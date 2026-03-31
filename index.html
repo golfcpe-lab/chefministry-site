@@ -68,7 +68,7 @@ function goLine() {
   window.location.href = "https://line.me/yourlink";
 }
 
-fetch("https://raw.githubusercontent.com/YOUR_USERNAME/chefministry-site/main/data.json")
+fetch("data.json")
 .then(res => res.json())
 .then(data => {
   const container = document.getElementById("free");
