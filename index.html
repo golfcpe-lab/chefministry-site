@@ -384,6 +384,7 @@
     "Japanese Omakase": r => r.type === "omakase",
     "Farm-to-Table":    r => r.tags && r.tags.some(t => t.toLowerCase().includes("farm")),
     "Neapolitan Pizza": r => r.cuisine.toLowerCase().includes("pizza") || r.cuisine.toLowerCase().includes("neapolitan"),
+    "Artisan Ramen":    r => r.cuisine.toLowerCase().includes("ramen"),
     "Thai Street Food": r => r.type === "street-food",
     "Steakhouse":       r => r.type === "steakhouse",
   };
