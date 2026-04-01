@@ -38,11 +38,11 @@ const CM_RESTAURANTS = [
     type:"fine-dining", budget:3, budgetLabel:"฿฿฿",
     occasions:["special","date","business"], area:"วิทยุ",
     priceRange:"4,500–8,000", emoji:"🍛",
-    signalStrength:"strong",   // very-strong / strong / moderate / weak
+    signalStrength:"weak",   // very-strong / strong / moderate / weak
     signalCount: 8,            // total influencer mentions
-    overlapSignal: 5,          // unique influencers in last 30 days
-    trendVelocity: "stable",   // rising / stable / declining
-    trendBadge: "→ Stable",
+    overlapSignal: 1,          // unique influencers in last 30 days
+    trendVelocity: "declining",   // rising / stable / declining
+    trendBadge: "↓ Declining",
     reviewerTiers: { mega:2, macro:2, mid:1 },
     recentReviewers: ["i01","i04","i06","i09","i03"],
     bookingLinks: { googlemaps:"#", wongnai:"#" },
@@ -56,8 +56,8 @@ const CM_RESTAURANTS = [
     type:"fine-dining", budget:3, budgetLabel:"฿฿฿",
     occasions:["special","date","business"], area:"สีลม",
     priceRange:"2,500–4,000", emoji:"🌿",
-    signalStrength:"very-strong", signalCount:12, overlapSignal:7,
-    trendVelocity:"rising", trendBadge:"↑ Rising",
+    signalStrength:"weak", signalCount:12, overlapSignal:1,
+    trendVelocity:"declining", trendBadge:"↓ Declining",
     reviewerTiers:{ mega:1, macro:3, mid:3 },
     recentReviewers:["i01","i08","i04","i03","i06","i09","i07"],
     bookingLinks:{ googlemaps:"#", wongnai:"#" },
@@ -71,8 +71,8 @@ const CM_RESTAURANTS = [
     type:"street-food", budget:2, budgetLabel:"฿฿",
     occasions:["casual","special"], area:"บางลำพู",
     priceRange:"800–1,500", emoji:"🦀",
-    signalStrength:"very-strong", signalCount:18, overlapSignal:6,
-    trendVelocity:"stable", trendBadge:"→ Stable",
+    signalStrength:"weak", signalCount:18, overlapSignal:1,
+    trendVelocity:"declining", trendBadge:"↓ Declining",
     reviewerTiers:{ mega:2, macro:3, mid:1 },
     recentReviewers:["i01","i02","i08","i04","i05","i10"],
     bookingLinks:{ googlemaps:"#" },
@@ -86,8 +86,8 @@ const CM_RESTAURANTS = [
     type:"local", budget:1, budgetLabel:"฿",
     occasions:["casual","everyday"], area:"วิทยุ",
     priceRange:"150–300", emoji:"🍗",
-    signalStrength:"very-strong", signalCount:22, overlapSignal:8,
-    trendVelocity:"rising", trendBadge:"↑ Rising",
+    signalStrength:"weak", signalCount:22, overlapSignal:1,
+    trendVelocity:"declining", trendBadge:"↓ Declining",
     reviewerTiers:{ mega:1, macro:4, mid:3 },
     recentReviewers:["i02","i10","i08","i05","i03","i07","i01","i06"],
     bookingLinks:{ googlemaps:"#" },
@@ -161,8 +161,8 @@ const CM_RESTAURANTS = [
     type:"fine-dining", budget:3, budgetLabel:"฿฿฿",
     occasions:["special","date","business"], area:"เพลินจิต",
     priceRange:"2,000–3,500", emoji:"👑",
-    signalStrength:"moderate", signalCount:8, overlapSignal:4,
-    trendVelocity:"stable", trendBadge:"→ Stable",
+    signalStrength:"weak", signalCount:8, overlapSignal:1,
+    trendVelocity:"declining", trendBadge:"↓ Declining",
     reviewerTiers:{ mega:1, macro:1, mid:2 },
     recentReviewers:["i01","i04","i06","i09"],
     bookingLinks:{ googlemaps:"#", wongnai:"#" },
