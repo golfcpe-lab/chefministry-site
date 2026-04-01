@@ -1,92 +1,433 @@
 <!DOCTYPE html>
-<html>
+<html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <title>Chef Ministry</title>
-  <style>
-    body {
-      font-family: Arial;
-      padding: 20px;
-      background: #111;
-      color: white;
-    }
-
-    .card {
-      border: 1px solid #333;
-      padding: 15px;
-      margin-bottom: 10px;
-      border-radius: 10px;
-    }
-
-    .pro {
-      filter: blur(5px);
-      position: relative;
-    }
-
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: rgba(0,0,0,0.6);
-    }
-
-    .btn {
-      padding: 10px 20px;
-      background: orange;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  </style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <link rel="icon" type="image/png" href="./assets/logo_circular.png"/>
+  <title>ChefMinistry — Food Trend Intelligence</title>
+  <meta name="description" content="Real-time Signal Intelligence จากวงการอาหารไทย — รู้ก่อน กินดีกว่า"/>
+  <link rel="stylesheet" href="./css/style.css"/>
 </head>
-
 <body>
 
-<h1>🔥 Chef Ministry</h1>
-<p>Food trend intelligence powered by data</p>
+<!-- ── HEADER ── -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="./index.html">
+      <img src="./assets/logo_circular.png" alt="Chef Ministry" class="logo-img"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <div class="logo-mark" style="display:none">CM</div>
+      <div>
+        <div class="logo-name">ChefMinistry</div>
+        <div class="logo-tagline">Food Trend Intelligence</div>
+      </div>
+    </a>
+    <nav class="site-nav">
+      <a class="nav-link active" href="./index.html">Home</a>
+      <a class="nav-link" href="./listing.html">Discover</a>
+      <a class="nav-link" href="./about.html">Methodology</a>
+      <a class="btn-pro" href="#">Pro — ฿99/mo</a>
+    </nav>
+    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+  </div>
+  <nav class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-links">
+      <a class="mobile-nav-link" href="./index.html">Home</a>
+      <a class="mobile-nav-link" href="./listing.html">Discover</a>
+      <a class="mobile-nav-link" href="./about.html">Methodology</a>
+      <a class="mobile-nav-link" href="#">Pro — ฿99/เดือน</a>
+    </div>
+  </nav>
+</header>
 
-<div id="free"></div>
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow hero-eyebrow">🧠 Food Signal Intelligence Platform</div>
+        <h1 class="display-1 hero-title">รู้ก่อน<br/>กินดีกว่า</h1>
+        <p class="hero-subtitle">
+          ไม่ใช่แค่ Search Engine อาหาร<br/>
+          ChefMinistry คือ <strong style="color:var(--gold)">Intelligence Layer</strong><br/>
+          ที่บอกว่า ณ ตอนนี้ วงการอาหารไทยกำลังไปทางไหน
+        </p>
+        <div class="hero-actions">
+          <a href="./listing.html" class="btn btn-primary">ดู Signal ทั้งหมด</a>
+          <a href="./about.html" class="btn btn-ghost">วิธีทำงาน →</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-num">20</div>
+            <div class="hero-stat-label">Influencers Tracked</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">15+</div>
+            <div class="hero-stat-label">Restaurants Monitored</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">Real-time</div>
+            <div class="hero-stat-label">Trend Updates</div>
+          </div>
+        </div>
+      </div>
 
-<h2>🔒 Pro Insights</h2>
+      <!-- Live Overlap Signal Preview -->
+      <div class="hero-sample">
+        <div class="hero-sample-head">
+          <span>🔗 Overlap Signal — Live</span>
+          <span class="verdict best-value" style="background:rgba(10,107,67,.2);color:#56c282">↑ Rising</span>
+        </div>
+        <div class="hero-sample-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+            <div>
+              <div class="hero-sample-name">ไก่ทอดโปโล</div>
+              <div class="hero-sample-type">Thai Fried Chicken · วิทยุ · ฿</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-size:10px;font-weight:900;color:var(--text-2);text-transform:uppercase;letter-spacing:.08em">Overlap Signal</div>
+              <div style="font-size:28px;font-weight:900;color:var(--green);font-family:'Playfair Display',serif;line-height:1.1">8 INF</div>
+            </div>
+          </div>
+          <!-- Overlap dots -->
+          <div style="margin-bottom:12px">
+            <div style="font-size:10px;font-weight:800;color:var(--text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Unique Influencers (30 days)</div>
+            <div style="display:flex;gap:4px;flex-wrap:wrap">
+              <span style="width:10px;height:10px;border-radius:50%;background:var(--green);display:inline-block"></span>
+              <span style="width:10px;height:10px;border-radius:50%;background:var(--green);display:inline-block"></span>
+              <span style="width:10px;height:10px;border-radius:50%;background:var(--green);display:inline-block"></span>
+              <span style="width:10px;height:10px;border-radius:50%;background:var(--green);display:inline-block"></span>
+              <span style="width:10px;height:10px;border-radius:50%;background:var(--green);display:inline-block"></span>
+              <span style="width:10px;height:10px;border-radius:50%;background:var(--green);display:inline-block"></span>
+              <span style="width:10px;height:10px;border-radius:50%;background:var(--green);display:inline-block"></span>
+              <span style="width:10px;height:10px;border-radius:50%;background:var(--green);display:inline-block"></span>
+              <span style="width:10px;height:10px;border-radius:50%;background:var(--border);display:inline-block"></span>
+              <span style="width:10px;height:10px;border-radius:50%;background:var(--border);display:inline-block"></span>
+            </div>
+          </div>
+          <!-- Reviewer tiers -->
+          <div style="display:flex;gap:6px;margin-bottom:12px">
+            <span class="tier-badge tier-mega">Mega ×1</span>
+            <span class="tier-badge tier-macro">Macro ×4</span>
+            <span class="tier-badge tier-mid">Mid ×3</span>
+          </div>
+          <div class="hero-sample-insight">"Overlap Signal สูงสุดในฐานข้อมูล — 8 influencer unique ใน 30 วัน และ Tier กว้างมาก"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<div class="card pro">
-  <p>🔥 Hidden restaurant insight</p>
-  <p>📈 Momentum data</p>
-
-  <div class="overlay">
-    <button class="btn" onclick="goLine()">Unlock Pro (99฿)</button>
+<!-- ── 3 SIGNAL CONCEPTS ── -->
+<div class="signal-concept">
+  <div class="signal-concept-item">
+    <div class="signal-concept-icon">🔗</div>
+    <div>
+      <div class="signal-concept-title">Overlap Signal</div>
+      <div class="signal-concept-desc">ถ้า Influencer 5+ คนรีวิวร้านเดียวกันใน 2 สัปดาห์ — นั่นคือ Signal ที่แข็งมาก ไม่ใช่เรื่องบังเอิญ</div>
+    </div>
+  </div>
+  <div class="signal-concept-item">
+    <div class="signal-concept-icon">📈</div>
+    <div>
+      <div class="signal-concept-title">Trend Velocity</div>
+      <div class="signal-concept-desc">วัดว่า Signal กำลัง Rising, Stable หรือ Declining เพื่อให้คุณรู้ก่อนคนอื่นว่าร้านไหน "กำลังจะ" ดัง</div>
+    </div>
+  </div>
+  <div class="signal-concept-item">
+    <div class="signal-concept-icon">⚖️</div>
+    <div>
+      <div class="signal-concept-title">Credibility Weight</div>
+      <div class="signal-concept-desc">ไม่ใช่ทุกรีวิวมีน้ำหนักเท่ากัน Mega Influencer &gt; Macro &gt; Mid-tier ทำให้ Signal แม่นยำกว่า</div>
+    </div>
   </div>
 </div>
 
+<!-- ── WEEKLY TREND HIGHLIGHT ── -->
+<section class="section" style="background:var(--white)">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start">
+      <div>
+        <div class="eyebrow" style="color:var(--amber);margin-bottom:8px">📊 This Week's Intelligence</div>
+        <h2 class="display-2" style="margin-bottom:16px" id="weeklyTitle">Loading…</h2>
+        <p class="lead" id="weeklyDesc">Loading…</p>
+        <div style="margin-top:24px">
+          <div style="font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);margin-bottom:12px">Category Trend Signals</div>
+          <div id="trendCategoryList"></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);margin-bottom:14px">🔥 Top Overlap Signals (30 days)</div>
+        <div class="rank-list card" style="border-radius:var(--radius-lg);overflow:hidden" id="overlapRankList"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ── RISING RESTAURANTS ── -->
+<section class="section">
+  <div class="container">
+    <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px">
+      <div>
+        <div class="eyebrow" style="color:var(--green);margin-bottom:6px">↑ Trend Velocity: Rising</div>
+        <h2 class="display-2">กำลัง Rising ตอนนี้</h2>
+        <p class="lead" style="margin-top:8px">ร้านที่ Influencer Signal กำลังเพิ่มขึ้น — รู้ก่อนคนอื่น</p>
+      </div>
+      <a href="./listing.html?velocity=rising" class="btn btn-outline btn-sm">ดูทั้งหมด →</a>
+    </div>
+    <div class="grid-3" id="risingGrid"></div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ── INFLUENCER NETWORK ── -->
+<section class="section" style="background:var(--white)">
+  <div class="container">
+    <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:28px">
+      <div>
+        <div class="eyebrow" style="color:var(--navy);margin-bottom:6px">👥 Influencer Network</div>
+        <h2 class="display-2">คนที่เราติดตาม</h2>
+        <p class="lead" style="margin-top:8px">เราติดตามโพสต์สาธารณะจาก Food Influencer ชั้นนำ 10 คน<br/>เพื่อสังเคราะห์เป็น Signal ที่มีความหมาย</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+        <div style="display:flex;gap:8px">
+          <span class="tier-badge tier-mega" style="padding:5px 12px;font-size:12px">Mega</span>
+          <span style="font-size:12px;color:var(--text-2);align-self:center">1M+ followers</span>
+        </div>
+        <div style="display:flex;gap:8px">
+          <span class="tier-badge tier-macro" style="padding:5px 12px;font-size:12px">Macro</span>
+          <span style="font-size:12px;color:var(--text-2);align-self:center">100K–1M followers</span>
+        </div>
+        <div style="display:flex;gap:8px">
+          <span class="tier-badge tier-mid" style="padding:5px 12px;font-size:12px">Mid</span>
+          <span style="font-size:12px;color:var(--text-2);align-self:center">10K–100K followers</span>
+        </div>
+      </div>
+    </div>
+    <div class="inf-grid" id="influencerGrid"></div>
+    <div style="margin-top:20px;padding:14px 20px;background:var(--cream);border-radius:var(--radius);border:1px solid var(--border)">
+      <p style="font-size:13px;color:var(--text-2);line-height:1.65;margin:0">
+        <strong style="color:var(--navy)">หมายเหตุทางกฎหมาย:</strong> ChefMinistry ติดตามเฉพาะเนื้อหาที่เผยแพร่สาธารณะ (Public Posts) เราไม่ประเมินหรือวิจารณ์ Influencer แต่ละคน แต่วิเคราะห์ <em>Pattern ของข้อมูลรวม</em> เพื่อสังเคราะห์เป็น Market Signal เท่านั้น
+      </p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="section">
+  <div class="container">
+    <div class="section-header" style="text-align:center;max-width:580px;margin:0 auto 36px">
+      <div class="eyebrow" style="color:var(--navy);margin-bottom:8px">How ChefMinistry Works</div>
+      <h2 class="display-2">Signal ที่ AI ทั่วไปทำไม่ได้</h2>
+      <p class="lead" style="margin-top:10px">AI ให้ข้อมูลทั่วไปได้ แต่สิ่งที่ AI ทำไม่ได้คือ Curated Signal จาก Human Trust Network แบบ Real-time</p>
+    </div>
+    <div class="grid-3">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-title">Monitor Public Posts</div>
+        <div class="step-desc">ติดตามโพสต์สาธารณะจาก Influencer 10 คน ทุก platform ทุกวัน ข้อมูลทั้งหมดเป็น Public Information ที่ทุกคนเข้าถึงได้</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-title">คำนวณ Overlap &amp; Weight</div>
+        <div class="step-desc">เมื่อ Influencer หลาย tier รีวิวร้านเดียวกัน Overlap Signal จะแข็งขึ้น Mega Influencer ได้ weight มากกว่า Mid-tier</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-title">สรุปเป็น Intelligence</div>
+        <div class="step-desc">Signal ทั้งหมดถูกสรุปเป็น Trend Report ที่อ่านง่าย คุณรู้ว่าร้านไหนกำลังร้อนแรง ก่อนที่มันจะดังใน mainstream</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ── SUBSCRIPTION MODEL ── -->
+<section class="section" style="background:var(--white)">
+  <div class="container">
+    <div class="section-header" style="text-align:center;max-width:580px;margin:0 auto 36px">
+      <div class="eyebrow" style="color:var(--navy);margin-bottom:8px">B2C Subscription</div>
+      <h2 class="display-2">Free vs Pro</h2>
+    </div>
+    <div class="grid-2" style="max-width:900px;margin:0 auto">
+      <!-- Free -->
+      <div class="card" style="padding:28px">
+        <div style="font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);margin-bottom:12px">Free</div>
+        <div style="font-size:36px;font-weight:900;color:var(--navy);font-family:'Playfair Display',serif;margin-bottom:4px">฿0</div>
+        <div style="font-size:13px;color:var(--text-2);margin-bottom:20px">ตลอดชีพ</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:center;gap:8px;font-size:14px"><span style="color:var(--green);font-weight:900">✓</span> Hot Restaurants Top 10 ของเดือน</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:14px"><span style="color:var(--green);font-weight:900">✓</span> Trend Summary รายหมวด</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:14px"><span style="color:var(--green);font-weight:900">✓</span> ดูชื่อ Influencer ที่รีวิว</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text-2)"><span>—</span> Full Overlap Signal</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text-2)"><span>—</span> Real-time Alert</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text-2)"><span>—</span> Booking Links + เบอร์โทร</div>
+        </div>
+        <a href="./listing.html" class="btn btn-outline" style="width:100%;margin-top:20px">เริ่มใช้ฟรี</a>
+      </div>
+      <!-- Pro -->
+      <div style="background:linear-gradient(135deg,var(--navy),var(--navy-2));border-radius:var(--radius-lg);padding:28px;color:#fff;position:relative;overflow:hidden">
+        <div style="position:absolute;top:12px;right:14px;background:var(--gold);color:var(--navy);font-size:10px;font-weight:900;padding:4px 10px;border-radius:99px;text-transform:uppercase;letter-spacing:.08em">Most Popular</div>
+        <div style="font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.5);margin-bottom:12px">Pro</div>
+        <div style="font-size:36px;font-weight:900;color:var(--gold);font-family:'Playfair Display',serif;margin-bottom:4px">฿99</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:20px">ต่อเดือน · ยกเลิกได้ทุกเมื่อ</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:center;gap:8px;font-size:14px"><span style="color:var(--gold);font-weight:900">✓</span> ทุกอย่างใน Free</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:14px"><span style="color:var(--gold);font-weight:900">✓</span> Alert ทันทีเมื่อ Overlap 3+ INF</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:14px"><span style="color:var(--gold);font-weight:900">✓</span> Full Overlap Signal ทุกร้าน</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:14px"><span style="color:var(--gold);font-weight:900">✓</span> Booking Links + เบอร์โทรร้าน</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:14px"><span style="color:var(--gold);font-weight:900">✓</span> Weekly Briefing ทาง Line OA</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:14px"><span style="color:var(--gold);font-weight:900">✓</span> Early Access Emerging Restaurants</div>
+        </div>
+        <a href="#" class="btn btn-primary" style="width:100%;margin-top:20px">เริ่มต้น Pro — ฿99/เดือน</a>
+        <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:10px;text-align:center">ทดลองฟรี 7 วัน</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── B2B TEASER ── -->
+<section class="section">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1.2fr 0.8fr;gap:48px;align-items:center">
+      <div>
+        <div class="eyebrow" style="color:var(--amber);margin-bottom:10px">🏭 B2B — Intelligence for Suppliers</div>
+        <h2 class="display-2" style="margin-bottom:16px">Insight สำหรับ Supplier อาหาร</h2>
+        <p class="lead" style="margin-bottom:20px">ถ้าคุณเป็น Supplier วัตถุดิบ คุณต้องรู้ว่า "เมนูอะไรกำลัง trend" ก่อนที่ร้านอาหารจะสั่งซื้อ</p>
+        <table class="b2b-table">
+          <thead>
+            <tr><th>สิ่งที่ขายได้</th><th>ตัวอย่าง</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Cuisine Trend Report</td><td>"Q2/2026 — Japanese Omakase โต +34% ใน BKK"</td></tr>
+            <tr><td>Ingredient Signal</td><td>"Wagyu, Truffle, Yuzu ถูก mention เพิ่มขึ้น"</td></tr>
+            <tr><td>Emerging Restaurant Alert</td><td>"ร้านใหม่ที่มี 3+ INF ใน 2 สัปดาห์แรก"</td></tr>
+            <tr><td>Competitor Intelligence</td><td>"ร้าน X ใช้ Influencer tier ไหน บ่อยแค่ไหน"</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card" style="padding:28px;background:linear-gradient(135deg,#f5f0e8,#fdf5e4)">
+        <div style="font-size:32px;margin-bottom:12px">📦</div>
+        <h3 class="h3" style="margin-bottom:10px">สนใจ B2B Data?</h3>
+        <p style="font-size:14px;color:var(--text-2);line-height:1.65;margin-bottom:20px">เราเปิดรับ Pilot Partner สำหรับ Supplier ที่ต้องการข้อมูล Trend อาหาร ติดต่อเราเพื่อ Demo รายงาน</p>
+        <a href="mailto:hello@chefministry.com" class="btn btn-dark btn-sm" style="width:100%">ติดต่อ B2B Team</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <img src="./assets/logo_circular.png" alt="Chef Ministry" style="height:36px;border-radius:6px"
+               onerror="this.style.display='none'"/>
+          <div class="logo-name">ChefMinistry</div>
+        </div>
+        <p class="footer-brand-desc">Food Signal Intelligence Platform — รู้ก่อน กินดีกว่า ข้อมูลจาก Human Trust Network ไม่ใช่ AI ทั่วไป</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Platform</div>
+        <div class="footer-links">
+          <a class="footer-link" href="./listing.html">Discover Restaurants</a>
+          <a class="footer-link" href="./listing.html?velocity=rising">Rising Trends</a>
+          <a class="footer-link" href="./listing.html?velocity=very-strong">Top Signals</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">About</div>
+        <div class="footer-links">
+          <a class="footer-link" href="./about.html">Our Methodology</a>
+          <a class="footer-link" href="./about.html#legal">Legal Framework</a>
+          <a class="footer-link" href="./about.html#b2b">B2B Intelligence</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Subscribe</div>
+        <div class="footer-links">
+          <a class="footer-link" href="#">Pro — ฿99/เดือน</a>
+          <a class="footer-link" href="#">Line OA Alert</a>
+          <a class="footer-link" href="#">B2B Partnership</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">© 2025 ChefMinistry. ข้อมูลทั้งหมดมาจากเนื้อหาสาธารณะ. ไม่ใช่คำแนะนำเชิงพาณิชย์.</div>
+      <div class="footer-legal">Signal Intelligence. Not Just Reviews.</div>
+    </div>
+  </div>
+</footer>
+
+<script src="./js/data.js"></script>
 <script>
-function goLine() {
-  window.location.href = "https://line.me/R/ti/p/chefministry";
-}
-
-fetch("data.json")
-.then(res => res.json())
-.then(data => {
-  const container = document.getElementById("free");
-
-  data.restaurants.forEach(r => {
-    const div = document.createElement("div");
-    div.className = "card";
-
-    div.innerHTML = `
-      <h3>${r.name}</h3>
-      <p>🔥 ${r.trend}</p>
-      <p>👥 ${r.mentions} influencers</p>
-    `;
-
-    container.appendChild(div);
+  // Mobile nav
+  document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
+    const n=document.getElementById("mobileNav");
+    n.style.display=n.style.display==="block"?"none":"block";
   });
-});
-</script>
 
+  // Weekly highlight
+  const wh = CM_SIGNALS.weeklyHighlight;
+  document.getElementById("weeklyTitle").textContent = wh.title;
+  document.getElementById("weeklyDesc").textContent = wh.desc;
+
+  // Trend category list
+  const tcList = document.getElementById("trendCategoryList");
+  tcList.innerHTML = CM_SIGNALS.trendCategories.map(t => {
+    const isPos = !t.change.startsWith("-");
+    const barPct = Math.abs(parseInt(t.change)) * 2.5; // scale to visible width
+    const barClass = t.signal === "declining" ? "declining" : t.signal === "stable" ? "stable" : "";
+    return `<div class="trend-row">
+      <div class="trend-cat">${escHtml(t.cat)}</div>
+      <div class="trend-bar-wrap"><div class="trend-bar-fill ${barClass}" style="width:${Math.min(barPct,100)}%"></div></div>
+      <div class="trend-change ${isPos?"positive":"negative"}">${escHtml(t.change)}</div>
+      <div class="trend-inf-count">${t.influencers} INF</div>
+    </div>`;
+  }).join("");
+
+  // Overlap rank list (top 5)
+  const rankList = document.getElementById("overlapRankList");
+  rankList.innerHTML = topByOverlap(5).map((r,i) => {
+    const vc = velocityClass(r.trendVelocity);
+    return `<a class="rank-item" href="./restaurant.html?id=${escHtml(r.id)}" style="cursor:pointer;text-decoration:none;color:inherit">
+      <div class="rank-num ${i<3?"top3":""}">${i+1}</div>
+      <div>
+        <div class="rank-name">${escHtml(r.name)}</div>
+        <div class="rank-meta">${escHtml(r.cuisine)} · ${escHtml(r.area)}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+        <div style="font-size:17px;font-weight:900;color:var(--green)">${r.overlapSignal} <span style="font-size:10px;font-weight:800">INF</span></div>
+        <span class="velocity ${r.trendVelocity}">${escHtml(r.trendBadge)}</span>
+      </div>
+    </a>`;
+  }).join("");
+
+  // Rising grid (up to 3)
+  const risingGrid = document.getElementById("risingGrid");
+  const rising = getRising(3);
+  risingGrid.innerHTML = rising.length
+    ? rising.map(r => buildRestaurantCard(r, {showOverlap:true})).join("")
+    : `<div style="color:var(--text-2);grid-column:1/-1;padding:20px">ไม่มีข้อมูล Rising ในขณะนี้</div>`;
+
+  // Influencer grid
+  const infGrid = document.getElementById("influencerGrid");
+  infGrid.innerHTML = CM_INFLUENCERS.map(i => `
+    <div class="inf-card">
+      <div class="inf-card-avatar ${i.tier.toLowerCase()}">${escHtml(i.avatar)}</div>
+      <div class="inf-card-name">${escHtml(i.name)}</div>
+      <div class="inf-card-handle">${escHtml(i.handle)}</div>
+      <div style="margin-bottom:6px"><span class="tier-badge tier-${i.tier.toLowerCase()}">${escHtml(i.tier)}</span></div>
+      <div class="inf-card-followers">${escHtml(i.followers)}</div>
+      <div style="font-size:11px;color:var(--text-2);margin-top:3px">${escHtml(i.platform)}</div>
+    </div>`).join("");
+</script>
 </body>
 </html>

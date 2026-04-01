@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <link rel="icon" type="image/png" href="./assets/logo_circular.png"/>
+  <title>Discover Restaurants — ChefMinistry</title>
+  <meta name="description" content="ค้นหาร้านอาหารด้วย Signal Intelligence — กรองตาม Overlap, Trend Velocity และ Category"/>
+  <link rel="stylesheet" href="./css/style.css"/>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="./index.html">
+      <img src="./assets/logo_circular.png" alt="Chef Ministry" class="logo-img"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <div class="logo-mark" style="display:none">CM</div>
+      <div>
+        <div class="logo-name">ChefMinistry</div>
+        <div class="logo-tagline">Food Trend Intelligence</div>
+      </div>
+    </a>
+    <nav class="site-nav">
+      <a class="nav-link" href="./index.html">Home</a>
+      <a class="nav-link active" href="./listing.html">Discover</a>
+      <a class="nav-link" href="./about.html">Methodology</a>
+      <a class="btn-pro" href="#">Pro — ฿99/mo</a>
+    </nav>
+    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+  </div>
+  <nav class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-links">
+      <a class="mobile-nav-link" href="./index.html">Home</a>
+      <a class="mobile-nav-link" href="./listing.html">Discover</a>
+      <a class="mobile-nav-link" href="./about.html">Methodology</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ── PAGE HERO ── -->
+<div style="background:var(--navy);padding:36px 0;border-bottom:3px solid var(--gold)">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="./index.html">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <span style="color:#fff">Discover</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-top:6px">
+      <div>
+        <h1 class="h1" style="color:#fff;margin-bottom:6px">Signal Intelligence — ร้านทั้งหมด</h1>
+        <p style="color:rgba(255,255,255,.65);font-size:15px">เรียงและกรองด้วย Overlap Signal, Trend Velocity หรือ Category</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <span class="signal-tag signal-very-strong">Very Strong Signal</span>
+        <span class="signal-tag signal-strong">Strong</span>
+        <span class="signal-tag signal-moderate">Moderate</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── MAIN ── -->
+<main class="section-sm">
+  <div class="container">
+
+    <!-- Search + Sort -->
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:16px;flex-wrap:wrap">
+      <input class="search-input" id="searchInput" type="text" placeholder="🔍 ค้นหาร้าน, ย่าน, ประเภทอาหาร..." style="max-width:440px"/>
+      <select class="sort-select" id="sortSelect">
+        <option value="overlap">เรียงตาม: Overlap Signal ↑</option>
+        <option value="signalCount">เรียงตาม: Total Signal Count</option>
+        <option value="reviews">เรียงตาม: Total Reviews</option>
+        <option value="name">เรียงตาม: ชื่อ A–Z</option>
+      </select>
+    </div>
+
+    <!-- Filters -->
+    <div class="filter-bar" style="margin-bottom:24px">
+      <span class="filter-label">Signal</span>
+      <div class="filter-group" id="signalFilters"></div>
+      <div style="width:1px;height:20px;background:var(--border);margin:0 6px"></div>
+      <span class="filter-label">Velocity</span>
+      <div class="filter-group" id="velocityFilters"></div>
+      <div style="width:1px;height:20px;background:var(--border);margin:0 6px"></div>
+      <span class="filter-label">งบ</span>
+      <div class="filter-group" id="budgetFilters"></div>
+      <div style="width:1px;height:20px;background:var(--border);margin:0 6px"></div>
+      <span class="filter-label">ประเภท</span>
+      <div class="filter-group" id="typeFilters"></div>
+    </div>
+
+    <!-- Result count + legend -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px">
+      <div id="resultCount" style="font-size:14px;color:var(--text-2);font-weight:700"></div>
+      <div style="display:flex;gap:14px;align-items:center;font-size:12px;flex-wrap:wrap">
+        <span style="font-weight:700;color:var(--text-2)">Overlap Signal =</span>
+        <span style="color:var(--green);font-weight:800">จำนวน Influencer unique ใน 30 วัน</span>
+        <a href="./about.html#methodology" style="color:var(--navy);font-weight:700;text-decoration:underline">อ่านวิธีคิด →</a>
+      </div>
+    </div>
+
+    <!-- Grid -->
+    <div class="listing-grid" id="listingGrid"></div>
+    <div class="empty-state" id="emptyState" style="display:none">
+      <div class="empty-icon">📡</div>
+      <div class="empty-title">ไม่พบร้านที่ตรงกับเงื่อนไข</div>
+      <div>ลองปรับ filter หรือค้นหาด้วยคำอื่น</div>
+    </div>
+  </div>
+</main>
+
+<!-- ── PRO TEASER ── -->
+<div style="background:var(--navy);padding:28px 0;margin-top:20px">
+  <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap">
+    <div>
+      <div style="color:var(--gold);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Pro Feature</div>
+      <div style="color:#fff;font-size:17px;font-weight:900">รับ Alert ทันทีเมื่อ Overlap Signal เพิ่มขึ้น — ก่อนคนอื่น</div>
+      <div style="color:rgba(255,255,255,.55);font-size:13px;margin-top:3px">ปลดล็อค Booking Links + Line OA Weekly Briefing</div>
+    </div>
+    <a href="#" class="btn btn-primary">เริ่มต้น Pro — ฿99/เดือน</a>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+          <div class="logo-mark" style="width:34px;height:34px;font-size:13px">CM</div>
+          <div class="logo-name">ChefMinistry</div>
+        </div>
+        <p class="footer-brand-desc">Food Signal Intelligence Platform</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Platform</div>
+        <div class="footer-links">
+          <a class="footer-link" href="./listing.html?velocity=rising">Rising Trends</a>
+          <a class="footer-link" href="./listing.html?signal=very-strong">Top Signals</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">About</div>
+        <div class="footer-links">
+          <a class="footer-link" href="./about.html">Methodology</a>
+          <a class="footer-link" href="./about.html#legal">Legal</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Subscribe</div>
+        <div class="footer-links">
+          <a class="footer-link" href="#">Pro Plan</a>
+          <a class="footer-link" href="#">Line OA</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">© 2025 ChefMinistry. ข้อมูลทั้งหมดมาจากเนื้อหาสาธารณะ.</div>
+    </div>
+  </div>
+</footer>
+
+<script src="./js/data.js"></script>
+<script>
+  document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
+    const n=document.getElementById("mobileNav");
+    n.style.display=n.style.display==="block"?"none":"block";
+  });
+
+  const state={signal:"all",velocity:"all",budget:"all",type:"all",search:"",sort:"overlap"};
+
+  // Read URL params
+  const params=new URLSearchParams(window.location.search);
+  if(params.get("signal"))   state.signal   = params.get("signal");
+  if(params.get("velocity")) state.velocity = params.get("velocity");
+  if(params.get("type"))     state.type     = params.get("type");
+  if(params.get("sort"))     state.sort     = params.get("sort");
+
+  // Signal filters
+  const signals=[
+    {id:"all",label:"ทั้งหมด"},
+    {id:"very-strong",label:"Very Strong"},
+    {id:"strong",label:"Strong"},
+    {id:"moderate",label:"Moderate"}
+  ];
+  document.getElementById("signalFilters").innerHTML=signals.map(s=>
+    `<button class="filter-chip ${state.signal===s.id?"active":""}" data-filter="signal" data-val="${s.id}">${s.label}</button>`
+  ).join("");
+
+  // Velocity filters
+  const velocities=[
+    {id:"all",label:"ทั้งหมด"},
+    {id:"rising",label:"↑ Rising"},
+    {id:"stable",label:"→ Stable"},
+    {id:"declining",label:"↓ Declining"}
+  ];
+  document.getElementById("velocityFilters").innerHTML=velocities.map(v=>
+    `<button class="filter-chip ${state.velocity===v.id?"active":""}" data-filter="velocity" data-val="${v.id}">${v.label}</button>`
+  ).join("");
+
+  // Budget filters
+  const budgets=[{id:"all",label:"ทุกงบ"},{id:"1",label:"฿"},{id:"2",label:"฿฿"},{id:"3",label:"฿฿฿"}];
+  document.getElementById("budgetFilters").innerHTML=budgets.map(b=>
+    `<button class="filter-chip ${state.budget===b.id?"active":""}" data-filter="budget" data-val="${b.id}">${b.label}</button>`
+  ).join("");
+
+  // Type filters
+  const types=[
+    {id:"all",label:"ทั้งหมด"},
+    {id:"fine-dining",label:"Fine Dining"},
+    {id:"casual-dining",label:"Casual"},
+    {id:"street-food",label:"Street Food"},
+    {id:"local",label:"Local Legend"}
+  ];
+  document.getElementById("typeFilters").innerHTML=types.map(t=>
+    `<button class="filter-chip ${state.type===t.id?"active":""}" data-filter="type" data-val="${t.id}">${t.label}</button>`
+  ).join("");
+
+  // Sort select
+  const sortSel=document.getElementById("sortSelect");
+  sortSel.value=state.sort;
+  sortSel.addEventListener("change",()=>{state.sort=sortSel.value;render();});
+
+  // Filter chips
+  document.querySelectorAll(".filter-chip").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const f=btn.dataset.filter,v=btn.dataset.val;
+      state[f]=v;
+      document.querySelectorAll(`.filter-chip[data-filter="${f}"]`).forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+      render();
+    });
+  });
+
+  // Search
+  document.getElementById("searchInput").addEventListener("input",e=>{
+    state.search=e.target.value.trim().toLowerCase();
+    render();
+  });
+
+  function filterAndSort(){
+    let list=CM_RESTAURANTS.slice();
+    if(state.signal!=="all")   list=list.filter(r=>r.signalStrength===state.signal||
+      (state.signal==="strong"&&r.signalStrength==="very-strong")); // very-strong also passes "strong" filter? No, keep strict
+    if(state.signal!=="all")   list=CM_RESTAURANTS.slice().filter(r=>r.signalStrength===state.signal);
+    if(state.velocity!=="all") list=list.filter(r=>r.trendVelocity===state.velocity);
+    if(state.budget!=="all")   list=list.filter(r=>String(r.budget)===state.budget);
+    if(state.type!=="all")     list=list.filter(r=>r.type===state.type);
+    if(state.search){
+      list=list.filter(r=>{
+        const hay=[r.name,r.cuisine,r.area,r.type,...r.tags].join(" ").toLowerCase();
+        return hay.includes(state.search);
+      });
+    }
+    list.sort((a,b)=>{
+      if(state.sort==="signalCount") return b.signalCount-a.signalCount;
+      if(state.sort==="reviews")     return b.totalReviews-a.totalReviews;
+      if(state.sort==="name")        return a.name.localeCompare(b.name,"th");
+      return b.overlapSignal-a.overlapSignal; // default: overlap
+    });
+    return list;
+  }
+
+  function render(){
+    // Re-apply signal filter strictly
+    let list=CM_RESTAURANTS.slice();
+    if(state.signal!=="all") list=list.filter(r=>r.signalStrength===state.signal);
+    if(state.velocity!=="all") list=list.filter(r=>r.trendVelocity===state.velocity);
+    if(state.budget!=="all") list=list.filter(r=>String(r.budget)===state.budget);
+    if(state.type!=="all") list=list.filter(r=>r.type===state.type);
+    if(state.search){
+      list=list.filter(r=>{
+        const hay=[r.name,r.cuisine,r.area,r.type,...r.tags].join(" ").toLowerCase();
+        return hay.includes(state.search);
+      });
+    }
+    list.sort((a,b)=>{
+      if(state.sort==="signalCount") return b.signalCount-a.signalCount;
+      if(state.sort==="reviews") return b.totalReviews-a.totalReviews;
+      if(state.sort==="name") return a.name.localeCompare(b.name,"th");
+      return b.overlapSignal-a.overlapSignal;
+    });
+
+    const grid=document.getElementById("listingGrid");
+    const empty=document.getElementById("emptyState");
+    const count=document.getElementById("resultCount");
+    count.textContent=`พบ ${list.length} ร้าน`;
+    if(!list.length){
+      grid.innerHTML=""; empty.style.display="block";
+    } else {
+      empty.style.display="none";
+      grid.innerHTML=list.map(r=>buildRestaurantCard(r,{showOverlap:true})).join("");
+    }
+  }
+
+  render();
+</script>
+</body>
+</html>

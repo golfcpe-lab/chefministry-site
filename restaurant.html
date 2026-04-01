@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <link rel="icon" type="image/png" href="./assets/logo_circular.png"/>
+  <title id="pageTitle">Restaurant — ChefMinistry</title>
+  <meta name="description" content="Signal Intelligence รายละเอียดร้านอาหาร — Overlap Signal, Trend Velocity และ Influencer ที่รีวิว"/>
+  <meta name="robots" content="noindex"/>
+  <link rel="stylesheet" href="./css/style.css"/>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="./index.html">
+      <img src="./assets/logo_circular.png" alt="Chef Ministry" class="logo-img"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <div class="logo-mark" style="display:none">CM</div>
+      <div>
+        <div class="logo-name">ChefMinistry</div>
+        <div class="logo-tagline">Food Trend Intelligence</div>
+      </div>
+    </a>
+    <nav class="site-nav">
+      <a class="nav-link" href="./index.html">Home</a>
+      <a class="nav-link" href="./listing.html">Discover</a>
+      <a class="nav-link" href="./about.html">Methodology</a>
+      <a class="btn-pro" href="#">Pro — ฿99/mo</a>
+    </nav>
+    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+  </div>
+  <nav class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-links">
+      <a class="mobile-nav-link" href="./index.html">Home</a>
+      <a class="mobile-nav-link" href="./listing.html">Discover</a>
+      <a class="mobile-nav-link" href="./about.html">Methodology</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ── RESTAURANT HERO ── -->
+<div class="detail-hero" id="detailHero">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="./index.html">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="./listing.html">Discover</a>
+      <span class="breadcrumb-sep">/</span>
+      <span style="color:#fff" id="breadcrumbName">…</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-top:10px">
+      <div>
+        <div style="font-size:48px;margin-bottom:10px" id="heroEmoji"></div>
+        <h1 class="h1" style="color:#fff;margin-bottom:8px" id="heroName">Loading…</h1>
+        <div style="color:rgba(255,255,255,.7);font-size:15px;display:flex;gap:12px;flex-wrap:wrap;align-items:center" id="heroMeta"></div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center" id="heroBadges"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── MAIN ── -->
+<main class="section-sm">
+  <div class="container">
+    <div class="detail-grid">
+
+      <!-- Left Column -->
+      <div style="display:flex;flex-direction:column;gap:24px">
+
+        <!-- CM Signal Note -->
+        <div class="insight-box" id="cmNoteBox"></div>
+
+        <!-- Overlap Breakdown -->
+        <div class="card">
+          <div class="panel-head">
+            <div class="panel-title">🔗 Influencer Overlap</div>
+            <span id="overlapCountPill" style="font-size:12px;font-weight:900;padding:4px 10px;border-radius:99px;background:rgba(255,255,255,.1);color:#fff"></span>
+          </div>
+          <div class="panel-body">
+            <!-- Tier breakdown -->
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px" id="tierBreakdown"></div>
+            <!-- Dot signal -->
+            <div style="margin-bottom:14px">
+              <div style="font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--text-2);margin-bottom:8px">Overlap Signal (Unique Influencers / 30 days)</div>
+              <div class="overlap-dots" id="overlapDotsDetail"></div>
+            </div>
+            <!-- Reviewer list -->
+            <div style="font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--text-2);margin-bottom:10px">Influencers ที่รีวิวล่าสุด</div>
+            <div style="display:flex;flex-direction:column;gap:8px" id="reviewerList"></div>
+            <!-- Pro blur -->
+            <div style="background:var(--gold-bg);border:1px solid rgba(201,168,76,.25);border-radius:var(--radius);padding:14px;margin-top:14px;text-align:center">
+              <div style="font-size:12px;font-weight:900;color:var(--amber);margin-bottom:4px">🔒 Pro Feature</div>
+              <div style="font-size:13px;color:var(--text-2)">ดู Booking Link + เบอร์โทรร้าน ได้เมื่อ Subscribe Pro</div>
+              <a href="#" class="btn btn-dark btn-sm" style="margin-top:10px">เริ่มต้น Pro — ฿99/เดือน</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        <div class="card">
+          <div class="panel-head"><div class="panel-title">🏷️ Signal Tags</div></div>
+          <div class="panel-body">
+            <div class="tag-list" id="signalTagList"></div>
+            <p style="font-size:13px;color:var(--text-2);margin-top:14px;line-height:1.65">Tags เหล่านี้มาจากการติดตาม Public Posts ของ Influencer — สะท้อนว่าร้านนี้ถูกพูดถึงในบริบทใดบ่อยที่สุด</p>
+          </div>
+        </div>
+
+        <!-- Menu Highlights -->
+        <div class="card">
+          <div class="panel-head"><div class="panel-title">🍴 Menu Highlights</div></div>
+          <div class="panel-body">
+            <div id="menuList" style="display:flex;flex-direction:column;gap:10px"></div>
+          </div>
+        </div>
+
+        <!-- Legal note -->
+        <div style="background:var(--cream);border:1px solid var(--border);border-radius:var(--radius);padding:16px">
+          <div style="font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);margin-bottom:6px">ChefMinistry Note</div>
+          <p style="font-size:13px;color:var(--text-2);line-height:1.65">ข้อมูล Signal ทั้งหมดมาจาก Public Posts เท่านั้น ChefMinistry ไม่ประเมินหรือวิจารณ์ร้านด้วยคำด่า — เราวิเคราะห์ Pattern ของ Influencer Mention เพื่อให้ข้อมูลเชิง Market Intelligence</p>
+        </div>
+
+        <!-- Other restaurants -->
+        <div>
+          <h2 class="h2" style="margin-bottom:16px">ร้านอื่นที่มี Signal แข็ง</h2>
+          <div class="grid-2" id="otherRestaurants"></div>
+        </div>
+      </div>
+
+      <!-- Right: Signal Panel (sticky) -->
+      <div class="detail-scores-panel" id="signalPanel">
+        <div class="panel-head">
+          <div class="panel-title">Signal Analysis</div>
+          <div id="velocityPill" style="font-size:12px;font-weight:900;padding:4px 10px;border-radius:99px;background:rgba(255,255,255,.1);color:#fff"></div>
+        </div>
+        <div class="panel-body">
+
+          <!-- Overlap big number -->
+          <div class="overall-big">
+            <div class="overall-num" id="overlapBig" style="font-size:72px">—</div>
+            <div class="overall-label">Unique Influencers (30 days)</div>
+            <div style="margin-top:10px" id="signalStrengthBadge"></div>
+          </div>
+
+          <!-- Signal count -->
+          <div style="background:var(--cream);border-radius:var(--radius);padding:14px;display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+            <div>
+              <div style="font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;color:var(--text-2)">Total Signal Count</div>
+              <div style="font-size:11px;color:var(--text-2);margin-top:2px">รวมทุก mention</div>
+            </div>
+            <div style="font-size:28px;font-weight:900;color:var(--navy);font-family:'Playfair Display',serif" id="signalCountNum">—</div>
+          </div>
+
+          <!-- Tier breakdown summary -->
+          <div style="font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--text-2);margin-bottom:10px">Reviewer Tier Mix</div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px" id="tierMixBars"></div>
+
+          <!-- Quick facts -->
+          <div style="border-top:1px solid var(--border);padding-top:14px;display:flex;flex-direction:column;gap:10px" id="quickFacts"></div>
+
+          <a href="./about.html#methodology" class="btn btn-outline" style="width:100%;margin-top:16px;font-size:13px">เข้าใจ Signal Score →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ── PRO CTA ── -->
+<div style="background:var(--navy);padding:32px 0;margin-top:16px">
+  <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap">
+    <div>
+      <div style="color:var(--gold);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Pro Feature</div>
+      <div style="color:#fff;font-size:17px;font-weight:900">รับ Alert ทันทีเมื่อ Overlap Signal เพิ่มขึ้น</div>
+      <div style="color:rgba(255,255,255,.6);font-size:14px;margin-top:4px">พร้อม Booking Links + Line OA Weekly Briefing</div>
+    </div>
+    <a href="#" class="btn btn-primary">เริ่มต้น Pro — ฿99/เดือน</a>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+          <div class="logo-mark" style="width:34px;height:34px;font-size:13px">CM</div>
+          <div class="logo-name">ChefMinistry</div>
+        </div>
+        <p class="footer-brand-desc">Food Signal Intelligence Platform</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Platform</div>
+        <div class="footer-links">
+          <a class="footer-link" href="./listing.html">Discover</a>
+          <a class="footer-link" href="./listing.html?velocity=rising">Rising</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">About</div>
+        <div class="footer-links">
+          <a class="footer-link" href="./about.html">Methodology</a>
+          <a class="footer-link" href="./about.html#legal">Legal</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Subscribe</div>
+        <div class="footer-links">
+          <a class="footer-link" href="#">Pro Plan</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">© 2025 ChefMinistry. ข้อมูลทั้งหมดมาจากเนื้อหาสาธารณะ.</div>
+    </div>
+  </div>
+</footer>
+
+<script src="./js/data.js"></script>
+<script>
+  document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
+    const n=document.getElementById("mobileNav");
+    n.style.display=n.style.display==="block"?"none":"block";
+  });
+
+  const params=new URLSearchParams(window.location.search);
+  const id=params.get("id");
+  const r=id ? getById(id) : CM_RESTAURANTS[0];
+
+  if(!r){
+    document.getElementById("heroName").textContent="ไม่พบร้านนี้";
+  } else {
+    document.title=`${r.name} — ChefMinistry`;
+    document.getElementById("pageTitle").textContent=`${r.name} — ChefMinistry`;
+    document.getElementById("breadcrumbName").textContent=r.name;
+
+    // Hero
+    document.getElementById("heroEmoji").textContent=r.emoji;
+    document.getElementById("heroName").textContent=r.name;
+    document.getElementById("heroMeta").innerHTML=`
+      <span>${escHtml(r.cuisine)}</span>
+      <span>·</span><span>📍 ${escHtml(r.area)}</span>
+      <span>·</span><span class="tag budget-${r.budget}" style="background:rgba(255,255,255,.15);color:#fff;border-color:transparent">${escHtml(r.budgetLabel)}</span>
+      <span>·</span><span style="color:rgba(255,255,255,.6)">฿${escHtml(r.priceRange)} บาท/คน</span>`;
+    document.getElementById("heroBadges").innerHTML=`
+      <span class="signal-tag signal-${r.signalStrength}" style="font-size:13px;padding:7px 14px">${signalLabel(r.signalStrength)}</span>
+      <span class="velocity ${r.trendVelocity}" style="font-size:13px;padding:7px 14px">${escHtml(r.trendBadge)}</span>
+      <span style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:99px;padding:7px 14px;font-size:13px;font-weight:700;color:#fff">${r.totalReviews} total reviews</span>`;
+
+    // CM Note box
+    document.getElementById("cmNoteBox").innerHTML=`
+      <div class="insight-box-label">🧠 ChefMinistry Signal Note</div>
+      <div class="insight-box-quote">"${escHtml(r.cmNote)}"</div>`;
+
+    // Overlap panel
+    document.getElementById("overlapCountPill").textContent=`${r.overlapSignal} unique influencers`;
+    const sc=signalClass(r.signalStrength);
+    document.getElementById("overlapBig").textContent=r.overlapSignal;
+    document.getElementById("overlapBig").style.color=`var(--${sc})`;
+    document.getElementById("signalStrengthBadge").innerHTML=`<span class="signal-tag signal-${r.signalStrength}" style="font-size:13px;padding:8px 16px">${signalLabel(r.signalStrength)}</span>`;
+    document.getElementById("velocityPill").textContent=r.trendBadge;
+    document.getElementById("velocityPill").style.color=r.trendVelocity==="rising"?"#56c282":r.trendVelocity==="declining"?"#f08080":"rgba(255,255,255,.6)";
+    document.getElementById("signalCountNum").textContent=r.signalCount;
+
+    // Tier breakdown boxes
+    const tiers=[
+      {key:"mega",label:"Mega",cls:"tier-mega"},
+      {key:"macro",label:"Macro",cls:"tier-macro"},
+      {key:"mid",label:"Mid",cls:"tier-mid"}
+    ];
+    document.getElementById("tierBreakdown").innerHTML=tiers.map(t=>`
+      <div style="text-align:center;padding:14px;border-radius:var(--radius);border:1px solid var(--border);background:var(--cream)">
+        <div style="font-size:24px;font-weight:900;color:var(--navy)">${r.reviewerTiers[t.key]??0}</div>
+        <div class="tier-badge ${t.cls}" style="margin:4px auto 0;display:inline-flex">${t.label}</div>
+      </div>`).join("");
+
+    // Tier mix bars
+    const total=(r.reviewerTiers.mega||0)+(r.reviewerTiers.macro||0)+(r.reviewerTiers.mid||0);
+    document.getElementById("tierMixBars").innerHTML=tiers.map(t=>{
+      const count=r.reviewerTiers[t.key]||0;
+      const pct=total>0?Math.round(count/total*100):0;
+      const barColor=t.key==="mega"?"var(--purple)":t.key==="macro"?"var(--blue)":"var(--text-2)";
+      return `<div style="display:grid;grid-template-columns:50px 1fr 30px;align-items:center;gap:8px">
+        <span class="tier-badge ${t.cls}" style="justify-content:center">${t.label}</span>
+        <div style="height:6px;background:var(--border);border-radius:99px;overflow:hidden"><div style="height:100%;width:${pct}%;background:${barColor};border-radius:99px"></div></div>
+        <span style="font-size:12px;font-weight:800;text-align:right">${count}</span>
+      </div>`;
+    }).join("");
+
+    // Overlap dots
+    const dotsEl=document.getElementById("overlapDotsDetail");
+    dotsEl.innerHTML=Array.from({length:10},(_,i)=>
+      `<span style="width:12px;height:12px;border-radius:50%;background:${i<r.overlapSignal?"var(--green)":"var(--border)"};display:inline-block"></span>`
+    ).join("");
+
+    // Reviewer list (first 5, rest blurred for Pro)
+    const reviewerListEl=document.getElementById("reviewerList");
+    const freeCount=3;
+    reviewerListEl.innerHTML=r.recentReviewers.slice(0,freeCount).map(rid=>{
+      const inf=getInfluencerById(rid);
+      if(!inf) return "";
+      return `<div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--border)">
+        <div class="inf-avatar ${inf.tier.toLowerCase()}">${escHtml(inf.avatar)}</div>
+        <div style="flex:1">
+          <div style="font-weight:800;font-size:14px">${escHtml(inf.name)}</div>
+          <div style="font-size:12px;color:var(--text-2)">${escHtml(inf.handle)} · ${escHtml(inf.platform)}</div>
+        </div>
+        <span class="tier-badge tier-${inf.tier.toLowerCase()}">${escHtml(inf.tier)}</span>
+      </div>`;
+    }).join("")+
+    (r.recentReviewers.length>freeCount?`
+      <div style="padding:10px 0;text-align:center;color:var(--text-2);font-size:13px;filter:blur(3px);user-select:none">
+        ${r.recentReviewers.slice(freeCount).length} คนอื่นๆ · Pro only
+      </div>`:""
+    );
+
+    // Quick facts
+    document.getElementById("quickFacts").innerHTML=`
+      <div style="display:flex;justify-content:space-between;font-size:13px">
+        <span style="color:var(--text-2);font-weight:700">ราคาเฉลี่ย</span>
+        <span style="font-weight:900">฿${escHtml(r.priceRange)} บาท/คน</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:13px">
+        <span style="color:var(--text-2);font-weight:700">ย่าน</span>
+        <span style="font-weight:900">${escHtml(r.area)}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:13px">
+        <span style="color:var(--text-2);font-weight:700">เหมาะกับ</span>
+        <span style="font-weight:900;text-align:right">${r.occasions.join(", ")}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:13px">
+        <span style="color:var(--text-2);font-weight:700">Total Reviews</span>
+        <span style="font-weight:900">${r.totalReviews}</span>
+      </div>`;
+
+    // Signal tags
+    document.getElementById("signalTagList").innerHTML=r.tags.map(t=>
+      `<span class="tag" style="background:var(--navy);color:#fff;text-transform:none;font-size:12px">${escHtml(t)}</span>`
+    ).join("");
+
+    // Menu highlights
+    document.getElementById("menuList").innerHTML=r.menuHighlights.map(m=>`
+      <div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)">
+        <span style="font-size:18px">🍴</span>
+        <span style="font-weight:700;font-size:14px">${escHtml(m)}</span>
+      </div>`).join("");
+
+    // Other restaurants (top 4 by overlap, excluding this)
+    const others=topByOverlap(8).filter(x=>x.id!==r.id).slice(0,4);
+    document.getElementById("otherRestaurants").innerHTML=others.map(o=>buildRestaurantCard(o)).join("");
+  }
+</script>
+</body>
+</html>

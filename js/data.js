@@ -1,0 +1,386 @@
+// ChefMinistry — Signal Intelligence Data Layer
+// ★ = Confirmed public data  |  ◎ = Illustrative / approximate for MVP
+
+// ── Influencers ──────────────────────────────────────────────────────────────
+const CM_INFLUENCERS = [
+
+  // ── MEGA TIER (1M+ followers) ─────────────────────────────────────────────
+  { id:"i01", name:"Peach Eat Laek",      handle:"@peach_eat_laek",    platform:"YouTube",   tier:"Mega",  followers:"8.8M",  focusArea:"All Thai Food, Eating Shows",      avatar:"P",  verified:true  }, // ★
+  { id:"i02", name:"icesy168",            handle:"@icesy168",           platform:"TikTok",    tier:"Mega",  followers:"3.7M",  focusArea:"Mukbang, Eating Show",              avatar:"I",  verified:true  }, // ★
+  { id:"i03", name:"พี่จ่า Peeja",        handle:"@peeja_pachim",       platform:"TikTok",    tier:"Mega",  followers:"2M",    focusArea:"Street Food, Local Thai",           avatar:"จ",  verified:true  }, // ★
+  { id:"i04", name:"bewvaraporn",         handle:"@bewvaraporn",        platform:"TikTok",    tier:"Mega",  followers:"1.7M",  focusArea:"Food, Lifestyle",                   avatar:"B",  verified:true  }, // ★
+
+  // ── MACRO TIER (100K–1M followers) ───────────────────────────────────────
+  { id:"i05", name:"มหาชนี จุ๊บจิ๊บ",   handle:"@mahachaneejubjib",   platform:"Facebook",  tier:"Macro", followers:"800K",  focusArea:"Bangkok Restaurants, All",          avatar:"ม",  verified:true  }, // ★
+  { id:"i06", name:"Mark Wiens",          handle:"@markwiens",          platform:"YouTube",   tier:"Mega",  followers:"8M",    focusArea:"Thai Street Food, Travel Food",      avatar:"M",  verified:true  }, // ★
+  { id:"i07", name:"Qunfoh",             handle:"@qunfoh",             platform:"TikTok",    tier:"Macro", followers:"400K",  focusArea:"ASMR, Mukbang, Korean-Thai",         avatar:"Q",  verified:true  }, // ★
+  { id:"i08", name:"GUN ASMR",           handle:"@gun_asmr",           platform:"TikTok",    tier:"Macro", followers:"250K",  focusArea:"ASMR Eating, Spicy Food",            avatar:"G",  verified:true  }, // ★
+  { id:"i09", name:"Kodtap Moo",         handle:"@kodtap_moo",         platform:"TikTok",    tier:"Macro", followers:"130K",  focusArea:"Street Food, Grilled Pork",          avatar:"K",  verified:true  }, // ★
+  { id:"i10", name:"Bon Bangkok",        handle:"@bon_bkk_food",       platform:"Instagram", tier:"Macro", followers:"170K",  focusArea:"Fine Dining, Bangkok Cafes",         avatar:"Bn", verified:false }, // ◎ Visa Wangsuphachart
+
+  // ── MID TIER (10K–100K followers) ────────────────────────────────────────
+  { id:"i11", name:"นุ่น Fine Dine",     handle:"@nun_finedine",       platform:"Instagram", tier:"Mid",   followers:"65K",   focusArea:"Fine Dining, Omakase, Japanese",    avatar:"น",  verified:false }, // ◎
+  { id:"i12", name:"โต้ง Street BKK",   handle:"@tong_streetbkk",     platform:"TikTok",    tier:"Mid",   followers:"55K",   focusArea:"Street Food, Night Market",          avatar:"ต",  verified:false }, // ◎
+  { id:"i13", name:"แนน Cafe Hunt",     handle:"@nan_cafehunt",       platform:"Instagram", tier:"Mid",   followers:"47K",   focusArea:"Cafe, Dessert, Brunch",              avatar:"น",  verified:false }, // ◎
+  { id:"i14", name:"ตั้ม Budget Eats",  handle:"@tam_budgeteats",     platform:"TikTok",    tier:"Mid",   followers:"38K",   focusArea:"Budget Eats, Best Value",            avatar:"ต",  verified:false }, // ◎
+  { id:"i15", name:"กอย Omakase BKK",  handle:"@koi_omakasebkk",     platform:"Instagram", tier:"Mid",   followers:"32K",   focusArea:"Omakase, Japanese, Wine Pairing",    avatar:"ก",  verified:false }, // ◎
+  { id:"i16", name:"เฟิร์น Night Eats", handle:"@fern_nighteats",     platform:"TikTok",    tier:"Mid",   followers:"27K",   focusArea:"Night Market, Late Night Food",      avatar:"ฝ",  verified:false }, // ◎
+  { id:"i17", name:"จอย Thai Regional", handle:"@joy_thairegional",   platform:"YouTube",   tier:"Mid",   followers:"20K",   focusArea:"Regional Thai, Traditional",          avatar:"จ",  verified:false }, // ◎
+  { id:"i18", name:"กาย Michelin Watch",handle:"@gay_michelinwatch",  platform:"Instagram", tier:"Mid",   followers:"17K",   focusArea:"Michelin Star, Fine Dining",          avatar:"ก",  verified:false }, // ◎
+  { id:"i19", name:"ดาว Eat Around",    handle:"@dao_eatround",       platform:"TikTok",    tier:"Mid",   followers:"14K",   focusArea:"Everyday Eats, Local Favorite",       avatar:"ด",  verified:false }, // ◎
+  { id:"i20", name:"มุก Sweet Review",  handle:"@mook_sweetreview",   platform:"Instagram", tier:"Mid",   followers:"11K",   focusArea:"Dessert, Bakery, Sweets",             avatar:"ม",  verified:false }, // ◎
+];
+
+// ── Restaurants ──────────────────────────────────────────────────────────────
+const CM_RESTAURANTS = [
+  {
+    id:"r001", name:"Gaggan Anand", cuisine:"Indian Progressive",
+    type:"fine-dining", budget:3, budgetLabel:"฿฿฿",
+    occasions:["special","date","business"], area:"วิทยุ",
+    priceRange:"4,500–8,000", emoji:"🍛",
+    signalStrength:"strong",   // very-strong / strong / moderate / weak
+    signalCount: 8,            // total influencer mentions
+    overlapSignal: 5,          // unique influencers in last 30 days
+    trendVelocity: "stable",   // rising / stable / declining
+    trendBadge: "→ Stable",
+    reviewerTiers: { mega:2, macro:2, mid:1 },
+    recentReviewers: ["i01","i04","i06","i09","i03"],
+    bookingLinks: { googlemaps:"#", wongnai:"#" },
+    tags:["Michelin 2★","Tasting Menu","Reservation Required"],
+    menuHighlights:["Yogurt Explosion","Potato Soil","Lick it up"],
+    cmNote:"Mega Influencer 2 คนรีวิวภายใน 2 สัปดาห์ — Signal แข็งมาก ราคาสูงแต่ถูกพูดถึงในกลุ่ม Fine Dining เสมอ",
+    totalReviews: 34
+  },
+  {
+    id:"r002", name:"Le Du", cuisine:"Modern Thai Fine Dining",
+    type:"fine-dining", budget:3, budgetLabel:"฿฿฿",
+    occasions:["special","date","business"], area:"สีลม",
+    priceRange:"2,500–4,000", emoji:"🌿",
+    signalStrength:"very-strong", signalCount:12, overlapSignal:7,
+    trendVelocity:"rising", trendBadge:"↑ Rising",
+    reviewerTiers:{ mega:1, macro:3, mid:3 },
+    recentReviewers:["i01","i08","i04","i03","i06","i09","i07"],
+    bookingLinks:{ googlemaps:"#", wongnai:"#" },
+    tags:["Asia's 50 Best","Local Sourcing","Seasonal Menu"],
+    menuHighlights:["Aged Duck","Thai Crab Curry","Local Herbs Dessert"],
+    cmNote:"Signal ที่แข็งที่สุดในหมวด Fine Dining ไทย — Influencer หลาย tier พูดถึงพร้อมกัน นี่คือ Overlap Signal ที่ตรวจจับได้ชัด",
+    totalReviews: 47
+  },
+  {
+    id:"r003", name:"Jay Fai", cuisine:"Street Food Thai",
+    type:"street-food", budget:2, budgetLabel:"฿฿",
+    occasions:["casual","special"], area:"บางลำพู",
+    priceRange:"800–1,500", emoji:"🦀",
+    signalStrength:"very-strong", signalCount:18, overlapSignal:6,
+    trendVelocity:"stable", trendBadge:"→ Stable",
+    reviewerTiers:{ mega:2, macro:3, mid:1 },
+    recentReviewers:["i01","i02","i08","i04","i05","i10"],
+    bookingLinks:{ googlemaps:"#" },
+    tags:["Michelin 1★","Queue Required","Iconic"],
+    menuHighlights:["Crab Omelette","Tom Yum Seafood","Dry Tom Yum"],
+    cmNote:"Signal สูงมาก แต่เป็น established signal ไม่ใช่ emerging — ทุกคนรู้จักแล้ว ไม่มี exclusivity advantage สำหรับ Pro user",
+    totalReviews: 89
+  },
+  {
+    id:"r004", name:"ไก่ทอดโปโล", cuisine:"Thai Fried Chicken",
+    type:"local", budget:1, budgetLabel:"฿",
+    occasions:["casual","everyday"], area:"วิทยุ",
+    priceRange:"150–300", emoji:"🍗",
+    signalStrength:"very-strong", signalCount:22, overlapSignal:8,
+    trendVelocity:"rising", trendBadge:"↑ Rising",
+    reviewerTiers:{ mega:1, macro:4, mid:3 },
+    recentReviewers:["i02","i10","i08","i05","i03","i07","i01","i06"],
+    bookingLinks:{ googlemaps:"#" },
+    tags:["Best Value","Local Legend","No Reservation"],
+    menuHighlights:["ไก่ทอด","ข้าวมันไก่","น้ำจิ้มสูตรพิเศษ"],
+    cmNote:"Overlap Signal สูงสุดในฐานข้อมูล — 8 influencer unique ใน 30 วัน และ Tier กว้างมาก ทั้ง Mega ถึง Mid ล้วนรีวิว",
+    totalReviews: 124
+  },
+  {
+    id:"r005", name:"Sühring", cuisine:"Modern German Fine Dining",
+    type:"fine-dining", budget:3, budgetLabel:"฿฿฿",
+    occasions:["special","date","business"], area:"สาทร",
+    priceRange:"5,000–9,000", emoji:"🥘",
+    signalStrength:"strong", signalCount:7, overlapSignal:4,
+    trendVelocity:"stable", trendBadge:"→ Stable",
+    reviewerTiers:{ mega:1, macro:2, mid:1 },
+    recentReviewers:["i01","i04","i06","i09"],
+    bookingLinks:{ googlemaps:"#", wongnai:"#" },
+    tags:["Asia's 50 Best","Twin Chefs","Tasting Menu"],
+    menuHighlights:["Pork Knuckle Reimagined","Schnitzel Evolution","Black Forest"],
+    cmNote:"Signal ที่ consistent มาก ทุกครั้งที่ influencer Fine Dining ไป คำตอบคือ positive ทำให้ Signal น่าเชื่อถือสูง",
+    totalReviews: 28
+  },
+  {
+    id:"r006", name:"Supanniga Eating Room", cuisine:"Thai Regional",
+    type:"casual-dining", budget:2, budgetLabel:"฿฿",
+    occasions:["casual","date","family"], area:"ทองหล่อ",
+    priceRange:"400–700", emoji:"🍲",
+    signalStrength:"moderate", signalCount:9, overlapSignal:4,
+    trendVelocity:"stable", trendBadge:"→ Stable",
+    reviewerTiers:{ mega:0, macro:2, mid:2 },
+    recentReviewers:["i03","i07","i08","i05"],
+    bookingLinks:{ googlemaps:"#", wongnai:"#" },
+    tags:["Regional Thai","Family Friendly","Good Ambiance"],
+    menuHighlights:["ปลาทูต้มมะดัน","แกงป่าหมูชะมวง","ยำปลาดุกฟู"],
+    cmNote:"Signal สม่ำเสมอจาก Macro-Mid tier influencer หมวด Casual Dining — ยังไม่มี Mega ให้ความสนใจ",
+    totalReviews: 67
+  },
+  {
+    id:"r007", name:"Somtum Der", cuisine:"Isaan Thai",
+    type:"casual-dining", budget:2, budgetLabel:"฿฿",
+    occasions:["casual","lunch"], area:"สีลม",
+    priceRange:"300–500", emoji:"🌶️",
+    signalStrength:"strong", signalCount:13, overlapSignal:5,
+    trendVelocity:"stable", trendBadge:"→ Stable",
+    reviewerTiers:{ mega:1, macro:2, mid:2 },
+    recentReviewers:["i02","i10","i08","i05","i03"],
+    bookingLinks:{ googlemaps:"#", wongnai:"#" },
+    tags:["Michelin Bib Gourmand","Isaan Specialist","Great Value"],
+    menuHighlights:["ส้มตำไทย","ลาบเป็ดคั่ว","ไก่ย่างตะกร้า"],
+    cmNote:"Michelin Bib Gourmand ทำให้ Signal น่าเชื่อถือสูง Mega influencer ฝั่ง Street Food บางส่วนรีวิวด้วย",
+    totalReviews: 83
+  },
+  {
+    id:"r008", name:"Shuggi Burger", cuisine:"American Smash Burger",
+    type:"casual", budget:1, budgetLabel:"฿",
+    occasions:["casual","everyday","hangout"], area:"ทองหล่อ",
+    priceRange:"250–400", emoji:"🍔",
+    signalStrength:"strong", signalCount:10, overlapSignal:6,
+    trendVelocity:"rising", trendBadge:"↑ Rising",
+    reviewerTiers:{ mega:0, macro:3, mid:3 },
+    recentReviewers:["i10","i02","i08","i05","i07","i03"],
+    bookingLinks:{ googlemaps:"#" },
+    tags:["Best Burger","Fast Casual","Trending Up"],
+    menuHighlights:["Double Smash Burger","Crispy Fries","Shuggi Sauce"],
+    cmNote:"Rising Signal ชัดมาก — Influencer หมวด Budget และ Street Food กำลังพูดถึงพร้อมกัน นี่คือ Emerging Signal ที่ Pro user ได้รู้ก่อน",
+    totalReviews: 56
+  },
+  {
+    id:"r009", name:"Paste Bangkok", cuisine:"Modern Royal Thai",
+    type:"fine-dining", budget:3, budgetLabel:"฿฿฿",
+    occasions:["special","date","business"], area:"เพลินจิต",
+    priceRange:"2,000–3,500", emoji:"👑",
+    signalStrength:"moderate", signalCount:8, overlapSignal:4,
+    trendVelocity:"stable", trendBadge:"→ Stable",
+    reviewerTiers:{ mega:1, macro:1, mid:2 },
+    recentReviewers:["i01","i04","i06","i09"],
+    bookingLinks:{ googlemaps:"#", wongnai:"#" },
+    tags:["Michelin 1★","Royal Thai","Vegetarian Friendly"],
+    menuHighlights:["Nahm Prik Roasted Chili","Royal Thai Curry","Blue Swimmer Crab"],
+    cmNote:"Signal ที่ credible สูงจาก Fine Dining influencer — แม้จำนวนไม่มาก แต่ Tier สูง ทำให้ weight ของ Signal แข็ง",
+    totalReviews: 41
+  },
+  {
+    id:"r010", name:"Haoma", cuisine:"Neo-Indian Sustainable",
+    type:"fine-dining", budget:3, budgetLabel:"฿฿฿",
+    occasions:["special","date"], area:"สุขุมวิท",
+    priceRange:"3,000–5,000", emoji:"🌱",
+    signalStrength:"moderate", signalCount:6, overlapSignal:4,
+    trendVelocity:"rising", trendBadge:"↑ Rising",
+    reviewerTiers:{ mega:0, macro:2, mid:2 },
+    recentReviewers:["i04","i06","i03","i09"],
+    bookingLinks:{ googlemaps:"#", wongnai:"#" },
+    tags:["Sustainable","Asia's 50 Best","Aquaponic Garden"],
+    menuHighlights:["Tasting Menu","Garden Fresh Produce","Neo-Indian Plates"],
+    cmNote:"Emerging Signal ใน Niche Sustainability Food — Influencer เฉพาะกลุ่มกำลังสร้าง signal ที่ค่อยๆ แข็งขึ้น",
+    totalReviews: 32
+  },
+  {
+    id:"r011", name:"ข้าวมันไก่ประตูน้ำ", cuisine:"Thai Hainanese Chicken Rice",
+    type:"street-food", budget:1, budgetLabel:"฿",
+    occasions:["casual","everyday","lunch"], area:"ประตูน้ำ",
+    priceRange:"60–100", emoji:"🍚",
+    signalStrength:"very-strong", signalCount:19, overlapSignal:9,
+    trendVelocity:"stable", trendBadge:"→ Stable",
+    reviewerTiers:{ mega:2, macro:4, mid:3 },
+    recentReviewers:["i02","i10","i08","i05","i01","i03","i07","i06","i04"],
+    bookingLinks:{ googlemaps:"#" },
+    tags:["Street Food Legend","Unbeatable Value","Local Icon"],
+    menuHighlights:["ข้าวมันไก่ต้ม","ข้าวมันไก่ทอด","ซุปไก่"],
+    cmNote:"Overlap Signal สูงสุดในหมวด Street Food/Budget — 9 Unique influencer ทุก Tier พูดถึง ยืนยัน signal ว่านี่คือ landmark ที่แท้จริง",
+    totalReviews: 156
+  },
+  {
+    id:"r012", name:"Daniel Thaiger", cuisine:"Thai-American Street Food",
+    type:"street-food", budget:1, budgetLabel:"฿",
+    occasions:["casual","lunch","hangout"], area:"หลายสาขา",
+    priceRange:"200–350", emoji:"🌮",
+    signalStrength:"moderate", signalCount:9, overlapSignal:4,
+    trendVelocity:"declining", trendBadge:"↓ Declining",
+    reviewerTiers:{ mega:0, macro:2, mid:2 },
+    recentReviewers:["i10","i05","i08","i03"],
+    bookingLinks:{ googlemaps:"#" },
+    tags:["Street Food","⚠️ Signal Declining","Multiple Locations"],
+    menuHighlights:["Thai Burger","Sticky Rice Bowl","Pad Kra Pao Fries"],
+    cmNote:"⚠️ Declining Signal — จำนวน influencer mention ลดลงจาก peak และเริ่มมี negative comment เรื่อง consistency หลังขยายสาขา Pro user ได้ข้อมูลนี้ก่อน",
+    totalReviews: 71
+  },
+  {
+    id:"r013", name:"Soul Food Thailand", cuisine:"Thai-Western Fusion",
+    type:"casual-dining", budget:2, budgetLabel:"฿฿",
+    occasions:["casual","date","hangout"], area:"เอกมัย",
+    priceRange:"350–600", emoji:"🍹",
+    signalStrength:"moderate", signalCount:7, overlapSignal:3,
+    trendVelocity:"stable", trendBadge:"→ Stable",
+    reviewerTiers:{ mega:0, macro:1, mid:2 },
+    recentReviewers:["i08","i07","i03"],
+    bookingLinks:{ googlemaps:"#", wongnai:"#" },
+    tags:["Good Vibes","Craft Cocktails","Fusion"],
+    menuHighlights:["Thai Tapas","Isaan Nachos","Craft Cocktails"],
+    cmNote:"Signal มาจาก Lifestyle influencer เป็นหลัก — Mood/Vibe มากกว่า Food signal บอกว่าร้านนี้ถูกรีวิวเพราะ บรรยากาศ ไม่ใช่อาหาร",
+    totalReviews: 48
+  },
+  {
+    id:"r014", name:"Peppina", cuisine:"Neapolitan Pizza",
+    type:"casual-dining", budget:2, budgetLabel:"฿฿",
+    occasions:["casual","date","family"], area:"ทองหล่อ",
+    priceRange:"400–700", emoji:"🍕",
+    signalStrength:"strong", signalCount:11, overlapSignal:5,
+    trendVelocity:"stable", trendBadge:"→ Stable",
+    reviewerTiers:{ mega:0, macro:3, mid:2 },
+    recentReviewers:["i08","i03","i07","i10","i05"],
+    bookingLinks:{ googlemaps:"#", wongnai:"#" },
+    tags:["Best Pizza BKK","Neapolitan DOC","Wood-fired Oven"],
+    menuHighlights:["Margherita","Diavola","Burrata & Prosciutto"],
+    cmNote:"Signal ที่สม่ำเสมอจาก Macro-Mid tier ในหมวด International Casual — บ่งบอกว่าคุณภาพ consistent และไม่มี controversy",
+    totalReviews: 62
+  },
+  {
+    id:"r015", name:"Eathai (Central Embassy)", cuisine:"Premium Thai Food Court",
+    type:"food-court", budget:2, budgetLabel:"฿฿",
+    occasions:["casual","lunch","family"], area:"เพลินจิต",
+    priceRange:"200–450", emoji:"🏪",
+    signalStrength:"strong", signalCount:14, overlapSignal:6,
+    trendVelocity:"stable", trendBadge:"→ Stable",
+    reviewerTiers:{ mega:1, macro:3, mid:2 },
+    recentReviewers:["i02","i10","i08","i05","i03","i07"],
+    bookingLinks:{ googlemaps:"#" },
+    tags:["Premium Food Court","Multiple Options","Great Location"],
+    menuHighlights:["ก๋วยเตี๋ยวเรือ","Mango Sticky Rice","Southern Thai Curry"],
+    cmNote:"Signal มาจาก Influencer หมวด Budget & Everyday — สะท้อนว่า Food Court คุณภาพสูงนี้เหมาะกับคนทุก segment",
+    totalReviews: 91
+  }
+];
+
+// ── Signal Intelligence for homepage ─────────────────────────────────────────
+const CM_SIGNALS = {
+  weeklyHighlight: {
+    title: "สัปดาห์นี้: Japanese Omakase กำลังดัง",
+    desc: "Influencer 6 คนรีวิวร้าน Omakase ใหม่ใน 10 วัน — Trend Velocity สูงสุดในรอบ 3 เดือน",
+    trend: "rising"
+  },
+  trendCategories: [
+    { cat:"Japanese Omakase", signal:"very-strong", change:"+34%", influencers:6 },
+    { cat:"Farm-to-Table",    signal:"rising",      change:"+18%", influencers:4 },
+    { cat:"Neapolitan Pizza", signal:"strong",      change:"+12%", influencers:5 },
+    { cat:"Thai Street Food", signal:"stable",      change:"+2%",  influencers:8 },
+    { cat:"Steakhouse",       signal:"declining",   change:"-8%",  influencers:2 }
+  ]
+};
+
+// ── Category meta ─────────────────────────────────────────────────────────────
+const CM_CATEGORIES = [
+  { id:"all",          label:"ทั้งหมด",      emoji:"🍽️" },
+  { id:"fine-dining",  label:"Fine Dining",   emoji:"🥂" },
+  { id:"casual-dining",label:"Casual Dining", emoji:"🍜" },
+  { id:"street-food",  label:"Street Food",   emoji:"🌶️" },
+  { id:"casual",       label:"Casual / Fast", emoji:"🍔" },
+  { id:"local",        label:"Local Legend",  emoji:"⭐" },
+  { id:"food-court",   label:"Food Court",    emoji:"🏪" }
+];
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function signalClass(s) {
+  if (s === "very-strong") return "green";
+  if (s === "strong")      return "green";
+  if (s === "moderate")    return "amber";
+  return "red";
+}
+function signalLabel(s) {
+  if (s === "very-strong") return "Signal แข็งมาก";
+  if (s === "strong")      return "Signal แข็ง";
+  if (s === "moderate")    return "Signal ปานกลาง";
+  return "Signal อ่อน";
+}
+function velocityClass(v) {
+  return v === "rising" ? "green" : v === "declining" ? "red" : "amber";
+}
+
+function escHtml(v) {
+  return String(v ?? "")
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+}
+function getById(id) {
+  return CM_RESTAURANTS.find(r => r.id === id);
+}
+function getInfluencerById(id) {
+  return CM_INFLUENCERS.find(i => i.id === id);
+}
+
+function topByOverlap(n = 5) {
+  return [...CM_RESTAURANTS].sort((a,b) => b.overlapSignal - a.overlapSignal).slice(0, n);
+}
+function topBySignalCount(n = 6) {
+  return [...CM_RESTAURANTS].sort((a,b) => b.signalCount - a.signalCount).slice(0, n);
+}
+function getRising(n = 6) {
+  return CM_RESTAURANTS.filter(r => r.trendVelocity === "rising").slice(0, n);
+}
+function getMostReviewed(n = 6) {
+  return [...CM_RESTAURANTS].sort((a,b) => b.totalReviews - a.totalReviews).slice(0, n);
+}
+
+// ── Signal Badge ──────────────────────────────────────────────────────────────
+function signalDots(overlapCount) {
+  const max = 10;
+  const filled = Math.min(overlapCount, max);
+  return Array.from({length: max}, (_,i) =>
+    `<span style="display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:2px;background:${i < filled ? "var(--green)" : "var(--border)"};"></span>`
+  ).join("");
+}
+
+// ── Card Builder ──────────────────────────────────────────────────────────────
+function buildRestaurantCard(r, opts = {}) {
+  const sc = signalClass(r.signalStrength);
+  const vc = velocityClass(r.trendVelocity);
+
+  const trendHtml = `<div class="card-trend ${vc === "green" ? "trend-up" : vc === "red" ? "trend-down" : ""}">${r.trendBadge}</div>`;
+
+  return `
+    <div class="card restaurant-card">
+      <a class="card-link" href="./restaurant.html?id=${escHtml(r.id)}">
+        <div class="card-image">
+          <div class="card-emoji-bg">${escHtml(r.emoji)}</div>
+          ${trendHtml}
+        </div>
+        <div class="card-body">
+          <div class="card-top">
+            <div>
+              <div class="card-name">${escHtml(r.name)}</div>
+              <div class="card-cuisine">${escHtml(r.cuisine)} · ${escHtml(r.area)}</div>
+            </div>
+            <div class="signal-badge signal-${escHtml(r.signalStrength)}">${r.overlapSignal}<span style="font-size:10px;font-weight:700;margin-left:2px">INF</span></div>
+          </div>
+          <div class="card-insight">${escHtml(r.cmNote)}</div>
+          <div class="overlap-bar" style="margin-top:4px">
+            <div style="font-size:10px;font-weight:800;color:var(--text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Influencer Overlap</div>
+            ${signalDots(r.overlapSignal)}
+          </div>
+          <div class="card-footer">
+            <div class="tag-list">
+              <span class="tag budget-${r.budget}">${escHtml(r.budgetLabel)}</span>
+              <span class="signal-tag signal-${escHtml(r.signalStrength)}">${signalLabel(r.signalStrength)}</span>
+            </div>
+            <div class="card-area">📍 ${escHtml(r.area)}</div>
+          </div>
+        </div>
+        ${opts.showOverlap ? `
+        <div class="value-score-strip" style="background:var(--green-bg)">
+          <span class="value-score-label" style="color:var(--green)">🔗 Overlap Signal</span>
+          <span class="value-score-num" style="color:var(--green)">${r.overlapSignal} influencers</span>
+        </div>` : ""}
+      </a>
+    </div>`;
+}
