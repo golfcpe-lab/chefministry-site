@@ -40,6 +40,14 @@ YOUTUBE_KEYWORD_SEARCHES = [
     "Sushi Ichizu Bangkok",
     "Ginza Sushi Ichi Bangkok",
     "โอมากาเสะ กรุงเทพ ใหม่",
+    # Pizza
+    "Maru Maru Pizza Bangkok",
+    "มารุมารุ พิซซ่า รีวิว",
+    "Pizza Massilia Bangkok",
+    # Ramen
+    "Sendo Ramen Bangkok รีวิว",
+    "Shindo Ramen ศาลายา รีวิว",
+    "ราเมน กรุงเทพ เปิดใหม่ 2026",
 ]
 
 # restaurant name → restaurant id mapping
@@ -72,6 +80,18 @@ RESTAURANT_ID_MAP = {
     "ichizu":            "r017",
     "ginza sushi ichi":  "r018",
     "sushi ichi":        "r018",
+    # Pizza (new)
+    "maru maru":         "r025",
+    "marumarupizza":     "r025",
+    "มารุมารุ":         "r025",
+    "pizza massilia":    "r021",
+    "massilia":          "r021",
+    "motorino":          "r022",
+    # Ramen (new)
+    "sendo ramen":       "r026",
+    "sendo":             "r026",
+    "shindo ramen":      "r027",
+    "shindo":            "r027",
 }
 
 # ─── HELPERS ─────────────────────────────────────────────────────────────────
