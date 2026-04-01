@@ -1,0 +1,39 @@
+name: Weekly Signal Update
+
+on:
+  schedule:
+    - cron: '0 2 * * 3'   # ทุกวันพุธ 09:00 น. (Thailand UTC+7)
+  workflow_dispatch:        # กด Run manually ได้เสมอ
+
+jobs:
+  update-signals:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run signal update script
+        run: python scripts/update_signals.py
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+
+      - name: Commit updated data.js
+        run: |
+          git config --global user.name  "ChefMinistry Bot"
+          git config --global user.email "bot@chefministry.com"
+          git add js/data.js
+          git diff --staged --quiet \
+            && echo "No changes to commit" \
+            || git commit -m "Weekly signal update $(date +'%Y-%m-%d')"
+          git push
