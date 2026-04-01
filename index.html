@@ -379,17 +379,54 @@
   document.getElementById("weeklyTitle").textContent = wh.title;
   document.getElementById("weeklyDesc").textContent = wh.desc;
 
+  // Trend category → restaurant matcher
+  const CAT_FILTER = {
+    "Japanese Omakase": r => r.type === "omakase",
+    "Farm-to-Table":    r => r.tags && r.tags.some(t => t.toLowerCase().includes("farm")),
+    "Neapolitan Pizza": r => r.cuisine.toLowerCase().includes("pizza") || r.cuisine.toLowerCase().includes("neapolitan"),
+    "Thai Street Food": r => r.type === "street-food",
+    "Steakhouse":       r => r.type === "steakhouse",
+  };
+
   // Trend category list
   const tcList = document.getElementById("trendCategoryList");
   tcList.innerHTML = CM_SIGNALS.trendCategories.map(t => {
     const isPos = !t.change.startsWith("-");
-    const barPct = Math.abs(parseInt(t.change)) * 2.5; // scale to visible width
+    const barPct = Math.abs(parseInt(t.change)) * 2.5;
     const barClass = t.signal === "declining" ? "declining" : t.signal === "stable" ? "stable" : "";
-    return `<div class="trend-row">
-      <div class="trend-cat">${escHtml(t.cat)}</div>
-      <div class="trend-bar-wrap"><div class="trend-bar-fill ${barClass}" style="width:${Math.min(barPct,100)}%"></div></div>
-      <div class="trend-change ${isPos?"positive":"negative"}">${escHtml(t.change)}</div>
-      <div class="trend-inf-count">${t.influencers} INF</div>
+
+    // matching restaurants (max 3, exclude declining for rising categories)
+    const filterFn = CAT_FILTER[t.cat];
+    const matched = filterFn
+      ? CM_RESTAURANTS.filter(filterFn)
+          .sort((a,b) => (b.overlapSignal||0) - (a.overlapSignal||0))
+          .slice(0,3)
+      : [];
+
+    const restaurantChips = matched.length
+      ? `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;padding-bottom:4px">
+          ${matched.map(r => `
+            <a href="./restaurant.html?id=${escHtml(r.id)}"
+               style="display:inline-flex;align-items:center;gap:5px;padding:4px 10px;
+                      background:var(--cream);border:1px solid var(--border);border-radius:20px;
+                      font-size:12px;font-weight:700;color:var(--navy);text-decoration:none;
+                      transition:all .15s"
+               onmouseover="this.style.background='var(--navy)';this.style.color='#fff'"
+               onmouseout="this.style.background='var(--cream)';this.style.color='var(--navy)'">
+              ${escHtml(r.emoji)} ${escHtml(r.name)}
+              <span style="font-size:10px;opacity:.6">${r.overlapSignal} INF</span>
+            </a>`).join("")}
+        </div>`
+      : "";
+
+    return `<div class="trend-row" style="flex-direction:column;align-items:stretch;gap:4px">
+      <div style="display:flex;align-items:center;gap:8px">
+        <div class="trend-cat">${escHtml(t.cat)}</div>
+        <div class="trend-bar-wrap" style="flex:1"><div class="trend-bar-fill ${barClass}" style="width:${Math.min(barPct,100)}%"></div></div>
+        <div class="trend-change ${isPos?"positive":"negative"}">${escHtml(t.change)}</div>
+        <div class="trend-inf-count">${t.influencers} INF</div>
+      </div>
+      ${restaurantChips}
     </div>`;
   }).join("");
 
