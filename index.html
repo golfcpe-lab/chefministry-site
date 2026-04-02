@@ -62,7 +62,7 @@
             <div class="hero-stat-label">Influencers Tracked</div>
           </div>
           <div>
-            <div class="hero-stat-num">15+</div>
+            <div class="hero-stat-num">25+</div>
             <div class="hero-stat-label">Restaurants Monitored</div>
           </div>
           <div>
@@ -161,6 +161,23 @@
         <div class="rank-list card" style="border-radius:var(--radius-lg);overflow:hidden" id="overlapRankList"></div>
       </div>
     </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ── THAI FINE DINING SPOTLIGHT ── -->
+<section class="section" style="background:linear-gradient(135deg,#0d1f3c,#1a2f52);color:#fff;padding-top:48px;padding-bottom:48px">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:28px">
+      <div>
+        <div class="eyebrow" style="color:var(--gold);margin-bottom:8px">🏆 Asia's 50 Best 2026 — Thai Fine Dining Surge</div>
+        <h2 class="display-2" style="color:#fff;margin-bottom:8px">Thai Fine Dining ครองแชมป์</h2>
+        <p style="color:rgba(255,255,255,.65);font-size:15px;max-width:520px;line-height:1.65">Nusara #5 · Baan Tepa #7 — อาหารไทย Fine Dining กำลัง Rising แรงที่สุดในรอบปี Overlap Signal สูงสุดในหมวด Fine Dining</p>
+      </div>
+      <a href="./listing.html?type=fine-dining" class="btn" style="background:var(--gold);color:var(--navy);font-weight:800;white-space:nowrap">ดู Fine Dining ทั้งหมด →</a>
+    </div>
+    <div class="grid-3" id="thaiFineDineGrid"></div>
   </div>
 </section>
 
@@ -388,6 +405,7 @@
 
   // Trend category → restaurant matcher
   const CAT_FILTER = {
+    "Thai Fine Dining": r => r.type === "fine-dining" && (r.cuisine.toLowerCase().includes("thai") || r.cuisine.toLowerCase().includes("samrub")),
     "Japanese Omakase": r => r.type === "omakase",
     "Farm-to-Table":    r => r.tags && r.tags.some(t => t.toLowerCase().includes("farm")),
     "Neapolitan Pizza": r => r.cuisine.toLowerCase().includes("pizza") || r.cuisine.toLowerCase().includes("neapolitan"),
@@ -455,9 +473,22 @@
     </a>`;
   }).join("");
 
-  // Rising grid (up to 3)
+  // Thai Fine Dining spotlight grid (top 3 by overlapSignal)
+  const thaiFineDineGrid = document.getElementById("thaiFineDineGrid");
+  const thaiFineDine = CM_RESTAURANTS
+    .filter(r => r.type === "fine-dining" && (r.cuisine.toLowerCase().includes("thai") || r.cuisine.toLowerCase().includes("samrub")))
+    .sort((a,b) => (b.overlapSignal||0) - (a.overlapSignal||0))
+    .slice(0,3);
+  thaiFineDineGrid.innerHTML = thaiFineDine.length
+    ? thaiFineDine.map(r => buildRestaurantCard(r, {showOverlap:true})).join("")
+    : `<div style="color:rgba(255,255,255,.5);grid-column:1/-1;padding:20px">ไม่มีข้อมูล</div>`;
+
+  // Rising grid (up to 6, excluding Thai Fine Dining already shown above)
   const risingGrid = document.getElementById("risingGrid");
-  const rising = getRising(3);
+  const thaiFineDineIds = new Set(thaiFineDine.map(r => r.id));
+  const rising = CM_RESTAURANTS
+    .filter(r => r.trendVelocity === "rising" && !thaiFineDineIds.has(r.id))
+    .slice(0, 6);
   risingGrid.innerHTML = rising.length
     ? rising.map(r => buildRestaurantCard(r, {showOverlap:true})).join("")
     : `<div style="color:var(--text-2);grid-column:1/-1;padding:20px">ไม่มีข้อมูล Rising ในขณะนี้</div>`;
