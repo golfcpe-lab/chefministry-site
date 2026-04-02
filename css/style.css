@@ -111,7 +111,7 @@ img{display:block;max-width:100%}
 .tag.budget-3{background:var(--red-bg);color:var(--red)}
 
 /* ── CARDS ── */
-.card{background:var(--white);border-radius:var(--radius-lg);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;transition:box-shadow .2s,transform .2s}
+.card{background:var(--white);color:var(--text);border-radius:var(--radius-lg);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;transition:box-shadow .2s,transform .2s}
 .card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
 .card-link{display:flex;flex-direction:column;height:100%}
 .card-image{height:190px;background:linear-gradient(135deg,#d9e4f0,#c8d8ea);position:relative;overflow:hidden}
