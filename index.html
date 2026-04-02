@@ -58,11 +58,11 @@
         </div>
         <div class="hero-stats">
           <div>
-            <div class="hero-stat-num">20</div>
+            <div class="hero-stat-num" id="statInfluencers">20</div>
             <div class="hero-stat-label">Influencers Tracked</div>
           </div>
           <div>
-            <div class="hero-stat-num">25+</div>
+            <div class="hero-stat-num" id="statRestaurants">—</div>
             <div class="hero-stat-label">Restaurants Monitored</div>
           </div>
           <div>
@@ -72,48 +72,8 @@
         </div>
       </div>
 
-      <!-- Live Overlap Signal Preview -->
-      <div class="hero-sample">
-        <div class="hero-sample-head">
-          <span>🔗 Overlap Signal — Live</span>
-          <span class="verdict best-value" style="background:rgba(10,107,67,.2);color:#56c282">↑ Rising</span>
-        </div>
-        <div class="hero-sample-card">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
-            <div>
-              <div class="hero-sample-name">ไก่ทอดโปโล</div>
-              <div class="hero-sample-type">Thai Fried Chicken · วิทยุ · ฿</div>
-            </div>
-            <div style="text-align:right">
-              <div style="font-size:10px;font-weight:900;color:var(--text-2);text-transform:uppercase;letter-spacing:.08em">Overlap Signal</div>
-              <div style="font-size:28px;font-weight:900;color:var(--green);font-family:'Playfair Display',serif;line-height:1.1">8 INF</div>
-            </div>
-          </div>
-          <!-- Overlap dots -->
-          <div style="margin-bottom:12px">
-            <div style="font-size:10px;font-weight:800;color:var(--text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Unique Influencers (30 days)</div>
-            <div style="display:flex;gap:4px;flex-wrap:wrap">
-              <span style="width:10px;height:10px;border-radius:50%;background:var(--green);display:inline-block"></span>
-              <span style="width:10px;height:10px;border-radius:50%;background:var(--green);display:inline-block"></span>
-              <span style="width:10px;height:10px;border-radius:50%;background:var(--green);display:inline-block"></span>
-              <span style="width:10px;height:10px;border-radius:50%;background:var(--green);display:inline-block"></span>
-              <span style="width:10px;height:10px;border-radius:50%;background:var(--green);display:inline-block"></span>
-              <span style="width:10px;height:10px;border-radius:50%;background:var(--green);display:inline-block"></span>
-              <span style="width:10px;height:10px;border-radius:50%;background:var(--green);display:inline-block"></span>
-              <span style="width:10px;height:10px;border-radius:50%;background:var(--green);display:inline-block"></span>
-              <span style="width:10px;height:10px;border-radius:50%;background:var(--border);display:inline-block"></span>
-              <span style="width:10px;height:10px;border-radius:50%;background:var(--border);display:inline-block"></span>
-            </div>
-          </div>
-          <!-- Reviewer tiers -->
-          <div style="display:flex;gap:6px;margin-bottom:12px">
-            <span class="tier-badge tier-mega">Mega ×1</span>
-            <span class="tier-badge tier-macro">Macro ×4</span>
-            <span class="tier-badge tier-mid">Mid ×3</span>
-          </div>
-          <div class="hero-sample-insight">"Overlap Signal สูงสุดในฐานข้อมูล — 8 influencer unique ใน 30 วัน และ Tier กว้างมาก"</div>
-        </div>
-      </div>
+      <!-- Live Overlap Signal Preview — rendered by JS -->
+      <div class="hero-sample" id="heroOverlapCard"></div>
     </div>
   </div>
 </section>
@@ -398,58 +358,112 @@
     n.style.display=n.style.display==="block"?"none":"block";
   });
 
+  // Dynamic stats
+  const statR = document.getElementById("statRestaurants");
+  if (statR) statR.textContent = CM_RESTAURANTS.length + "+";
+
   // Weekly highlight
   const wh = CM_SIGNALS.weeklyHighlight;
   document.getElementById("weeklyTitle").textContent = wh.title;
   document.getElementById("weeklyDesc").textContent = wh.desc;
 
-  // Trend category → restaurant matcher
+  // ── Hero overlap card — dynamic from top restaurant ──────────────────────
+  const heroCard = document.getElementById("heroOverlapCard");
+  if (heroCard) {
+    const heroRest = [...CM_RESTAURANTS].sort((a,b) => (b.overlapSignal||0) - (a.overlapSignal||0))[0];
+    if (heroRest) {
+      const maxDots = 10;
+      const filled = Math.min(heroRest.overlapSignal, maxDots);
+      const dots = Array.from({length: maxDots}, (_,i) =>
+        `<span style="width:10px;height:10px;border-radius:50%;background:${i < filled ? "var(--green)" : "var(--border)"};display:inline-block"></span>`
+      ).join("");
+      const tiers = heroRest.reviewerTiers || {};
+      const tierHtml = [
+        tiers.mega  > 0 ? `<span class="tier-badge tier-mega">Mega ×${tiers.mega}</span>`   : "",
+        tiers.macro > 0 ? `<span class="tier-badge tier-macro">Macro ×${tiers.macro}</span>` : "",
+        tiers.mid   > 0 ? `<span class="tier-badge tier-mid">Mid ×${tiers.mid}</span>`       : "",
+      ].filter(Boolean).join("");
+      const velColor = heroRest.trendVelocity === "rising" ? "#56c282" : heroRest.trendVelocity === "declining" ? "#e05c5c" : "rgba(255,255,255,.55)";
+      const velBg    = heroRest.trendVelocity === "rising" ? "rgba(10,107,67,.2)" : heroRest.trendVelocity === "declining" ? "rgba(180,30,30,.2)" : "rgba(255,255,255,.1)";
+      heroCard.innerHTML = `
+        <div class="hero-sample-head">
+          <span>🔗 Overlap Signal — Live</span>
+          <span class="verdict" style="background:${velBg};color:${velColor}">${escHtml(heroRest.trendBadge)}</span>
+        </div>
+        <div class="hero-sample-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+            <div>
+              <div class="hero-sample-name">${escHtml(heroRest.name)}</div>
+              <div class="hero-sample-type">${escHtml(heroRest.cuisine)} · ${escHtml(heroRest.area)} · ${escHtml(heroRest.budgetLabel)}</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-size:10px;font-weight:900;color:var(--text-2);text-transform:uppercase;letter-spacing:.08em">Overlap Signal</div>
+              <div style="font-size:28px;font-weight:900;color:var(--green);font-family:'Playfair Display',serif;line-height:1.1">${heroRest.overlapSignal} <span style="font-size:12px">INF</span></div>
+            </div>
+          </div>
+          <div style="margin-bottom:12px">
+            <div style="font-size:10px;font-weight:800;color:var(--text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Unique Influencers (30 days)</div>
+            <div style="display:flex;gap:4px;flex-wrap:wrap">${dots}</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">${tierHtml}</div>
+          <div class="hero-sample-insight">${escHtml(heroRest.cmNote)}</div>
+        </div>`;
+    }
+  }
+
+  // ── Trend category → restaurant matcher ──────────────────────────────────
   const CAT_FILTER = {
     "Thai Fine Dining": r => r.type === "fine-dining" && (r.cuisine.toLowerCase().includes("thai") || r.cuisine.toLowerCase().includes("samrub")),
     "Japanese Omakase": r => r.type === "omakase",
+    "Hidden Gems":      r => r.tags && r.tags.some(t => t === "Hidden Gem" || t === "ล้านลับ"),
     "Farm-to-Table":    r => r.tags && r.tags.some(t => t.toLowerCase().includes("farm")),
     "Neapolitan Pizza": r => r.cuisine.toLowerCase().includes("pizza") || r.cuisine.toLowerCase().includes("neapolitan"),
     "Artisan Ramen":    r => r.cuisine.toLowerCase().includes("ramen"),
     "Thai Street Food": r => r.type === "street-food",
+    "Hot Pot / Suki":   r => r.cuisine.toLowerCase().includes("hot pot") || r.cuisine.toLowerCase().includes("suki"),
     "Steakhouse":       r => r.type === "steakhouse",
   };
 
+  // Sort trendCategories: very-strong → strong → moderate/rising → stable → declining
+  const SIG_RANK = {"very-strong":5,"strong":4,"moderate":3,"rising":2,"stable":1,"declining":0,"weak":0};
+  const sortedTrends = [...CM_SIGNALS.trendCategories]
+    .sort((a,b) => (SIG_RANK[b.signal]||0) - (SIG_RANK[a.signal]||0));
+
   // Trend category list
   const tcList = document.getElementById("trendCategoryList");
-  tcList.innerHTML = CM_SIGNALS.trendCategories.map(t => {
-    const isPos = !t.change.startsWith("-");
-    const barPct = Math.abs(parseInt(t.change)) * 2.5;
-    const barClass = t.signal === "declining" ? "declining" : t.signal === "stable" ? "stable" : "";
+  tcList.innerHTML = sortedTrends.map(t => {
+    const rawVal = parseInt(t.change);
+    const isPos  = !t.change.startsWith("-");
+    const barPct = isNaN(rawVal) ? 8 : Math.min(Math.abs(rawVal) * 2.2, 100);
+    const barClass = t.signal === "declining" ? "declining" : (t.signal === "stable" || t.signal === "moderate") ? "stable" : "";
 
-    // matching restaurants (max 3, exclude declining for rising categories)
     const filterFn = CAT_FILTER[t.cat];
     const matched = filterFn
       ? CM_RESTAURANTS.filter(filterFn)
           .sort((a,b) => (b.overlapSignal||0) - (a.overlapSignal||0))
-          .slice(0,3)
+          .slice(0, 3)
       : [];
 
     const restaurantChips = matched.length
-      ? `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;padding-bottom:4px">
-          ${matched.map(r => `
-            <a href="./restaurant.html?id=${escHtml(r.id)}"
-               style="display:inline-flex;align-items:center;gap:5px;padding:4px 10px;
+      ? `<div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;padding-bottom:2px">
+          ${matched.map(r =>
+            `<a href="./restaurant.html?id=${escHtml(r.id)}"
+               style="display:inline-flex;align-items:center;gap:4px;padding:3px 9px;
                       background:var(--cream);border:1px solid var(--border);border-radius:20px;
-                      font-size:12px;font-weight:700;color:var(--navy);text-decoration:none;
-                      transition:all .15s"
+                      font-size:11.5px;font-weight:700;color:var(--navy);text-decoration:none;
+                      transition:background .15s,color .15s"
                onmouseover="this.style.background='var(--navy)';this.style.color='#fff'"
-               onmouseout="this.style.background='var(--cream)';this.style.color='var(--navy)'">
-              ${escHtml(r.emoji)} ${escHtml(r.name)}
-              <span style="font-size:10px;opacity:.6">${r.overlapSignal} INF</span>
-            </a>`).join("")}
+               onmouseout="this.style.background='var(--cream)';this.style.color='var(--navy)'"
+             >${escHtml(r.emoji)} ${escHtml(r.name)}<span style="font-size:10px;opacity:.55;margin-left:2px">${r.overlapSignal} INF</span></a>`
+          ).join("")}
         </div>`
       : "";
 
-    return `<div class="trend-row" style="flex-direction:column;align-items:stretch;gap:4px">
+    return `<div class="trend-row" style="flex-direction:column;align-items:stretch;gap:3px;margin-bottom:2px">
       <div style="display:flex;align-items:center;gap:8px">
         <div class="trend-cat">${escHtml(t.cat)}</div>
-        <div class="trend-bar-wrap" style="flex:1"><div class="trend-bar-fill ${barClass}" style="width:${Math.min(barPct,100)}%"></div></div>
-        <div class="trend-change ${isPos?"positive":"negative"}">${escHtml(t.change)}</div>
+        <div class="trend-bar-wrap" style="flex:1"><div class="trend-bar-fill ${barClass}" style="width:${barPct}%"></div></div>
+        <div class="trend-change ${isPos && !isNaN(rawVal) ? "positive" : isNaN(rawVal) ? "neutral" : "negative"}" style="${isNaN(rawVal) ? "color:var(--text-2);font-style:italic" : ""}">${escHtml(t.change)}</div>
         <div class="trend-inf-count">${t.influencers} INF</div>
       </div>
       ${restaurantChips}
