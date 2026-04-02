@@ -38,11 +38,11 @@ const CM_RESTAURANTS = [
     type:"fine-dining", budget:3, budgetLabel:"฿฿฿",
     occasions:["special","date","business"], area:"วิทยุ",
     priceRange:"4,500–8,000", emoji:"🍛",
-    signalStrength:"weak",   // very-strong / strong / moderate / weak
+    signalStrength:"strong",   // very-strong / strong / moderate / weak
     signalCount: 8,            // total influencer mentions
-    overlapSignal: 1,          // unique influencers in last 30 days
-    trendVelocity: "declining",   // rising / stable / declining
-    trendBadge: "↓ Declining",
+    overlapSignal: 5,          // unique influencers in last 30 days
+    trendVelocity: "stable",   // rising / stable / declining
+    trendBadge: "→ Stable",
     reviewerTiers: { mega:2, macro:2, mid:1 },
     recentReviewers: ["i01","i04","i06","i09","i03"],
     bookingLinks: { googlemaps:"#", wongnai:"#" },
@@ -56,8 +56,8 @@ const CM_RESTAURANTS = [
     type:"fine-dining", budget:3, budgetLabel:"฿฿฿",
     occasions:["special","date","business"], area:"สีลม",
     priceRange:"2,500–4,000", emoji:"🌿",
-    signalStrength:"weak", signalCount:12, overlapSignal:1,
-    trendVelocity:"declining", trendBadge:"↓ Declining",
+    signalStrength:"very-strong", signalCount:12, overlapSignal:7,
+    trendVelocity:"rising", trendBadge:"↑ Rising",
     reviewerTiers:{ mega:1, macro:3, mid:3 },
     recentReviewers:["i01","i08","i04","i03","i06","i09","i07"],
     bookingLinks:{ googlemaps:"#", wongnai:"#" },
@@ -71,8 +71,8 @@ const CM_RESTAURANTS = [
     type:"street-food", budget:2, budgetLabel:"฿฿",
     occasions:["casual","special"], area:"บางลำพู",
     priceRange:"800–1,500", emoji:"🦀",
-    signalStrength:"weak", signalCount:18, overlapSignal:1,
-    trendVelocity:"declining", trendBadge:"↓ Declining",
+    signalStrength:"very-strong", signalCount:18, overlapSignal:6,
+    trendVelocity:"stable", trendBadge:"→ Stable",
     reviewerTiers:{ mega:2, macro:3, mid:1 },
     recentReviewers:["i01","i02","i08","i04","i05","i10"],
     bookingLinks:{ googlemaps:"#" },
@@ -86,8 +86,8 @@ const CM_RESTAURANTS = [
     type:"local", budget:1, budgetLabel:"฿",
     occasions:["casual","everyday"], area:"วิทยุ",
     priceRange:"150–300", emoji:"🍗",
-    signalStrength:"weak", signalCount:22, overlapSignal:1,
-    trendVelocity:"declining", trendBadge:"↓ Declining",
+    signalStrength:"very-strong", signalCount:22, overlapSignal:8,
+    trendVelocity:"rising", trendBadge:"↑ Rising",
     reviewerTiers:{ mega:1, macro:4, mid:3 },
     recentReviewers:["i02","i10","i08","i05","i03","i07","i01","i06"],
     bookingLinks:{ googlemaps:"#" },
@@ -161,8 +161,8 @@ const CM_RESTAURANTS = [
     type:"fine-dining", budget:3, budgetLabel:"฿฿฿",
     occasions:["special","date","business"], area:"เพลินจิต",
     priceRange:"2,000–3,500", emoji:"👑",
-    signalStrength:"weak", signalCount:8, overlapSignal:1,
-    trendVelocity:"declining", trendBadge:"↓ Declining",
+    signalStrength:"moderate", signalCount:8, overlapSignal:4,
+    trendVelocity:"stable", trendBadge:"→ Stable",
     reviewerTiers:{ mega:1, macro:1, mid:2 },
     recentReviewers:["i01","i04","i06","i09"],
     bookingLinks:{ googlemaps:"#", wongnai:"#" },
@@ -298,8 +298,8 @@ const CM_RESTAURANTS = [
     type:"casual-dining", budget:2, budgetLabel:"฿฿",
     occasions:["casual","date","hangout"], area:"พระโขนง (สุขุมวิท 67)",
     priceRange:"380–750", emoji:"🍕",
-    signalStrength:"weak", signalCount:14, overlapSignal:1,
-    trendVelocity:"declining", trendBadge:"↓ Declining",
+    signalStrength:"very-strong", signalCount:14, overlapSignal:7,
+    trendVelocity:"rising", trendBadge:"↑ Rising",
     reviewerTiers:{ mega:0, macro:4, mid:3 },
     recentReviewers:["i03","i08","i12","i07","i05","i04","i16"],
     bookingLinks:{ googlemaps:"#", wongnai:"#" },
@@ -445,21 +445,68 @@ const CM_RESTAURANTS = [
     menuHighlights:["Omakase Nigiri","Seasonal Tsumami","Tamago Finale"],
     cmNote:"แบรนด์จาก Ginza Tokyo — Signal มาจาก Influencer ที่เน้น Fine Dining และ Japanese โดยเฉพาะ",
     totalReviews: 29
+  },
+  // ── Thai Fine Dining (Emerging Strongest) ────────────────────────────────
+  {
+    id:"r030", name:"Nusara", cuisine:"Modern Thai Fine Dining",
+    type:"fine-dining", budget:3, budgetLabel:"฿฿฿",
+    occasions:["special","date","business"], area:"สีลม",
+    priceRange:"3,500–5,500", emoji:"🌺",
+    signalStrength:"very-strong", signalCount:10, overlapSignal:7, // ◎
+    trendVelocity:"rising", trendBadge:"↑ Rising",
+    reviewerTiers:{ mega:1, macro:2, mid:4 },
+    recentReviewers:["i01","i04","i06","i10","i11","i15","i18"],
+    bookingLinks:{ googlemaps:"#", wongnai:"#" },
+    tags:["Asia's 50 Best #5 (2026)","Michelin 1★","Rooftop View Wat Pho","Chefs' Choice Award 2026"],
+    menuHighlights:["12-course Tasting Menu","Tiger Prawn Curry","River Fish","Seasonal Salads"],
+    cmNote:"Signal แข็งที่สุดในหมวด Thai Fine Dining ตอนนี้ — Asia's 50 Best #5 ปี 2026 + Chef Ton ได้ Chefs' Choice Award Mega & Fine Dine influencer พูดถึงพร้อมกัน Overlap Signal Rising",
+    totalReviews: 31
+  },
+  {
+    id:"r031", name:"Baan Tepa", cuisine:"Thai Farm-to-Table",
+    type:"fine-dining", budget:3, budgetLabel:"฿฿฿",
+    occasions:["special","date"], area:"รามคำแหง",
+    priceRange:"3,900–4,500", emoji:"🌿",
+    signalStrength:"very-strong", signalCount:9, overlapSignal:6, // ◎
+    trendVelocity:"rising", trendBadge:"↑ Rising",
+    reviewerTiers:{ mega:1, macro:2, mid:3 },
+    recentReviewers:["i01","i04","i06","i10","i11","i18"],
+    bookingLinks:{ googlemaps:"#", wongnai:"#" },
+    tags:["Asia's 50 Best #7 (2026)","Michelin 2★","Best Thai Restaurant 2026","Farm-to-Table","Garden Dining"],
+    menuHighlights:["7-course Tasting Menu","Seasonal Thai Herbs","Garden Fresh Produce","Chef's Snack in Garden"],
+    cmNote:"Best Thai Restaurant 2026 (Asia's 50 Best) — Chef Tam คนแรกในโลกที่เป็นผู้หญิงไทยนำร้าน Michelin 2 ดาว ตั้งอยู่ในบ้านเก่า 3 generation กำลังเป็น must-visit สำหรับ Fine Dine community",
+    totalReviews: 24
+  },
+  {
+    id:"r032", name:"ขวัญทิพย์ Kwantip", cuisine:"Samrub Thai Dining",
+    type:"fine-dining", budget:3, budgetLabel:"฿฿฿",
+    occasions:["special","date","family"], area:"อารีย์",
+    priceRange:"1,390++", emoji:"👸",
+    signalStrength:"moderate", signalCount:5, overlapSignal:3, // ◎
+    trendVelocity:"rising", trendBadge:"↑ Rising",
+    reviewerTiers:{ mega:0, macro:1, mid:2 },
+    recentReviewers:["i05","i10","i11"],
+    bookingLinks:{ googlemaps:"#", wongnai:"#" },
+    tags:["Heritage Thai","Samrub Style","Reservation Required","Open Fri–Sun Only","4-Generation Recipe"],
+    menuHighlights:["สำรับอาหารไทยตามฤดูกาล","น้ำพริกปลาสลิดฟู","ยำส้มโอเป็ดรมควัน","แกงปลา"],
+    cmNote:"Emerging Signal ในหมวด Heritage Thai — เปิดเฉพาะ Fri–Sun โดยเชฟป้อม ม.ล.ขวัญทิพย์ เทวกุล สูตร 4 generation กำลังสร้าง buzz ในกลุ่ม Thai culture & fine dine community",
+    totalReviews: 9
   }
 ];
 
 // ── Signal Intelligence for homepage ─────────────────────────────────────────
 const CM_SIGNALS = {
   weeklyHighlight: {
-    title: "สัปดาห์นี้: Japanese Omakase กำลังดัง",
-    desc: "Influencer 6 คนรีวิวร้าน Omakase ใหม่ใน 10 วัน — Trend Velocity สูงสุดในรอบ 3 เดือน",
+    title: "🔥 Thai Fine Dining ครองแชมป์ Asia's 50 Best 2026",
+    desc: "Nusara #5 + Baan Tepa #7 — Fine Dining ไทยแท้กำลัง Rising แรงที่สุดในรอบปี Influencer ทุก tier พูดถึงพร้อมกัน",
     trend: "rising"
   },
   trendCategories: [
+    { cat:"Thai Fine Dining", signal:"very-strong", change:"+52%", influencers:8 },
     { cat:"Japanese Omakase", signal:"very-strong", change:"+34%", influencers:6 },
-    { cat:"Farm-to-Table",    signal:"rising",      change:"+18%", influencers:4 },
     { cat:"Neapolitan Pizza", signal:"strong",      change:"+22%", influencers:7 },
     { cat:"Artisan Ramen",    signal:"strong",      change:"+15%", influencers:5 },
+    { cat:"Farm-to-Table",    signal:"rising",      change:"+18%", influencers:4 },
     { cat:"Thai Street Food", signal:"stable",      change:"+2%",  influencers:8 },
     { cat:"Steakhouse",       signal:"declining",   change:"-8%",  influencers:2 }
   ]
