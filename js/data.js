@@ -491,6 +491,66 @@ const CM_RESTAURANTS = [
     menuHighlights:["สำรับอาหารไทยตามฤดูกาล","น้ำพริกปลาสลิดฟู","ยำส้มโอเป็ดรมควัน","แกงปลา"],
     cmNote:"Emerging Signal ในหมวด Heritage Thai — เปิดเฉพาะ Fri–Sun โดยเชฟป้อม ม.ล.ขวัญทิพย์ เทวกุล สูตร 4 generation กำลังสร้าง buzz ในกลุ่ม Thai culture & fine dine community",
     totalReviews: 9
+  },
+  {
+    id:"r033", name:"Sukiism", cuisine:"Chinese Hot Pot / Suki",
+    type:"casual-dining", budget:2, budgetLabel:"฿฿",
+    occasions:["casual","group","family"], area:"กรุงเทพฯ",
+    priceRange:"300–600", emoji:"🍲",
+    signalStrength:"moderate", signalCount:14, overlapSignal:4,
+    trendVelocity:"stable", trendBadge:"→ Stable",
+    reviewerTiers:{ mega:2, macro:3, mid:2 },
+    recentReviewers:["i02","i03","i04","i07","i09","i12","i16"],
+    bookingLinks:{ googlemaps:"#", wongnai:"#" },
+    tags:["TikTok Viral","Hot Pot","Suki","Group Dining","Crowded Market"],
+    menuHighlights:["น้ำซุปต้มยำ","สุกี้ทะเล","ชุดพรีเมียม"],
+    cmNote:"Signal จาก TikTok volume สูง แต่ตลาด Hot Pot / Suki ใน กทม. อิ่มตัวมาก — มีคู่แข่งหลักร้อยร้าน Influencer รีวิวเพราะ format ทำง่าย ไม่ใช่เพราะร้านโดดเด่น",
+    totalReviews: 28
+  },
+  {
+    id:"r034", name:"Lok Toi Hot Pot", cuisine:"Chinese Hot Pot",
+    type:"casual-dining", budget:2, budgetLabel:"฿฿",
+    occasions:["casual","group","family"], area:"กรุงเทพฯ",
+    priceRange:"350–700", emoji:"🥘",
+    signalStrength:"moderate", signalCount:9, overlapSignal:3,
+    trendVelocity:"stable", trendBadge:"→ Stable",
+    reviewerTiers:{ mega:1, macro:2, mid:2 },
+    recentReviewers:["i02","i07","i09","i12","i16"],
+    bookingLinks:{ googlemaps:"#", wongnai:"#" },
+    tags:["TikTok Trending","Hot Pot","Chinese","Group Dining","Crowded Market"],
+    menuHighlights:["น้ำซุปหลากรส","เนื้อพรีเมียม","ชุดผัก"],
+    cmNote:"อยู่ใน genre Hot Pot ที่ตลาด กทม. แน่นมาก — signal มาจาก TikTok format ไม่ใช่ความโดดเด่นของร้าน ควรดู Overlap ระยะยาวก่อนสรุป",
+    totalReviews: 17
+  },
+  {
+    id:"r035", name:"Ishii Katsu", cuisine:"Japanese Katsu",
+    type:"casual-dining", budget:2, budgetLabel:"฿฿",
+    occasions:["casual","date","solo"], area:"กรุงเทพฯ",
+    priceRange:"350–700", emoji:"🍱",
+    signalStrength:"strong", signalCount:7, overlapSignal:5,
+    trendVelocity:"rising", trendBadge:"↑ Rising",
+    reviewerTiers:{ mega:0, macro:2, mid:3 },
+    recentReviewers:["i07","i09","i11","i15","i18"],
+    bookingLinks:{ googlemaps:"#", wongnai:"#" },
+    tags:["Hidden Gem","Japanese Katsu","Tonkatsu","ล้านลับ","Worth the Hunt"],
+    menuHighlights:["Tonkatsu Premium","Hire Katsu","Katsu Curry"],
+    cmNote:"Hidden Gem ที่ Influencer พูดถึงแบบ organic — ไม่ใช่ paid content ไม่ได้ดังจาก TikTok volume แต่ Overlap Signal แน่น นี่คือประเภท signal ที่ ChefMinistry ออกแบบมาเพื่อตรวจจับ",
+    totalReviews: 14
+  },
+  {
+    id:"r036", name:"505 House", cuisine:"Casual Dining",
+    type:"casual-dining", budget:2, budgetLabel:"฿฿",
+    occasions:["casual","group","date"], area:"กรุงเทพฯ",
+    priceRange:"200–500", emoji:"🏠",
+    signalStrength:"strong", signalCount:6, overlapSignal:4,
+    trendVelocity:"rising", trendBadge:"↑ Rising",
+    reviewerTiers:{ mega:0, macro:1, mid:3 },
+    recentReviewers:["i09","i12","i14","i16"],
+    bookingLinks:{ googlemaps:"#", wongnai:"#" },
+    tags:["Hidden Gem","ล้านลับ","Local Favorite","Underrated","Word of Mouth"],
+    menuHighlights:["เมนู signature ประจำร้าน","Daily Specials"],
+    cmNote:"ร้านลับที่คนรู้จักจาก word of mouth — signal เงียบแต่ Overlap มาจาก Influencer หลาย tier โดยไม่ได้นัดกัน นี่คือ authentic signal ที่หายากและมีค่าที่สุดในระบบ",
+    totalReviews: 11
   }
 ];
 
@@ -504,10 +564,12 @@ const CM_SIGNALS = {
   trendCategories: [
     { cat:"Thai Fine Dining", signal:"very-strong", change:"+52%", influencers:8 },
     { cat:"Japanese Omakase", signal:"very-strong", change:"+34%", influencers:6 },
+    { cat:"Hidden Gems",      signal:"strong",      change:"+40%", influencers:5 },
     { cat:"Neapolitan Pizza", signal:"strong",      change:"+22%", influencers:7 },
     { cat:"Artisan Ramen",    signal:"strong",      change:"+15%", influencers:5 },
     { cat:"Farm-to-Table",    signal:"rising",      change:"+18%", influencers:4 },
     { cat:"Thai Street Food", signal:"stable",      change:"+2%",  influencers:8 },
+    { cat:"Hot Pot / Suki",   signal:"stable",      change:"Crowded", influencers:7 },
     { cat:"Steakhouse",       signal:"declining",   change:"-8%",  influencers:2 }
   ]
 };
