@@ -648,4 +648,25 @@
 
   // Rising grid (up to 6, excluding Thai Fine Dining already shown above)
   const risingGrid = document.getElementById("risingGrid");
-  const
+  const thaiFineDineIds = new Set(thaiFineDine.map(r => r.id));
+  const rising = CM_RESTAURANTS
+    .filter(r => r.trendVelocity === "rising" && !thaiFineDineIds.has(r.id))
+    .slice(0, 6);
+  risingGrid.innerHTML = rising.length
+    ? rising.map(r => buildRestaurantCard(r, {showOverlap:true})).join("")
+    : `<div style="color:var(--text-2);grid-column:1/-1;padding:20px">ไม่มีข้อมูล Rising ในขณะนี้</div>`;
+
+  // Influencer grid
+  const infGrid = document.getElementById("influencerGrid");
+  infGrid.innerHTML = CM_INFLUENCERS.map(i => `
+    <div class="inf-card">
+      <div class="inf-card-avatar ${i.tier.toLowerCase()}">${escHtml(i.avatar)}</div>
+      <div class="inf-card-name">${escHtml(i.name)}</div>
+      <div class="inf-card-handle">${escHtml(i.handle)}</div>
+      <div style="margin-bottom:6px"><span class="tier-badge tier-${i.tier.toLowerCase()}">${escHtml(i.tier)}</span></div>
+      <div class="inf-card-followers">${escHtml(i.followers)}</div>
+      <div style="font-size:11px;color:var(--text-2);margin-top:3px">${escHtml(i.platform)}</div>
+    </div>`).join("");
+</script>
+</body>
+</html>
