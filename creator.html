@@ -442,4 +442,29 @@ const FAQS=[
   {q:"ChefMinistry ใช้ข้อมูลจาก creator อย่างไร?",
    a:"เราใช้ข้อมูลเฉพาะ aggregate analytics เพื่อปรับปรุง signal quality ไม่มีการแชร์ข้อมูลส่วนตัวกับบุคคลที่สาม และ creator สามารถ opt-out ได้ตลอดเวลา"},
   {q:"Brand Deal Pipeline จะเริ่มเมื่อไหร่?",
-   a:"เป็น P
+   a:"เป็น Phase 2 ของ ChefMinistry ครับ ปัจจุบันอยู่ในช่วง building community ก่อน — creator ที่สมัครตอนนี้จะได้สิทธิ์ early access เมื่อระบบ matching เปิดตัว"},
+];
+
+const faqList=document.getElementById("faqList");
+faqList.innerHTML=FAQS.map((f,i)=>`
+  <div style="border-bottom:1px solid var(--border)">
+    <button onclick="toggleFaq(${i})" style="width:100%;display:flex;justify-content:space-between;align-items:center;padding:20px 0;background:none;border:none;cursor:pointer;font-family:inherit;text-align:left;gap:16px">
+      <span style="font-size:15px;font-weight:800;color:var(--text)">${f.q}</span>
+      <span id="faqIcon${i}" style="font-size:20px;color:var(--text-2);flex-shrink:0;transition:transform .2s">＋</span>
+    </button>
+    <div id="faqBody${i}" style="display:none;padding-bottom:18px">
+      <p style="font-size:14px;color:var(--text-2);line-height:1.7">${f.a}</p>
+    </div>
+  </div>
+`).join("");
+
+function toggleFaq(i){
+  const body=document.getElementById("faqBody"+i);
+  const icon=document.getElementById("faqIcon"+i);
+  const open=body.style.display==="block";
+  body.style.display=open?"none":"block";
+  icon.textContent=open?"＋":"－";
+}
+</script>
+</body>
+</html>

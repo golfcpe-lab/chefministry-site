@@ -666,4 +666,19 @@ function buildRestaurantCard(r, opts = {}) {
             <div style="font-size:10px;font-weight:800;color:var(--text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Influencer Overlap</div>
             ${signalDots(r.overlapSignal)}
           </div>
-          <div class="car
+          <div class="card-footer">
+            <div class="tag-list">
+              <span class="tag budget-${r.budget}">${escHtml(r.budgetLabel)}</span>
+              <span class="signal-tag signal-${escHtml(r.signalStrength)}">${signalLabel(r.signalStrength)}</span>
+            </div>
+            <div class="card-area">📍 ${escHtml(r.area)}</div>
+          </div>
+        </div>
+        ${opts.showOverlap ? `
+        <div class="value-score-strip" style="background:var(--green-bg)">
+          <span class="value-score-label" style="color:var(--green)">🔗 Overlap Signal</span>
+          <span class="value-score-num" style="color:var(--green)">${r.overlapSignal} influencers</span>
+        </div>` : ""}
+      </a>
+    </div>`;
+}
