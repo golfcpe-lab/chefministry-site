@@ -7,6 +7,14 @@
   <title>Discover Restaurants — ChefMinistry</title>
   <meta name="description" content="ค้นหาร้านอาหารด้วย Signal Intelligence — กรองตาม Overlap, Trend Velocity และ Category"/>
   <link rel="stylesheet" href="./css/style.css"/>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BT2BCMZ9SH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BT2BCMZ9SH');
+  </script>
 </head>
 <body>
 
@@ -26,7 +34,8 @@
       <a class="nav-link" href="./index.html">Home</a>
       <a class="nav-link active" href="./listing.html">Discover</a>
       <a class="nav-link" href="./about.html">Methodology</a>
-      <a class="btn-pro" href="#">Pro — ฿99/mo</a>
+      <a class="btn-pro" href="./restaurant_partner.html">🏪 For Restaurants</a>
+      <a class="nav-link" href="./creator.html">🎥 For Creators</a>
     </nav>
     <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
   </div>
@@ -35,6 +44,8 @@
       <a class="mobile-nav-link" href="./index.html">Home</a>
       <a class="mobile-nav-link" href="./listing.html">Discover</a>
       <a class="mobile-nav-link" href="./about.html">Methodology</a>
+      <a class="mobile-nav-link" href="./creator.html">🎥 For Creators</a>
+      <a class="mobile-nav-link" href="./restaurant_partner.html">🏪 For Restaurants</a>
     </div>
   </nav>
 </header>
@@ -49,13 +60,21 @@
     </div>
     <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-top:6px">
       <div>
-        <h1 class="h1" style="color:#fff;margin-bottom:6px">Signal Intelligence — ร้านทั้งหมด</h1>
-        <p style="color:rgba(255,255,255,.65);font-size:15px">เรียงและกรองด้วย Overlap Signal, Trend Velocity หรือ Category</p>
+        <h1 class="h1" style="color:#fff;margin-bottom:6px">Discover ร้านและ Signal ที่กำลังมา</h1>
+        <p style="color:rgba(255,255,255,.65);font-size:15px">ใช้ signal เพื่อดูว่าร้านไหนกำลังถูกพูดถึง และเปิดโอกาสให้ร้านเชื่อมต่อกับ creator</p>
       </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <span class="signal-tag signal-very-strong">Very Strong Signal</span>
-        <span class="signal-tag signal-strong">Strong</span>
-        <span class="signal-tag signal-moderate">Moderate</span>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
+          <span style="font-size:10px;font-weight:900;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.1em;align-self:center">Signal Strength</span>
+          <span class="signal-tag signal-very-strong">Very Strong</span>
+          <span class="signal-tag signal-strong">Strong</span>
+          <span class="signal-tag signal-moderate">Moderate</span>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
+          <span style="font-size:10px;font-weight:900;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.1em;align-self:center">Trending Now</span>
+          <a href="./listing.html?type=ramen" class="signal-tag" style="text-decoration:none;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff">🍜 Ramen Rising</a>
+          <a href="./listing.html?type=fine-dining" class="signal-tag" style="text-decoration:none;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:var(--gold)">🏆 Fine Dining</a>
+        </div>
       </div>
     </div>
   </div>
@@ -66,9 +85,9 @@
   <div class="container">
 
     <!-- Search + Sort -->
-    <div style="display:flex;gap:12px;align-items:center;margin-bottom:16px;flex-wrap:wrap">
-      <input class="search-input" id="searchInput" type="text" placeholder="🔍 ค้นหาร้าน, ย่าน, ประเภทอาหาร..." style="max-width:440px"/>
-      <select class="sort-select" id="sortSelect">
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:16px;flex-wrap:wrap;min-width:0">
+      <input class="search-input" id="searchInput" type="text" placeholder="🔍 ค้นหาร้าน, ย่าน, ประเภทอาหาร..." style="max-width:440px;min-width:0;flex:1"/>
+      <select class="sort-select" id="sortSelect" style="min-width:0;max-width:100%">
         <option value="overlap">เรียงตาม: Overlap Signal ↑</option>
         <option value="signalCount">เรียงตาม: Total Signal Count</option>
         <option value="reviews">เรียงตาม: Total Reviews</option>
@@ -77,7 +96,7 @@
     </div>
 
     <!-- Filters -->
-    <div class="filter-bar" style="margin-bottom:24px">
+    <div class="filter-bar" style="margin-bottom:24px;min-width:0">
       <span class="filter-label">Signal</span>
       <div class="filter-group" id="signalFilters"></div>
       <div style="width:1px;height:20px;background:var(--border);margin:0 6px"></div>
@@ -92,11 +111,12 @@
     </div>
 
     <!-- Result count + legend -->
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px;min-width:0;overflow:hidden">
       <div id="resultCount" style="font-size:14px;color:var(--text-2);font-weight:700"></div>
       <div style="display:flex;gap:14px;align-items:center;font-size:12px;flex-wrap:wrap">
         <span style="font-weight:700;color:var(--text-2)">Overlap Signal =</span>
         <span style="color:var(--green);font-weight:800">จำนวน Influencer unique ใน 30 วัน</span>
+        <a href="./listing.html?type=ramen" style="color:var(--navy);font-weight:700;text-decoration:underline">ดู Ramen →</a>
         <a href="./about.html#methodology" style="color:var(--navy);font-weight:700;text-decoration:underline">อ่านวิธีคิด →</a>
       </div>
     </div>
@@ -108,18 +128,48 @@
       <div class="empty-title">ไม่พบร้านที่ตรงกับเงื่อนไข</div>
       <div>ลองปรับ filter หรือค้นหาด้วยคำอื่น</div>
     </div>
+
+  <!-- ── DISCOVER WALL (shows when not unlocked) ── -->
+  <div id="discoverWall" style="display:none;margin-top:0">
+    <!-- Gradient fade overlay suggestion -->
+    <div style="height:100px;background:linear-gradient(to bottom,transparent,var(--cream));margin-top:-100px;position:relative;z-index:1;pointer-events:none"></div>
+    <!-- Wall card -->
+    <div style="background:var(--navy);border-radius:var(--radius-lg);padding:40px 36px;text-align:center;max-width:520px;margin:0 auto 40px;box-shadow:0 8px 40px rgba(29,58,95,.18)">
+      <div style="font-size:36px;margin-bottom:12px">🔍</div>
+      <div id="wallCount" style="font-size:13px;font-weight:900;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px">อีก <span id="hiddenCount">?</span> ร้านที่ซ่อนอยู่</div>
+      <h3 style="color:#fff;font-size:22px;font-weight:900;margin-bottom:8px;font-family:'Playfair Display',serif">ปลดล็อก Signal ทั้งหมด</h3>
+      <p style="color:rgba(255,255,255,.65);font-size:14px;line-height:1.7;margin-bottom:24px">สมัครฟรีเพื่อเข้าถึงข้อมูล Signal ร้านอาหารทั้งหมด<br/>ไม่ต้องจ่ายเงิน · ไม่มีโฆษณา · เข้าถึงได้ทันที</p>
+      <form id="wallForm" onsubmit="unlockDiscover(event)" style="display:flex;flex-direction:column;gap:12px">
+        <input id="wallEmail" type="email" required placeholder="อีเมลของคุณ"
+          style="padding:13px 16px;border-radius:var(--radius);border:1.5px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font-size:14px;outline:none;text-align:center"/>
+        <select id="wallType" required
+          style="padding:13px 16px;border-radius:var(--radius);border:1.5px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font-size:14px;cursor:pointer">
+          <option value="" disabled selected style="background:#1D3A5F">คุณเป็น...?</option>
+          <option value="creator" style="background:#1D3A5F">🎥 Food Creator / Influencer</option>
+          <option value="restaurant" style="background:#1D3A5F">🏪 เจ้าของร้านอาหาร / แบรนด์</option>
+          <option value="foodie" style="background:#1D3A5F">🍽️ Foodie ทั่วไป</option>
+          <option value="other" style="background:#1D3A5F">📊 นักการตลาด / อื่นๆ</option>
+        </select>
+        <button type="submit" id="wallSubmitBtn"
+          style="padding:14px;background:var(--gold);color:var(--navy);font-weight:900;font-size:15px;border:none;border-radius:var(--radius);cursor:pointer;transition:opacity .2s">
+          ปลดล็อก Signal ทั้งหมด →
+        </button>
+      </form>
+      <p style="font-size:11px;color:rgba(255,255,255,.35);margin-top:12px;line-height:1.6">ฟรีทั้งหมด · ไม่มีบัตรเครดิต · ยกเลิกได้ตลอด</p>
+    </div>
   </div>
+</div>
 </main>
 
-<!-- ── PRO TEASER ── -->
+<!-- ── RESTAURANT CTA ── -->
 <div style="background:var(--navy);padding:28px 0;margin-top:20px">
   <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap">
     <div>
-      <div style="color:var(--gold);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Pro Feature</div>
-      <div style="color:#fff;font-size:17px;font-weight:900">รับ Alert ทันทีเมื่อ Overlap Signal เพิ่มขึ้น — ก่อนคนอื่น</div>
-      <div style="color:rgba(255,255,255,.55);font-size:13px;margin-top:3px">ปลดล็อค Booking Links + Line OA Weekly Briefing</div>
+      <div style="color:var(--gold);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">For Restaurant Owners</div>
+      <div style="color:#fff;font-size:17px;font-weight:900">เพิ่มลูกค้าโดยใช้ Influencer Signal</div>
+      <div style="color:rgba(255,255,255,.55);font-size:13px;margin-top:3px">รู้ว่าใครกำลังพูดถึงร้านคุณ + เริ่ม campaign กับ food creator ได้เร็วขึ้น</div>
     </div>
-    <a href="#" class="btn btn-primary">เริ่มต้น Pro — ฿99/เดือน</a>
+    <a href="./restaurant_partner.html" class="btn btn-primary">ลงทะเบียนร้านของคุณ →</a>
   </div>
 </div>
 
@@ -149,10 +199,11 @@
         </div>
       </div>
       <div>
-        <div class="footer-col-title">Subscribe</div>
+        <div class="footer-col-title">For Business</div>
         <div class="footer-links">
-          <a class="footer-link" href="#">Pro Plan</a>
-          <a class="footer-link" href="https://line.me/R/ti/p/@chefministry" target="_blank">LINE OA Alert</a>
+          <a class="footer-link" href="./restaurant_partner.html">Restaurant / Brand Pilot</a>
+          <a class="footer-link" href="./creator.html">Creator Network</a>
+          <a class="footer-link" href="mailto:contact@chefministry.com?subject=ChefMinistry%20Pilot%20Partnership">Pilot Partnership</a>
         </div>
       </div>
       <div>
@@ -218,6 +269,7 @@
     {id:"all",label:"ทั้งหมด"},
     {id:"fine-dining",label:"Fine Dining"},
     {id:"casual-dining",label:"Casual"},
+    {id:"ramen",label:"Ramen"},
     {id:"street-food",label:"Street Food"},
     {id:"local",label:"Local Legend"}
   ];
@@ -270,13 +322,97 @@
     return list;
   }
 
-  function render(){
-    // Re-apply signal filter strictly
+
+<script src="./js/data.js"></script>
+<script>
+  document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
+    const n=document.getElementById("mobileNav");
+    n.style.display=n.style.display==="block"?"none":"block";
+  });
+
+  const UNLOCK_KEY = "cm_discover_v1";
+  function isUnlocked(){
+    try{ return localStorage.getItem(UNLOCK_KEY)==="yes"; }catch(e){ return false; }
+  }
+
+  const state={signal:"all",velocity:"all",budget:"all",type:"all",search:"",sort:"overlap"};
+
+  // Read URL params
+  const params=new URLSearchParams(window.location.search);
+  if(params.get("signal"))   state.signal   = params.get("signal");
+  if(params.get("velocity")) state.velocity = params.get("velocity");
+  if(params.get("type"))     state.type     = params.get("type");
+  if(params.get("sort"))     state.sort     = params.get("sort");
+
+  // Signal filters
+  const signals=[
+    {id:"all",label:"ทั้งหมด"},
+    {id:"very-strong",label:"Very Strong"},
+    {id:"strong",label:"Strong"},
+    {id:"moderate",label:"Moderate"}
+  ];
+  document.getElementById("signalFilters").innerHTML=signals.map(s=>
+    `<button class="filter-chip ${state.signal===s.id?"active":""}" data-filter="signal" data-val="${s.id}">${s.label}</button>`
+  ).join("");
+
+  // Velocity filters
+  const velocities=[
+    {id:"all",label:"ทั้งหมด"},
+    {id:"rising",label:"↑ Rising"},
+    {id:"stable",label:"→ Stable"},
+    {id:"declining",label:"↓ Declining"}
+  ];
+  document.getElementById("velocityFilters").innerHTML=velocities.map(v=>
+    `<button class="filter-chip ${state.velocity===v.id?"active":""}" data-filter="velocity" data-val="${v.id}">${v.label}</button>`
+  ).join("");
+
+  // Budget filters
+  const budgets=[{id:"all",label:"ทุกงบ"},{id:"1",label:"฿"},{id:"2",label:"฿฿"},{id:"3",label:"฿฿฿"}];
+  document.getElementById("budgetFilters").innerHTML=budgets.map(b=>
+    `<button class="filter-chip ${state.budget===b.id?"active":""}" data-filter="budget" data-val="${b.id}">${b.label}</button>`
+  ).join("");
+
+  // Type filters
+  const types=[
+    {id:"all",label:"ทั้งหมด"},
+    {id:"fine-dining",label:"Fine Dining"},
+    {id:"casual-dining",label:"Casual"},
+    {id:"ramen",label:"Ramen"},
+    {id:"street-food",label:"Street Food"},
+    {id:"local",label:"Local Legend"}
+  ];
+  document.getElementById("typeFilters").innerHTML=types.map(t=>
+    `<button class="filter-chip ${state.type===t.id?"active":""}" data-filter="type" data-val="${t.id}">${t.label}</button>`
+  ).join("");
+
+  // Sort select
+  const sortSel=document.getElementById("sortSelect");
+  sortSel.value=state.sort;
+  sortSel.addEventListener("change",()=>{state.sort=sortSel.value;render();});
+
+  // Filter chips
+  document.querySelectorAll(".filter-chip").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const f=btn.dataset.filter,v=btn.dataset.val;
+      state[f]=v;
+      document.querySelectorAll(`.filter-chip[data-filter="${f}"]`).forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+      render();
+    });
+  });
+
+  // Search
+  document.getElementById("searchInput").addEventListener("input",e=>{
+    state.search=e.target.value.trim().toLowerCase();
+    render();
+  });
+
+  function filterAndSort(){
     let list=CM_RESTAURANTS.slice();
-    if(state.signal!=="all") list=list.filter(r=>r.signalStrength===state.signal);
+    if(state.signal!=="all")   list=list.filter(r=>r.signalStrength===state.signal);
     if(state.velocity!=="all") list=list.filter(r=>r.trendVelocity===state.velocity);
-    if(state.budget!=="all") list=list.filter(r=>String(r.budget)===state.budget);
-    if(state.type!=="all") list=list.filter(r=>r.type===state.type);
+    if(state.budget!=="all")   list=list.filter(r=>String(r.budget)===state.budget);
+    if(state.type!=="all")     list=list.filter(r=>r.type===state.type);
     if(state.search){
       list=list.filter(r=>{
         const hay=[r.name,r.cuisine,r.area,r.type,...r.tags].join(" ").toLowerCase();
@@ -285,21 +421,77 @@
     }
     list.sort((a,b)=>{
       if(state.sort==="signalCount") return b.signalCount-a.signalCount;
-      if(state.sort==="reviews") return b.totalReviews-a.totalReviews;
-      if(state.sort==="name") return a.name.localeCompare(b.name,"th");
+      if(state.sort==="reviews")     return b.totalReviews-a.totalReviews;
+      if(state.sort==="name")        return a.name.localeCompare(b.name,"th");
       return b.overlapSignal-a.overlapSignal;
     });
+    return list;
+  }
 
-    const grid=document.getElementById("listingGrid");
-    const empty=document.getElementById("emptyState");
-    const count=document.getElementById("resultCount");
-    count.textContent=`พบ ${list.length} ร้าน`;
+  const PREVIEW_COUNT = 3;
+
+  function render(){
+    const list = filterAndSort();
+    const grid = document.getElementById("listingGrid");
+    const empty = document.getElementById("emptyState");
+    const wall = document.getElementById("discoverWall");
+
+    document.getElementById("resultCount").textContent = isUnlocked()
+      ? `พบ ${list.length} ร้าน`
+      : `พบ ${list.length} ร้าน (แสดง ${Math.min(list.length,PREVIEW_COUNT)} ก่อน)`;
+
     if(!list.length){
-      grid.innerHTML=""; empty.style.display="block";
-    } else {
-      empty.style.display="none";
-      grid.innerHTML=list.map(r=>buildRestaurantCard(r,{showOverlap:true})).join("");
+      grid.innerHTML=""; empty.style.display="block"; wall.style.display="none";
+      return;
     }
+    empty.style.display="none";
+
+    if(isUnlocked()){
+      wall.style.display="none";
+      grid.innerHTML=list.map(r=>buildRestaurantCard(r,{showOverlap:true})).join("");
+    } else {
+      const preview = list.slice(0, PREVIEW_COUNT);
+      grid.innerHTML = preview.map(r=>buildRestaurantCard(r,{showOverlap:true})).join("");
+      if(list.length > PREVIEW_COUNT){
+        document.getElementById("hiddenCount").textContent = list.length - PREVIEW_COUNT;
+        wall.style.display="block";
+      } else {
+        wall.style.display="none";
+      }
+    }
+  }
+
+  // ── Unlock handler ──────────────────────────────────────────────────────
+  function unlockDiscover(e){
+    e.preventDefault();
+    const email = document.getElementById("wallEmail").value.trim();
+    const type  = document.getElementById("wallType").value;
+    const btn   = document.getElementById("wallSubmitBtn");
+
+    if(!type){ alert("กรุณาเลือกประเภทของคุณ"); return; }
+
+    btn.textContent="กำลังปลดล็อก...";
+    btn.disabled=true;
+
+    // Fire GA4 event
+    if(typeof gtag!=="undefined"){
+      gtag("event","discover_unlock",{email_type:type,page_location:window.location.href});
+    }
+
+    // Soft unlock via localStorage
+    try{ localStorage.setItem(UNLOCK_KEY,"yes"); }catch(err){}
+
+    // Submit to Google Form (background, no redirect)
+    const FORM_ID = "1FAIpQLScBoALniPeyFM2dwt-bRNhymHLYiJGNLM1BGtMFA91OlCSz6w";
+    const iframe = document.createElement("iframe");
+    iframe.style.display="none";
+    iframe.src=`https://docs.google.com/forms/d/e/${FORM_ID}/formResponse?entry.1228433381=${encodeURIComponent("Discover:"+type)}&entry.1854478110=${encodeURIComponent(email)}&submit=Submit`;
+    document.body.appendChild(iframe);
+
+    setTimeout(()=>{
+      document.getElementById("discoverWall").style.display="none";
+      render();
+    }, 600);
   }
 
   render();

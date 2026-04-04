@@ -8,6 +8,14 @@
   <meta name="description" content="Signal Intelligence รายละเอียดร้านอาหาร — Overlap Signal, Trend Velocity และ Influencer ที่รีวิว"/>
   <meta name="robots" content="noindex"/>
   <link rel="stylesheet" href="./css/style.css"/>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BT2BCMZ9SH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BT2BCMZ9SH');
+  </script>
 </head>
 <body>
 
@@ -27,7 +35,8 @@
       <a class="nav-link" href="./index.html">Home</a>
       <a class="nav-link" href="./listing.html">Discover</a>
       <a class="nav-link" href="./about.html">Methodology</a>
-      <a class="btn-pro" href="#">Pro — ฿99/mo</a>
+      <a class="btn-pro" href="./restaurant_partner.html">🏪 For Restaurants</a>
+      <a class="nav-link" href="./creator.html">🎥 For Creators</a>
     </nav>
     <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
   </div>
@@ -36,6 +45,8 @@
       <a class="mobile-nav-link" href="./index.html">Home</a>
       <a class="mobile-nav-link" href="./listing.html">Discover</a>
       <a class="mobile-nav-link" href="./about.html">Methodology</a>
+      <a class="mobile-nav-link" href="./creator.html">🎥 For Creators</a>
+      <a class="mobile-nav-link" href="./restaurant_partner.html">🏪 For Restaurants</a>
     </div>
   </nav>
 </header>
@@ -89,11 +100,14 @@
             <!-- Reviewer list -->
             <div style="font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--text-2);margin-bottom:10px">Influencers ที่รีวิวล่าสุด</div>
             <div style="display:flex;flex-direction:column;gap:8px" id="reviewerList"></div>
-            <!-- Pro blur -->
-            <div style="background:var(--gold-bg);border:1px solid rgba(201,168,76,.25);border-radius:var(--radius);padding:14px;margin-top:14px;text-align:center">
-              <div style="font-size:12px;font-weight:900;color:var(--amber);margin-bottom:4px">🔒 Pro Feature</div>
-              <div style="font-size:13px;color:var(--text-2)">ดู Booking Link + เบอร์โทรร้าน ได้เมื่อ Subscribe Pro</div>
-              <a href="#" class="btn btn-dark btn-sm" style="margin-top:10px">เริ่มต้น Pro — ฿99/เดือน</a>
+            <!-- Restaurant owner CTA -->
+            <div style="background:#fff3cd;border:1px solid #ffeeba;border-radius:var(--radius);padding:16px;margin-top:14px;text-align:center">
+              <div style="font-size:12px;font-weight:900;color:#856404;margin-bottom:4px">📢 สำหรับเจ้าของร้าน</div>
+              <div style="font-size:14px;color:#333;margin-bottom:10px">ร้านคุณกำลังถูกพูดถึงโดย Influencer</div>
+              <div style="font-size:13px;color:#666;margin-bottom:12px">
+                เข้าร่วม ChefMinistry เพื่อเพิ่ม visibility, เชื่อมต่อ creator และเพิ่มลูกค้าโดยไม่ต้องยิง ads มั่ว
+              </div>
+              <a href="./restaurant_partner.html" class="btn btn-dark btn-sm" style="margin-top:10px">ลงทะเบียนร้านของคุณ →</a>
             </div>
           </div>
         </div>
@@ -166,15 +180,15 @@
   </div>
 </main>
 
-<!-- ── PRO CTA ── -->
+<!-- ── RESTAURANT CTA ── -->
 <div style="background:var(--navy);padding:32px 0;margin-top:16px">
   <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap">
     <div>
-      <div style="color:var(--gold);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Pro Feature</div>
-      <div style="color:#fff;font-size:17px;font-weight:900">รับ Alert ทันทีเมื่อ Overlap Signal เพิ่มขึ้น</div>
-      <div style="color:rgba(255,255,255,.6);font-size:14px;margin-top:4px">พร้อม Booking Links + Line OA Weekly Briefing</div>
+      <div style="color:var(--gold);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">For Restaurant Owners</div>
+      <div style="color:#fff;font-size:17px;font-weight:900">เพิ่มลูกค้าโดยใช้ Data + Influencer Signal</div>
+      <div style="color:rgba(255,255,255,.6);font-size:14px;margin-top:4px">รู้ว่าใครกำลังพูดถึงร้านคุณ และเริ่มแคมเปญกับ creator ได้ง่ายขึ้น</div>
     </div>
-    <a href="#" class="btn btn-primary">เริ่มต้น Pro — ฿99/เดือน</a>
+    <a href="./restaurant_partner.html" class="btn btn-primary">ลงทะเบียนร้านของคุณ</a>
   </div>
 </div>
 
@@ -204,10 +218,11 @@
         </div>
       </div>
       <div>
-        <div class="footer-col-title">Subscribe</div>
+        <div class="footer-col-title">For Business</div>
         <div class="footer-links">
-          <a class="footer-link" href="#">Pro Plan</a>
-          <a class="footer-link" href="https://line.me/R/ti/p/@chefministry" target="_blank">LINE OA Alert</a>
+          <a class="footer-link" href="./restaurant_partner.html">Restaurant / Brand Pilot</a>
+          <a class="footer-link" href="./creator.html">Creator Network</a>
+          <a class="footer-link" href="mailto:contact@chefministry.com?subject=ChefMinistry%20Pilot%20Partnership">Pilot Partnership</a>
         </div>
       </div>
       <div>
