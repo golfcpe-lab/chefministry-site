@@ -676,46 +676,14 @@ function buildRestaurantCard(r, opts = {}) {
         </div>
         ${opts.showOverlap ? `
         <div class="value-score-strip" style="background:var(--green-bg)">
-          <span class="value-score-label" style="color:var(--green)">🔗 Overlap Signal</span>
-          <span class="value-score-num" style="color:var(--green)">${r.overlapSignal} influencers</span>
+          <span class="value-score-label" style="color:var(--green);font-size:11px;font-weight:700">
+            🔗 Overlap ${r.overlapSignal} creators
+          </span>
         </div>` : ""}
       </a>
     </div>`;
 }
 
-// ── EXTERNAL_DATA_START (auto-generated 2026-04-05) ──
-const CM_DB_STATS = { total: 141, lastUpdated: "2026-04-05" };
-const CM_EXTERNAL_RESTAURANTS = [];
-// Merge with main data (deduplicate by name)
-(function() {
-  const existingNames = new Set(CM_RESTAURANTS.map(r => r.name.toLowerCase()));
-  const newOnes = CM_EXTERNAL_RESTAURANTS.filter(r =>
-    !existingNames.has(r.name.toLowerCase())
-  );
-  CM_RESTAURANTS.push(...newOnes);
-})();
-// ── EXTERNAL_DATA_END ──
-// ── EXTERNAL_DATA_START (auto-generated 2026-04-05) ──
+// ── DB Stats (injected by scraper) ───────────────────────────────────────────
 const CM_DB_STATS = { total: 138, lastUpdated: "2026-04-05" };
 const CM_EXTERNAL_RESTAURANTS = [];
-// Merge with main data (deduplicate by name)
-(function() {
-  const existingNames = new Set(CM_RESTAURANTS.map(r => r.name.toLowerCase()));
-  const newOnes = CM_EXTERNAL_RESTAURANTS.filter(r =>
-    !existingNames.has(r.name.toLowerCase())
-  );
-  CM_RESTAURANTS.push(...newOnes);
-})();
-// ── EXTERNAL_DATA_END ──
-// ── EXTERNAL_DATA_START (auto-generated 2026-04-05) ──
-const CM_DB_STATS = { total: 138, lastUpdated: "2026-04-05" };
-const CM_EXTERNAL_RESTAURANTS = [];
-// Merge with main data (deduplicate by name)
-(function() {
-  const existingNames = new Set(CM_RESTAURANTS.map(r => r.name.toLowerCase()));
-  const newOnes = CM_EXTERNAL_RESTAURANTS.filter(r =>
-    !existingNames.has(r.name.toLowerCase())
-  );
-  CM_RESTAURANTS.push(...newOnes);
-})();
-// ── EXTERNAL_DATA_END ──
