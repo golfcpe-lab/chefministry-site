@@ -37,6 +37,8 @@ def setup():
     """ติดตั้ง dependencies + Playwright browser"""
     print("📦 Installing dependencies...")
     subprocess.run([sys.executable, "-m", "pip", "install", "-r", "requirements.txt"], check=True)
+    # ติดตั้ง playwright-stealth แยก (bypass bot detection)
+    subprocess.run([sys.executable, "-m", "pip", "install", "playwright-stealth"], check=False)
     print("🌐 Installing Playwright Chromium...")
     subprocess.run([sys.executable, "-m", "playwright", "install", "chromium"], check=True)
     init_db()

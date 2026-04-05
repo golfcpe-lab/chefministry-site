@@ -1,19 +1,17 @@
 """
-ChefMinistry — Wongnai Scraper v3
-Strategy (ลำดับ):
-  1. __NEXT_DATA__  — Next.js ฝัง JSON ไว้ใน <script id="__NEXT_DATA__"> ทุกหน้า
-  2. API interception — ดัก XHR/fetch ที่หน้าทำ
-  3. HTML selectors  — fallback สุดท้าย
+ChefMinistry — Wongnai Scraper v4
+ปัญหาที่แก้: Wongnai detect headless browser → ส่ง empty HTML กลับมา
 
-ทำไม __NEXT_DATA__ ถึงดีที่สุด:
-  - ไม่ต้องรู้ CSS class ที่อาจ hash ทุกครั้ง build
-  - ข้อมูลครบ (ชื่อ, rating, review, ราคา) ในครั้งเดียว
-  - ไม่ขึ้นกับ JS render / timing
+Solution stack (ลำดับ):
+  1. requests + SSR  — ลอง GET ธรรมดาก่อน ถ้า Wongnai ใช้ SSR จะได้ HTML + __NEXT_DATA__
+  2. Playwright stealth — ใช้ playwright-stealth ซ่อน automation fingerprint
+  3. Network interception — ดัก XHR/fetch API calls ระหว่าง page load
+  4. HTML link fallback — เก็บ URL ร้านจาก <a> tags
 
-รัน: python scrape_wongnai.py
-     python scrape_wongnai.py thonglor ekkamai
+ติดตั้ง: pip install playwright-stealth
 """
 import asyncio, re, json, pathlib
+import requests as req_lib
 from playwright.async_api import async_playwright, TimeoutError as PWTimeout
 from db import init_db, upsert_restaurant, record_snapshot
 from config import BANGKOK_AREAS, DELAY_BETWEEN_PAGES, MAX_PAGES_PER_RUN, HEADLESS, CUISINE_MAP
@@ -21,6 +19,31 @@ from config import BANGKOK_AREAS, DELAY_BETWEEN_PAGES, MAX_PAGES_PER_RUN, HEADLE
 BASE_URL  = "https://www.wongnai.com"
 DEBUG_DIR = pathlib.Path(__file__).parent / "debug_output"
 
+REQUEST_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/124.0.0.0 Safari/537.36"
+    ),
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+    "Accept-Language": "th-TH,th;q=0.9,en;q=0.8",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Connection": "keep-alive",
+    "Upgrade-Insecure-Requests": "1",
+}
+
+WONGNAI_API_PATTERNS = [
+    "api.wongnai.com",
+    "wongnai.com/api",
+    "/graphql",
+    "/restaurants/search",
+    "/v1/restaurants", "/v2/restaurants",
+    "wongnai.com/_next/data",
+    "_next/data",
+]
+
+
+# ── Helpers ────────────────────────────────────────────────────────────────────
 
 def detect_cuisine(text: str) -> str:
     t = (text or "").lower()
@@ -62,302 +85,229 @@ def clean_int(s) -> int:
     return int(nums) if nums else 0
 
 
-# ─── 1. __NEXT_DATA__ extractor ───────────────────────────────────────────────
+def item_to_restaurant(item: dict, area: str) -> dict | None:
+    """แปลง Wongnai API/Next item → restaurant dict"""
+    try:
+        ext_id = str(
+            item.get("id") or item.get("restaurantId") or
+            item.get("publicId") or item.get("_id") or ""
+        )
+        if not ext_id:
+            return None
 
-def walk_for_restaurants(obj, found=None, depth=0):
-    """
-    เดิน JSON tree แบบ recursive หาทุก list ที่น่าจะเป็น restaurants
-    (มี dict ที่มี key 'name' และ 'id' หรือ 'rating')
-    """
-    if found is None:
-        found = []
-    if depth > 10:
-        return found
-    if isinstance(obj, list):
-        if obj and isinstance(obj[0], dict):
-            sample = obj[0]
-            has_name = any(k in sample for k in ["name", "displayName", "nameTh"])
-            has_id   = any(k in sample for k in ["id", "restaurantId", "_id", "publicId"])
-            if has_name and has_id:
-                found.append(obj)
-                return found   # ไม่ลึกต่อจาก list นี้
-        for item in obj[:5]:
-            walk_for_restaurants(item, found, depth + 1)
-    elif isinstance(obj, dict):
-        for v in obj.values():
-            walk_for_restaurants(v, found, depth + 1)
-    return found
+        name = (
+            item.get("name") or item.get("displayName") or
+            item.get("nameTh") or item.get("nameLocale") or ""
+        )
+        if not name:
+            return None
 
+        rating_obj = item.get("rating") or item.get("ratingInfo") or {}
+        if isinstance(rating_obj, dict):
+            rating       = float(rating_obj.get("score") or rating_obj.get("average") or 0)
+            review_count = int(rating_obj.get("count") or rating_obj.get("total") or 0)
+        else:
+            rating       = float(rating_obj or item.get("score") or 0)
+            review_count = int(item.get("reviewCount") or item.get("totalReview") or 0)
 
-def parse_next_data(next_data: dict, area: str) -> list:
-    """แกะ __NEXT_DATA__ → list of restaurant dicts"""
-    restaurants = []
+        cats = item.get("categories") or item.get("cuisines") or item.get("tags") or []
+        cat_text = " ".join(
+            c.get("name", c) if isinstance(c, dict) else str(c)
+            for c in (cats if isinstance(cats, list) else [])
+        )
 
-    # หา restaurant lists ใน JSON tree
-    candidates = walk_for_restaurants(next_data)
-    if not candidates:
-        return []
+        slug = item.get("slug") or item.get("urlName") or item.get("permalink") or str(ext_id)
+        url  = f"{BASE_URL}/restaurants/{slug}" if not slug.startswith("http") else slug
 
-    # เลือก list ที่ใหญ่ที่สุด
-    items = max(candidates, key=len)
-    print(f"    __NEXT_DATA__: พบ {len(items)} items")
+        img = item.get("coverImage") or item.get("photoUrl") or item.get("thumbnailUrl") or ""
+        if isinstance(img, dict):
+            img = img.get("url", "")
 
-    for item in items:
-        try:
-            if not isinstance(item, dict):
-                continue
-
-            ext_id = str(
-                item.get("id") or item.get("restaurantId") or
-                item.get("publicId") or item.get("_id") or ""
-            )
-            if not ext_id:
-                continue
-
-            name = (
-                item.get("name") or item.get("displayName") or
-                item.get("nameTh") or item.get("nameLocale") or ""
-            )
-            if not name:
-                continue
-
-            # Rating / reviews — อาจอยู่ใน nested object
-            rating_obj   = item.get("rating") or item.get("ratingInfo") or {}
-            if isinstance(rating_obj, dict):
-                rating       = float(rating_obj.get("score") or rating_obj.get("average") or 0)
-                review_count = int(rating_obj.get("count") or rating_obj.get("total") or 0)
-            else:
-                rating       = float(rating_obj or item.get("score") or 0)
-                review_count = int(
-                    item.get("reviewCount") or item.get("totalReview") or
-                    item.get("ratingCount") or 0
-                )
-
-            # Cuisine
-            cats = item.get("categories") or item.get("cuisines") or item.get("tags") or []
-            cat_text = " ".join(
-                c.get("name", c) if isinstance(c, dict) else str(c)
-                for c in (cats if isinstance(cats, list) else [])
-            )
-            cuisine = detect_cuisine(cat_text or name)
-
-            # Price
-            price_range = parse_price(
-                item.get("priceRange") or item.get("priceLevel") or
-                item.get("price_range") or 2
-            )
-
-            # URL
-            slug = item.get("slug") or item.get("urlName") or item.get("permalink") or str(ext_id)
-            url  = f"{BASE_URL}/restaurants/{slug}" if not slug.startswith("http") else slug
-
-            # Image
-            img = (item.get("coverImage") or item.get("photoUrl") or
-                   item.get("thumbnailUrl") or "")
-            if isinstance(img, dict):
-                img = img.get("url", "")
-
-            restaurants.append({
-                "source":        "wongnai",
-                "external_id":   ext_id,
-                "name":          name,
-                "name_en":       item.get("nameEn") or item.get("nameEnglish") or "",
-                "cuisine":       cuisine,
-                "area":          area,
-                "price_range":   price_range,
-                "url":           url,
-                "image_url":     str(img) if img else "",
-                "_review_count": review_count,
-                "_rating":       rating,
-            })
-        except Exception:
-            continue
-
-    return restaurants
-
-
-# ─── 2. API interception ───────────────────────────────────────────────────────
-
-WONGNAI_API_PATTERNS = [
-    "api.wongnai.com",
-    "wongnai.com/api",
-    "/graphql",
-    "/restaurants/search",
-    "/v1/restaurants", "/v2/restaurants",
-    "wongnai.com/_next/data",
-]
-
-
-def parse_api_response(body: dict, area: str) -> list:
-    """แกะ JSON จาก API call — ลอง paths หลายแบบ"""
-    restaurants = []
-    items = []
-    for key in ["restaurants", "data", "results", "items", "list", "feeds", "content"]:
-        val = body.get(key, [])
-        if isinstance(val, list) and val:
-            items = val
-            break
-        if isinstance(val, dict):
-            for sub in ["restaurants", "items", "results", "data"]:
-                sub_val = val.get(sub, [])
-                if isinstance(sub_val, list) and sub_val:
-                    items = sub_val
-                    break
-        if items:
-            break
-    if not items:
-        page_props = body.get("pageProps", {})
-        for key in ["restaurants", "data", "results"]:
-            val = page_props.get(key, [])
-            if isinstance(val, list) and val:
-                items = val
-                break
-    if not items and isinstance(body, list):
-        items = body
-
-    for item in items[:150]:
-        try:
-            if not isinstance(item, dict):
-                continue
-            ext_id = str(item.get("id") or item.get("restaurantId") or "")
-            name   = item.get("name") or item.get("displayName") or ""
-            if not ext_id or not name:
-                continue
-
-            rating_obj   = item.get("rating") or item.get("ratingInfo") or {}
-            rating       = float(rating_obj.get("score", 0) if isinstance(rating_obj, dict) else rating_obj or 0)
-            review_count = int(rating_obj.get("count", 0) if isinstance(rating_obj, dict) else item.get("reviewCount", 0))
-
-            cats     = item.get("categories") or item.get("cuisines") or []
-            cat_text = " ".join(c.get("name", c) if isinstance(c, dict) else str(c) for c in cats)
-            slug     = item.get("slug") or item.get("urlName") or str(ext_id)
-            url      = f"{BASE_URL}/restaurants/{slug}" if not slug.startswith("http") else slug
-
-            restaurants.append({
-                "source":        "wongnai",
-                "external_id":   ext_id,
-                "name":          name,
-                "name_en":       item.get("nameEn") or "",
-                "cuisine":       detect_cuisine(cat_text or name),
-                "area":          area,
-                "price_range":   parse_price(item.get("priceRange") or item.get("priceLevel") or 2),
-                "url":           url,
-                "image_url":     str(item.get("coverImage") or item.get("photoUrl") or ""),
-                "_review_count": review_count,
-                "_rating":       rating,
-            })
-        except Exception:
-            continue
-    return restaurants
-
-
-# ─── 3. HTML fallback ─────────────────────────────────────────────────────────
-
-async def html_fallback(page, area: str) -> list:
-    """
-    ดึง href ของร้านจาก link elements แล้วกรองด้วย URL pattern
-    ไม่ต้องรู้ class name เลย
-    """
-    results = []
-    # ดึง hrefs ทั้งหมดที่ตรง pattern URL ร้าน
-    hrefs = await page.eval_on_selector_all(
-        "a",
-        """els => els
-            .map(e => ({href: e.href, text: e.innerText.trim().substring(0, 80)}))
-            .filter(e => /wongnai\\.com\\/restaurants\\/[\\w-]+\\/[\\w-]+-\\d+/.test(e.href))
-        """
-    )
-    print(f"    HTML fallback: พบ {len(hrefs)} restaurant links")
-
-    seen = set()
-    for item in hrefs:
-        href = item.get("href", "")
-        text = item.get("text", "").strip()
-        if not href or href in seen:
-            continue
-        seen.add(href)
-
-        id_match = re.search(r"-(\d+)/?$", href)
-        ext_id   = id_match.group(1) if id_match else href[-20:]
-        name     = text.split("\n")[0].strip() if text else f"Restaurant {ext_id}"
-        if len(name) < 2:
-            name = f"Restaurant {ext_id}"
-
-        results.append({
+        return {
             "source":        "wongnai",
             "external_id":   ext_id,
             "name":          name,
-            "name_en":       "",
-            "cuisine":       detect_cuisine(name),
+            "name_en":       item.get("nameEn") or item.get("nameEnglish") or "",
+            "cuisine":       detect_cuisine(cat_text or name),
             "area":          area,
-            "price_range":   2,
-            "url":           href,
-            "image_url":     "",
-            "_review_count": 0,
-            "_rating":       0.0,
-        })
+            "price_range":   parse_price(item.get("priceRange") or item.get("priceLevel") or 2),
+            "url":           url,
+            "image_url":     str(img) if img else "",
+            "_review_count": review_count,
+            "_rating":       rating,
+        }
+    except Exception:
+        return None
 
+
+def walk_for_restaurants(obj, depth=0) -> list:
+    """Recursive: หา list ที่มี restaurant dicts"""
+    if depth > 10:
+        return []
+    found = []
+    if isinstance(obj, list) and obj and isinstance(obj[0], dict):
+        sample = obj[0]
+        has_name = any(k in sample for k in ["name", "displayName", "nameTh"])
+        has_id   = any(k in sample for k in ["id", "restaurantId", "_id", "publicId"])
+        if has_name and has_id:
+            return [obj]
+        for item in obj[:3]:
+            found.extend(walk_for_restaurants(item, depth + 1))
+    elif isinstance(obj, dict):
+        for v in obj.values():
+            found.extend(walk_for_restaurants(v, depth + 1))
+    return found
+
+
+def parse_json_for_restaurants(data, area: str) -> list:
+    """แกะ JSON ใดๆ หา restaurant list"""
+    candidates = walk_for_restaurants(data)
+    if not candidates:
+        return []
+    items = max(candidates, key=len)
+    results = []
+    for item in items[:150]:
+        r = item_to_restaurant(item, area)
+        if r:
+            results.append(r)
     return results
 
 
-# ─── Main scraper ─────────────────────────────────────────────────────────────
+# ── Strategy 1: plain requests (ไม่ใช้ browser) ──────────────────────────────
 
-async def scrape_area(page, area: str, max_pages: int) -> list:
-    results = []
-    base_url = f"{BASE_URL}/restaurants/bangkok/{area}"
-    print(f"\n  🗺️  Wongnai area: {area}")
+def try_requests_strategy(area: str, page_num: int = 1) -> list:
+    """
+    ลอง GET ธรรมดา — ถ้า Wongnai ทำ SSR จะได้ __NEXT_DATA__ ใน HTML
+    ถ้า detect bot จะได้ empty HTML (39 bytes)
+    """
+    url = f"{BASE_URL}/restaurants/bangkok/{area}"
+    if page_num > 1:
+        url += f"?page={page_num}"
+    try:
+        resp = req_lib.get(url, headers=REQUEST_HEADERS, timeout=15)
+        if len(resp.text) < 500:
+            return []   # empty → bot detected
 
-    for page_num in range(1, max_pages + 1):
-        url = f"{base_url}?page={page_num}" if page_num > 1 else base_url
+        # หา __NEXT_DATA__
+        m = re.search(r'<script id="__NEXT_DATA__" type="application/json">(.*?)</script>', resp.text, re.DOTALL)
+        if not m:
+            return []
+        data = json.loads(m.group(1))
+        restaurants = parse_json_for_restaurants(data, area)
+        if restaurants:
+            print(f"    ✅ [requests/__NEXT_DATA__] {len(restaurants)} restaurants")
+        return restaurants
+    except Exception as e:
+        return []
+
+
+# ── Strategy 2: Playwright + stealth ─────────────────────────────────────────
+
+async def apply_stealth(page):
+    """
+    Manual stealth — ซ่อน automation fingerprints
+    (ใช้แทน playwright-stealth ในกรณีที่ install ไม่ได้)
+    """
+    await page.add_init_script("""
+        // ซ่อน webdriver flag
+        Object.defineProperty(navigator, 'webdriver', {get: () => undefined});
+        // แก้ plugins (bot มักมี 0 plugins)
+        Object.defineProperty(navigator, 'plugins', {get: () => [1,2,3,4,5]});
+        // แก้ languages
+        Object.defineProperty(navigator, 'languages', {get: () => ['th-TH','th','en-US','en']});
+        // ซ่อน automation properties
+        window.chrome = {runtime: {}};
+        // แก้ permissions
+        const originalQuery = window.navigator.permissions.query;
+        window.navigator.permissions.query = (parameters) =>
+            parameters.name === 'notifications'
+                ? Promise.resolve({ state: Notification.permission })
+                : originalQuery(parameters);
+    """)
+
+    # ลอง import playwright-stealth ถ้ามี
+    try:
+        from playwright_stealth import stealth_async
+        await stealth_async(page)
+        print("    🥷 playwright-stealth applied")
+    except ImportError:
+        print("    🥷 manual stealth applied (pip install playwright-stealth สำหรับ full stealth)")
+
+
+async def try_playwright_strategy(page, area: str, api_buffer: list) -> list:
+    """Playwright + stealth + networkidle"""
+    url = f"{BASE_URL}/restaurants/bangkok/{area}"
+    try:
+        await page.goto(url, wait_until="networkidle", timeout=45_000)
+        await asyncio.sleep(4)
+    except PWTimeout:
+        print(f"    ⚠️  Playwright timeout — รอ networkidle นานเกิน")
         try:
-            await page.goto(url, wait_until="domcontentloaded", timeout=40_000)
-            await asyncio.sleep(3)
-        except PWTimeout:
-            print(f"    ⚠️  Timeout page {page_num}")
-            break
-
-        # ── Strategy 1: __NEXT_DATA__ ─────────────────────────────────
-        page_results = []
-        try:
-            next_data_raw = await page.eval_on_selector(
-                "#__NEXT_DATA__",
-                "el => el.textContent"
-            )
-            if next_data_raw:
-                next_data = json.loads(next_data_raw)
-                page_results = parse_next_data(next_data, area)
-                if page_results:
-                    print(f"    ✅ __NEXT_DATA__: {len(page_results)} restaurants (page {page_num})")
-        except Exception as e:
+            await page.wait_for_load_state("load", timeout=10_000)
+        except:
             pass
 
-        # ── Strategy 2: HTML fallback ─────────────────────────────────
-        if not page_results:
-            page_results = await html_fallback(page, area)
-            if page_results:
-                print(f"    ✅ HTML links: {len(page_results)} restaurants (page {page_num})")
+    # ลอง __NEXT_DATA__ ก่อน
+    results = []
+    try:
+        raw = await page.evaluate("""
+            () => {
+                const el = document.getElementById('__NEXT_DATA__');
+                return el ? el.textContent : null;
+            }
+        """)
+        if raw and len(raw) > 100:
+            data = json.loads(raw)
+            results = parse_json_for_restaurants(data, area)
+            if results:
+                print(f"    ✅ [Playwright/__NEXT_DATA__] {len(results)} restaurants")
+    except Exception:
+        pass
 
-        if not page_results:
-            print(f"    ⚠️  Page {page_num}: 0 restaurants — saving debug HTML")
-            DEBUG_DIR.mkdir(exist_ok=True)
-            html = await page.content()
-            debug_file = DEBUG_DIR / f"wongnai_{area}_p{page_num}.html"
-            debug_file.write_text(html, encoding="utf-8")
-            print(f"    📄 Saved: {debug_file}")
-            break
+    # ถ้า __NEXT_DATA__ ว่าง ลอง API buffer (intercepted ระหว่าง navigate)
+    if not results and api_buffer:
+        results = api_buffer[:]
+        print(f"    ✅ [API intercept] {len(results)} restaurants")
 
-        # dedup by external_id
-        existing = {r["external_id"] for r in results}
-        new_items = [r for r in page_results if r["external_id"] not in existing]
-        results.extend(new_items)
+    # HTML link fallback
+    if not results:
+        hrefs = await page.eval_on_selector_all(
+            "a",
+            """els => els
+                .map(e => ({href: e.href, text: e.innerText.trim().substring(0, 80)}))
+                .filter(e => /wongnai\\.com\\/restaurants\\/[\\w-]+\\/[\\w-]+-\\d+/.test(e.href))
+            """
+        )
+        seen = set()
+        for item in hrefs:
+            href = item.get("href", "")
+            if not href or href in seen:
+                continue
+            seen.add(href)
+            id_m = re.search(r"-(\d+)/?$", href)
+            ext_id = id_m.group(1) if id_m else href[-20:]
+            name = item.get("text", "").split("\n")[0].strip() or f"Restaurant {ext_id}"
+            results.append({
+                "source": "wongnai", "external_id": ext_id, "name": name,
+                "name_en": "", "cuisine": detect_cuisine(name), "area": area,
+                "price_range": 2, "url": href, "image_url": "",
+                "_review_count": 0, "_rating": 0.0,
+            })
+        if results:
+            print(f"    ✅ [HTML links] {len(results)} restaurant URLs")
 
-        if len(page_results) < 5 or page_num >= max_pages:
-            break
-
-        await asyncio.sleep(DELAY_BETWEEN_PAGES)
+    # Save debug HTML ถ้ายังได้ 0
+    if not results:
+        DEBUG_DIR.mkdir(exist_ok=True)
+        html = await page.content()
+        debug_path = DEBUG_DIR / f"wongnai_{area}_v4.html"
+        debug_path.write_text(html, encoding="utf-8")
+        print(f"    ❌ 0 restaurants — HTML dump: {debug_path} ({len(html)} bytes)")
 
     return results
 
+
+# ── Main ───────────────────────────────────────────────────────────────────────
 
 async def run(areas: list = None, max_pages: int = None):
     areas     = areas or BANGKOK_AREAS
@@ -365,13 +315,39 @@ async def run(areas: list = None, max_pages: int = None):
     init_db()
     total = 0
 
+    # ── ลอง requests strategy ก่อน (เร็วกว่า, ไม่ต้องใช้ browser) ───────
+    print("\n  🔍 Strategy 1: plain requests (ไม่ต้อง browser)")
+    requests_results = {}
+    for area in areas:
+        print(f"  [{area}] ", end="", flush=True)
+        r = try_requests_strategy(area)
+        requests_results[area] = r
+        print(f"{len(r)} restaurants")
+
+    all_requests_ok = all(len(v) > 0 for v in requests_results.values())
+    if all_requests_ok:
+        print("\n  ✅ requests strategy ได้ผลทุก area — ไม่ต้องใช้ Playwright")
+        for area, restaurants in requests_results.items():
+            for r in restaurants:
+                rid = upsert_restaurant(r)
+                record_snapshot(rid, review_count=r["_review_count"],
+                                rating=r["_rating"], rating_count=r["_review_count"])
+            total += len(restaurants)
+            print(f"  ✅ {area}: saved {len(restaurants)} restaurants")
+        print(f"\n🎉 Wongnai scrape done — {total} restaurants saved")
+        return
+
+    # ── ถ้า requests ไม่ได้ → ใช้ Playwright + stealth ──────────────────
+    print("\n  🔍 Strategy 2: Playwright + stealth")
     async with async_playwright() as p:
         browser = await p.chromium.launch(
             headless=HEADLESS,
             args=[
                 "--lang=th-TH,th",
-                "--disable-blink-features=AutomationControlled",
                 "--no-sandbox",
+                "--disable-blink-features=AutomationControlled",
+                "--disable-infobars",
+                "--window-size=1280,900",
             ]
         )
         context = await browser.new_context(
@@ -382,11 +358,13 @@ async def run(areas: list = None, max_pages: int = None):
                 "AppleWebKit/537.36 (KHTML, like Gecko) "
                 "Chrome/124.0.0.0 Safari/537.36"
             ),
+            java_script_enabled=True,
         )
         page = await context.new_page()
+        await apply_stealth(page)
 
-        # ── ดัก API calls ตลอด session (bonus: จะได้ถ้า __NEXT_DATA__ ไม่มี) ──
-        api_buffer = {}   # area → list
+        # ── ดัก API calls ──────────────────────────────────────────────
+        api_buffer = []
 
         async def on_response(resp):
             ct = resp.headers.get("content-type", "")
@@ -397,33 +375,33 @@ async def run(areas: list = None, max_pages: int = None):
                 return
             try:
                 body = await resp.json()
-                items = parse_api_response(body, "api")
+                items = parse_json_for_restaurants(body, "api")
                 if items:
-                    api_buffer.setdefault("api", []).extend(items)
-                    print(f"    📡 API: {u[:70]} → {len(items)} restaurants")
+                    api_buffer.extend(items)
+                    print(f"    📡 {u[:70]} → {len(items)} restaurants")
             except Exception:
                 pass
 
         page.on("response", on_response)
 
         for area in areas:
-            restaurants = await scrape_area(page, area, max_pages)
+            print(f"\n  🗺️  Wongnai area: {area}")
+            api_buffer.clear()
 
-            # เพิ่มจาก API buffer ถ้ายังขาด
-            if not restaurants and api_buffer.get("api"):
-                for r in api_buffer["api"]:
+            # ใช้ requests result ถ้ามีแล้ว
+            if requests_results.get(area):
+                restaurants = requests_results[area]
+                print(f"    ✅ [requests cache] {len(restaurants)} restaurants")
+            else:
+                restaurants = await try_playwright_strategy(page, area, api_buffer)
+                # backfill area ถ้ามาจาก API buffer
+                for r in restaurants:
                     r["area"] = area
-                restaurants = api_buffer["api"]
-                api_buffer.clear()
 
             for r in restaurants:
                 rid = upsert_restaurant(r)
-                record_snapshot(
-                    rid,
-                    review_count=r.get("_review_count", 0),
-                    rating=r.get("_rating", 0),
-                    rating_count=r.get("_review_count", 0),
-                )
+                record_snapshot(rid, review_count=r["_review_count"],
+                                rating=r["_rating"], rating_count=r["_review_count"])
             total += len(restaurants)
             print(f"  ✅ {area}: saved {len(restaurants)} restaurants")
             await asyncio.sleep(DELAY_BETWEEN_PAGES)
@@ -432,8 +410,11 @@ async def run(areas: list = None, max_pages: int = None):
 
     print(f"\n🎉 Wongnai scrape done — {total} restaurants saved")
     if total == 0:
-        print(f"\n  ⚠️  ยังได้ 0 — ดูไฟล์ debug HTML ที่ scraper/debug_output/")
-        print(f"      แล้วส่งให้ Claude ดูเพื่อหา selector จริง")
+        print(f"\n  ⚠️  ยังได้ 0 ทุก strategy")
+        print(f"  1. รัน: pip install playwright-stealth แล้วลองใหม่")
+        print(f"  2. ลอง: python scrape_wongnai.py แบบ HEADLESS=False ใน config.py")
+        print(f"     เพื่อดู browser จริงว่า block ยังไง")
+        print(f"  3. ดู HTML dump ใน scraper/debug_output/")
 
 
 if __name__ == "__main__":
