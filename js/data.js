@@ -682,3 +682,28 @@ function buildRestaurantCard(r, opts = {}) {
       </a>
     </div>`;
 }
+
+// ── EXTERNAL_DATA_START (auto-generated 2026-04-05) ──
+const CM_DB_STATS = { total: 141, lastUpdated: "2026-04-05" };
+const CM_EXTERNAL_RESTAURANTS = [];
+// Merge with main data (deduplicate by name)
+(function() {
+  const existingNames = new Set(CM_RESTAURANTS.map(r => r.name.toLowerCase()));
+  const newOnes = CM_EXTERNAL_RESTAURANTS.filter(r =>
+    !existingNames.has(r.name.toLowerCase())
+  );
+  CM_RESTAURANTS.push(...newOnes);
+})();
+// ── EXTERNAL_DATA_END ──
+// ── EXTERNAL_DATA_START (auto-generated 2026-04-05) ──
+const CM_DB_STATS = { total: 138, lastUpdated: "2026-04-05" };
+const CM_EXTERNAL_RESTAURANTS = [];
+// Merge with main data (deduplicate by name)
+(function() {
+  const existingNames = new Set(CM_RESTAURANTS.map(r => r.name.toLowerCase()));
+  const newOnes = CM_EXTERNAL_RESTAURANTS.filter(r =>
+    !existingNames.has(r.name.toLowerCase())
+  );
+  CM_RESTAURANTS.push(...newOnes);
+})();
+// ── EXTERNAL_DATA_END ──
