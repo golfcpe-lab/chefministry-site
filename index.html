@@ -210,35 +210,30 @@
 
 <hr class="divider"/>
 
-<!-- ── INFLUENCER NETWORK ── -->
+<!-- ── CREATOR NETWORK TEASER (ไม่แสดงรายชื่อ — ดูเต็มใน Discover) ── -->
 <section class="section" style="background:var(--white)">
   <div class="container">
-    <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:28px">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px">
       <div>
-        <div class="eyebrow" style="color:var(--navy);margin-bottom:6px">👥 Influencer Network</div>
-        <h2 class="display-2">คนที่เราติดตาม</h2>
-        <p class="lead" style="margin-top:8px">เราติดตามโพสต์สาธารณะจาก Food Creator ชั้นนำ 30+ คน<br/>เพื่อสังเคราะห์เป็น Signal ที่มีความหมาย</p>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
-        <div style="display:flex;gap:8px">
-          <span class="tier-badge tier-mega" style="padding:5px 12px;font-size:12px">Mega</span>
-          <span style="font-size:12px;color:var(--text-2);align-self:center">1M+ followers</span>
-        </div>
-        <div style="display:flex;gap:8px">
-          <span class="tier-badge tier-macro" style="padding:5px 12px;font-size:12px">Macro</span>
-          <span style="font-size:12px;color:var(--text-2);align-self:center">100K–1M followers</span>
-        </div>
-        <div style="display:flex;gap:8px">
-          <span class="tier-badge tier-mid" style="padding:5px 12px;font-size:12px">Mid</span>
-          <span style="font-size:12px;color:var(--text-2);align-self:center">10K–100K followers</span>
+        <div class="eyebrow" style="color:var(--navy);margin-bottom:6px">👥 Creator Intelligence</div>
+        <h2 class="display-2" style="margin-bottom:10px">30+ Food Creators ที่เราติดตาม</h2>
+        <p style="font-size:15px;color:var(--text-2);line-height:1.7;max-width:480px;margin-bottom:20px">
+          เราติดตามโพสต์สาธารณะจาก Mega, Macro และ Mid-tier creators<br>
+          เพื่อสังเคราะห์เป็น Signal ว่าร้านไหนกำลัง trending
+        </p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <span class="tier-badge tier-mega" style="padding:6px 14px;font-size:12px">Mega · 4 คน</span>
+          <span class="tier-badge tier-macro" style="padding:6px 14px;font-size:12px">Macro · 6 คน</span>
+          <span class="tier-badge tier-mid" style="padding:6px 14px;font-size:12px">Mid · 10+ คน</span>
         </div>
       </div>
-    </div>
-    <div class="inf-grid" id="influencerGrid"></div>
-    <div style="margin-top:20px;padding:14px 20px;background:var(--cream);border-radius:var(--radius);border:1px solid var(--border)">
-      <p style="font-size:13px;color:var(--text-2);line-height:1.65;margin:0">
-        <strong style="color:var(--navy)">หมายเหตุทางกฎหมาย:</strong> ChefMinistry ติดตามเฉพาะเนื้อหาที่เผยแพร่สาธารณะ (Public Posts) เราไม่ประเมินหรือวิจารณ์ Influencer แต่ละคน แต่วิเคราะห์ <em>Pattern ของข้อมูลรวม</em> เพื่อสังเคราะห์เป็น Market Signal เท่านั้น
-      </p>
+      <div style="text-align:center">
+        <div style="background:var(--cream);border:1px solid var(--border);border-radius:16px;padding:28px 32px;min-width:220px">
+          <div style="font-size:11px;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Members Only</div>
+          <div style="font-size:14px;color:var(--text-2);margin-bottom:16px;line-height:1.6">ดูรายชื่อ creators ทั้งหมด<br>พร้อม tier และ focus area</div>
+          <a href="./listing.html" class="btn btn-primary btn-sm">ดูรายชื่อทั้งหมด →</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -660,16 +655,7 @@
     : `<div style="color:var(--text-2);grid-column:1/-1;padding:20px">ไม่มีข้อมูล Rising ในขณะนี้</div>`;
 
   // Influencer grid
-  const infGrid = document.getElementById("influencerGrid");
-  infGrid.innerHTML = CM_INFLUENCERS.map(i => `
-    <div class="inf-card">
-      <div class="inf-card-avatar ${i.tier.toLowerCase()}">${escHtml(i.avatar)}</div>
-      <div class="inf-card-name">${escHtml(i.name)}</div>
-      <div class="inf-card-handle">${escHtml(i.handle)}</div>
-      <div style="margin-bottom:6px"><span class="tier-badge tier-${i.tier.toLowerCase()}">${escHtml(i.tier)}</span></div>
-      <div class="inf-card-followers">${escHtml(i.followers)}</div>
-      <div style="font-size:11px;color:var(--text-2);margin-top:3px">${escHtml(i.platform)}</div>
-    </div>`).join("");
+  // Creator grid ย้ายไปอยู่ใน listing.html (Members Only section)
 </script>
 </body>
 </html>
