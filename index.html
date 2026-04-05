@@ -496,9 +496,12 @@
     n.style.display=n.style.display==="block"?"none":"block";
   });
 
-  // Dynamic stats
+  // Dynamic stats — ใช้ CM_DB_STATS.total ถ้ามี (อัปเดตจาก scraper อัตโนมัติ)
   const statR = document.getElementById("statRestaurants");
-  if (statR) statR.textContent = CM_RESTAURANTS.length + "+";
+  if (statR) {
+    const total = (typeof CM_DB_STATS !== "undefined") ? CM_DB_STATS.total : CM_RESTAURANTS.length;
+    statR.textContent = total + "+";
+  }
 
   // Weekly highlight
   const wh = CM_SIGNALS.weeklyHighlight;
