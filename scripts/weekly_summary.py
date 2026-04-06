@@ -16,7 +16,7 @@ from openai import OpenAI
 
 # ── Config ────────────────────────────────────────────────────────────────────
 HERE      = pathlib.Path(__file__).parent
-DATA_FILE = HERE / "site" / "js" / "data.js"
+DATA_FILE = pathlib.Path(os.environ.get("DATA_FILE", str(HERE / "site" / "js" / "data.js")))
 
 # หา API key จาก .env หรือ environment
 env_file = HERE / ".env"
