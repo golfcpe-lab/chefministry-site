@@ -508,7 +508,7 @@
   if (heroCard) {
     // ลอง CM_EXTERNAL_RESTAURANTS ก่อน (ข้อมูลจริงจาก scraper)
     const extSorted = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined" && CM_EXTERNAL_RESTAURANTS.length > 0)
-      ? [...CM_EXTERNAL_RESTAURANTS].filter(r => (r.velocityPct||0) > 0).sort((a,b) => (b.velocityPct||0) - (a.velocityPct||0))
+      ? [...CM_EXTERNAL_RESTAURANTS].filter(r => (r.velocityPct||0) > 0 && r.isRestaurant !== false).sort((a,b) => (b.velocityPct||0) - (a.velocityPct||0))
       : [];
     const heroExt = extSorted[0];
     const heroStatic = [...CM_RESTAURANTS].sort((a,b) => (b.overlapSignal||0) - (a.overlapSignal||0))[0];
@@ -662,7 +662,7 @@
   const rankList = document.getElementById("overlapRankList");
   const extRising = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined" && CM_EXTERNAL_RESTAURANTS.length > 0)
     ? [...CM_EXTERNAL_RESTAURANTS]
-        .filter(r => (r.velocityPct || 0) > 0)
+        .filter(r => (r.velocityPct || 0) > 0 && r.isRestaurant !== false)
         .sort((a,b) => (b.velocityPct||0) - (a.velocityPct||0))
         .slice(0, 5)
     : [];
