@@ -22,8 +22,23 @@ SITE_FILES = [
 # ── scripts ที่อยู่ใน root (ไม่ใช่ใน site/) ────────────────────────────────────
 # หมายเหตุ: ไม่รวม .env และ .github_token.txt เพราะเป็นข้อมูลลับ
 ROOT_FILES = [
-    ("push_to_github.py",  "scripts/push_to_github.py"),
-    ("weekly_summary.py",  "scripts/weekly_summary.py"),
+    ("push_to_github.py",         "scripts/push_to_github.py"),
+    ("weekly_summary.py",         "scripts/weekly_summary.py"),
+    # Scraper suite (ใหม่ — แทนที่ grabfood/lineman/wongnai v1 เดิม)
+    ("scraper/config.py",         "scripts/scraper/config.py"),
+    ("scraper/db.py",             "scripts/scraper/db.py"),
+    ("scraper/run_all.py",        "scripts/scraper/run_all.py"),
+    ("scraper/export_signals.py", "scripts/scraper/export_signals.py"),
+    ("scraper/requirements.txt",  "scripts/scraper/requirements.txt"),
+    ("scraper/scrape_wongnai_v5.py", "scripts/scraper/scrape_wongnai_v5.py"),
+    ("scraper/scrape_gmaps.py",   "scripts/scraper/scrape_gmaps.py"),
+]
+
+# ── ไฟล์เก่าที่ต้องลบออกจาก repo ─────────────────────────────────────────────
+FILES_TO_DELETE = [
+    "scripts/scraper/scrape_grabfood.py",
+    "scripts/scraper/scrape_lineman.py",
+    "scripts/scraper/scrape_wongnai.py",
 ]
 
 # ── หา token ──────────────────────────────────────────────────────────────────
@@ -87,6 +102,21 @@ def push_file(local_file, gh_path):
     except Exception as e:
         print(f"    ❌  Push ไม่สำเร็จ: {e}\n")
 
+def delete_file(gh_path):
+    """ลบไฟล์ออกจาก GitHub repo (ถ้ามีอยู่)"""
+    url = f"https://api.github.com/repos/{REPO}/contents/{gh_path}"
+    try:
+        info = gh_request(url)
+        sha  = info["sha"]
+        print(f"🗑️   ลบ {gh_path}  (SHA: {sha[:7]}…)")
+        gh_request(url, method="DELETE", body={"message": f"remove: ลบ scraper เก่า ({today})", "sha": sha})
+        print(f"    ✅  ลบสำเร็จ\n")
+    except Exception as e:
+        if "HTTP 404" in str(e):
+            print(f"⏭️   ข้าม {gh_path} (ไม่มีใน repo)\n")
+        else:
+            print(f"    ❌  ลบไม่สำเร็จ: {e}\n")
+
 print("── Site files ──────────────────────────────────────")
 for local_rel, gh_path in SITE_FILES:
     push_file(HERE / "site" / local_rel, gh_path)
@@ -94,6 +124,10 @@ for local_rel, gh_path in SITE_FILES:
 print("── Scripts ─────────────────────────────────────────")
 for local_rel, gh_path in ROOT_FILES:
     push_file(HERE / local_rel, gh_path)
+
+print("── ลบไฟล์เก่า ──────────────────────────────────────")
+for gh_path in FILES_TO_DELETE:
+    delete_file(gh_path)
 
 print(f"{'='*55}")
 print(f"  เสร็จสิ้น — รอ 1-2 นาทีแล้วเปิด chefministry.com")
