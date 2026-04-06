@@ -503,47 +503,88 @@
   document.getElementById("weeklyTitle").textContent = wh.title;
   document.getElementById("weeklyDesc").textContent = wh.desc;
 
-  // ── Hero overlap card — dynamic from top restaurant ──────────────────────
+  // ── Hero card — Highest Velocity (ม้ามืด) จาก scraper, fallback static ──────
   const heroCard = document.getElementById("heroOverlapCard");
   if (heroCard) {
-    const heroRest = [...CM_RESTAURANTS].sort((a,b) => (b.overlapSignal||0) - (a.overlapSignal||0))[0];
+    // ลอง CM_EXTERNAL_RESTAURANTS ก่อน (ข้อมูลจริงจาก scraper)
+    const extSorted = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined" && CM_EXTERNAL_RESTAURANTS.length > 0)
+      ? [...CM_EXTERNAL_RESTAURANTS].filter(r => (r.velocity_pct||0) > 0).sort((a,b) => (b.velocity_pct||0) - (a.velocity_pct||0))
+      : [];
+    const heroExt = extSorted[0];
+    const heroStatic = [...CM_RESTAURANTS].sort((a,b) => (b.overlapSignal||0) - (a.overlapSignal||0))[0];
+    const useExt = !!heroExt;
+    const heroRest = useExt ? heroExt : heroStatic;
+
     if (heroRest) {
-      const maxDots = 10;
-      const filled = Math.min(heroRest.overlapSignal, maxDots);
-      const dots = Array.from({length: maxDots}, (_,i) =>
-        `<span style="width:10px;height:10px;border-radius:50%;background:${i < filled ? "var(--green)" : "var(--border)"};display:inline-block"></span>`
-      ).join("");
-      const tiers = heroRest.reviewerTiers || {};
-      const tierHtml = [
-        tiers.mega  > 0 ? `<span class="tier-badge tier-mega">Mega ×${tiers.mega}</span>`   : "",
-        tiers.macro > 0 ? `<span class="tier-badge tier-macro">Macro ×${tiers.macro}</span>` : "",
-        tiers.mid   > 0 ? `<span class="tier-badge tier-mid">Mid ×${tiers.mid}</span>`       : "",
-      ].filter(Boolean).join("");
-      const velColor = heroRest.trendVelocity === "rising" ? "#56c282" : heroRest.trendVelocity === "declining" ? "#e05c5c" : "rgba(255,255,255,.55)";
-      const velBg    = heroRest.trendVelocity === "rising" ? "rgba(10,107,67,.2)" : heroRest.trendVelocity === "declining" ? "rgba(180,30,30,.2)" : "rgba(255,255,255,.1)";
-      heroCard.innerHTML = `
-        <div class="hero-sample-head">
-          <span>🔗 Overlap Signal — Live</span>
-          <span class="verdict" style="background:${velBg};color:${velColor}">${escHtml(heroRest.trendBadge)}</span>
-        </div>
-        <div class="hero-sample-card">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
-            <div>
-              <div class="hero-sample-name">${escHtml(heroRest.name)}</div>
-              <div class="hero-sample-type">${escHtml(heroRest.cuisine)} · ${escHtml(heroRest.area)} · ${escHtml(heroRest.budgetLabel)}</div>
-            </div>
-            <div style="text-align:right">
-              <div style="font-size:10px;font-weight:900;color:var(--text-2);text-transform:uppercase;letter-spacing:.08em">Overlap Signal</div>
-              <div style="font-size:28px;font-weight:900;color:var(--green);font-family:'Playfair Display',serif;line-height:1.1">${heroRest.overlapSignal} <span style="font-size:12px">INF</span></div>
-            </div>
+      const name = heroRest.name || heroRest.name_en || "";
+      const cuisine = heroRest.cuisine || "";
+      const area = heroRest.area || "";
+      const budget = heroRest.budgetLabel || "฿฿";
+      const note = heroRest.cmNote || "";
+
+      if (useExt) {
+        // Velocity card
+        const pct = heroRest.velocity_pct ? `+${Math.round(heroRest.velocity_pct)}%` : "";
+        const newRev = heroRest.new_reviews || 0;
+        heroCard.innerHTML = `
+          <div class="hero-sample-head">
+            <span>🚀 Highest Velocity — ม้ามืดสัปดาห์นี้</span>
+            <span class="verdict" style="background:rgba(10,107,67,.2);color:#56c282">↑ Rising</span>
           </div>
-          <div style="margin-bottom:12px">
-            <div style="font-size:10px;font-weight:800;color:var(--text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Unique Influencers (30 days)</div>
-            <div style="display:flex;gap:4px;flex-wrap:wrap">${dots}</div>
+          <div class="hero-sample-card">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+              <div>
+                <div class="hero-sample-name">${escHtml(name)}</div>
+                <div class="hero-sample-type">${escHtml(cuisine)} · ${escHtml(area)}</div>
+              </div>
+              <div style="text-align:right">
+                <div style="font-size:10px;font-weight:900;color:var(--text-2);text-transform:uppercase;letter-spacing:.08em">Velocity (30d)</div>
+                <div style="font-size:28px;font-weight:900;color:var(--green);font-family:'Playfair Display',serif;line-height:1.1">${escHtml(pct)}</div>
+              </div>
+            </div>
+            <div style="margin-bottom:12px">
+              <div style="font-size:10px;font-weight:800;color:var(--text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">New Reviews (30 days)</div>
+              <div style="font-size:20px;font-weight:900;color:var(--navy)">+${newRev} reviews</div>
+            </div>
+            <div class="hero-sample-insight">${escHtml(note)}</div>
+          </div>`;
+      } else {
+        // Fallback: overlap card เหมือนเดิม
+        const maxDots = 10;
+        const filled = Math.min(heroRest.overlapSignal||0, maxDots);
+        const dots = Array.from({length: maxDots}, (_,i) =>
+          `<span style="width:10px;height:10px;border-radius:50%;background:${i < filled ? "var(--green)" : "var(--border)"};display:inline-block"></span>`
+        ).join("");
+        const tiers = heroRest.reviewerTiers || {};
+        const tierHtml = [
+          tiers.mega  > 0 ? `<span class="tier-badge tier-mega">Mega ×${tiers.mega}</span>`   : "",
+          tiers.macro > 0 ? `<span class="tier-badge tier-macro">Macro ×${tiers.macro}</span>` : "",
+          tiers.mid   > 0 ? `<span class="tier-badge tier-mid">Mid ×${tiers.mid}</span>`       : "",
+        ].filter(Boolean).join("");
+        heroCard.innerHTML = `
+          <div class="hero-sample-head">
+            <span>🔗 Overlap Signal — Live</span>
+            <span class="verdict" style="background:rgba(10,107,67,.2);color:#56c282">${escHtml(heroRest.trendBadge||"")}</span>
           </div>
-          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">${tierHtml}</div>
-          <div class="hero-sample-insight">${escHtml(heroRest.cmNote)}</div>
-        </div>`;
+          <div class="hero-sample-card">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+              <div>
+                <div class="hero-sample-name">${escHtml(name)}</div>
+                <div class="hero-sample-type">${escHtml(cuisine)} · ${escHtml(area)} · ${escHtml(budget)}</div>
+              </div>
+              <div style="text-align:right">
+                <div style="font-size:10px;font-weight:900;color:var(--text-2);text-transform:uppercase;letter-spacing:.08em">Overlap Signal</div>
+                <div style="font-size:28px;font-weight:900;color:var(--green);font-family:'Playfair Display',serif;line-height:1.1">${heroRest.overlapSignal||0} <span style="font-size:12px">INF</span></div>
+              </div>
+            </div>
+            <div style="margin-bottom:12px">
+              <div style="font-size:10px;font-weight:800;color:var(--text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Unique Influencers (30 days)</div>
+              <div style="display:flex;gap:4px;flex-wrap:wrap">${dots}</div>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">${tierHtml}</div>
+            <div class="hero-sample-insight">${escHtml(note)}</div>
+          </div>`;
+      }
     }
   }
 
