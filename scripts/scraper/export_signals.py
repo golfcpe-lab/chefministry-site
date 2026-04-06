@@ -13,7 +13,7 @@ Output:
 """
 import json, argparse, re
 from datetime import date
-from db import get_trending_restaurants, get_stats, get_conn
+from db import get_trending_restaurants, get_all_restaurants, get_stats, get_conn
 from config import EXPORT_JSON, EXPORT_DIR
 
 # ── Signal strength mapping ───────────────────────────────────────────────────
@@ -75,6 +75,10 @@ def to_cm_format(row: dict, days: int = 30) -> dict | None:
     price   = row.get("price_range") or 2
     source  = row.get("source") or "wongnai"
 
+    # ประเภทสถานที่: street food / bar / cafe ไม่นับเป็น "ร้านอาหาร" หลัก
+    NON_RESTAURANT_TYPES = {"street-food", "cafe", "bar", "casual"}
+    is_restaurant = cuisine not in NON_RESTAURANT_TYPES
+
     # Signal count: proxy จาก velocity_pct
     signal_count = max(1, int(new_reviews / 10)) if new_reviews else 1
 
@@ -108,6 +112,7 @@ def to_cm_format(row: dict, days: int = 30) -> dict | None:
         "velocityPct":    velocity_pct,
         "tags":           [cuisine, area, source],
         "cmNote":         cm_note,
+        "isRestaurant":   is_restaurant,
         "source":         source,
         "sourceUrl":      row.get("url") or "",
         "reviewerTiers":  {"mega": 0, "macro": 0, "mid": 0},  # placeholder
@@ -115,31 +120,31 @@ def to_cm_format(row: dict, days: int = 30) -> dict | None:
     }
 
 
-def export_json(days: int = 30, limit: int = 100, min_snapshots: int = 1) -> list:
+def export_json(days: int = 30, limit: int = 500, min_snapshots: int = 0) -> list:
     """
-    Export trending restaurants → export_restaurants.json
+    Export ร้านทั้งหมดจาก DB พร้อม velocity data (ถ้ามี) → export_restaurants.json
+    ร้านที่มี velocity (rising) จะขึ้นก่อน ที่เหลือตามหลัง
     """
-    trending = get_trending_restaurants(limit=limit, days=days)
-
-    # กรอง noise
-    filtered = [r for r in trending if (r.get("snapshot_count") or 0) >= min_snapshots]
+    all_rows = get_all_restaurants(days=days)
 
     cm_restaurants = []
-    for row in filtered:
+    for row in all_rows:
         cm = to_cm_format(row, days=days)
         if cm:
             cm_restaurants.append(cm)
 
-    # Sort: rising first, then by new_reviews
+    # Sort: rising first (by velocity), then stable by name
     cm_restaurants.sort(key=lambda r: (
         0 if r["trendVelocity"] == "rising" else 1,
-        -r["newReviews30d"]
+        -(r.get("velocity_pct") or 0)
     ))
 
     with open(EXPORT_JSON, "w", encoding="utf-8") as f:
         json.dump(cm_restaurants, f, ensure_ascii=False, indent=2)
 
+    rising_count = sum(1 for r in cm_restaurants if r["trendVelocity"] == "rising")
     print(f"✅ Exported {len(cm_restaurants)} restaurants → {EXPORT_JSON}")
+    print(f"   🔥 Rising: {rising_count}  |  Stable: {len(cm_restaurants) - rising_count}")
     return cm_restaurants
 
 
@@ -168,49 +173,59 @@ def show_summary(days: int = 30):
     print()
 
 
+# รองรับหลาย marker รูปแบบ (ทั้ง Unicode box และ ASCII)
+DATAJS_MARKERS = [
+    "// ── DB Stats (injected by scraper)",   # Unicode box chars
+    "// -- DB Stats (injected by scraper)",   # ASCII dashes
+    "// DB Stats (injected by scraper)",       # ไม่มี dashes
+    "const CM_DB_STATS",                       # fallback: หา const โดยตรง
+]
+
 def inject_into_datajs(cm_restaurants: list):
     """
-    Inject trending restaurants เข้า data.js
-    เพิ่มเป็น CM_EXTERNAL_RESTAURANTS ก่อนปิด file
-    (ไม่แทนที่ CM_RESTAURANTS เดิม เพื่อความปลอดภัย)
+    อัปเดต CM_DB_STATS และ CM_EXTERNAL_RESTAURANTS ใน data.js
+    วิธี: ตัดไฟล์ที่ marker แล้วต่อท้ายด้วยข้อมูลใหม่
     """
     data_js_path = EXPORT_DIR / "data.js"
     if not data_js_path.exists():
         print(f"❌ data.js not found at {data_js_path}")
         return
 
-    with open(data_js_path, "r", encoding="utf-8") as f:
+    stats       = get_stats()
+    total_in_db = stats.get("total_restaurants", len(cm_restaurants))
+    today       = date.today().isoformat()
+
+    with open(data_js_path, "r", encoding="utf-8", errors="replace") as f:
         content = f.read()
 
-    # Remove old injection ถ้ามี
-    content = re.sub(
-        r"\n// ── EXTERNAL_DATA_START.*?// ── EXTERNAL_DATA_END\n",
-        "",
-        content,
-        flags=re.DOTALL
+    # ลอง marker ทีละตัวจนกว่าจะเจอ
+    marker_idx = -1
+    for mk in DATAJS_MARKERS:
+        idx = content.find(mk)
+        if idx != -1:
+            marker_idx = idx
+            print(f"   🔍 Found marker: {mk[:40]!r}")
+            break
+
+    if marker_idx == -1:
+        print("❌ Marker not found in data.js — ไม่สามารถ inject ได้")
+        print("   ลองเช็กว่า data.js มีบรรทัด 'const CM_DB_STATS' หรือไม่")
+        return
+    base = content[:marker_idx]
+
+    # สร้างบรรทัดใหม่
+    json_str = json.dumps(cm_restaurants, ensure_ascii=False)
+    tail = (
+        f"// -- DB Stats (injected by scraper) -------------------------------------------\n"
+        f'const CM_DB_STATS = {{ total: {total_in_db}, lastUpdated: "{today}" }};\n'
+        f'const CM_EXTERNAL_RESTAURANTS = {json_str};\n'
     )
 
-    # Build injection block
-    json_str = json.dumps(cm_restaurants, ensure_ascii=False, indent=2)
-    injection = f"""
-// ── EXTERNAL_DATA_START (auto-generated {date.today().isoformat()}) ──
-const CM_EXTERNAL_RESTAURANTS = {json_str};
-// Merge with main data (deduplicate by name)
-(function() {{
-  const existingNames = new Set(CM_RESTAURANTS.map(r => r.name.toLowerCase()));
-  const newOnes = CM_EXTERNAL_RESTAURANTS.filter(r =>
-    !existingNames.has(r.name.toLowerCase()) && r.signalStrength !== 'weak'
-  );
-  CM_RESTAURANTS.push(...newOnes);
-}})();
-// ── EXTERNAL_DATA_END ──"""
-
-    content += injection
-
     with open(data_js_path, "w", encoding="utf-8") as f:
-        f.write(content)
+        f.write(base + tail)
 
     print(f"✅ Injected {len(cm_restaurants)} restaurants into data.js")
+    print(f"   📊 CM_DB_STATS.total = {total_in_db} (all monitored restaurants)")
     print(f"   → {data_js_path}")
 
 
