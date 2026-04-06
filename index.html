@@ -508,7 +508,7 @@
   if (heroCard) {
     // ลอง CM_EXTERNAL_RESTAURANTS ก่อน (ข้อมูลจริงจาก scraper)
     const extSorted = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined" && CM_EXTERNAL_RESTAURANTS.length > 0)
-      ? [...CM_EXTERNAL_RESTAURANTS].filter(r => (r.velocity_pct||0) > 0).sort((a,b) => (b.velocity_pct||0) - (a.velocity_pct||0))
+      ? [...CM_EXTERNAL_RESTAURANTS].filter(r => (r.velocityPct||0) > 0).sort((a,b) => (b.velocityPct||0) - (a.velocityPct||0))
       : [];
     const heroExt = extSorted[0];
     const heroStatic = [...CM_RESTAURANTS].sort((a,b) => (b.overlapSignal||0) - (a.overlapSignal||0))[0];
@@ -524,8 +524,8 @@
 
       if (useExt) {
         // Velocity card
-        const pct = heroRest.velocity_pct ? `+${Math.round(heroRest.velocity_pct)}%` : "";
-        const newRev = heroRest.new_reviews || 0;
+        const pct = heroRest.velocityPct ? `+${Math.round(heroRest.velocityPct)}%` : "";
+        const newRev = heroRest.newReviews30d || 0;
         heroCard.innerHTML = `
           <div class="hero-sample-head">
             <span>🚀 Highest Velocity — ม้ามืดสัปดาห์นี้</span>
@@ -662,14 +662,14 @@
   const rankList = document.getElementById("overlapRankList");
   const extRising = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined" && CM_EXTERNAL_RESTAURANTS.length > 0)
     ? [...CM_EXTERNAL_RESTAURANTS]
-        .filter(r => (r.velocity_pct || 0) > 0)
-        .sort((a,b) => (b.velocity_pct||0) - (a.velocity_pct||0))
+        .filter(r => (r.velocityPct || 0) > 0)
+        .sort((a,b) => (b.velocityPct||0) - (a.velocityPct||0))
         .slice(0, 5)
     : [];
 
   const velocityItems = extRising.length > 0 ? extRising.map((r,i) => {
-    const pct = r.velocity_pct ? `+${Math.round(r.velocity_pct)}%` : "";
-    const newRev = r.new_reviews ? `+${r.new_reviews} reviews` : "";
+    const pct = r.velocityPct ? `+${Math.round(r.velocityPct)}%` : "";
+    const newRev = r.newReviews30d ? `+${r.newReviews30d} reviews` : "";
     return `<div class="rank-item" style="cursor:default">
       <div class="rank-num ${i<3?"top3":""}">${i+1}</div>
       <div style="flex:1;min-width:0">
