@@ -34,6 +34,7 @@ jobs:
       - name: Run weekly_summary.py
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          DATA_FILE: ${{ github.workspace }}/js/data.js
         run: |
           cd scripts
           python weekly_summary.py
