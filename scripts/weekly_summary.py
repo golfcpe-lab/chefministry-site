@@ -16,6 +16,7 @@ from openai import OpenAI
 
 # ── Config ────────────────────────────────────────────────────────────────────
 HERE      = pathlib.Path(__file__).parent
+# รองรับทั้ง local (site/js/data.js) และ GitHub Actions (ส่งผ่าน env DATA_FILE)
 DATA_FILE = pathlib.Path(os.environ.get("DATA_FILE", str(HERE / "site" / "js" / "data.js")))
 
 # หา API key จาก .env หรือ environment
