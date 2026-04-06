@@ -1,0 +1,63 @@
+name: ChefMinistry GMaps Scraper
+
+# รันทุกวันอาทิตย์ 23:00 น. เวลาไทย (16:00 UTC)
+# = 9 ชั่วโมงก่อน weekly_summary.py (จันทร์ 08:00 ICT = 01:00 UTC)
+# เหตุผล: GMaps ดึง review count snapshot → weekly summary อ่าน signal ที่อัปเดตแล้ว
+on:
+  schedule:
+    - cron: '0 16 * * 0'   # อาทิตย์ 16:00 UTC = อาทิตย์ 23:00 ICT
+  workflow_dispatch:        # รัน manual ได้
+
+# ── Timeline ทุกสัปดาห์ ────────────────────────────────────────────────────────
+# อาทิตย์ 23:00 ICT  → scraper.yml รัน GMaps (ดึง review counts ใหม่)
+# จันทร์  08:00 ICT  → weekly_update.yml รัน weekly summary (อ่านข้อมูลที่อัปเดตแล้ว)
+# ──────────────────────────────────────────────────────────────────────────────
+
+jobs:
+  gmaps-scraper:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      # ── 1. Checkout ───────────────────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+          fetch-depth: 1
+
+      # ── 2. Setup Python ───────────────────────────────────────────────────
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # ── 3. Install dependencies (GMaps ไม่ต้องใช้ playwright) ─────────────
+      - name: Install Python packages
+        run: pip install requests --quiet
+
+      # ── 4. รัน GMaps scraper (API only — ไม่ต้องใช้ browser) ──────────────
+      - name: Run GMaps scraper
+        env:
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+        run: |
+          cd scripts/scraper
+          python scrape_gmaps.py --limit 200
+        continue-on-error: false
+
+      # ── 5. Export signals → อัปเดต data.js ───────────────────────────────
+      - name: Export signals to data.js
+        run: |
+          cd scripts/scraper
+          python export_signals.py --inject --days 30
+
+      # ── 6. Commit ─────────────────────────────────────────────────────────
+      - name: Commit updated data
+        run: |
+          git config user.name  "ChefMinistry Bot"
+          git config user.email "bot@chefministry.com"
+          git add js/data.js scripts/scraper/chefministry_data.db
+          git diff --staged --quiet || git commit -m "auto: GMaps snapshot update $(date +'%Y-%m-%d')"
+
+      - name: Push to GitHub
+        run: git push origin main
