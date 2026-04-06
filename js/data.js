@@ -542,8 +542,8 @@ const CM_RESTAURANTS = [
 // ── Signal Intelligence for homepage ─────────────────────────────────────────
 const CM_SIGNALS = {
   weeklyHighlight: {
-    title: "🍽️ ร้านอาหารไทยฟิน ไต่ระดับความนิยมสูงขึ้น!",
-    desc: "ร้าน Nusara และ Le Du ยังคงร้อนแรงด้วยสัญญาณ Overlap ที่สูงขึ้น ขณะที่แนวโน้ม Fine Dining และ Omakase กำลังเติบโตอย่างต่อเนื่อง!",
+    title: "🌟 ร้านอาหารที่มาแรงในสัปดาห์นี้!",
+    desc: "Nusara และ Le Du ยังคงเป็นดาวเด่นในวงการอาหารไทย ขณะที่ Thai Fine Dining กำลังเติบโตอย่างรวดเร็ว!",
     trend: "rising"
   },
   trendCategories: [
