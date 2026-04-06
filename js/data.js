@@ -142,21 +142,6 @@ const CM_RESTAURANTS = [
     totalReviews: 55
   },
   {
-    id:"r008", name:"Shuggi Burger", cuisine:"American Smash Burger",
-    type:"casual", budget:1, budgetLabel:"฿",
-    occasions:["casual","everyday","hangout"], area:"ทองหล่อ",
-    priceRange:"250–400", emoji:"🍔",
-    signalStrength:"moderate", signalCount:7, overlapSignal:3,
-    trendVelocity:"rising", trendBadge:"↑ Rising",
-    reviewerTiers:{ mega:0, macro:2, mid:1 },
-    recentReviewers:["i10","i08","i07"],
-    bookingLinks:{ googlemaps:"#" },
-    tags:["Best Burger","Fast Casual","Trending Up"],
-    menuHighlights:["Double Smash Burger","Crispy Fries","Shuggi Sauce"],
-    cmNote:"Rising Signal ชัดมาก — Influencer หมวด Budget และ Street Food กำลังพูดถึงพร้อมกัน นี่คือ Emerging Signal ที่ Pro user ได้รู้ก่อน",
-    totalReviews: 27
-  },
-  {
     id:"r009", name:"Paste Bangkok", cuisine:"Modern Royal Thai",
     type:"fine-dining", budget:3, budgetLabel:"฿฿฿",
     occasions:["special","date","business"], area:"เพลินจิต",
@@ -684,6 +669,6 @@ function buildRestaurantCard(r, opts = {}) {
     </div>`;
 }
 
-// ── DB Stats (injected by scraper) ─────────────────────────────────────────────
+// -- DB Stats (injected by scraper) -------------------------------------------
 const CM_DB_STATS = { total: 138, lastUpdated: "2026-04-06" };
 const CM_EXTERNAL_RESTAURANTS = [{"id": "wongnai_8288", "name": "De Moon Bangkok รัชดา", "cuisine": "Isaan", "area": "Ratchada", "type": "isaan", "budget": 3, "budgetLabel": "฿฿฿", "signalStrength": "very-strong", "signalCount": 4, "overlapSignal": 1, "trendVelocity": "rising", "trendBadge": "↑↑ Viral", "totalReviews": 77, "newReviews30d": 42, "velocityPct": 120.0, "tags": ["isaan", "ratchada", "wongnai"], "cmNote": "🔥 Review เพิ่ม +120% ใน 30 วัน — น่าจับตา", "source": "wongnai", "sourceUrl": "https://www.wongnai.com/restaurants/8288Ar-de-moon-bangkok-%E0%B8%A3%E0%B8%B1%E0%B8%8A%E0%B8%94%E0%B8%B2", "reviewerTiers": {"mega": 0, "macro": 0, "mid": 0}, "lastUpdated": "2026-04-06"}, {"id": "wongnai_20696", "name": "เจ๊เบิ๊บโภชนา", "cuisine": "Street-Food", "area": "Silom", "type": "street-food", "budget": 1, "budgetLabel": "฿", "signalStrength": "strong", "signalCount": 1, "overlapSignal": 1, "trendVelocity": "rising", "trendBadge": "↑ Rising Fast", "totalReviews": 52, "newReviews30d": 15, "velocityPct": 40.5, "tags": ["street-food", "silom", "wongnai"], "cmNote": "🔥 Review เพิ่ม +40% ใน 30 วัน — น่าจับตา", "source": "wongnai", "sourceUrl": "https://www.wongnai.com/restaurants/20696xR-%E0%B9%80%E0%B8%88%E0%B9%8A%E0%B9%80%E0%B8%9A%E0%B8%B4%E0%B9%8A%E0%B8%9A%E0%B9%82%E0%B8%A0%E0%B8%8A%E0%B8%99%E0%B8%B2", "reviewerTiers": {"mega": 0, "macro": 0, "mid": 0}, "lastUpdated": "2026-04-06"}, {"id": "wongnai_207727", "name": "เผือกทอดศาลาแดงซอย๑", "cuisine": "Street-Food", "area": "Silom", "type": "street-food", "budget": 1, "budgetLabel": "฿", "signalStrength": "moderate", "signalCount": 1, "overlapSignal": 1, "trendVelocity": "rising", "trendBadge": "↑ Rising", "totalReviews": 11, "newReviews30d": 1, "velocityPct": 10.0, "tags": ["street-food", "silom", "wongnai"], "cmNote": "↑ Traffic กำลังเพิ่มบน Wongnai", "source": "wongnai", "sourceUrl": "https://www.wongnai.com/restaurants/207727qE-%E0%B9%80%E0%B8%9C%E0%B8%B7%E0%B8%AD%E0%B8%81%E0%B8%97%E0%B8%AD%E0%B8%94%E0%B8%A8%E0%B8%B2%E0%B8%A5%E0%B8%B2%E0%B9%81%E0%B8%94%E0%B8%87%E0%B8%8B%E0%B8%AD%E0%B8%A2%E0%B9%91", "reviewerTiers": {"mega": 0, "macro": 0, "mid": 0}, "lastUpdated": "2026-04-06"}];
