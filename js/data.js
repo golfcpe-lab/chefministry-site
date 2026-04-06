@@ -659,12 +659,6 @@ function buildRestaurantCard(r, opts = {}) {
             <div class="card-area">📍 ${escHtml(r.area)}</div>
           </div>
         </div>
-        ${opts.showOverlap ? `
-        <div class="value-score-strip" style="background:var(--green-bg)">
-          <span class="value-score-label" style="color:var(--green);font-size:11px;font-weight:700">
-            🔗 Overlap ${r.overlapSignal} creators
-          </span>
-        </div>` : ""}
       </a>
     </div>`;
 }
