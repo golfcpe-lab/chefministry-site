@@ -6,6 +6,7 @@ ChefMinistry — SQLite Database Manager
 import sqlite3, json
 from datetime import datetime, date, timedelta
 from config import DB_PATH
+import pathlib
 
 
 def get_conn():
@@ -15,7 +16,24 @@ def get_conn():
 
 
 def init_db():
-    """สร้าง tables ถ้ายังไม่มี"""
+    """สร้าง tables ถ้ายังไม่มี — auto-recover ถ้า DB เสียหาย"""
+    # ตรวจ DB corruption ก่อน
+    try:
+        with get_conn() as conn:
+            conn.execute("SELECT 1")
+    except sqlite3.DatabaseError as e:
+        if "malformed" in str(e) or "corrupt" in str(e):
+            import shutil
+            bak = str(DB_PATH) + ".bak"
+            try:
+                shutil.copy(str(DB_PATH), bak)
+                print(f"⚠️  DB เสียหาย — backup ไว้ที่ {bak} แล้วสร้างใหม่")
+            except Exception:
+                pass
+            DB_PATH.unlink(missing_ok=True)
+        else:
+            raise
+
     with get_conn() as conn:
         conn.executescript("""
         -- ข้อมูลหลักของร้าน
@@ -35,6 +53,7 @@ def init_db():
             image_url   TEXT,
             first_seen  TEXT DEFAULT (date('now')),
             last_updated TEXT DEFAULT (datetime('now')),
+            business_status TEXT DEFAULT 'OPERATIONAL',  -- OPERATIONAL | CLOSED_TEMPORARILY | CLOSED_PERMANENTLY
             UNIQUE(source, external_id)
         );
 
@@ -202,6 +221,52 @@ def get_trending_restaurants(limit: int = 50, days: int = 30) -> list:
             LIMIT ?
         """, (since, limit)).fetchall()
 
+    return [dict(r) for r in rows]
+
+
+def get_all_restaurants(days: int = 30) -> list:
+    """
+    ดึงร้านทั้งหมดจาก DB พร้อม velocity data (ถ้ามี)
+    ร้านที่มี velocity จะได้ข้อมูลครบ ร้านที่ไม่มีจะได้ 0
+    """
+    since = (date.today() - timedelta(days=days)).isoformat()
+    with get_conn() as conn:
+        rows = conn.execute("""
+            WITH ranked AS (
+                SELECT
+                    s.restaurant_id, s.review_count, s.rating, s.snapshot_date,
+                    ROW_NUMBER() OVER (PARTITION BY s.restaurant_id ORDER BY s.snapshot_date ASC)  AS rn_asc,
+                    ROW_NUMBER() OVER (PARTITION BY s.restaurant_id ORDER BY s.snapshot_date DESC) AS rn_desc
+                FROM review_snapshots s
+                WHERE s.snapshot_date >= ?
+            ),
+            first_last AS (
+                SELECT
+                    restaurant_id,
+                    MAX(CASE WHEN rn_asc  = 1 THEN review_count END) AS first_count,
+                    MAX(CASE WHEN rn_desc = 1 THEN review_count END) AS last_count,
+                    MAX(CASE WHEN rn_desc = 1 THEN rating END)       AS latest_rating,
+                    COUNT(*) / 2 AS snapshot_count
+                FROM ranked GROUP BY restaurant_id
+            )
+            SELECT
+                r.id, r.name, r.name_en, r.cuisine, r.area,
+                r.price_range, r.url, r.source,
+                COALESCE(fl.first_count, 0)    AS first_count,
+                COALESCE(fl.last_count, 0)     AS last_count,
+                COALESCE(fl.latest_rating, 0)  AS latest_rating,
+                COALESCE(fl.snapshot_count, 0) AS snapshot_count,
+                COALESCE(fl.last_count - fl.first_count, 0) AS new_reviews,
+                CASE
+                    WHEN COALESCE(fl.first_count, 0) > 0
+                    THEN ROUND((fl.last_count - fl.first_count) * 100.0 / fl.first_count, 1)
+                    ELSE 0
+                END AS velocity_pct
+            FROM restaurants r
+            LEFT JOIN first_last fl ON fl.restaurant_id = r.id
+            WHERE COALESCE(r.business_status, 'OPERATIONAL') != 'CLOSED_PERMANENTLY'
+            ORDER BY new_reviews DESC, velocity_pct DESC
+        """, (since,)).fetchall()
     return [dict(r) for r in rows]
 
 
