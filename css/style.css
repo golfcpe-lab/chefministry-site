@@ -432,6 +432,7 @@ img{display:block;max-width:100%}
   .section{padding:36px 0}
   .pro-banner{padding:24px}
   .site-nav .nav-link{display:none}
+  .site-nav .btn-pro{display:none}
   .mobile-menu-btn{display:block}
   .footer-grid{grid-template-columns:1fr 1fr;gap:24px}
   .stat-grid{grid-template-columns:repeat(2,1fr)}
