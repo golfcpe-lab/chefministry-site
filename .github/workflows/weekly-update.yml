@@ -1,39 +1,52 @@
-name: Weekly Signal Update
+name: ChefMinistry Weekly Update
 
+# รันทุกวันจันทร์ 08:00 น. เวลาไทย (01:00 UTC = +7)
 on:
   schedule:
-    - cron: '0 2 * * 3'   # ทุกวันพุธ 09:00 น. (Thailand UTC+7)
-  workflow_dispatch:        # กด Run manually ได้เสมอ
+    - cron: '0 1 * * 1'   # 08:00 ICT = 01:00 UTC
+  workflow_dispatch:        # รัน manual ได้ด้วย (ปุ่ม Run workflow ใน Actions tab)
 
 jobs:
-  update-signals:
+  weekly-update:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+    timeout-minutes: 15
 
     steps:
-      - name: Checkout repo
+      # ── 1. Checkout code ──────────────────────────────────────────────────
+      - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+          fetch-depth: 1
 
-      - name: Setup Python
+      # ── 2. Setup Python ───────────────────────────────────────────────────
+      - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
-        run: pip install requests
+      # ── 3. Install dependencies ───────────────────────────────────────────
+      - name: Install Python packages
+        run: |
+          pip install openai --quiet
 
-      - name: Run signal update script
-        run: python scripts/update_signals.py
+      # ── 4. Generate weekly summary (อัปเดต data.js) ──────────────────────
+      - name: Run weekly_summary.py
         env:
-          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          cd scripts
+          python weekly_summary.py
+        continue-on-error: false
 
+      # ── 5. Commit & Push ไฟล์ที่เปลี่ยนแปลง ──────────────────────────────
       - name: Commit updated data.js
         run: |
-          git config --global user.name  "ChefMinistry Bot"
-          git config --global user.email "bot@chefministry.com"
+          git config user.name  "ChefMinistry Bot"
+          git config user.email "bot@chefministry.com"
           git add js/data.js
-          git diff --staged --quiet \
-            && echo "No changes to commit" \
-            || git commit -m "Weekly signal update $(date +'%Y-%m-%d')"
-          git push
+          # commit เฉพาะถ้ามีการเปลี่ยนแปลง
+          git diff --staged --quiet || git commit -m "auto: weekly signal update $(date +'%Y-%m-%d')"
+
+      - name: Push to GitHub
+        run: git push origin main
