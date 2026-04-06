@@ -45,8 +45,12 @@ HEADERS = {
 def gh_request(url, method="GET", body=None):
     data = json.dumps(body).encode() if body else None
     req  = urllib.request.Request(url, data=data, method=method, headers=HEADERS)
-    with urllib.request.urlopen(req) as r:
-        return json.loads(r.read())
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return json.loads(r.read())
+    except urllib.error.HTTPError as e:
+        err_body = e.read().decode(errors="replace")
+        raise Exception(f"HTTP {e.code} {e.reason}: {err_body[:300]}")
 
 today   = datetime.date.today().strftime("%Y-%m-%d")
 message = f"update: accuracy fixes, GA4 tracking, roadmap Phase 3 ({today})"
@@ -67,8 +71,11 @@ def push_file(local_file, gh_path):
     try:
         sha = gh_request(url)["sha"]
         print(f"    SHA ปัจจุบัน: {sha[:7]}…")
-    except:
-        print(f"    ไม่พบไฟล์ใน repo (จะสร้างใหม่)")
+    except Exception as e:
+        if "HTTP 404" in str(e):
+            print(f"    ไม่พบไฟล์ใน repo (จะสร้างใหม่)")
+        else:
+            print(f"    ⚠️  ดึง SHA ไม่ได้: {e}")
         sha = None
     body = {"message": message, "content": encoded}
     if sha:
