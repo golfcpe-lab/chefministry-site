@@ -164,7 +164,7 @@
         </div>
       </div>
       <div>
-        <div style="font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);margin-bottom:14px">🔥 Top Overlap Signals (30 days)</div>
+        <div style="font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);margin-bottom:14px">🚀 Highest Velocity — ม้ามืดที่น่าจับตา</div>
         <div class="rank-list card" style="border-radius:var(--radius-lg);overflow:hidden" id="overlapRankList"></div>
       </div>
     </div>
@@ -617,10 +617,30 @@
   }
   tcList.innerHTML = tcRows.join("");
 
-  // Overlap rank list (top 5)
+  // Highest Velocity rank list — ใช้ข้อมูลจาก scraper ถ้ามี, fallback static
   const rankList = document.getElementById("overlapRankList");
-  rankList.innerHTML = topByOverlap(5).map((r,i) => {
-    const vc = velocityClass(r.trendVelocity);
+  const extRising = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined" && CM_EXTERNAL_RESTAURANTS.length > 0)
+    ? [...CM_EXTERNAL_RESTAURANTS]
+        .filter(r => (r.velocity_pct || 0) > 0)
+        .sort((a,b) => (b.velocity_pct||0) - (a.velocity_pct||0))
+        .slice(0, 5)
+    : [];
+
+  const velocityItems = extRising.length > 0 ? extRising.map((r,i) => {
+    const pct = r.velocity_pct ? `+${Math.round(r.velocity_pct)}%` : "";
+    const newRev = r.new_reviews ? `+${r.new_reviews} reviews` : "";
+    return `<div class="rank-item" style="cursor:default">
+      <div class="rank-num ${i<3?"top3":""}">${i+1}</div>
+      <div style="flex:1;min-width:0">
+        <div class="rank-name">${escHtml(r.name||r.name_en||"")}</div>
+        <div class="rank-meta">${escHtml(r.cuisine||"")} · ${escHtml(r.area||"")}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+        <div style="font-size:16px;font-weight:900;color:var(--green)">${pct}</div>
+        <div style="font-size:11px;color:var(--text-2);font-weight:700">${newRev}</div>
+      </div>
+    </div>`;
+  }).join("") : topByOverlap(5).map((r,i) => {
     return `<a class="rank-item" href="./restaurant.html?id=${escHtml(r.id)}" style="cursor:pointer;text-decoration:none;color:inherit">
       <div class="rank-num ${i<3?"top3":""}">${i+1}</div>
       <div>
@@ -633,6 +653,7 @@
       </div>
     </a>`;
   }).join("");
+  rankList.innerHTML = velocityItems;
 
   // Thai Fine Dining spotlight grid (top 3 by overlapSignal)
   const thaiFineDineGrid = document.getElementById("thaiFineDineGrid");
