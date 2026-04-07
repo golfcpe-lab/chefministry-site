@@ -24,6 +24,9 @@ SITE_FILES = [
 ROOT_FILES = [
     ("push_to_github.py",         "scripts/push_to_github.py"),
     ("weekly_summary.py",         "scripts/weekly_summary.py"),
+    # GitHub Actions workflows
+    (".github/workflows/weekly_update.yml", ".github/workflows/weekly_update.yml"),
+    (".github/workflows/scraper.yml",       ".github/workflows/scraper.yml"),
     # Scraper suite (ใหม่ — แทนที่ grabfood/lineman/wongnai v1 เดิม)
     ("scraper/config.py",         "scripts/scraper/config.py"),
     ("scraper/db.py",             "scripts/scraper/db.py"),
@@ -70,7 +73,7 @@ def gh_request(url, method="GET", body=None):
         raise Exception(f"HTTP {e.code} {e.reason}: {err_body[:300]}")
 
 today   = datetime.date.today().strftime("%Y-%m-%d")
-message = f"update: accuracy fixes, GA4 tracking, roadmap Phase 3 ({today})"
+message = f"fix: data.js syntax, inject DB→data.js weekly, fix inject_youtube bugs ({today})"
 
 print(f"\n{'='*55}")
 print(f"  ChefMinistry → Push to GitHub")
