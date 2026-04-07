@@ -887,8 +887,8 @@ const CM_RESTAURANTS = [
 // ── Signal Intelligence for homepage ─────────────────────────────────────────
 const CM_SIGNALS = {
   weeklyHighlight: {
-    title: "🍽️ ร้านอาหารไทยที่กำลังมาแรงในสัปดาห์นี้!",
-    desc: "Nusara และ Le Du ยังคงนำเทรนด์ Thai Fine Dining ขึ้นมาแรง ส่วนร้าน Rising อย่าง Haoma และ 80/20 Bangkok ก็น่าจับตามอง! 🎉",
+    title: "ร้านใหม่ในวงการอาหารไทยที่น่าสนใจ 🍽️",
+    desc: "Le Du และ Haoma สร้างกระแสแรงในสัปดาห์นี้ พร้อมกับรีวิวจาก YouTube ที่ส่งผลดีต่อภาพรวมของร้านอาหารไทย",
     trend: "rising"
   },
   trendCategories: [
