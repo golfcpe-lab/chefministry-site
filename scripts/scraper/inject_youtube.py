@@ -400,8 +400,11 @@ def main(dry_run=False):
                                     depth2 -= 1
                                     if depth2 == 0: break
                             i2 += 1
-                        # แทรก entry ก่อน ]
-                        js_text = js_text[:i2] + "\n" + js_entry + "\n" + js_text[i2:]
+                        # แทรก entry ก่อน ] — ต้องมี comma หลัง entry สุดท้าย
+                        before = js_text[:i2].rstrip()
+                        if before and before[-1] not in (',', '['):
+                            before += ','
+                        js_text = before + "\n" + js_entry + "\n" + js_text[i2:]
                     next_num += 1
                     added_count += 1
             else:
