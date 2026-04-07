@@ -155,16 +155,16 @@
   <div class="container">
     <div class="section-cols-2">
       <div>
-        <div class="eyebrow" style="color:var(--amber);margin-bottom:8px">📊 This Week's Intelligence</div>
+        <div class="eyebrow" style="color:var(--amber);margin-bottom:8px">🌟 Spotlight of the Week</div>
         <h2 class="display-2" style="margin-bottom:16px" id="weeklyTitle">Loading…</h2>
         <p class="lead" id="weeklyDesc">Loading…</p>
         <div style="margin-top:24px">
-          <div style="font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);margin-bottom:12px">Category Trend Signals</div>
+          <div style="font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);margin-bottom:12px">Trend by Category</div>
           <div id="trendCategoryList"></div>
         </div>
       </div>
       <div>
-        <div style="font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);margin-bottom:14px">🚀 Highest Velocity — ร้านที่โดดเด่นในสัปดาห์นี้</div>
+        <div style="font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);margin-bottom:14px" id="rankListLabel">📡 Influencer Signal Rank</div>
         <div class="rank-list card" style="border-radius:var(--radius-lg);overflow:hidden" id="overlapRankList"></div>
       </div>
     </div>
@@ -658,14 +658,21 @@
   }
   tcList.innerHTML = tcRows.join("");
 
-  // Highest Velocity rank list — ใช้ข้อมูลจาก scraper ถ้ามี, fallback static
-  const rankList = document.getElementById("overlapRankList");
+  // Rank list — ใช้ velocity จาก DB scraper ถ้ามี, fallback = INF overlap
+  const rankList     = document.getElementById("overlapRankList");
+  const rankLabel    = document.getElementById("rankListLabel");
   const extRising = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined" && CM_EXTERNAL_RESTAURANTS.length > 0)
     ? [...CM_EXTERNAL_RESTAURANTS]
         .filter(r => (r.velocityPct || 0) > 0 && r.isRestaurant !== false)
         .sort((a,b) => (b.velocityPct||0) - (a.velocityPct||0))
         .slice(0, 5)
     : [];
+
+  if (rankLabel) {
+    rankLabel.textContent = extRising.length > 0
+      ? "📈 Velocity Rank — รีวิวเพิ่มเร็วที่สุดสัปดาห์นี้"
+      : "📡 Influencer Signal Rank — ร้านที่ Influencer พูดถึงมากสุด";
+  }
 
   const velocityItems = extRising.length > 0 ? extRising.map((r,i) => {
     const pct = r.velocityPct ? `+${Math.round(r.velocityPct)}%` : "";
