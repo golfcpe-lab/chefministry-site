@@ -120,13 +120,13 @@ EXTRACT_PROMPT = """\
 
 ตอบเป็น JSON array เท่านั้น ห้ามมีข้อความอื่น:
 [
-  {
+  {{
     "restaurant": "ชื่อร้าน",
     "cuisine": "ประเภทอาหาร เช่น Thai, Japanese, Street Food, Fine Dining",
     "area": "ย่านหรือจังหวัด เช่น Thonglor, Silom, Bangkok (ถ้าไม่รู้ใส่ Bangkok)",
     "rating": "exceed | above_average | average | need_improve (ประเมินจาก tone ของ video)",
     "confidence": "high | medium | low"
-  }
+  }}
 ]
 
 Video title: {title}
