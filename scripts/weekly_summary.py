@@ -17,7 +17,9 @@ from openai import OpenAI
 # ── Config ────────────────────────────────────────────────────────────────────
 HERE      = pathlib.Path(__file__).parent
 # รองรับทั้ง local (site/js/data.js) และ GitHub Actions (ส่งผ่าน env DATA_FILE)
-DATA_FILE = pathlib.Path(os.environ.get("DATA_FILE", str(HERE / "site" / "js" / "data.js")))
+DATA_FILE    = pathlib.Path(os.environ.get("DATA_FILE", str(HERE / "site" / "js" / "data.js")))
+# youtube_reviews.json: อยู่ใน scripts/ (sibling ของ weekly_summary.py ใน repo)
+YOUTUBE_FILE = pathlib.Path(os.environ.get("YOUTUBE_FILE", str(HERE / "youtube_reviews.json")))
 
 # หา API key จาก .env หรือ environment
 env_file = HERE / ".env"
@@ -55,8 +57,18 @@ def extract_signals(js_text):
     raw = match.group(1)
     return eval(js_to_python(raw))
 
+# ── อ่าน YouTube reviews (ถ้ามี) ──────────────────────────────────────────────
+def load_youtube_reviews():
+    if not YOUTUBE_FILE.exists():
+        return []
+    try:
+        data = json.loads(YOUTUBE_FILE.read_text(encoding="utf-8"))
+        return data.get("reviews", [])
+    except Exception:
+        return []
+
 # ── สร้าง prompt summary สำหรับส่งให้ GPT ─────────────────────────────────────
-def build_prompt(restaurants, signals):
+def build_prompt(restaurants, signals, youtube_reviews=None):
     today = datetime.date.today().strftime("%d %B %Y")
 
     # top 5 ร้านที่มี overlap สูงสุด
@@ -77,6 +89,17 @@ def build_prompt(restaurants, signals):
         for c in cats
     ])
 
+    # YouTube influencer section (ถ้ามี)
+    yt_section = ""
+    if youtube_reviews:
+        yt_lines = []
+        for r in youtube_reviews[:10]:  # ใช้แค่ 10 รีวิวแรก
+            yt_lines.append(
+                f"- [{r['tier']}] {r['influencer']}: {r['restaurant']} "
+                f"({r.get('cuisine','')}) — {r.get('rating','?')} [{r['published']}]"
+            )
+        yt_section = f"\nYouTube Influencer Reviews สัปดาห์นี้:\n" + "\n".join(yt_lines)
+
     return f"""คุณเป็น editor ของ ChefMinistry แพลตฟอร์ม food signal intelligence สำหรับวงการอาหารไทย
 
 วันนี้: {today}
@@ -89,9 +112,10 @@ TOP 5 ร้านที่มี Overlap Signal สูงสุด:
 ร้านที่กำลัง Rising ตอนนี้: {rising_text}
 
 Trend Categories:
-{cats_text}
+{cats_text}{yt_section}
 
 งานของคุณ: เขียน weekly summary สั้นๆ สำหรับแสดงบนหน้าหลักเว็บ ChefMinistry
+(ถ้ามีข้อมูล YouTube ให้นำมา highlight influencer ที่น่าสนใจด้วย)
 
 ต้องการ JSON output แบบนี้เท่านั้น (ห้ามเพิ่มข้อความนอก JSON):
 {{
@@ -142,8 +166,14 @@ def main():
     signals     = extract_signals(js_text)
     print(f"    พบ {len(restaurants)} ร้าน, {len(signals.get('trendCategories',[]))} categories")
 
+    yt_reviews = load_youtube_reviews()
+    if yt_reviews:
+        print(f"    + YouTube reviews: {len(yt_reviews)} รีวิว (จาก {YOUTUBE_FILE.name})")
+    else:
+        print(f"    ℹ️  ไม่พบ youtube_reviews.json — ใช้เฉพาะข้อมูล data.js")
+
     print(f"\n[2] ส่งข้อมูลให้ GPT-4o-mini...")
-    prompt  = build_prompt(restaurants, signals)
+    prompt  = build_prompt(restaurants, signals, yt_reviews)
     result  = generate_summary(prompt)
 
     print(f"\n[3] ผลลัพธ์จาก GPT:")
