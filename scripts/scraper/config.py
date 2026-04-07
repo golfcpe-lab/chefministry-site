@@ -7,7 +7,7 @@ import pathlib, os
 # ── Paths ─────────────────────────────────────────────────────────────────────
 BASE_DIR    = pathlib.Path(__file__).parent
 DB_PATH     = BASE_DIR / "chefministry_data.db"
-EXPORT_DIR  = BASE_DIR.parent / "site" / "js"   # จะ update data.js ที่นี่
+EXPORT_DIR  = pathlib.Path(os.environ.get("EXPORT_DIR", str(BASE_DIR.parent / "site" / "js")))
 EXPORT_JSON = BASE_DIR / "export_restaurants.json"
 
 # ── Scraper settings ──────────────────────────────────────────────────────────
