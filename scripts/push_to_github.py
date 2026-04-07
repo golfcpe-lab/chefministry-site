@@ -33,6 +33,7 @@ ROOT_FILES = [
     ("scraper/scrape_wongnai_v5.py", "scripts/scraper/scrape_wongnai_v5.py"),
     ("scraper/scrape_gmaps.py",      "scripts/scraper/scrape_gmaps.py"),
     ("scraper/scrape_youtube.py",    "scripts/scraper/scrape_youtube.py"),
+    ("scraper/inject_youtube.py",    "scripts/scraper/inject_youtube.py"),
 ]
 
 # ── ไฟล์เก่าที่ต้องลบออกจาก repo ─────────────────────────────────────────────
