@@ -90,10 +90,33 @@ def js_to_python(raw):
     return raw
 
 def extract_restaurants(js_text):
-    match = re.search(r'const CM_RESTAURANTS\s*=\s*(\[.*?\]);', js_text, re.DOTALL)
-    if not match:
+    # หา index ของ [ เปิด แล้วนับ bracket จนปิด — ป้องกัน ]; ใน string value
+    m = re.search(r'const CM_RESTAURANTS\s*=\s*\[', js_text, re.DOTALL)
+    if not m:
         return []
-    return eval(js_to_python(match.group(1)))
+    start = m.end() - 1  # ชี้ที่ [
+    depth, i, in_str, esc = 0, start, False, False
+    while i < len(js_text):
+        ch = js_text[i]
+        if esc:
+            esc = False
+        elif ch == '\\' and in_str:
+            esc = True
+        elif ch == '"' and not esc:
+            in_str = not in_str
+        elif not in_str:
+            if ch == '[':   depth += 1
+            elif ch == ']':
+                depth -= 1
+                if depth == 0:
+                    break
+        i += 1
+    arr_text = js_text[start:i+1]
+    try:
+        return eval(js_to_python(arr_text))
+    except Exception as e:
+        print(f"  ⚠️  extract_restaurants eval error: {e}")
+        return []
 
 def signal_strength(overlap, count):
     if overlap >= 5 or count >= 9:  return "very-strong"
@@ -230,14 +253,14 @@ def dict_to_js(d, indent=4):
         if isinstance(v, bool):      return "true" if v else "false"
         if isinstance(v, int):       return str(v)
         if isinstance(v, float):     return str(v)
-        if isinstance(v, str):       return f'"{v}"'
+        if isinstance(v, str):       return json.dumps(v, ensure_ascii=False)
         if isinstance(v, list):
             items = ", ".join(val(i) for i in v)
             return f'[{items}]'
         if isinstance(v, dict):
             pairs = ", ".join(f'{k}:{val(vv)}' for k, vv in v.items())
             return f'{{{pairs}}}'
-        return f'"{v}"'
+        return json.dumps(str(v), ensure_ascii=False)
     sp = " " * indent
     lines = ["{"]
     for k, v in d.items():
@@ -361,12 +384,24 @@ def main(dry_run=False):
                 entry = generate_new_restaurant_entry(rest_name, cuisine, area, influencers, new_id)
                 if entry:
                     js_entry = f"  {dict_to_js(entry)},"
-                    # แทรกก่อน closing ]  ของ CM_RESTAURANTS
-                    js_text = re.sub(
-                        r'(const CM_RESTAURANTS\s*=\s*\[.*?)(];)',
-                        lambda m: m.group(1) + "\n" + js_entry + "\n" + m.group(2),
-                        js_text, flags=re.DOTALL, count=1
-                    )
+                    # หาจุดปิด ] ของ CM_RESTAURANTS โดยนับ bracket
+                    mo = re.search(r'const CM_RESTAURANTS\s*=\s*\[', js_text, re.DOTALL)
+                    if mo:
+                        start = mo.end() - 1
+                        depth2, i2, in_s, esc2 = 0, start, False, False
+                        while i2 < len(js_text):
+                            c = js_text[i2]
+                            if esc2:   esc2 = False
+                            elif c == '\\' and in_s: esc2 = True
+                            elif c == '"' and not esc2: in_s = not in_s
+                            elif not in_s:
+                                if c == '[':  depth2 += 1
+                                elif c == ']':
+                                    depth2 -= 1
+                                    if depth2 == 0: break
+                            i2 += 1
+                        # แทรก entry ก่อน ]
+                        js_text = js_text[:i2] + "\n" + js_entry + "\n" + js_text[i2:]
                     next_num += 1
                     added_count += 1
             else:
