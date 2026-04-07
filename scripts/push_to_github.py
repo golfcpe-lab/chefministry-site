@@ -39,12 +39,7 @@ ROOT_FILES = [
     ("scraper/inject_youtube.py",    "scripts/scraper/inject_youtube.py"),
 ]
 
-# ── ไฟล์เก่าที่ต้องลบออกจาก repo ─────────────────────────────────────────────
-FILES_TO_DELETE = [
-    "scripts/scraper/scrape_grabfood.py",
-    "scripts/scraper/scrape_lineman.py",
-    "scripts/scraper/scrape_wongnai.py",
-]
+FILES_TO_DELETE = []  # ไม่มีไฟล์ที่ต้องลบแล้ว
 
 # ── หา token ──────────────────────────────────────────────────────────────────
 HERE = pathlib.Path(__file__).parent
@@ -130,9 +125,6 @@ print("── Scripts ───────────────────�
 for local_rel, gh_path in ROOT_FILES:
     push_file(HERE / local_rel, gh_path)
 
-print("── ลบไฟล์เก่า ──────────────────────────────────────")
-for gh_path in FILES_TO_DELETE:
-    delete_file(gh_path)
 
 print(f"{'='*55}")
 print(f"  เสร็จสิ้น — รอ 1-2 นาทีแล้วเปิด chefministry.com")
