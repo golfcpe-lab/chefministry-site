@@ -78,19 +78,58 @@ def load_youtube_reviews():
         return []
 
 # ── สร้าง prompt summary สำหรับส่งให้ GPT ─────────────────────────────────────
-def build_prompt(restaurants, signals, youtube_reviews=None, external_restaurants=None):
+def build_prompt(restaurants, signals, youtube_reviews=None, external_restaurants=None,
+                 current_highlight=None):
     today = datetime.date.today().strftime("%d %B %Y")
 
-    # top 5 ร้านที่มี overlap สูงสุด (จาก influencer data)
-    top5 = sorted(restaurants, key=lambda r: r.get('overlapSignal', 0), reverse=True)[:5]
+    # ── "สัปดาห์นี้" score: YouTube count + velocity + overlapSignal (baseline) ──
+    # นับ YouTube reviews ต่อร้าน (สัปดาห์นี้)
+    yt_count = {}
+    if youtube_reviews:
+        for r in youtube_reviews:
+            name = r.get("restaurant", "")
+            if name:
+                yt_count[name] = yt_count.get(name, 0) + 1
+
+    # velocity map จาก CM_EXTERNAL_RESTAURANTS
+    vel_map = {}
+    if external_restaurants:
+        for r in external_restaurants:
+            vel_map[r.get("name", "")] = r.get("velocityPct", 0)
+
+    def this_week_score(r):
+        name = r.get("name", "")
+        yt   = yt_count.get(name, 0) * 10        # YouTube สัปดาห์นี้ (น้ำหนักสูงสุด)
+        vel  = vel_map.get(name, 0) / 10          # velocity จาก DB
+        base = r.get("overlapSignal", 0)           # baseline (ประวัติ)
+        return yt + vel + base
+
+    # top 5 "สัปดาห์นี้" — ไม่ใช่แค่ all-time overlapSignal
+    top5 = sorted(restaurants, key=this_week_score, reverse=True)[:5]
+
+    # กรอง current_highlight ออกจาก top5 (ห้ามซ้ำสัปดาห์ที่แล้ว)
+    if current_highlight:
+        top5_filtered = [r for r in top5 if r.get("name","").lower() != current_highlight.lower()]
+        # ถ้ากรองแล้วเหลือน้อยเกินไป ให้เอาจาก next best
+        if len(top5_filtered) < 3:
+            extras = sorted(restaurants, key=this_week_score, reverse=True)
+            extras = [r for r in extras if r.get("name","").lower() != current_highlight.lower()]
+            top5_filtered = extras[:5]
+        top5 = top5_filtered
+
     top5_text = "\n".join([
-        f"- {r['name']} ({r.get('cuisine','')}) — overlap: {r.get('overlapSignal',0)}, velocity: {r.get('trendVelocity','')}"
+        f"- {r['name']} ({r.get('cuisine','')}) — "
+        f"overlap: {r.get('overlapSignal',0)}, "
+        f"yt_reviews_this_week: {yt_count.get(r['name'],0)}, "
+        f"velocity: {r.get('trendVelocity','')}"
         for r in top5
     ])
 
-    # rising ร้าน (จาก influencer data)
-    rising = [r['name'] for r in restaurants if r.get('trendVelocity') == 'rising']
-    rising_text = ", ".join(rising[:5]) if rising else "ไม่มี"
+    # ร้านใหม่จาก YouTube สัปดาห์นี้ (ไม่อยู่ใน top5 ด้านบน)
+    top5_names = {r['name'] for r in top5}
+    yt_new = [name for name, cnt in sorted(yt_count.items(), key=lambda x: x[1], reverse=True)
+              if name not in top5_names][:5]
+    yt_new_text = ", ".join(yt_new) if yt_new else "ไม่มีใหม่"
 
     # trend categories
     cats = signals.get('trendCategories', [])
@@ -124,28 +163,35 @@ def build_prompt(restaurants, signals, youtube_reviews=None, external_restaurant
             )
         yt_section = f"\nYouTube Influencer Reviews สัปดาห์นี้:\n" + "\n".join(yt_lines)
 
+    # ห้ามซ้ำ instruction
+    no_repeat = ""
+    if current_highlight:
+        no_repeat = f"\n⚠️  ห้ามเลือก \"{current_highlight}\" — ถูก highlight ไปแล้วสัปดาห์ก่อน เลือกร้านอื่นเท่านั้น"
+
     return f"""คุณเป็น editor ของ ChefMinistry แพลตฟอร์ม food signal intelligence สำหรับวงการอาหารไทย
 
-วันนี้: {today}
+วันนี้: {today}{no_repeat}
 
-ข้อมูล Signal ล่าสุด:
+ข้อมูล Signal ล่าสุด (เรียงตาม activity สัปดาห์นี้ ไม่ใช่แค่ประวัติ):
 
-TOP 5 ร้านที่ Influencer พูดถึงมากสุด:
+TOP 5 ร้านที่น่าสนใจสัปดาห์นี้ (YouTube + velocity + influencer รวมกัน):
 {top5_text}
 
-ร้านที่กำลัง Rising (influencer signal): {rising_text}
+ร้านใหม่จาก YouTube ที่ยังไม่อยู่ใน TOP 5: {yt_new_text}
 
 Trend Categories:
 {cats_text}{velocity_section}{yt_section}
 
-งานของคุณ: เขียน weekly summary สั้นๆ โดยเน้น insight ที่เปลี่ยนแปลงจากสัปดาห์ที่แล้ว
-ให้ highlight ร้านที่ velocity สูงหรือ influencer พูดถึงใหม่ๆ ไม่ใช่แค่ร้านดังเดิม
-(ถ้ามีข้อมูล YouTube หรือ velocity ใหม่ ให้นำมาใช้เป็นหลัก)
+งานของคุณ: เขียน weekly summary สั้นๆ โดยเน้น insight ที่เปลี่ยนแปลงสัปดาห์นี้จริงๆ
+- ให้ priority กับร้านที่มี yt_reviews_this_week > 0 หรือ velocity สูงสุด
+- ถ้าไม่มี YouTube/velocity data ให้เลือกร้านจาก TOP 5 ที่มี overlapSignal สูงรองลงมา (ไม่ใช่อันดับ 1 เสมอ)
+- ห้ามเลือกร้านที่ถูกระบุใน "ห้ามเลือก" ด้านบนโดยเด็ดขาด
 
 ต้องการ JSON output แบบนี้เท่านั้น (ห้ามเพิ่มข้อความนอก JSON):
 {{
   "title": "หัวข้อสั้นๆ ดึงดูด ภาษาไทย ไม่เกิน 60 ตัวอักษร (มี emoji ได้)",
-  "desc": "สรุป 1-2 ประโยค ภาษาไทย อ่านง่าย บอก insight ที่น่าสนใจที่สุดของสัปดาห์นี้"
+  "desc": "สรุป 1-2 ประโยค ภาษาไทย อ่านง่าย บอก insight ที่น่าสนใจที่สุดของสัปดาห์นี้",
+  "restaurant": "ชื่อร้านหลักที่ highlight ในสัปดาห์นี้ (ชื่อจริงจากข้อมูลด้านบนเท่านั้น)"
 }}"""
 
 # ── เรียก GPT ──────────────────────────────────────────────────────────────────
@@ -163,8 +209,16 @@ def generate_summary(prompt):
         raise ValueError(f"GPT ไม่ส่ง JSON กลับมา: {text}")
     return json.loads(match.group())
 
+# ── อ่าน weeklyHighlight ปัจจุบัน ──────────────────────────────────────────────
+def extract_current_highlight(js_text):
+    """ดึงชื่อร้านที่ถูก highlight ล่าสุด (จาก field 'restaurant' ใน weeklyHighlight)"""
+    # อ่าน field 'restaurant' (เพิ่มเวอร์ชันใหม่)
+    m = re.search(r'weeklyHighlight\s*:\s*\{[^}]*restaurant\s*:\s*"([^"]*)"', js_text, re.DOTALL)
+    return m.group(1) if m else None
+
 # ── อัปเดต weeklyHighlight ใน data.js ─────────────────────────────────────────
-def update_weekly_highlight(js_text, new_title, new_desc):
+def update_weekly_highlight(js_text, new_title, new_desc, new_restaurant=None):
+    # replace title + desc
     pattern = r'(weeklyHighlight\s*:\s*\{[^}]*title\s*:\s*")[^"]*("[^}]*desc\s*:\s*")[^"]*(")'
 
     def replacer(m):
@@ -173,6 +227,24 @@ def update_weekly_highlight(js_text, new_title, new_desc):
     new_text, count = re.subn(pattern, replacer, js_text, flags=re.DOTALL)
     if count == 0:
         raise ValueError("ไม่สามารถ replace weeklyHighlight ได้ — ตรวจสอบ pattern")
+
+    # เพิ่ม/อัปเดต field 'restaurant' ใน weeklyHighlight block
+    if new_restaurant:
+        rest_escaped = new_restaurant.replace('"', '\\"')
+        # ถ้ามี field restaurant อยู่แล้ว → replace
+        if re.search(r'weeklyHighlight\s*:\s*\{[^}]*restaurant\s*:', new_text, re.DOTALL):
+            new_text = re.sub(
+                r'(weeklyHighlight\s*:\s*\{[^}]*restaurant\s*:\s*")[^"]*(")',
+                rf'\g<1>{rest_escaped}\2',
+                new_text, flags=re.DOTALL
+            )
+        else:
+            # ยังไม่มี → เพิ่มหลัง desc field
+            new_text = re.sub(
+                r'(weeklyHighlight\s*:\s*\{[^}]*desc\s*:\s*"[^"]*")',
+                rf'\1, restaurant: "{rest_escaped}"',
+                new_text, flags=re.DOTALL
+            )
     return new_text
 
 # ── Main ──────────────────────────────────────────────────────────────────────
@@ -187,10 +259,13 @@ def main():
     print(f"\n[1] อ่าน data.js...")
     js_text = DATA_FILE.read_text(encoding="utf-8")
 
-    restaurants = extract_restaurants(js_text)
-    signals     = extract_signals(js_text)
-    ext_rests   = extract_external_restaurants(js_text)
+    restaurants       = extract_restaurants(js_text)
+    signals           = extract_signals(js_text)
+    ext_rests         = extract_external_restaurants(js_text)
+    current_highlight = extract_current_highlight(js_text)
     print(f"    พบ {len(restaurants)} ร้าน (influencer), {len(ext_rests)} ร้าน (DB velocity), {len(signals.get('trendCategories',[]))} categories")
+    if current_highlight:
+        print(f"    🔒  current highlight (จะไม่ซ้ำ): {current_highlight}")
 
     yt_reviews = load_youtube_reviews()
     if yt_reviews:
@@ -199,7 +274,7 @@ def main():
         print(f"    ℹ️  ไม่พบ youtube_reviews.json — ใช้เฉพาะข้อมูล data.js")
 
     print(f"\n[2] ส่งข้อมูลให้ GPT-4o-mini...")
-    prompt  = build_prompt(restaurants, signals, yt_reviews, ext_rests)
+    prompt  = build_prompt(restaurants, signals, yt_reviews, ext_rests, current_highlight)
     result  = generate_summary(prompt)
 
     print(f"\n[3] ผลลัพธ์จาก GPT:")
@@ -207,7 +282,10 @@ def main():
     print(f"    desc  : {result['desc']}")
 
     print(f"\n[4] อัปเดต data.js...")
-    new_js = update_weekly_highlight(js_text, result['title'], result['desc'])
+    highlighted_rest = result.get('restaurant', '')
+    if highlighted_rest:
+        print(f"    🏆  ร้านที่ highlight: {highlighted_rest}")
+    new_js = update_weekly_highlight(js_text, result['title'], result['desc'], highlighted_rest)
     DATA_FILE.write_text(new_js, encoding="utf-8")
     print(f"    ✅ บันทึกแล้ว")
 
