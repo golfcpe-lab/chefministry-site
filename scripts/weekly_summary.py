@@ -57,6 +57,16 @@ def extract_signals(js_text):
     raw = match.group(1)
     return eval(js_to_python(raw))
 
+def extract_external_restaurants(js_text):
+    """ดึง CM_EXTERNAL_RESTAURANTS array (จาก DB scraper) — ถ้าไม่มีคืน []"""
+    match = re.search(r'const CM_EXTERNAL_RESTAURANTS\s*=\s*(\[.*?\]);', js_text, re.DOTALL)
+    if not match:
+        return []
+    try:
+        return json.loads(match.group(1))
+    except Exception:
+        return []
+
 # ── อ่าน YouTube reviews (ถ้ามี) ──────────────────────────────────────────────
 def load_youtube_reviews():
     if not YOUTUBE_FILE.exists():
@@ -68,17 +78,17 @@ def load_youtube_reviews():
         return []
 
 # ── สร้าง prompt summary สำหรับส่งให้ GPT ─────────────────────────────────────
-def build_prompt(restaurants, signals, youtube_reviews=None):
+def build_prompt(restaurants, signals, youtube_reviews=None, external_restaurants=None):
     today = datetime.date.today().strftime("%d %B %Y")
 
-    # top 5 ร้านที่มี overlap สูงสุด
+    # top 5 ร้านที่มี overlap สูงสุด (จาก influencer data)
     top5 = sorted(restaurants, key=lambda r: r.get('overlapSignal', 0), reverse=True)[:5]
     top5_text = "\n".join([
-        f"- {r['name']} ({r.get('cuisine','')}, {r.get('area','')}) — overlap: {r.get('overlapSignal',0)}, velocity: {r.get('trendVelocity','')}"
+        f"- {r['name']} ({r.get('cuisine','')}) — overlap: {r.get('overlapSignal',0)}, velocity: {r.get('trendVelocity','')}"
         for r in top5
     ])
 
-    # rising ร้าน
+    # rising ร้าน (จาก influencer data)
     rising = [r['name'] for r in restaurants if r.get('trendVelocity') == 'rising']
     rising_text = ", ".join(rising[:5]) if rising else "ไม่มี"
 
@@ -89,11 +99,25 @@ def build_prompt(restaurants, signals, youtube_reviews=None):
         for c in cats
     ])
 
+    # top velocity จาก DB scraper (ข้อมูลสดจาก Wongnai/GMaps)
+    velocity_section = ""
+    if external_restaurants:
+        top_vel = sorted(
+            [r for r in external_restaurants if r.get('velocityPct', 0) > 0 and r.get('isRestaurant', True)],
+            key=lambda r: r.get('velocityPct', 0), reverse=True
+        )[:5]
+        if top_vel:
+            vel_lines = "\n".join([
+                f"- {r.get('name','')} ({r.get('cuisine','')}, {r.get('area','')}) — velocity: +{r.get('velocityPct',0):.0f}%, new reviews: {r.get('newReviews30d',0)}"
+                for r in top_vel
+            ])
+            velocity_section = f"\nTop Velocity จาก DB (ร้านที่รีวิวเพิ่มเร็วที่สุดสัปดาห์นี้):\n{vel_lines}"
+
     # YouTube influencer section (ถ้ามี)
     yt_section = ""
     if youtube_reviews:
         yt_lines = []
-        for r in youtube_reviews[:10]:  # ใช้แค่ 10 รีวิวแรก
+        for r in youtube_reviews[:10]:
             yt_lines.append(
                 f"- [{r['tier']}] {r['influencer']}: {r['restaurant']} "
                 f"({r.get('cuisine','')}) — {r.get('rating','?')} [{r['published']}]"
@@ -106,16 +130,17 @@ def build_prompt(restaurants, signals, youtube_reviews=None):
 
 ข้อมูล Signal ล่าสุด:
 
-TOP 5 ร้านที่มี Overlap Signal สูงสุด:
+TOP 5 ร้านที่ Influencer พูดถึงมากสุด:
 {top5_text}
 
-ร้านที่กำลัง Rising ตอนนี้: {rising_text}
+ร้านที่กำลัง Rising (influencer signal): {rising_text}
 
 Trend Categories:
-{cats_text}{yt_section}
+{cats_text}{velocity_section}{yt_section}
 
-งานของคุณ: เขียน weekly summary สั้นๆ สำหรับแสดงบนหน้าหลักเว็บ ChefMinistry
-(ถ้ามีข้อมูล YouTube ให้นำมา highlight influencer ที่น่าสนใจด้วย)
+งานของคุณ: เขียน weekly summary สั้นๆ โดยเน้น insight ที่เปลี่ยนแปลงจากสัปดาห์ที่แล้ว
+ให้ highlight ร้านที่ velocity สูงหรือ influencer พูดถึงใหม่ๆ ไม่ใช่แค่ร้านดังเดิม
+(ถ้ามีข้อมูล YouTube หรือ velocity ใหม่ ให้นำมาใช้เป็นหลัก)
 
 ต้องการ JSON output แบบนี้เท่านั้น (ห้ามเพิ่มข้อความนอก JSON):
 {{
@@ -164,7 +189,8 @@ def main():
 
     restaurants = extract_restaurants(js_text)
     signals     = extract_signals(js_text)
-    print(f"    พบ {len(restaurants)} ร้าน, {len(signals.get('trendCategories',[]))} categories")
+    ext_rests   = extract_external_restaurants(js_text)
+    print(f"    พบ {len(restaurants)} ร้าน (influencer), {len(ext_rests)} ร้าน (DB velocity), {len(signals.get('trendCategories',[]))} categories")
 
     yt_reviews = load_youtube_reviews()
     if yt_reviews:
@@ -173,7 +199,7 @@ def main():
         print(f"    ℹ️  ไม่พบ youtube_reviews.json — ใช้เฉพาะข้อมูล data.js")
 
     print(f"\n[2] ส่งข้อมูลให้ GPT-4o-mini...")
-    prompt  = build_prompt(restaurants, signals, yt_reviews)
+    prompt  = build_prompt(restaurants, signals, yt_reviews, ext_rests)
     result  = generate_summary(prompt)
 
     print(f"\n[3] ผลลัพธ์จาก GPT:")
