@@ -1,0 +1,75 @@
+name: ChefMinistry Weekly Update
+
+# รันทุกวันจันทร์ 08:00 น. เวลาไทย (01:00 UTC = +7)
+on:
+  schedule:
+    - cron: '0 1 * * 1'   # 08:00 ICT = 01:00 UTC
+  workflow_dispatch:        # รัน manual ได้ด้วย (ปุ่ม Run workflow ใน Actions tab)
+
+jobs:
+  weekly-update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      # ── 1. Checkout code ──────────────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+          fetch-depth: 1
+
+      # ── 2. Setup Python ───────────────────────────────────────────────────
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # ── 3. Install dependencies ───────────────────────────────────────────
+      - name: Install Python packages
+        run: |
+          pip install openai --quiet
+
+      # ── 4. Export DB → inject CM_EXTERNAL_RESTAURANTS เข้า data.js ──────
+      - name: Export DB signals into data.js
+        env:
+          EXPORT_DIR: ${{ github.workspace }}/js
+        run: |
+          cd scripts/scraper
+          python export_signals.py --inject
+        continue-on-error: true   # ถ้า DB ไม่มีหรือ error ก็ข้ามไป ไม่หยุด workflow
+
+      # ── 5. Inject YouTube reviews → อัปเดต restaurant signals ────────────
+      - name: Inject YouTube signals into data.js
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          DATA_FILE:      ${{ github.workspace }}/js/data.js
+          YOUTUBE_FILE:   ${{ github.workspace }}/scripts/youtube_reviews.json
+          SCRIPTS_DIR:    ${{ github.workspace }}/scripts
+        run: |
+          cd scripts/scraper
+          python inject_youtube.py
+        continue-on-error: true   # ถ้าไม่มี youtube_reviews.json ก็ข้ามไป
+
+      # ── 5. Generate weekly summary (อัปเดต weeklyHighlight) ─────────────
+      - name: Run weekly_summary.py
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          DATA_FILE:      ${{ github.workspace }}/js/data.js
+          YOUTUBE_FILE:   ${{ github.workspace }}/scripts/youtube_reviews.json
+        run: |
+          cd scripts
+          python weekly_summary.py
+        continue-on-error: false
+
+      # ── 5. Commit & Push ไฟล์ที่เปลี่ยนแปลง ──────────────────────────────
+      - name: Commit updated data.js
+        run: |
+          git config user.name  "ChefMinistry Bot"
+          git config user.email "bot@chefministry.com"
+          git add js/data.js
+          # commit เฉพาะถ้ามีการเปลี่ยนแปลง
+          git diff --staged --quiet || git commit -m "auto: weekly signal update $(date +'%Y-%m-%d')"
+
+      - name: Push to GitHub
+        run: git push origin main
