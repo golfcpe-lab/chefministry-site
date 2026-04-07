@@ -542,8 +542,8 @@ const CM_RESTAURANTS = [
 // ── Signal Intelligence for homepage ─────────────────────────────────────────
 const CM_SIGNALS = {
   weeklyHighlight: {
-    title: "🔥 ร้านอาหารไทยสุดฮิตที่ต้องลอง! 🍽️",
-    desc: "Nusara และ Le Du ยังคงนำเทรนด์ Fine Dining ในสีลม ส่วน YouTube Influencer อย่าง Peach Eat Laek ก็นำเสนอร้านเด็ดที่ควรไปชิม!",
+    title: "🌟 ร้านอาหารที่มาแรงในสัปดาห์นี้!",
+    desc: "Nusara และ Le Du ยังคงเป็นดาวเด่นในวงการอาหารไทย ขณะที่ Thai Fine Dining กำลังเติบโตอย่างรวดเร็ว!",
     trend: "rising"
   },
   trendCategories: [
