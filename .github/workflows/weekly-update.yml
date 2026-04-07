@@ -30,11 +30,24 @@ jobs:
         run: |
           pip install openai --quiet
 
-      # ── 4. Generate weekly summary (อัปเดต data.js) ──────────────────────
+      # ── 4. Inject YouTube reviews → อัปเดต restaurant signals ────────────
+      - name: Inject YouTube signals into data.js
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          DATA_FILE:      ${{ github.workspace }}/js/data.js
+          YOUTUBE_FILE:   ${{ github.workspace }}/scripts/youtube_reviews.json
+          SCRIPTS_DIR:    ${{ github.workspace }}/scripts
+        run: |
+          cd scripts/scraper
+          python inject_youtube.py
+        continue-on-error: true   # ถ้าไม่มี youtube_reviews.json ก็ข้ามไป
+
+      # ── 5. Generate weekly summary (อัปเดต weeklyHighlight) ─────────────
       - name: Run weekly_summary.py
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          DATA_FILE: ${{ github.workspace }}/js/data.js
+          DATA_FILE:      ${{ github.workspace }}/js/data.js
+          YOUTUBE_FILE:   ${{ github.workspace }}/scripts/youtube_reviews.json
         run: |
           cd scripts
           python weekly_summary.py
