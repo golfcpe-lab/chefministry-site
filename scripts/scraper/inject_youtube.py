@@ -179,6 +179,64 @@ def update_restaurant_in_js(js_text, restaurant_name, delta_overlap, delta_count
     js_text = js_text.replace(orig_block, block, 1)
     return js_text, True
 
+# ── CM_EXTERNAL_RESTAURANTS helpers ───────────────────────────────────────────
+def _find_bracket_end(text, start):
+    """นับ bracket จาก start จนถึงปิด — คืน index ของ bracket ปิดสุดท้าย"""
+    depth, i, in_str, esc = 0, start, False, False
+    while i < len(text):
+        c = text[i]
+        if esc:     esc = False
+        elif c == '\\' and in_str: esc = True
+        elif c == '"': in_str = not in_str
+        elif not in_str:
+            if c in '[{':   depth += 1
+            elif c in ']}':
+                depth -= 1
+                if depth == 0: return i
+        i += 1
+    return -1
+
+def extract_external_restaurants(js_text):
+    """ดึง CM_EXTERNAL_RESTAURANTS array (JSON) พร้อม start/end index"""
+    m = re.search(r'const CM_EXTERNAL_RESTAURANTS\s*=\s*\[', js_text)
+    if not m:
+        return [], -1, -1
+    start = m.end() - 1  # ชี้ที่ [
+    end   = _find_bracket_end(js_text, start)
+    if end == -1:
+        return [], -1, -1
+    try:
+        return json.loads(js_text[start:end+1]), start, end
+    except Exception as e:
+        print(f"  ⚠️  parse CM_EXTERNAL error: {e}")
+        return [], start, end
+
+def inject_influencer_to_external(ext_entry, influencers, new_velocity):
+    """เพิ่ม influencer signal fields เข้า CM_EXTERNAL_RESTAURANTS entry"""
+    mega  = sum(1 for i in influencers if i.get("tier") == "Mega")
+    macro = sum(1 for i in influencers if i.get("tier") == "Macro")
+    mid   = sum(1 for i in influencers if i.get("tier") == "Mid")
+    overlap = len(set(i["name"] for i in influencers))
+    old_tiers = ext_entry.get("reviewerTiers", {"mega": 0, "macro": 0, "mid": 0})
+    ext_entry["overlapSignal"]   = ext_entry.get("overlapSignal", 0) + overlap
+    ext_entry["signalCount"]     = ext_entry.get("signalCount",   0) + overlap
+    ext_entry["signalStrength"]  = signal_strength(ext_entry["overlapSignal"], ext_entry["signalCount"])
+    ext_entry["trendVelocity"]   = new_velocity
+    ext_entry["trendBadge"]      = trend_badge(new_velocity)
+    ext_entry["reviewerTiers"]   = {
+        "mega":  old_tiers.get("mega",  0) + mega,
+        "macro": old_tiers.get("macro", 0) + macro,
+        "mid":   old_tiers.get("mid",   0) + mid,
+    }
+    ext_entry["influencerNames"] = list(set(
+        ext_entry.get("influencerNames", []) + [i["name"] for i in influencers]
+    ))
+
+def write_external_restaurants(js_text, ext_list, arr_start, arr_end):
+    """เขียน CM_EXTERNAL_RESTAURANTS กลับเข้า data.js (แทนที่ JSON เดิม)"""
+    new_json = json.dumps(ext_list, ensure_ascii=False, separators=(',', ':'))
+    return js_text[:arr_start] + new_json + js_text[arr_end+1:]
+
 # ── Generate new restaurant entry via OpenAI ──────────────────────────────────
 NEW_REST_PROMPT = """คุณเป็น data generator สำหรับ ChefMinistry
 
@@ -332,6 +390,11 @@ def main(dry_run=False):
     existing_ids = [r.get("id","") for r in existing]
     next_num = max((int(re.sub(r'\D','', i)) for i in existing_ids if re.sub(r'\D','',i).isdigit()), default=0) + 1
 
+    # โหลด CM_EXTERNAL_RESTAURANTS พร้อม position
+    ext_list, ext_start, ext_end = extract_external_restaurants(js_text)
+    ext_updated = False
+    print(f"📦  CM_RESTAURANTS: {len(existing)} ร้าน | CM_EXTERNAL_RESTAURANTS: {len(ext_list)} ร้าน\n")
+
     # ── รวม reviews ต่อร้าน ──────────────────────────────────────────────────
     rest_map = defaultdict(lambda: {"influencers": [], "cuisines": [], "areas": []})
     cuisine_counts = defaultdict(set)
@@ -350,8 +413,9 @@ def main(dry_run=False):
         if rv.get("area"):
             entry["areas"].append(rv["area"])
 
-    updated_count = 0
-    added_count   = 0
+    updated_count  = 0
+    ext_upd_count  = 0
+    added_count    = 0
 
     for rest_name, data in rest_map.items():
         influencers = data["influencers"]
@@ -360,11 +424,11 @@ def main(dry_run=False):
         mega_count    = sum(1 for i in influencers if i["tier"] == "Mega")
         new_velocity  = "rising" if delta_overlap >= 2 or mega_count >= 1 else "stable"
 
+        # ── Step 1: ค้นหาใน CM_RESTAURANTS ──────────────────────────────
         match = fuzzy_match(rest_name, existing)
 
         if match:
-            # ── อัปเดตร้านที่มีอยู่ ─────────────────────────────────────
-            print(f"  ✏️  อัปเดต: {match['name']}  (+{delta_overlap} influencers → {new_velocity})")
+            print(f"  ✏️  [CM_REST] อัปเดต: {match['name']}  (+{delta_overlap} influencers → {new_velocity})")
             if not dry_run:
                 js_text, ok = update_restaurant_in_js(
                     js_text, match["name"], delta_overlap, delta_count, new_velocity
@@ -373,55 +437,76 @@ def main(dry_run=False):
                     updated_count += 1
                 else:
                     print(f"      ⚠️  regex ไม่ match — ข้ามไป")
-        else:
-            # ── เพิ่มร้านใหม่ ────────────────────────────────────────────
-            cuisine = data["cuisines"][0] if data["cuisines"] else "Thai"
-            area    = data["areas"][0]    if data["areas"]    else "Bangkok"
-            new_id  = f"r{next_num:03d}"
-            print(f"  ➕  ร้านใหม่: {rest_name} ({cuisine}, {area}) — id: {new_id}")
+            continue
 
+        # ── Step 2: ค้นหาใน CM_EXTERNAL_RESTAURANTS ─────────────────────
+        ext_match = fuzzy_match(rest_name, ext_list) if ext_list else None
+
+        if ext_match:
+            print(f"  🔗  [CM_EXT]  อัปเดต: {ext_match['name']}  (+{delta_overlap} influencers → {new_velocity})")
             if not dry_run:
-                entry = generate_new_restaurant_entry(rest_name, cuisine, area, influencers, new_id)
-                if entry:
-                    js_entry = f"  {dict_to_js(entry)},"
-                    # หาจุดปิด ] ของ CM_RESTAURANTS โดยนับ bracket
-                    mo = re.search(r'const CM_RESTAURANTS\s*=\s*\[', js_text, re.DOTALL)
-                    if mo:
-                        start = mo.end() - 1
-                        depth2, i2, in_s, esc2 = 0, start, False, False
-                        while i2 < len(js_text):
-                            c = js_text[i2]
-                            if esc2:   esc2 = False
-                            elif c == '\\' and in_s: esc2 = True
-                            elif c == '"' and not esc2: in_s = not in_s
-                            elif not in_s:
-                                if c == '[':  depth2 += 1
-                                elif c == ']':
-                                    depth2 -= 1
-                                    if depth2 == 0: break
-                            i2 += 1
-                        # แทรก entry ก่อน ] — ต้องมี comma หลัง entry สุดท้าย
-                        before = js_text[:i2].rstrip()
-                        if before and before[-1] not in (',', '['):
-                            before += ','
-                        js_text = before + "\n" + js_entry + "\n" + js_text[i2:]
-                    next_num += 1
-                    added_count += 1
-            else:
-                print(f"      [dry-run] จะ generate entry ด้วย OpenAI")
+                inject_influencer_to_external(ext_match, influencers, new_velocity)
+                ext_updated = True
+                ext_upd_count += 1
+            continue
+
+        # ── Step 3: ร้านใหม่ — เพิ่มเข้า CM_RESTAURANTS ─────────────────
+        cuisine = data["cuisines"][0] if data["cuisines"] else "Thai"
+        area    = data["areas"][0]    if data["areas"]    else "Bangkok"
+        new_id  = f"r{next_num:03d}"
+        print(f"  ➕  [NEW]     ร้านใหม่: {rest_name} ({cuisine}, {area}) — id: {new_id}")
+
+        if not dry_run:
+            entry = generate_new_restaurant_entry(rest_name, cuisine, area, influencers, new_id)
+            if entry:
+                js_entry = f"  {dict_to_js(entry)},"
+                # หาจุดปิด ] ของ CM_RESTAURANTS โดยนับ bracket
+                mo = re.search(r'const CM_RESTAURANTS\s*=\s*\[', js_text, re.DOTALL)
+                if mo:
+                    start = mo.end() - 1
+                    depth2, i2, in_s, esc2 = 0, start, False, False
+                    while i2 < len(js_text):
+                        c = js_text[i2]
+                        if esc2:   esc2 = False
+                        elif c == '\\' and in_s: esc2 = True
+                        elif c == '"' and not esc2: in_s = not in_s
+                        elif not in_s:
+                            if c == '[':  depth2 += 1
+                            elif c == ']':
+                                depth2 -= 1
+                                if depth2 == 0: break
+                        i2 += 1
+                    # แทรก entry ก่อน ] — ต้องมี comma หลัง entry สุดท้าย
+                    before = js_text[:i2].rstrip()
+                    if before and before[-1] not in (',', '['):
+                        before += ','
+                    js_text = before + "\n" + js_entry + "\n" + js_text[i2:]
+                next_num += 1
+                added_count += 1
+                # CM_EXTERNAL_RESTAURANTS เลื่อน offset หลัง insert — re-extract
+                if ext_list and ext_start != -1:
+                    _, ext_start, ext_end = extract_external_restaurants(js_text)
+        else:
+            print(f"      [dry-run] จะ generate entry ด้วย OpenAI")
+
+    # ── เขียน CM_EXTERNAL_RESTAURANTS กลับ ──────────────────────────────────
+    if not dry_run and ext_updated and ext_start != -1:
+        js_text = write_external_restaurants(js_text, ext_list, ext_start, ext_end)
+        print(f"\n  📦  เขียน CM_EXTERNAL_RESTAURANTS กลับ ({ext_upd_count} ร้านอัปเดต influencer)")
 
     # ── อัปเดต trendCategories ───────────────────────────────────────────────
     if not dry_run and cuisine_counts:
         js_text = update_trend_categories(js_text, cuisine_counts)
-        print(f"\n  📊  อัปเดต trendCategories จาก {len(cuisine_counts)} cuisine types")
+        print(f"  📊  อัปเดต trendCategories จาก {len(cuisine_counts)} cuisine types")
 
     # ── บันทึก ───────────────────────────────────────────────────────────────
     if not dry_run:
         DATA_FILE.write_text(js_text, encoding="utf-8")
 
     print(f"\n{'─'*55}")
-    print(f"  อัปเดตแล้ว : {updated_count} ร้าน")
-    print(f"  เพิ่มใหม่  : {added_count}  ร้าน")
+    print(f"  [CM_REST]  อัปเดตแล้ว : {updated_count} ร้าน")
+    print(f"  [CM_EXT]   อัปเดตแล้ว : {ext_upd_count} ร้าน")
+    print(f"  [NEW]      เพิ่มใหม่  : {added_count}  ร้าน")
     if dry_run:
         print(f"  [dry-run] — ไม่มีการเปลี่ยนแปลงจริง")
     print(f"{'─'*55}\n")
