@@ -15,8 +15,10 @@ SITE_FILES = [
     ("creator.html",            "creator.html"),
     ("restaurant.html",         "restaurant.html"),
     ("restaurant_partner.html", "restaurant_partner.html"),
-    ("css/style.css",           "css/style.css"),
-    ("js/data.js",              "js/data.js"),
+    ("css/style.css",              "css/style.css"),
+    ("js/data.js",                 "js/data.js"),
+    ("js/auth.js",                 "js/auth.js"),
+    ("js/firebase-config.js",      "js/firebase-config.js"),
 ]
 
 # ── scripts ที่อยู่ใน root (ไม่ใช่ใน site/) ────────────────────────────────────
