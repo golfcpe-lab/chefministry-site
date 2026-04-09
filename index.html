@@ -36,6 +36,7 @@
       <a class="nav-link" href="./about.html">Methodology</a>
       <a class="btn-pro" href="./restaurant_partner.html">🏪 For Restaurants</a>
       <a class="nav-link" href="./creator.html">🎥 For Creators</a>
+      <div class="cm-auth-nav" style="display:flex;align-items:center"></div>
     </nav>
     <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
   </div>
@@ -46,6 +47,7 @@
       <a class="mobile-nav-link" href="./about.html">Methodology</a>
       <a class="mobile-nav-link" href="./creator.html">🎥 For Creators</a>
       <a class="mobile-nav-link" href="./restaurant_partner.html">🏪 For Restaurants</a>
+      <div class="cm-auth-nav" style="padding:8px 16px"></div>
     </div>
   </nav>
 </header>
@@ -168,7 +170,9 @@
       </div>
       <div>
         <div style="font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);margin-bottom:14px" id="rankListLabel">📡 Influencer Signal Rank</div>
-        <div class="rank-list card" style="border-radius:var(--radius-lg);overflow:hidden" id="overlapRankList"></div>
+        <div data-require="free" style="position:relative;border-radius:var(--radius-lg);overflow:hidden">
+          <div class="rank-list card" style="border-radius:var(--radius-lg);overflow:hidden" id="overlapRankList"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -486,7 +490,13 @@
   </div>
 </footer>
 
-<script src="./js/data.js?v=20260402b"></script>
+<!-- Firebase SDK (compat) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<script src="./js/firebase-config.js"></script>
+<script src="./js/auth.js"></script>
+<script src="./js/data.js?v=20260409"></script>
 <script>
   // Mobile nav
   document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
