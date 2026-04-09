@@ -527,9 +527,9 @@ const CM_RESTAURANTS = [
 // ── Signal Intelligence for homepage ─────────────────────────────────────────
 const CM_SIGNALS = {
   weeklyHighlight: {
-    title: "🌟 ร้านอาหารที่มาแรงในสัปดาห์นี้!",
-    desc: "Nusara และ Le Du ยังคงเป็นดาวเด่นในวงการอาหารไทย ขณะที่ Thai Fine Dining กำลังเติบโตอย่างรวดเร็ว!",
-    restaurant: "Nusara",
+    title: "🌿 Farm-to-Table คว้าสปอตไลต์ — Baan Tepa แรงเงียบสัปดาห์นี้",
+    desc: "Baan Tepa ได้รับความสนใจจาก Influencer เพิ่มขึ้นต่อเนื่อง ขณะที่กลุ่ม Farm-to-Table Thai Fine Dining กำลังโตแรงเป็นอันดับที่ 2 รองจาก Modern Thai ในสัปดาห์นี้",
+    restaurant: "Baan Tepa",
     trend: "rising"
   },
   trendCategories: [
