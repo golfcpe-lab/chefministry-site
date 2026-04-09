@@ -37,6 +37,7 @@
       <a class="nav-link" href="./about.html">Methodology</a>
       <a class="btn-pro" href="./restaurant_partner.html">🏪 For Restaurants</a>
       <a class="nav-link" href="./creator.html">🎥 For Creators</a>
+      <div class="cm-auth-nav" style="display:flex;align-items:center"></div>
     </nav>
     <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
   </div>
@@ -142,8 +143,8 @@
         </div>
       </div>
 
-      <!-- Right: Signal Panel (sticky) -->
-      <div class="detail-scores-panel" id="signalPanel">
+      <!-- Right: Signal Panel (sticky) — gated for free members -->
+      <div class="detail-scores-panel" id="signalPanel" data-require="free" style="position:relative">
         <div class="panel-head">
           <div class="panel-title">Signal Analysis</div>
           <div id="velocityPill" style="font-size:12px;font-weight:900;padding:4px 10px;border-radius:99px;background:rgba(255,255,255,.1);color:#fff"></div>
@@ -239,6 +240,12 @@
   </div>
 </footer>
 
+<!-- Firebase SDK (compat) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<script src="./js/firebase-config.js"></script>
+<script src="./js/auth.js"></script>
 <script src="./js/data.js"></script>
 <script>
   document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
