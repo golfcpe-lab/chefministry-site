@@ -36,6 +36,7 @@
       <a class="nav-link" href="./about.html">Methodology</a>
       <a class="btn-pro" href="./restaurant_partner.html">🏪 For Restaurants</a>
       <a class="nav-link" href="./creator.html">🎥 For Creators</a>
+      <div class="cm-auth-nav" style="display:flex;align-items:center"></div>
     </nav>
     <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
   </div>
@@ -139,11 +140,13 @@
       <div id="wallCount" style="font-size:13px;font-weight:700;color:rgba(255,255,255,.55);margin-bottom:10px">อีก <span id="hiddenCount">?</span> ร้านที่ซ่อนอยู่</div>
       <h3 style="color:#fff;font-size:22px;font-weight:900;margin-bottom:8px;font-family:'Playfair Display',serif">เข้าถึง Signal ทั้งหมด</h3>
       <p style="color:rgba(255,255,255,.65);font-size:14px;line-height:1.7;margin-bottom:24px">สมัครฟรีเพื่อดู Signal ร้านอาหาร รายชื่อ Creator<br/>และข้อมูล Trend ทั้งหมด · ไม่มีค่าใช้จ่าย</p>
-      <button disabled
-        style="width:100%;padding:14px;background:rgba(255,255,255,.12);color:rgba(255,255,255,.4);font-weight:900;font-size:15px;border:1.5px solid rgba(255,255,255,.2);border-radius:var(--radius);cursor:not-allowed;letter-spacing:.04em">
-        🔒 Coming Soon
+      <button id="wallSignInBtn"
+        onclick="if(typeof CM_AUTH!=='undefined') CM_AUTH.signIn()"
+        style="width:100%;padding:14px;background:#fff;color:#0d1f3c;font-weight:900;font-size:15px;border:none;border-radius:var(--radius);cursor:pointer;letter-spacing:.04em;display:flex;align-items:center;justify-content:center;gap:10px">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" style="width:20px;height:20px">
+        Sign in with Google — ฟรี
       </button>
-      <p style="font-size:11px;color:rgba(255,255,255,.35);margin-top:12px;line-height:1.6">ระบบสมาชิกกำลังพัฒนา — เปิดเร็วๆ นี้</p>
+      <p style="font-size:11px;color:rgba(255,255,255,.35);margin-top:12px;line-height:1.6">ใช้ Gmail account · ไม่มีค่าใช้จ่าย · ยกเลิกได้ทุกเมื่อ</p>
     </div>
   </div>
 </div>
@@ -232,6 +235,12 @@
   </div>
 </footer>
 
+<!-- Firebase SDK (compat) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<script src="./js/firebase-config.js"></script>
+<script src="./js/auth.js"></script>
 <script src="./js/data.js"></script>
 <script>
   document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
@@ -239,9 +248,13 @@
     n.style.display=n.style.display==="block"?"none":"block";
   });
 
-  const UNLOCK_KEY = "cm_discover_v1";
+  // isUnlocked — ใช้ CM_AUTH tier แทน localStorage
   function isUnlocked(){
-    try{ return localStorage.getItem(UNLOCK_KEY)==="yes"; }catch(e){ return false; }
+    if(typeof CM_AUTH !== "undefined" && CM_AUTH.isReady()){
+      const t = CM_AUTH.getTier();
+      return t === "free" || t === "paid";
+    }
+    return false;
   }
 
   const state={signal:"all",velocity:"all",budget:"all",type:"all",search:"",sort:"overlap"};
@@ -480,11 +493,20 @@
 
   // แสดง creator list อัตโนมัติถ้า unlock แล้ว
   render();
-  try {
-    if (localStorage.getItem(UNLOCK_KEY) === "yes") {
-      renderCreatorList("all");
-    }
-  } catch(e) {}
+
+  // Auth state listener — re-render เมื่อ login/logout
+  if (typeof CM_AUTH !== "undefined") {
+    CM_AUTH.onTierChange((tier) => {
+      render();
+      if (tier === "free" || tier === "paid") {
+        document.getElementById("discoverWall").style.display = "none";
+        renderCreatorList("all");
+      } else {
+        const section = document.getElementById("creatorListSection");
+        if (section) section.style.display = "none";
+      }
+    });
+  }
 </script>
 </body>
 </html>
