@@ -155,7 +155,10 @@
   <div class="container">
     <div class="section-cols-2">
       <div>
-        <div class="eyebrow" style="color:var(--amber);margin-bottom:8px">🌟 Spotlight of the Week</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap">
+          <div class="eyebrow" style="color:var(--amber)">🌟 Spotlight of the Week</div>
+          <div id="weeklyUpdatedBadge" style="font-size:10px;font-weight:800;background:var(--cream);border:1px solid var(--border);border-radius:99px;padding:3px 10px;color:var(--text-2);letter-spacing:.06em;display:none">Updated <span id="weeklyUpdatedDate"></span></div>
+        </div>
         <h2 class="display-2" style="margin-bottom:16px" id="weeklyTitle">Loading…</h2>
         <p class="lead" id="weeklyDesc">Loading…</p>
         <div style="margin-top:24px">
@@ -503,6 +506,17 @@
   document.getElementById("weeklyTitle").textContent = wh.title;
   document.getElementById("weeklyDesc").textContent = wh.desc;
 
+  // Updated date badge (ใช้ CM_DB_STATS.lastUpdated ถ้ามี)
+  const updBadge = document.getElementById("weeklyUpdatedBadge");
+  const updDate  = document.getElementById("weeklyUpdatedDate");
+  if (updBadge && updDate) {
+    const lastUpdated = (typeof CM_DB_STATS !== "undefined" && CM_DB_STATS.lastUpdated)
+      ? CM_DB_STATS.lastUpdated
+      : new Date().toISOString().slice(0,10);
+    updDate.textContent = lastUpdated;
+    updBadge.style.display = "flex";
+  }
+
   // ── Hero card — Highest Velocity (ม้ามืด) จาก scraper, fallback static ──────
   const heroCard = document.getElementById("heroOverlapCard");
   if (heroCard) {
@@ -511,7 +525,19 @@
       ? [...CM_EXTERNAL_RESTAURANTS].filter(r => (r.velocityPct||0) > 0 && r.isRestaurant !== false).sort((a,b) => (b.velocityPct||0) - (a.velocityPct||0))
       : [];
     const heroExt = extSorted[0];
-    const heroStatic = [...CM_RESTAURANTS].sort((a,b) => (b.overlapSignal||0) - (a.overlapSignal||0))[0];
+
+    // Fallback priority: weeklyHighlight.restaurant → weekly rotation from top5 (not always #1)
+    const weeklyRestName = (CM_SIGNALS.weeklyHighlight || {}).restaurant;
+    const top5Static = [...CM_RESTAURANTS]
+      .sort((a,b) => (b.overlapSignal||0) - (a.overlapSignal||0))
+      .slice(0, 5);
+    const weeklyRest = weeklyRestName
+      ? (CM_RESTAURANTS.find(r => r.name === weeklyRestName) || top5Static[0])
+      : null;
+    // rotate ทุกสัปดาห์ถ้าไม่มี weeklyHighlight.restaurant
+    const weekNum = Math.floor((Date.now() - new Date("2025-01-01").getTime()) / (7*24*60*60*1000));
+    const heroStatic = weeklyRest || top5Static[weekNum % top5Static.length];
+
     const useExt = !!heroExt;
     const heroRest = useExt ? heroExt : heroStatic;
 
