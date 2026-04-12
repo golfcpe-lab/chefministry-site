@@ -630,17 +630,18 @@ function buildRestaurantCard(r, opts = {}) {
               <div class="card-name">${escHtml(r.name)}</div>
               <div class="card-cuisine">${escHtml(r.cuisine)} · ${escHtml(r.area)}</div>
             </div>
-            <div class="signal-badge signal-${escHtml(r.signalStrength)}">${r.overlapSignal}<span style="font-size:10px;font-weight:700;margin-left:2px">INF</span></div>
+            <div class="signal-badge signal-${escHtml(r.signalStrength)}">${r.totalReviews||0}<span style="font-size:10px;font-weight:700;margin-left:2px">รีวิว</span></div>
           </div>
           <div class="card-insight">${escHtml(r.cmNote)}</div>
           <div class="overlap-bar" style="margin-top:4px">
-            <div style="font-size:10px;font-weight:800;color:var(--text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Influencer Overlap</div>
+            <div style="font-size:10px;font-weight:800;color:var(--text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Creator Signal <span style="font-weight:400;opacity:.6">(ข้อมูลเสริม)</span></div>
             ${signalDots(r.overlapSignal)}
           </div>
           <div class="card-footer">
             <div class="tag-list">
               <span class="tag budget-${r.budget}">${escHtml(r.budgetLabel)}</span>
-              <span class="signal-tag signal-${escHtml(r.signalStrength)}">${signalLabel(r.signalStrength)}</span>
+              <span class="velocity ${escHtml(r.trendVelocity)}">${escHtml(r.trendBadge)}</span>
+              <span class="signal-tag signal-${escHtml(r.signalStrength)}" style="font-size:9px;opacity:.75">${signalLabel(r.signalStrength)}</span>
             </div>
             <div class="card-area">📍 ${escHtml(r.area)}</div>
           </div>
