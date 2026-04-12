@@ -1,419 +1,751 @@
-<!DOCTYPE html>
+<\!DOCTYPE html>
 <html lang="th">
-  <head>
-      <meta charset="UTF-8"/>
-      <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-      <link rel="icon" type="image/png" href="./assets/logo_circular.png"/>
-      <title>ChefMinistry — Restaurant Rating Intelligence</title>
-    <meta name="description" content="ChefMinistry วิเคราะห์ Rating Velocity และ Review Trend จากแหล่งข้อมูล public รายวัน — ให้ร้านอาหารรู้ position ตัวเองใน Category และให้ Food Creator เห็นโอกาสก่อนตลาด"/>
-    <link rel="stylesheet" href="./css/style.css"/>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BT2BCMZ9SH"></script>
-    <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-BT2BCMZ9SH');
-    </script>
-  </head>
-  <body>
-
-    <!-- ── HEADER ── -->
-    <header class="site-header">
-        <div class="container header-inner">
-              <a class="logo" href="./index.html">
-                      <img src="./assets/logo_circular.png" alt="Chef Ministry" class="logo-img"
-                                   style="width:40px;height:40px;border-radius:50%;object-fit:cover"/>
-                      <div class="logo-mark" style="display:none">CM</div>div>
-                      <div>
-                                <div class="logo-name">ChefMinistry</div>
-                                <div class="logo-tagline">Restaurant Rating Intelligence</div>
-                      </div>
-              </a>a>
-              <nav class="site-nav">
-                      <a class="nav-link active" href="./index.html">Home</a>a>
-                      <a class="nav-link" href="./listing.html">Discover</a>a>
-                      <a class="nav-link" href="./about.html">Methodology</a>a>
-                      <a class="btn-pro" href="./restaurant_partner.html">🏪 For Restaurants</a>a>
-                      <a class="nav-link" href="./creator.html">🎥 For Creators</a>a>
-                      <div class="cm-auth-nav"></div>
-              </nav>nav>
-              <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>button>
-        </div>
-        <nav class="mobile-nav" id="mobileNav">
-              <div class="mobile-nav-links">
-                      <a class="mobile-nav-link" href="./index.html">Home</a>a>
-                      <a class="mobile-nav-link" href="./listing.html">Discover</a>a>
-                      <a class="mobile-nav-link" href="./about.html">Methodology</a>a>
-                      <a class="mobile-nav-link" href="./creator.html">🎥 For Creators</a>a>
-                      <a class="mobile-nav-link" href="./restaurant_partner.html">🏪 For Restaurants</a>a>
-                      <div class="cm-auth-nav" style="padding:8px 16px"></div>
-              </div>
-        </nav>nav>
-    </header>header>
-
-    <!-- ── HERO ── -->
-    <section class="hero">
-        <div class="container">
-              <div class="hero-grid">
-                      <div>
-                                <div class="eyebrow hero-eyebrow">🔬 Thailand's Restaurant Intelligence Platform</div>
-                                <h1 class="display-1 hero-title">รู้ position ร้านตัวเอง<br/>ก่อนคู่แข่งจะรู้</h1>h1>
-                                <p class="hero-subtitle">
-                                            ChefMinistry วิเคราะห์ Rating Velocity และ Review Trend
-                                            จากแหล่งข้อมูล public รายวัน — ให้ร้านอาหารรู้ว่าตัวเองอยู่ตรงไหนใน Category
-                                            และให้ Food Creator เห็นโอกาสก่อนตลาด
-                                </p>p>
-                                <div class="hero-actions" style="flex-wrap:wrap">
-                                            <a href="./restaurant_partner.html" class="btn btn-primary">🏪 สำหรับร้านอาหาร</a>a>
-                                            <a href="./creator.html" class="btn btn-creator-cta">🎥 สำหรับ Creator</a>a>
-                                            <a href="./listing.html" class="btn btn-ghost">ดู Trend ทั้งหมด →</a>a>
-                                </div>
-                                <div class="hero-stats">
-                                            <div>
-                                                          <div class="hero-stat-num" id="statRestaurants">138+</div>
-                                                          <div class="hero-stat-label">ร้านอาหารในฐานข้อมูล</div>
-                                            </div>
-                                            <div>
-                                                          <div class="hero-stat-num">3</div>
-                                                          <div class="hero-stat-label">แหล่งข้อมูล Public</div>
-                                            </div>
-                                            <div>
-                                                          <div class="hero-stat-num">Daily</div>
-                                                          <div class="hero-stat-label">อัปเดตคะแนนรายวัน</div>
-                                            </div>
-                                </div>
-                      </div>
-
-                      <!-- Live Signal Preview -->
-                      <div class="hero-sample" id="heroOverlapCard"></div>
-              </div>
-        </div>
-    </section>section>
-
-    <!-- ── 3 CORE CONCEPTS ── -->
-    <div class="signal-concept">
-        <div class="signal-concept-item">
-              <div class="signal-concept-icon">📈</div>
-              <div>
-                      <div class="signal-concept-title">Rating Trend Velocity</div>
-                      <div class="signal-concept-desc">วัด momentum ของรีวิวแบบ daily ว่าร้านกำลัง Rising, Stable หรือ Declining — ข้อมูลจาก snapshot 30 วัน ไม่ใช่ความรู้สึก</div>
-              </div>
-        </div>
-        <div class="signal-concept-item">
-              <div class="signal-concept-icon">🏆</div>
-              <div>
-                      <div class="signal-concept-title">Category Benchmark</div>
-                      <div class="signal-concept-desc">เปรียบเทียบเฉพาะร้านที่อยู่ใน category เดียวกัน รู้ว่าคู่แข่งกำลังแซงหน้าหรือไม่ และต้องปรับกลยุทธ์ตรงไหน</div>
-              </div>
-        </div>
-        <div class="signal-concept-item">
-              <div class="signal-concept-icon">🎯</div>
-              <div>
-                      <div class="signal-concept-title">Creator Matching</div>
-                      <div class="signal-concept-desc">Coming soon — Creator จะถูก match กับร้านที่ trend ตรงกับ niche ของตัวเอง โดยอัตโนมัติ ข้อมูลนำ ไม่ใช่โชค</div>
-              </div>
-        </div>
-    </div>
-
-    <hr class="divider"/>
-
-    <!-- ── 2 AUDIENCES ── -->
-    <section class="section" style="background:var(--white)">
-        <div class="container">
-              <div class="grid-2" style="gap:20px">
-
-                      <!-- RESTAURANT -->
-                      <div class="card" style="padding:32px;border-top:4px solid var(--gold)">
-                                <div style="font-size:32px;margin-bottom:16px">🏪</div>
-                                <h3 class="h3" style="margin-bottom:10px">สำหรับเจ้าของร้านอาหาร</h3>h3>
-                                <p class="body-text" style="color:var(--text-2);margin-bottom:16px">
-                                            รู้ว่าตัวเองอยู่ตรงไหนใน Category ของคุณ เปรียบเทียบ velocity
-                                            กับคู่แข่ง และวางกลยุทธ์ด้วยข้อมูลจริง — ไม่ใช่ความรู้สึก
-                                </p>p>
-                                <ul class="feature-list" style="margin-bottom:20px">
-                                            <li>ดู rating velocity ย้อนหลัง 30 วัน</li>
-                                            <li>Benchmark กับร้านอื่นใน Category เดียวกัน</li>
-                                            <li>รู้ว่าคู่แข่งกำลังเติบโตเพราะอะไร</li>
-                                            <li>บทวิเคราะห์เชิงกลยุทธ์แบบเจาะลึก (Premium)</li>
-                                </ul>ul>
-                              <a href="./restaurant_partner.html" class="btn btn-primary" style="margin-top:8px">วิเคราะห์ร้านของคุณ →</a>a>
-                      </div>
-              
-                    <!-- CREATOR -->
-                    <div class="card" style="padding:32px;border-top:4px solid #6366f1">
-                            <div style="font-size:32px;margin-bottom:16px">🎥</div>
-                            <h3 class="h3" style="margin-bottom:10px">สำหรับ Food Creator</h3>h3>
-                            <p class="body-text" style="color:var(--text-2);margin-bottom:16px">
-                              เข้าถึง trend data ที่คนทั่วไปไม่มี รู้ว่าร้านไหน rating กำลัง spike
-                              แต่ยังไม่ถูกพูดถึง — first-mover advantage ที่วัดได้จากข้อมูล
-                            </p>p>
-                            <ul class="feature-list" style="margin-bottom:20px">
-                                      <li>เห็นร้านที่ rating กำลัง rising แต่ยังไม่ viral</li>
-                                      <li>แยกตาม category และย่านที่คุณถนัด</li>
-                                      <li>Coming soon: ได้รับ match จากร้านที่ตรงกับ niche</li>
-                                      <li>ลงทะเบียนฟรี ไม่มีค่าใช้จ่าย</li>
-                            </ul>ul>
-                            <a href="./creator.html" class="btn btn-outline" style="margin-top:8px">เข้าร่วม Creator Network — ฟรี →</a>a>
-                    </div>
-              </div>
-        </div>
-    </section>section>
-  
-  <hr class="divider"/>
-  
-  <!-- ── WEEKLY TREND HIGHLIGHT ── -->
-  <section class="section" style="background:var(--white)">
-    <div class="container">
-        <div class="section-cols-2">
-              <div>
-                      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
-                                <div class="eyebrow" style="color:var(--amber)">🌟 Trend ประจำสัปดาห์</div>
-                      </div>
-                      <h2 class="display-2" style="margin-bottom:16px" id="weeklyTitle">Loading…</h2>h2>
-                      <p class="lead" id="weeklyDesc">Loading…</p>p>
-                      <div style="margin-top:24px">
-                                <div class="eyebrow" style="margin-bottom:12px">Category ที่กำลังมา</div>
-                                <div id="trendCategoryList"></div>
-                      </div>
-              </div>
-              <div>
-                      <div class="card" style="padding:24px;background:var(--dark);color:#fff">
-                                <div class="eyebrow" style="color:var(--gold);margin-bottom:16px">📊 Rating Trend สัปดาห์นี้</div>
-                                <div id="weeklyHighlightCard">
-                                            <div style="text-align:center;color:#94a3b8;padding:20px">กำลังโหลด trend ล่าสุด…</div>
-                                </div>
-                      </div>
-              </div>
-        </div>
-    </div>
-  </section>section>
-  
-  <hr class="divider"/>
-  
-  <!-- ── RISING RESTAURANTS ── -->
-  <section class="section">
-    <div class="container">
-        <div class="section-header">
-              <div>
-                      <div class="eyebrow">↑ Rising Now</div>
-                      <h2 class="display-2">ร้านที่ Rating กำลัง Rising</h2>h2>
-                      <p class="lead" style="margin-top:10px">ร้านเหล่านี้มีคะแนนรีวิวเพิ่มขึ้นเร็วใน 30 วันล่าสุด — โอกาสของร้านที่อยากรู้ว่าคู่แข่งทำอะไร</p>p>
-              </div>
-        </div>
-        <div class="grid-3" id="risingGrid"></div>
-        <div style="text-align:center;margin-top:32px">
-              <a href="./listing.html" class="btn btn-ghost">ดู Trend ทั้งหมด →</a>a>
-        </div>
-    </div>
-  </section>section>
-  
-  <hr class="divider"/>
-  
-  <!-- ── HOW IT WORKS ── -->
-  <section class="section">
-    <div class="container">
-        <div class="section-header">
-              <div>
-                      <div class="eyebrow">How It Works</div>
-                      <h2 class="display-2">ข้อมูลจริง ตัดสินใจถูก</h2>h2>
-                      <p class="lead" style="margin-top:10px">รวบรวม review data จากแหล่งข้อมูล public ทุกวัน วิเคราะห์ผ่าน algorithm ที่ออกแบบมาเฉพาะสำหรับตลาดร้านอาหาร</p>p>
-              </div>
-        </div>
-        <div class="grid-3">
-              <div class="step-card">
-                      <div class="step-num">1</div>
-                      <div class="step-title">รวบรวมข้อมูล Daily</div>
-                      <div class="step-desc">รวบรวม review count และ rating score จากแหล่งข้อมูล public ทุกวัน บันทึกเป็น daily snapshot ใน database อัตโนมัติ</div>
-              </div>
-              <div class="step-card">
-                      <div class="step-num">2</div>
-                      <div class="step-title">วิเคราะห์ Velocity</div>
-                      <div class="step-desc">คำนวณ % การเปลี่ยนแปลงของ review ใน 30 วัน ร้านที่เพิ่มเร็วกว่าค่าเฉลี่ยของ category = trending signal ที่ชัดเจน</div>
-              </div>
-              <div class="step-card">
-                      <div class="step-num">3</div>
-                      <div class="step-title">Category Benchmark</div>
-                      <div class="step-desc">จัดกลุ่มและเปรียบเทียบเฉพาะร้านใน category เดียวกัน — Ramen vs Ramen, Fine Dining vs Fine Dining เสมอ</div>
-              </div>
-        </div>
-    </div>
-  </section>section>
-  
-  <hr class="divider"/>
-  
-  <!-- ── FOR CREATORS ── -->
-  <section class="section creator-home-section">
-    <div class="container">
-        <div class="section-cols-2">
-        
-              <!-- LEFT: value props -->
-              <div>
-                      <div class="eyebrow" style="color:#6366f1;margin-bottom:12px">🎥 For Food Creators</div>
-                      <h2 class="display-2" style="margin-bottom:14px">เห็นร้านกำลังมา<br/>ก่อนทุกคนในวงการ</h2>h2>
-                      <p class="lead" style="margin-bottom:28px">
-                        ข้อมูล rating trend ที่คนทั่วไปไม่มีสิทธิ์เห็น — รู้ว่าร้านไหนกำลัง spike
-                        ก่อนสื่อจะตามทัน แล้วอยู่ใน content ที่ใช่ ในเวลาที่ใช่
-                      </p>p>
-                      <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px">
-                                <div style="display:flex;gap:12px;align-items:flex-start">
-                                            <div style="font-size:20px">📊</div>
-                                            <div>
-                                                          <div style="font-weight:700;font-size:14px">Rating Trend แยก Category แบบ Real-time</div>
-                                                          <div style="font-size:13px;color:var(--text-2)">เห็น velocity data ของ Ramen, Fine Dining, Omakase และอีก 20+ category อัปเดตทุกวัน</div>
-                                            </div>
-                                </div>
-                                <div style="display:flex;gap:12px;align-items:flex-start">
-                                            <div style="font-size:20px">🎯</div>
-                                            <div>
-                                                          <div style="font-weight:700;font-size:14px">Coming Soon: Smart Matching</div>
-                                                          <div style="font-size:13px;color:var(--text-2)">ระบบจะ match คุณกับร้านที่ trend ตรงกับ niche ของคุณโดยอัตโนมัติ — ร้านมาหาคุณ ไม่ใช่คุณตามหาร้าน</div>
-                                            </div>
-                                </div>
-                                <div style="display:flex;gap:12px;align-items:flex-start">
-                                            <div style="font-size:20px">🆓</div>
-                                            <div>
-                                                          <div style="font-weight:700;font-size:14px">ฟรีตลอดชีพสำหรับ Early Access</div>
-                                                          <div style="font-size:13px;color:var(--text-2)">ลงทะเบียนก่อนครบ 1,000 คน รับสิทธิ์ early access และ feature พิเศษสำหรับสมาชิกยุคแรก</div>
-                                            </div>
-                                </div>
-                      </div>
-                      <a href="./creator.html" class="btn btn-dark" style="gap:8px">เข้าร่วม Creator Network — ฟรี →</a>a>
-              </div>
-        
-              <!-- RIGHT: dashboard preview -->
-              <div>
-                      <div class="card" style="padding:24px;background:var(--dark);color:#fff">
-                                <div style="font-size:12px;color:#94a3b8;margin-bottom:16px;font-weight:600;letter-spacing:.08em">TRENDING IN YOUR CATEGORY</div>
-                                <div style="display:flex;flex-direction:column;gap:12px">
-                                            <div style="background:rgba(255,255,255,.07);border-radius:10px;padding:14px">
-                                                          <div style="display:flex;justify-content:space-between;align-items:center">
-                                                                          <div>
-                                                                                            <div style="font-weight:800;font-size:13px">Sendo Ramen</div>
-                                                                                            <div style="font-size:11px;color:#94a3b8">Ramen · Thonglor</div>
-                                                                          </div>
-                                                                          <span style="background:#16a34a;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px">↑ Rising Fast</span>span>
-                                                          </div>
-                                                          <div style="margin-top:8px;font-size:12px;color:#94a3b8">+42% reviews ใน 30 วัน · ⭐ 4.7</div>
-                                            </div>
-                                            <div style="background:rgba(255,255,255,.07);border-radius:10px;padding:14px">
-                                                          <div style="display:flex;justify-content:space-between;align-items:center">
-                                                                          <div>
-                                                                                            <div style="font-weight:800;font-size:13px">Maru Maru Pizza</div>
-                                                                                            <div style="font-size:11px;color:#94a3b8">Pizza · Ekkamai</div>
-                                                                          </div>
-                                                                          <span style="background:#16a34a;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px">↑ Rising</span>span>
-                                                          </div>
-                                                          <div style="margin-top:8px;font-size:12px;color:#94a3b8">+28% reviews ใน 30 วัน · ⭐ 4.5</div>
-                                            </div>
-                                            <div style="background:rgba(255,255,255,.07);border-radius:10px;padding:14px">
-                                                          <div style="display:flex;justify-content:space-between;align-items:center">
-                                                                          <div>
-                                                                                            <div style="font-weight:800;font-size:13px">Nusara</div>
-                                                                                            <div style="font-size:11px;color:#94a3b8">Thai Fine Dining · Silom</div>
-                                                                          </div>
-                                                                          <span style="background:#d97706;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px">→ Stable</span>span>
-                                                          </div>
-                                                          <div style="margin-top:8px;font-size:12px;color:#94a3b8">+8% reviews ใน 30 วัน · ⭐ 4.9</div>
-                                            </div>
-                                </div>
-                                <div style="margin-top:16px;font-size:11px;color:#475569;text-align:center">ข้อมูลตัวอย่าง — login เพื่อดูข้อมูลจริง</div>
-                      </div>
-              </div>
-        </div>
-    </div>
-  </section>section>
-  
-  <hr class="divider"/>
-  
-  <!-- ── CTA FINAL ── -->
-  <section class="section" style="background:var(--dark);color:#fff;text-align:center">
-    <div class="container" style="max-width:640px">
-        <div class="eyebrow" style="color:var(--gold);margin-bottom:16px">เริ่มต้นได้ทันที</div>
-        <h2 class="display-2" style="color:#fff;margin-bottom:16px">ข้อมูลที่เปลี่ยน<br/>วิธีมองธุรกิจอาหาร</h2>h2>
-        <p class="lead" style="color:#94a3b8;margin-bottom:32px">
-          ไม่ว่าคุณจะเป็นเจ้าของร้านที่อยากรู้ position ตัวเอง หรือ Creator ที่อยากเห็นโอกาสก่อนตลาด
-          — ChefMinistry คือเครื่องมือที่คุณต้องการ
-        </p>p>
-        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
-              <a href="./restaurant_partner.html" class="btn btn-primary">🏪 ฉันเป็นเจ้าของร้าน</a>a>
-              <a href="./creator.html" class="btn" style="background:#6366f1;color:#fff">🎥 ฉันเป็น Creator</a>a>
-        </div>
-    </div>
-  </section>section>
-  
-  <!-- ── FOOTER ── -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-        <div class="footer-brand">
-              <div class="footer-logo">ChefMinistry</div>
-              <div class="footer-tagline">Restaurant Rating Intelligence</div>
-        </div>
-        <div class="footer-links">
-              <a href="./listing.html">Discover</a>a>
-              <a href="./about.html">Methodology</a>a>
-              <a href="./restaurant_partner.html">For Restaurants</a>a>
-              <a href="./creator.html">For Creators</a>a>
-        </div>
-        <div class="footer-copy">© 2026 ChefMinistry · Restaurant Rating Intelligence</div>
-    </div>
-  </footer>footer>
-  
-  <!-- Firebase + Auth -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-  <script src="./js/firebase-config.js"></script>
-  <script src="./js/auth.js"></script>
-  <script src="./js/data.js"></script>
-  
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <link rel="icon" type="image/png" href="./assets/logo_circular.png"/>
+  <title>ChefMinistry — Restaurant Rating Intelligence</title>
+  <meta name="description" content="ChefMinistry วิเคราะห์ Rating Velocity และ Review Trend จากแหล่งข้อมูล public รายวัน — ให้ร้านอาหารรู้ position ตัวเองใน Category และให้ Food Creator เห็นโอกาสก่อนตลาด"/>
+  <link rel="stylesheet" href="./css/style.css"/>
+  <\!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BT2BCMZ9SH"></script>
   <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BT2BCMZ9SH');
+  </script>
+</head>
+<body>
+
+<\!-- ── HEADER ── -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="./index.html">
+      <img src="./assets/logo_circular.png" alt="Chef Ministry" class="logo-img"
+           style="width:40px;height:40px;border-radius:50%;object-fit:cover"/>
+      <div>
+        <div class="logo-name">ChefMinistry</div>
+        <div class="logo-tagline">Restaurant Rating Intelligence</div>
+      </div>
+    </a>
+    <nav class="site-nav">
+      <a class="nav-link active" href="./index.html">Home</a>
+      <a class="nav-link" href="./listing.html">Discover</a>
+      <a class="nav-link" href="./about.html">Methodology</a>
+      <a class="btn-pro" href="./restaurant_partner.html">🏪 For Restaurants</a>
+      <a class="nav-link" href="./creator.html">🎥 For Creators</a>
+      <div class="cm-auth-nav"></div>
+    </nav>
+    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+  </div>
+  <nav class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-links">
+      <a class="mobile-nav-link" href="./index.html">Home</a>
+      <a class="mobile-nav-link" href="./listing.html">Discover</a>
+      <a class="mobile-nav-link" href="./about.html">Methodology</a>
+      <a class="mobile-nav-link" href="./creator.html">🎥 For Creators</a>
+      <a class="mobile-nav-link" href="./restaurant_partner.html">🏪 For Restaurants</a>
+      <div class="cm-auth-nav" style="padding:8px 16px"></div>
+    </div>
+  </nav>
+</header>
+
+<\!-- ── HERO ── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow hero-eyebrow">🔬 Thailand's Restaurant Intelligence Platform</div>
+        <h1 class="display-1 hero-title">รู้ position ร้านตัวเอง<br/>ก่อนคู่แข่งจะรู้</h1>
+        <p class="hero-subtitle">
+          ChefMinistry วิเคราะห์ Rating Velocity และ Review Trend
+          จากแหล่งข้อมูล public รายวัน — ให้ร้านอาหารรู้ว่าตัวเองอยู่ตรงไหนใน Category
+          และให้ Food Creator เห็นโอกาสก่อนตลาด
+        </p>
+        <div class="hero-actions" style="flex-wrap:wrap">
+          <a href="./restaurant_partner.html" class="btn btn-primary">🏪 สำหรับร้านอาหาร</a>
+          <a href="./creator.html" class="btn btn-creator-cta">🎥 For Creators</a>
+          <a href="./listing.html" class="btn btn-ghost">ดู Signal ทั้งหมด →</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-num" id="statRestaurants">—</div>
+            <div class="hero-stat-label">ร้านอาหารในฐานข้อมูล</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">3</div>
+            <div class="hero-stat-label">แหล่งข้อมูล Public</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">Daily</div>
+            <div class="hero-stat-label">อัปเดตรายวัน</div>
+          </div>
+        </div>
+      </div>
+
+      <\!-- Live Signal Preview — rendered by JS -->
+      <div class="hero-sample" id="heroOverlapCard"></div>
+    </div>
+  </div>
+</section>
+
+<\!-- ── 3 SIGNAL CONCEPTS ── -->
+<div class="signal-concept">
+  <div class="signal-concept-item">
+    <div class="signal-concept-icon">📈</div>
+    <div>
+      <div class="signal-concept-title">Rating Trend Velocity</div>
+      <div class="signal-concept-desc">วัด momentum ของรีวิวแบบ daily ว่าร้านกำลัง Rising, Stable หรือ Declining — ข้อมูลจาก snapshot 30 วัน ไม่ใช่ความรู้สึก</div>
+    </div>
+  </div>
+  <div class="signal-concept-item">
+    <div class="signal-concept-icon">🏆</div>
+    <div>
+      <div class="signal-concept-title">Category Benchmark</div>
+      <div class="signal-concept-desc">เปรียบเทียบเฉพาะร้านใน category เดียวกัน รู้ว่าคู่แข่งกำลังแซงหน้าหรือไม่ และต้องปรับกลยุทธ์ตรงไหน</div>
+    </div>
+  </div>
+  <div class="signal-concept-item">
+    <div class="signal-concept-icon">🎯</div>
+    <div>
+      <div class="signal-concept-title">Creator Matching</div>
+      <div class="signal-concept-desc">Coming soon — Creator จะถูก match กับร้านที่ trend ตรงกับ niche ของตัวเองโดยอัตโนมัติ ข้อมูลนำ ไม่ใช่โชค</div>
+    </div>
+  </div>
+</div>
+
+<section class="section" style="background:var(--white);padding-top:36px;padding-bottom:36px">
+  <div class="container">
+    <div class="grid-2" style="gap:20px">
+      <div class="card" style="padding:28px;display:flex;flex-direction:column;border-top:4px solid var(--gold)">
+        <div style="font-size:28px;margin-bottom:10px">🏪</div>
+        <h3 class="h3" style="margin-bottom:10px">สำหรับเจ้าของร้านอาหาร</h3>
+        <p style="font-size:15px;color:var(--text-2);line-height:1.7;margin-bottom:16px;flex:1">
+          รู้ว่าตัวเองอยู่ตรงไหนใน Category ของคุณ เปรียบเทียบ velocity กับคู่แข่ง
+          และวางกลยุทธ์ด้วยข้อมูลจริง — ไม่ใช่ความรู้สึก
+        </p>
+        <ul class="feature-list" style="margin-bottom:18px">
+          <li>ดู rating velocity ย้อนหลัง 30 วัน</li>
+          <li>Benchmark กับร้านอื่นใน Category เดียวกัน</li>
+          <li>รู้ว่าคู่แข่งกำลังเติบโตเพราะอะไร</li>
+        </ul>
+        <a href="./restaurant_partner.html" class="btn btn-primary" style="margin-top:auto">วิเคราะห์ร้านของคุณ →</a>
+      </div>
+
+      <div class="card" style="padding:28px;display:flex;flex-direction:column;border-top:4px solid #6366f1">
+        <div style="font-size:28px;margin-bottom:10px">🎥</div>
+        <h3 class="h3" style="margin-bottom:10px">สำหรับ Food Creator</h3>
+        <p style="font-size:15px;color:var(--text-2);line-height:1.7;margin-bottom:16px;flex:1">
+          เข้าถึง trend data ที่คนทั่วไปไม่มี รู้ว่าร้านไหน rating กำลัง spike
+          แต่ยังไม่ถูกพูดถึง — first-mover advantage ที่วัดได้จากข้อมูล
+        </p>
+        <ul class="feature-list" style="margin-bottom:18px">
+          <li>เห็นร้านที่ rating กำลัง rising แต่ยังไม่ viral</li>
+          <li>แยกตาม category และย่านที่คุณถนัด</li>
+          <li>Coming soon: ถูก match กับร้านที่ niche ตรงกัน</li>
+        </ul>
+        <a href="./creator.html" class="btn btn-outline" style="margin-top:auto">เข้าร่วม Creator Network — ฟรี →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<\!-- ── WEEKLY TREND HIGHLIGHT ── -->
+<section class="section" style="background:var(--white)">
+  <div class="container">
+    <div class="section-cols-2">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap">
+          <div class="eyebrow" style="color:var(--amber)">🌟 Spotlight of the Week</div>
+          <div id="weeklyUpdatedBadge" style="font-size:10px;font-weight:800;background:var(--cream);border:1px solid var(--border);border-radius:99px;padding:3px 10px;color:var(--text-2);letter-spacing:.06em;display:none">Updated <span id="weeklyUpdatedDate"></span></div>
+        </div>
+        <h2 class="display-2" style="margin-bottom:16px" id="weeklyTitle">Loading…</h2>
+        <p class="lead" id="weeklyDesc">Loading…</p>
+        <div style="margin-top:24px">
+          <div style="font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);margin-bottom:12px">Trend by Category</div>
+          <div id="trendCategoryList"></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);margin-bottom:14px" id="rankListLabel">📡 Signal Rank</div>
+        <div data-require="free" style="position:relative;border-radius:var(--radius-lg);overflow:hidden">
+          <div class="rank-list card" style="border-radius:var(--radius-lg);overflow:hidden" id="overlapRankList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<\!-- ── THAI FINE DINING SPOTLIGHT ── -->
+<section class="section" style="background:linear-gradient(135deg,#0d1f3c,#1a2f52);color:#fff;padding-top:48px;padding-bottom:48px">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:28px">
+      <div>
+        <div class="eyebrow" style="color:var(--gold);margin-bottom:8px">🏆 Asia's 50 Best 2026 — Thai Fine Dining Surge</div>
+        <h2 class="display-2" style="color:#fff;margin-bottom:8px">Thai Fine Dining ครองแชมป์</h2>
+        <p style="color:rgba(255,255,255,.65);font-size:15px;max-width:520px;line-height:1.65">Nusara #5 · Baan Tepa #7 — อาหารไทย Fine Dining กำลัง Rising แรงที่สุดในรอบปี Rating Velocity สูงสุดในหมวด Fine Dining</p>
+      </div>
+      <a href="./listing.html?type=fine-dining" class="btn" style="background:var(--gold);color:var(--navy);font-weight:800;white-space:nowrap">ดู Fine Dining ทั้งหมด →</a>
+    </div>
+    <div class="grid-3" id="thaiFineDineGrid"></div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<\!-- ── RISING RESTAURANTS ── -->
+<section class="section">
+  <div class="container">
+    <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px">
+      <div>
+        <div class="eyebrow" style="color:var(--green);margin-bottom:6px">↑ Trend Velocity: Rising</div>
+        <h2 class="display-2">กำลัง Rising ตอนนี้</h2>
+        <p class="lead" style="margin-top:8px">ร้านที่ review count เพิ่มขึ้นเร็วที่สุดใน 30 วัน — รู้ก่อนคนอื่น</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="./listing.html?type=ramen" class="btn btn-outline btn-sm">ดู Ramen →</a>
+        <a href="./listing.html?velocity=rising" class="btn btn-outline btn-sm">ดูทั้งหมด →</a>
+      </div>
+    </div>
+    <div class="grid-3" id="risingGrid"></div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<\!-- ── CREATOR NETWORK TEASER ── -->
+<section class="section" style="background:var(--white)">
+  <div class="container">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px">
+      <div>
+        <div class="eyebrow" style="color:var(--navy);margin-bottom:6px">👥 Creator Intelligence</div>
+        <h2 class="display-2" style="margin-bottom:10px">30+ Food Creators ที่เราติดตาม</h2>
+        <p style="font-size:15px;color:var(--text-2);line-height:1.7;max-width:480px;margin-bottom:20px">
+          เราติดตาม signal จาก Mega, Macro และ Mid-tier creators<br>
+          เพื่อสังเคราะห์เป็น Trend data ว่าร้านไหนกำลัง trending
+        </p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <span class="tier-badge tier-mega" style="padding:6px 14px;font-size:12px">Mega · 4 คน</span>
+          <span class="tier-badge tier-macro" style="padding:6px 14px;font-size:12px">Macro · 6 คน</span>
+          <span class="tier-badge tier-mid" style="padding:6px 14px;font-size:12px">Mid · 10+ คน</span>
+        </div>
+      </div>
+      <div style="text-align:center">
+        <div style="background:var(--cream);border:1px solid var(--border);border-radius:16px;padding:28px 32px;min-width:220px">
+          <div style="display:inline-block;background:var(--gold);color:var(--navy);font-size:10px;font-weight:900;padding:4px 12px;border-radius:99px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px">Members Only</div>
+          <div style="font-size:14px;color:var(--text-2);margin-bottom:16px;line-height:1.6">ดูรายชื่อ creators ทั้งหมด<br>พร้อม tier และ focus area</div>
+          <a href="./listing.html" class="btn btn-primary btn-sm">ดูรายชื่อทั้งหมด →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<\!-- ── HOW IT WORKS ── -->
+<section class="section">
+  <div class="container">
+    <div class="section-header" style="text-align:center;max-width:580px;margin:0 auto 36px">
+      <div class="eyebrow" style="color:var(--navy);margin-bottom:8px">How It Works</div>
+      <h2 class="display-2">ข้อมูลจริง ตัดสินใจถูก</h2>
+      <p class="lead" style="margin-top:10px">รวบรวม review data จากแหล่งข้อมูล public ทุกวัน วิเคราะห์ผ่าน algorithm ที่ออกแบบมาเฉพาะสำหรับตลาดร้านอาหาร</p>
+    </div>
+    <div class="grid-3">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-title">รวบรวมข้อมูล Daily</div>
+        <div class="step-desc">รวบรวม review count และ rating score จากแหล่งข้อมูล public ทุกวัน บันทึกเป็น daily snapshot ใน database อัตโนมัติ</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-title">วิเคราะห์ Velocity</div>
+        <div class="step-desc">คำนวณ % การเปลี่ยนแปลงของ review ใน 30 วัน ร้านที่เพิ่มเร็วกว่าค่าเฉลี่ยของ category = trending signal ที่ชัดเจน</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-title">Category Benchmark</div>
+        <div class="step-desc">จัดกลุ่มและเปรียบเทียบเฉพาะร้านใน category เดียวกัน — Ramen vs Ramen, Fine Dining vs Fine Dining เสมอ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<\!-- ── FOR CREATORS ── -->
+<section class="section creator-home-section">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center">
+
+      <\!-- LEFT: value props -->
+      <div>
+        <div class="eyebrow" style="color:#6366f1;margin-bottom:12px">🎥 For Food Creators</div>
+        <h2 class="display-2" style="margin-bottom:14px">เห็นร้านกำลังมา<br/>ก่อนทุกคนในวงการ</h2>
+        <p class="lead" style="margin-bottom:28px">
+          ข้อมูล rating trend ที่คนทั่วไปไม่มีสิทธิ์เห็น — รู้ว่าร้านไหนกำลัง spike
+          ก่อนสื่อจะตามทัน แล้วอยู่ใน content ที่ใช่ ในเวลาที่ใช่
+        </p>
+        <div style="display:flex;flex-direction:column;gap:18px;margin-bottom:32px">
+          <div style="display:flex;gap:14px;align-items:flex-start">
+            <div style="width:44px;height:44px;border-radius:12px;background:var(--green-bg);display:grid;place-items:center;font-size:20px;flex-shrink:0">📊</div>
+            <div>
+              <div style="font-size:15px;font-weight:900;margin-bottom:3px">Rating Trend แยก Category แบบ Real-time</div>
+              <div style="font-size:13.5px;color:var(--text-2);line-height:1.6">เห็น velocity data ของ Ramen, Fine Dining, Omakase และอีก 20+ category อัปเดตทุกวัน</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start">
+            <div style="width:44px;height:44px;border-radius:12px;background:var(--amber-bg);display:grid;place-items:center;font-size:20px;flex-shrink:0">🎯</div>
+            <div>
+              <div style="font-size:15px;font-weight:900;margin-bottom:3px">Coming Soon: Smart Matching</div>
+              <div style="font-size:13.5px;color:var(--text-2);line-height:1.6">ระบบจะ match คุณกับร้านที่ trend ตรงกับ niche ของคุณโดยอัตโนมัติ — ร้านมาหาคุณ ไม่ใช่คุณตามหาร้าน</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start">
+            <div style="width:44px;height:44px;border-radius:12px;background:var(--blue-bg);display:grid;place-items:center;font-size:20px;flex-shrink:0">🆓</div>
+            <div>
+              <div style="font-size:15px;font-weight:900;margin-bottom:3px">ฟรีตลอดชีพสำหรับ Early Access</div>
+              <div style="font-size:13.5px;color:var(--text-2);line-height:1.6">ลงทะเบียนก่อนครบ 1,000 คน รับสิทธิ์ early access และ feature พิเศษสำหรับสมาชิกยุคแรก</div>
+            </div>
+          </div>
+        </div>
+        <a href="./creator.html" class="btn btn-dark" style="gap:8px">เข้าร่วม Creator Network — ฟรี →</a>
+      </div>
+
+      <\!-- RIGHT: dashboard preview card -->
+      <div style="background:linear-gradient(135deg,var(--navy),var(--navy-2));border-radius:var(--radius-lg);padding:28px;color:#fff">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+          <div style="font-size:12px;font-weight:900;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.1em">Creator Dashboard</div>
+          <div style="background:var(--gold);color:var(--navy);font-size:10px;font-weight:900;padding:3px 10px;border-radius:99px">BETA</div>
+        </div>
+        <\!-- signal chips -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px">
+          <div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px;text-align:center">
+            <div style="font-size:22px;font-weight:900;color:var(--gold)" id="statDashRising">↑</div>
+            <div style="font-size:9px;color:rgba(255,255,255,.45);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-top:2px">Rising</div>
+          </div>
+          <div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px;text-align:center">
+            <div style="font-size:22px;font-weight:900;color:#fff" id="statDashTotal">—</div>
+            <div style="font-size:9px;color:rgba(255,255,255,.45);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-top:2px">ร้านทั้งหมด</div>
+          </div>
+          <div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px;text-align:center">
+            <div style="font-size:22px;font-weight:900;color:#fff">Daily</div>
+            <div style="font-size:9px;color:rgba(255,255,255,.45);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-top:2px">อัปเดต</div>
+          </div>
+        </div>
+        <\!-- trending list -->
+        <div style="font-size:10px;font-weight:900;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px">🔥 Trending Now</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="background:#fff;border-radius:12px;padding:12px 14px;color:var(--text);display:flex;gap:12px;align-items:center">
+            <div style="font-size:24px;width:40px;height:40px;display:grid;place-items:center;background:var(--cream);border-radius:8px;flex-shrink:0">🍣</div>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:13px;font-weight:900">Sushi Zo Bangkok</div>
+              <div style="font-size:11px;color:var(--text-2)">Japanese Omakase · Sathorn</div>
+            </div>
+            <div style="background:var(--green-bg);color:var(--green);font-size:10px;font-weight:900;padding:3px 8px;border-radius:99px;white-space:nowrap">↑ Rising Fast</div>
+          </div>
+          <div style="background:#fff;border-radius:12px;padding:12px 14px;color:var(--text);display:flex;gap:12px;align-items:center">
+            <div style="font-size:24px;width:40px;height:40px;display:grid;place-items:center;background:var(--cream);border-radius:8px;flex-shrink:0">🍜</div>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:13px;font-weight:900">Sendo Ramen</div>
+              <div style="font-size:11px;color:var(--text-2)">Modern Japanese Ramen · Silom</div>
+            </div>
+            <div style="background:var(--red-bg);color:var(--red);font-size:10px;font-weight:900;padding:3px 8px;border-radius:99px;white-space:nowrap">🔥 Trending</div>
+          </div>
+        </div>
+        <div style="margin-top:14px;text-align:center">
+          <a href="./creator.html" style="color:rgba(255,255,255,.5);font-size:12px;font-weight:700">สมัครเพื่อดู dashboard แบบ full →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<\!-- ── PILOT CTA ── -->
+<section class="section" style="background:var(--white)">
+  <div class="container">
+    <div class="section-header" style="text-align:center;max-width:680px;margin:0 auto 36px">
+      <div class="eyebrow" style="color:var(--navy);margin-bottom:8px">เริ่มต้นได้ทันที</div>
+      <h2 class="display-2">ข้อมูลที่เปลี่ยนวิธีมองธุรกิจอาหาร</h2>
+      <p class="lead" style="margin-top:10px">
+        ไม่ว่าคุณจะเป็นเจ้าของร้านที่อยากรู้ position ตัวเอง หรือ Creator ที่อยากเห็นโอกาสก่อนตลาด
+        — ChefMinistry คือเครื่องมือที่คุณต้องการ
+      </p>
+    </div>
+    <div class="grid-2" style="max-width:980px;margin:0 auto;gap:20px">
+      <div class="card" style="padding:28px;display:flex;flex-direction:column">
+        <div style="font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);margin-bottom:12px">For Restaurants / Brands</div>
+        <h3 class="h3" style="margin-bottom:10px">วิเคราะห์ position ร้านของคุณ</h3>
+        <p style="font-size:14px;color:var(--text-2);line-height:1.7;margin-bottom:0;flex:1">
+          รู้ velocity, benchmark คู่แข่ง และเข้าใจกลยุทธ์ที่ต้องปรับ
+        </p>
+        <a href="./restaurant_partner.html" class="btn btn-primary" style="width:100%;margin-top:18px">กรอกฟอร์มสำหรับร้าน</a>
+      </div>
+      <div class="card" style="padding:28px;display:flex;flex-direction:column">
+        <div style="font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);margin-bottom:12px">For Food Creators</div>
+        <h3 class="h3" style="margin-bottom:10px">เข้าร่วม Creator Network</h3>
+        <p style="font-size:14px;color:var(--text-2);line-height:1.7;margin-bottom:0;flex:1">
+          สำหรับ creator สายอาหารที่ต้องการ first-mover advantage จากข้อมูลจริง
+        </p>
+        <a href="./creator.html" class="btn btn-outline" style="width:100%;margin-top:18px">ไปหน้าสมัคร Creator</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<\!-- ── B2B TEASER ── -->
+<section class="section">
+  <div class="container">
+    <div class="section-cols-asym">
+      <div>
+        <div class="eyebrow" style="color:var(--amber);margin-bottom:10px">🏭 B2B — Intelligence for Suppliers</div>
+        <h2 class="display-2" style="margin-bottom:16px">Data และ Trend Insight สำหรับธุรกิจอาหาร</h2>
+        <p class="lead" style="margin-bottom:20px">เหมาะสำหรับ supplier, food brand และ partner ที่ต้องการเข้าใจ trend อาหาร ร้านที่กำลังมา และโอกาสในตลาด</p>
+        <div class="b2b-table-wrap"><table class="b2b-table">
+          <thead><tr><th>ชื่อรายงาน</th><th>รายละเอียด</th></tr></thead>
+          <tbody>
+            <tr><td>Cuisine Trend Report</td><td>"Q2/2026 — Japanese Omakase โต +34% ใน BKK"</td></tr>
+            <tr><td>Ingredient Signal</td><td>"Wagyu, Truffle, Yuzu ถูก mention เพิ่มขึ้น"</td></tr>
+            <tr><td>Emerging Restaurant Alert</td><td>"ร้านใหม่ที่ velocity สูงสุดใน 2 สัปดาห์แรก"</td></tr>
+            <tr><td>Competitor Intelligence</td><td>"ร้าน X velocity เป็นอย่างไร เทียบกับ category"</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="card" style="padding:28px;background:linear-gradient(135deg,#f5f0e8,#fdf5e4)">
+        <div style="font-size:32px;margin-bottom:12px">📦</div>
+        <h3 class="h3" style="margin-bottom:10px">สนใจ B2B Data?</h3>
+        <p style="font-size:14px;color:var(--text-2);line-height:1.65;margin-bottom:20px">เราเปิดรับ Pilot Partner สำหรับ Supplier ที่ต้องการข้อมูล Trend อาหาร ติดต่อเราเพื่อ Demo รายงาน</p>
+        <a href="mailto:contact@chefministry.com?subject=ChefMinistry%20Pilot%20Partnership" class="btn btn-dark btn-sm" style="width:100%">ขอ Pilot / Demo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<\!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <img src="./assets/logo_circular.png" alt="Chef Ministry" style="height:36px;border-radius:6px" onerror="this.style.display='none'"/>
+          <div class="logo-name">ChefMinistry</div>
+        </div>
+        <p class="footer-brand-desc">Restaurant Rating Intelligence Platform — รู้ position ร้านตัวเองก่อนคู่แข่ง ข้อมูลจากแหล่งข้อมูล public อัปเดตรายวัน</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Platform</div>
+        <div class="footer-links">
+          <a class="footer-link" href="./listing.html">Discover Restaurants</a>
+          <a class="footer-link" href="./listing.html?velocity=rising">Rising Trends</a>
+          <a class="footer-link" href="./listing.html?velocity=very-strong">Top Signals</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">About</div>
+        <div class="footer-links">
+          <a class="footer-link" href="./about.html">Our Methodology</a>
+          <a class="footer-link" href="./about.html#legal">Legal Framework</a>
+          <a class="footer-link" href="./about.html#b2b">B2B Intelligence</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">For Business</div>
+        <div class="footer-links">
+          <a class="footer-link" href="./restaurant_partner.html">Restaurant / Brand Pilot</a>
+          <a class="footer-link" href="./creator.html">Creator Network</a>
+          <a class="footer-link" href="mailto:contact@chefministry.com?subject=ChefMinistry%20Pilot%20Partnership">Pilot Partnership</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">ติดต่อ</div>
+        <div class="footer-links">
+          <a class="footer-link" href="https://line.me/R/ti/p/@chefministry" target="_blank">💬 LINE: @chefministry</a>
+          <a class="footer-link" href="mailto:contact@chefministry.com?subject=ChefMinistry%20Pilot%20Partnership">✉️ contact@chefministry.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">© 2026 ChefMinistry. ข้อมูลทั้งหมดมาจากแหล่งข้อมูล public. ไม่ใช่คำแนะนำเชิงพาณิชย์.</div>
+      <div class="footer-legal">Rating Intelligence. Not Just Reviews.</div>
+    </div>
+  </div>
+</footer>
+
+<\!-- Firebase SDK (compat) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<script src="./js/firebase-config.js"></script>
+<script src="./js/auth.js"></script>
+<script src="./js/data.js?v=20260413"></script>
+<script>
+  // Mobile nav
   document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
-      document.getElementById("mobileNav").classList.toggle("open");
+    const n=document.getElementById("mobileNav");
+    n.style.display=n.style.display==="block"?"none":"block";
   });
-  
-  // ── Weekly highlight ─────────────────────────────────────────────────────────
-  document.addEventListener("DOMContentLoaded", () => {
-      if (typeof CM_SIGNALS !== "undefined" && CM_SIGNALS.weeklyHighlight) {
-            const w = CM_SIGNALS.weeklyHighlight;
-            const el = document.getElementById("weeklyTitle");
-            const desc = document.getElementById("weeklyDesc");
-            if (el) el.textContent = w.title || "Trend ประจำสัปดาห์";
-                  if (desc) desc.textContent = w.desc || "";
+
+  // Dynamic stats
+  const statR = document.getElementById("statRestaurants");
+  if (statR) {
+    const total = (typeof CM_DB_STATS \!== "undefined") ? CM_DB_STATS.total : CM_RESTAURANTS.length;
+    statR.textContent = total + "+";
+  }
+  const statDashTotal = document.getElementById("statDashTotal");
+  if (statDashTotal && typeof CM_RESTAURANTS \!== "undefined") {
+    statDashTotal.textContent = CM_RESTAURANTS.length + "+";
+  }
+  const statDashRising = document.getElementById("statDashRising");
+  if (statDashRising && typeof CM_RESTAURANTS \!== "undefined") {
+    const risingCount = CM_RESTAURANTS.filter(r => r.trendVelocity === "rising").length;
+    statDashRising.textContent = "↑ " + risingCount;
+  }
+
+  // Weekly highlight
+  const wh = CM_SIGNALS.weeklyHighlight;
+  document.getElementById("weeklyTitle").textContent = wh.title;
+  document.getElementById("weeklyDesc").textContent = wh.desc;
+
+  // Updated date badge
+  const updBadge = document.getElementById("weeklyUpdatedBadge");
+  const updDate  = document.getElementById("weeklyUpdatedDate");
+  if (updBadge && updDate) {
+    const lastUpdated = (typeof CM_DB_STATS \!== "undefined" && CM_DB_STATS.lastUpdated)
+      ? CM_DB_STATS.lastUpdated
+      : new Date().toISOString().slice(0,10);
+    updDate.textContent = lastUpdated;
+    updBadge.style.display = "flex";
+  }
+
+  // ── Hero card — Highest Velocity จาก scraper, fallback static ──────────────
+  const heroCard = document.getElementById("heroOverlapCard");
+  if (heroCard) {
+    const extSorted = (typeof CM_EXTERNAL_RESTAURANTS \!== "undefined" && CM_EXTERNAL_RESTAURANTS.length > 0)
+      ? [...CM_EXTERNAL_RESTAURANTS].filter(r => (r.velocityPct||0) > 0 && r.isRestaurant \!== false)
+          .sort((a,b) => (b.velocityPct||0) - (a.velocityPct||0))
+      : [];
+    const heroExt = extSorted[0];
+
+    const weeklyRestName = (CM_SIGNALS.weeklyHighlight || {}).restaurant;
+    const top5Static = [...CM_RESTAURANTS].sort((a,b) => (b.overlapSignal||0) - (a.overlapSignal||0)).slice(0, 5);
+    const weeklyRest = weeklyRestName ? (CM_RESTAURANTS.find(r => r.name === weeklyRestName) || top5Static[0]) : null;
+    const weekNum = Math.floor((Date.now() - new Date("2025-01-01").getTime()) / (7*24*60*60*1000));
+    const heroStatic = weeklyRest || top5Static[weekNum % top5Static.length];
+
+    const useExt = \!\!heroExt;
+    const heroRest = useExt ? heroExt : heroStatic;
+
+    if (heroRest) {
+      const name = heroRest.name || heroRest.name_en || "";
+      const cuisine = heroRest.cuisine || "";
+      const area = heroRest.area || "";
+      const budget = heroRest.budgetLabel || "฿฿";
+      const note = heroRest.cmNote || "";
+
+      if (useExt) {
+        const pct = heroRest.velocityPct ? `+${Math.round(heroRest.velocityPct)}%` : "";
+        const newRev = heroRest.newReviews30d || 0;
+        heroCard.innerHTML = `
+          <div class="hero-sample-head">
+            <span>🚀 Highest Velocity — ร้านที่โดดเด่นสัปดาห์นี้</span>
+            <span class="verdict" style="background:rgba(10,107,67,.2);color:#56c282">↑ Rising</span>
+          </div>
+          <div class="hero-sample-card">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+              <div>
+                <div class="hero-sample-name">${escHtml(name)}</div>
+                <div class="hero-sample-type">${escHtml(cuisine)} · ${escHtml(area)}</div>
+              </div>
+              <div style="text-align:right">
+                <div style="font-size:10px;font-weight:900;color:var(--text-2);text-transform:uppercase;letter-spacing:.08em">Velocity (30d)</div>
+                <div style="font-size:28px;font-weight:900;color:var(--green);font-family:'Playfair Display',serif;line-height:1.1">${escHtml(pct)}</div>
+              </div>
+            </div>
+            <div style="margin-bottom:12px">
+              <div style="font-size:10px;font-weight:800;color:var(--text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">New Reviews (30 days)</div>
+              <div style="font-size:20px;font-weight:900;color:var(--navy)">+${newRev} reviews</div>
+            </div>
+            <div class="hero-sample-insight">${escHtml(note)}</div>
+          </div>`;
+      } else {
+        const maxDots = 10;
+        const filled = Math.min(heroRest.overlapSignal||0, maxDots);
+        const dots = Array.from({length: maxDots}, (_,i) =>
+          `<span style="width:10px;height:10px;border-radius:50%;background:${i < filled ? "var(--green)" : "var(--border)"};display:inline-block"></span>`
+        ).join("");
+        const tiers = heroRest.reviewerTiers || {};
+        const tierHtml = [
+          tiers.mega  > 0 ? `<span class="tier-badge tier-mega">Mega ×${tiers.mega}</span>`   : "",
+          tiers.macro > 0 ? `<span class="tier-badge tier-macro">Macro ×${tiers.macro}</span>` : "",
+          tiers.mid   > 0 ? `<span class="tier-badge tier-mid">Mid ×${tiers.mid}</span>`       : "",
+        ].filter(Boolean).join("");
+        heroCard.innerHTML = `
+          <div class="hero-sample-head">
+            <span>📈 Velocity Signal — Live</span>
+            <span class="verdict" style="background:rgba(10,107,67,.2);color:#56c282">${escHtml(heroRest.trendBadge||"")}</span>
+          </div>
+          <div class="hero-sample-card">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+              <div>
+                <div class="hero-sample-name">${escHtml(name)}</div>
+                <div class="hero-sample-type">${escHtml(cuisine)} · ${escHtml(area)} · ${escHtml(budget)}</div>
+              </div>
+              <div style="text-align:right">
+                <div style="font-size:10px;font-weight:900;color:var(--text-2);text-transform:uppercase;letter-spacing:.08em">Signal Strength</div>
+                <div style="font-size:28px;font-weight:900;color:var(--green);font-family:'Playfair Display',serif;line-height:1.1">${heroRest.overlapSignal||0} <span style="font-size:12px">INF</span></div>
+              </div>
+            </div>
+            <div style="margin-bottom:12px">
+              <div style="font-size:10px;font-weight:800;color:var(--text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Unique Influencers (30 days)</div>
+              <div style="display:flex;gap:4px;flex-wrap:wrap">${dots}</div>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">${tierHtml}</div>
+            <div class="hero-sample-insight">${escHtml(note)}</div>
+          </div>`;
       }
-    
-      // Category list
-          if (typeof CM_CATEGORIES !== "undefined") {
-                const list = document.getElementById("trendCategoryList");
-                if (list) {
-                        list.innerHTML = CM_CATEGORIES.filter(c => c.trend === "rising").slice(0,4).map(c =>
-          `<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-                    <span style="font-size:18px">${c.emoji||"🍽️"}</span>
-                              <span style="font-weight:700;font-size:14px">${c.name}</span>
-              <span style="font-size:12px;color:var(--text-muted)">${c.desc||""}</span>
-  </div>`
-                                ).join("");
-                }
-          }
-    
-      // Rising grid
-    if (typeof CM_RESTAURANTS !== "undefined") {
-          const grid = document.getElementById("risingGrid");
-          if (grid) {
-        const rising = CM_RESTAURANTS.filter(r => r.trendVelocity === "rising").slice(0,6);
-                  grid.innerHTML = rising.map(r => `
-                          <div class="card restaurant-card">
-                                    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
-                                                <div>
-                                                              <div style="font-size:24px">${r.emoji||"🍽️"}</div>
-                                  <div class="card-title" style="margin-top:6px">${r.name}</div>
-                                                <div style="font-size:12px;color:var(--text-muted)">${r.cuisine} · ${r.area}</div>
-                                                            </div>
-                                                                                 <span class="signal-tag signal-${r.signalStrength||"moderate"}">${r.trendBadge||"→ Stable"}</span>
-                                                                                           </div>
-                                                                                                     <div style="font-size:13px;color:var(--text-muted);margin-bottom:12px">${r.cmNote||""}</div>
-                                                                                                               <div style="display:flex;gap:8px;flex-wrap:wrap">
-                                                                                                                           ${(r.tags||[]).slice(0,2).map(t=>`<span class="tag">${t}</span>`).join("")}
-                                                                                                                                     </div>
-                                                                                                                                             </div>
-                           
+    }
+  }
+
+  // ── Trend category → restaurant matcher ────────────────────────────────────
+  const CAT_FILTER = {
+    "Thai Fine Dining": r => r.type === "fine-dining" && (r.cuisine.toLowerCase().includes("thai") || r.cuisine.toLowerCase().includes("samrub")),
+    "Japanese Omakase": r => r.type === "omakase",
+    "Hidden Gems":      r => r.tags && r.tags.some(t => t === "Hidden Gem" || t === "ล้านลับ"),
+    "Farm-to-Table":    r => r.tags && r.tags.some(t => t.toLowerCase().includes("farm")),
+    "Neapolitan Pizza": r => r.cuisine.toLowerCase().includes("pizza") || r.cuisine.toLowerCase().includes("neapolitan"),
+    "Artisan Ramen":    r => r.cuisine.toLowerCase().includes("ramen"),
+    "Thai Street Food": r => r.type === "street-food",
+    "Hot Pot / Suki":   r => r.cuisine.toLowerCase().includes("hot pot") || r.cuisine.toLowerCase().includes("suki"),
+    "Steakhouse":       r => r.type === "steakhouse",
+  };
+
+  const sortedTrends = [...CM_SIGNALS.trendCategories].sort((a, b) => {
+    const va = parseInt(a.change);
+    const vb = parseInt(b.change);
+    if (isNaN(va) && isNaN(vb)) return 0;
+    if (isNaN(va)) return 1;
+    if (isNaN(vb)) return -1;
+    return vb - va;
+  });
+
+  const tcList = document.getElementById("trendCategoryList");
+  const tcRows = [];
+  for (var ti = 0; ti < sortedTrends.length; ti++) {
+    var t = sortedTrends[ti];
+    var rawVal = parseInt(t.change);
+    var isPos  = \!t.change.startsWith("-");
+    var barPct = isNaN(rawVal) ? 8 : Math.min(Math.abs(rawVal) * 2.2, 100);
+    var barClass = t.signal === "declining" ? "declining" : (t.signal === "stable" || t.signal === "moderate") ? "stable" : "";
+    var changeClass = isNaN(rawVal) ? "" : (isPos ? "positive" : "negative");
+    var changeStyle = isNaN(rawVal) ? "color:var(--text-2);font-style:italic;font-weight:700" : "";
+
+    var filterFn = CAT_FILTER[t.cat];
+    var matched = [];
+    if (filterFn) {
+      var all = CM_RESTAURANTS.filter(filterFn);
+      all.sort(function(a,b){ return (b.overlapSignal||0)-(a.overlapSignal||0); });
+      matched = all.slice(0, 3);
+    }
+
+    var chipsHtml = "";
+    if (matched.length > 0) {
+      var chipItems = "";
+      for (var ci = 0; ci < matched.length; ci++) {
+        var r = matched[ci];
+        chipItems += '<a href="./restaurant.html?id=' + escHtml(r.id) + '" class="rest-chip">'
+          + escHtml(r.emoji) + ' ' + escHtml(r.name)
+          + '<span class="chip-inf">' + r.overlapSignal + ' INF</span></a>';
+      }
+      chipsHtml = '<div class="chip-row">' + chipItems + '</div>';
+    }
+
+    tcRows.push(
+      '<div class="trend-row" style="flex-direction:column;align-items:stretch;gap:3px;margin-bottom:2px">'
+      + '<div style="display:flex;align-items:center;gap:8px">'
+      + '<div class="trend-cat">' + escHtml(t.cat) + '</div>'
+      + '<div class="trend-bar-wrap" style="flex:1"><div class="trend-bar-fill ' + barClass + '" style="width:' + barPct + '%"></div></div>'
+      + '<div class="trend-change ' + changeClass + '" style="' + changeStyle + '">' + escHtml(t.change) + '</div>'
+      + '<div class="trend-inf-count">' + t.influencers + ' INF</div>'
+      + '</div>'
+      + chipsHtml
+      + '</div>'
+    );
+  }
+  tcList.innerHTML = tcRows.join("");
+
+  // Rank list — velocity จาก DB ถ้ามี, fallback = overlap signal
+  const rankList  = document.getElementById("overlapRankList");
+  const rankLabel = document.getElementById("rankListLabel");
+  const extRising = (typeof CM_EXTERNAL_RESTAURANTS \!== "undefined" && CM_EXTERNAL_RESTAURANTS.length > 0)
+    ? [...CM_EXTERNAL_RESTAURANTS]
+        .filter(r => (r.velocityPct || 0) > 0 && r.isRestaurant \!== false)
+        .sort((a,b) => (b.velocityPct||0) - (a.velocityPct||0))
+        .slice(0, 5)
+    : [];
+
+  if (rankLabel) {
+    rankLabel.textContent = extRising.length > 0
+      ? "📈 Velocity Rank — รีวิวเพิ่มเร็วที่สุดสัปดาห์นี้"
+      : "📡 Signal Rank — ร้านที่ trend กำลังมาแรงสุด";
+  }
+
+  const velocityItems = extRising.length > 0 ? extRising.map((r,i) => {
+    const pct = r.velocityPct ? `+${Math.round(r.velocityPct)}%` : "";
+    const newRev = r.newReviews30d ? `+${r.newReviews30d} reviews` : "";
+    return `<div class="rank-item" style="cursor:default">
+      <div class="rank-num ${i<3?"top3":""}">${i+1}</div>
+      <div style="flex:1;min-width:0">
+        <div class="rank-name">${escHtml(r.name||r.name_en||"")}</div>
+        <div class="rank-meta">${escHtml(r.cuisine||"")} · ${escHtml(r.area||"")}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+        <div style="font-size:16px;font-weight:900;color:var(--green)">${pct}</div>
+        <div style="font-size:11px;color:var(--text-2);font-weight:700">${newRev}</div>
+      </div>
+    </div>`;
+  }).join("") : topByOverlap(5).map((r,i) => {
+    return `<a class="rank-item" href="./restaurant.html?id=${escHtml(r.id)}" style="cursor:pointer;text-decoration:none;color:inherit">
+      <div class="rank-num ${i<3?"top3":""}">${i+1}</div>
+      <div>
+        <div class="rank-name">${escHtml(r.name)}</div>
+        <div class="rank-meta">${escHtml(r.cuisine)} · ${escHtml(r.area)}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+        <div style="font-size:17px;font-weight:900;color:var(--green)">${r.overlapSignal} <span style="font-size:10px;font-weight:800">INF</span></div>
+        <span class="velocity ${r.trendVelocity}">${escHtml(r.trendBadge)}</span>
+      </div>
+    </a>`;
+  }).join("");
+  rankList.innerHTML = velocityItems;
+
+  // Thai Fine Dining spotlight grid
+  const thaiFineDineGrid = document.getElementById("thaiFineDineGrid");
+  const thaiFineDine = CM_RESTAURANTS
+    .filter(r => r.type === "fine-dining" && (r.cuisine.toLowerCase().includes("thai") || r.cuisine.toLowerCase().includes("samrub")))
+    .sort((a,b) => (b.overlapSignal||0) - (a.overlapSignal||0))
+    .slice(0,3);
+  thaiFineDineGrid.innerHTML = thaiFineDine.length
+    ? thaiFineDine.map(r => buildRestaurantCard(r, {showOverlap:true})).join("")
+    : `<div style="color:rgba(255,255,255,.5);grid-column:1/-1;padding:20px">ไม่มีข้อมูล</div>`;
+
+  // Rising grid (ยกเว้น Thai Fine Dining ที่แสดงด้านบนแล้ว)
+  const risingGrid = document.getElementById("risingGrid");
+  const thaiFineDineIds = new Set(thaiFineDine.map(r => r.id));
+  const rising = CM_RESTAURANTS
+    .filter(r => r.trendVelocity === "rising" && \!thaiFineDineIds.has(r.id))
+    .slice(0, 6);
+  risingGrid.innerHTML = rising.length
+    ? rising.map(r => buildRestaurantCard(r, {showOverlap:true})).join("")
+    : `<div style="color:var(--text-2);grid-column:1/-1;padding:20px">ไม่มีข้อมูล Rising ในขณะนี้</div>`;
+</script>
+
+</body>
+</html>
