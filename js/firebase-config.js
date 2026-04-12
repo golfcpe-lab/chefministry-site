@@ -13,3 +13,4 @@ const CM_FIREBASE_CONFIG = {
   appId:             "1:1030596429058:web:0249826d6b4affc324ae1b",
   measurementId:     "G-R8P8J6L8BJ",
 };
+window.CM_FIREBASE_CONFIG = CM_FIREBASE_CONFIG;
