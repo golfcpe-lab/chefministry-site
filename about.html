@@ -5,10 +5,107 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <link rel="icon" type="image/png" href="./assets/logo_circular.png"/>
   <title>ChefMinistry — Methodology · วิธีที่เราวัด Rating Trend</title>
-  <meta name="description" content="ChefMinistry ดึงข้อมูลคะแนนรีวิวจากแหล่งข้อมูล public รายวัน เพื่อคำนวณ velocity และ benchmark ใน category เดียวกัน"/>
+  <meta name="description" content="ChefMinistry วิเคราะห์ Rating Velocity จากแหล่งข้อมูล public รายวัน เพื่อให้ร้านอาหารรู้ตำแหน่งตัวเอง และให้ Food Creator เห็นโอกาสก่อนตลาด"/>
   <link rel="stylesheet" href="./css/style.css"/>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-BT2BCMZ9SH"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BT2BCMZ9SH');</script>
+  <style>
+    /* ── Methodology page extras ── */
+    .flow-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 24px;
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    .flow-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .flow-connector {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 4px 0;
+      color: var(--text-2);
+      font-size: 22px;
+      opacity: .4;
+    }
+    .source-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .velocity-demo {
+      background: #0d1f3c;
+      border-radius: 14px;
+      padding: 20px;
+      color: #fff;
+    }
+    .velocity-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: rgba(255,255,255,.07);
+      margin-bottom: 8px;
+    }
+    .velocity-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(255,255,255,.55);
+      text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+    .velocity-value {
+      font-size: 15px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .velocity-arrow {
+      font-size: 13px;
+      color: rgba(255,255,255,.35);
+      margin: 0 6px;
+    }
+    .velocity-result {
+      font-size: 22px;
+      font-weight: 900;
+    }
+    .signal-bar {
+      display: flex;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 10px;
+      width: 100%;
+      gap: 2px;
+    }
+    .signal-seg { flex: 1; border-radius: 3px; }
+    .sig-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+  </style>
 </head>
 <body>
 
@@ -45,88 +142,240 @@
 </header>
 
 <!-- ── HERO ── -->
-<div class="hero" style="padding:60px 0 40px">
+<div class="hero" style="padding:56px 0 48px">
   <div class="container">
-    <div class="breadcrumb">
-      <a href="./index.html">Home</a>
-      <span class="breadcrumb-sep">/</span>
-      <span style="color:#fff">Methodology</span>
+    <div style="max-width:640px">
+      <div class="eyebrow hero-eyebrow" style="margin-bottom:14px">🔬 Methodology</div>
+      <h1 class="display-1" style="color:#fff;margin-bottom:16px">ข้อมูลขับเคลื่อน<br/>ทุกการตัดสินใจ</h1>
+      <p style="color:rgba(255,255,255,.72);font-size:17px;line-height:1.75;max-width:520px">
+        เราไม่เดา — เราวัด รวบรวม review count และ rating score จากแหล่งข้อมูล public ทุกวัน
+        แล้วคำนวณ velocity เพื่อให้เห็นว่าร้านไหนกำลังมา และร้านไหนกำลังหยุดนิ่ง
+      </p>
+      <!-- stats row -->
+      <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:28px">
+        <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:12px 20px;text-align:center">
+          <div style="font-size:22px;font-weight:900;color:#fff">138+</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.55);font-weight:700;text-transform:uppercase;letter-spacing:.07em">ร้านใน DB</div>
+        </div>
+        <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:12px 20px;text-align:center">
+          <div style="font-size:22px;font-weight:900;color:#fff">3</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.55);font-weight:700;text-transform:uppercase;letter-spacing:.07em">แหล่งข้อมูล</div>
+        </div>
+        <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:12px 20px;text-align:center">
+          <div style="font-size:22px;font-weight:900;color:var(--gold)">Daily</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.55);font-weight:700;text-transform:uppercase;letter-spacing:.07em">อัปเดต</div>
+        </div>
+        <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:12px 20px;text-align:center">
+          <div style="font-size:22px;font-weight:900;color:#fff">30d</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.55);font-weight:700;text-transform:uppercase;letter-spacing:.07em">Velocity Window</div>
+        </div>
+      </div>
     </div>
-    <div style="max-width:680px;margin-top:24px">
-      <div class="eyebrow hero-eyebrow">🔬 How It Works</div>
-      <h1 class="display-1" style="color:#fff;margin-bottom:16px">วิธีที่เราวัด<br/>Rating Trend</h1>
-      <p style="color:#cbd5e1;font-size:18px;line-height:1.7">
-        ChefMinistry ไม่ได้ใช้ความรู้สึก ใช้ข้อมูล — ดึง review count และคะแนน
-        จากแหล่งข้อมูล public รายวัน เพื่อให้ทุกคนเห็น trend ที่เกิดขึ้นจริง
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- ── HOW IT WORKS — VISUAL FLOW ── -->
+<section class="section" id="methodology">
+  <div class="container" style="max-width:760px">
+    <div style="text-align:center;margin-bottom:40px">
+      <div class="eyebrow" style="margin-bottom:8px">How It Works</div>
+      <h2 class="display-2">3 ขั้นตอน จากข้อมูลสู่ Insight</h2>
+    </div>
+
+    <!-- STEP 1: Collect -->
+    <div class="flow-step">
+      <div class="flow-icon" style="background:#eff6ff">📥</div>
+      <div style="flex:1">
+        <div style="font-size:11px;font-weight:900;color:var(--text-2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px">Step 1 — รวบรวมข้อมูล Daily</div>
+        <div style="font-size:17px;font-weight:800;color:var(--navy);margin-bottom:10px">ดึงข้อมูลจาก 3 แหล่งทุกวัน</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <span class="source-pill">🟡 Review Platform</span>
+          <span class="source-pill">🗺️ Google Maps</span>
+          <span class="source-pill" style="border-color:#d4d4d4;color:var(--text-2)">🎥 Creator Signal <span style="font-size:10px;font-weight:500">(เสริม)</span></span>
+        </div>
+        <p style="font-size:13px;color:var(--text-2);margin-top:10px;line-height:1.65">
+          เก็บ <strong style="color:var(--navy)">review count</strong> และ <strong style="color:var(--navy)">rating score</strong>
+          เป็น daily snapshot ใน database — ข้อมูลทั้งหมดจาก public API
+        </p>
+      </div>
+    </div>
+
+    <div class="flow-connector">↓</div>
+
+    <!-- STEP 2: Velocity Calculation -->
+    <div class="flow-step">
+      <div class="flow-icon" style="background:#f0fdf4">📈</div>
+      <div style="flex:1">
+        <div style="font-size:11px;font-weight:900;color:var(--text-2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px">Step 2 — คำนวณ Velocity</div>
+        <div style="font-size:17px;font-weight:800;color:var(--navy);margin-bottom:14px">เปรียบเทียบ 30 วัน — วัดว่าร้านไหนโตเร็ว</div>
+
+        <!-- Visual velocity demo -->
+        <div class="velocity-demo">
+          <div style="font-size:11px;color:rgba(255,255,255,.45);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px">ตัวอย่าง: ร้าน A vs ร้าน B</div>
+
+          <!-- Restaurant A -->
+          <div style="margin-bottom:14px">
+            <div style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:6px;font-weight:700">ร้าน A — Thai Fine Dining</div>
+            <div class="velocity-row">
+              <span class="velocity-label">Review Count</span>
+              <span class="velocity-value">150 <span class="velocity-arrow">→</span> 216</span>
+              <span style="font-size:14px;font-weight:900;color:#4ade80">+44%</span>
+            </div>
+            <div class="velocity-row">
+              <span class="velocity-label">Rating Score</span>
+              <span class="velocity-value">4.4 <span class="velocity-arrow">→</span> 4.7</span>
+              <span style="font-size:13px;font-weight:800;color:#86efac">▲ ขึ้น</span>
+            </div>
+            <div style="margin-top:8px;display:flex;align-items:center;gap:8px">
+              <span style="font-size:11px;font-weight:900;background:#16a34a;color:#fff;padding:3px 10px;border-radius:99px">↑ Rising Fast</span>
+              <span style="font-size:11px;color:rgba(255,255,255,.45)">Velocity ≥ 25%</span>
+            </div>
+          </div>
+
+          <!-- Restaurant B -->
+          <div>
+            <div style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:6px;font-weight:700">ร้าน B — Thai Fine Dining (เดียวกัน)</div>
+            <div class="velocity-row">
+              <span class="velocity-label">Review Count</span>
+              <span class="velocity-value">520 <span class="velocity-arrow">→</span> 541</span>
+              <span style="font-size:14px;font-weight:900;color:#fbbf24">+4%</span>
+            </div>
+            <div class="velocity-row">
+              <span class="velocity-label">Rating Score</span>
+              <span class="velocity-value">4.8 <span class="velocity-arrow">→</span> 4.8</span>
+              <span style="font-size:13px;font-weight:800;color:rgba(255,255,255,.4)">— คงที่</span>
+            </div>
+            <div style="margin-top:8px;display:flex;align-items:center;gap:8px">
+              <span style="font-size:11px;font-weight:900;background:#d97706;color:#fff;padding:3px 10px;border-radius:99px">→ Stable</span>
+              <span style="font-size:11px;color:rgba(255,255,255,.45)">Velocity &lt; 10%</span>
+            </div>
+          </div>
+
+          <!-- Formula note -->
+          <div style="margin-top:14px;padding:10px 14px;background:rgba(255,255,255,.05);border-radius:8px;border-left:3px solid var(--gold)">
+            <div style="font-size:11px;color:rgba(255,255,255,.45);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Formula</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.85);font-weight:600;font-family:'Courier New',monospace">
+              Velocity = (reviews<sub style="font-size:9px">today</sub> − reviews<sub style="font-size:9px">30d ago</sub>) ÷ reviews<sub style="font-size:9px">30d ago</sub> × 100%
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-connector">↓</div>
+
+    <!-- STEP 3: Benchmark -->
+    <div class="flow-step">
+      <div class="flow-icon" style="background:#fefce8">🏆</div>
+      <div style="flex:1">
+        <div style="font-size:11px;font-weight:900;color:var(--text-2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px">Step 3 — Category Benchmark</div>
+        <div style="font-size:17px;font-weight:800;color:var(--navy);margin-bottom:10px">เปรียบ Ramen vs Ramen — ไม่ใช่ vs Fine Dining</div>
+        <p style="font-size:13px;color:var(--text-2);line-height:1.65;margin-bottom:14px">
+          velocity 20% อาจจะเก่งมากใน Ramen แต่ธรรมดาใน Street Food — benchmark ภายใน category เดียวกันเท่านั้น
+        </p>
+        <!-- Category visual -->
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <div style="border:1.5px solid #22c55e;border-radius:10px;padding:10px 14px;background:#f0fdf4">
+            <div style="font-size:10px;font-weight:800;color:#15803d;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">🍜 Ramen</div>
+            <div style="font-size:12px;color:#166534;font-weight:700">Ramen A vs Ramen B vs Ramen C</div>
+          </div>
+          <div style="border:1.5px solid #a855f7;border-radius:10px;padding:10px 14px;background:#faf5ff">
+            <div style="font-size:10px;font-weight:800;color:#7c3aed;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">🥂 Fine Dining</div>
+            <div style="font-size:12px;color:#6d28d9;font-weight:700">Fine A vs Fine B vs Fine C</div>
+          </div>
+          <div style="border:1.5px solid #f59e0b;border-radius:10px;padding:10px 14px;background:#fffbeb">
+            <div style="font-size:10px;font-weight:800;color:#b45309;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">🍣 Omakase</div>
+            <div style="font-size:12px;color:#92400e;font-weight:700">Omakase A vs Omakase B</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-connector">↓</div>
+
+    <!-- OUTPUT: Signal -->
+    <div style="padding:24px;background:linear-gradient(135deg,#0d1f3c,#1a2f52);border-radius:var(--radius-lg);color:#fff;text-align:center">
+      <div style="font-size:12px;font-weight:900;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px">Output — Trend Signal</div>
+      <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">
+        <span class="sig-badge" style="background:#16a34a;color:#fff">↑ Rising Fast</span>
+        <span class="sig-badge" style="background:#15803d;color:#fff">↑ Rising</span>
+        <span class="sig-badge" style="background:#d97706;color:#fff">→ Stable</span>
+        <span class="sig-badge" style="background:#dc2626;color:#fff">↓ Declining</span>
+      </div>
+      <p style="font-size:13px;color:rgba(255,255,255,.55);margin-top:12px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.6">
+        signal ที่ได้ใช้เพื่อแจ้งร้านอาหารถึงสถานะตัวเอง และช่วย Food Creator เลือกร้านที่กำลัง trend
       </p>
     </div>
-  </div>
-</div>
 
-<!-- ── DATA SOURCES ── -->
-<section class="section">
-  <div class="container">
-    <div class="section-cols-2">
-      <div>
-        <div class="eyebrow" style="margin-bottom:12px">Data Sources</div>
-        <h2 class="display-2" style="margin-bottom:20px">ข้อมูลจากไหน?</h2>
-        <p class="lead" style="margin-bottom:16px">
-          เราดึงข้อมูลจาก platform หลักที่คนไทยใช้จริงในการรีวิวร้านอาหาร
-          ข้อมูลทั้งหมดเป็น public information ที่ทุกคนเข้าถึงได้
-        </p>
-        <div style="display:flex;flex-direction:column;gap:16px;margin-top:24px">
-          <div style="display:flex;gap:16px;align-items:flex-start;padding:16px;background:var(--bg);border-radius:12px">
-            <div style="font-size:32px">🟡</div>
-            <div>
-              <div style="font-weight:800;font-size:15px;margin-bottom:4px">Restaurant Review Platform</div>
-              <div style="font-size:13px;color:var(--text-muted)">Platform รีวิวร้านอาหารชั้นนำของไทย — รวบรวม review count, rating score, และ cuisine type รายวัน จากข้อมูล public ที่เปิดให้เข้าถึงได้ทั่วไป</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:16px;align-items:flex-start;padding:16px;background:var(--bg);border-radius:12px">
-            <div style="font-size:32px">🗺️</div>
-            <div>
-              <div style="font-weight:800;font-size:15px;margin-bottom:4px">Google Maps</div>
-              <div style="font-size:13px;color:var(--text-muted)">ดึง userRatingCount และ rating score ผ่าน Google Places API — ข้อมูลครอบคลุมและอัปเดตบ่อยที่สุด เป็น source หลักของ velocity calculation</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:16px;align-items:flex-start;padding:16px;background:var(--bg);border-radius:12px">
-            <div style="font-size:32px">🎥</div>
-            <div>
-              <div style="font-weight:800;font-size:15px;margin-bottom:4px">Food Creator Signal <span style="font-size:11px;font-weight:500;color:var(--text-muted)">(ข้อมูลเสริม)</span></div>
-              <div style="font-size:13px;color:var(--text-muted)">ติดตาม food creator channels เพื่อ cross-validate trend — ถ้า rating ขึ้นพร้อมกับ influencer review นั่นคือ strong signal ที่น่าเชื่อถือมากขึ้น</div>
-            </div>
-          </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<\!-- ── SIGNAL STRENGTH TABLE ── -->
+<section class="section" style="background:var(--white)">
+  <div class="container" style="max-width:760px">
+    <div style="text-align:center;margin-bottom:32px">
+      <div class="eyebrow" style="margin-bottom:8px">Signal Strength</div>
+      <h2 class="display-2">Velocity แปลเป็น Signal ยังไง?</h2>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="display:flex;align-items:center;gap:16px;padding:14px 18px;border:1.5px solid #dcfce7;border-radius:12px">
+        <span style="font-size:22px;width:36px;text-align:center">🔥</span>
+        <div style="flex:1">
+          <div style="font-weight:800;font-size:15px;color:#15803d;margin-bottom:2px">Very Strong</div>
+          <div style="font-size:13px;color:var(--text-2)">New reviews ≥ 100 หรือ Velocity ≥ 50% ใน 30 วัน</div>
+        </div>
+        <div style="display:flex;gap:4px">
+          <span style="width:12px;height:12px;border-radius:50%;background:#16a34a;display:inline-block"></span>
+          <span style="width:12px;height:12px;border-radius:50%;background:#16a34a;display:inline-block"></span>
+          <span style="width:12px;height:12px;border-radius:50%;background:#16a34a;display:inline-block"></span>
+          <span style="width:12px;height:12px;border-radius:50%;background:#16a34a;display:inline-block"></span>
+          <span style="width:12px;height:12px;border-radius:50%;background:#16a34a;display:inline-block"></span>
         </div>
       </div>
-      <div>
-        <div class="card" style="padding:24px;background:var(--dark);color:#fff">
-          <div class="eyebrow" style="color:var(--gold);margin-bottom:16px">📊 ตัวอย่าง Velocity Data</div>
-          <div style="display:flex;flex-direction:column;gap:12px">
-            <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:12px">
-              <div style="font-size:12px;color:#94a3b8;margin-bottom:6px">Jan 1 — Feb 1 (30 วัน)</div>
-              <div style="display:flex;justify-content:space-between">
-                <span style="font-weight:700">Review Count</span>
-                <span style="color:#4ade80">150 → 213 (+42%)</span>
-              </div>
-              <div style="display:flex;justify-content:space-between;margin-top:4px">
-                <span style="font-weight:700">Rating Score</span>
-                <span>4.5 → 4.7</span>
-              </div>
-              <div style="margin-top:8px;font-size:11px;background:#16a34a;color:#fff;padding:2px 8px;border-radius:99px;display:inline-block">↑ Rising Fast</div>
-            </div>
-            <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:12px">
-              <div style="font-size:12px;color:#94a3b8;margin-bottom:6px">Jan 1 — Feb 1 (30 วัน)</div>
-              <div style="display:flex;justify-content:space-between">
-                <span style="font-weight:700">Review Count</span>
-                <span style="color:#d97706">520 → 562 (+8%)</span>
-              </div>
-              <div style="display:flex;justify-content:space-between;margin-top:4px">
-                <span style="font-weight:700">Rating Score</span>
-                <span>4.8 → 4.8</span>
-              </div>
-              <div style="margin-top:8px;font-size:11px;background:#d97706;color:#fff;padding:2px 8px;border-radius:99px;display:inline-block">→ Stable</div>
-            </div>
-          </div>
+      <div style="display:flex;align-items:center;gap:16px;padding:14px 18px;border:1.5px solid #dcfce7;border-radius:12px">
+        <span style="font-size:22px;width:36px;text-align:center">📈</span>
+        <div style="flex:1">
+          <div style="font-weight:800;font-size:15px;color:#166534;margin-bottom:2px">Strong</div>
+          <div style="font-size:13px;color:var(--text-2)">New reviews ≥ 40 หรือ Velocity ≥ 25%</div>
+        </div>
+        <div style="display:flex;gap:4px">
+          <span style="width:12px;height:12px;border-radius:50%;background:#16a34a;display:inline-block"></span>
+          <span style="width:12px;height:12px;border-radius:50%;background:#16a34a;display:inline-block"></span>
+          <span style="width:12px;height:12px;border-radius:50%;background:#16a34a;display:inline-block"></span>
+          <span style="width:12px;height:12px;border-radius:50%;background:#86efac;display:inline-block"></span>
+          <span style="width:12px;height:12px;border-radius:50%;background:#e4e4e7;display:inline-block"></span>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;padding:14px 18px;border:1.5px solid #fef9c3;border-radius:12px">
+        <span style="font-size:22px;width:36px;text-align:center">→</span>
+        <div style="flex:1">
+          <div style="font-weight:800;font-size:15px;color:#92400e;margin-bottom:2px">Moderate / Stable</div>
+          <div style="font-size:13px;color:var(--text-2)">New reviews ≥ 15 หรือ Velocity ≥ 10%</div>
+        </div>
+        <div style="display:flex;gap:4px">
+          <span style="width:12px;height:12px;border-radius:50%;background:#f59e0b;display:inline-block"></span>
+          <span style="width:12px;height:12px;border-radius:50%;background:#f59e0b;display:inline-block"></span>
+          <span style="width:12px;height:12px;border-radius:50%;background:#e4e4e7;display:inline-block"></span>
+          <span style="width:12px;height:12px;border-radius:50%;background:#e4e4e7;display:inline-block"></span>
+          <span style="width:12px;height:12px;border-radius:50%;background:#e4e4e7;display:inline-block"></span>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;padding:14px 18px;border:1.5px solid #fee2e2;border-radius:12px">
+        <span style="font-size:22px;width:36px;text-align:center">📉</span>
+        <div style="flex:1">
+          <div style="font-weight:800;font-size:15px;color:#b91c1c;margin-bottom:2px">Weak / Declining</div>
+          <div style="font-size:13px;color:var(--text-2)">เพิ่มขึ้นน้อยหรือ review count ลดลง</div>
+        </div>
+        <div style="display:flex;gap:4px">
+          <span style="width:12px;height:12px;border-radius:50%;background:#fca5a5;display:inline-block"></span>
+          <span style="width:12px;height:12px;border-radius:50%;background:#e4e4e7;display:inline-block"></span>
+          <span style="width:12px;height:12px;border-radius:50%;background:#e4e4e7;display:inline-block"></span>
+          <span style="width:12px;height:12px;border-radius:50%;background:#e4e4e7;display:inline-block"></span>
+          <span style="width:12px;height:12px;border-radius:50%;background:#e4e4e7;display:inline-block"></span>
         </div>
       </div>
     </div>
@@ -135,53 +384,32 @@
 
 <hr class="divider"/>
 
-<!-- ── STATS ── -->
-<div class="section-sm" style="background:var(--white)">
-  <div class="container">
-    <div class="stat-grid">
-      <div class="stat-card"><div class="stat-num">138+</div><div class="stat-label">ร้านอาหารในฐานข้อมูล</div></div>
-      <div class="stat-card"><div class="stat-num">Daily</div><div class="stat-label">อัปเดตรายวัน</div></div>
-      <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">แหล่งข้อมูล Public</div></div>
-      <div class="stat-card"><div class="stat-num">30d</div><div class="stat-label">Velocity Window</div></div>
+<\!-- DATA SOURCES -->
+<section class="section" id="sources">
+  <div class="container" style="max-width:760px">
+    <div style="text-align:center;margin-bottom:32px">
+      <div class="eyebrow" style="margin-bottom:8px">Data Sources</div>
+      <h2 class="display-2">ข้อมูลมาจากไหน?</h2>
+      <p class="lead" style="margin-top:8px;max-width:500px;margin-left:auto;margin-right:auto">ข้อมูลทั้งหมดเป็น public information ที่ทุกคนเข้าถึงได้</p>
     </div>
-  </div>
-</div>
-
-<hr class="divider"/>
-
-<!-- ── METHODOLOGY ── -->
-<section class="section" id="methodology">
-  <div class="container">
-    <div class="section-header" style="text-align:center">
-      <div class="eyebrow">How We Calculate</div>
-      <h2 class="display-2" style="margin-bottom:16px">Rating Velocity คืออะไร?</h2>
-      <p class="lead" style="max-width:600px;margin:0 auto">ไม่ใช่แค่ดูว่าคะแนนเท่าไหร่ แต่ดูว่า review เพิ่มขึ้นเร็วแค่ไหนใน 30 วัน</p>
-    </div>
-    <div class="grid-3" style="margin-top:40px">
-      <div class="step-card">
-        <div class="step-num">1</div>
-        <div class="step-title">รวบรวมข้อมูล Daily</div>
-        <div class="step-desc">รวบรวม review_count และ rating score จากแหล่งข้อมูล public ทุกวัน เก็บเป็น daily snapshot ใน database อัตโนมัติ</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+      <div style="padding:20px;background:var(--white);border:1.5px solid var(--border);border-radius:14px;text-align:center">
+        <div style="font-size:36px;margin-bottom:10px">🟡</div>
+        <div style="font-weight:800;font-size:14px;color:var(--navy);margin-bottom:6px">Review Platform</div>
+        <div style="font-size:12px;color:var(--text-2);line-height:1.55">Platform รีวิวร้านอาหารชั้นนำของไทย — review count + rating รายวัน</div>
+        <div style="margin-top:10px;font-size:10px;font-weight:800;color:#15803d;background:#f0fdf4;padding:3px 10px;border-radius:99px;display:inline-block">PRIMARY</div>
       </div>
-      <div class="step-card">
-        <div class="step-num">2</div>
-        <div class="step-title">คำนวณ Velocity</div>
-        <div class="step-desc">เปรียบเทียบ review count วันนี้ vs 30 วันก่อน คำนวณเป็น % เพิ่มขึ้น ร้านที่เพิ่มเร็วกว่าค่าเฉลี่ย = velocity สูงกว่า</div>
+      <div style="padding:20px;background:var(--white);border:1.5px solid var(--border);border-radius:14px;text-align:center">
+        <div style="font-size:36px;margin-bottom:10px">🗺️</div>
+        <div style="font-weight:800;font-size:14px;color:var(--navy);margin-bottom:6px">Google Maps</div>
+        <div style="font-size:12px;color:var(--text-2);line-height:1.55">userRatingCount + rating score ผ่าน Places API — ครอบคลุมที่สุด</div>
+        <div style="margin-top:10px;font-size:10px;font-weight:800;color:#15803d;background:#f0fdf4;padding:3px 10px;border-radius:99px;display:inline-block">PRIMARY</div>
       </div>
-      <div class="step-card">
-        <div class="step-num">3</div>
-        <div class="step-title">Category Benchmark</div>
-        <div class="step-desc">จัดกลุ่มตาม category (Ramen, Fine Dining, Omakase ฯลฯ) เพื่อให้เปรียบเทียบ fair — Ramen vs Ramen ไม่ใช่ vs Fine Dining</div>
-      </div>
-    </div>
-
-    <div style="margin-top:40px;padding:24px;background:var(--bg);border-radius:16px;border-left:4px solid var(--gold)">
-      <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:8px">Signal Strength Formula</div>
-      <div style="font-size:14px;color:var(--text);line-height:1.7">
-        <strong>Very Strong:</strong> new reviews ≥100 หรือ velocity ≥50% ใน 30 วัน<br/>
-        <strong>Strong:</strong> new reviews ≥40 หรือ velocity ≥25%<br/>
-        <strong>Moderate:</strong> new reviews ≥15 หรือ velocity ≥10%<br/>
-        <strong>Weak:</strong> เพิ่มขึ้นน้อยหรือ stable/declining
+      <div style="padding:20px;background:var(--bg);border:1.5px dashed var(--border);border-radius:14px;text-align:center">
+        <div style="font-size:36px;margin-bottom:10px">🎥</div>
+        <div style="font-weight:800;font-size:14px;color:var(--navy);margin-bottom:6px">Creator Signal</div>
+        <div style="font-size:12px;color:var(--text-2);line-height:1.55">Food creator coverage — cross-validate trend ไม่ใช่ตัวเลขหลัก</div>
+        <div style="margin-top:10px;font-size:10px;font-weight:800;color:#92400e;background:#fffbeb;padding:3px 10px;border-radius:99px;display:inline-block">SUPPLEMENTARY</div>
       </div>
     </div>
   </div>
@@ -189,39 +417,36 @@
 
 <hr class="divider"/>
 
-<!-- ── LEGAL ── -->
+<\!-- LEGAL -->
 <section class="section" id="legal" style="background:var(--white)">
-  <div class="container" style="max-width:720px">
+  <div class="container" style="max-width:620px;text-align:center">
     <div class="eyebrow" style="margin-bottom:12px">Legal Framework</div>
-    <h2 class="display-2" style="margin-bottom:16px">ข้อมูลและความโปร่งใส</h2>
-    <p style="font-size:15px;color:var(--text-2);line-height:1.75;margin-bottom:16px">
-      ข้อมูลทั้งหมดที่ ChefMinistry ใช้มาจากแหล่งข้อมูล public — รวม review count, rating score, และ metadata ร้านอาหาร ที่เข้าถึงได้โดยทุกคน
+    <h2 class="display-2" style="margin-bottom:16px">ความโปร่งใสด้านข้อมูล</h2>
+    <p style="font-size:15px;color:var(--text-2);line-height:1.8;margin-bottom:12px">
+      ข้อมูลทั้งหมดที่ ChefMinistry ใช้มาจาก <strong style="color:var(--navy)">แหล่งข้อมูล public</strong> ที่ทุกคนเข้าถึงได้ — review count, rating score และ metadata ร้านอาหาร
     </p>
-    <p style="font-size:15px;color:var(--text-2);line-height:1.75;margin-bottom:16px">
-      เราไม่ได้คัดลอก review content หรือข้อความรีวิวของผู้ใช้ — เราวิเคราะห์เฉพาะ <strong>จำนวน</strong> และ <strong>คะแนน</strong> ซึ่งเป็นข้อมูลสาธารณะที่แสดงบน search results และ API ทั่วไป
-    </p>
-    <p style="font-size:15px;color:var(--text-2);line-height:1.75">
-      Food Creator Signal ใช้เป็นข้อมูลเสริมเท่านั้น เพื่อ cross-validate trend — ไม่ใช่ข้อมูลหลักในการตัดสิน
+    <p style="font-size:15px;color:var(--text-2);line-height:1.8">
+      เราไม่ได้คัดลอก content หรือข้อความรีวิว — วิเคราะห์เฉพาะ <strong style="color:var(--navy)">จำนวน</strong> และ <strong style="color:var(--navy)">คะแนน</strong> ซึ่งแสดงอยู่บน search results และ public API
     </p>
   </div>
 </section>
 
 <hr class="divider"/>
 
-<!-- ── CTA ── -->
-<section class="section" style="background:var(--dark);color:#fff;text-align:center">
-  <div class="container" style="max-width:560px">
+<\!-- CTA -->
+<section class="section" style="background:linear-gradient(135deg,#0d1f3c,#1a2f52);color:#fff;text-align:center">
+  <div class="container" style="max-width:520px">
     <div class="eyebrow" style="color:var(--gold);margin-bottom:16px">เริ่มใช้งาน</div>
-    <h2 class="display-2" style="color:#fff;margin-bottom:16px">ดู Trend ร้านอาหารตอนนี้</h2>
-    <p style="color:#94a3b8;margin-bottom:32px">ข้อมูลจากแหล่งข้อมูล public อัปเดตทุกวัน</p>
-    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+    <h2 class="display-2" style="color:#fff;margin-bottom:14px">ดู Signal ร้านอาหารตอนนี้</h2>
+    <p style="color:rgba(255,255,255,.6);margin-bottom:28px;font-size:15px">ข้อมูลอัปเดตทุกวัน ฟรีสำหรับ Early Access</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
       <a href="./listing.html" class="btn btn-primary">ดู Discover →</a>
-      <a href="./restaurant_partner.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff">🏪 For Restaurants</a>
+      <a href="./restaurant_partner.html" class="btn" style="background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2)">🏪 For Restaurants</a>
     </div>
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
+<\!-- FOOTER -->
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
@@ -230,7 +455,7 @@
           <img src="./assets/logo_circular.png" alt="Chef Ministry" style="height:36px;border-radius:6px" onerror="this.style.display='none'"/>
           <div class="logo-name">ChefMinistry</div>
         </div>
-        <p class="footer-brand-desc">Restaurant Rating Intelligence Platform — ข้อมูลจากแหล่งข้อมูล public อัปเดตรายวัน</p>
+        <p class="footer-brand-desc">Restaurant Rating Intelligence — ข้อมูลจากแหล่งข้อมูล public อัปเดตรายวัน</p>
       </div>
       <div>
         <div class="footer-col-title">Platform</div>
@@ -243,9 +468,9 @@
       <div>
         <div class="footer-col-title">About</div>
         <div class="footer-links">
-          <a class="footer-link" href="./about.html">Our Methodology</a>
+          <a class="footer-link" href="./about.html#methodology">How It Works</a>
+          <a class="footer-link" href="./about.html#sources">Data Sources</a>
           <a class="footer-link" href="./about.html#legal">Legal Framework</a>
-          <a class="footer-link" href="./about.html#methodology">How We Calculate</a>
         </div>
       </div>
       <div>
@@ -272,4 +497,15 @@
 </footer>
 
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.c
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<script src="./js/firebase-config.js"></script>
+<script src="./js/auth.js"></script>
+<script>
+document.getElementById("mobileMenuBtn").addEventListener("click", () => {
+  const n = document.getElementById("mobileNav");
+  n.style.display = n.style.display === "block" ? "none" : "block";
+});
+</script>
+</body>
+</html>
