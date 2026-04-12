@@ -5,7 +5,7 @@
       <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
       <link rel="icon" type="image/png" href="./assets/logo_circular.png"/>
       <title>ChefMinistry — Restaurant Rating Intelligence</title>
-    <meta name="description" content="ดู trend คะแนนรีวิวร้านตัวเอง เปรียบเทียบกับร้านอื่นใน Category เดียวกัน — ข้อมูลจริงจาก Wongnai & Google Maps"/>
+    <meta name="description" content="ChefMinistry วิเคราะห์ Rating Velocity และ Review Trend จากแหล่งข้อมูล public รายวัน — ให้ร้านอาหารรู้ position ตัวเองใน Category และให้ Food Creator เห็นโอกาสก่อนตลาด"/>
     <link rel="stylesheet" href="./css/style.css"/>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-BT2BCMZ9SH"></script>
@@ -57,12 +57,12 @@
         <div class="container">
               <div class="hero-grid">
                       <div>
-                                <div class="eyebrow hero-eyebrow">📊 Restaurant Rating Intelligence</div>
-                                <h1 class="display-1 hero-title">รู้ trend ร้านตัวเอง<br/>ก่อนจะสาย</h1>h1>
+                                <div class="eyebrow hero-eyebrow">🔬 Thailand's Restaurant Intelligence Platform</div>
+                                <h1 class="display-1 hero-title">รู้ position ร้านตัวเอง<br/>ก่อนคู่แข่งจะรู้</h1>h1>
                                 <p class="hero-subtitle">
-                                            ChefMinistry ดึงข้อมูลคะแนนรีวิวจริงจาก Wongnai และ Google Maps
-                                            เพื่อให้ร้านอาหารเห็นว่าตัวเองอยู่ตรงไหนใน Category
-                                            และ creator เห็นว่าร้านไหนกำลังมาก่อนคนอื่น
+                                            ChefMinistry วิเคราะห์ Rating Velocity และ Review Trend
+                                            จากแหล่งข้อมูล public รายวัน — ให้ร้านอาหารรู้ว่าตัวเองอยู่ตรงไหนใน Category
+                                            และให้ Food Creator เห็นโอกาสก่อนตลาด
                                 </p>p>
                                 <div class="hero-actions" style="flex-wrap:wrap">
                                             <a href="./restaurant_partner.html" class="btn btn-primary">🏪 สำหรับร้านอาหาร</a>a>
@@ -76,7 +76,7 @@
                                             </div>
                                             <div>
                                                           <div class="hero-stat-num">3</div>
-                                                          <div class="hero-stat-label">Sources (Wongnai, GMaps, YouTube)</div>
+                                                          <div class="hero-stat-label">แหล่งข้อมูล Public</div>
                                             </div>
                                             <div>
                                                           <div class="hero-stat-num">Daily</div>
@@ -97,21 +97,21 @@
               <div class="signal-concept-icon">📈</div>
               <div>
                       <div class="signal-concept-title">Rating Trend Velocity</div>
-                      <div class="signal-concept-desc">วัดว่าคะแนนรีวิวของร้านกำลัง Rising, Stable หรือ Declining เทียบกับ 30 วันที่ผ่านมา รู้ก่อนว่าร้านไหนกำลังจะมา</div>
+                      <div class="signal-concept-desc">วัด momentum ของรีวิวแบบ daily ว่าร้านกำลัง Rising, Stable หรือ Declining — ข้อมูลจาก snapshot 30 วัน ไม่ใช่ความรู้สึก</div>
               </div>
         </div>
         <div class="signal-concept-item">
               <div class="signal-concept-icon">🏆</div>
               <div>
                       <div class="signal-concept-title">Category Benchmark</div>
-                      <div class="signal-concept-desc">เปรียบเทียบตัวเองกับร้านอื่นใน Category เดียวกัน รู้ว่าคู่แข่งอยู่ตรงไหน และต้องปรับกลยุทธ์อะไร</div>
+                      <div class="signal-concept-desc">เปรียบเทียบเฉพาะร้านที่อยู่ใน category เดียวกัน รู้ว่าคู่แข่งกำลังแซงหน้าหรือไม่ และต้องปรับกลยุทธ์ตรงไหน</div>
               </div>
         </div>
         <div class="signal-concept-item">
               <div class="signal-concept-icon">🎯</div>
               <div>
                       <div class="signal-concept-title">Creator Matching</div>
-                      <div class="signal-concept-desc">อนาคต: Creator ที่ลงทะเบียนจะถูก match กับร้านที่ trend กำลังมาใน category ที่ตรงกัน — ข้อมูลจริง ไม่ใช่การเดา</div>
+                      <div class="signal-concept-desc">Coming soon — Creator จะถูก match กับร้านที่ trend ตรงกับ niche ของตัวเอง โดยอัตโนมัติ ข้อมูลนำ ไม่ใช่โชค</div>
               </div>
         </div>
     </div>
@@ -126,36 +126,35 @@
                       <!-- RESTAURANT -->
                       <div class="card" style="padding:32px;border-top:4px solid var(--gold)">
                                 <div style="font-size:32px;margin-bottom:16px">🏪</div>
-                                <h3 class="h3" style="margin-bottom:10px">สำหรับร้านอาหาร</h3>h3>
-                                <p class="body-text" style="color:var(--text-muted);margin-bottom:16px">
-                                            ดูว่าคะแนนรีวิวร้านตัวเองอยู่ตรงไหนใน Category
-                                            เปรียบเทียบกับคู่แข่ง และรู้ว่าต้องปรับกลยุทธ์อะไร
-                                            บทวิเคราะห์เชิง strategy เจาะลึกสำหรับ Premium members
+                                <h3 class="h3" style="margin-bottom:10px">สำหรับเจ้าของร้านอาหาร</h3>h3>
+                                <p class="body-text" style="color:var(--text-2);margin-bottom:16px">
+                                            รู้ว่าตัวเองอยู่ตรงไหนใน Category ของคุณ เปรียบเทียบ velocity
+                                            กับคู่แข่ง และวางกลยุทธ์ด้วยข้อมูลจริง — ไม่ใช่ความรู้สึก
                                 </p>p>
                                 <ul class="feature-list" style="margin-bottom:20px">
-                                            <li>ดู trend คะแนนรีวิวย้อนหลัง 30 วัน</li>
-                                          <li>เปรียบเทียบกับร้านอื่นใน Category เดียวกัน</li>
-                                          <li>รู้ว่าร้านไหนกำลังแซงหน้า และทำไม</li>
-                                          <li>บทวิเคราะห์ strategy เชิงลึก (Premium)</li>
+                                            <li>ดู rating velocity ย้อนหลัง 30 วัน</li>
+                                            <li>Benchmark กับร้านอื่นใน Category เดียวกัน</li>
+                                            <li>รู้ว่าคู่แข่งกำลังเติบโตเพราะอะไร</li>
+                                            <li>บทวิเคราะห์เชิงกลยุทธ์แบบเจาะลึก (Premium)</li>
                                 </ul>ul>
-                              <a href="./restaurant_partner.html" class="btn btn-primary" style="margin-top:8px">ดู Trend ร้านของคุณ →</a>a>
+                              <a href="./restaurant_partner.html" class="btn btn-primary" style="margin-top:8px">วิเคราะห์ร้านของคุณ →</a>a>
                       </div>
               
                     <!-- CREATOR -->
                     <div class="card" style="padding:32px;border-top:4px solid #6366f1">
                             <div style="font-size:32px;margin-bottom:16px">🎥</div>
                             <h3 class="h3" style="margin-bottom:10px">สำหรับ Food Creator</h3>h3>
-                            <p class="body-text" style="color:var(--text-muted);margin-bottom:16px">
-                              เข้าร่วม Creator Network เพื่อเห็นว่าร้านไหนใน Category กำลังมา
-                              ก่อนที่ทุกคนจะแห่ไป และอนาคตเราจะ match คุณกับร้านที่ใช่
+                            <p class="body-text" style="color:var(--text-2);margin-bottom:16px">
+                              เข้าถึง trend data ที่คนทั่วไปไม่มี รู้ว่าร้านไหน rating กำลัง spike
+                              แต่ยังไม่ถูกพูดถึง — first-mover advantage ที่วัดได้จากข้อมูล
                             </p>p>
                             <ul class="feature-list" style="margin-bottom:20px">
-                                      <li>เห็นร้านที่ trend rating กำลัง rising แต่ยังไม่ดัง</li>
-                                      <li>แยกตาม category และพื้นที่ที่คุณถนัด</li>
-                                      <li>อนาคต: ได้รับ match จากร้านที่ตรงกับ niche ของคุณ</li>
+                                      <li>เห็นร้านที่ rating กำลัง rising แต่ยังไม่ viral</li>
+                                      <li>แยกตาม category และย่านที่คุณถนัด</li>
+                                      <li>Coming soon: ได้รับ match จากร้านที่ตรงกับ niche</li>
                                       <li>ลงทะเบียนฟรี ไม่มีค่าใช้จ่าย</li>
                             </ul>ul>
-                            <a href="./creator.html" class="btn btn-outline" style="margin-top:8px">สมัครเป็น Creator — ฟรี →</a>a>
+                            <a href="./creator.html" class="btn btn-outline" style="margin-top:8px">เข้าร่วม Creator Network — ฟรี →</a>a>
                     </div>
               </div>
         </div>
@@ -217,25 +216,25 @@
         <div class="section-header">
               <div>
                       <div class="eyebrow">How It Works</div>
-                      <h2 class="display-2">ข้อมูลจริง ไม่ใช่การเดา</h2>h2>
-                      <p class="lead" style="margin-top:10px">ดึงข้อมูลคะแนนรีวิวจาก platform หลักทุกวัน เพื่อให้คุณเห็น trend ที่เกิดขึ้นจริง</p>p>
+                      <h2 class="display-2">ข้อมูลจริง ตัดสินใจถูก</h2>h2>
+                      <p class="lead" style="margin-top:10px">รวบรวม review data จากแหล่งข้อมูล public ทุกวัน วิเคราะห์ผ่าน algorithm ที่ออกแบบมาเฉพาะสำหรับตลาดร้านอาหาร</p>p>
               </div>
         </div>
         <div class="grid-3">
               <div class="step-card">
                       <div class="step-num">1</div>
-                      <div class="step-title">Scrape รายวัน</div>
-                      <div class="step-desc">ดึงคะแนนรีวิวและ review count จาก Wongnai, Google Maps ทุกวัน เก็บเป็น snapshot รายวันใน database</div>
+                      <div class="step-title">รวบรวมข้อมูล Daily</div>
+                      <div class="step-desc">รวบรวม review count และ rating score จากแหล่งข้อมูล public ทุกวัน บันทึกเป็น daily snapshot ใน database อัตโนมัติ</div>
               </div>
               <div class="step-card">
                       <div class="step-num">2</div>
-                      <div class="step-title">คำนวณ Velocity</div>
-                      <div class="step-desc">คำนวณ % การเพิ่มขึ้นของ review ใน 30 วัน ร้านที่ review เพิ่มเร็ว = trending signal ที่ชัดเจน</div>
+                      <div class="step-title">วิเคราะห์ Velocity</div>
+                      <div class="step-desc">คำนวณ % การเปลี่ยนแปลงของ review ใน 30 วัน ร้านที่เพิ่มเร็วกว่าค่าเฉลี่ยของ category = trending signal ที่ชัดเจน</div>
               </div>
               <div class="step-card">
                       <div class="step-num">3</div>
                       <div class="step-title">Category Benchmark</div>
-                      <div class="step-desc">จัดกลุ่มตาม category และย่าน เพื่อให้เปรียบเทียบได้ fair — ร้าน Ramen vs ร้าน Ramen ไม่ใช่ vs Fine Dining</div>
+                      <div class="step-desc">จัดกลุ่มและเปรียบเทียบเฉพาะร้านใน category เดียวกัน — Ramen vs Ramen, Fine Dining vs Fine Dining เสมอ</div>
               </div>
         </div>
     </div>
@@ -251,35 +250,35 @@
               <!-- LEFT: value props -->
               <div>
                       <div class="eyebrow" style="color:#6366f1;margin-bottom:12px">🎥 For Food Creators</div>
-                      <h2 class="display-2" style="margin-bottom:14px">เห็นร้านกำลังมา<br/>ก่อนทุกคน</h2>h2>
+                      <h2 class="display-2" style="margin-bottom:14px">เห็นร้านกำลังมา<br/>ก่อนทุกคนในวงการ</h2>h2>
                       <p class="lead" style="margin-bottom:28px">
-                        ChefMinistry ช่วยให้คุณรู้ว่าร้านไหน rating กำลัง rising แต่ยังไม่ถูกพูดถึงมาก
-                        First-mover advantage จากข้อมูลจริง ไม่ใช่การเดา
+                        ข้อมูล rating trend ที่คนทั่วไปไม่มีสิทธิ์เห็น — รู้ว่าร้านไหนกำลัง spike
+                        ก่อนสื่อจะตามทัน แล้วอยู่ใน content ที่ใช่ ในเวลาที่ใช่
                       </p>p>
                       <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px">
                                 <div style="display:flex;gap:12px;align-items:flex-start">
                                             <div style="font-size:20px">📊</div>
                                             <div>
-                                                          <div style="font-weight:700;font-size:14px">Rating Trend แยก Category</div>
-                                                          <div style="font-size:13px;color:var(--text-muted)">เห็นว่า Ramen, Fine Dining, Omakase ไหนกำลัง spike ตาม data จริง</div>
+                                                          <div style="font-weight:700;font-size:14px">Rating Trend แยก Category แบบ Real-time</div>
+                                                          <div style="font-size:13px;color:var(--text-2)">เห็น velocity data ของ Ramen, Fine Dining, Omakase และอีก 20+ category อัปเดตทุกวัน</div>
                                             </div>
                                 </div>
                                 <div style="display:flex;gap:12px;align-items:flex-start">
                                             <div style="font-size:20px">🎯</div>
                                             <div>
-                                                          <div style="font-weight:700;font-size:14px">อนาคต: ถูก Match กับร้านที่ใช่</div>
-                                                          <div style="font-size:13px;color:var(--text-muted)">ร้านที่ trend กำลังมาจะ match กับ creator ที่ niche ตรงกัน — ไม่ต้องรอให้ร้านโทรหาเอง</div>
+                                                          <div style="font-weight:700;font-size:14px">Coming Soon: Smart Matching</div>
+                                                          <div style="font-size:13px;color:var(--text-2)">ระบบจะ match คุณกับร้านที่ trend ตรงกับ niche ของคุณโดยอัตโนมัติ — ร้านมาหาคุณ ไม่ใช่คุณตามหาร้าน</div>
                                             </div>
                                 </div>
                                 <div style="display:flex;gap:12px;align-items:flex-start">
                                             <div style="font-size:20px">🆓</div>
                                             <div>
-                                                          <div style="font-weight:700;font-size:14px">ลงทะเบียนฟรี</div>
-                                                          <div style="font-size:13px;color:var(--text-muted)">ไม่มีค่าใช้จ่าย ยกเลิกได้ทุกเมื่อ เข้าถึงข้อมูล trend ได้ทันที</div>
+                                                          <div style="font-weight:700;font-size:14px">ฟรีตลอดชีพสำหรับ Early Access</div>
+                                                          <div style="font-size:13px;color:var(--text-2)">ลงทะเบียนก่อนครบ 1,000 คน รับสิทธิ์ early access และ feature พิเศษสำหรับสมาชิกยุคแรก</div>
                                             </div>
                                 </div>
                       </div>
-                      <a href="./creator.html" class="btn btn-dark" style="gap:8px">สมัครเป็น Creator — ฟรี →</a>a>
+                      <a href="./creator.html" class="btn btn-dark" style="gap:8px">เข้าร่วม Creator Network — ฟรี →</a>a>
               </div>
         
               <!-- RIGHT: dashboard preview -->
@@ -330,11 +329,11 @@
   <!-- ── CTA FINAL ── -->
   <section class="section" style="background:var(--dark);color:#fff;text-align:center">
     <div class="container" style="max-width:640px">
-        <div class="eyebrow" style="color:var(--gold);margin-bottom:16px">เริ่มต้นได้เลย</div>
-        <h2 class="display-2" style="color:#fff;margin-bottom:16px">ข้อมูลที่ร้านอาหารต้องการ<br/>ไม่เคยมีมาก่อน</h2>h2>
+        <div class="eyebrow" style="color:var(--gold);margin-bottom:16px">เริ่มต้นได้ทันที</div>
+        <h2 class="display-2" style="color:#fff;margin-bottom:16px">ข้อมูลที่เปลี่ยน<br/>วิธีมองธุรกิจอาหาร</h2>h2>
         <p class="lead" style="color:#94a3b8;margin-bottom:32px">
-          ดู trend คะแนนรีวิว เปรียบเทียบ category เข้าใจกลยุทธ์คู่แข่ง
-          ข้อมูลจาก Wongnai และ Google Maps อัปเดตทุกวัน
+          ไม่ว่าคุณจะเป็นเจ้าของร้านที่อยากรู้ position ตัวเอง หรือ Creator ที่อยากเห็นโอกาสก่อนตลาด
+          — ChefMinistry คือเครื่องมือที่คุณต้องการ
         </p>p>
         <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
               <a href="./restaurant_partner.html" class="btn btn-primary">🏪 ฉันเป็นเจ้าของร้าน</a>a>
@@ -356,7 +355,7 @@
               <a href="./restaurant_partner.html">For Restaurants</a>a>
               <a href="./creator.html">For Creators</a>a>
         </div>
-        <div class="footer-copy">© 2026 ChefMinistry · ข้อมูลจาก Wongnai & Google Maps</div>
+        <div class="footer-copy">© 2026 ChefMinistry · Restaurant Rating Intelligence</div>
     </div>
   </footer>footer>
   
@@ -417,16 +416,4 @@
                                                                                                                            ${(r.tags||[]).slice(0,2).map(t=>`<span class="tag">${t}</span>`).join("")}
                                                                                                                                      </div>
                                                                                                                                              </div>
-                                                                                                                                                   `).join("");
-          }
-    }
-  });
-  </script>
-  
-  </body>
-</html>html></li></li>
-                      </div>
-                      </div>
-  </body>
-    </script></title>
-  </head>
+                           

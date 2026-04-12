@@ -513,3 +513,132 @@ img{display:block;max-width:100%}
 @media(max-width:900px){
   .section .container>div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important;gap:32px!important}
 }
+
+/* ══════════════════════════════════════════════════════════
+   PROFESSIONAL MARKETING ENHANCEMENTS
+   ══════════════════════════════════════════════════════════ */
+
+/* ── HERO: richer gradient + dot grid texture ── */
+.hero{
+  background:linear-gradient(135deg,#08142a 0%,#0f1f3c 45%,#14213d 100%);
+}
+.hero::before{
+  background:
+    radial-gradient(ellipse at 72% 38%,rgba(201,168,76,.22) 0%,transparent 52%),
+    radial-gradient(ellipse at 12% 85%,rgba(99,102,241,.14) 0%,transparent 48%);
+}
+.hero::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:28px 28px;
+  pointer-events:none;
+}
+
+/* ── HERO EYEBROW: gold accent line ── */
+.hero-eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(201,168,76,.12);
+  border:1px solid rgba(201,168,76,.28);
+  border-radius:99px;
+  padding:5px 14px;
+  font-size:11px;
+}
+
+/* ── HERO STATS: bigger, gold gradient numbers ── */
+.hero-stat-num{
+  font-size:28px;
+  background:linear-gradient(135deg,#fff 20%,var(--gold) 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.hero-stat-label{font-size:11px;letter-spacing:.07em}
+
+/* ── STEP CARDS: hover + gold accent + better number badge ── */
+.step-card{
+  position:relative;
+  overflow:hidden;
+  border-top:3px solid transparent;
+  transition:border-color .22s,box-shadow .22s,transform .22s;
+}
+.step-card:hover{
+  border-top-color:var(--gold);
+  box-shadow:var(--shadow-lg);
+  transform:translateY(-4px);
+}
+.step-card::after{
+  content:'';
+  position:absolute;
+  top:-30px;right:-30px;
+  width:100px;height:100px;
+  background:radial-gradient(circle,rgba(201,168,76,.07),transparent 70%);
+  pointer-events:none;
+}
+.step-num{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 100%);
+  box-shadow:0 4px 14px rgba(15,31,60,.22);
+  font-size:19px;
+}
+
+/* ── STEP TITLE: slightly bigger ── */
+.step-title{font-size:19px;letter-spacing:-.01em}
+
+/* ── SIGNAL CONCEPT STRIP: hover + icon shadow ── */
+.signal-concept{border-top:3px solid var(--gold)}
+.signal-concept-item{
+  transition:background .18s;
+  cursor:default;
+}
+.signal-concept-item:hover{background:var(--cream)}
+.signal-concept-icon{
+  font-size:30px;
+  filter:drop-shadow(0 2px 6px rgba(0,0,0,.1));
+}
+.signal-concept-title{font-size:15px;letter-spacing:-.01em}
+
+/* ── FEATURE LIST: gold circle checkmarks ── */
+.feature-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:11px}
+.feature-list li{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  font-size:14px;
+  color:var(--text-2);
+  line-height:1.55;
+}
+.feature-list li::before{
+  content:'✓';
+  flex-shrink:0;
+  width:20px;height:20px;
+  border-radius:50%;
+  background:var(--gold-bg);
+  border:1.5px solid rgba(201,168,76,.35);
+  color:var(--amber);
+  font-size:10px;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:1px;
+}
+
+/* ── AUDIENCE CARDS: bigger border-top + shadow on hover ── */
+.card[style*="border-top:4px solid var(--gold)"]:hover,
+.card[style*="border-top:4px solid #6366f1"]:hover{
+  box-shadow:0 20px 56px rgba(15,31,60,.16);
+  transform:translateY(-4px);
+}
+
+/* ── CREATOR HOME SECTION: subtle gradient ── */
+.creator-home-section{
+  background:linear-gradient(160deg,#f7f5f2 0%,#f0edf8 100%);
+}
+
+/* ── CTA DARK SECTION: richer gradient + pattern ── */
+section.section[style*="background:var(--dark)"]{
+  background:linear-gradient(135deg,#07111f 0%,#0f1f3c 55%,#130e2b 100%)!important;
+  position:relati
