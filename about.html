@@ -1,208 +1,275 @@
 <!DOCTYPE html>
 <html lang="th">
-  <head>
-      <meta charset="UTF-8"/>
-      <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-      <link rel="icon" type="image/png" href="./assets/logo_circular.png"/>
-      <title>ChefMinistry — Methodology · วิธีที่เราวัด Rating Trend</title>
-    <meta name="description" content="ChefMinistry ดึงข้อมูลคะแนนรีวิวจากแหล่งข้อมูล public รายวัน เพื่อคำนวณ velocity และ benchmark ใน category เดียวกัน"/>
-    <link rel="stylesheet" href="./css/style.css"/>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BT2BCMZ9SH"></script>
-    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BT2BCMZ9SH');</script>
-  </head>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <link rel="icon" type="image/png" href="./assets/logo_circular.png"/>
+  <title>ChefMinistry — Methodology · วิธีที่เราวัด Rating Trend</title>
+  <meta name="description" content="ChefMinistry ดึงข้อมูลคะแนนรีวิวจากแหล่งข้อมูล public รายวัน เพื่อคำนวณ velocity และ benchmark ใน category เดียวกัน"/>
+  <link rel="stylesheet" href="./css/style.css"/>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BT2BCMZ9SH"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BT2BCMZ9SH');</script>
+</head>
 <body>
-  <header class="site-header">
-      <div class="container header-inner">
-            <a class="logo" href="./index.html">
-                    <img src="./assets/logo_circular.png" alt="CM" class="logo-img" style="width:40px;height:40px;border-radius:50%;object-fit:cover"/>
-                    <div><div class="logo-name">ChefMinistry</div><div class="logo-tagline">Restaurant Rating Intelligence</div></div>
-            </a>a>
-          <nav class="site-nav">
-            <a class="nav-link" href="./index.html">Home</a>a>
-            <a class="nav-link" href="./listing.html">Discover</a>a>
-            <a class="nav-link active" href="./about.html">Methodology</a>a>
-            <a class="btn-pro" href="./restaurant_partner.html">🏪 For Restaurants</a>a>
-            <a class="nav-link" href="./creator.html">🎥 For Creators</a>a>
-            <div class="cm-auth-nav"></div>
-          </nav>nav>
-          <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>button>
-      </div>
-    <nav class="mobile-nav" id="mobileNav">
-        <div class="mobile-nav-links">
-                <a class="mobile-nav-link" href="./index.html">Home</a>a>
-                <a class="mobile-nav-link" href="./listing.html">Discover</a>a>
-                <a class="mobile-nav-link" href="./about.html">Methodology</a>a>
-                <a class="mobile-nav-link" href="./creator.html">🎥 For Creators</a>a>
-                <a class="mobile-nav-link" href="./restaurant_partner.html">🏪 For Restaurants</a>a>
-                <div class="cm-auth-nav" style="padding:8px 16px"></div>
-        </div>
-    </nav>nav>
-  </header>header>
 
-  <div class="hero" style="padding:60px 0 40px">
-      <div class="container">
-            <div class="breadcrumb"><a href="./index.html">Home</a>a><span class="breadcrumb-sep">/</span>span><span style="color:#fff">Methodology</span>span></div>
-            <div style="max-width:680px;margin-top:24px">
-                    <div class="eyebrow hero-eyebrow">🔬 How It Works</div>
-                    <h1 class="display-1" style="color:#fff;margin-bottom:16px">วิธีที่เราวัด<br/>Rating Trend</h1>h1>
-                    <p style="color:#cbd5e1;font-size:18px;line-height:1.7">
-                              ChefMinistry ไม่ได้ใช้ความรู้สึก ใช้ข้อมูล — ดึง review count และคะแนน
-                              จากแหล่งข้อมูล public รายวัน เพื่อให้ทุกคนเห็น trend ที่เกิดขึ้นจริง
-                    </p>p>
-            </div>
+<!-- ── HEADER ── -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="./index.html">
+      <img src="./assets/logo_circular.png" alt="CM" class="logo-img" style="width:40px;height:40px;border-radius:50%;object-fit:cover"/>
+      <div>
+        <div class="logo-name">ChefMinistry</div>
+        <div class="logo-tagline">Restaurant Rating Intelligence</div>
       </div>
+    </a>
+    <nav class="site-nav">
+      <a class="nav-link" href="./index.html">Home</a>
+      <a class="nav-link" href="./listing.html">Discover</a>
+      <a class="nav-link active" href="./about.html">Methodology</a>
+      <a class="btn-pro" href="./restaurant_partner.html">🏪 For Restaurants</a>
+      <a class="nav-link" href="./creator.html">🎥 For Creators</a>
+      <div class="cm-auth-nav"></div>
+    </nav>
+    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
   </div>
+  <nav class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-links">
+      <a class="mobile-nav-link" href="./index.html">Home</a>
+      <a class="mobile-nav-link" href="./listing.html">Discover</a>
+      <a class="mobile-nav-link" href="./about.html">Methodology</a>
+      <a class="mobile-nav-link" href="./creator.html">🎥 For Creators</a>
+      <a class="mobile-nav-link" href="./restaurant_partner.html">🏪 For Restaurants</a>
+      <div class="cm-auth-nav" style="padding:8px 16px"></div>
+    </div>
+  </nav>
+</header>
 
-  <section class="section">
-      <div class="container">
-            <div class="section-cols-2">
-                    <div>
-                              <div class="eyebrow" style="margin-bottom:12px">Data Sources</div>
-                              <h2 class="display-2" style="margin-bottom:20px">ข้อมูลจากไหน?</h2>h2>
-                              <p class="lead" style="margin-bottom:16px">
-                                          เราดึงข้อมูลจาก platform หลักที่คนไทยใช้จริงในการรีวิวร้านอาหาร
-                                          ข้อมูลทั้งหมดเป็น public information ที่ทุกคนเข้าถึงได้
-                              </p>p>
-                              <div style="display:flex;flex-direction:column;gap:16px;margin-top:24px">
-                                          <div style="display:flex;gap:16px;align-items:flex-start;padding:16px;background:var(--bg);border-radius:12px">
-                                                        <div style="font-size:32px">🟡</div>
-                                                        <div>
-                                                                        <div style="font-weight:800;font-size:15px;margin-bottom:4px">Restaurant Review Platform</div>
-                                                                        <div style="font-size:13px;color:var(--text-muted)">Platform รีวิวร้านอาหารชั้นนำของไทย — รวบรวม review count, rating score, และ cuisine type รายวัน จากข้อมูล public ที่เปิดให้เข้าถึงได้ทั่วไป</div>
-                                                        </div>
-                                          </div>
-                                          <div style="display:flex;gap:16px;align-items:flex-start;padding:16px;background:var(--bg);border-radius:12px">
-                                                        <div style="font-size:32px">🗺️</div>
-                                                        <div>
-                                                                        <div style="font-weight:800;font-size:15px;margin-bottom:4px">Google Maps</div>
-                                                                        <div style="font-size:13px;color:var(--text-muted)">ดึง userRatingCount และ rating score ผ่าน Google Places API — ข้อมูลครอบคลุมและอัปเดตบ่อยที่สุด เป็น source หลักของ velocity calculation</div>
-                                                        </div>
-                                          </div>
-                                          <div style="display:flex;gap:16px;align-items:flex-start;padding:16px;background:var(--bg);border-radius:12px">
-                                                        <div style="font-size:32px">🎥</div>
-                                                        <div>
-                                                                        <div style="font-weight:800;font-size:15px;margin-bottom:4px">YouTube (Supplementary)</div>
-                                                                        <div style="font-size:13px;color:var(--text-muted)">ติดตาม food creator channels เพื่อ cross-validate trend — ถ้า rating ขึ้นพร้อมกับ influencer review นั่นคือ strong signal</div>
-                                                        </div>
-                                          </div>
-                              </div>
-                    </div>
-                    <div>
-                              <div class="card" style="padding:24px;background:var(--dark);color:#fff">
-                                          <div class="eyebrow" style="color:var(--gold);margin-bottom:16px">📊 ตัวอย่าง Velocity Data</div>
-                                          <div style="display:flex;flex-direction:column;gap:12px">
-                                                        <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:12px">
-                                                                        <div style="font-size:12px;color:#94a3b8;margin-bottom:6px">Jan 1 — Feb 1 (30 วัน)</div>
-                                                                        <div style="display:flex;justify-content:space-between">
-                                                                                          <span style="font-weight:700">Review Count</span>span>
-                                                                                          <span style="color:#4ade80">150 → 213 (+42%)</span>span>
-                                                                        </div>
-                                                                        <div style="display:flex;justify-content:space-between;margin-top:4px">
-                                                                                          <span style="font-weight:700">Rating Score</span>span>
-                                                                                          <span>4.5 → 4.7</span>
-                                                                        </div>
-                                                                      <div style="margin-top:8px;font-size:11px;background:#16a34a;color:#fff;padding:2px 8px;border-radius:99px;display:inline-block">↑ Rising Fast</div>
-                                                        </div>
-                                                      <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:12px">
-                                                                    <div style="font-size:12px;color:#94a3b8;margin-bottom:6px">Jan 1 — Feb 1 (30 วัน)</div>
-                                                                    <div style="display:flex;justify-content:space-between">
-                                                                                    <span style="font-weight:700">Review Count</span>
-                                                                                    <span style="color:#d97706">520 → 562 (+8%)</span>
-                                                                    </div>
-                                                                    <div style="display:flex;justify-content:space-between;margin-top:4px">
-                                                                                    <span style="font-weight:700">Rating Score</span>
-                                                                                    <span>4.8 → 4.8</span>
-                                                                    </div>
-                                                                    <div style="margin-top:8px;font-size:11px;background:#d97706;color:#fff;padding:2px 8px;border-radius:99px;display:inline-block">→ Stable</div>
-                                                      </div>
-                                          </div>
-                              </div>
-                    </div>
+<!-- ── HERO ── -->
+<div class="hero" style="padding:60px 0 40px">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="./index.html">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <span style="color:#fff">Methodology</span>
+    </div>
+    <div style="max-width:680px;margin-top:24px">
+      <div class="eyebrow hero-eyebrow">🔬 How It Works</div>
+      <h1 class="display-1" style="color:#fff;margin-bottom:16px">วิธีที่เราวัด<br/>Rating Trend</h1>
+      <p style="color:#cbd5e1;font-size:18px;line-height:1.7">
+        ChefMinistry ไม่ได้ใช้ความรู้สึก ใช้ข้อมูล — ดึง review count และคะแนน
+        จากแหล่งข้อมูล public รายวัน เพื่อให้ทุกคนเห็น trend ที่เกิดขึ้นจริง
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ── DATA SOURCES ── -->
+<section class="section">
+  <div class="container">
+    <div class="section-cols-2">
+      <div>
+        <div class="eyebrow" style="margin-bottom:12px">Data Sources</div>
+        <h2 class="display-2" style="margin-bottom:20px">ข้อมูลจากไหน?</h2>
+        <p class="lead" style="margin-bottom:16px">
+          เราดึงข้อมูลจาก platform หลักที่คนไทยใช้จริงในการรีวิวร้านอาหาร
+          ข้อมูลทั้งหมดเป็น public information ที่ทุกคนเข้าถึงได้
+        </p>
+        <div style="display:flex;flex-direction:column;gap:16px;margin-top:24px">
+          <div style="display:flex;gap:16px;align-items:flex-start;padding:16px;background:var(--bg);border-radius:12px">
+            <div style="font-size:32px">🟡</div>
+            <div>
+              <div style="font-weight:800;font-size:15px;margin-bottom:4px">Restaurant Review Platform</div>
+              <div style="font-size:13px;color:var(--text-muted)">Platform รีวิวร้านอาหารชั้นนำของไทย — รวบรวม review count, rating score, และ cuisine type รายวัน จากข้อมูล public ที่เปิดให้เข้าถึงได้ทั่วไป</div>
             </div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start;padding:16px;background:var(--bg);border-radius:12px">
+            <div style="font-size:32px">🗺️</div>
+            <div>
+              <div style="font-weight:800;font-size:15px;margin-bottom:4px">Google Maps</div>
+              <div style="font-size:13px;color:var(--text-muted)">ดึง userRatingCount และ rating score ผ่าน Google Places API — ข้อมูลครอบคลุมและอัปเดตบ่อยที่สุด เป็น source หลักของ velocity calculation</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start;padding:16px;background:var(--bg);border-radius:12px">
+            <div style="font-size:32px">🎥</div>
+            <div>
+              <div style="font-weight:800;font-size:15px;margin-bottom:4px">Food Creator Signal <span style="font-size:11px;font-weight:500;color:var(--text-muted)">(ข้อมูลเสริม)</span></div>
+              <div style="font-size:13px;color:var(--text-muted)">ติดตาม food creator channels เพื่อ cross-validate trend — ถ้า rating ขึ้นพร้อมกับ influencer review นั่นคือ strong signal ที่น่าเชื่อถือมากขึ้น</div>
+            </div>
+          </div>
+        </div>
       </div>
-  </section>section>
+      <div>
+        <div class="card" style="padding:24px;background:var(--dark);color:#fff">
+          <div class="eyebrow" style="color:var(--gold);margin-bottom:16px">📊 ตัวอย่าง Velocity Data</div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:12px">
+              <div style="font-size:12px;color:#94a3b8;margin-bottom:6px">Jan 1 — Feb 1 (30 วัน)</div>
+              <div style="display:flex;justify-content:space-between">
+                <span style="font-weight:700">Review Count</span>
+                <span style="color:#4ade80">150 → 213 (+42%)</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-top:4px">
+                <span style="font-weight:700">Rating Score</span>
+                <span>4.5 → 4.7</span>
+              </div>
+              <div style="margin-top:8px;font-size:11px;background:#16a34a;color:#fff;padding:2px 8px;border-radius:99px;display:inline-block">↑ Rising Fast</div>
+            </div>
+            <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:12px">
+              <div style="font-size:12px;color:#94a3b8;margin-bottom:6px">Jan 1 — Feb 1 (30 วัน)</div>
+              <div style="display:flex;justify-content:space-between">
+                <span style="font-weight:700">Review Count</span>
+                <span style="color:#d97706">520 → 562 (+8%)</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-top:4px">
+                <span style="font-weight:700">Rating Score</span>
+                <span>4.8 → 4.8</span>
+              </div>
+              <div style="margin-top:8px;font-size:11px;background:#d97706;color:#fff;padding:2px 8px;border-radius:99px;display:inline-block">→ Stable</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <hr class="divider"/>
 
+<!-- ── STATS ── -->
 <div class="section-sm" style="background:var(--white)">
   <div class="container">
-      <div class="stat-grid">
-            <div class="stat-card"><div class="stat-num">138+</div><div class="stat-label">ร้านอาหารในฐานข้อมูล</div></div>
-            <div class="stat-card"><div class="stat-num">Daily</div><div class="stat-label">อัปเดตรายวัน</div></div>
-            <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">แหล่งข้อมูล Public</div></div>
-            <div class="stat-card"><div class="stat-num">30d</div><div class="stat-label">Velocity Window</div></div>
-      </div>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-num">138+</div><div class="stat-label">ร้านอาหารในฐานข้อมูล</div></div>
+      <div class="stat-card"><div class="stat-num">Daily</div><div class="stat-label">อัปเดตรายวัน</div></div>
+      <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">แหล่งข้อมูล Public</div></div>
+      <div class="stat-card"><div class="stat-num">30d</div><div class="stat-label">Velocity Window</div></div>
+    </div>
   </div>
 </div>
 
 <hr class="divider"/>
 
+<!-- ── METHODOLOGY ── -->
 <section class="section" id="methodology">
   <div class="container">
-      <div class="section-header" style="text-align:center">
-            <div class="eyebrow">How We Calculate</div>
-            <h2 class="display-2" style="margin-bottom:16px">Rating Velocity คืออะไร?</h2>h2>
-            <p class="lead" style="max-width:600px;margin:0 auto">ไม่ใช่แค่ดูว่าคะแนนเท่าไหร่ แต่ดูว่า review เพิ่มขึ้นเร็วแค่ไหนใน 30 วัน</p>p>
+    <div class="section-header" style="text-align:center">
+      <div class="eyebrow">How We Calculate</div>
+      <h2 class="display-2" style="margin-bottom:16px">Rating Velocity คืออะไร?</h2>
+      <p class="lead" style="max-width:600px;margin:0 auto">ไม่ใช่แค่ดูว่าคะแนนเท่าไหร่ แต่ดูว่า review เพิ่มขึ้นเร็วแค่ไหนใน 30 วัน</p>
+    </div>
+    <div class="grid-3" style="margin-top:40px">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-title">รวบรวมข้อมูล Daily</div>
+        <div class="step-desc">รวบรวม review_count และ rating score จากแหล่งข้อมูล public ทุกวัน เก็บเป็น daily snapshot ใน database อัตโนมัติ</div>
       </div>
-      <div class="grid-3" style="margin-top:40px">
-            <div class="step-card">
-                    <div class="step-num">1</div>
-                    <div class="step-title">Scrape รายวัน</div>
-                    <div class="step-desc">รวบรวม review_count และ rating score จากแหล่งข้อมูล public ทุกวัน เก็บเป็น daily snapshot ใน SQLite database</div>
-            </div>
-            <div class="step-card">
-                    <div class="step-num">2</div>
-                    <div class="step-title">คำนวณ Velocity</div>
-                    <div class="step-desc">เปรียบเทียบ review count วันนี้ vs 30 วันก่อน คำนวณเป็น % เพิ่มขึ้น ร้านที่เพิ่มเร็วกว่า = velocity สูงกว่า</div>
-            </div>
-            <div class="step-card">
-                    <div class="step-num">3</div>
-                    <div class="step-title">Category Benchmark</div>
-                    <div class="step-desc">จัดกลุ่มตาม category (Ramen, Fine Dining, Omakase ฯลฯ) เพื่อให้เปรียบเทียบ fair — Ramen vs Ramen ไม่ใช่ vs Fine Dining</div>
-            </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-title">คำนวณ Velocity</div>
+        <div class="step-desc">เปรียบเทียบ review count วันนี้ vs 30 วันก่อน คำนวณเป็น % เพิ่มขึ้น ร้านที่เพิ่มเร็วกว่าค่าเฉลี่ย = velocity สูงกว่า</div>
       </div>
-  
-      <div style="margin-top:40px;padding:24px;background:var(--bg);border-radius:16px;border-left:4px solid var(--gold)">
-            <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:8px">Signal Strength Formula</div>
-            <div style="font-size:14px;color:var(--text);line-height:1.7">
-                    <strong>Very Strong:</strong> new reviews ≥100 หรือ velocity ≥50% ใน 30 วัน<br/>
-                    <strong>Strong:</strong> new reviews ≥40 หรือ velocity ≥25%<br/>
-                    <strong>Moderate:</strong> new reviews ≥15 หรือ velocity ≥10%<br/>
-                    <strong>Weak:</strong> เพิ่มขึ้นน้อยหรือ stable/declining
-            </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-title">Category Benchmark</div>
+        <div class="step-desc">จัดกลุ่มตาม category (Ramen, Fine Dining, Omakase ฯลฯ) เพื่อให้เปรียบเทียบ fair — Ramen vs Ramen ไม่ใช่ vs Fine Dining</div>
       </div>
+    </div>
+
+    <div style="margin-top:40px;padding:24px;background:var(--bg);border-radius:16px;border-left:4px solid var(--gold)">
+      <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:8px">Signal Strength Formula</div>
+      <div style="font-size:14px;color:var(--text);line-height:1.7">
+        <strong>Very Strong:</strong> new reviews ≥100 หรือ velocity ≥50% ใน 30 วัน<br/>
+        <strong>Strong:</strong> new reviews ≥40 หรือ velocity ≥25%<br/>
+        <strong>Moderate:</strong> new reviews ≥15 หรือ velocity ≥10%<br/>
+        <strong>Weak:</strong> เพิ่มขึ้นน้อยหรือ stable/declining
+      </div>
+    </div>
   </div>
-</section>section>
+</section>
 
 <hr class="divider"/>
 
+<!-- ── LEGAL ── -->
+<section class="section" id="legal" style="background:var(--white)">
+  <div class="container" style="max-width:720px">
+    <div class="eyebrow" style="margin-bottom:12px">Legal Framework</div>
+    <h2 class="display-2" style="margin-bottom:16px">ข้อมูลและความโปร่งใส</h2>
+    <p style="font-size:15px;color:var(--text-2);line-height:1.75;margin-bottom:16px">
+      ข้อมูลทั้งหมดที่ ChefMinistry ใช้มาจากแหล่งข้อมูล public — รวม review count, rating score, และ metadata ร้านอาหาร ที่เข้าถึงได้โดยทุกคน
+    </p>
+    <p style="font-size:15px;color:var(--text-2);line-height:1.75;margin-bottom:16px">
+      เราไม่ได้คัดลอก review content หรือข้อความรีวิวของผู้ใช้ — เราวิเคราะห์เฉพาะ <strong>จำนวน</strong> และ <strong>คะแนน</strong> ซึ่งเป็นข้อมูลสาธารณะที่แสดงบน search results และ API ทั่วไป
+    </p>
+    <p style="font-size:15px;color:var(--text-2);line-height:1.75">
+      Food Creator Signal ใช้เป็นข้อมูลเสริมเท่านั้น เพื่อ cross-validate trend — ไม่ใช่ข้อมูลหลักในการตัดสิน
+    </p>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ── CTA ── -->
 <section class="section" style="background:var(--dark);color:#fff;text-align:center">
   <div class="container" style="max-width:560px">
-      <div class="eyebrow" style="color:var(--gold);margin-bottom:16px">เริ่มใช้งาน</div>
-      <h2 class="display-2" style="color:#fff;margin-bottom:16px">ดู Trend ร้านอาหารตอนนี้</h2>h2>
-      <p style="color:#94a3b8;margin-bottom:32px">ข้อมูลจากแหล่งข้อมูล public อัปเดตทุกวัน</p>p>
-      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
-            <a href="./listing.html" class="btn btn-primary">ดู Discover →</a>a>
-            <a href="./restaurant_partner.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff">🏪 For Restaurants</a>a>
-      </div>
+    <div class="eyebrow" style="color:var(--gold);margin-bottom:16px">เริ่มใช้งาน</div>
+    <h2 class="display-2" style="color:#fff;margin-bottom:16px">ดู Trend ร้านอาหารตอนนี้</h2>
+    <p style="color:#94a3b8;margin-bottom:32px">ข้อมูลจากแหล่งข้อมูล public อัปเดตทุกวัน</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="./listing.html" class="btn btn-primary">ดู Discover →</a>
+      <a href="./restaurant_partner.html" class="btn" style="background:rgba(255,255,255,.1);color:#fff">🏪 For Restaurants</a>
+    </div>
   </div>
-</section>section>
+</section>
 
+<!-- ── FOOTER ── -->
 <footer class="site-footer">
-  <div class="container footer-inner">
-      <div class="footer-brand"><div class="footer-logo">ChefMinistry</div><div class="footer-tagline">Restaurant Rating Intelligence</div></div>
-      <div class="footer-links">
-            <a href="./listing.html">Discover</a>a><a href="./about.html">Methodology</a>a>
-            <a href="./restaurant_partner.html">For Restaurants</a>a><a href="./creator.html">For Creators</a>a>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <img src="./assets/logo_circular.png" alt="Chef Ministry" style="height:36px;border-radius:6px" onerror="this.style.display='none'"/>
+          <div class="logo-name">ChefMinistry</div>
+        </div>
+        <p class="footer-brand-desc">Restaurant Rating Intelligence Platform — ข้อมูลจากแหล่งข้อมูล public อัปเดตรายวัน</p>
       </div>
-      <div class="footer-copy">© 2026 ChefMinistry · ข้อมูลจากแหล่งข้อมูล public</div>
+      <div>
+        <div class="footer-col-title">Platform</div>
+        <div class="footer-links">
+          <a class="footer-link" href="./listing.html">Discover Restaurants</a>
+          <a class="footer-link" href="./listing.html?velocity=rising">Rising Trends</a>
+          <a class="footer-link" href="./listing.html?velocity=very-strong">Top Signals</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">About</div>
+        <div class="footer-links">
+          <a class="footer-link" href="./about.html">Our Methodology</a>
+          <a class="footer-link" href="./about.html#legal">Legal Framework</a>
+          <a class="footer-link" href="./about.html#methodology">How We Calculate</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">For Business</div>
+        <div class="footer-links">
+          <a class="footer-link" href="./restaurant_partner.html">Restaurant / Brand Pilot</a>
+          <a class="footer-link" href="./creator.html">Creator Network</a>
+          <a class="footer-link" href="mailto:contact@chefministry.com">Pilot Partnership</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">ติดต่อ</div>
+        <div class="footer-links">
+          <a class="footer-link" href="https://line.me/R/ti/p/@chefministry" target="_blank">💬 LINE: @chefministry</a>
+          <a class="footer-link" href="mailto:contact@chefministry.com">✉️ contact@chefministry.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">© 2026 ChefMinistry · ข้อมูลทั้งหมดมาจากแหล่งข้อมูล public</div>
+      <div class="footer-legal">Rating Intelligence. Not Just Reviews.</div>
+    </div>
   </div>
-</footer>footer>
+</footer>
 
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-<script src="./js/firebase-config.js"></script>
-<script src="./js/auth.js"></script>
-<script>
-document.getElementById("mobileMenuBtn").addEventListener("click",()=>{document.getElementById("mobileNav").class
+<script src="https://www.gstatic.c

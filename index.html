@@ -601,7 +601,9 @@
               </div>
               <div style="text-align:right">
                 <div style="font-size:10px;font-weight:900;color:var(--text-2);text-transform:uppercase;letter-spacing:.08em">Total Reviews</div>
-                <div style="font-size:28px;font-weight:900;color:var(--green);font-family:'Playfair Display',serif;line-height:1.1">${heroRest.totalReviews||0}<span style="font-size:12px;margin-left:3px">รีวิว</span></div>
+                <div style="font-size:10px;font-weight:900;color:var(--text-2);text-transform:uppercase;letter-spacing:.08em">Trend Signal</div>
+                <div style="font-size:20px;font-weight:900;color:var(--green);font-family:'Playfair Display',Serif;line-height:1.2">${escHtml(heroRest.trendBadge||'&mdash;')}</div>
+                <div style="font-size:11px;color:var(--text-2);font-weight:700;margin-top:2px">${heroRest.overlapSignal||0} Creator Signal</div>
               </div>
             </div>
             <div style="margin-bottom:12px">
@@ -653,7 +655,7 @@
     var matched = [];
     if (filterFn) {
       var all = CM_RESTAURANTS.filter(filterFn);
-      all.sort(function(a,b){ return (b.totalReviews||0)-(a.totalReviews||0); });
+      all.sort(function(a,b){ return (b.overlapSignal||0)-(a.overlapSignal||0); });
       matched = all.slice(0, 3);
     }
 
@@ -664,7 +666,7 @@
         var r = matched[ci];
         chipItems += '<a href="./restaurant.html?id=' + escHtml(r.id) + '" class="rest-chip">'
           + escHtml(r.emoji) + ' ' + escHtml(r.name)
-          + '<span class="chip-inf">' + (r.totalReviews || r.overlapSignal) + ' รีวิว</span></a>';
+          + '<span class="chip-inf">' + escHtml(r.trendBadge||'→') + '</span></a>';
       }
       chipsHtml = '<div class="chip-row">' + chipItems + '</div>';
     }
@@ -696,7 +698,7 @@
   if (rankLabel) {
     rankLabel.textContent = extRising.length > 0
       ? "📈 Velocity Rank — รีวิวเพิ่มเร็วที่สุดสัปดาห์นี้"
-      : "📊 Review Rank — ร้านที่มีรีวิวมากที่สุดใน DB";
+      : "📡 Signal Rank — ร้านที่ trend signal แรงที่สุดใน DB";
   }
 
   const velocityItems = extRising.length > 0 ? extRising.map((r,i) => {
@@ -713,7 +715,7 @@
         <div style="font-size:11px;color:var(--text-2);font-weight:700">${newRev}</div>
       </div>
     </div>`;
-  }).join("") : [...CM_RESTAURANTS].sort((a,b)=>(b.totalReviews||0)-(a.totalReviews||0)).slice(0,5).map((r,i) => {
+  }).join("") : [...CM_RESTAURANTS].sort((a,b) => { const vo={rising:3,stable:2,declining:1}; const va=vo[a.trendVelocity]||0,vb=vo[b.trendVelocity]||0; return vb!==va?vb-va:(b.overlapSignal||0)-(a.overlapSignal||0); }).slice(0,5).map((r,i) => {
     return `<a class="rank-item" href="./restaurant.html?id=${escHtml(r.id)}" style="cursor:pointer;text-decoration:none;color:inherit">
       <div class="rank-num ${i<3?"top3":""}">${i+1}</div>
       <div>
@@ -721,8 +723,8 @@
         <div class="rank-meta">${escHtml(r.cuisine)} · ${escHtml(r.area)}</div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
-        <div style="font-size:17px;font-weight:900;color:var(--green)">${r.totalReviews||0} <span style="font-size:10px;font-weight:800">รีวิว</span></div>
         <span class="velocity ${r.trendVelocity}">${escHtml(r.trendBadge)}</span>
+        <div style="font-size:11px;color:var(--text-2);font-weight:700;margin-top:2px">${r.overlapSignal||0} Creator Signal</div>
       </div>
     </a>`;
   }).join("");
@@ -732,7 +734,7 @@
   const thaiFineDineGrid = document.getElementById("thaiFineDineGrid");
   const thaiFineDine = CM_RESTAURANTS
     .filter(r => r.type === "fine-dining" && (r.cuisine.toLowerCase().includes("thai") || r.cuisine.toLowerCase().includes("samrub")))
-    .sort((a,b) => (b.totalReviews||0) - (a.totalReviews||0))
+    .sort((a,b) => (b.overlapSignal||0) - (a.overlapSignal||0))
     .slice(0,3);
   thaiFineDineGrid.innerHTML = thaiFineDine.length
     ? thaiFineDine.map(r => buildRestaurantCard(r, {showOverlap:true})).join("")
