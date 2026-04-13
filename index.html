@@ -677,7 +677,14 @@
         + '</div>';
     }).join('');
 
-    tcList.innerHTML = rows;
+    // Append Dessert & Cafe as Coming Soon entry
+    var dessertRow = '<div class="trend-row">'
+      + '<div class="trend-cat">Dessert &amp; Cafe</div>'
+      + '<div class="trend-bar-wrap"><div class="trend-bar-fill stable" style="width:8%"></div></div>'
+      + '<div class="trend-change" style="color:var(--text-2);font-style:italic;font-weight:700">Coming Soon</div>'
+      + '<div class="trend-inf-count">— INF</div>'
+      + '</div>';
+    tcList.innerHTML = rows + dessertRow;
   })();
 
   // ── Category Discovery Grid ──────────────────────────────────────────────────
@@ -714,7 +721,10 @@
       return {bg:"rgba(255,255,255,.07)", color:"rgba(255,255,255,.5)"};
     };
 
-    var cards = [];
+    // Build circles + names separately, then output in 5x4 block order
+    var allCircles = [];
+    var allNames   = [];
+
     DISC_CATS.forEach(function(cat){
       var matched = CM_RESTAURANTS.filter(cat.filter).sort(function(a,b){
         var va=vo[a.trendVelocity]||0,vb=vo[b.trendVelocity]||0;
@@ -724,36 +734,46 @@
       var riseCount=matched.filter(function(r){return r.trendVelocity==="rising";}).length;
       var decCount =matched.filter(function(r){return r.trendVelocity==="declining";}).length;
       var ringPct,ringColor;
-      if(matched.length===0){ringPct="15%";ringColor="rgba(255,255,255,.1)";}
+      if(matched.length===0){ringPct="15%";ringColor="rgba(255,255,255,.12)";}
       else if(riseCount===matched.length){ringPct="85%";ringColor="#4ade80";}
       else if(riseCount>0){ringPct=Math.round(50+riseCount/matched.length*30)+"%";ringColor="#86efac";}
       else if(decCount===matched.length){ringPct="22%";ringColor="#f87171";}
-      else{ringPct="40%";ringColor="rgba(255,255,255,.35)";}
+      else{ringPct="40%";ringColor="rgba(255,255,255,.38)";}
 
+      // Circle cell
+      allCircles.push(
+        '<a href="'+cat.link+'" style="display:flex;justify-content:center;padding:8px 4px 0;text-decoration:none" '
+        +'onmouseover="this.querySelector(\'.ri\').style.boxShadow=\'0 0 0 3px rgba(201,168,76,.5)\'" '
+        +'onmouseout="this.querySelector(\'.ri\').style.boxShadow=\'inset 0 2px 8px rgba(0,0,0,.4)\'">'
+        +'<div style="width:88px;height:88px;border-radius:50%;background:conic-gradient('+ringColor+' '+ringPct+',rgba(255,255,255,.07) 0);display:grid;place-items:center">'
+        +'<div class="ri" style="width:66px;height:66px;border-radius:50%;background:#0b1830;display:grid;place-items:center;font-size:30px;box-shadow:inset 0 2px 8px rgba(0,0,0,.4);transition:box-shadow .2s">'+cat.emoji+'</div>'
+        +'</div>'
+        +'</a>'
+      );
+
+      // Name + restaurant cell
       var restHtml=matched.length>0
         ? matched.map(function(r){
             var clr=r.trendVelocity==="rising"?"#4ade80":r.trendVelocity==="declining"?"#f87171":"rgba(255,255,255,.4)";
             var arrow=r.trendVelocity==="rising"?"↑":r.trendVelocity==="declining"?"↓":"→";
-            var nm=r.name.length>14?r.name.slice(0,13)+"…":r.name;
-            return '<a href="./restaurant.html?id='+escHtml(r.id)+'" style="color:rgba(255,255,255,.6);text-decoration:none;font-size:9.5px;display:block;transition:color .15s">'+escHtml(nm)
-              +' <span style="color:'+clr+';font-weight:900;font-size:9px">'+arrow+'</span></a>';
+            var nm=r.name.length>16?r.name.slice(0,15)+"…":r.name;
+            return '<div style="font-size:10.5px;color:rgba(255,255,255,.55);line-height:1.7">'+escHtml(nm)
+              +' <span style="color:'+clr+';font-weight:900;font-size:9px">'+arrow+'</span></div>';
           }).join("")
-        : '<span style="color:rgba(255,255,255,.2);font-size:9px">Coming Soon</span>';
+        : '<div style="color:rgba(255,255,255,.2);font-size:9.5px;margin-top:2px">Coming Soon</div>';
 
-      cards.push(
-        '<a href="'+cat.link+'" style="display:flex;flex-direction:column;align-items:center;gap:9px;padding:20px 10px 16px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);text-align:center;text-decoration:none;color:inherit;transition:all .22s;cursor:pointer" '
-        +'onmouseover="this.style.background=\'rgba(255,255,255,.1)\';this.style.borderColor=\'rgba(201,168,76,.45)\';this.style.transform=\'translateY(-3px)\'" '
-        +'onmouseout="this.style.background=\'rgba(255,255,255,.05)\';this.style.borderColor=\'rgba(255,255,255,.09)\';this.style.transform=\'\'">'
-        +'<div style="width:78px;height:78px;border-radius:50%;background:conic-gradient('+ringColor+' '+ringPct+',rgba(255,255,255,.07) 0);display:grid;place-items:center;flex-shrink:0">'
-        +'<div style="width:58px;height:58px;border-radius:50%;background:#0b1830;display:grid;place-items:center;font-size:26px;box-shadow:inset 0 2px 8px rgba(0,0,0,.4)">'+cat.emoji+'</div>'
+      allNames.push(
+        '<div style="text-align:center;padding:6px 6px 14px">'
+        +'<div style="font-size:11px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px">'+escHtml(cat.label)+'</div>'
+        +restHtml
         +'</div>'
-        +'<div style="font-size:9.5px;font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:.06em;line-height:1.35;max-width:110px">'+escHtml(cat.label)+'</div>'
-        +'<div style="line-height:1.65;width:100%">'+restHtml+'</div>'
-        +'</a>'
       );
     });
 
-    grid.innerHTML = cards.join("");
+    // Output: circles[0-4], names[0-4], circles[5-9], names[5-9]
+    var out = allCircles.slice(0,5).concat(allNames.slice(0,5))
+                        .concat(allCircles.slice(5,10)).concat(allNames.slice(5,10));
+    grid.innerHTML = out.join("");
   })();
 
   // Rank list — velocity จาก DB ถ้ามี, fallback = overlap signal
