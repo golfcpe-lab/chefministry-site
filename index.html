@@ -56,18 +56,16 @@
   <div class="container">
     <div class="hero-grid">
       <div>
-        <div class="eyebrow hero-eyebrow">🔬 Thailand's Restaurant Rating Intelligence Platform</div>
-        <h1 class="display-1 hero-title">ขับเคลื่อนการตัดสินใจ<br/>ด้วยข้อมูล</h1>
+        <div class="eyebrow hero-eyebrow">🔥 Bangkok's Restaurant Trend Tracker</div>
+        <h1 class="display-1 hero-title">ค้นพบร้านใหม่<br/>ก่อนใคร</h1>
         <p class="hero-subtitle">
-          ChefMinistry เปลี่ยนข้อมูลสาธารณะรายวันให้เป็น Insight ที่นำไปใช้ได้จริง
-          ผ่านการวิเคราะห์ Rating Velocity และ Review Trend
-          — เพื่อให้ร้านอาหารเข้าใจสถานะการแข่งขัน
-          และให้ Food Creator มองเห็นโอกาสใหม่ก่อนตลาด
+          ChefMinistry วิเคราะห์ข้อมูลรีวิวรายวันจาก Google Maps และ YouTube Creator
+          — เพื่อให้คุณรู้ว่าร้านไหนกำลัง Rising ก่อนที่ทุกคนจะตามทัน
         </p>
         <div class="hero-actions" style="flex-wrap:wrap">
-          <a href="./restaurant_partner.html" class="btn btn-primary">🏪 สำหรับร้านอาหาร</a>
+          <a href="./listing.html" class="btn btn-primary">🔍 ดูร้านทั้งหมด →</a>
+          <a href="./restaurant_partner.html" class="btn btn-ghost">🏪 สำหรับร้านอาหาร</a>
           <a href="./creator.html" class="btn btn-creator-cta">🎥 For Creators</a>
-          <a href="./listing.html" class="btn btn-ghost">ดู Signal ทั้งหมด →</a>
         </div>
         <div class="hero-stats">
           <div>
@@ -75,12 +73,12 @@
             <div class="hero-stat-label">ร้านอาหารในฐานข้อมูล</div>
           </div>
           <div>
-            <div class="hero-stat-num">3</div>
-            <div class="hero-stat-label">แหล่งข้อมูล Public</div>
-          </div>
-          <div>
             <div class="hero-stat-num">Daily</div>
             <div class="hero-stat-label">อัปเดตรายวัน</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">Free</div>
+            <div class="hero-stat-label">เข้าถึงฟรี</div>
           </div>
         </div>
       </div>
@@ -94,27 +92,44 @@
 <!-- ── 3 SIGNAL CONCEPTS ── -->
 <div class="signal-concept">
   <div class="signal-concept-item">
-    <div class="signal-concept-icon">📈</div>
+    <div class="signal-concept-icon">📊</div>
     <div>
-      <div class="signal-concept-title">Rating Trend Velocity</div>
-      <div class="signal-concept-desc">วัด momentum ของรีวิวแบบ daily ว่าร้านกำลัง Rising, Stable หรือ Declining — ข้อมูลจาก snapshot 30 วัน ไม่ใช่ความรู้สึก</div>
+      <div class="signal-concept-title">Rising · Stable · Declining</div>
+      <div class="signal-concept-desc">รู้ movement ของร้านจาก snapshot รีวิว 30 วัน — ไม่ต้องเดา ดูข้อมูลจริงจาก Google Maps</div>
     </div>
   </div>
   <div class="signal-concept-item">
-    <div class="signal-concept-icon">🏆</div>
+    <div class="signal-concept-icon">🗂️</div>
     <div>
-      <div class="signal-concept-title">Category Benchmark</div>
-      <div class="signal-concept-desc">เปรียบเทียบเฉพาะร้านใน category เดียวกัน รู้ว่าคู่แข่งกำลังแซงหน้าหรือไม่ และต้องปรับกลยุทธ์ตรงไหน</div>
+      <div class="signal-concept-title">แยกตาม Category</div>
+      <div class="signal-concept-desc">เปรียบเทียบเฉพาะร้านในหมวดเดียวกัน — Ramen vs Ramen, Fine Dining vs Fine Dining เสมอ</div>
     </div>
   </div>
   <div class="signal-concept-item">
-    <div class="signal-concept-icon">🎯</div>
+    <div class="signal-concept-icon">🎥</div>
     <div>
-      <div class="signal-concept-title">Creator Matching</div>
-      <div class="signal-concept-desc">Coming soon — Creator จะถูก match กับร้านที่ trend ตรงกับ niche ของตัวเองโดยอัตโนมัติ ข้อมูลนำ ไม่ใช่โชค</div>
+      <div class="signal-concept-title">Google Maps + YouTube</div>
+      <div class="signal-concept-desc">รวม signal จาก Google Maps รายวัน และ YouTube Creator Network 30+ คน เห็นภาพรวมครบกว่า</div>
     </div>
   </div>
 </div>
+
+<!-- ── TRENDING BY CATEGORY ── -->
+<section style="background:var(--navy);padding:52px 0">
+  <div class="container">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:12px">
+      <div>
+        <div class="eyebrow" style="color:var(--gold);margin-bottom:8px">🔥 Trending Now</div>
+        <h2 class="display-2" style="color:#fff;margin-bottom:6px">ร้านไหนมาแรงสัปดาห์นี้?</h2>
+        <p style="font-size:13px;color:rgba(255,255,255,.45);margin:0">ข้อมูลจาก Google Maps + YouTube · อัปเดตรายวัน</p>
+      </div>
+      <a href="./listing.html" class="btn btn-ghost" style="white-space:nowrap">ดูร้านทั้งหมด →</a>
+    </div>
+    <div id="categoryDiscoveryGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px"></div>
+  </div>
+</section>
+
+<hr class="divider"/>
 
 <section class="section" style="background:var(--white);padding-top:36px;padding-bottom:36px">
   <div class="container">
@@ -687,6 +702,72 @@
   }
   tcList.innerHTML = tcRows.join("");
 
+
+  // ── Category Discovery Grid ──────────────────────────────────────────────────
+  (function(){
+    var DISC_CATS = [
+      { label:"Thai Fine Dining", emoji:"🍽️", link:"./listing.html?type=fine-dining",
+        filter: function(r){ return r.type==="fine-dining" && (r.cuisine.toLowerCase().indexOf("thai")>=0 || r.cuisine.toLowerCase().indexOf("royal")>=0 || r.cuisine.toLowerCase().indexOf("samrub")>=0 || r.cuisine.toLowerCase().indexOf("farm")>=0); } },
+      { label:"Japanese Omakase", emoji:"🍣", link:"./listing.html?type=omakase",
+        filter: function(r){ return r.type==="omakase"; } },
+      { label:"Pizza & Italian",  emoji:"🍕", link:"./listing.html",
+        filter: function(r){ return r.cuisine.toLowerCase().indexOf("pizza")>=0 || r.cuisine.toLowerCase().indexOf("italian")>=0 || r.cuisine.toLowerCase().indexOf("neapolitan")>=0; } },
+      { label:"Ramen",            emoji:"🍜", link:"./listing.html",
+        filter: function(r){ return r.cuisine.toLowerCase().indexOf("ramen")>=0; } },
+      { label:"Steakhouse & BBQ", emoji:"🥩", link:"./listing.html",
+        filter: function(r){ return r.type==="steakhouse" || r.cuisine.toLowerCase().indexOf("steak")>=0 || r.cuisine.toLowerCase().indexOf("bbq")>=0; } },
+      { label:"Street Food",      emoji:"🍢", link:"./listing.html",
+        filter: function(r){ return r.type==="street-food" || r.type==="local" || r.cuisine.toLowerCase().indexOf("street")>=0; } },
+      { label:"Hidden Gems",      emoji:"💎", link:"./listing.html",
+        filter: function(r){ return r.tags && r.tags.some(function(t){ return t==="Hidden Gem" || t==="ล้านลับ"; }); } },
+      { label:"International",    emoji:"🌍", link:"./listing.html",
+        filter: function(r){ var c = r.cuisine.toLowerCase(); return r.type==="fine-dining" && c.indexOf("thai")<0 && c.indexOf("omakase")<0 && c.indexOf("japanese")<0; } },
+    ];
+    var vo = {rising:3, stable:2, declining:1};
+    var grid = document.getElementById("categoryDiscoveryGrid");
+    if (\!grid || typeof CM_RESTAURANTS === "undefined") return;
+
+    var velStyle = function(v){
+      if(v==="rising")   return {bg:"rgba(34,197,94,.15)",  color:"#4ade80"};
+      if(v==="declining") return {bg:"rgba(239,68,68,.15)", color:"#f87171"};
+      return {bg:"rgba(255,255,255,.07)", color:"rgba(255,255,255,.5)"};
+    };
+
+    var cards = [];
+    DISC_CATS.forEach(function(cat){
+      var matched = CM_RESTAURANTS.filter(cat.filter).sort(function(a,b){
+        var va = vo[a.trendVelocity]||0, vb = vo[b.trendVelocity]||0;
+        return vb \!== va ? vb-va : (b.overlapSignal||0)-(a.overlapSignal||0);
+      }).slice(0,3);
+      if (\!matched.length) return;
+
+      var rows = matched.map(function(r){
+        var vs = velStyle(r.trendVelocity);
+        var badge = r.trendBadge || "→";
+        return '<a href="./restaurant.html?id=' + escHtml(r.id) + '" class="disc-rest-row">'
+          + '<div class="disc-rest-emoji">' + escHtml(r.emoji || cat.emoji) + '</div>'
+          + '<div class="disc-rest-info">'
+          + '<div class="disc-rest-name">' + escHtml(r.name) + '</div>'
+          + '<div class="disc-rest-area">' + escHtml(r.area || "") + (r.cuisine ? ' · ' + escHtml(r.cuisine.split(' ').slice(0,2).join(' ')) : '') + '</div>'
+          + '</div>'
+          + '<div class="disc-vel-badge" style="background:' + vs.bg + ';color:' + vs.color + '">' + escHtml(badge) + '</div>'
+          + '</a>';
+      }).join("");
+
+      cards.push(
+        '<div class="disc-cat-card">'
+        + '<div class="disc-cat-header">'
+        + '<div class="disc-cat-label"><span>' + cat.emoji + '</span><span>' + escHtml(cat.label) + '</span></div>'
+        + '<a href="' + cat.link + '" class="disc-cat-more">ดูทั้งหมด →</a>'
+        + '</div>'
+        + '<div class="disc-rows">' + rows + '</div>'
+        + '</div>'
+      );
+    });
+
+    grid.innerHTML = cards.join("") || '<div style="color:rgba(255,255,255,.4);grid-column:1/-1;text-align:center;padding:40px">กำลังโหลดข้อมูล...</div>';
+  })();
+
   // Rank list — velocity จาก DB ถ้ามี, fallback = overlap signal
   const rankList  = document.getElementById("overlapRankList");
   const rankLabel = document.getElementById("rankListLabel");
@@ -739,11 +820,4 @@
     .sort((a,b) => (b.overlapSignal||0) - (a.overlapSignal||0))
     .slice(0,3);
   thaiFineDineGrid.innerHTML = thaiFineDine.length
-    ? thaiFineDine.map(r => buildRestaurantCard(r, {showOverlap:true})).join("")
-    : `<div style="color:rgba(255,255,255,.5);grid-column:1/-1;padding:20px">ไม่มีข้อมูล</div>`;
-
-  // Rising grid (ยกเว้น Thai Fine Dining ที่แสดงด้านบนแล้ว)
-  const risingGrid = document.getElementById("risingGrid");
-  const thaiFineDineIds = new Set(thaiFineDine.map(r => r.id));
-  const rising = CM_RESTAURANTS
-    .filter(r => r.trendVelocity === "rising" && !thaiFineDineIds.has(r.id))
+    ? thaiF
