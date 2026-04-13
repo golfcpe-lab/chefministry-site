@@ -124,7 +124,7 @@
       </div>
       <a href="./listing.html" style="font-size:11px;font-weight:700;color:rgba(255,255,255,.5);text-decoration:none;white-space:nowrap">ดูร้านทั้งหมด →</a>
     </div>
-    <div id="categoryDiscoveryGrid" class="disc-compact-grid"></div>
+    <div id="categoryDiscoveryGrid" class="disc-circle-grid"></div>
   </div>
 </section>
 
@@ -720,30 +720,44 @@
         var va = vo[a.trendVelocity]||0, vb = vo[b.trendVelocity]||0;
         return vb !== va ? vb-va : (b.overlapSignal||0)-(a.overlapSignal||0);
       }).slice(0,3);
-      if (!matched.length) return;
 
-      var chips = matched.map(function(r){
-        var vel = r.trendVelocity || "stable";
-        var velCls = vel === "rising" ? "rising" : vel === "declining" ? "declining" : "stable";
-        var arrow = vel === "rising" ? "↑" : vel === "declining" ? "↓" : "→";
-        return '<a href="./restaurant.html?id=' + escHtml(r.id) + '" class="disc-chip">'
-          + escHtml(r.name)
-          + '<span class="disc-chip-vel ' + velCls + '">' + arrow + '</span>'
-          + '</a>';
-      }).join("");
+      var riseCount = matched.filter(function(r){ return r.trendVelocity==="rising"; }).length;
+      var decCount  = matched.filter(function(r){ return r.trendVelocity==="declining"; }).length;
+      var ringPct, ringColor;
+      if (matched.length === 0) {
+        ringPct = "15%"; ringColor = "rgba(255,255,255,.1)";
+      } else if (riseCount === matched.length) {
+        ringPct = "85%"; ringColor = "#4ade80";
+      } else if (riseCount > 0) {
+        ringPct = Math.round(50 + riseCount/matched.length*30) + "%"; ringColor = "#86efac";
+      } else if (decCount === matched.length) {
+        ringPct = "22%"; ringColor = "#f87171";
+      } else {
+        ringPct = "40%"; ringColor = "rgba(255,255,255,.35)";
+      }
+
+      var restHtml = matched.length > 0
+        ? matched.map(function(r){
+            var velCls = r.trendVelocity==="rising" ? "rising" : r.trendVelocity==="declining" ? "declining" : "";
+            var arrow  = r.trendVelocity==="rising" ? "↑" : r.trendVelocity==="declining" ? "↓" : "→";
+            var shortName = r.name.length > 15 ? r.name.slice(0,14)+"…" : r.name;
+            return '<a href="./restaurant.html?id=' + escHtml(r.id) + '">' + escHtml(shortName)
+              + ' <span class="disc-vel-mini ' + velCls + '">' + arrow + '</span></a>';
+          }).join("<br>")
+        : '<span style="color:rgba(255,255,255,.22);font-size:9px">Coming Soon</span>';
 
       cards.push(
-        '<div class="disc-compact-row">'
-        + '<a href="' + cat.link + '" class="disc-compact-cat">'
-        + '<span style="font-size:15px">' + cat.emoji + '</span>'
-        + '<span>' + escHtml(cat.label) + '</span>'
-        + '</a>'
-        + '<div class="disc-chips">' + chips + '</div>'
+        '<a href="' + cat.link + '" class="disc-circle-card">'
+        + '<div class="disc-ring" style="background:conic-gradient(' + ringColor + ' ' + ringPct + ',rgba(255,255,255,.07) 0)">'
+        + '<div class="disc-ring-inner">' + cat.emoji + '</div>'
         + '</div>'
+        + '<div class="disc-cat-label">' + escHtml(cat.label) + '</div>'
+        + '<div class="disc-rest-mini">' + restHtml + '</div>'
+        + '</a>'
       );
     });
 
-    grid.innerHTML = cards.join("") || '<div style="color:rgba(255,255,255,.3);grid-column:1/-1;text-align:center;padding:20px;font-size:12px">กำลังโหลดข้อมูล...</div>';
+    grid.innerHTML = cards.join("");
   })();
 
   // Rank list — velocity จาก DB ถ้ามี, fallback = overlap signal
