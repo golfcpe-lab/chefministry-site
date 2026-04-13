@@ -1,243 +1,470 @@
 <!DOCTYPE html>
 <html lang="th">
-  <head>
-      <meta charset="UTF-8"/>
-      <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-      <link rel="icon" type="image/png" href="./assets/logo_circular.png"/>
-      <title>ChefMinistry — สำหรับ Food Creator · เห็นร้านกำลังมาก่อนทุกคน</title>
-    <meta name="description" content="เข้าร่วม Creator Network เพื่อเห็นว่าร้านไหน rating กำลัง rising แต่ยังไม่ดัง และอนาคตเราจะ match คุณกับร้านที่ใช่"/>
-    <link rel="stylesheet" href="./css/style.css"/>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BT2BCMZ9SH"></script>
-    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BT2BCMZ9SH');</script>
-  </head>
-<body>
-  <header class="site-header">
-      <div class="container header-inner">
-            <a class="logo" href="./index.html">
-                    <img src="./assets/logo_circular.png" alt="CM" class="logo-img" style="width:40px;height:40px;border-radius:50%;object-fit:cover"/>
-                    <div><div class="logo-name">ChefMinistry</div><div class="logo-tagline">Restaurant Rating Intelligence</div></div>
-            </a>a>
-          <nav class="site-nav">
-            <a class="nav-link" href="./index.html">Home</a>a>
-            <a class="nav-link" href="./listing.html">Discover</a>a>
-            <a class="nav-link" href="./about.html">Methodology</a>a>
-            <a class="btn-pro" href="./restaurant_partner.html">🏪 For Restaurants</a>a>
-            <a class="nav-link active" href="./creator.html">🎥 For Creators</a>a>
-            <div class="cm-auth-nav"></div>
-          </nav>nav>
-          <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>button>
-      </div>
-    <nav class="mobile-nav" id="mobileNav">
-        <div class="mobile-nav-links">
-                <a class="mobile-nav-link" href="./index.html">Home</a>a>
-                <a class="mobile-nav-link" href="./listing.html">Discover</a>a>
-                <a class="mobile-nav-link" href="./about.html">Methodology</a>a>
-                <a class="mobile-nav-link" href="./creator.html">🎥 For Creators</a>a>
-                <a class="mobile-nav-link" href="./restaurant_partner.html">🏪 For Restaurants</a>a>
-                <div class="cm-auth-nav" style="padding:8px 16px"></div>
-        </div>
-    </nav>nav>
-  </header>header>
-
-  <div class="hero" style="padding:60px 0 40px;background:linear-gradient(135deg,#0d1f3c 0%,#1e1b4b 100%)">
-      <div class="container">
-            <div class="breadcrumb"><a href="./index.html">Home</a>a><span class="breadcrumb-sep">/</span>span><span style="color:#fff">For Creators</span>span></div>
-            <div style="max-width:680px;margin-top:24px">
-                    <div class="eyebrow hero-eyebrow" style="color:#a5b4fc">🎥 สำหรับ Food Creator</div>
-                    <h1 class="display-1" style="color:#fff;margin-bottom:16px">เห็นร้านกำลังมา<br/>ก่อนทุกคน</h1>h1>
-                    <p style="color:#cbd5e1;font-size:18px;line-height:1.7;margin-bottom:24px">
-                              ChefMinistry วิเคราะห์ Rating Trend จากแหล่งข้อมูล public ทุกวัน
-                              เพื่อให้คุณเห็นว่าร้านไหนกำลัง rising แต่ยังไม่ถูกพูดถึงมาก
-                              First-mover advantage จากข้อมูลจริง ไม่ใช่การเดา
-                    </p>p>
-                    <a href="#register" class="btn" style="background:#6366f1;color:#fff;font-size:16px">สมัครเป็น Creator — ฟรี</a>a>
-            </div>
-      </div>
-  </div>
-
-  <section class="section" style="background:var(--white)">
-      <div class="container">
-            <div class="section-header" style="text-align:center">
-                    <div class="eyebrow">สิ่งที่คุณได้รับ</div>
-                    <h2 class="display-2">ข้อมูลที่ช่วยให้ content ของคุณดีขึ้น</h2>h2>
-            </div>
-            <div class="grid-3" style="margin-top:32px">
-                    <div class="step-card" style="text-align:left">
-                              <div style="font-size:32px;margin-bottom:12px">📊</div>
-                              <div class="step-title">Rating Trend แยก Category</div>
-                              <div class="step-desc">เห็นว่า Ramen, Fine Dining, Omakase ไหนกำลัง spike จาก data จริง ไม่ใช่แค่ดูว่าใครดังบน social แล้ว</div>
-                    </div>
-                    <div class="step-card" style="text-align:left">
-                              <div style="font-size:32px;margin-bottom:12px">🔍</div>
-                              <div class="step-title">ร้าน Hidden Gem กำลัง Rising</div>
-                              <div class="step-desc">เห็นร้านที่ review เพิ่มเร็วแต่ยังไม่มีใครรีวิว — โอกาสทำ content ก่อนที่ทุกคนจะแห่ไปพร้อมกัน</div>
-                    </div>
-                    <div class="step-card" style="text-align:left">
-                              <div style="font-size:32px;margin-bottom:12px">📍</div>
-                              <div class="step-title">แยกตาม Category และย่าน</div>
-                              <div class="step-desc">Filter ตาม niche ของคุณ — ถ้าทำ content Ramen ก็ดูเฉพาะ Ramen ที่ rating กำลัง rising ใน area ที่สนใจ</div>
-                    </div>
-                    <div class="step-card" style="text-align:left">
-                              <div style="font-size:32px;margin-bottom:12px">🎯</div>
-                              <div class="step-title">อนาคต: ถูก Match กับร้านที่ใช่</div>
-                              <div class="step-desc">ร้านที่ trend กำลังมาจะ match กับ creator ที่ niche ตรงกัน — ไม่ต้องรอให้ร้านโทรหา เราจะแนะนำอัตโนมัติ</div>
-                    </div>
-                    <div class="step-card" style="text-align:left">
-                              <div style="font-size:32px;margin-bottom:12px">🆓</div>
-                              <div class="step-title">ลงทะเบียนฟรี</div>
-                              <div class="step-desc">ไม่มีค่าใช้จ่าย ยกเลิกได้ทุกเมื่อ เข้าถึงข้อมูล trend แบบ free tier ได้ทันทีหลัง login</div>
-                    </div>
-                    <div class="step-card" style="text-align:left">
-                              <div style="font-size:32px;margin-bottom:12px">📈</div>
-                              <div class="step-title">ข้อมูลอัปเดตทุกวัน</div>
-                              <div class="step-desc">ข้อมูลจากแหล่งข้อมูล public ถูกรวบรวมทุกวัน ทำให้เห็น trend ที่เกิดขึ้นจริงในช่วง 30 วันล่าสุดแบบ real-time</div>
-                    </div>
-            </div>
-      </div>
-  </section>section>
-
-  <hr class="divider"/>
-
-  <section class="section" style="background:var(--dark);color:#fff">
-      <div class="container">
-            <div class="section-cols-2">
-                    <div>
-                              <div class="eyebrow" style="color:#a5b4fc;margin-bottom:12px">ตัวอย่างข้อมูล</div>
-                              <h2 class="display-2" style="color:#fff;margin-bottom:16px">รู้ก่อนว่าร้านไหน<br/>กำลังจะดัง</h2>h2>
-                              <p style="color:#94a3b8;margin-bottom:24px">
-                                          แทนที่จะรอดูว่าร้านไหนถูก feature บน social แล้วค่อยไป
-                                          คุณเห็น data ก่อนว่าร้านไหน review count เพิ่มเร็วผิดปกติใน 30 วัน
-                                          นั่นคือสัญญาณว่าร้านนั้นกำลังจะมา
-                              </p>p>
-                              <div style="display:flex;flex-direction:column;gap:14px">
-                                          <div style="display:flex;gap:12px;align-items:center">
-                                                        <span style="color:#4ade80;font-size:20px">✓</span>span>
-                                                        <span style="font-size:14px;color:#e2e8f0">ดูก่อน → ไปก่อน → content ได้ attention สูงสุด</span>span>
-                                          </div>
-                                          <div style="display:flex;gap:12px;align-items:center">
-                                                        <span style="color:#4ade80;font-size:20px">✓</span>span>
-                                                        <span style="font-size:14px;color:#e2e8f0">เปรียบเทียบ velocity ของหลายร้านใน category เดียวกัน</span>span>
-                                          </div>
-                                          <div style="display:flex;gap:12px;align-items:center">
-                                                        <span style="color:#4ade80;font-size:20px">✓</span>span>
-                                                        <span style="font-size:14px;color:#e2e8f0">อนาคต: ร้านที่ trending จะ reach out หาคุณผ่าน ChefMinistry</span>span>
-                                          </div>
-                              </div>
-                    </div>
-                    <div>
-                              <div class="card" style="padding:24px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)">
-                                          <div style="font-size:12px;color:#94a3b8;margin-bottom:16px;font-weight:600;letter-spacing:.08em">RISING IN RAMEN CATEGORY</div>
-                                          <div style="display:flex;flex-direction:column;gap:12px">
-                                                        <div style="background:rgba(255,255,255,.07);border-radius:10px;padding:14px">
-                                                                        <div style="display:flex;justify-content:space-between;align-items:center">
-                                                                                          <div><div style="font-weight:800;font-size:13px">Sendo Ramen</div><div style="font-size:11px;color:#94a3b8">🍜 Ramen · Thonglor</div></div>
-                                                                                          <span style="background:#16a34a;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px">↑ Rising Fast</span>span>
-                                                                        </div>
-                                                                        <div style="margin-top:8px;font-size:12px;color:#94a3b8">+42% reviews ใน 30 วัน · ⭐ 4.7 · 234 reviews</div>
-                                                        </div>
-                                                        <div style="background:rgba(255,255,255,.07);border-radius:10px;padding:14px">
-                                                                        <div style="display:flex;justify-content:space-between;align-items:center">
-                                                                                          <div><div style="font-weight:800;font-size:13px">Shindo Ramen</div><div style="font-size:11px;color:#94a3b8">🍜 Ramen · Ari</div></div>
-                                                                                          <span style="background:#16a34a;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px">↑ Rising</span>span>
-                                                                        </div>
-                                                                        <div style="margin-top:8px;font-size:12px;color:#94a3b8">+28% reviews ใน 30 วัน · ⭐ 4.5 · 187 reviews</div>
-                                                        </div>
-                                                        <div style="background:rgba(255,255,255,.07);border-radius:10px;padding:14px">
-                                                                        <div style="display:flex;justify-content:space-between;align-items:center">
-                                                                                          <div><div style="font-weight:800;font-size:13px">Fuji Ramen Lab</div><div style="font-size:11px;color:#94a3b8">🍜 Ramen · Ekkamai</div></div>
-                                                                                          <span style="background:#d97706;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px">→ Stable</span>span>
-                                                                        </div>
-                                                                        <div style="margin-top:8px;font-size:12px;color:#94a3b8">+8% reviews ใน 30 วัน · ⭐ 4.6 · 412 reviews</div>
-                                                        </div>
-                                          </div>
-                                          <div style="margin-top:14px;font-size:11px;color:#475569;text-align:center">ข้อมูลตัวอย่าง — login เพื่อดูข้อมูลจริง</div>
-                              </div>
-                    </div>
-            </div>
-      </div>
-  </section>section>
-
-  <hr class="divider"/>
-
-  <section class="section" id="register" style="background:var(--white)">
-      <div class="container" style="max-width:600px">
-            <div style="text-align:center;margin-bottom:32px">
-                    <div class="eyebrow" style="color:#6366f1">สมัครเข้าร่วม</div>
-                    <h2 class="display-2" style="margin-bottom:12px">🎥 เป็น Creator — ฟรี</h2>h2>
-                    <p style="color:var(--text-muted)">ทีมงานจะติดต่อกลับภายใน 24 ชั่วโมง<br/>ข้อมูลของคุณจะไม่ถูกแชร์กับบุคคลที่สาม</p>p>
-            </div>
-            <form id="creatorForm" style="display:flex;flex-direction:column;gap:16px">
-                    <div>
-                              <label style="font-size:13px;font-weight:600;display:block;margin-bottom:6px">ชื่อ / Channel Name *</label>label>
-                              <input type="text" id="cname" placeholder="ชื่อของคุณหรือชื่อ channel" required style="width:100%;padding:12px 14px;border-radius:8px;border:1px solid #e2e8f0;font-size:14px"/>
-                    </div>
-                    <div>
-                              <label style="font-size:13px;font-weight:600;display:block;margin-bottom:6px">Platform ที่ใช้</label>label>
-                              <div style="display:flex;flex-wrap:wrap;gap:8px">
-                                          <button type="button" class="filter-btn" onclick="togglePlat(this)">YouTube</button>button>
-                                          <button type="button" class="filter-btn" onclick="togglePlat(this)">TikTok</button>button>
-                                          <button type="button" class="filter-btn" onclick="togglePlat(this)">Instagram</button>button>
-                                          <button type="button" class="filter-btn" onclick="togglePlat(this)">Facebook</button>button>
-                                          <button type="button" class="filter-btn" onclick="togglePlat(this)">Blog / Website</button>button>
-                              </div>
-                    </div>
-                    <div>
-                              <label style="font-size:13px;font-weight:600;display:block;margin-bottom:6px">Food Category ที่ถนัด</label>label>
-                              <div style="display:flex;flex-wrap:wrap;gap:8px">
-                                          <button type="button" class="filter-btn" onclick="togglePlat(this)">Fine Dining</button>button>
-                                          <button type="button" class="filter-btn" onclick="togglePlat(this)">Ramen / Japanese</button>button>
-                                          <button type="button" class="filter-btn" onclick="togglePlat(this)">Street Food</button>button>
-                                          <button type="button" class="filter-btn" onclick="togglePlat(this)">Cafe</button>button>
-                                          <button type="button" class="filter-btn" onclick="togglePlat(this)">ทุกประเภท</button>button>
-                              </div>
-                    </div>
-                    <div>
-                              <label style="font-size:13px;font-weight:600;display:block;margin-bottom:6px">Line ID *</label>label>
-                              <input type="text" id="cline" placeholder="@line_id ของคุณ" required style="width:100%;padding:12px 14px;border-radius:8px;border:1px solid #e2e8f0;font-size:14px"/>
-                    </div>
-                    <button type="submit" class="btn" style="background:#6366f1;color:#fff;margin-top:8px;font-size:16px;padding:14px">สมัครเป็น Creator — ฟรี</button>button>
-                    <p style="color:var(--text-muted);font-size:12px;text-align:center">ไม่มีค่าใช้จ่าย · ยกเลิกได้ทุกเมื่อ</p>p>
-            </form>form>
-            <div id="creatorSuccess" style="display:none;text-align:center;padding:40px">
-                    <div style="font-size:48px;margin-bottom:16px">🎉</div>
-                    <h3 style="margin-bottom:8px">ขอบคุณที่สนใจ!</h3>h3>
-                    <p style="color:var(--text-muted)">ทีมงาน ChefMinistry จะติดต่อกลับภายใน 24 ชั่วโมง<br/>ขอบคุณที่สนใจเป็นส่วนหนึ่งของ Creator Network 🙏</p>p>
-            </div>
-      </div>
-  </section>section>
-
-  <footer class="site-footer">
-      <div class="container footer-inner">
-            <div class="footer-brand"><div class="footer-logo">ChefMinistry</div><div class="footer-tagline">Restaurant Rating Intelligence</div></div>
-            <div class="footer-links">
-                    <a href="./listing.html">Discover</a>a><a href="./about.html">Methodology</a>a>
-                    <a href="./restaurant_partner.html">For Restaurants</a>a><a href="./creator.html">For Creators</a>a>
-            </div>
-            <div class="footer-copy">© 2026 ChefMinistry · Restaurant Rating Intelligence</div>
-      </div>
-  </footer>footer>
-
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-  <script src="./js/firebase-config.js"></script>
-  <script src="./js/auth.js"></script>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <link rel="icon" type="image/png" href="./assets/logo_circular.png"/>
+  <title>ChefMinistry — For Food Creators</title>
+  <meta name="description" content="สมัครเป็น Food Creator บน ChefMinistry — ใช้ Signal Intelligence วางแผน Content และรับ Brand Deal โดยตรง"/>
+  <link rel="stylesheet" href="./css/style.css"/>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BT2BCMZ9SH"></script>
   <script>
-    document.getElementById("mobileMenuBtn").addEventListener("click",()=>{document.getElementById("mobileNav").classList.toggle("open");});
-    function togglePlat(btn){btn.classList.toggle("active");}
-    document.getElementById("creatorForm").addEventListener("submit",function(e){
-        e.preventDefault();
-        const cname=document.getElementById("cname").value.trim();
-        const cline=document.getElementById("cline").value.trim();
-      if(!cname){alert("กรุณากรอกชื่อ");return;}
-          if(!cline){alert("กรุณากรอก Line ID");return;}
-              document.getElementById("creatorForm").style.display="none";
-        document.getElementById("creatorSuccess").style.display="block";
-        console.log("Creator signup:",{cname,cline});
-    });
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BT2BCMZ9SH');
   </script>
-</body>
-</html>html>
-                    </div>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="./index.html">
+      <img src="./assets/logo_circular.png" alt="Chef Ministry" class="logo-img"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <div class="logo-mark" style="display:none">CM</div>
+      <div>
+        <div class="logo-name">ChefMinistry</div>
+        <div class="logo-tagline">Food Trend Intelligence</div>
+      </div>
+    </a>
+    <nav class="site-nav">
+      <a class="nav-link" href="./index.html">Home</a>
+      <a class="nav-link" href="./listing.html">Discover</a>
+      <a class="nav-link" href="./about.html">Methodology</a>
+      <a class="btn-pro" href="./restaurant_partner.html">🏪 For Restaurants</a>
+      <a class="nav-link-creator active" href="./creator.html">🎥 For Creators</a>
+    </nav>
+    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+  </div>
+  <nav class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-links">
+      <a class="mobile-nav-link" href="./index.html">Home</a>
+      <a class="mobile-nav-link" href="./listing.html">Discover</a>
+      <a class="mobile-nav-link" href="./about.html">Methodology</a>
+      <a class="mobile-nav-link" href="./creator.html">🎥 For Creators</a>
+      <a class="mobile-nav-link" href="#register">Join Creator Network</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ── HERO ── -->
+<section class="creator-page-hero">
+  <div class="container">
+    <div style="max-width:680px">
+      <div class="eyebrow" style="color:var(--gold);margin-bottom:14px">🎥 ChefMinistry Creator Network</div>
+      <h1 class="display-1" style="color:#fff;margin-bottom:18px">
+        วางแผน Content<br/>จาก Data จริง
+      </h1>
+      <p style="font-size:16px;color:rgba(255,255,255,.72);line-height:1.7;margin-bottom:28px;max-width:560px">
+        ไม่ต้องเดาว่าร้านไหนน่าลอง — ChefMinistry บอกคุณว่าร้านไหน "ยังไม่มีใครรีวิว"
+        และ cuisine ไหนกำลัง trending ก่อนคนอื่น
+      </p>
+      <!-- Stats -->
+      <div style="display:flex;gap:28px;flex-wrap:wrap">
+        <div>
+          <div style="font-size:28px;font-weight:900;color:#fff;line-height:1">30+</div>
+          <div style="font-size:10.5px;font-weight:700;color:rgba(255,255,255,.45);margin-top:3px;text-transform:uppercase;letter-spacing:.07em">Verified Creators</div>
         </div>
-</body
+        <div style="width:1px;background:rgba(255,255,255,.12)"></div>
+        <div>
+          <div style="font-size:28px;font-weight:900;color:#fff;line-height:1">150+</div>
+          <div style="font-size:10.5px;font-weight:700;color:rgba(255,255,255,.45);margin-top:3px;text-transform:uppercase;letter-spacing:.07em">Restaurants Tracked</div>
+        </div>
+        <div style="width:1px;background:rgba(255,255,255,.12)"></div>
+        <div>
+          <div style="font-size:28px;font-weight:900;color:#fff;line-height:1">Weekly</div>
+          <div style="font-size:10.5px;font-weight:700;color:rgba(255,255,255,.45);margin-top:3px;text-transform:uppercase;letter-spacing:.07em">Signal Update</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ── WHY JOIN + FORM ── -->
+<section class="section" style="background:var(--cream)">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start">
+
+      <!-- LEFT: Why join -->
+      <div>
+        <div class="eyebrow" style="color:var(--amber);margin-bottom:12px">Creator ได้อะไรจาก ChefMinistry</div>
+        <h2 class="display-2" style="margin-bottom:28px">สมัครฟรี<br/>ได้ประโยชน์ทันที</h2>
+
+        <div style="display:flex;flex-direction:column;gap:24px;margin-bottom:36px">
+          <div style="display:flex;gap:16px;align-items:flex-start">
+            <div class="creator-why-num">1</div>
+            <div>
+              <div style="font-size:15px;font-weight:900;margin-bottom:4px">First-mover Opportunity</div>
+              <div style="font-size:13.5px;color:var(--text-2);line-height:1.65">ดูร้านที่ "ยังไม่มีใครรีวิว" ใน niche ของคุณ — content ที่ออกมาก่อนใคร ได้ engagement สูงกว่าเสมอ</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start">
+            <div class="creator-why-num">2</div>
+            <div>
+              <div style="font-size:15px;font-weight:900;margin-bottom:4px">Trend Signal รายหมวด</div>
+              <div style="font-size:13.5px;color:var(--text-2);line-height:1.65">รู้ว่า cuisine ไหนกำลัง hot ในเดือนนี้ วางแผน content calendar ได้ล่วงหน้า ไม่ต้องเดาอีกต่อไป</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start">
+            <div class="creator-why-num">3</div>
+            <div>
+              <div style="font-size:15px;font-weight:900;margin-bottom:4px">Overlap Intelligence</div>
+              <div style="font-size:13.5px;color:var(--text-2);line-height:1.65">เห็นว่า creator คนอื่น cover ร้านไหนไปแล้ว หลีกเลี่ยง content ซ้ำ หาโอกาสที่ยังว่างอยู่</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start">
+            <div class="creator-why-num">4</div>
+            <div>
+              <div style="font-size:15px;font-weight:900;margin-bottom:4px">Brand Deal Pipeline <span style="font-size:11px;background:var(--amber-bg);color:var(--amber);padding:2px 7px;border-radius:4px;font-weight:900;vertical-align:middle">Phase 2</span></div>
+              <div style="font-size:13.5px;color:var(--text-2);line-height:1.65">เมื่อ community โตพอ ร้านและแบรนด์จะมาหา creator โดยตรงผ่าน ChefMinistry — คุณไม่ต้องหางานเองทั้งหมด</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial -->
+        <div style="padding:20px 22px;background:var(--gold-bg);border:1px solid rgba(201,168,76,.3);border-radius:var(--radius);border-left:4px solid var(--gold)">
+          <div style="font-size:14px;font-style:italic;color:var(--text);line-height:1.7;margin-bottom:12px">
+            "ก่อนหน้านี้เราเดาว่าร้านไหนน่าลอง พอมี signal จาก ChefMinistry ทำให้ content engagement ดีขึ้นชัดเจน เพราะไปก่อนคนอื่น"
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="width:38px;height:38px;border-radius:50%;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-size:18px;flex-shrink:0">🍜</div>
+            <div>
+              <div style="font-size:13px;font-weight:900">Food Creator · Mid-tier</div>
+              <div style="font-size:11px;color:var(--text-2)">180K followers · TikTok + Instagram · <span style="opacity:.7">ตัวอย่างจาก creator</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard preview teaser -->
+        <div style="margin-top:24px;background:linear-gradient(135deg,var(--navy),var(--navy-2));border-radius:var(--radius-lg);padding:22px;color:#fff">
+          <div style="font-size:11px;font-weight:900;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px">ตัวอย่าง — Creator Opportunity Dashboard</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="background:rgba(255,255,255,.07);border-radius:10px;padding:11px 14px;display:flex;align-items:center;gap:12px">
+              <span style="font-size:20px">🍣</span>
+              <div style="flex:1">
+                <div style="font-size:13px;font-weight:900">Sushi Zo Bangkok</div>
+                <div style="font-size:11px;color:rgba(255,255,255,.5)">Omakase · Sathorn · 0 creator รีวิว</div>
+              </div>
+              <div style="background:var(--green-bg);color:var(--green);font-size:10px;font-weight:900;padding:3px 8px;border-radius:99px">First 🏆</div>
+            </div>
+            <div style="background:rgba(255,255,255,.07);border-radius:10px;padding:11px 14px;display:flex;align-items:center;gap:12px">
+              <span style="font-size:20px">🥩</span>
+              <div style="flex:1">
+                <div style="font-size:13px;font-weight:900">The Butcher Club</div>
+                <div style="font-size:11px;color:rgba(255,255,255,.5)">Steakhouse · Ekkamai · 1 creator รีวิว</div>
+              </div>
+              <div style="background:var(--amber-bg);color:var(--amber);font-size:10px;font-weight:900;padding:3px 8px;border-radius:99px">Rising ↑</div>
+            </div>
+            <div style="background:rgba(255,255,255,.04);border-radius:10px;padding:11px 14px;display:flex;align-items:center;gap:12px;filter:blur(3px);pointer-events:none">
+              <span style="font-size:20px">🍝</span>
+              <div style="flex:1">
+                <div style="font-size:13px;font-weight:900">████████████</div>
+                <div style="font-size:11px;color:rgba(255,255,255,.4)">████████████</div>
+              </div>
+              <div style="background:rgba(255,255,255,.1);font-size:10px;padding:3px 8px;border-radius:99px;color:rgba(255,255,255,.4)">สมัครเพื่อดู</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Registration Form -->
+      <div class="creator-form-card" id="register">
+        <h2 style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;margin-bottom:6px">สมัครเป็น Creator</h2>
+        <p style="font-size:14px;color:var(--text-2);margin-bottom:28px;line-height:1.6">ใช้เวลา 2 นาที · ฟรี · ไม่ต้องใส่ข้อมูลบัตรเครดิต</p>
+
+        <form id="creatorForm" onsubmit="handleSubmit(event)">
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px">
+            <div>
+              <label class="creator-form-label">ชื่อ / ชื่อแชนแนล *</label>
+              <input class="creator-form-input" type="text" id="fname" placeholder="เช่น Peach Eat Laek" required/>
+            </div>
+            <div>
+              <label class="creator-form-label">อีเมล *</label>
+              <input class="creator-form-input" type="email" id="femail" placeholder="your@email.com" required/>
+            </div>
+          </div>
+
+          <div style="margin-bottom:18px">
+            <label class="creator-form-label">Line ID *</label>
+            <input class="creator-form-input" type="text" id="fline" placeholder="@lineid"/>
+          </div>
+
+          <div style="margin-bottom:18px">
+            <label class="creator-form-label">Platform หลัก (กดเลือกได้หลายอัน) *</label>
+            <div class="creator-platform-grid" id="platformGrid">
+              <button type="button" class="creator-platform-btn" data-platform="TikTok" onclick="togglePlatform(this)">
+                <div style="font-size:20px;margin-bottom:4px">📱</div>
+                <div style="font-size:11px;font-weight:700">TikTok</div>
+              </button>
+              <button type="button" class="creator-platform-btn" data-platform="Instagram" onclick="togglePlatform(this)">
+                <div style="font-size:20px;margin-bottom:4px">📸</div>
+                <div style="font-size:11px;font-weight:700">Instagram</div>
+              </button>
+              <button type="button" class="creator-platform-btn" data-platform="YouTube" onclick="togglePlatform(this)">
+                <div style="font-size:20px;margin-bottom:4px">▶️</div>
+                <div style="font-size:11px;font-weight:700">YouTube</div>
+              </button>
+              <button type="button" class="creator-platform-btn" data-platform="Facebook" onclick="togglePlatform(this)">
+                <div style="font-size:20px;margin-bottom:4px">👤</div>
+                <div style="font-size:11px;font-weight:700">Facebook</div>
+              </button>
+              <button type="button" class="creator-platform-btn" data-platform="X/Twitter" onclick="togglePlatform(this)">
+                <div style="font-size:20px;margin-bottom:4px">🐦</div>
+                <div style="font-size:11px;font-weight:700">X / Twitter</div>
+              </button>
+              <button type="button" class="creator-platform-btn" data-platform="Other" onclick="togglePlatform(this)">
+                <div style="font-size:20px;margin-bottom:4px">➕</div>
+                <div style="font-size:11px;font-weight:700">อื่นๆ</div>
+              </button>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px">
+            <div>
+              <label class="creator-form-label">จำนวน Followers (รวมทุก platform) *</label>
+              <select class="creator-form-input" id="ffollowers" style="cursor:pointer" required>
+                <option value="">-- เลือก --</option>
+                <option value="nano">น้อยกว่า 10K</option>
+                <option value="micro">10K – 50K</option>
+                <option value="mid">50K – 200K</option>
+                <option value="macro">200K – 1M</option>
+                <option value="mega">1M+</option>
+              </select>
+            </div>
+            <div>
+              <label class="creator-form-label">Niche หลัก *</label>
+              <select class="creator-form-input" id="fniche" style="cursor:pointer" required>
+                <option value="">-- เลือก --</option>
+                <option value="all">All-around Food</option>
+                <option value="finedining">Thai Fine Dining</option>
+                <option value="japanese">Japanese / Omakase</option>
+                <option value="street">Street Food / Local</option>
+                <option value="cafe">Café / Bakery / Dessert</option>
+                <option value="other">อื่นๆ</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-bottom:18px">
+            <label class="creator-form-label">Link โปรไฟล์หลัก</label>
+            <input class="creator-form-input" type="url" id="flink" placeholder="https://tiktok.com/@yourhandle"/>
+          </div>
+
+          <div style="margin-bottom:24px">
+            <label class="creator-form-label">เบอร์ติดต่อ (optional)</label>
+            <input class="creator-form-input" type="tel" id="fphone" placeholder="08x-xxx-xxxx"/>
+          </div>
+
+          <button type="submit" class="creator-submit-btn" id="submitBtn">
+            🎥 สมัครเป็น Creator — ฟรี
+          </button>
+          <p style="font-size:11px;color:var(--text-2);text-align:center;margin-top:10px;line-height:1.6">
+            ทีมงานจะติดต่อกลับภายใน 24 ชั่วโมง<br/>ข้อมูลของคุณจะไม่ถูกแชร์กับบุคคลที่สาม
+          </p>
+        </form>
+
+        <!-- Success state (hidden by default) -->
+        <div id="successState" style="display:none;text-align:center;padding:32px 0">
+          <div style="font-size:52px;margin-bottom:16px">🎉</div>
+          <h3 style="font-size:20px;font-weight:900;margin-bottom:10px">สมัครเสร็จแล้ว!</h3>
+          <p style="font-size:14px;color:var(--text-2);line-height:1.65;margin-bottom:20px">
+            ทีมงาน ChefMinistry จะติดต่อกลับภายใน 24 ชั่วโมง<br/>
+            ขอบคุณที่สนใจเป็นส่วนหนึ่งของ Creator Network 🙏
+          </p>
+          <a href="./index.html" class="btn btn-dark btn-sm">กลับหน้าหลัก →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ── FAQ ── -->
+<section class="section" style="background:var(--white)">
+  <div class="container" style="max-width:720px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:40px">
+      <div class="eyebrow" style="color:var(--navy);margin-bottom:10px">FAQ</div>
+      <h2 class="display-2">คำถามที่พบบ่อย</h2>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0" id="faqList">
+      <!-- FAQ items rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <img src="./assets/logo_circular.png" alt="Chef Ministry" style="height:36px;border-radius:6px"
+               onerror="this.style.display='none'"/>
+          <div class="logo-name">ChefMinistry</div>
+        </div>
+        <p class="footer-brand-desc">Food Signal Intelligence Platform — รู้ก่อน กินดีกว่า ข้อมูลจาก Human Trust Network ไม่ใช่ AI ทั่วไป</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Platform</div>
+        <div class="footer-links">
+          <a class="footer-link" href="./listing.html">Discover Restaurants</a>
+          <a class="footer-link" href="./listing.html?velocity=rising">Rising Trends</a>
+          <a class="footer-link" href="./creator.html">For Creators</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">About</div>
+        <div class="footer-links">
+          <a class="footer-link" href="./about.html">Our Methodology</a>
+          <a class="footer-link" href="./about.html#legal">Legal Framework</a>
+          <a class="footer-link" href="./about.html#b2b">B2B Intelligence</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">For Business</div>
+        <div class="footer-links">
+          <a class="footer-link" href="./restaurant_partner.html">Restaurant / Brand Pilot</a>
+          <a class="footer-link" href="./creator.html">Creator Network</a>
+          <a class="footer-link" href="mailto:contact@chefministry.com?subject=ChefMinistry%20Pilot%20Partnership">Pilot Partnership</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">ติดต่อ</div>
+        <div class="footer-links">
+          <a class="footer-link" href="https://line.me/R/ti/p/@chefministry" target="_blank">💬 LINE: @chefministry</a>
+          <a class="footer-link" href="mailto:contact@chefministry.com">✉️ contact@chefministry.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">© 2026 ChefMinistry. ข้อมูลทั้งหมดมาจากเนื้อหาสาธารณะ. ไม่ใช่คำแนะนำเชิงพาณิชย์.</div>
+      <div class="footer-legal">Signal Intelligence. Not Just Reviews.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Mobile nav ──────────────────────────────────────────────────────────────
+document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
+  const n=document.getElementById("mobileNav");
+  n.style.display=n.style.display==="block"?"none":"block";
+});
+
+// ── Platform toggle ─────────────────────────────────────────────────────────
+function togglePlatform(btn){
+  btn.classList.toggle("active");
+}
+
+// ── Form submit ─────────────────────────────────────────────────────────────
+function handleSubmit(e){
+  e.preventDefault();
+
+  const platformBtns = [...document.querySelectorAll(".creator-platform-btn.active")];
+  if(!platformBtns.length){
+    alert("กรุณาเลือก Platform อย่างน้อย 1 อัน");
+    return;
+  }
+
+  const lineVal = document.getElementById("fline").value.trim();
+  if(!lineVal){
+    alert("กรุณากรอก Line ID");
+    return;
+  }
+
+  const btn = document.getElementById("submitBtn");
+  btn.textContent="กำลังส่ง...";
+  btn.disabled=true;
+
+  // Google Form entry IDs
+  const FORM_ID         = "1FAIpQLScBoALniPeyFM2dwt-bRNhymHLYiJGNLM1BGtMFA91OlCSz6w";
+  const ENTRY_NAME      = "entry.1228433381";
+  const ENTRY_EMAIL     = "entry.1854478110";
+  const ENTRY_LINE      = "entry.1719352600";
+  const ENTRY_PLATFORM  = "entry.2045466382";
+  const ENTRY_FOLLOWERS = "entry.2013940586";
+  const ENTRY_NICHE     = "entry.1155484595";
+  const ENTRY_LINK      = "entry.843150425";
+  const ENTRY_PHONE     = "entry.737242334";
+
+  const name = document.getElementById("fname").value.trim();
+  const email = document.getElementById("femail").value.trim();
+  const followers = document.getElementById("ffollowers").selectedOptions[0]?.text || "";
+  const niche = document.getElementById("fniche").selectedOptions[0]?.text || "";
+  const link = document.getElementById("flink").value.trim();
+  const phone = document.getElementById("fphone").value.trim();
+
+  const platformParams = platformBtns
+    .map(b => `${ENTRY_PLATFORM}=${encodeURIComponent(b.dataset.platform === "Other" ? "อื่นๆ" : b.dataset.platform)}`)
+    .join("&");
+
+  const params = [
+    `${ENTRY_NAME}=${encodeURIComponent(name)}`,
+    `${ENTRY_EMAIL}=${encodeURIComponent(email)}`,
+    `${ENTRY_LINE}=${encodeURIComponent(lineVal)}`,
+    platformParams,
+    `${ENTRY_FOLLOWERS}=${encodeURIComponent(followers)}`,
+    `${ENTRY_NICHE}=${encodeURIComponent(niche)}`,
+    `${ENTRY_LINK}=${encodeURIComponent(link)}`,
+    `${ENTRY_PHONE}=${encodeURIComponent(phone)}`,
+    `submit=Submit`
+  ].filter(Boolean).join("&");
+
+  const formURL = `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse?${params}`;
+
+  const iframe = document.createElement("iframe");
+  iframe.style.display="none";
+  iframe.name="hidden_iframe_submit";
+  iframe.src=formURL;
+  document.body.appendChild(iframe);
+
+  setTimeout(()=>{
+    document.getElementById("creatorForm").style.display="none";
+    document.getElementById("successState").style.display="block";
+  },1500);
+}
+
+// ── FAQ ─────────────────────────────────────────────────────────────────────
+const FAQS=[
+  {q:"ต้องมี followers เยอะแค่ไหนถึงสมัครได้?",
+   a:"ไม่มีขั้นต่ำครับ เราเปิดรับ creator ทุก tier ตั้งแต่ nano (น้อยกว่า 10K) ถึง mega (1M+) เพราะเชื่อว่า engagement และ niche ที่ตรงสำคัญกว่า follower count"},
+  {q:"ค่าใช้จ่ายในการสมัครเป็นอย่างไร?",
+   a:"สมัครฟรีครับ ไม่มีค่าใช้จ่ายใดๆ ทั้งสิ้น Creator จะได้เข้าถึง Signal Dashboard ในช่วง beta โดยไม่มีค่าใช้จ่าย"},
+  {q:"หลังสมัครแล้วจะได้อะไรบ้าง?",
+   a:"หลังสมัครทีมงานจะติดต่อกลับภายใน 24 ชั่วโมง เพื่อ onboard และให้ access เข้า Creator Dashboard ซึ่งแสดง opportunity signals, trend data, และ overlap intelligence"},
+  {q:"ChefMinistry ใช้ข้อมูลจาก creator อย่างไร?",
+   a:"เราใช้ข้อมูลเฉพาะ aggregate analytics เพื่อปรับปรุง signal quality ไม่มีการแชร์ข้อมูลส่วนตัวกับบุคคลที่สาม และ creator สามารถ opt-out ได้ตลอดเวลา"},
+  {q:"Brand Deal Pipeline จะเริ่มเมื่อไหร่?",
+   a:"เป็น Phase 2 ของ ChefMinistry ครับ ปัจจุบันอยู่ในช่วง building community ก่อน — creator ที่สมัครตอนนี้จะได้สิทธิ์ early access เมื่อระบบ matching เปิดตัว"},
+];
+
+const faqList=document.getElementById("faqList");
+faqList.innerHTML=FAQS.map((f,i)=>`
+  <div style="border-bottom:1px solid var(--border)">
+    <button onclick="toggleFaq(${i})" style="width:100%;display:flex;justify-content:space-between;align-items:center;padding:20px 0;background:none;border:none;cursor:pointer;font-family:inherit;text-align:left;gap:16px">
+      <span style="font-size:15px;font-weight:800;color:var(--text)">${f.q}</span>
+      <span id="faqIcon${i}" style="font-size:20px;color:var(--text-2);flex-shrink:0;transition:transform .2s">＋</span>
+    </button>
+    <div id="faqBody${i}" style="display:none;padding-bottom:18px">
+      <p style="font-size:14px;color:var(--text-2);line-height:1.7">${f.a}</p>
+    </div>
+  </div>
+`).join("");
+
+function toggleFaq(i){
+  const body=document.getElementById("faqBody"+i);
+  const icon=document.getElementById("faqIcon"+i);
+  const open=body.style.display==="block";
+  body.style.display=open?"none":"block";
+  icon.textContent=open?"＋":"－";
+}
+</script>
+</body>
+</html>

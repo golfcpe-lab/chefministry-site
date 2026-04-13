@@ -1,221 +1,607 @@
 <!DOCTYPE html>
 <html lang="th">
-  <head>
-      <meta charset="UTF-8"/>
-      <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-      <link rel="icon" type="image/png" href="./assets/logo_circular.png"/>
-      <title>ChefMinistry — สำหรับร้านอาหาร · ดู Trend & Category Benchmark</title>
-    <meta name="description" content="ดู trend คะแนนรีวิวร้านตัวเองเปรียบเทียบกับร้านอื่นใน Category เดียวกัน รู้ก่อนว่าต้องปรับกลยุทธ์อะไร"/>
-    <link rel="stylesheet" href="./css/style.css"/>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BT2BCMZ9SH"></script>
-    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BT2BCMZ9SH');</script>
-  </head>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <link rel="icon" type="image/png" href="./assets/logo_circular.png"/>
+  <title>ChefMinistry — For Restaurants & Brands</title>
+  <meta name="description" content="เพิ่มลูกค้าด้วย Food Creator ที่ใช่ — ChefMinistry ช่วยร้านอาหารและแบรนด์หา creator ที่เหมาะกับกลุ่มลูกค้า พร้อม trend data"/>
+  <link rel="stylesheet" href="./css/style.css"/>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BT2BCMZ9SH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BT2BCMZ9SH');
+  </script>
+</head>
 <body>
-  <header class="site-header">
-      <div class="container header-inner">
-            <a class="logo" href="./index.html">
-                    <img src="./assets/logo_circular.png" alt="CM" class="logo-img" style="width:40px;height:40px;border-radius:50%;object-fit:cover"/>
-                    <div><div class="logo-name">ChefMinistry</div><div class="logo-tagline">Restaurant Rating Intelligence</div></div>
-            </a>a>
-          <nav class="site-nav">
-            <a class="nav-link" href="./index.html">Home</a>a>
-            <a class="nav-link" href="./listing.html">Discover</a>a>
-            <a class="nav-link" href="./about.html">Methodology</a>a>
-            <a class="btn-pro active" href="./restaurant_partner.html">🏪 For Restaurants</a>a>
-            <a class="nav-link" href="./creator.html">🎥 For Creators</a>a>
-            <div class="cm-auth-nav"></div>
-          </nav>nav>
-          <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>button>
-      </div>
-    <nav class="mobile-nav" id="mobileNav">
-        <div class="mobile-nav-links">
-                <a class="mobile-nav-link" href="./index.html">Home</a>a>
-                <a class="mobile-nav-link" href="./listing.html">Discover</a>a>
-                <a class="mobile-nav-link" href="./about.html">Methodology</a>a>
-                <a class="mobile-nav-link" href="./creator.html">🎥 For Creators</a>a>
-                <a class="mobile-nav-link" href="./restaurant_partner.html">🏪 For Restaurants</a>a>
-                <div class="cm-auth-nav" style="padding:8px 16px"></div>
-        </div>
-    </nav>nav>
-  </header>header>
 
-  <div class="hero" style="padding:60px 0 40px">
-      <div class="container">
-            <div class="breadcrumb"><a href="./index.html">Home</a>a><span class="breadcrumb-sep">/</span>span><span style="color:#fff">For Restaurants</span>span></div>
-            <div style="max-width:680px;margin-top:24px">
-                    <div class="eyebrow hero-eyebrow">🏪 สำหรับร้านอาหาร</div>
-                    <h1 class="display-1" style="color:#fff;margin-bottom:16px">ดู Trend ร้านตัวเอง<br/>เปรียบเทียบ Category</h1>h1>
-                    <p style="color:#cbd5e1;font-size:18px;line-height:1.7;margin-bottom:24px">
-                              รู้ว่าคะแนนรีวิวร้านของคุณกำลังไปทิศทางไหน เปรียบเทียบกับร้านอื่นใน Category เดียวกัน
-                              และเข้าใจว่าต้องปรับกลยุทธ์อะไร — ข้อมูลจากแหล่งข้อมูล public อัปเดตทุกวัน
-                    </p>p>
-                    <a href="#register" class="btn btn-primary" style="font-size:16px">ลงทะเบียนดู Trend ร้านคุณ — ฟรี</a>a>
-            </div>
+<!-- ── HEADER ── -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="./index.html">
+      <img src="./assets/logo_circular.png" alt="Chef Ministry" class="logo-img"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <div class="logo-mark" style="display:none">CM</div>
+      <div>
+        <div class="logo-name">ChefMinistry</div>
+        <div class="logo-tagline">Food Trend Intelligence</div>
       </div>
+    </a>
+    <nav class="site-nav">
+      <a class="nav-link" href="./index.html">Home</a>
+      <a class="nav-link" href="./listing.html">Discover</a>
+      <a class="nav-link" href="./about.html">Methodology</a>
+      <a class="btn-pro" href="#register">🏪 ลงทะเบียนร้าน</a>
+      <a class="nav-link" href="./creator.html">🎥 For Creators</a>
+      <div class="cm-auth-nav" style="display:flex;align-items:center"></div>
+    </nav>
+    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
   </div>
+  <nav class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-links">
+      <a class="mobile-nav-link" href="./index.html">Home</a>
+      <a class="mobile-nav-link" href="./listing.html">Discover</a>
+      <a class="mobile-nav-link" href="./about.html">Methodology</a>
+      <a class="mobile-nav-link" href="./creator.html">🎥 For Creators</a>
+      <a class="mobile-nav-link" href="#register">🏪 ลงทะเบียนร้าน</a>
+    </div>
+  </nav>
+</header>
 
-  <section class="section" style="background:var(--white)">
-      <div class="container">
-            <div class="section-header" style="text-align:center">
-                    <div class="eyebrow">What You Get</div>
-                    <h2 class="display-2">รู้ทุกมิติของ Trend ร้านคุณ</h2>h2>
-            </div>
-            <div class="grid-3" style="margin-top:32px">
-                    <div class="step-card" style="text-align:left">
-                              <div style="font-size:32px;margin-bottom:12px">📈</div>
-                              <div class="step-title">Rating Trend ย้อนหลัง 30 วัน</div>
-                              <div class="step-desc">เห็นว่าคะแนนรีวิวร้านของคุณ Rising, Stable หรือ Declining เทียบกับช่วงก่อนหน้า รู้ก่อนที่ลูกค้าจะหายไป</div>
-                    </div>
-                    <div class="step-card" style="text-align:left">
-                              <div style="font-size:32px;margin-bottom:12px">🏆</div>
-                              <div class="step-title">Category Benchmark</div>
-                              <div class="step-desc">เปรียบเทียบ rating velocity ของร้านคุณกับร้านอื่นใน Category เดียวกัน รู้ว่าคู่แข่งที่กำลังมาทำอะไรต่างจากคุณ</div>
-                    </div>
-                    <div class="step-card" style="text-align:left">
-                              <div style="font-size:32px;margin-bottom:12px">🔍</div>
-                              <div class="step-title">ดูว่าร้านไหนกำลังแซง</div>
-                              <div class="step-desc">เห็นร้านที่ review count เพิ่มขึ้นเร็วใน Category ของคุณ ก่อนที่พวกเขาจะดังแบบที่ทุกคนรู้แล้ว</div>
-                    </div>
-                    <div class="step-card" style="text-align:left">
-                              <div style="font-size:32px;margin-bottom:12px">🎯</div>
-                              <div class="step-title">บทวิเคราะห์ Strategy (Premium)</div>
-                              <div class="step-desc">สมาชิก Premium ได้รับบทวิเคราะห์เชิง strategy เจาะลึก ว่าต้องปรับจุดไหน เพื่อให้ rating velocity เพิ่มขึ้นได้จริง</div>
-                    </div>
-                    <div class="step-card" style="text-align:left">
-                              <div style="font-size:32px;margin-bottom:12px">📍</div>
-                              <div class="step-title">แยกตามย่านและ Category</div>
-                              <div class="step-desc">Filter ข้อมูลตามย่าน (Thonglor, Silom, Ari ฯลฯ) และประเภทร้าน เพื่อให้ benchmark ที่ตรงกับสถานการณ์จริง</div>
-                    </div>
-                    <div class="step-card" style="text-align:left">
-                              <div style="font-size:32px;margin-bottom:12px">🤝</div>
-                              <div class="step-title">Creator Match (อนาคต)</div>
-                              <div class="step-desc">เมื่อ trend ของร้านคุณ rising เราจะแนะนำ food creator ที่ niche ตรงกับ category ของร้านคุณโดยอัตโนมัติ</div>
-                    </div>
-            </div>
+<!-- ── HERO ── -->
+<section class="restaurant-page-hero">
+  <div class="container">
+    <div style="max-width:700px">
+      <div class="eyebrow" style="color:var(--gold);margin-bottom:14px">🏪 ChefMinistry Restaurant Partner</div>
+      <h1 class="display-1" style="color:#fff;margin-bottom:18px">
+        เพิ่มลูกค้า<br/>ด้วย Creator ที่ใช่
+      </h1>
+      <p style="font-size:16px;color:rgba(255,255,255,.72);line-height:1.7;margin-bottom:28px;max-width:560px">
+        ไม่ต้องเสียเวลาหา creator เอง — ChefMinistry จับคู่ร้านของคุณกับ food creator
+        ที่เหมาะกับ concept และกลุ่มลูกค้าของคุณ พร้อม trend data ที่ช่วยให้ campaign ได้ผลจริง
+      </p>
+      <!-- Stats -->
+      <div style="display:flex;gap:28px;flex-wrap:wrap">
+        <div>
+          <div style="font-size:28px;font-weight:900;color:#fff;line-height:1">30+</div>
+          <div style="font-size:10.5px;font-weight:700;color:rgba(255,255,255,.45);margin-top:3px;text-transform:uppercase;letter-spacing:.07em">Verified Creators</div>
+        </div>
+        <div style="width:1px;background:rgba(255,255,255,.12)"></div>
+        <div>
+          <div style="font-size:28px;font-weight:900;color:#fff;line-height:1">150+</div>
+          <div style="font-size:10.5px;font-weight:700;color:rgba(255,255,255,.45);margin-top:3px;text-transform:uppercase;letter-spacing:.07em">Restaurants Tracked</div>
+        </div>
+        <div style="width:1px;background:rgba(255,255,255,.12)"></div>
+        <div>
+          <div style="font-size:28px;font-weight:900;color:#fff;line-height:1">ฟรี</div>
+          <div style="font-size:10.5px;font-weight:700;color:rgba(255,255,255,.45);margin-top:3px;text-transform:uppercase;letter-spacing:.07em">Early Access Partner</div>
+        </div>
       </div>
-  </section>section>
-
-  <hr class="divider"/>
-
-  <section class="section">
-      <div class="container">
-            <div class="section-header" style="text-align:center">
-                    <div class="eyebrow">Pricing</div>
-                    <h2 class="display-2">เริ่มต้นฟรี อัปเกรดเมื่อพร้อม</h2>h2>
-            </div>
-            <div class="grid-2" style="max-width:760px;margin:32px auto 0">
-                    <div class="card" style="padding:28px">
-                              <div style="font-size:24px;font-weight:900;margin-bottom:4px">Free</div>
-                              <div style="font-size:13px;color:var(--text-muted);margin-bottom:20px">เริ่มต้นได้เลย ไม่ต้องใช้บัตร</div>
-                              <ul style="list-style:none;padding:0;margin:0 0 24px;display:flex;flex-direction:column;gap:10px">
-                                          <li style="font-size:14px;display:flex;gap:8px"><span style="color:#16a34a">✓</span>span> ดู trend ร้านทั้งหมดใน Discover</li>li>
-                                          <li style="font-size:14px;display:flex;gap:8px"><span style="color:#16a34a">✓</span>span> เห็น Rating Velocity แต่ละ Category</li>li>
-                                          <li style="font-size:14px;display:flex;gap:8px"><span style="color:#16a34a">✓</span>span> ดูว่าร้านไหนกำลัง Rising ใน Category คุณ</li>li>
-                                          <li style="font-size:14px;display:flex;gap:8px;color:var(--text-muted)"><span>—</span> บทวิเคราะห์ strategy เจาะลึก</li>li>
-                                        <li style="font-size:14px;display:flex;gap:8px;color:var(--text-muted)"><span>—</span> Creator Match สำหรับร้านคุณ</li>li>
-                              </ul>ul>
-                            <a href="#register" class="btn btn-outline" style="width:100%;text-align:center">เริ่มฟรี →</a>a>
-                    </div>
-                  <div class="card" style="padding:28px;border:2px solid var(--gold)">
-                          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-                                    <div style="font-size:24px;font-weight:900">Premium</div>
-                                    <span style="background:var(--gold);color:#0d1f3c;font-size:10px;font-weight:800;padding:3px 8px;border-radius:99px">COMING SOON</span>
-                          </div>
-                          <div style="font-size:13px;color:var(--text-muted);margin-bottom:20px">สำหรับเจ้าของร้านที่จริงจัง</div>
-                          <ul style="list-style:none;padding:0;margin:0 0 24px;display:flex;flex-direction:column;gap:10px">
-                                    <li style="font-size:14px;display:flex;gap:8px"><span style="color:#16a34a">✓</span> ทุกอย่างใน Free</li>li>
-                                    <li style="font-size:14px;display:flex;gap:8px"><span style="color:#16a34a">✓</span> บทวิเคราะห์ strategy เชิงลึกรายร้าน</li>li>
-                                    <li style="font-size:14px;display:flex;gap:8px"><span style="color:#16a34a">✓</span> เปรียบเทียบ metric รายวัน vs คู่แข่ง</li>li>
-                                    <li style="font-size:14px;display:flex;gap:8px"><span style="color:#16a34a">✓</span> Alert เมื่อคู่แข่ง rating spike</li>li>
-                                    <li style="font-size:14px;display:flex;gap:8px"><span style="color:#16a34a">✓</span> Creator Match — แนะนำ creator ที่ตรง niche</li>li>
-                          </ul>ul>
-                          <button class="btn btn-primary" style="width:100%" disabled>แจ้งเตือนเมื่อเปิดตัว</button>button>
-                  </div>
-            </div>
-      </div>
-  </section>section>
+    </div>
+  </div>
+</section>
 
 <hr class="divider"/>
 
-<section class="section" id="register" style="background:var(--dark)">
-  <div class="container" style="max-width:600px">
-      <div style="text-align:center;margin-bottom:32px">
-            <div class="eyebrow" style="color:var(--gold)">ลงทะเบียนเข้าร่วม</div>
-            <h2 class="display-2" style="color:#fff;margin-bottom:12px">เริ่มดู Trend ร้านคุณ</h2>h2>
-            <p style="color:#94a3b8">ทีมงานจะติดต่อกลับภายใน 24 ชั่วโมง<br/>ข้อมูลของคุณจะไม่ถูกแชร์กับบุคคลที่สาม</p>p>
-      </div>
-      <form id="restaurantForm" style="display:flex;flex-direction:column;gap:16px">
-            <div>
-                    <label style="color:#e2e8f0;font-size:13px;font-weight:600;display:block;margin-bottom:6px">ชื่อร้าน *</label>label>
-                    <input type="text" id="rname" placeholder="ชื่อร้านอาหารของคุณ" required style="width:100%;padding:12px 14px;border-radius:8px;border:1px solid #334155;background:#1e293b;color:#fff;font-size:14px"/>
-            </div>
-            <div>
-                    <label style="color:#e2e8f0;font-size:13px;font-weight:600;display:block;margin-bottom:6px">ประเภทร้าน</label>label>
-                    <div style="display:flex;flex-wrap:wrap;gap:8px" id="categoryBtns">
-                              <button type="button" class="filter-btn" onclick="toggleGoal(this)">Fine Dining</button>button>
-                              <button type="button" class="filter-btn" onclick="toggleGoal(this)">Casual Dining</button>button>
-                              <button type="button" class="filter-btn" onclick="toggleGoal(this)">Ramen</button>button>
-                              <button type="button" class="filter-btn" onclick="toggleGoal(this)">Omakase / Sushi</button>button>
-                              <button type="button" class="filter-btn" onclick="toggleGoal(this)">Street Food</button>button>
-                              <button type="button" class="filter-btn" onclick="toggleGoal(this)">Pizza</button>button>
-                              <button type="button" class="filter-btn" onclick="toggleGoal(this)">Cafe</button>button>
-                              <button type="button" class="filter-btn" onclick="toggleGoal(this)">อื่นๆ</button>button>
-                    </div>
-            </div>
-            <div>
-                    <label style="color:#e2e8f0;font-size:13px;font-weight:600;display:block;margin-bottom:6px">ย่านที่ตั้ง</label>label>
-                    <input type="text" id="rarea" placeholder="เช่น Thonglor, Silom, Ari" style="width:100%;padding:12px 14px;border-radius:8px;border:1px solid #334155;background:#1e293b;color:#fff;font-size:14px"/>
-            </div>
-            <div>
-                    <label style="color:#e2e8f0;font-size:13px;font-weight:600;display:block;margin-bottom:6px">Line ID หรืออีเมล *</label>label>
-                    <input type="text" id="rcontact" placeholder="สำหรับติดต่อกลับ" required style="width:100%;padding:12px 14px;border-radius:8px;border:1px solid #334155;background:#1e293b;color:#fff;font-size:14px"/>
-            </div>
-            <div>
-                    <label style="color:#e2e8f0;font-size:13px;font-weight:600;display:block;margin-bottom:8px">สิ่งที่อยากรู้</label>label>
-                    <div style="display:flex;flex-wrap:wrap;gap:8px">
-                              <button type="button" class="filter-btn" onclick="toggleGoal(this)">ดู trend rating ตัวเอง</button>button>
-                              <button type="button" class="filter-btn" onclick="toggleGoal(this)">เปรียบเทียบคู่แข่ง</button>button>
-                              <button type="button" class="filter-btn" onclick="toggleGoal(this)">หา Food Creator</button>button>
-                              <button type="button" class="filter-btn" onclick="toggleGoal(this)">ปรับกลยุทธ์ร้าน</button>button>
-                    </div>
-            </div>
-            <button type="submit" class="btn btn-primary" style="margin-top:8px;font-size:16px;padding:14px">ส่งข้อมูล — ดู Trend ร้านคุณ</button>button>
-            <p style="color:#64748b;font-size:12px;text-align:center">ข้อมูลของคุณจะไม่ถูกแชร์กับบุคคลที่สาม · ยกเลิกได้ทุกเมื่อ</p>p>
-      </form>form>
-      <div id="formSuccess" style="display:none;text-align:center;padding:40px">
-            <div style="font-size:48px;margin-bottom:16px">✅</div>
-            <h3 style="color:#fff;margin-bottom:8px">ได้รับข้อมูลแล้ว!</h3>h3>
-            <p style="color:#94a3b8">ทีมงาน ChefMinistry จะติดต่อกลับภายใน 24 ชั่วโมง<br/>เพื่อ setup dashboard trend สำหรับร้านของคุณ 🙏</p>p>
-      </div>
-  </div>
-</section>section>
+<!-- ── WHY JOIN + FORM ── -->
+<section class="section" style="background:var(--cream)">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start">
 
-<footer class="site-footer">
-  <div class="container footer-inner">
-      <div class="footer-brand"><div class="footer-logo">ChefMinistry</div><div class="footer-tagline">Restaurant Rating Intelligence</div></div>
-      <div class="footer-links">
-            <a href="./listing.html">Discover</a>a><a href="./about.html">Methodology</a>a>
-            <a href="./restaurant_partner.html">For Restaurants</a>a><a href="./creator.html">For Creators</a>a>
-      </div>
-      <div class="footer-copy">© 2026 ChefMinistry · Restaurant Rating Intelligence</div>
-  </div>
-</footer>footer>
+      <!-- LEFT: Why join -->
+      <div>
+        <div class="eyebrow" style="color:var(--amber);margin-bottom:12px">ร้านได้อะไรจาก ChefMinistry</div>
+        <h2 class="display-2" style="margin-bottom:28px">สมัครฟรี<br/>เริ่มได้ทันที</h2>
 
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-<script src="./js/firebase-config.js"></script>
-<script src="./js/auth.js"></script>
-<script>
-document.getElementById("mobileMenuBtn").addEventListener("click",()=>{document.getElementById("mobileNav").classList.toggle("open");});
-function toggleGoal(btn){btn.classList.toggle("active");}
-document.getElementById("restaurantForm").addEventListener("submit",function(e){
-    e.preventDefault();
-    const rname=document.getElementById("rname").value.trim();
-    const contact=document.getElementById("rcontact").value.trim();
-    if(!rname){alert("กรุณากรอกชื่อร้าน");return;}
-    if(!contact){al</span></span>
+        <div style="display:flex;flex-direction:column;gap:24px;margin-bottom:36px">
+          <div style="display:flex;gap:16px;align-items:flex-start">
+            <div class="creator-why-num">1</div>
+            <div>
+              <div style="font-size:15px;font-weight:900;margin-bottom:4px">จับคู่ Creator ที่ตรง Concept</div>
+              <div style="font-size:13.5px;color:var(--text-2);line-height:1.65">คัด creator ตาม cuisine, พื้นที่ และ audience ที่ตรงกับกลุ่มลูกค้าของร้าน — ไม่ใช่แค่คนที่มี follower เยอะ</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start">
+            <div class="creator-why-num">2</div>
+            <div>
+              <div style="font-size:15px;font-weight:900;margin-bottom:4px">ดู Trend ก่อนคู่แข่ง</div>
+              <div style="font-size:13.5px;color:var(--text-2);line-height:1.65">รู้ว่าคู่แข่งในย่านหรือ cuisine เดียวกันกำลังถูกพูดถึงแค่ไหน วางแผน campaign ได้แม่นยำกว่า</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start">
+            <div class="creator-why-num">3</div>
+            <div>
+              <div style="font-size:15px;font-weight:900;margin-bottom:4px">เริ่มแบบ Low-risk Pilot</div>
+              <div style="font-size:13.5px;color:var(--text-2);line-height:1.65">ทดลอง campaign กับ creator 1–2 คนก่อน เมื่อเห็นผลจริงค่อย scale — ไม่ต้องเสี่ยงงบก้อนใหญ่</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start">
+            <div class="creator-why-num">4</div>
+            <div>
+              <div style="font-size:15px;font-weight:900;margin-bottom:4px">Monitor Signal ต่อเนื่อง <span style="font-size:11px;background:var(--amber-bg);color:var(--amber);padding:2px 7px;border-radius:4px;font-weight:900;vertical-align:middle">Monthly</span></div>
+              <div style="font-size:13.5px;color:var(--text-2);line-height:1.65">ติดตาม signal ของร้านและคู่แข่งในระยะยาว ไม่ใช่แค่แคมเปญครั้งเดียว</div>
+            </div>
+          </div>
         </div>
-</body></script></title>
-  </head>
-         
+
+        <!-- Early Access Benefits -->
+        <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px">
+          <div style="font-size:11px;font-weight:900;color:var(--text-2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px">🎁 Early Access Partner — ฟรีทั้งหมด</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--cream);border-radius:var(--radius-sm)">
+              <span style="color:var(--green);font-size:18px;font-weight:900">✓</span>
+              <div>
+                <div style="font-size:13px;font-weight:900">เข้าถึง Signal Dashboard</div>
+                <div style="font-size:12px;color:var(--text-2);margin-top:1px">ดู trend และ creator activity ที่เกี่ยวกับร้านคุณ</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--cream);border-radius:var(--radius-sm)">
+              <span style="color:var(--green);font-size:18px;font-weight:900">✓</span>
+              <div>
+                <div style="font-size:13px;font-weight:900">Creator Shortlist ที่เหมาะกับร้าน</div>
+                <div style="font-size:12px;color:var(--text-2);margin-top:1px">ทีมงานคัด creator ให้ตามประเภทอาหารและกลุ่มลูกค้า</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--navy);border-radius:var(--radius-sm)">
+              <span style="color:var(--gold);font-size:18px;font-weight:900">✓</span>
+              <div>
+                <div style="font-size:13px;font-weight:900;color:#fff">Pilot Campaign Support</div>
+                <div style="font-size:12px;color:rgba(255,255,255,.55);margin-top:1px">ช่วยวางแผนและ monitor ผลลัพธ์ครั้งแรกฟรี</div>
+              </div>
+            </div>
+          </div>
+          <p style="font-size:12px;color:var(--text-2);margin-top:12px;line-height:1.6">* ช่วง Early Access ไม่มีค่าใช้จ่าย ทีมงานจะติดต่อเพื่อ onboard ภายใน 24 ชม.</p>
+        </div>
+
+        <!-- Social proof -->
+        <div style="margin-top:20px;padding:20px 22px;background:var(--gold-bg);border:1px solid rgba(201,168,76,.3);border-radius:var(--radius);border-left:4px solid var(--gold)">
+          <div style="font-size:14px;font-style:italic;color:var(--text);line-height:1.7;margin-bottom:12px">
+            "ก่อนหน้านี้เราไม่รู้จะหา creator จากไหน พอมี ChefMinistry จับคู่ให้ ได้ creator ที่ตรงกับ concept ร้านจริงๆ engagement ดีกว่าที่คาดไว้มาก"
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="width:38px;height:38px;border-radius:50%;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-size:18px;flex-shrink:0">🏪</div>
+            <div>
+              <div style="font-size:13px;font-weight:900">ร้านอาหาร Fine Dining · Bangkok</div>
+              <div style="font-size:11px;color:var(--text-2)">Starter Campaign · Q1 2026 · <span style="opacity:.7">ตัวอย่างจากลูกค้า pilot</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Registration Form -->
+      <div class="creator-form-card" id="register">
+        <h2 style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;margin-bottom:6px">ลงทะเบียน Early Access</h2>
+        <p style="font-size:14px;color:var(--text-2);margin-bottom:28px;line-height:1.6">ใช้เวลา 3 นาที · <strong>ฟรีทั้งหมด ไม่มีค่าใช้จ่าย</strong> · ทีมงานจะติดต่อกลับภายใน 24 ชม.</p>
+
+        <form id="restaurantForm" onsubmit="handleRestaurantSubmit(event)">
+
+          <!-- Row 1: ชื่อร้าน + ชื่อผู้ติดต่อ -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px">
+            <div>
+              <label class="creator-form-label">ชื่อร้าน / แบรนด์ *</label>
+              <input class="creator-form-input" type="text" id="rname" placeholder="เช่น The Butcher Club" required/>
+            </div>
+            <div>
+              <label class="creator-form-label">ชื่อผู้ติดต่อ *</label>
+              <input class="creator-form-input" type="text" id="rcontact" placeholder="ชื่อ-นามสกุล" required/>
+            </div>
+          </div>
+
+          <!-- Row 2: อีเมล + Line ID -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px">
+            <div>
+              <label class="creator-form-label">อีเมล *</label>
+              <input class="creator-form-input" type="email" id="remail" placeholder="your@email.com" required/>
+            </div>
+            <div>
+              <label class="creator-form-label">Line ID *</label>
+              <input class="creator-form-input" type="text" id="rline" placeholder="@lineid" required/>
+            </div>
+          </div>
+
+          <!-- Row 3: เบอร์โทร + พื้นที่ -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px">
+            <div>
+              <label class="creator-form-label">เบอร์โทรศัพท์ *</label>
+              <input class="creator-form-input" type="tel" id="rphone" placeholder="08x-xxx-xxxx" required/>
+            </div>
+            <div>
+              <label class="creator-form-label">พื้นที่ / ย่าน *</label>
+              <input class="creator-form-input" type="text" id="rarea" placeholder="เช่น Thonglor, Sathorn"/>
+            </div>
+          </div>
+
+          <!-- Row 4: ประเภทอาหาร + ราคาเฉลี่ยต่อหัว -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px">
+            <div>
+              <label class="creator-form-label">ประเภทอาหาร *</label>
+              <select class="creator-form-input" id="rcuisine" style="cursor:pointer" required>
+                <option value="">-- เลือก --</option>
+                <option>All-around Food</option>
+                <option>Thai / อาหารไทย</option>
+                <option>Japanese / Omakase</option>
+                <option>Chinese / Dim Sum</option>
+                <option>Steakhouse / BBQ</option>
+                <option>Café / Bakery / Dessert</option>
+                <option>Seafood</option>
+                <option>Street Food / Local</option>
+                <option>อื่นๆ</option>
+              </select>
+            </div>
+            <div>
+              <label class="creator-form-label">ราคาเฉลี่ยต่อหัว *</label>
+              <select class="creator-form-input" id="rprice" style="cursor:pointer" required>
+                <option value="">-- เลือก --</option>
+                <option>ต่ำกว่า 300 บาท</option>
+                <option>300–500 บาท</option>
+                <option>500–1,000 บาท</option>
+                <option>1,000–2,000 บาท</option>
+                <option>2,000 บาท ขึ้นไป</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- เป้าหมายหลัก (multi-select) -->
+          <div style="margin-bottom:18px">
+            <label class="creator-form-label">เป้าหมายหลัก (กดเลือกได้หลายอัน) *</label>
+            <div class="restaurant-goal-grid" id="goalGrid">
+              <button type="button" class="restaurant-goal-btn" data-goal="เพิ่มจำนวนลูกค้า" onclick="toggleGoal(this)">
+                <div style="font-size:18px;margin-bottom:3px">🧲</div>
+                <div style="font-size:11px;font-weight:700;line-height:1.3">เพิ่มจำนวนลูกค้า</div>
+              </button>
+              <button type="button" class="restaurant-goal-btn" data-goal="Brand Awareness" onclick="toggleGoal(this)">
+                <div style="font-size:18px;margin-bottom:3px">📢</div>
+                <div style="font-size:11px;font-weight:700;line-height:1.3">Brand Awareness</div>
+              </button>
+              <button type="button" class="restaurant-goal-btn" data-goal="หา Creator ที่ใช่" onclick="toggleGoal(this)">
+                <div style="font-size:18px;margin-bottom:3px">🎯</div>
+                <div style="font-size:11px;font-weight:700;line-height:1.3">หา Creator ที่ใช่</div>
+              </button>
+              <button type="button" class="restaurant-goal-btn" data-goal="Monitor Trend / คู่แข่ง" onclick="toggleGoal(this)">
+                <div style="font-size:18px;margin-bottom:3px">📈</div>
+                <div style="font-size:11px;font-weight:700;line-height:1.3">Monitor Trend</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- ประสบการณ์กับ Creator -->
+          <div style="margin-bottom:18px">
+            <label class="creator-form-label">เคยทำแคมเปญกับ Food Creator ไหม? *</label>
+            <div style="display:flex;flex-direction:column;gap:8px" id="expGrid">
+              <button type="button" class="rradio-btn" data-group="exp" data-val="ไม่เคยทำเลย" onclick="toggleRadio(this)">
+                <span style="font-size:14px">🆕</span> ไม่เคยทำเลย — อยากเริ่มครั้งแรก
+              </button>
+              <button type="button" class="rradio-btn" data-group="exp" data-val="เคย แต่ไม่แน่ใจผล" onclick="toggleRadio(this)">
+                <span style="font-size:14px">🤔</span> เคย แต่ไม่แน่ใจผลลัพธ์
+              </button>
+              <button type="button" class="rradio-btn" data-group="exp" data-val="เคย และได้ผลดี" onclick="toggleRadio(this)">
+                <span style="font-size:14px">✅</span> เคย และได้ผลดี — อยากขยายต่อ
+              </button>
+            </div>
+          </div>
+
+          <!-- งบประมาณ -->
+          <div style="margin-bottom:18px">
+            <label class="creator-form-label">งบประมาณที่ตั้งไว้ต่อแคมเปญ *</label>
+            <div style="display:flex;flex-direction:column;gap:8px" id="budgetGrid">
+              <button type="button" class="rradio-btn" data-group="budget" data-val="ยังไม่แน่ใจ" onclick="toggleRadio(this)">
+                <span style="font-size:14px">🤷</span> ยังไม่แน่ใจ — ขอหารือก่อน
+              </button>
+              <button type="button" class="rradio-btn" data-group="budget" data-val="ต่ำกว่า 3,000 บาท" onclick="toggleRadio(this)">
+                <span style="font-size:14px">💰</span> ต่ำกว่า ฿3,000 (Micro pilot)
+              </button>
+              <button type="button" class="rradio-btn" data-group="budget" data-val="3,000–10,000 บาท" onclick="toggleRadio(this)">
+                <span style="font-size:14px">💰</span> ฿3,000 – ฿10,000 (Starter)
+              </button>
+              <button type="button" class="rradio-btn" data-group="budget" data-val="10,000–30,000 บาท" onclick="toggleRadio(this)">
+                <span style="font-size:14px">💰</span> ฿10,000 – ฿30,000
+              </button>
+              <button type="button" class="rradio-btn" data-group="budget" data-val="30,000 บาทขึ้นไป" onclick="toggleRadio(this)">
+                <span style="font-size:14px">💰</span> ฿30,000 ขึ้นไป
+              </button>
+            </div>
+          </div>
+
+          <!-- ระดับความสนใจ -->
+          <div style="margin-bottom:24px">
+            <label class="creator-form-label">ระดับความสนใจ *</label>
+            <div style="display:flex;flex-direction:column;gap:8px" id="interestGrid">
+              <button type="button" class="rradio-btn" data-group="interest" data-val="สนใจ (อยากให้ติดต่อกลับเร็ว)" onclick="toggleRadio(this)">
+                <span style="font-size:14px">🔥</span> สนใจมาก — อยากให้ติดต่อกลับเร็วๆ
+              </button>
+              <button type="button" class="rradio-btn" data-group="interest" data-val="กำลังพิจารณา" onclick="toggleRadio(this)">
+                <span style="font-size:14px">🧐</span> กำลังพิจารณา — ขอข้อมูลเพิ่มก่อน
+              </button>
+              <button type="button" class="rradio-btn" data-group="interest" data-val="แค่อยากเรียนรู้ก่อน" onclick="toggleRadio(this)">
+                <span style="font-size:14px">📚</span> แค่อยากเรียนรู้ก่อน
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="creator-submit-btn" id="rsubmitBtn">
+            🏪 ลงทะเบียนเข้าร่วม — ฟรี
+          </button>
+          <p style="font-size:11px;color:var(--text-2);text-align:center;margin-top:10px;line-height:1.6">
+            ทีมงานจะติดต่อกลับภายใน 24 ชั่วโมง<br/>ข้อมูลของคุณจะไม่ถูกแชร์กับบุคคลที่สาม
+          </p>
+        </form>
+
+        <!-- Success state (hidden by default) -->
+        <div id="rSuccessState" style="display:none;text-align:center;padding:32px 0">
+          <div style="font-size:52px;margin-bottom:16px">🎉</div>
+          <h3 style="font-size:20px;font-weight:900;margin-bottom:10px">รับข้อมูลเรียบร้อยแล้ว!</h3>
+          <p style="font-size:14px;color:var(--text-2);line-height:1.65;margin-bottom:20px">
+            ทีมงาน ChefMinistry จะติดต่อกลับภายใน 24 ชั่วโมง<br/>
+            เพื่อนัดหารือรายละเอียดและ proposal ที่เหมาะกับร้านของคุณ 🙏
+          </p>
+          <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+            <a href="./listing.html" class="btn btn-dark btn-sm">ดู Signal Dashboard →</a>
+            <a href="./index.html" class="btn btn-outline btn-sm" style="color:var(--navy)">กลับหน้าหลัก</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="section" style="background:var(--white)">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:44px">
+      <div class="eyebrow" style="color:var(--navy);margin-bottom:10px">Process</div>
+      <h2 class="display-2">เริ่มต้นได้ใน 3 ขั้นตอน</h2>
+    </div>
+    <div class="grid-3" style="gap:24px">
+      <div class="step-card" style="text-align:center">
+        <div class="step-num" style="margin:0 auto 16px">1</div>
+        <h3 class="step-title">ลงทะเบียนและหารือ</h3>
+        <p class="step-desc">กรอกฟอร์มด้านบน ทีมงานติดต่อนัดหารือ เพื่อเข้าใจ concept ร้านและเป้าหมายที่ชัดเจน</p>
+      </div>
+      <div class="step-card" style="text-align:center">
+        <div class="step-num" style="margin:0 auto 16px">2</div>
+        <h3 class="step-title">รับ Creator Shortlist</h3>
+        <p class="step-desc">ChefMinistry คัด creator list ที่ match กับร้าน พร้อม signal data และ proposal สำหรับแคมเปญ</p>
+      </div>
+      <div class="step-card" style="text-align:center">
+        <div class="step-num" style="margin:0 auto 16px">3</div>
+        <h3 class="step-title">Pilot และ Scale</h3>
+        <p class="step-desc">เริ่ม campaign แบบ low-risk กับ creator 1–2 คน วัดผล แล้วค่อย scale เมื่อมั่นใจในผลลัพธ์</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ── FAQ ── -->
+<section class="section" style="background:var(--cream)">
+  <div class="container" style="max-width:720px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:40px">
+      <div class="eyebrow" style="color:var(--navy);margin-bottom:10px">FAQ</div>
+      <h2 class="display-2">คำถามที่พบบ่อย</h2>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0" id="faqList"></div>
+  </div>
+</section>
+
+<!-- ── CTA STRIP ── -->
+<section style="background:var(--navy);padding:48px 0">
+  <div class="container" style="text-align:center">
+    <h2 class="display-2" style="color:#fff;margin-bottom:14px">พร้อมเพิ่มลูกค้าด้วย Creator?</h2>
+    <p style="font-size:15px;color:rgba(255,255,255,.65);margin-bottom:28px">เริ่มต้นได้ทันที ไม่มีค่าใช้จ่ายในการสมัคร</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="#register" class="btn btn-primary">ลงทะเบียนร้านอาหาร →</a>
+      <a href="./listing.html" class="btn btn-ghost">ดู Signal Dashboard</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <img src="./assets/logo_circular.png" alt="Chef Ministry" style="height:36px;border-radius:6px"
+               onerror="this.style.display:'none'"/>
+          <div class="logo-name">ChefMinistry</div>
+        </div>
+        <p class="footer-brand-desc">Food Signal Intelligence Platform — รู้ก่อน กินดีกว่า ข้อมูลจาก Human Trust Network ไม่ใช่ AI ทั่วไป</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Platform</div>
+        <div class="footer-links">
+          <a class="footer-link" href="./listing.html">Discover Restaurants</a>
+          <a class="footer-link" href="./listing.html?velocity=rising">Rising Trends</a>
+          <a class="footer-link" href="./creator.html">For Creators</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">About</div>
+        <div class="footer-links">
+          <a class="footer-link" href="./about.html">Our Methodology</a>
+          <a class="footer-link" href="./about.html#legal">Legal Framework</a>
+          <a class="footer-link" href="./about.html#b2b">B2B Intelligence</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">For Business</div>
+        <div class="footer-links">
+          <a class="footer-link" href="./restaurant_partner.html">Restaurant / Brand Pilot</a>
+          <a class="footer-link" href="./creator.html">Creator Network</a>
+          <a class="footer-link" href="mailto:contact@chefministry.com?subject=ChefMinistry%20Pilot%20Partnership">Pilot Partnership</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">ติดต่อ</div>
+        <div class="footer-links">
+          <a class="footer-link" href="https://line.me/R/ti/p/@chefministry" target="_blank">💬 LINE: @chefministry</a>
+          <a class="footer-link" href="mailto:contact@chefministry.com">✉️ contact@chefministry.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">© 2026 ChefMinistry. ข้อมูลทั้งหมดมาจากเนื้อหาสาธารณะ. ไม่ใช่คำแนะนำเชิงพาณิชย์.</div>
+      <div class="footer-legal">Signal Intelligence. Not Just Reviews.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Mobile nav ──────────────────────────────────────────────────────────────
+document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
+  const n=document.getElementById("mobileNav");
+  n.style.display=n.style.display==="block"?"none":"block";
+});
+
+// ── Goal toggle (multi-select) ───────────────────────────────────────────────
+function toggleGoal(btn){
+  btn.classList.toggle("active");
+}
+
+// ── Radio-style single-select ────────────────────────────────────────────────
+function toggleRadio(btn){
+  const group = btn.dataset.group;
+  document.querySelectorAll(`.rradio-btn[data-group="${group}"]`).forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+}
+
+// ── Form submit ─────────────────────────────────────────────────────────────
+function handleRestaurantSubmit(e){
+  e.preventDefault();
+
+  // Validate multi-select goals
+  const goalBtns = [...document.querySelectorAll(".restaurant-goal-btn.active")];
+  if(!goalBtns.length){
+    alert("กรุณาเลือกเป้าหมายอย่างน้อย 1 อัน");
+    return;
+  }
+
+  // Validate radio buttons
+  const expBtn      = document.querySelector(".rradio-btn[data-group='exp'].active");
+  const budgetBtn   = document.querySelector(".rradio-btn[data-group='budget'].active");
+  const interestBtn = document.querySelector(".rradio-btn[data-group='interest'].active");
+  if(!expBtn)      { alert("กรุณาเลือกประสบการณ์กับ Creator"); return; }
+  if(!budgetBtn)   { alert("กรุณาเลือกงบประมาณ"); return; }
+  if(!interestBtn) { alert("กรุณาเลือกระดับความสนใจ"); return; }
+
+  const submitBtn = document.getElementById("rsubmitBtn");
+  submitBtn.textContent = "กำลังส่ง...";
+  submitBtn.disabled = true;
+
+  // ── Google Form entry IDs (confirmed) ───────────────────────────────────────
+  const FORM_ID         = "1FAIpQLSdFBnj-Xp9HTJR04XRM3MxOlPP0J8BJ0H6MQpdDsKGe3itIvQ";
+  const ENTRY_RNAME     = "entry.1809998895";   // ชื่อร้าน / แบรนด์
+  const ENTRY_CONTACT   = "entry.823264010";    // ชื่อผู้ติดต่อ
+  const ENTRY_EMAIL     = "entry.1082247947";   // อีเมล
+  const ENTRY_LINE      = "entry.1259449581";   // Line ID
+  const ENTRY_PHONE     = "entry.539103673";    // เบอร์โทร
+  const ENTRY_AREA      = "entry.1716334969";   // พื้นที่ / ย่าน
+  const ENTRY_CUISINE   = "entry.1087971326";   // ประเภทอาหาร
+  const ENTRY_PRICE     = "entry.1419190970";   // ราคาเฉลี่ยต่อหัว
+  const ENTRY_GOAL      = "entry.991485663";    // เป้าหมายหลัก (multi)
+  const ENTRY_EXP       = "entry.826666135";    // ประสบการณ์กับ Creator
+  const ENTRY_BUDGET    = "entry.1309500556";   // งบประมาณ
+  const ENTRY_INTEREST  = "entry.1283676679";   // ระดับความสนใจ
+
+  // Collect values
+  const rname   = document.getElementById("rname").value.trim();
+  const contact = document.getElementById("rcontact").value.trim();
+  const email   = document.getElementById("remail").value.trim();
+  const lineVal = document.getElementById("rline").value.trim();
+  const phone   = document.getElementById("rphone").value.trim();
+  const area    = document.getElementById("rarea").value.trim();
+  const cuisine = document.getElementById("rcuisine").selectedOptions[0]?.text || "";
+  const price   = document.getElementById("rprice").selectedOptions[0]?.text || "";
+
+  const goalParams = goalBtns
+    .map(b => `${ENTRY_GOAL}=${encodeURIComponent(b.dataset.goal)}`)
+    .join("&");
+
+  const params = [
+    `${ENTRY_RNAME}=${encodeURIComponent(rname)}`,
+    `${ENTRY_CONTACT}=${encodeURIComponent(contact)}`,
+    `${ENTRY_EMAIL}=${encodeURIComponent(email)}`,
+    `${ENTRY_LINE}=${encodeURIComponent(lineVal)}`,
+    `${ENTRY_PHONE}=${encodeURIComponent(phone)}`,
+    `${ENTRY_AREA}=${encodeURIComponent(area)}`,
+    `${ENTRY_CUISINE}=${encodeURIComponent(cuisine)}`,
+    `${ENTRY_PRICE}=${encodeURIComponent(price)}`,
+    goalParams,
+    `${ENTRY_EXP}=${encodeURIComponent(expBtn.dataset.val)}`,
+    `${ENTRY_BUDGET}=${encodeURIComponent(budgetBtn.dataset.val)}`,
+    `${ENTRY_INTEREST}=${encodeURIComponent(interestBtn.dataset.val)}`,
+    `submit=Submit`
+  ].filter(Boolean).join("&");
+
+  const formURL = `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse?${params}`;
+
+  const iframe = document.createElement("iframe");
+  iframe.style.display = "none";
+  iframe.name = "hidden_iframe_restaurant";
+  iframe.src = formURL;
+  document.body.appendChild(iframe);
+
+  setTimeout(()=>{
+    document.getElementById("restaurantForm").style.display="none";
+    document.getElementById("rSuccessState").style.display="block";
+  }, 1500);
+}
+
+// ── FAQ ─────────────────────────────────────────────────────────────────────
+const FAQS = [
+  {
+    q: "ค่าใช้จ่ายในการลงทะเบียนเป็นอย่างไร?",
+    a: "ลงทะเบียนฟรีครับ ค่าใช้จ่ายจะเกิดขึ้นเมื่อตกลงร่วมแคมเปญจริง โดย Starter Campaign เริ่มต้นที่ ฿3,000 และ Monthly Support ที่ ฿1,500/เดือน"
+  },
+  {
+    q: "ChefMinistry หา creator อย่างไร?",
+    a: "เรามี network creator อาหาร 30+ คนในระบบ ตั้งแต่ nano (น้อยกว่า 10K) ถึง mega (1M+) คัดโดยดูจาก engagement rate, niche ที่ตรง และ audience demographics ไม่ใช่แค่ follower count"
+  },
+  {
+    q: "ร้านสามารถเลือก creator ได้เองไหม?",
+    a: "ได้ครับ ทีมงานจะส่ง shortlist ให้ร้านพิจารณาก่อน ร้านสามารถเลือก approve creator ที่ต้องการก่อนเริ่ม campaign"
+  },
+  {
+    q: "ถ้าไม่พอใจผลลัพธ์จากแคมเปญจะทำอย่างไร?",
+    a: "เราเน้น transparency ครับ — ก่อนเริ่มจะมีการกำหนด KPI ร่วมกัน และหลังแคมเปญจะมี report สรุปผล ถ้าผลไม่ได้ตามเป้า เราจะช่วยวิเคราะห์และปรับ strategy ก่อน scale"
+  },
+  {
+    q: "Monthly Support รวมอะไรบ้าง?",
+    a: "รวม creator shortlist อัปเดตรายเดือน, signal monitoring สำหรับร้านและ category, trend report รายเดือน และการปรึกษา strategy 1 ครั้ง/เดือน"
+  }
+];
+
+const faqEl = document.getElementById("faqList");
+FAQS.forEach((item, i) => {
+  const wrap = document.createElement("div");
+  wrap.style.cssText="border-bottom:1px solid var(--border)";
+  wrap.innerHTML=`
+    <button onclick="toggleFaq(this)" style="width:100%;text-align:left;padding:20px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:none;cursor:pointer;font-family:inherit">
+      <span style="font-size:15px;font-weight:800;color:var(--text)">${item.q}</span>
+      <span class="faq-icon" style="font-size:18px;color:var(--text-2);flex-shrink:0;transition:transform .2s">+</span>
+    </button>
+    <div class="faq-body" style="display:none;padding-bottom:20px">
+      <p style="font-size:14px;color:var(--text-2);line-height:1.7">${item.a}</p>
+    </div>`;
+  faqEl.appendChild(wrap);
+});
+
+function toggleFaq(btn){
+  const body = btn.nextElementSibling;
+  const icon = btn.querySelector(".faq-icon");
+  const open = body.style.display==="block";
+  body.style.display = open?"none":"block";
+  icon.textContent = open?"+":"–";
+  icon.style.transform = open?"rotate(0deg)":"rotate(0deg)";
+}
+</script>
+
+</body>
+</html>
