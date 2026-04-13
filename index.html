@@ -124,7 +124,7 @@
       </div>
       <a href="./listing.html" style="font-size:11px;font-weight:700;color:rgba(255,255,255,.5);text-decoration:none;white-space:nowrap">ดูร้านทั้งหมด →</a>
     </div>
-    <div id="categoryDiscoveryGrid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:13px"></div>
+    <div id="categoryDiscoveryGrid" style="display:grid;gap:13px"></div>
   </div>
 </section>
 
@@ -770,10 +770,48 @@
       );
     });
 
-    // Output: circles[0-4], names[0-4], circles[5-9], names[5-9]
-    var out = allCircles.slice(0,5).concat(allNames.slice(0,5))
-                        .concat(allCircles.slice(5,10)).concat(allNames.slice(5,10));
+    // Responsive layout: 5 cols desktop, 2 cols mobile
+    var isMobile = window.innerWidth < 640;
+    var cols = isMobile ? 2 : 5;
+    grid.style.gridTemplateColumns = "repeat("+cols+",1fr)";
+
+    var out;
+    if (isMobile) {
+      // 2x10: pairs — circle[i], circle[i+1], name[i], name[i+1]
+      out = [];
+      for (var i = 0; i < allCircles.length; i += 2) {
+        if (allCircles[i])   out.push(allCircles[i]);
+        if (allCircles[i+1]) out.push(allCircles[i+1]);
+        if (allNames[i])     out.push(allNames[i]);
+        if (allNames[i+1])   out.push(allNames[i+1]);
+      }
+    } else {
+      // 5x4: circles[0-4], names[0-4], circles[5-9], names[5-9]
+      out = allCircles.slice(0,5).concat(allNames.slice(0,5))
+                      .concat(allCircles.slice(5,10)).concat(allNames.slice(5,10));
+    }
     grid.innerHTML = out.join("");
+
+    // Re-layout on resize
+    window.addEventListener("resize", function(){
+      var mob = window.innerWidth < 640;
+      var c = mob ? 2 : 5;
+      grid.style.gridTemplateColumns = "repeat("+c+",1fr)";
+      var o;
+      if (mob) {
+        o = [];
+        for (var j = 0; j < allCircles.length; j += 2) {
+          if (allCircles[j])   o.push(allCircles[j]);
+          if (allCircles[j+1]) o.push(allCircles[j+1]);
+          if (allNames[j])     o.push(allNames[j]);
+          if (allNames[j+1])   o.push(allNames[j+1]);
+        }
+      } else {
+        o = allCircles.slice(0,5).concat(allNames.slice(0,5))
+                      .concat(allCircles.slice(5,10)).concat(allNames.slice(5,10));
+      }
+      grid.innerHTML = o.join("");
+    }, {passive:true});
   })();
 
   // Rank list — velocity จาก DB ถ้ามี, fallback = overlap signal
