@@ -655,4 +655,4 @@ section.section[style*="background:var(--dark)"]{
 .disc-vel-mini{font-size:9px;font-weight:900}
 .disc-vel-mini.rising{color:#4ade80}
 .disc-vel-mini.declining{color:#f87171}
-@media(max-width:720px){.disc-circle-grid{grid-template-columns:repeat(2,1fr)\!important}}
+@media(max-width:720px){.disc-circle-grid{grid-template-columns:repeat(2,1fr)!important}}
