@@ -650,7 +650,7 @@ section.section[style*="background:var(--dark)"]{
 .disc-cat-more{font-size:11px;color:var(--gold);font-weight:700;text-decoration:none;white-space:nowrap}
 .disc-cat-more:hover{opacity:.8}
 .disc-rows{display:flex;flex-direction:column;gap:8px}
-.disc-rest-row{display:flex;align-items:center;gap:11px;padding:10px 12px;background:rgba(255,255,255,.05);border-radius:10px;text-decoration:none;color:inherit;transition:background .18s;cursor:pointer}
+.disc-rest-row{display:flex;align-items:center;gap:11px;padding:10px 12px;background:rgba(255,255,255,.05);border-radius:10px;text-decoration:none;color:#fff;transition:background .18s;cursor:pointer}
 .disc-rest-row:hover{background:rgba(255,255,255,.1)}
 .disc-rest-emoji{font-size:22px;width:38px;height:38px;display:grid;place-items:center;background:rgba(255,255,255,.07);border-radius:8px;flex-shrink:0}
 .disc-rest-info{flex:1;min-width:0}
