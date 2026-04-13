@@ -134,7 +134,7 @@
     <div class="listing-grid" id="listingGrid"></div>
     <div class="empty-state" id="emptyState" style="display:none">
       <div class="empty-icon">📡</div>
-      <div class="empty-title">ยังไม่พบร้านที่ตรงกับเงื่อนไขนี้</div>
+      <div class="empty-title">ไม่พบร้านที่ตรงกับเงื่อนไขนี้</div>
       <div style="color:var(--text-2);font-size:14px;line-height:1.6;margin-bottom:16px">ลองปรับ category, area หรือ signal level เพื่อดูร้านเพิ่มเติม</div>
       <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
         <button onclick="clearAllFilters()" class="btn btn-primary btn-sm">ล้างตัวกรอง</button>
@@ -253,10 +253,10 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-<script src="./js/firebase-config.js"></script>
-<script src="./js/auth.js"></script>
-<script src="./js/data.js"></script>
-<script src="./js/dataService.js"></script>
+<script src="./js/firebase-config.js?v=20260414b"></script>
+<script src="./js/auth.js?v=20260414b"></script>
+<script src="./js/data.js?v=20260414b"></script>
+<script src="./js/dataService.js?v=20260414b"></script>
 <script>
   document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
     const n=document.getElementById("mobileNav");
@@ -350,10 +350,10 @@
 
     // Merge scraped data (CM_EXTERNAL_RESTAURANTS) if available, deduped by name
     const curatedNames = new Set(baseCurated.map(r => r.name.trim().toLowerCase()));
-    const external = (typeof CM_EXTERNAL_RESTAURANTS \!== "undefined" ? CM_EXTERNAL_RESTAURANTS : [])
+    const external = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined" ? CM_EXTERNAL_RESTAURANTS : [])
       .filter(r => {
         const n = (r.name || r.name_en || "").trim().toLowerCase();
-        return n && \!curatedNames.has(n);
+        return n && !curatedNames.has(n);
       })
       .map(r => ({
         ...r,
@@ -365,10 +365,10 @@
 
     let list = [...baseCurated, ...external];
 
-    if(state.signal\!=="all")   list=list.filter(r=>r.signalStrength===state.signal);
-    if(state.velocity\!=="all") list=list.filter(r=>r.trendVelocity===state.velocity);
-    if(state.budget\!=="all")   list=list.filter(r=>String(r.budget)===state.budget);
-    if(state.type\!=="all")     list=list.filter(r=>r.type===state.type);
+    if(state.signal!=="all")   list=list.filter(r=>r.signalStrength===state.signal);
+    if(state.velocity!=="all") list=list.filter(r=>r.trendVelocity===state.velocity);
+    if(state.budget!=="all")   list=list.filter(r=>String(r.budget)===state.budget);
+    if(state.type!=="all")     list=list.filter(r=>r.type===state.type);
     if(state.search){
       list=list.filter(r=>{
         const hay=[r.name,r.cuisine,r.area,r.type,...(r.tags||[])].join(" ").toLowerCase();
@@ -397,8 +397,16 @@
       ? `แสดง ${list.length} ร้าน · จาก ${_cfg2.restaurantCount}+ ในฐานข้อมูล`
       : `แสดง ${Math.min(list.length, PREVIEW_COUNT)} จาก ${list.length} ร้านในหมวดนี้`;
 
+    // Never show empty state if no filters are active (protects against data-load race)
+    const filtersActive = state.signal !== "all" || state.velocity !== "all" ||
+                          state.budget !== "all" || state.type !== "all" || state.search;
     if(!list.length){
-      grid.innerHTML=""; empty.style.display="block"; wall.style.display="none";
+      if (filtersActive) {
+        grid.innerHTML=""; empty.style.display="block"; wall.style.display="none";
+      } else {
+        // No filters active but 0 results — data not ready yet, keep grid as-is
+        console.warn("[CM] filterAndSort returned 0 with no active filters — data.js may not be loaded");
+      }
       return;
     }
     empty.style.display="none";
@@ -523,7 +531,20 @@
   }
 
   // แสดง creator list อัตโนมัติถ้า unlock แล้ว
-  render();
+  // Safe render — catches errors if dataService failed to load
+  try {
+    render();
+  } catch(e) {
+    console.error("[CM] render() failed:", e);
+    // Fallback: populate directly from CM_RESTAURANTS if available
+    var grid = document.getElementById("listingGrid");
+    if (grid && typeof CM_RESTAURANTS !== "undefined" && CM_RESTAURANTS.length) {
+      var preview = CM_RESTAURANTS.slice(0, 6);
+      grid.innerHTML = preview.map(function(r){ return buildRestaurantCard(r, {showOverlap:true}); }).join("");
+      var wc = document.getElementById("wallCount");
+      if (wc) wc.textContent = "แสดง " + preview.length + " จาก " + CM_RESTAURANTS.length + " ร้านที่วิเคราะห์แล้ว";
+    }
+  }
 
   // Auth state listener — re-render เมื่อ login/logout
   if (typeof CM_AUTH !== "undefined") {

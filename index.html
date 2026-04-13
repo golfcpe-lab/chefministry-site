@@ -88,7 +88,30 @@
       </div>
 
       <!-- Live Signal Preview — rendered by JS -->
-      <div class="hero-sample" id="heroOverlapCard"></div>
+      <div id="heroOverlapCard">
+          <div class="hero-sample-head">
+            <span>&#x1F4C8; Velocity Signal &#x2014; Live</span>
+            <span class="verdict" style="background:rgba(10,107,67,.2);color:#56c282">&#x2191; Rising</span>
+          </div>
+          <div class="hero-sample-card">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+              <div>
+                <div class="hero-sample-name">Baan Tepa</div>
+                <div class="hero-sample-type">Farm-to-Table Progressive Thai &middot; ลาดพร้าว &middot; &#x0E3F;&#x0E3F;&#x0E3F;</div>
+              </div>
+              <div style="text-align:right">
+                <div style="font-size:10px;font-weight:900;color:var(--text-2);text-transform:uppercase;letter-spacing:.08em">Trend Signal</div>
+                <div style="font-size:20px;font-weight:900;color:var(--green);font-family:'Playfair Display',serif;line-height:1.2">&#x2191; Rising</div>
+                <div style="font-size:11px;color:var(--text-2);font-weight:700;margin-top:2px">8 Creator Signal</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">
+              <span class="tier-badge tier-macro">Macro &times;2</span>
+              <span class="tier-badge tier-mid">Mid &times;2</span>
+            </div>
+            <div class="hero-sample-insight">Baan Tepa ได้รับความสนใจจาก Creator เพิ่มขึ้นต่อเนื่อง ขณะที่กลุ่ม Farm-to-Table Thai Fine Dining กำลังโตแรง — Overlap Signal แข็งใน tier กลาง</div>
+          </div>
+        </div>
     </div>
   </div>
 </section>
@@ -132,7 +155,7 @@
   </div>
 </section>
 
-<\!-- ── WHY THIS MATTERS ── -->
+<!-- ── WHY THIS MATTERS ── -->
 <section style="background:var(--cream);padding:32px 0">
   <div class="container" style="max-width:700px;text-align:center">
     <div class="eyebrow" style="color:var(--navy);margin-bottom:10px">ทำไมข้อมูลถึงสำคัญ</div>
@@ -518,10 +541,10 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-<script src="./js/firebase-config.js"></script>
-<script src="./js/auth.js"></script>
-<script src="./js/data.js?v=20260415"></script>
-<script src="./js/dataService.js?v=20260415"></script>
+<script src="./js/firebase-config.js?v=20260414b"></script>
+<script src="./js/auth.js?v=20260414b"></script>
+<script src="./js/data.js?v=20260414b"></script>
+<script src="./js/dataService.js?v=20260414b"></script>
 <script>
   // Mobile nav
   document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
@@ -869,7 +892,7 @@
   const risingGrid = document.getElementById("risingGrid");
   const thaiFineDineIds = new Set(thaiFineDine.map(r => r.id));
   const risingRest = ChefMinistryData.getTrendingRestaurants(8)
-    .filter(r => \!thaiFineDineIds.has(r.id))
+    .filter(r => !thaiFineDineIds.has(r.id))
     .slice(0, 6);
   if (risingGrid) risingGrid.innerHTML = risingRest.length
     ? risingRest.map(r => buildRestaurantCard(r, {showOverlap:true})).join("")
