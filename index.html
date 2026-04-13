@@ -90,7 +90,7 @@
 </section>
 
 <!-- ── 3 SIGNAL CONCEPTS ── -->
-<div class="signal-concept">
+<div class="signal-concept" style="padding:18px 0">
   <div class="signal-concept-item">
     <div class="signal-concept-icon">📊</div>
     <div>
@@ -115,23 +115,22 @@
 </div>
 
 <!-- ── TRENDING BY CATEGORY ── -->
-<section style="background:var(--navy);padding:52px 0;color:#fff">
+<section style="background:var(--navy);padding:28px 0 32px;color:#fff">
   <div class="container">
-    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:12px">
-      <div>
-        <div class="eyebrow" style="color:var(--gold);margin-bottom:8px">🔥 Trending Now</div>
-        <h2 class="display-2" style="color:#fff;margin-bottom:6px">ร้านไหนมาแรงสัปดาห์นี้?</h2>
-        <p style="font-size:13px;color:rgba(255,255,255,.45);margin:0">ข้อมูลจาก Google Maps + YouTube · อัปเดตรายวัน</p>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <div style="font-size:11px;font-weight:900;color:var(--gold);letter-spacing:.1em;text-transform:uppercase">🔥 Trending by Category</div>
+        <span style="font-size:11px;color:rgba(255,255,255,.35)">Google Maps + YouTube · อัปเดตรายวัน</span>
       </div>
-      <a href="./listing.html" class="btn btn-ghost" style="white-space:nowrap">ดูร้านทั้งหมด →</a>
+      <a href="./listing.html" style="font-size:11px;font-weight:700;color:rgba(255,255,255,.5);text-decoration:none;white-space:nowrap">ดูร้านทั้งหมด →</a>
     </div>
-    <div id="categoryDiscoveryGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px"></div>
+    <div id="categoryDiscoveryGrid" class="disc-compact-grid"></div>
   </div>
 </section>
 
 <hr class="divider"/>
 
-<section class="section" style="background:var(--white);padding-top:36px;padding-bottom:36px">
+<section class="section" style="background:var(--white);padding-top:28px;padding-bottom:28px">
   <div class="container">
     <div class="grid-2" style="gap:20px">
       <div class="card" style="padding:28px;display:flex;flex-direction:column;border-top:4px solid var(--gold)">
@@ -170,7 +169,7 @@
 <hr class="divider"/>
 
 <!-- ── WEEKLY TREND HIGHLIGHT ── -->
-<section class="section" style="background:var(--cream)">
+<section style="background:var(--cream);padding:36px 0">
   <div class="container">
     <div style="background:var(--white);border-radius:var(--radius-lg);border:1px solid var(--border);padding:36px 40px;box-shadow:0 2px 16px rgba(0,0,0,.06)">
       <div class="section-cols-2">
@@ -181,10 +180,7 @@
           </div>
           <h2 style="font-family:'Playfair Display',serif;font-size:clamp(20px,2.6vw,34px);line-height:1.12;letter-spacing:-.02em;margin-bottom:14px" id="weeklyTitle">Loading…</h2>
           <p class="lead" id="weeklyDesc">Loading…</p>
-          <div style="margin-top:24px">
-            <div style="font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);margin-bottom:12px">Trend by Category</div>
-            <div id="trendCategoryList"></div>
-          </div>
+
         </div>
         <div>
           <div style="font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);margin-bottom:14px" id="rankListLabel">📡 Signal Rank</div>
@@ -200,7 +196,7 @@
 <hr class="divider"/>
 
 <!-- ── THAI FINE DINING SPOTLIGHT ── -->
-<section class="section" style="background:linear-gradient(135deg,#0d1f3c,#1a2f52);color:#fff;padding-top:48px;padding-bottom:48px">
+<section style="background:linear-gradient(135deg,#0d1f3c,#1a2f52);color:#fff;padding-top:36px;padding-bottom:36px">
   <div class="container">
     <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:28px">
       <div>
@@ -217,7 +213,7 @@
 <hr class="divider"/>
 
 <!-- ── RISING RESTAURANTS ── -->
-<section class="section">
+<section style="padding:36px 0">
   <div class="container">
     <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px">
       <div>
@@ -237,7 +233,7 @@
 <hr class="divider"/>
 
 <!-- ── CREATOR NETWORK TEASER ── -->
-<section class="section" style="background:var(--white)">
+<section style="background:var(--white);padding:32px 0">
   <div class="container">
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px">
       <div>
@@ -267,9 +263,9 @@
 <hr class="divider"/>
 
 <!-- ── HOW IT WORKS ── -->
-<section class="section">
+<section style="padding:36px 0">
   <div class="container">
-    <div class="section-header" style="text-align:center;max-width:580px;margin:0 auto 36px">
+    <div class="section-header" style="text-align:center;max-width:580px;margin:0 auto 28px">
       <div class="eyebrow" style="color:var(--navy);margin-bottom:8px">How It Works</div>
       <h2 class="display-2">ข้อมูลจริง ตัดสินใจถูก</h2>
       <p class="lead" style="margin-top:10px">รวบรวม review data จากแหล่งข้อมูล public ทุกวัน วิเคราะห์ผ่าน algorithm ที่ออกแบบมาเฉพาะสำหรับตลาดร้านอาหาร</p>
@@ -388,9 +384,9 @@
 <hr class="divider"/>
 
 <!-- ── PILOT CTA ── -->
-<section class="section" style="background:var(--white)">
+<section style="background:var(--white);padding:36px 0">
   <div class="container">
-    <div class="section-header" style="text-align:center;max-width:680px;margin:0 auto 36px">
+    <div class="section-header" style="text-align:center;max-width:680px;margin:0 auto 28px">
       <div class="eyebrow" style="color:var(--navy);margin-bottom:8px">เริ่มต้นได้ทันที</div>
       <h2 class="display-2">ข้อมูลที่เปลี่ยนวิธีมองธุรกิจอาหาร</h2>
       <p class="lead" style="margin-top:10px">
@@ -718,10 +714,14 @@
         filter: function(r){ return r.type==="steakhouse" || r.cuisine.toLowerCase().indexOf("steak")>=0 || r.cuisine.toLowerCase().indexOf("bbq")>=0; } },
       { label:"Street Food",      emoji:"🍢", link:"./listing.html",
         filter: function(r){ return r.type==="street-food" || r.type==="local" || r.cuisine.toLowerCase().indexOf("street")>=0; } },
+      { label:"Hotpot",           emoji:"🫕", link:"./listing.html",
+        filter: function(r){ return r.cuisine.toLowerCase().indexOf("hotpot")>=0 || r.cuisine.toLowerCase().indexOf("shabu")>=0 || r.cuisine.toLowerCase().indexOf("sukiyaki")>=0 || r.cuisine.toLowerCase().indexOf("hot pot")>=0; } },
       { label:"Hidden Gems",      emoji:"💎", link:"./listing.html",
         filter: function(r){ return r.tags && r.tags.some(function(t){ return t==="Hidden Gem" || t==="ล้านลับ"; }); } },
       { label:"International",    emoji:"🌍", link:"./listing.html",
         filter: function(r){ var c = r.cuisine.toLowerCase(); return r.type==="fine-dining" && c.indexOf("thai")<0 && c.indexOf("omakase")<0 && c.indexOf("japanese")<0; } },
+      { label:"Dessert & Cafe",   emoji:"🍰", link:"./listing.html",
+        filter: function(r){ return r.type==="cafe" || r.cuisine.toLowerCase().indexOf("dessert")>=0 || r.cuisine.toLowerCase().indexOf("cafe")>=0 || r.cuisine.toLowerCase().indexOf("bakery")>=0; } },
     ];
     var vo = {rising:3, stable:2, declining:1};
     var grid = document.getElementById("categoryDiscoveryGrid");
@@ -741,31 +741,28 @@
       }).slice(0,3);
       if (!matched.length) return;
 
-      var rows = matched.map(function(r){
-        var vs = velStyle(r.trendVelocity);
-        var badge = r.trendBadge || "→";
-        return '<a href="./restaurant.html?id=' + escHtml(r.id) + '" class="disc-rest-row">'
-          + '<div class="disc-rest-emoji">' + escHtml(r.emoji || cat.emoji) + '</div>'
-          + '<div class="disc-rest-info">'
-          + '<div class="disc-rest-name">' + escHtml(r.name) + '</div>'
-          + '<div class="disc-rest-area">' + escHtml(r.area || "") + (r.cuisine ? ' · ' + escHtml(r.cuisine.split(' ').slice(0,2).join(' ')) : '') + '</div>'
-          + '</div>'
-          + '<div class="disc-vel-badge" style="background:' + vs.bg + ';color:' + vs.color + '">' + escHtml(badge) + '</div>'
+      var chips = matched.map(function(r){
+        var vel = r.trendVelocity || "stable";
+        var velCls = vel === "rising" ? "rising" : vel === "declining" ? "declining" : "stable";
+        var arrow = vel === "rising" ? "↑" : vel === "declining" ? "↓" : "→";
+        return '<a href="./restaurant.html?id=' + escHtml(r.id) + '" class="disc-chip">'
+          + escHtml(r.name)
+          + '<span class="disc-chip-vel ' + velCls + '">' + arrow + '</span>'
           + '</a>';
       }).join("");
 
       cards.push(
-        '<div class="disc-cat-card">'
-        + '<div class="disc-cat-header">'
-        + '<div class="disc-cat-label"><span>' + cat.emoji + '</span><span>' + escHtml(cat.label) + '</span></div>'
-        + '<a href="' + cat.link + '" class="disc-cat-more">ดูทั้งหมด →</a>'
-        + '</div>'
-        + '<div class="disc-rows">' + rows + '</div>'
+        '<div class="disc-compact-row">'
+        + '<a href="' + cat.link + '" class="disc-compact-cat">'
+        + '<span style="font-size:15px">' + cat.emoji + '</span>'
+        + '<span>' + escHtml(cat.label) + '</span>'
+        + '</a>'
+        + '<div class="disc-chips">' + chips + '</div>'
         + '</div>'
       );
     });
 
-    grid.innerHTML = cards.join("") || '<div style="color:rgba(255,255,255,.4);grid-column:1/-1;text-align:center;padding:40px">กำลังโหลดข้อมูล...</div>';
+    grid.innerHTML = cards.join("") || '<div style="color:rgba(255,255,255,.3);grid-column:1/-1;text-align:center;padding:20px;font-size:12px">กำลังโหลดข้อมูล...</div>';
   })();
 
   // Rank list — velocity จาก DB ถ้ามี, fallback = overlap signal
