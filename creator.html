@@ -353,6 +353,8 @@
   </div>
 </footer>
 
+<script src="./js/data.js"></script>
+<script src="./js/dataService.js"></script>
 <script>
 // ── Mobile nav ──────────────────────────────────────────────────────────────
 document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
@@ -460,12 +462,8 @@ faqList.innerHTML=FAQS.map((f,i)=>`
   </div>
 `).join("");
 
-// Init stats from CM_CONFIG
-(function(){
-  var cfg = (typeof CM_CONFIG !== "undefined") ? CM_CONFIG : {restaurantCount:270};
-  var el = document.getElementById("creatorStatRestaurants");
-  if(el) el.textContent = cfg.restaurantCount + "+";
-})();
+// Stats wired via ChefMinistryData.injectStats()
+  ChefMinistryData.injectStats();
 
 function toggleFaq(i){
   const body=document.getElementById("faqBody"+i);

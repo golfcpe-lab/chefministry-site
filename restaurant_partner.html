@@ -453,16 +453,14 @@
   </div>
 </footer>
 
+<script src="./js/data.js"></script>
+<script src="./js/dataService.js"></script>
 <script>
 // ── Mobile nav ──────────────────────────────────────────────────────────────
 (function(){
   var menuBtn = document.getElementById("mobileMenuBtn");
-  // Init stats
-  (function(){
-    var cfg = (typeof CM_CONFIG !== "undefined") ? CM_CONFIG : {restaurantCount:270};
-    var el = document.getElementById("partnerStatRestaurants");
-    if(el) el.textContent = cfg.restaurantCount + "+";
-  })();
+  // Stats wired via ChefMinistryData.injectStats()
+  ChefMinistryData.injectStats();
 
   var mobileNav = document.getElementById("mobileNav");
   var navOpen = false;

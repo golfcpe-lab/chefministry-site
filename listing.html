@@ -256,6 +256,7 @@
 <script src="./js/firebase-config.js"></script>
 <script src="./js/auth.js"></script>
 <script src="./js/data.js"></script>
+<script src="./js/dataService.js"></script>
 <script>
   document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
     const n=document.getElementById("mobileNav");
@@ -344,13 +345,15 @@
   });
 
   function filterAndSort(){
-    // รวม CM_RESTAURANTS (curated) + CM_EXTERNAL_RESTAURANTS (scraped)
-    // ป้องกัน duplicate โดย dedupe ด้วย normalized name
-    const curatedNames = new Set(CM_RESTAURANTS.map(r => r.name.trim().toLowerCase()));
-    const external = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined" ? CM_EXTERNAL_RESTAURANTS : [])
+    // Base list from ChefMinistryData — single source of truth (reads from CM_RESTAURANTS)
+    const baseCurated = ChefMinistryData.getRestaurantList();
+
+    // Merge scraped data (CM_EXTERNAL_RESTAURANTS) if available, deduped by name
+    const curatedNames = new Set(baseCurated.map(r => r.name.trim().toLowerCase()));
+    const external = (typeof CM_EXTERNAL_RESTAURANTS \!== "undefined" ? CM_EXTERNAL_RESTAURANTS : [])
       .filter(r => {
         const n = (r.name || r.name_en || "").trim().toLowerCase();
-        return n && !curatedNames.has(n);
+        return n && \!curatedNames.has(n);
       })
       .map(r => ({
         ...r,
@@ -360,12 +363,12 @@
         totalReviews: r.totalReviews || r.last_count || 0,
       }));
 
-    let list = [...CM_RESTAURANTS, ...external];
+    let list = [...baseCurated, ...external];
 
-    if(state.signal!=="all")   list=list.filter(r=>r.signalStrength===state.signal);
-    if(state.velocity!=="all") list=list.filter(r=>r.trendVelocity===state.velocity);
-    if(state.budget!=="all")   list=list.filter(r=>String(r.budget)===state.budget);
-    if(state.type!=="all")     list=list.filter(r=>r.type===state.type);
+    if(state.signal\!=="all")   list=list.filter(r=>r.signalStrength===state.signal);
+    if(state.velocity\!=="all") list=list.filter(r=>r.trendVelocity===state.velocity);
+    if(state.budget\!=="all")   list=list.filter(r=>String(r.budget)===state.budget);
+    if(state.type\!=="all")     list=list.filter(r=>r.type===state.type);
     if(state.search){
       list=list.filter(r=>{
         const hay=[r.name,r.cuisine,r.area,r.type,...(r.tags||[])].join(" ").toLowerCase();
@@ -389,7 +392,7 @@
     const empty = document.getElementById("emptyState");
     const wall = document.getElementById("discoverWall");
 
-    const _cfg2 = (typeof CM_CONFIG \!== "undefined") ? CM_CONFIG : { restaurantCount: 270 };
+    const _cfg2 = { restaurantCount: ChefMinistryData.getDbTotalCount() };
     document.getElementById("resultCount").textContent = isUnlocked()
       ? `แสดง ${list.length} ร้าน · จาก ${_cfg2.restaurantCount}+ ในฐานข้อมูล`
       : `แสดง ${Math.min(list.length, PREVIEW_COUNT)} จาก ${list.length} ร้านในหมวดนี้`;
@@ -407,7 +410,7 @@
       const preview = list.slice(0, PREVIEW_COUNT);
       grid.innerHTML = preview.map(r=>buildRestaurantCard(r,{showOverlap:true})).join("");
       if(list.length > PREVIEW_COUNT){
-        const _totalDb = (typeof CM_CONFIG \!== "undefined") ? CM_CONFIG.restaurantCount : 270;
+        const _totalDb = ChefMinistryData.getDbTotalCount();
         document.getElementById("hiddenCount").textContent = _totalDb;
         const _pre = document.getElementById("previewCount");
         if(_pre) _pre.textContent = Math.min(list.length, PREVIEW_COUNT);

@@ -521,6 +521,7 @@
 <script src="./js/firebase-config.js"></script>
 <script src="./js/auth.js"></script>
 <script src="./js/data.js?v=20260415"></script>
+<script src="./js/dataService.js?v=20260415"></script>
 <script>
   // Mobile nav
   document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
@@ -528,39 +529,19 @@
     n.style.display=n.style.display==="block"?"none":"block";
   });
 
-  // Dynamic stats — uses CM_CONFIG as single source of truth
-  const _cfg = (typeof CM_CONFIG \!== "undefined") ? CM_CONFIG : { restaurantCount:270, creatorCount:31, categoryCount:20 };
-  const statR = document.getElementById("statRestaurants");
-  if (statR) statR.textContent = _cfg.restaurantCount + "+";
-  const statCat = document.getElementById("statCategories");
-  if (statCat) statCat.textContent = _cfg.categoryCount + "+";
-  const statCre = document.getElementById("statCreators");
-  if (statCre) statCre.textContent = _cfg.creatorCount + "+";
-  const statDashTotal = document.getElementById("statDashTotal");
-  if (statDashTotal) statDashTotal.textContent = _cfg.restaurantCount + "+";
-  const statDashRising = document.getElementById("statDashRising");
-  if (statDashRising && typeof CM_RESTAURANTS \!== "undefined") {
-    const risingCount = CM_RESTAURANTS.filter(r => r.trendVelocity === "rising").length;
-    statDashRising.textContent = "↑ " + risingCount;
-  }
+  // ── Stats: all values live from ChefMinistryData (derived from actual arrays) ──
+  ChefMinistryData.injectStats();
 
-  // Weekly highlight
-  const wh = CM_SIGNALS.weeklyHighlight;
-  document.getElementById("weeklyTitle").textContent = wh.title;
-  document.getElementById("weeklyDesc").textContent = wh.desc;
+  // Weekly highlight — matched to real restaurant via CM_SIGNALS + actual data
+  (function(){
+    var spotlight = ChefMinistryData.getWeeklySpotlight();
+    var whTitle = document.getElementById("weeklyTitle");
+    var whDesc  = document.getElementById("weeklyDesc");
+    if (whTitle && spotlight.title) whTitle.textContent = spotlight.title;
+    if (whDesc  && spotlight.desc)  whDesc.textContent  = spotlight.desc;
+  })();
 
-  // Updated date badge
-  const updBadge = document.getElementById("weeklyUpdatedBadge");
-  const updDate  = document.getElementById("weeklyUpdatedDate");
-  if (updBadge && updDate) {
-    const lastUpdated = (typeof CM_DB_STATS !== "undefined" && CM_DB_STATS.lastUpdated)
-      ? CM_DB_STATS.lastUpdated
-      : new Date().toISOString().slice(0,10);
-    updDate.textContent = lastUpdated;
-    updBadge.style.display = "flex";
-  }
-
-  // ── Hero card — Highest Velocity จาก scraper, fallback static ──────────────
+  // ── Hero card — Highest Velocity from scraper if available, else real signal data ──
   const heroCard = document.getElementById("heroOverlapCard");
   if (heroCard) {
     const extSorted = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined" && CM_EXTERNAL_RESTAURANTS.length > 0)
@@ -569,11 +550,9 @@
       : [];
     const heroExt = extSorted[0];
 
-    const weeklyRestName = (CM_SIGNALS.weeklyHighlight || {}).restaurant;
-    const top5Static = [...CM_RESTAURANTS].sort((a,b) => (b.overlapSignal||0) - (a.overlapSignal||0)).slice(0, 5);
-    const weeklyRest = weeklyRestName ? (CM_RESTAURANTS.find(r => r.name === weeklyRestName) || top5Static[0]) : null;
-    const weekNum = Math.floor((Date.now() - new Date("2025-01-01").getTime()) / (7*24*60*60*1000));
-    const heroStatic = weeklyRest || top5Static[weekNum % top5Static.length];
+    // Spotlight from ChefMinistryData — matched to real restaurant data
+    const _spotlight = ChefMinistryData.getWeeklySpotlight();
+    const heroStatic = _spotlight.restaurant;
 
     const useExt = !!heroExt;
     const heroRest = useExt ? heroExt : heroStatic;
@@ -861,7 +840,7 @@
         <div style="font-size:11px;color:var(--text-2);font-weight:700">${newRev}</div>
       </div>
     </div>`;
-  }).join("") : [...CM_RESTAURANTS].sort((a,b) => { const vo={rising:3,stable:2,declining:1}; const va=vo[a.trendVelocity]||0,vb=vo[b.trendVelocity]||0; return vb!==va?vb-va:(b.overlapSignal||0)-(a.overlapSignal||0); }).slice(0,5).map((r,i) => {
+  }).join("") : ChefMinistryData.getFeaturedRestaurants(5).map((r,i) => {
     return `<a class="rank-item" href="./restaurant.html?id=${escHtml(r.id)}" style="cursor:pointer;text-decoration:none;color:inherit">
       <div class="rank-num ${i<3?"top3":""}">${i+1}</div>
       <div>
@@ -876,24 +855,24 @@
   }).join("");
   rankList.innerHTML = velocityItems;
 
-  // Thai Fine Dining spotlight grid
+  // Thai Fine Dining spotlight grid — live from ChefMinistryData
   const thaiFineDineGrid = document.getElementById("thaiFineDineGrid");
-  const thaiFineDine = CM_RESTAURANTS
-    .filter(r => r.type === "fine-dining" && (r.cuisine.toLowerCase().includes("thai") || r.cuisine.toLowerCase().includes("samrub")))
+  const thaiFineDine = ChefMinistryData.getRestaurantList({type:"fine-dining"})
+    .filter(r => r.cuisine.toLowerCase().includes("thai") || r.cuisine.toLowerCase().includes("samrub"))
     .sort((a,b) => (b.overlapSignal||0) - (a.overlapSignal||0))
     .slice(0,3);
-  thaiFineDineGrid.innerHTML = thaiFineDine.length
+  if (thaiFineDineGrid) thaiFineDineGrid.innerHTML = thaiFineDine.length
     ? thaiFineDine.map(r => buildRestaurantCard(r, {showOverlap:true})).join("")
     : `<div style="color:rgba(255,255,255,.5);grid-column:1/-1;padding:20px">ไม่มีข้อมูล</div>`;
 
-  // Rising grid
+  // Rising grid — live from ChefMinistryData
   const risingGrid = document.getElementById("risingGrid");
   const thaiFineDineIds = new Set(thaiFineDine.map(r => r.id));
-  const rising = CM_RESTAURANTS
-    .filter(r => r.trendVelocity === "rising" && !thaiFineDineIds.has(r.id))
+  const risingRest = ChefMinistryData.getTrendingRestaurants(8)
+    .filter(r => \!thaiFineDineIds.has(r.id))
     .slice(0, 6);
-  risingGrid.innerHTML = rising.length
-    ? rising.map(r => buildRestaurantCard(r, {showOverlap:true})).join("")
+  if (risingGrid) risingGrid.innerHTML = risingRest.length
+    ? risingRest.map(r => buildRestaurantCard(r, {showOverlap:true})).join("")
     : `<div style="color:var(--text-2);grid-column:1/-1;padding:20px">ไม่มีข้อมูล Rising ในขณะนี้</div>`;
 </script>
 
