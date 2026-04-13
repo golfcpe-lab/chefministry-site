@@ -455,10 +455,23 @@
 
 <script>
 // ── Mobile nav ──────────────────────────────────────────────────────────────
-document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
-  const n=document.getElementById("mobileNav");
-  n.style.display=n.style.display==="block"?"none":"block";
-});
+(function(){
+  var menuBtn = document.getElementById("mobileMenuBtn");
+  var mobileNav = document.getElementById("mobileNav");
+  var navOpen = false;
+  if(menuBtn && mobileNav){
+    menuBtn.addEventListener("click", function(e){
+      e.stopPropagation();
+      navOpen = !navOpen;
+      mobileNav.style.display = navOpen ? "block" : "none";
+      menuBtn.textContent = navOpen ? "✕" : "☰";
+    });
+    document.addEventListener("click", function(){
+      if(navOpen){ navOpen=false; mobileNav.style.display="none"; menuBtn.textContent="☰"; }
+    });
+    mobileNav.addEventListener("click", function(e){ e.stopPropagation(); });
+  }
+})();
 
 // ── Goal toggle (multi-select) ───────────────────────────────────────────────
 function toggleGoal(btn){
@@ -587,18 +600,4 @@ FAQS.forEach((item, i) => {
       <span style="font-size:15px;font-weight:800;color:var(--text)">${item.q}</span>
       <span class="faq-icon" style="font-size:18px;color:var(--text-2);flex-shrink:0;transition:transform .2s">+</span>
     </button>
-    <div class="faq-body" style="display:none;padding-bottom:20px">
-      <p style="font-size:14px;color:var(--text-2);line-height:1.7">${item.a}</p>
-    </div>`;
-  faqEl.appendChild(wrap);
-});
-
-function toggleFaq(btn){
-  const body = btn.nextElementSibling;
-  const icon = btn.querySelector(".faq-icon");
-  const open = body.style.display==="block";
-  body.style.display = open?"none":"block";
-  icon.textContent = open?"+":"–";
-  icon.style.transform = open?"rotate(0deg)":"rotate(0deg)";
-}
-</scr
+    <div class="faq-body" style="displa

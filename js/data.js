@@ -29,6 +29,19 @@ const CM_INFLUENCERS = [
   { id:"i18", name:"กาย Michelin Watch",handle:"@gay_michelinwatch",  platform:"Instagram", tier:"Mid",   followers:"17K",   focusArea:"Michelin Star, Fine Dining",          avatar:"ก",  verified:false }, // ◎
   { id:"i19", name:"ดาว Eat Around",    handle:"@dao_eatround",       platform:"TikTok",    tier:"Mid",   followers:"14K",   focusArea:"Everyday Eats, Local Favorite",       avatar:"ด",  verified:false }, // ◎
   { id:"i20", name:"มุก Sweet Review",  handle:"@mook_sweetreview",   platform:"Instagram", tier:"Mid",   followers:"11K",   focusArea:"Dessert, Bakery, Sweets",             avatar:"ม",  verified:false }, // ◎
+
+  // ── YOUTUBE SOURCES ADDED ─────────────────────────────────────────────────
+  { id:"i21", name:"Starvingtime",       handle:"@Starvingtime",       platform:"YouTube",   tier:"Mega",  followers:"2M+",   focusArea:"Thai Food, Street Food, Restaurant Reviews",  avatar:"St", verified:true  },
+  { id:"i22", name:"Tid Review",         handle:"@tid_review",         platform:"YouTube",   tier:"Mega",  followers:"1M+",   focusArea:"Food Review, Thai & International",           avatar:"T",  verified:true  },
+  { id:"i23", name:"EaterOat",           handle:"@EaterOat",           platform:"YouTube",   tier:"Macro", followers:"500K",  focusArea:"Food Review, Bangkok Restaurants",            avatar:"Eo", verified:true  },
+  { id:"i24", name:"GoWentGo",           handle:"@GoWentGo",           platform:"YouTube",   tier:"Macro", followers:"350K",  focusArea:"Travel Food, Thai Restaurants, Hidden Gems",  avatar:"Gw", verified:true  },
+  { id:"i25", name:"EatGuide",           handle:"@EatGuide",           platform:"YouTube",   tier:"Macro", followers:"280K",  focusArea:"Food Guide, Restaurant Reviews, All Thai",    avatar:"Eg", verified:true  },
+  { id:"i26", name:"Kin Kub Ky",         handle:"@kin-kub-ky",         platform:"YouTube",   tier:"Macro", followers:"200K",  focusArea:"Thai Food, Everyday Eats, Local Favorite",   avatar:"K",  verified:true  },
+  { id:"i27", name:"Henmuntookdee",      handle:"@Henmuntookdee",      platform:"YouTube",   tier:"Macro", followers:"150K",  focusArea:"Budget Eats, Best Value, Street Food",        avatar:"H",  verified:true  },
+  { id:"i28", name:"KiaZaab",            handle:"@KiaZaab",            platform:"YouTube",   tier:"Mid",   followers:"80K",   focusArea:"Thai Street Food, Spicy, Local",              avatar:"Kz", verified:false },
+  { id:"i29", name:"SauceChannel",       handle:"@SauceChannel",       platform:"YouTube",   tier:"Mid",   followers:"60K",   focusArea:"Sauces, Thai Cuisine, Cooking",               avatar:"Sc", verified:false },
+  { id:"i30", name:"NanaEats",           handle:"@NanaEats",           platform:"YouTube",   tier:"Mid",   followers:"45K",   focusArea:"Everyday Eats, Local Food, Cafes",            avatar:"N",  verified:false },
+  { id:"i31", name:"Harupiii",           handle:"@Harupiii",           platform:"YouTube",   tier:"Mid",   followers:"30K",   focusArea:"Cafe, Dessert, Japanese, Lifestyle",          avatar:"Hp", verified:false },
 ];
 
 // ── Restaurants ──────────────────────────────────────────────────────────────

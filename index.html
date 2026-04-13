@@ -155,25 +155,27 @@
 <hr class="divider"/>
 
 <!-- ── WEEKLY TREND HIGHLIGHT ── -->
-<section class="section" style="background:var(--white)">
+<section class="section" style="background:var(--cream)">
   <div class="container">
-    <div class="section-cols-2">
-      <div>
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap">
-          <div class="eyebrow" style="color:var(--amber)">🌟 Spotlight of the Week</div>
-          <div id="weeklyUpdatedBadge" style="font-size:10px;font-weight:800;background:var(--cream);border:1px solid var(--border);border-radius:99px;padding:3px 10px;color:var(--text-2);letter-spacing:.06em;display:none">Updated <span id="weeklyUpdatedDate"></span></div>
+    <div style="background:var(--white);border-radius:var(--radius-lg);border:1px solid var(--border);padding:36px 40px;box-shadow:0 2px 16px rgba(0,0,0,.06)">
+      <div class="section-cols-2">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap">
+            <div class="eyebrow" style="color:var(--amber)">🌟 Spotlight of the Week</div>
+            <div id="weeklyUpdatedBadge" style="font-size:10px;font-weight:800;background:var(--cream);border:1px solid var(--border);border-radius:99px;padding:3px 10px;color:var(--text-2);letter-spacing:.06em;display:none">Updated <span id="weeklyUpdatedDate"></span></div>
+          </div>
+          <h2 style="font-family:'Playfair Display',serif;font-size:clamp(20px,2.6vw,34px);line-height:1.12;letter-spacing:-.02em;margin-bottom:14px" id="weeklyTitle">Loading…</h2>
+          <p class="lead" id="weeklyDesc">Loading…</p>
+          <div style="margin-top:24px">
+            <div style="font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);margin-bottom:12px">Trend by Category</div>
+            <div id="trendCategoryList"></div>
+          </div>
         </div>
-        <h2 class="display-2" style="margin-bottom:16px" id="weeklyTitle">Loading…</h2>
-        <p class="lead" id="weeklyDesc">Loading…</p>
-        <div style="margin-top:24px">
-          <div style="font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);margin-bottom:12px">Trend by Category</div>
-          <div id="trendCategoryList"></div>
-        </div>
-      </div>
-      <div>
-        <div style="font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);margin-bottom:14px" id="rankListLabel">📡 Signal Rank</div>
-        <div data-require="free" style="position:relative;border-radius:var(--radius-lg);overflow:hidden">
-          <div class="rank-list card" style="border-radius:var(--radius-lg);overflow:hidden" id="overlapRankList"></div>
+        <div>
+          <div style="font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);margin-bottom:14px" id="rankListLabel">📡 Signal Rank</div>
+          <div data-require="free" style="position:relative;border-radius:var(--radius-lg);overflow:hidden">
+            <div class="rank-list card" style="border-radius:var(--radius-lg);overflow:hidden" id="overlapRankList"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -231,9 +233,9 @@
           เพื่อสังเคราะห์เป็น Trend data ว่าร้านไหนกำลัง trending
         </p>
         <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <span class="tier-badge tier-mega" style="padding:6px 14px;font-size:12px">Mega · 4 คน</span>
-          <span class="tier-badge tier-macro" style="padding:6px 14px;font-size:12px">Macro · 6 คน</span>
-          <span class="tier-badge tier-mid" style="padding:6px 14px;font-size:12px">Mid · 10+ คน</span>
+          <span class="tier-badge tier-mega" style="padding:6px 14px;font-size:12px">Mega · 7 คน</span>
+          <span class="tier-badge tier-macro" style="padding:6px 14px;font-size:12px">Macro · 10 คน</span>
+          <span class="tier-badge tier-mid" style="padding:6px 14px;font-size:12px">Mid · 14+ คน</span>
         </div>
       </div>
       <div style="text-align:center">
@@ -745,11 +747,3 @@
   const thaiFineDineIds = new Set(thaiFineDine.map(r => r.id));
   const rising = CM_RESTAURANTS
     .filter(r => r.trendVelocity === "rising" && !thaiFineDineIds.has(r.id))
-    .slice(0, 6);
-  risingGrid.innerHTML = rising.length
-    ? rising.map(r => buildRestaurantCard(r, {showOverlap:true})).join("")
-    : `<div style="color:var(--text-2);grid-column:1/-1;padding:20px">ไม่มีข้อมูล Rising ในขณะนี้</div>`;
-</script>
-
-</body>
-</html>
