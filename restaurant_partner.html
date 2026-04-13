@@ -27,7 +27,7 @@
       <div class="logo-mark" style="display:none">CM</div>
       <div>
         <div class="logo-name">ChefMinistry</div>
-        <div class="logo-tagline">Food Trend Intelligence</div>
+        <div class="logo-tagline">Restaurant Rating Intelligence Platform</div>
       </div>
     </a>
     <nav class="site-nav">
@@ -66,7 +66,7 @@
       <!-- Stats -->
       <div style="display:flex;gap:28px;flex-wrap:wrap">
         <div>
-          <div style="font-size:28px;font-weight:900;color:#fff;line-height:1">150+</div>
+          <div style="font-size:28px;font-weight:900;color:#fff;line-height:1" id="partnerStatRestaurants">270+</div>
           <div style="font-size:10.5px;font-weight:700;color:rgba(255,255,255,.45);margin-top:3px;text-transform:uppercase;letter-spacing:.07em">Restaurants Tracked</div>
         </div>
         <div style="width:1px;background:rgba(255,255,255,.12)"></div>
@@ -427,7 +427,7 @@
         <div class="footer-links">
           <a class="footer-link" href="./about.html">Our Methodology</a>
           <a class="footer-link" href="./about.html#legal">Legal Framework</a>
-          <a class="footer-link" href="./about.html#b2b">B2B Intelligence</a>
+          <a class="footer-link" href="./legal.html">Legal / Data</a>
         </div>
       </div>
       <div>
@@ -435,7 +435,7 @@
         <div class="footer-links">
           <a class="footer-link" href="./restaurant_partner.html">Restaurant / Brand Pilot</a>
           <a class="footer-link" href="./creator.html">Creator Network</a>
-          <a class="footer-link" href="mailto:contact@chefministry.com?subject=ChefMinistry%20Pilot%20Partnership">Pilot Partnership</a>
+          <a class="footer-link" href="./contact.html">Contact / Pilot</a>
         </div>
       </div>
       <div>
@@ -457,6 +457,13 @@
 // ── Mobile nav ──────────────────────────────────────────────────────────────
 (function(){
   var menuBtn = document.getElementById("mobileMenuBtn");
+  // Init stats
+  (function(){
+    var cfg = (typeof CM_CONFIG !== "undefined") ? CM_CONFIG : {restaurantCount:270};
+    var el = document.getElementById("partnerStatRestaurants");
+    if(el) el.textContent = cfg.restaurantCount + "+";
+  })();
+
   var mobileNav = document.getElementById("mobileNav");
   var navOpen = false;
   if(menuBtn && mobileNav){
@@ -597,7 +604,4 @@ FAQS.forEach((item, i) => {
   wrap.style.cssText="border-bottom:1px solid var(--border)";
   wrap.innerHTML=`
     <button onclick="toggleFaq(this)" style="width:100%;text-align:left;padding:20px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:none;cursor:pointer;font-family:inherit">
-      <span style="font-size:15px;font-weight:800;color:var(--text)">${item.q}</span>
-      <span class="faq-icon" style="font-size:18px;color:var(--text-2);flex-shrink:0;transition:transform .2s">+</span>
-    </button>
-    <div class="faq-body" style="displa
+      <span style="font-size:15px;font-w

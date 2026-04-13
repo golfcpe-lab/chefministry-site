@@ -27,7 +27,7 @@
       <div class="logo-mark" style="display:none">CM</div>
       <div>
         <div class="logo-name">ChefMinistry</div>
-        <div class="logo-tagline">Food Trend Intelligence</div>
+        <div class="logo-tagline">Restaurant Rating Intelligence Platform</div>
       </div>
     </a>
     <nav class="site-nav">
@@ -62,14 +62,22 @@
     <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-top:6px">
       <div>
         <h1 class="h1" style="color:#fff;margin-bottom:6px">Discover ร้านและ Signal ที่กำลังมา</h1>
-        <p style="color:rgba(255,255,255,.65);font-size:15px">ใช้ signal เพื่อดูว่าร้านไหนกำลังถูกพูดถึง และเปิดโอกาสให้ร้านเชื่อมต่อกับ creator</p>
+        <p style="color:rgba(255,255,255,.65);font-size:15px">ดูว่าร้านไหนกำลังมา จาก trend signal ที่อัปเดตทุกวัน และเปรียบเทียบในหมวดเดียวกันเพื่อให้ตีความได้ง่ายขึ้น</p>
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
-        <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
-          <span style="font-size:10px;font-weight:900;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.1em;align-self:center">Signal Strength</span>
-          <span class="signal-tag signal-very-strong">Very Strong</span>
-          <span class="signal-tag signal-strong">Strong</span>
-          <span class="signal-tag signal-moderate">Moderate</span>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end">
+          <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:6px 14px;text-align:center">
+            <div style="font-size:15px;font-weight:900;color:#fff" id="discoverStatRestaurants">270+</div>
+            <div style="font-size:9px;color:rgba(255,255,255,.45);font-weight:700;text-transform:uppercase;letter-spacing:.07em">ร้านในฐานข้อมูล</div>
+          </div>
+          <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:6px 14px;text-align:center">
+            <div style="font-size:15px;font-weight:900;color:var(--gold)">Daily</div>
+            <div style="font-size:9px;color:rgba(255,255,255,.45);font-weight:700;text-transform:uppercase;letter-spacing:.07em">อัปเดต</div>
+          </div>
+          <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:6px 14px;text-align:center">
+            <div style="font-size:15px;font-weight:900;color:#fff" id="discoverStatCats">20+</div>
+            <div style="font-size:9px;color:rgba(255,255,255,.45);font-weight:700;text-transform:uppercase;letter-spacing:.07em">หมวดอาหาร</div>
+          </div>
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
           <span style="font-size:10px;font-weight:900;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.1em;align-self:center">Trending Now</span>
@@ -126,8 +134,13 @@
     <div class="listing-grid" id="listingGrid"></div>
     <div class="empty-state" id="emptyState" style="display:none">
       <div class="empty-icon">📡</div>
-      <div class="empty-title">ไม่พบร้านที่ตรงกับเงื่อนไข</div>
-      <div>ลองปรับ filter หรือค้นหาด้วยคำอื่น</div>
+      <div class="empty-title">ยังไม่พบร้านที่ตรงกับเงื่อนไขนี้</div>
+      <div style="color:var(--text-2);font-size:14px;line-height:1.6;margin-bottom:16px">ลองปรับ category, area หรือ signal level เพื่อดูร้านเพิ่มเติม</div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button onclick="clearAllFilters()" class="btn btn-primary btn-sm">ล้างตัวกรอง</button>
+        <a href="./listing.html?velocity=rising" class="btn btn-outline btn-sm">ดูร้านที่กำลัง Rising</a>
+        <a href="./listing.html" class="btn btn-ghost btn-sm">ดูทั้งหมด</a>
+      </div>
     </div>
 
   <!-- ── DISCOVER WALL (shows when not unlocked) ── -->
@@ -137,7 +150,7 @@
     <!-- Wall card -->
     <div style="background:var(--navy);border-radius:var(--radius-lg);padding:40px 36px;text-align:center;max-width:520px;margin:0 auto 40px;box-shadow:0 8px 40px rgba(29,58,95,.18)">
       <div style="display:inline-block;background:var(--gold);color:var(--navy);font-size:10px;font-weight:900;padding:4px 12px;border-radius:99px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px">Members Only</div>
-      <div id="wallCount" style="font-size:13px;font-weight:700;color:rgba(255,255,255,.55);margin-bottom:10px">อีก <span id="hiddenCount">?</span> ร้านที่ซ่อนอยู่</div>
+      <div id="wallCount" style="font-size:13px;font-weight:700;color:rgba(255,255,255,.55);margin-bottom:10px">แสดง <span id="previewCount">6</span> จาก <span id="hiddenCount">270</span> ร้านในฐานข้อมูล</div>
       <h3 style="color:#fff;font-size:22px;font-weight:900;margin-bottom:8px;font-family:'Playfair Display',serif">เข้าถึง Signal ทั้งหมด</h3>
       <p style="color:rgba(255,255,255,.65);font-size:14px;line-height:1.7;margin-bottom:24px">สมัครฟรีเพื่อดู Signal ร้านอาหาร รายชื่อ Creator<br/>และข้อมูล Trend ทั้งหมด · ไม่มีค่าใช้จ่าย</p>
       <button id="wallSignInBtn"
@@ -197,7 +210,7 @@
           <div class="logo-mark" style="width:34px;height:34px;font-size:13px;display:none">CM</div>
           <div class="logo-name">ChefMinistry</div>
         </div>
-        <p class="footer-brand-desc">Food Signal Intelligence Platform</p>
+        <p class="footer-brand-desc">Restaurant Rating Intelligence Platform — วิเคราะห์แนวโน้มร้านอาหารจากข้อมูล public ที่อัปเดตอย่างต่อเนื่อง</p>
       </div>
       <div>
         <div class="footer-col-title">Platform</div>
@@ -210,15 +223,16 @@
         <div class="footer-col-title">About</div>
         <div class="footer-links">
           <a class="footer-link" href="./about.html">Methodology</a>
-          <a class="footer-link" href="./about.html#legal">Legal</a>
+          <a class="footer-link" href="./faq.html">FAQ</a>
+          <a class="footer-link" href="./legal.html">Legal / Data</a>
         </div>
       </div>
       <div>
         <div class="footer-col-title">For Business</div>
         <div class="footer-links">
-          <a class="footer-link" href="./restaurant_partner.html">Restaurant / Brand Pilot</a>
+          <a class="footer-link" href="./restaurant_partner.html">For Restaurants / Brands</a>
           <a class="footer-link" href="./creator.html">Creator Network</a>
-          <a class="footer-link" href="mailto:contact@chefministry.com?subject=ChefMinistry%20Pilot%20Partnership">Pilot Partnership</a>
+          <a class="footer-link" href="./contact.html">Contact / Pilot</a>
         </div>
       </div>
       <div>
@@ -375,9 +389,10 @@
     const empty = document.getElementById("emptyState");
     const wall = document.getElementById("discoverWall");
 
+    const _cfg2 = (typeof CM_CONFIG \!== "undefined") ? CM_CONFIG : { restaurantCount: 270 };
     document.getElementById("resultCount").textContent = isUnlocked()
-      ? `พบ ${list.length} ร้าน`
-      : `พบ ${list.length} ร้าน (แสดง ${Math.min(list.length,PREVIEW_COUNT)} ก่อน)`;
+      ? `แสดง ${list.length} ร้าน · จาก ${_cfg2.restaurantCount}+ ในฐานข้อมูล`
+      : `แสดง ${Math.min(list.length, PREVIEW_COUNT)} จาก ${list.length} ร้านในหมวดนี้`;
 
     if(!list.length){
       grid.innerHTML=""; empty.style.display="block"; wall.style.display="none";
@@ -392,12 +407,25 @@
       const preview = list.slice(0, PREVIEW_COUNT);
       grid.innerHTML = preview.map(r=>buildRestaurantCard(r,{showOverlap:true})).join("");
       if(list.length > PREVIEW_COUNT){
-        document.getElementById("hiddenCount").textContent = list.length - PREVIEW_COUNT;
+        const _totalDb = (typeof CM_CONFIG \!== "undefined") ? CM_CONFIG.restaurantCount : 270;
+        document.getElementById("hiddenCount").textContent = _totalDb;
+        const _pre = document.getElementById("previewCount");
+        if(_pre) _pre.textContent = Math.min(list.length, PREVIEW_COUNT);
         wall.style.display="block";
       } else {
         wall.style.display="none";
       }
     }
+  }
+
+  // ── Clear all filters ───────────────────────────────────────────────────
+  function clearAllFilters(){
+    state.signal="all"; state.velocity="all"; state.budget="all"; state.type="all"; state.search="";
+    document.getElementById("searchInput").value="";
+    document.querySelectorAll(".filter-chip").forEach(c=>{
+      c.classList.toggle("active", c.dataset.val==="all");
+    });
+    render();
   }
 
   // ── Unlock handler ──────────────────────────────────────────────────────

@@ -26,7 +26,7 @@
            style="width:40px;height:40px;border-radius:50%;object-fit:cover"/>
       <div>
         <div class="logo-name">ChefMinistry</div>
-        <div class="logo-tagline">Restaurant Rating Intelligence</div>
+        <div class="logo-tagline">Restaurant Rating Intelligence Platform</div>
       </div>
     </a>
     <nav class="site-nav">
@@ -56,29 +56,33 @@
   <div class="container">
     <div class="hero-grid">
       <div>
-        <div class="eyebrow hero-eyebrow">🔥 Bangkok's Restaurant Trend Tracker</div>
-        <h1 class="display-1 hero-title">ค้นพบร้านใหม่<br/>ก่อนใคร</h1>
+        <div class="eyebrow hero-eyebrow">Restaurant Rating Intelligence Platform</div>
+        <h1 class="display-1 hero-title">ตัดสินใจได้แม่นขึ้น<br/>ด้วยข้อมูลร้านอาหารที่อัปเดตรายวัน</h1>
         <p class="hero-subtitle">
-          ChefMinistry วิเคราะห์ข้อมูลรีวิวรายวันจาก Google Maps และ YouTube Creator
-          — เพื่อให้คุณรู้ว่าร้านไหนกำลัง Rising ก่อนที่ทุกคนจะตามทัน
+          ChefMinistry วิเคราะห์ review trend และ creator signal จากแหล่งข้อมูล public
+          เพื่อช่วยให้คุณเห็นว่าร้านไหนกำลังมา ร้านไหนเริ่มอิ่มตัว
+          และร้านของคุณอยู่ตรงไหนใน category ที่เกี่ยวข้อง
         </p>
         <div class="hero-actions" style="flex-wrap:wrap">
           <a href="./listing.html" class="btn btn-primary">🔍 ดูร้านทั้งหมด →</a>
-          <a href="./restaurant_partner.html" class="btn btn-ghost">🏪 สำหรับร้านอาหาร</a>
-          <a href="./creator.html" class="btn btn-creator-cta">🎥 For Creators</a>
+          <a href="./creator.html" class="btn btn-creator-cta">🎥 สำหรับ Food Creators</a>
         </div>
         <div class="hero-stats">
           <div>
-            <div class="hero-stat-num" id="statRestaurants">—</div>
-            <div class="hero-stat-label">ร้านอาหารในฐานข้อมูล</div>
+            <div class="hero-stat-num" id="statRestaurants">270+</div>
+            <div class="hero-stat-label">ร้านในฐานข้อมูล</div>
           </div>
           <div>
             <div class="hero-stat-num">Daily</div>
             <div class="hero-stat-label">อัปเดตรายวัน</div>
           </div>
           <div>
-            <div class="hero-stat-num">Free</div>
-            <div class="hero-stat-label">เข้าถึงฟรี</div>
+            <div class="hero-stat-num" id="statCategories">20+</div>
+            <div class="hero-stat-label">หมวดอาหาร</div>
+          </div>
+          <div>
+            <div class="hero-stat-num" id="statCreators">30+</div>
+            <div class="hero-stat-label">creators monitored</div>
           </div>
         </div>
       </div>
@@ -125,6 +129,19 @@
       <a href="./listing.html" style="font-size:11px;font-weight:700;color:rgba(255,255,255,.5);text-decoration:none;white-space:nowrap">ดูร้านทั้งหมด →</a>
     </div>
     <div id="categoryDiscoveryGrid" style="display:grid;gap:13px"></div>
+  </div>
+</section>
+
+<\!-- ── WHY THIS MATTERS ── -->
+<section style="background:var(--cream);padding:32px 0">
+  <div class="container" style="max-width:700px;text-align:center">
+    <div class="eyebrow" style="color:var(--navy);margin-bottom:10px">ทำไมข้อมูลถึงสำคัญ</div>
+    <h2 class="display-2" style="margin-bottom:14px">เมื่อสัญญาณของตลาดเปลี่ยนเร็วขึ้น<br/>ข้อมูลช่วยให้ตัดสินใจได้ชัดขึ้น</h2>
+    <p style="font-size:15px;color:var(--text-2);line-height:1.75;max-width:600px;margin:0 auto">
+      ChefMinistry รวบรวมข้อมูลร้านอาหารจากแหล่งข้อมูล public และแปลงให้เป็น trend signal
+      ที่ช่วยให้ผู้ใช้งานมองเห็นโอกาส เปรียบเทียบตำแหน่งของร้าน
+      และติดตามความเปลี่ยนแปลงได้อย่างเป็นระบบ
+    </p>
   </div>
 </section>
 
@@ -178,8 +195,8 @@
             <div class="eyebrow" style="color:var(--amber)">🌟 Spotlight of the Week</div>
             <div id="weeklyUpdatedBadge" style="font-size:10px;font-weight:800;background:var(--cream);border:1px solid var(--border);border-radius:99px;padding:3px 10px;color:var(--text-2);letter-spacing:.06em;display:none">Updated <span id="weeklyUpdatedDate"></span></div>
           </div>
-          <h2 style="font-family:'Playfair Display',serif;font-size:clamp(20px,2.6vw,34px);line-height:1.12;letter-spacing:-.02em;margin-bottom:14px" id="weeklyTitle">Loading…</h2>
-          <p class="lead" id="weeklyDesc">Loading…</p>
+          <h2 style="font-family:'Playfair Display',serif;font-size:clamp(20px,2.6vw,34px);line-height:1.12;letter-spacing:-.02em;margin-bottom:14px" id="weeklyTitle">🌿 Farm-to-Table คว้าสปอตไลต์ — Baan Tepa แรงเงียบสัปดาห์นี้</h2>
+          <p class="lead" id="weeklyDesc">Baan Tepa ได้รับความสนใจจาก Creator เพิ่มขึ้นต่อเนื่อง ขณะที่กลุ่ม Farm-to-Table Thai Fine Dining กำลังโตแรง เป็นอันดับที่ 2 รองจาก Modern Thai ในสัปดาห์นี้</p>
           <div style="margin-top:20px">
             <div style="font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);margin-bottom:10px">Trend by Category</div>
             <div id="trendCategoryList"></div>
@@ -304,10 +321,10 @@
       <!-- LEFT: value props -->
       <div>
         <div class="eyebrow" style="color:#6366f1;margin-bottom:12px">🎥 For Food Creators</div>
-        <h2 class="display-2" style="margin-bottom:14px">เห็นร้านกำลังมา<br/>ก่อนทุกคนในวงการ</h2>
+        <h2 class="display-2" style="margin-bottom:14px">วางแผนคอนเทนต์ได้แม่นขึ้น<br/>จากสัญญาณที่จับต้องได้</h2>
         <p class="lead" style="margin-bottom:28px">
-          ข้อมูล rating trend ที่คนทั่วไปไม่มีสิทธิ์เห็น — รู้ว่าร้านไหนกำลัง spike
-          ก่อนสื่อจะตามทัน แล้วอยู่ใน content ที่ใช่ ในเวลาที่ใช่
+          ข้อมูล public ที่ถูกจัดโครงสร้างเป็น insight — รู้ว่าร้านไหนกำลัง spike
+          ก่อน coverage จะหนาแน่นเกินไป เพื่อวาง content ในเวลาที่ใช่
         </p>
         <div style="display:flex;flex-direction:column;gap:18px;margin-bottom:32px">
           <div style="display:flex;gap:14px;align-items:flex-start">
@@ -327,8 +344,8 @@
           <div style="display:flex;gap:14px;align-items:flex-start">
             <div style="width:44px;height:44px;border-radius:12px;background:var(--blue-bg);display:grid;place-items:center;font-size:20px;flex-shrink:0">🆓</div>
             <div>
-              <div style="font-size:15px;font-weight:900;margin-bottom:3px">ฟรีตลอดชีพสำหรับ Early Access</div>
-              <div style="font-size:13.5px;color:var(--text-2);line-height:1.6">ลงทะเบียนก่อนครบ 1,000 คน รับสิทธิ์ early access และ feature พิเศษสำหรับสมาชิกยุคแรก</div>
+              <div style="font-size:15px;font-weight:900;margin-bottom:3px">เข้าร่วมได้ฟรี — ตอนนี้</div>
+              <div style="font-size:13.5px;color:var(--text-2);line-height:1.6">สมัครเป็น creator เพื่อเข้าถึง Signal Dashboard และ trend data ในช่วง early access โดยไม่มีค่าใช้จ่าย</div>
             </div>
           </div>
         </div>
@@ -456,7 +473,7 @@
           <img src="./assets/logo_circular.png" alt="Chef Ministry" style="height:36px;border-radius:6px" onerror="this.style.display='none'"/>
           <div class="logo-name">ChefMinistry</div>
         </div>
-        <p class="footer-brand-desc">Restaurant Rating Intelligence — ข้อมูลจากแหล่งข้อมูล public อัปเดตรายวัน</p>
+        <p class="footer-brand-desc">Restaurant Rating Intelligence Platform — วิเคราะห์แนวโน้มร้านอาหารจากข้อมูล public ที่อัปเดตอย่างต่อเนื่อง</p>
       </div>
       <div>
         <div class="footer-col-title">Platform</div>
@@ -469,17 +486,17 @@
       <div>
         <div class="footer-col-title">About</div>
         <div class="footer-links">
-          <a class="footer-link" href="./about.html">Our Methodology</a>
-          <a class="footer-link" href="./about.html#legal">Legal Framework</a>
-          <a class="footer-link" href="./about.html#b2b">B2B Intelligence</a>
+          <a class="footer-link" href="./about.html">Methodology</a>
+          <a class="footer-link" href="./faq.html">FAQ</a>
+          <a class="footer-link" href="./legal.html">Legal / Data</a>
         </div>
       </div>
       <div>
         <div class="footer-col-title">For Business</div>
         <div class="footer-links">
-          <a class="footer-link" href="./restaurant_partner.html">Restaurant / Brand Pilot</a>
+          <a class="footer-link" href="./restaurant_partner.html">For Restaurants / Brands</a>
           <a class="footer-link" href="./creator.html">Creator Network</a>
-          <a class="footer-link" href="mailto:contact@chefministry.com?subject=ChefMinistry%20Pilot%20Partnership">Pilot Partnership</a>
+          <a class="footer-link" href="./contact.html">Contact / Pilot</a>
         </div>
       </div>
       <div>
@@ -511,18 +528,18 @@
     n.style.display=n.style.display==="block"?"none":"block";
   });
 
-  // Dynamic stats
+  // Dynamic stats — uses CM_CONFIG as single source of truth
+  const _cfg = (typeof CM_CONFIG \!== "undefined") ? CM_CONFIG : { restaurantCount:270, creatorCount:31, categoryCount:20 };
   const statR = document.getElementById("statRestaurants");
-  if (statR) {
-    const total = (typeof CM_DB_STATS !== "undefined") ? CM_DB_STATS.total : CM_RESTAURANTS.length;
-    statR.textContent = total + "+";
-  }
+  if (statR) statR.textContent = _cfg.restaurantCount + "+";
+  const statCat = document.getElementById("statCategories");
+  if (statCat) statCat.textContent = _cfg.categoryCount + "+";
+  const statCre = document.getElementById("statCreators");
+  if (statCre) statCre.textContent = _cfg.creatorCount + "+";
   const statDashTotal = document.getElementById("statDashTotal");
-  if (statDashTotal && typeof CM_RESTAURANTS !== "undefined") {
-    statDashTotal.textContent = CM_RESTAURANTS.length + "+";
-  }
+  if (statDashTotal) statDashTotal.textContent = _cfg.restaurantCount + "+";
   const statDashRising = document.getElementById("statDashRising");
-  if (statDashRising && typeof CM_RESTAURANTS !== "undefined") {
+  if (statDashRising && typeof CM_RESTAURANTS \!== "undefined") {
     const risingCount = CM_RESTAURANTS.filter(r => r.trendVelocity === "rising").length;
     statDashRising.textContent = "↑ " + risingCount;
   }
