@@ -643,16 +643,16 @@ section.section[style*="background:var(--dark)"]{
   background:linear-gradient(135deg,#07111f 0%,#0f1f3c 55%,#130e2b 100%)!important;
   position:relati
 /* ── Category Discovery Grid ─────────────────────────────────────────────── */
-.disc-compact-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.disc-compact-row{display:flex;align-items:center;gap:12px;padding:9px 14px;border-radius:9px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);transition:border-color .15s}
-.disc-compact-row:hover{border-color:rgba(255,255,255,.14)}
-.disc-compact-cat{display:flex;align-items:center;gap:6px;font-size:10px;font-weight:900;color:rgba(255,255,255,.75);text-transform:uppercase;letter-spacing:.07em;text-decoration:none;white-space:nowrap;flex-shrink:0;min-width:150px}
-.disc-compact-cat:hover{color:#fff}
+.disc-compact-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.disc-compact-row{display:flex;align-items:center;gap:14px;padding:10px 16px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);transition:border-color .15s}
+.disc-compact-row:hover{border-color:rgba(201,168,76,.35);background:rgba(255,255,255,.09)}
+.disc-compact-cat{display:flex;align-items:center;gap:7px;font-size:10px;font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:.07em;text-decoration:none;white-space:nowrap;flex-shrink:0;width:158px}
+.disc-compact-cat:hover{color:var(--gold)}
 .disc-chips{display:flex;align-items:center;gap:5px;flex-wrap:wrap;flex:1}
-.disc-chip{font-size:11px;color:rgba(255,255,255,.65);text-decoration:none;padding:3px 9px;border-radius:99px;background:rgba(255,255,255,.07);transition:background .15s;white-space:nowrap;display:inline-flex;align-items:center;gap:4px}
-.disc-chip:hover{background:rgba(255,255,255,.14);color:#fff}
-.disc-chip-vel{font-size:9px;font-weight:900}
+.disc-chip{font-size:11px;font-weight:700;color:#fff;text-decoration:none;padding:4px 10px;border-radius:99px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.15);transition:all .15s;white-space:nowrap;display:inline-flex;align-items:center;gap:4px}
+.disc-chip:hover{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.3)}
+.disc-chip-vel{font-size:10px;font-weight:900}
 .disc-chip-vel.rising{color:#4ade80}
 .disc-chip-vel.declining{color:#f87171}
-.disc-chip-vel.stable{color:rgba(255,255,255,.35)}
+.disc-chip-vel.stable{color:rgba(255,255,255,.5)}
 @media(max-width:768px){.disc-compact-grid{grid-template-columns:1fr\!important}}

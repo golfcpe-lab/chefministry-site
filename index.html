@@ -6,7 +6,7 @@
   <link rel="icon" type="image/png" href="./assets/logo_circular.png"/>
   <title>ChefMinistry — Restaurant Rating Intelligence</title>
   <meta name="description" content="ChefMinistry วิเคราะห์ Rating Velocity และ Review Trend จากแหล่งข้อมูล public รายวัน — ให้ร้านอาหารรู้ position ตัวเองใน Category และให้ Food Creator เห็นโอกาสก่อนตลาด"/>
-  <link rel="stylesheet" href="./css/style.css?v=20260413"/>
+  <link rel="stylesheet" href="./css/style.css?v=20260414"/>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-BT2BCMZ9SH"></script>
   <script>
@@ -180,6 +180,10 @@
           </div>
           <h2 style="font-family:'Playfair Display',serif;font-size:clamp(20px,2.6vw,34px);line-height:1.12;letter-spacing:-.02em;margin-bottom:14px" id="weeklyTitle">Loading…</h2>
           <p class="lead" id="weeklyDesc">Loading…</p>
+          <div style="margin-top:20px">
+            <div style="font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);margin-bottom:10px">Trend by Category</div>
+            <div id="trendCategoryList"></div>
+          </div>
 
         </div>
         <div>
@@ -499,7 +503,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 <script src="./js/firebase-config.js"></script>
 <script src="./js/auth.js"></script>
-<script src="./js/data.js?v=20260413"></script>
+<script src="./js/data.js?v=20260414"></script>
 <script>
   // Mobile nav
   document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
@@ -632,6 +636,49 @@
   }
 
 
+
+  // Trend category bars (Spotlight section) — null-guarded
+  (function(){
+    var tcList = document.getElementById('trendCategoryList');
+    if (!tcList) return;
+
+    var CAT_FILTER = {
+      'Thai Fine Dining': function(r){ return r.type==='fine-dining' && (r.cuisine.toLowerCase().indexOf('thai')>=0 || r.cuisine.toLowerCase().indexOf('samrub')>=0); },
+      'Japanese Omakase': function(r){ return r.type==='omakase'; },
+      'Hidden Gems':      function(r){ return r.tags && r.tags.some(function(t){ return t==='Hidden Gem' || t==='ล้านลับ'; }); },
+      'Farm-to-Table':    function(r){ return r.tags && r.tags.some(function(t){ return t.toLowerCase().indexOf('farm')>=0; }); },
+      'Neapolitan Pizza': function(r){ return r.cuisine.toLowerCase().indexOf('pizza')>=0 || r.cuisine.toLowerCase().indexOf('neapolitan')>=0; },
+      'Artisan Ramen':    function(r){ return r.cuisine.toLowerCase().indexOf('ramen')>=0; },
+      'Thai Street Food': function(r){ return r.type==='street-food'; },
+      'Hot Pot / Suki':   function(r){ return r.cuisine.toLowerCase().indexOf('hot pot')>=0 || r.cuisine.toLowerCase().indexOf('suki')>=0; },
+      'Steakhouse':       function(r){ return r.type==='steakhouse'; },
+    };
+
+    var sortedTrends = [].concat(CM_SIGNALS.trendCategories).sort(function(a,b){
+      var va = parseInt(a.change), vb = parseInt(b.change);
+      if (isNaN(va) && isNaN(vb)) return 0;
+      if (isNaN(va)) return 1;
+      if (isNaN(vb)) return -1;
+      return vb - va;
+    });
+
+    var rows = sortedTrends.map(function(t){
+      var rawVal = parseInt(t.change);
+      var isPos  = t.change.indexOf('-') < 0;
+      var barPct = isNaN(rawVal) ? 8 : Math.min(Math.abs(rawVal) * 2.2, 100);
+      var barCls = t.signal==='declining' ? 'declining' : (t.signal==='stable'||t.signal==='moderate') ? 'stable' : '';
+      var chgCls = isNaN(rawVal) ? '' : (isPos ? 'positive' : 'negative');
+      var chgSty = isNaN(rawVal) ? 'color:var(--text-2);font-style:italic;font-weight:700' : '';
+      return '<div class="trend-row">'
+        + '<div class="trend-cat">' + escHtml(t.cat) + '</div>'
+        + '<div class="trend-bar-wrap"><div class="trend-bar-fill ' + barCls + '" style="width:' + barPct + '%"></div></div>'
+        + '<div class="trend-change ' + chgCls + '" style="' + chgSty + '">' + escHtml(t.change) + '</div>'
+        + '<div class="trend-inf-count">' + t.influencers + ' INF</div>'
+        + '</div>';
+    }).join('');
+
+    tcList.innerHTML = rows;
+  })();
 
   // ── Category Discovery Grid ──────────────────────────────────────────────────
   (function(){
