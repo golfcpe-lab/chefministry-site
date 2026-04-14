@@ -762,7 +762,7 @@
         filter: function(r){ return r.type==="cafe" || r.cuisine.toLowerCase().indexOf("dessert")>=0 || r.cuisine.toLowerCase().indexOf("cafe")>=0 || r.cuisine.toLowerCase().indexOf("bakery")>=0; } },
     ];
     var grid = document.getElementById("categoryDiscoveryGrid");
-    if (\!grid) return;
+    if (!grid) return;
     // v5: canonical merged pool
     var allPool = (typeof ChefMinistryData !== "undefined" && ChefMinistryData.mergeAll)
       ? ChefMinistryData.mergeAll().filter(ChefMinistryData.scopeFilter)
