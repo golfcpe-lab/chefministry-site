@@ -374,7 +374,7 @@ def get_emerging_restaurants(limit: int = 20, max_reviews: int = 200) -> list:
                               THEN MIN((sd.last_count-sd.first_count)*1.0/sd.first_count,1.0)*0.2 ELSE 0 END
                    ,4) AS emerging_score
             FROM restaurants r JOIN snap_data sd ON sd.restaurant_id=r.id
-            WHERE COALESCE(r.business_status,'OPERATIONAL') \!= 'CLOSED_PERMANENTLY'
+            WHERE COALESCE(r.business_status,'OPERATIONAL') != 'CLOSED_PERMANENTLY'
               AND sd.latest_rating >= 4.0 AND sd.last_count < ? AND sd.last_count > 0
             ORDER BY emerging_score DESC LIMIT ?
         """, (max_reviews, limit)).fetchall()
@@ -413,7 +413,7 @@ def get_all_restaurants(days: int = 30) -> list:
                              *COALESCE(fl.latest_rating,4.0)/4.0, 4) ELSE 0 END AS trend_score
             FROM restaurants r
             LEFT JOIN first_last fl ON fl.restaurant_id=r.id
-            WHERE COALESCE(r.business_status,'OPERATIONAL') \!= 'CLOSED_PERMANENTLY'
+            WHERE COALESCE(r.business_status,'OPERATIONAL') != 'CLOSED_PERMANENTLY'
             ORDER BY trend_score DESC, velocity_pct DESC
         """, (since,)).fetchall()
     return [dict(r) for r in rows]
