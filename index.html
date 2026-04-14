@@ -927,4 +927,24 @@
         <div class="rank-meta">${escHtml(r.cuisine||"")} · ${escHtml(r.area||"")}</div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
-        <div style="font-size:
+        <div style="font-size:${_rpct > 0 ? _rpct+"%" : _remoji}
+        </div>
+        <div style="font-size:11px;color:var(--text-2);font-weight:700">${_remoji} ${escHtml(_rlabel)}</div>
+      </div>
+    </a>`;
+  }).join("");
+
+  if (rankList) {
+    rankList.innerHTML = velocityItems || '<div style="color:var(--text-2);padding:16px;text-align:center">ยังไม่มีข้อมูล velocity</div>';
+  }
+
+  // Auth state listener — re-render sidebar when login state changes
+  if (typeof CM_AUTH !== "undefined") {
+    CM_AUTH.onTierChange((tier) => {
+      ChefMinistryData.injectStats();
+    });
+  }
+
+</script>
+</body>
+</html>
