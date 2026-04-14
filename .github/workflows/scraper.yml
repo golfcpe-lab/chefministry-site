@@ -39,14 +39,14 @@ jobs:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           OPENAI_API_KEY:  ${{ secrets.OPENAI_API_KEY }}
         run: |
-          cd scraper
+          cd scripts/scraper
           python scrape_youtube.py --days 7
 
       - name: Commit YouTube reviews
         run: |
           git config user.name  "ChefMinistry Bot"
           git config user.email "bot@chefministry.com"
-          git add scraper/youtube_reviews.json
+          git add scripts/scraper/youtube_reviews.json
           git diff --staged --quiet || git commit -m "auto: YouTube reviews $(date +'%Y-%m-%d')"
 
       - name: Push to GitHub
@@ -80,14 +80,14 @@ jobs:
 
       - name: Migrate DB schema (idempotent)
         run: |
-          cd scraper
+          cd scripts/scraper
           python -c "from db import init_db; init_db(); print('DB schema up-to-date')"
 
       - name: Run GMaps scraper
         env:
           GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
         run: |
-          cd scraper
+          cd scripts/scraper
           python scrape_gmaps.py --limit 200
         continue-on-error: true
 
@@ -96,7 +96,7 @@ jobs:
           git config user.name  "ChefMinistry Bot"
           git config user.email "bot@chefministry.com"
           git pull --rebase origin main
-          git add scraper/chefministry_data.db
+          git add scripts/scraper/chefministry_data.db
           git diff --staged --quiet || git commit -m "auto: GMaps snapshot $(date +'%Y-%m-%d')"
 
       - name: Push to GitHub
@@ -132,7 +132,7 @@ jobs:
 
       - name: Backfill classification for new/unclassified records
         run: |
-          cd scraper
+          cd scripts/scraper
           python -c "
           from db import get_conn, init_db
           from classify import classify_record
@@ -173,7 +173,7 @@ jobs:
         env:
           EXPORT_DIR: ${{ github.workspace }}/site/js
         run: |
-          cd scraper
+          cd scripts/scraper
           python export_signals.py
         # No --inject here; weekly_update.yml handles data.js injection on Monday
 
@@ -181,7 +181,7 @@ jobs:
         run: |
           python -c "
           import json, pathlib, sys
-          p = pathlib.Path('scraper/export_restaurants.json')
+          p = pathlib.Path('export_restaurants.json')
           if not p.exists():
               print('export_restaurants.json missing'); sys.exit(0)
           records = json.load(open(p, encoding='utf-8'))
@@ -203,7 +203,7 @@ jobs:
           git config user.name  "ChefMinistry Bot"
           git config user.email "bot@chefministry.com"
           git pull --rebase origin main
-          git add scraper/export_restaurants.json scraper/chefministry_data.db
+          git add scripts/scraper/export_restaurants.json scripts/scraper/chefministry_data.db
           git diff --staged --quiet || git commit -m "auto: classify+export $(date +'%Y-%m-%d') [schema-v2]"
 
       - name: Push to GitHub
