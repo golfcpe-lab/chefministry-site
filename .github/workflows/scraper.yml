@@ -1,93 +1,210 @@
 name: ChefMinistry Sunday Scraper
- 
-# รันทุกวันอาทิตย์ 23:00 ICT (16:00 UTC)
-# YouTube + GMaps รันพร้อมกัน → ข้อมูลพร้อมก่อน weekly summary จันทร์ 08:00 ICT
+
+# Pipeline order:
+#   1. youtube-scraper   — YouTube API -> youtube_reviews.json
+#   2. gmaps-scraper     — GMaps Places API -> review snapshots in DB
+#                          (scrape_gmaps.py calls classify_record() at ingest)
+#   3. classify-export   — classify unclassified records + export JSON
+#                          (this is what Monday weekly_update.yml reads)
 on:
   schedule:
-    - cron: '0 16 * * 0'   # อาทิตย์ 16:00 UTC = อาทิตย์ 23:00 ICT
+    - cron: '0 16 * * 0'   # Sunday 16:00 UTC = Sunday 23:00 ICT
   workflow_dispatch:
- 
+
 jobs:
-  # ══════════════════════════════════════════════════════════════════════════════
-  #  JOB 1 — YouTube Influencer Scraper (API only — ไม่ต้องใช้ browser)
-  # ══════════════════════════════════════════════════════════════════════════════
+  # ============================================================
+  #  JOB 1 — YouTube Influencer Scraper (API only)
+  # ============================================================
   youtube-scraper:
     runs-on: ubuntu-latest
     timeout-minutes: 20
- 
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GH_PAT }}
           fetch-depth: 1
- 
+
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
- 
+
       - name: Install Python packages
         run: pip install openai --quiet
- 
+
       - name: Scrape YouTube channels
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           OPENAI_API_KEY:  ${{ secrets.OPENAI_API_KEY }}
-          SCRIPTS_DIR:     ${{ github.workspace }}/scripts
         run: |
-          cd scripts/scraper
+          cd scraper
           python scrape_youtube.py --days 7
- 
+
       - name: Commit YouTube reviews
         run: |
           git config user.name  "ChefMinistry Bot"
           git config user.email "bot@chefministry.com"
-          git add scripts/youtube_reviews.json
+          git add scraper/youtube_reviews.json
           git diff --staged --quiet || git commit -m "auto: YouTube reviews $(date +'%Y-%m-%d')"
- 
+
       - name: Push to GitHub
         run: git push origin main
- 
-  # ══════════════════════════════════════════════════════════════════════════════
-  #  JOB 2 — GMaps Snapshot (ต้องมี chefministry_data.db ใน repo ก่อน)
-  #  รันหลัง youtube-scraper เสร็จเสมอ (needs: youtube-scraper)
-  # ══════════════════════════════════════════════════════════════════════════════
+
+  # ============================================================
+  #  JOB 2 — GMaps Snapshot
+  #  scrape_gmaps.py calls classify_record() at ingest so every
+  #  new restaurant row is immediately tagged with venue_type /
+  #  scope_market / is_bangkok_focus / is_restaurant_focus.
+  # ============================================================
   gmaps-scraper:
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    needs: youtube-scraper   # รอ YouTube เสร็จก่อน แล้วค่อยรัน GMaps
- 
+    needs: youtube-scraper
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GH_PAT }}
           fetch-depth: 1
- 
+
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
- 
+
       - name: Install Python packages
         run: pip install requests --quiet
- 
+
+      - name: Migrate DB schema (idempotent)
+        run: |
+          cd scraper
+          python -c "from db import init_db; init_db(); print('DB schema up-to-date')"
+
       - name: Run GMaps scraper
         env:
           GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
         run: |
-          cd scripts/scraper
+          cd scraper
           python scrape_gmaps.py --limit 200
-        continue-on-error: true   # ถ้าไม่มี DB ให้ข้ามไป ไม่หยุด workflow
- 
-      - name: Commit updated data
+        continue-on-error: true
+
+      - name: Commit updated DB
         run: |
           git config user.name  "ChefMinistry Bot"
           git config user.email "bot@chefministry.com"
-          git pull --rebase origin main   # sync ก่อน เพราะ youtube job เพิ่ง push
-          git add scripts/scraper/chefministry_data.db
+          git pull --rebase origin main
+          git add scraper/chefministry_data.db
           git diff --staged --quiet || git commit -m "auto: GMaps snapshot $(date +'%Y-%m-%d')"
- 
+
+      - name: Push to GitHub
+        run: git push origin main
+
+  # ============================================================
+  #  JOB 3 — Classify + Export (schema v2)
+  #  Runs after gmaps-scraper.  Classifies any unclassified DB
+  #  records and exports export_restaurants.json with full
+  #  classification fields.  This JSON is what weekly_update.yml
+  #  consumes on Monday.
+  #
+  #  Fields guaranteed in output:
+  #    city, province, country, venue_type, scope_market,
+  #    is_bangkok_focus, is_restaurant_focus, exclude_reason
+  # ============================================================
+  classify-export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: gmaps-scraper
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+          fetch-depth: 1
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Backfill classification for new/unclassified records
+        run: |
+          cd scraper
+          python -c "
+          from db import get_conn, init_db
+          from classify import classify_record
+          import json
+          init_db()
+          with get_conn() as conn:
+              rows = conn.execute('''
+                  SELECT id, name, area, cuisine,
+                         COALESCE(gmaps_types, '[]') AS gmaps_types_json
+                  FROM restaurants
+                  WHERE scope_market IS NULL OR scope_market = ''
+              ''').fetchall()
+              updated = 0
+              for row in rows:
+                  try:
+                      gmaps_types = json.loads(row['gmaps_types_json'] or '[]')
+                  except Exception:
+                      gmaps_types = []
+                  rec = classify_record({
+                      'name': row['name'], 'area': row['area'] or '',
+                      'cuisine': row['cuisine'] or '', 'gmaps_types': gmaps_types,
+                  })
+                  conn.execute('''UPDATE restaurants SET
+                      city=?, province=?, venue_type=?, scope_market=?,
+                      is_bangkok_focus=?, is_restaurant_focus=?, exclude_reason=?
+                      WHERE id=?''', (
+                      rec.get('city',''), rec.get('province',''),
+                      rec.get('venue_type','unknown'), rec.get('scope_market','needs_review'),
+                      1 if rec.get('is_bangkok_focus') else 0,
+                      1 if rec.get('is_restaurant_focus') else 0,
+                      rec.get('exclude_reason'), row['id'],
+                  ))
+                  updated += 1
+          print(f'Classified {updated} new records')
+          "
+
+      - name: Export classified dataset to export_restaurants.json
+        env:
+          EXPORT_DIR: ${{ github.workspace }}/site/js
+        run: |
+          cd scraper
+          python export_signals.py
+        # No --inject here; weekly_update.yml handles data.js injection on Monday
+
+      - name: Validate schema v2 in exported JSON
+        run: |
+          python -c "
+          import json, pathlib, sys
+          p = pathlib.Path('scraper/export_restaurants.json')
+          if not p.exists():
+              print('export_restaurants.json missing'); sys.exit(0)
+          records = json.load(open(p, encoding='utf-8'))
+          required = ['city','province','venue_type','scope_market','is_bangkok_focus','is_restaurant_focus']
+          ok = all(f in records[0] for f in required) if records else False
+          if ok:
+              in_scope = sum(1 for r in records if r.get('is_restaurant_focus'))
+              bkk      = sum(1 for r in records if r.get('is_bangkok_focus'))
+              review   = sum(1 for r in records if r.get('scope_market') == 'needs_review')
+              print(f'Schema v2 OK — {len(records)} records | in-scope: {in_scope} | bkk: {bkk} | review: {review}')
+          else:
+              missing = [f for f in required if f not in (records[0] if records else {})]
+              print(f'SCHEMA WARNING — missing fields: {missing}')
+          "
+        continue-on-error: true
+
+      - name: Commit classified export
+        run: |
+          git config user.name  "ChefMinistry Bot"
+          git config user.email "bot@chefministry.com"
+          git pull --rebase origin main
+          git add scraper/export_restaurants.json scraper/chefministry_data.db
+          git diff --staged --quiet || git commit -m "auto: classify+export $(date +'%Y-%m-%d') [schema-v2]"
+
       - name: Push to GitHub
         run: git push origin main
