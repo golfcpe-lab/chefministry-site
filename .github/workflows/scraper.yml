@@ -46,7 +46,7 @@ jobs:
         run: |
           git config user.name  "ChefMinistry Bot"
           git config user.email "bot@chefministry.com"
-          git add scripts/scraper/youtube_reviews.json
+          git add scripts/youtube_reviews.json || true
           git diff --staged --quiet || git commit -m "auto: YouTube reviews $(date +'%Y-%m-%d')"
 
       - name: Push to GitHub
@@ -171,7 +171,7 @@ jobs:
 
       - name: Export classified dataset to export_restaurants.json
         env:
-          EXPORT_DIR: ${{ github.workspace }}/site/js
+          EXPORT_DIR: ${{ github.workspace }}/js
         run: |
           cd scripts/scraper
           python export_signals.py
