@@ -306,7 +306,7 @@
     // Update button styles
     ['trending','emerging','popular'].forEach(function(t) {
       const btn = document.getElementById('tab-' + t);
-      if (\!btn) return;
+      if (!btn) return;
       if (t === tab) {
         btn.style.background = 'var(--navy)';
         btn.style.color = '#fff';
@@ -401,7 +401,7 @@
 
     // v5: always use canonical merged pool — Bangkok+restaurant scope is applied inside
     // ChefMinistryData functions (scopeFilter).
-    if (\!filtersActive) {
+    if (!filtersActive) {
       const N = 60;
       if (currentTab === 'emerging') return ChefMinistryData.getEmergingRestaurants(N);
       if (currentTab === 'popular')  return ChefMinistryData.getPopularRestaurants(N);
