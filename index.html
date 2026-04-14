@@ -6,7 +6,7 @@
   <link rel="icon" type="image/png" href="./assets/logo_circular.png"/>
   <title>ChefMinistry — Restaurant Rating Intelligence</title>
   <meta name="description" content="ChefMinistry วิเคราะห์ Rating Velocity และ Review Trend จากแหล่งข้อมูล public รายวัน — ให้ร้านอาหารรู้ position ตัวเองใน Category และให้ Food Creator เห็นโอกาสก่อนตลาด"/>
-  <link rel="stylesheet" href="./css/style.css?v=20260415"/>
+  <link rel="stylesheet" href="./css/style.css?v=20260415a"/>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-BT2BCMZ9SH"></script>
   <script>
@@ -256,21 +256,46 @@
 
 <hr class="divider"/>
 
-<!-- ── RISING RESTAURANTS ── -->
-<section style="padding:36px 0">
+<!-- ── DISCOVER: TRENDING / EMERGING TABS ── -->
+<section style="padding:36px 0" id="discoverSection">
   <div class="container">
-    <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px">
+
+    <!-- Header + tab switcher -->
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:24px">
       <div>
-        <div class="eyebrow" style="color:var(--green);margin-bottom:6px">↑ Trend Velocity: Rising</div>
-        <h2 class="display-2">กำลัง Rising ตอนนี้</h2>
-        <p class="lead" style="margin-top:8px">ร้านที่ review count เพิ่มขึ้นเร็วที่สุดใน 30 วัน — รู้ก่อนคนอื่น</p>
+        <div class="eyebrow" style="color:var(--green);margin-bottom:6px">📊 Growth Intelligence</div>
+        <h2 class="display-2">Discover ร้านอาหาร</h2>
+        <p class="lead" style="margin-top:8px" id="discoverSubtitle">จัดอันดับจาก Normalized Growth Score — ไม่ใช่แค่ยอดรีวิวรวม</p>
       </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <a href="./listing.html?type=ramen" class="btn btn-outline btn-sm">ดู Ramen →</a>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <!-- Tab buttons -->
+        <div style="display:flex;border:1.5px solid var(--border);border-radius:10px;overflow:hidden;background:var(--cream)">
+          <button id="tabTrending"
+            onclick="switchDiscoverTab('trending')"
+            style="padding:8px 18px;font-size:13px;font-weight:800;border:none;cursor:pointer;background:var(--navy);color:#fff;border-radius:8px 0 0 8px;transition:all .15s">
+            🔥 Trending
+          </button>
+          <button id="tabEmerging"
+            onclick="switchDiscoverTab('emerging')"
+            style="padding:8px 18px;font-size:13px;font-weight:800;border:none;cursor:pointer;background:transparent;color:var(--text-2);border-radius:0 8px 8px 0;transition:all .15s">
+            🆕 Emerging
+          </button>
+        </div>
         <a href="./listing.html?velocity=rising" class="btn btn-outline btn-sm">ดูทั้งหมด →</a>
       </div>
     </div>
+
+    <!-- Trending grid -->
     <div class="grid-3" id="risingGrid"></div>
+    <!-- Emerging grid (hidden by default) -->
+    <div class="grid-3" id="emergingGrid" style="display:none"></div>
+
+    <!-- Info strip below grid -->
+    <div id="discoverInfoStrip" style="margin-top:16px;padding:10px 16px;background:var(--cream);border:1px solid var(--border);border-radius:10px;font-size:12px;color:var(--text-2);display:flex;gap:16px;flex-wrap:wrap;align-items:center">
+      <span id="discoverScoreFormula">📐 Score = growth_rate × log(reviews+1) / log(reviews+10) — ลด bias ร้านใหญ่</span>
+      <span style="margin-left:auto;opacity:.6" id="discoverRotateNote">🔄 หมุนเวียนทุกวัน เพื่อความหลากหลาย</span>
+    </div>
+
   </div>
 </section>
 
@@ -541,10 +566,10 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-<script src="./js/firebase-config.js?v=20260414b"></script>
-<script src="./js/auth.js?v=20260414b"></script>
-<script src="./js/data.js?v=20260414b"></script>
-<script src="./js/dataService.js?v=20260414b"></script>
+<script src="./js/firebase-config.js?v=20260415a"></script>
+<script src="./js/auth.js?v=20260415a"></script>
+<script src="./js/data.js?v=20260415a"></script>
+<script src="./js/dataService.js?v=20260415a"></script>
 <script>
   // Mobile nav
   document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
@@ -568,7 +593,7 @@
   const heroCard = document.getElementById("heroOverlapCard");
   if (heroCard) {
     const extSorted = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined" && CM_EXTERNAL_RESTAURANTS.length > 0)
-      ? [...CM_EXTERNAL_RESTAURANTS].filter(r => (r.velocityPct||0) > 0 && r.isRestaurant !== false)
+      ? [...CM_EXTERNAL_RESTAURANTS].filter(r => (r.velocityPct||0) > 0 && ChefMinistryData.scopeFilter(r) /* v4: Bangkok+restaurant scope */
           .sort((a,b) => (b.velocityPct||0) - (a.velocityPct||0))
       : [];
     const heroExt = extSorted[0];
@@ -624,10 +649,19 @@
           tiers.macro > 0 ? `<span class="tier-badge tier-macro">Macro ×${tiers.macro}</span>` : "",
           tiers.mid   > 0 ? `<span class="tier-badge tier-mid">Mid ×${tiers.mid}</span>`       : "",
         ].filter(Boolean).join("");
+        // Compute growth metrics for hero display
+        const _hs = ChefMinistryData.computeScore(heroRest);
+        const _heroGrowthPct  = Math.round(_hs.growthRate * 100);
+        const _heroGrowth     = _hs.growth;
+        const _heroLabel      = heroRest._trendLabel || ChefMinistryData.trendLabel(_hs);
+        const _heroEmoji      = heroRest._trendEmoji || ChefMinistryData.trendEmoji(_heroLabel);
+        const _heroMetric     = _heroGrowthPct >= 10
+          ? `+${_heroGrowthPct}% reviews in 30 days`
+          : (_heroGrowth > 0 ? `+${_heroGrowth} reviews in last 30 days` : "");
         heroCard.innerHTML = `
           <div class="hero-sample-head">
-            <span>📈 Velocity Signal — Live</span>
-            <span class="verdict" style="background:rgba(10,107,67,.2);color:#56c282">${escHtml(heroRest.trendBadge||"")}</span>
+            <span>📈 Trend Intelligence — Spotlight</span>
+            <span class="verdict" style="background:rgba(10,107,67,.2);color:#56c282">${_heroEmoji} ${escHtml(_heroLabel)}</span>
           </div>
           <div class="hero-sample-card">
             <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
@@ -636,18 +670,15 @@
                 <div class="hero-sample-type">${escHtml(cuisine)} · ${escHtml(area)} · ${escHtml(budget)}</div>
               </div>
               <div style="text-align:right">
-                <div style="font-size:10px;font-weight:900;color:var(--text-2);text-transform:uppercase;letter-spacing:.08em">Total Reviews</div>
-                <div style="font-size:10px;font-weight:900;color:var(--text-2);text-transform:uppercase;letter-spacing:.08em">Trend Signal</div>
-                <div style="font-size:20px;font-weight:900;color:var(--green);font-family:'Playfair Display',Serif;line-height:1.2">${escHtml(heroRest.trendBadge||'&mdash;')}</div>
-                <div style="font-size:11px;color:var(--text-2);font-weight:700;margin-top:2px">${heroRest.overlapSignal||0} Creator Signal</div>
+                <div style="font-size:10px;font-weight:900;color:var(--text-2);text-transform:uppercase;letter-spacing:.08em">Growth Rate</div>
+                <div style="font-size:28px;font-weight:900;color:var(--green);font-family:'Playfair Display',serif;line-height:1.1">+${_heroGrowthPct}%</div>
               </div>
             </div>
-            <div style="margin-bottom:12px">
-              <div style="font-size:10px;font-weight:800;color:var(--text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Trend Velocity</div>
-              <div style="font-size:18px;font-weight:900;color:var(--navy)">${escHtml(heroRest.trendBadge||"")}</div>
-            </div>
-            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">${tierHtml}</div>
-            <div style="font-size:10px;color:var(--text-2);margin-bottom:8px">Creator Signal: ${heroRest.overlapSignal||0} INF</div>
+            ${_heroMetric ? `<div style="margin-bottom:12px">
+              <div style="font-size:10px;font-weight:800;color:var(--text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">30-Day Growth</div>
+              <div style="font-size:20px;font-weight:900;color:var(--navy)">${escHtml(_heroMetric)}</div>
+            </div>` : ""}
+            <div style="font-size:11px;font-style:italic;color:var(--text-2);margin-bottom:8px">จัดอันดับจากการเปลี่ยนแปลงของรีวิว ไม่ใช่จำนวนรีวิวรวม</div>
             <div class="hero-sample-insight">${escHtml(note)}</div>
           </div>`;
       }
@@ -730,9 +761,12 @@
       { label:"Dessert & Cafe",   emoji:"🍰", link:"./listing.html",
         filter: function(r){ return r.type==="cafe" || r.cuisine.toLowerCase().indexOf("dessert")>=0 || r.cuisine.toLowerCase().indexOf("cafe")>=0 || r.cuisine.toLowerCase().indexOf("bakery")>=0; } },
     ];
-    var vo = {rising:3, stable:2, declining:1};
     var grid = document.getElementById("categoryDiscoveryGrid");
-    if (!grid || typeof CM_RESTAURANTS === "undefined") return;
+    if (\!grid) return;
+    // v5: canonical merged pool
+    var allPool = (typeof ChefMinistryData !== "undefined" && ChefMinistryData.mergeAll)
+      ? ChefMinistryData.mergeAll().filter(ChefMinistryData.scopeFilter)
+      : (typeof CM_EXTERNAL_RESTAURANTS !== "undefined" ? CM_EXTERNAL_RESTAURANTS : []).concat(typeof CM_RESTAURANTS !== "undefined" ? CM_RESTAURANTS : []);
 
     var velStyle = function(v){
       if(v==="rising")   return {bg:"rgba(34,197,94,.15)",  color:"#4ade80"};
@@ -745,9 +779,26 @@
     var allNames   = [];
 
     DISC_CATS.forEach(function(cat){
-      var matched = CM_RESTAURANTS.filter(cat.filter).sort(function(a,b){
-        var va=vo[a.trendVelocity]||0,vb=vo[b.trendVelocity]||0;
-        return vb!==va?vb-va:(b.overlapSignal||0)-(a.overlapSignal||0);
+      var catLabel = cat.label.toLowerCase();
+      var matched = allPool.filter(function(r) {
+        var cuisine = (r.cuisine_normalized || r.cuisine || '').toLowerCase();
+        var vt = (r.venue_type || r.type || '').toLowerCase();
+        if (catLabel.indexOf('thai fine') >= 0) return cuisine.indexOf('thai') >= 0 || cuisine.indexOf('fine dining') >= 0;
+        if (catLabel.indexOf('omakase') >= 0 || catLabel.indexOf('japanese') >= 0) return cuisine.indexOf('omakase') >= 0 || cuisine.indexOf('japanese') >= 0;
+        if (catLabel.indexOf('pizza') >= 0 || catLabel.indexOf('italian') >= 0) return cuisine.indexOf('italian') >= 0 || cuisine.indexOf('pizza') >= 0;
+        if (catLabel.indexOf('ramen') >= 0) return cuisine.indexOf('ramen') >= 0;
+        if (catLabel.indexOf('steak') >= 0 || catLabel.indexOf('bbq') >= 0) return cuisine.indexOf('steak') >= 0 || cuisine.indexOf('bbq') >= 0;
+        if (catLabel.indexOf('hotpot') >= 0) return cuisine.indexOf('hotpot') >= 0 || cuisine.indexOf('shabu') >= 0;
+        if (catLabel.indexOf('dessert') >= 0 || catLabel.indexOf('cafe') >= 0) return vt === 'cafe' || cuisine.indexOf('cafe') >= 0 || cuisine.indexOf('dessert') >= 0;
+        if (catLabel.indexOf('international') >= 0) return cuisine.indexOf('thai') < 0 && (cuisine.indexOf('italian') >= 0 || cuisine.indexOf('french') >= 0 || cuisine.indexOf('western') >= 0 || cuisine.indexOf('korean') >= 0 || cuisine.indexOf('fusion') >= 0);
+        if (catLabel.indexOf('street') >= 0 || catLabel.indexOf('local') >= 0) return vt === 'street_food' || cuisine.indexOf('street') >= 0;
+        try { return cat.filter ? cat.filter(r) : false; } catch(e) { return false; }
+      }).map(function(r) {
+        var sc = (typeof ChefMinistryData !== 'undefined') ? ChefMinistryData.computeScore(r) : {score:0};
+        return Object.assign({}, r, { _sortScore: sc.score });
+      }).sort(function(a,b) {
+        if (Math.abs(b._sortScore - a._sortScore) > 0.001) return b._sortScore - a._sortScore;
+        return (b.totalReviews||0) - (a.totalReviews||0);
       }).slice(0,3);
 
       var riseCount=matched.filter(function(r){return r.trendVelocity==="rising";}).length;
@@ -773,8 +824,9 @@
       // Name + restaurant cell
       var restHtml=matched.length>0
         ? matched.map(function(r){
-            var clr=r.trendVelocity==="rising"?"#4ade80":r.trendVelocity==="declining"?"#f87171":"rgba(255,255,255,.4)";
-            var arrow=r.trendVelocity==="rising"?"↑":r.trendVelocity==="declining"?"↓":"→";
+            var tl = r._trendLabel || r.trend_label || '';
+            var clr = (tl==='Rising Fast'||tl==='Gaining Momentum'||tl==='Emerging'||tl==='Social Buzz'||r.trendVelocity==='rising') ? "#4ade80" : r.trendVelocity==="declining" ? "#f87171" : "rgba(255,255,255,.4)";
+            var arrow = (tl==='Rising Fast'||tl==='Gaining Momentum'||tl==='Emerging'||tl==='Social Buzz'||r.trendVelocity==='rising') ? "↑" : r.trendVelocity==="declining" ? "↓" : "→";
             var nm=r.name.length>16?r.name.slice(0,15)+"…":r.name;
             return '<div style="font-size:10.5px;color:rgba(255,255,255,.55);line-height:1.7">'+escHtml(nm)
               +' <span style="color:'+clr+';font-weight:900;font-size:9px">'+arrow+'</span></div>';
@@ -838,15 +890,15 @@
   const rankLabel = document.getElementById("rankListLabel");
   const extRising = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined" && CM_EXTERNAL_RESTAURANTS.length > 0)
     ? [...CM_EXTERNAL_RESTAURANTS]
-        .filter(r => (r.velocityPct || 0) > 0 && r.isRestaurant !== false)
+        .filter(r => (r.velocityPct || 0) > 0 && ChefMinistryData.scopeFilter(r) /* v4: Bangkok+restaurant scope */
         .sort((a,b) => (b.velocityPct||0) - (a.velocityPct||0))
         .slice(0, 5)
     : [];
 
   if (rankLabel) {
     rankLabel.textContent = extRising.length > 0
-      ? "📈 Velocity Rank — รีวิวเพิ่มเร็วที่สุดสัปดาห์นี้"
-      : "📡 Signal Rank — ร้านที่ trend signal แรงที่สุดใน DB";
+      ? "📈 Velocity Rank — รีวิวเพิ่มเร็วที่สุด 30 วัน"
+      : "🔥 Trending Now — จัดอันดับจาก Growth Score";
   }
 
   const velocityItems = extRising.length > 0 ? extRising.map((r,i) => {
@@ -863,41 +915,16 @@
         <div style="font-size:11px;color:var(--text-2);font-weight:700">${newRev}</div>
       </div>
     </div>`;
-  }).join("") : ChefMinistryData.getFeaturedRestaurants(5).map((r,i) => {
+  }).join("") : ChefMinistryData.getTrendingRestaurants(5).map((r,i) => {
+    const _rs = ChefMinistryData.computeScore(r);
+    const _rpct = Math.round(_rs.growthRate * 100);
+    const _rlabel = r._trendLabel || ChefMinistryData.trendLabel(_rs);
+    const _remoji = r._trendEmoji || ChefMinistryData.trendEmoji(_rlabel);
     return `<a class="rank-item" href="./restaurant.html?id=${escHtml(r.id)}" style="cursor:pointer;text-decoration:none;color:inherit">
       <div class="rank-num ${i<3?"top3":""}">${i+1}</div>
-      <div>
+      <div style="flex:1;min-width:0">
         <div class="rank-name">${escHtml(r.name)}</div>
-        <div class="rank-meta">${escHtml(r.cuisine)} · ${escHtml(r.area)}</div>
+        <div class="rank-meta">${escHtml(r.cuisine||"")} · ${escHtml(r.area||"")}</div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
-        <span class="velocity ${r.trendVelocity}">${escHtml(r.trendBadge)}</span>
-        <div style="font-size:11px;color:var(--text-2);font-weight:700;margin-top:2px">${r.overlapSignal||0} Creator Signal</div>
-      </div>
-    </a>`;
-  }).join("");
-  rankList.innerHTML = velocityItems;
-
-  // Thai Fine Dining spotlight grid — live from ChefMinistryData
-  const thaiFineDineGrid = document.getElementById("thaiFineDineGrid");
-  const thaiFineDine = ChefMinistryData.getRestaurantList({type:"fine-dining"})
-    .filter(r => r.cuisine.toLowerCase().includes("thai") || r.cuisine.toLowerCase().includes("samrub"))
-    .sort((a,b) => (b.overlapSignal||0) - (a.overlapSignal||0))
-    .slice(0,3);
-  if (thaiFineDineGrid) thaiFineDineGrid.innerHTML = thaiFineDine.length
-    ? thaiFineDine.map(r => buildRestaurantCard(r, {showOverlap:true})).join("")
-    : `<div style="color:rgba(255,255,255,.5);grid-column:1/-1;padding:20px">ไม่มีข้อมูล</div>`;
-
-  // Rising grid — live from ChefMinistryData
-  const risingGrid = document.getElementById("risingGrid");
-  const thaiFineDineIds = new Set(thaiFineDine.map(r => r.id));
-  const risingRest = ChefMinistryData.getTrendingRestaurants(8)
-    .filter(r => !thaiFineDineIds.has(r.id))
-    .slice(0, 6);
-  if (risingGrid) risingGrid.innerHTML = risingRest.length
-    ? risingRest.map(r => buildRestaurantCard(r, {showOverlap:true})).join("")
-    : `<div style="color:var(--text-2);grid-column:1/-1;padding:20px">ไม่มีข้อมูล Rising ในขณะนี้</div>`;
-</script>
-
-</body>
-</html>
+        <div style="font-size:
