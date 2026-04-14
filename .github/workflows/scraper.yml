@@ -81,7 +81,38 @@ jobs:
       - name: Migrate DB schema (idempotent)
         run: |
           cd scripts/scraper
-          python -c "from db import init_db; init_db(); print('DB schema up-to-date')"
+          python -c "
+          import sqlite3, pathlib
+          DB = pathlib.Path('chefministry_data.db')
+          if not DB.exists():
+              print('No DB yet')
+              exit(0)
+          conn = sqlite3.connect(str(DB))
+          cols = [
+              ('city','TEXT'), ('province','TEXT'),
+              ('country',\"TEXT DEFAULT 'Thailand'\"),
+              ('gmaps_types','TEXT'), ('venue_type','TEXT'),
+              ('scope_market','TEXT'), ('is_bangkok_focus','INTEGER DEFAULT 0'),
+              ('is_restaurant_focus','INTEGER DEFAULT 0'), ('exclude_reason','TEXT'),
+              ('place_id','TEXT'), ('creator_mentions_7d','INTEGER DEFAULT 0'),
+              ('creator_mentions_30d','INTEGER DEFAULT 0'),
+              ('creator_signal_score','REAL DEFAULT 0'),
+              ('is_viral_candidate','INTEGER DEFAULT 0'),
+              ('candidate_status',\"TEXT DEFAULT 'candidate'\"),
+              ('appeared_last_3_cycles','INTEGER DEFAULT 0'),
+          ]
+          added = []
+          for col, defn in cols:
+              try:
+                  conn.execute('ALTER TABLE restaurants ADD COLUMN ' + col + ' ' + defn)
+                  added.append(col)
+              except Exception:
+                  pass
+          conn.commit()
+          conn.close()
+          print('Migration done: ' + str(len(added)) + ' columns added')
+          "
+        continue-on-error: true
 
       - name: Run GMaps scraper
         env:
@@ -134,11 +165,15 @@ jobs:
         run: |
           cd scripts/scraper
           python -c "
-          from db import get_conn, init_db
+          import sqlite3, json, pathlib, sys
+          sys.path.insert(0, '.')
           from classify import classify_record
-          import json
-          init_db()
-          with get_conn() as conn:
+          DB = pathlib.Path('chefministry_data.db')
+          if not DB.exists():
+              print('No DB yet'); exit(0)
+          conn = sqlite3.connect(str(DB))
+          conn.row_factory = sqlite3.Row
+          with conn:
               rows = conn.execute('''
                   SELECT id, name, area, cuisine,
                          COALESCE(gmaps_types, '[]') AS gmaps_types_json
@@ -166,7 +201,9 @@ jobs:
                       rec.get('exclude_reason'), row['id'],
                   ))
                   updated += 1
-          print(f'Classified {updated} new records')
+          conn.commit()
+          conn.close()
+          print('Classified ' + str(updated) + ' new records')
           "
 
       - name: Export classified dataset to export_restaurants.json
