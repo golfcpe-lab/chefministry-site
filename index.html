@@ -593,7 +593,7 @@
   const heroCard = document.getElementById("heroOverlapCard");
   if (heroCard) {
     const extSorted = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined" && CM_EXTERNAL_RESTAURANTS.length > 0)
-      ? [...CM_EXTERNAL_RESTAURANTS].filter(r => (r.velocityPct||0) > 0 && ChefMinistryData.scopeFilter(r) /* v4: Bangkok+restaurant scope */
+      ? [...CM_EXTERNAL_RESTAURANTS].filter(r => (r.velocityPct||0) > 0 && ChefMinistryData.scopeFilter(r))
           .sort((a,b) => (b.velocityPct||0) - (a.velocityPct||0))
       : [];
     const heroExt = extSorted[0];
@@ -890,7 +890,7 @@
   const rankLabel = document.getElementById("rankListLabel");
   const extRising = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined" && CM_EXTERNAL_RESTAURANTS.length > 0)
     ? [...CM_EXTERNAL_RESTAURANTS]
-        .filter(r => (r.velocityPct || 0) > 0 && ChefMinistryData.scopeFilter(r) /* v4: Bangkok+restaurant scope */
+        .filter(r => (r.velocityPct || 0) > 0 && ChefMinistryData.scopeFilter(r))
         .sort((a,b) => (b.velocityPct||0) - (a.velocityPct||0))
         .slice(0, 5)
     : [];
