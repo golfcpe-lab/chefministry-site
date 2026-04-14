@@ -654,7 +654,7 @@ function buildRestaurantCard(r, opts = {}) {
   // -- Trend label (multi-tier v5) --
   let trendLabel = r._trendLabel || r.trend_label;
   let trendEmoji = r._trendEmoji || '→';
-  if (\!trendLabel) {
+  if (!trendLabel) {
     const cScore = r.creator_signal_score || 0;
     if (cScore > 0.5 && totalRev < 200)      { trendLabel='Social Buzz';        trendEmoji='📲'; }
     else if (totalRev < 300 && totalRev > 0 && (growthRate > 0.03 || (r.rating_gmaps||0) >= 4.5))
