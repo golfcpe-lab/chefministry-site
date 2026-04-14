@@ -88,8 +88,8 @@ def init_db():
         CREATE INDEX IF NOT EXISTS idx_snap_date ON review_snapshots(snapshot_date);
         CREATE INDEX IF NOT EXISTS idx_rest_source ON restaurants(source);
         CREATE INDEX IF NOT EXISTS idx_rest_area ON restaurants(area);
-        CREATE INDEX IF NOT EXISTS idx_rest_scope ON restaurants(scope_market);
-        CREATE INDEX IF NOT EXISTS idx_rest_bkk ON restaurants(is_bangkok_focus);
+        -- scope/bkk indexes created after migration (see _migrate_classification_columns)
+        -- scope/bkk indexes created after migration (see _migrate_classification_columns)
         """)
     # ── Safe migration: add classification columns if they don't exist yet ──
     _migrate_classification_columns()
@@ -118,6 +118,15 @@ def _migrate_classification_columns():
                 conn.execute(f"ALTER TABLE restaurants ADD COLUMN {col_name} {col_def}")
             except Exception:
                 pass  # Column already exists — skip silently
+        # Create classification indexes now that columns exist
+        for idx_sql in [
+            "CREATE INDEX IF NOT EXISTS idx_rest_scope ON restaurants(scope_market)",
+            "CREATE INDEX IF NOT EXISTS idx_rest_bkk ON restaurants(is_bangkok_focus)",
+        ]:
+            try:
+                conn.execute(idx_sql)
+            except Exception:
+                pass
 
 
 def upsert_restaurant(data: dict) -> str:
@@ -372,112 +381,4 @@ def get_emerging_restaurants(limit: int = 20, max_reviews: int = 200) -> list:
                 r.price_range, r.url, r.source, r.first_seen,
                 sd.last_count, sd.latest_rating, sd.snap_count,
                 -- growth_rate: 0 if no comparison or if counts went down
-                CASE
-                    WHEN sd.snap_count > 1 AND sd.first_count > 0
-                         AND sd.last_count > sd.first_count
-                    THEN ROUND((sd.last_count - sd.first_count) * 100.0 / sd.first_count, 1)
-                    ELSE 0
-                END AS velocity_pct,
-                -- emerging score: quality * recency proxy
-                ROUND(
-                    COALESCE(sd.latest_rating, 4.0)
-                    * LOG(COALESCE(sd.last_count, 1) + 1)
-                    / LOG(COALESCE(sd.last_count, 1) + 10)
-                , 4) AS emerging_score
-            FROM restaurants r
-            JOIN snap_data sd ON sd.restaurant_id = r.id
-            WHERE sd.last_count < ?
-              AND COALESCE(sd.last_count, 0) > 0
-              AND COALESCE(sd.latest_rating, 0) >= 4.0
-              AND COALESCE(r.business_status, 'OPERATIONAL') != 'CLOSED_PERMANENTLY'
-            ORDER BY emerging_score DESC, sd.latest_rating DESC, sd.last_count ASC
-            LIMIT ?
-        """, (max_reviews, limit)).fetchall()
-
-    return [dict(r) for r in rows]
-
-
-def get_all_restaurants(days: int = 30) -> list:
-    """
-    ดึงร้านทั้งหมดจาก DB พร้อม velocity data (ถ้ามี)
-    ร้านที่มี velocity จะได้ข้อมูลครบ ร้านที่ไม่มีจะได้ 0
-    """
-    since = (date.today() - timedelta(days=days)).isoformat()
-    with get_conn() as conn:
-        rows = conn.execute("""
-            WITH ranked AS (
-                SELECT
-                    s.restaurant_id, s.review_count, s.rating, s.snapshot_date,
-                    ROW_NUMBER() OVER (PARTITION BY s.restaurant_id ORDER BY s.snapshot_date ASC)  AS rn_asc,
-                    ROW_NUMBER() OVER (PARTITION BY s.restaurant_id ORDER BY s.snapshot_date DESC) AS rn_desc
-                FROM review_snapshots s
-                WHERE s.snapshot_date >= ?
-            ),
-            first_last AS (
-                SELECT
-                    restaurant_id,
-                    MAX(CASE WHEN rn_asc  = 1 THEN review_count END) AS first_count,
-                    MAX(CASE WHEN rn_desc = 1 THEN review_count END) AS last_count,
-                    MAX(CASE WHEN rn_desc = 1 THEN rating END)       AS latest_rating,
-                    COUNT(*) / 2 AS snapshot_count
-                FROM ranked GROUP BY restaurant_id
-            )
-            SELECT
-                r.id, r.name, r.name_en, r.cuisine, r.area,
-                r.price_range, r.url, r.source,
-                r.city, r.province, r.country, r.gmaps_types,
-                r.venue_type, r.scope_market,
-                r.is_bangkok_focus, r.is_restaurant_focus, r.exclude_reason,
-                COALESCE(fl.first_count, 0)    AS first_count,
-                COALESCE(fl.last_count, 0)     AS last_count,
-                COALESCE(fl.latest_rating, 0)  AS latest_rating,
-                COALESCE(fl.snapshot_count, 0) AS snapshot_count,
-                -- clamp negative growth to 0 (handles inconsistent snapshot metrics)
-                MAX(0, COALESCE(fl.last_count - fl.first_count, 0)) AS new_reviews,
-                CASE
-                    WHEN COALESCE(fl.first_count, 0) > 0
-                         AND fl.last_count > fl.first_count
-                    THEN ROUND((fl.last_count - fl.first_count) * 100.0 / fl.first_count, 1)
-                    ELSE 0
-                END AS velocity_pct,
-                -- normalized trend score (size-dampened)
-                CASE
-                    WHEN COALESCE(fl.first_count, 0) > 0
-                         AND fl.last_count > fl.first_count
-                    THEN ROUND(
-                        ((fl.last_count - fl.first_count) * 1.0 / fl.first_count)
-                        * (LOG(fl.last_count + 1) / LOG(fl.last_count + 10))
-                        * COALESCE(fl.latest_rating, 4.0) / 4.0
-                    , 4)
-                    ELSE 0
-                END AS trend_score
-            FROM restaurants r
-            LEFT JOIN first_last fl ON fl.restaurant_id = r.id
-            WHERE COALESCE(r.business_status, 'OPERATIONAL') != 'CLOSED_PERMANENTLY'
-            ORDER BY trend_score DESC, velocity_pct DESC
-        """, (since,)).fetchall()
-    return [dict(r) for r in rows]
-
-
-def get_stats() -> dict:
-    """Summary stats ของ database"""
-    with get_conn() as conn:
-        total = conn.execute("SELECT COUNT(*) FROM restaurants").fetchone()[0]
-        by_source = conn.execute(
-            "SELECT source, COUNT(*) n FROM restaurants GROUP BY source"
-        ).fetchall()
-        snapshots = conn.execute("SELECT COUNT(*) FROM review_snapshots").fetchone()[0]
-        latest_snap = conn.execute(
-            "SELECT MAX(snapshot_date) FROM review_snapshots"
-        ).fetchone()[0]
-    return {
-        "total_restaurants": total,
-        "by_source": {r["source"]: r["n"] for r in by_source},
-        "total_snapshots": snapshots,
-        "latest_snapshot": latest_snap,
-    }
-
-
-if __name__ == "__main__":
-    init_db()
-    print(get_stats())
+     
