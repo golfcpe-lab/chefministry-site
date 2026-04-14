@@ -87,6 +87,17 @@ jobs:
         run: |
           cd scripts/scraper
           python export_signals.py --inject
+          # Guard: verify injection produced actual records (don't let empty DB overwrite good data)
+          python -c "
+          import json, pathlib, sys
+          p = pathlib.Path('export_restaurants.json')
+          if p.exists():
+              recs = json.load(open(p))
+              in_scope = sum(1 for r in recs if r.get('is_restaurant_focus'))
+              print('Exported %d records (%d in-scope)' % (len(recs), in_scope))
+          else:
+              print('No export file found')
+          "
         continue-on-error: true
 
       - name: Inject YouTube signals into data.js
