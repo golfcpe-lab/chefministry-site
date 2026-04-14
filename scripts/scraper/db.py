@@ -349,36 +349,88 @@ def get_emerging_restaurants(limit: int = 20, max_reviews: int = 200) -> list:
     สำหรับร้านที่มี 2 snapshot: ใช้ growth_rate เพิ่มเติม
     """
     with get_conn() as conn:
+
         rows = conn.execute("""
             WITH latest AS (
-                SELECT
-                    restaurant_id,
-                    MAX(snapshot_date)  AS snap_date,
-                    COUNT(*)            AS snap_count
-                FROM review_snapshots
-                GROUP BY restaurant_id
+                SELECT restaurant_id, MAX(snapshot_date) AS snap_date, COUNT(*) AS snap_count
+                FROM review_snapshots GROUP BY restaurant_id
             ),
             snap_data AS (
-                SELECT
-                    l.restaurant_id,
-                    l.snap_count,
-                    s.review_count  AS last_count,
-                    s.rating        AS latest_rating,
-                    first_s.review_count AS first_count
+                SELECT l.restaurant_id, l.snap_count,
+                       s.review_count AS last_count, s.rating AS latest_rating,
+                       first_s.review_count AS first_count
                 FROM latest l
-                JOIN review_snapshots s
-                    ON s.restaurant_id = l.restaurant_id
-                   AND s.snapshot_date = l.snap_date
-                LEFT JOIN review_snapshots first_s
-                    ON first_s.restaurant_id = l.restaurant_id
-                   AND first_s.snapshot_date = (
-                       SELECT MIN(snapshot_date) FROM review_snapshots
-                       WHERE restaurant_id = l.restaurant_id
-                   )
+                JOIN review_snapshots s ON s.restaurant_id=l.restaurant_id AND s.snapshot_date=l.snap_date
+                LEFT JOIN review_snapshots first_s ON first_s.restaurant_id=l.restaurant_id
+                   AND first_s.snapshot_date=(SELECT MIN(snapshot_date) FROM review_snapshots WHERE restaurant_id=l.restaurant_id)
             )
-            SELECT
-                r.id, r.name, r.name_en, r.cuisine, r.area,
-                r.price_range, r.url, r.source, r.first_seen,
-                sd.last_count, sd.latest_rating, sd.snap_count,
-                -- growth_rate: 0 if no comparison or if counts went down
-     
+            SELECT r.id, r.name, r.name_en, r.cuisine, r.area, r.price_range, r.url, r.source, r.first_seen,
+                   sd.last_count, sd.latest_rating, sd.snap_count,
+                   CASE WHEN sd.snap_count>1 AND sd.last_count>sd.first_count
+                        THEN ROUND((sd.last_count-sd.first_count)*100.0/sd.first_count,1) ELSE 0 END AS growth_rate,
+                   ROUND((sd.latest_rating/5.0)*0.6
+                       + CASE WHEN sd.last_count>0 THEN MIN(sd.last_count/100.0,1.0)*0.2 ELSE 0 END
+                       + CASE WHEN sd.snap_count>1 AND sd.last_count>sd.first_count
+                              THEN MIN((sd.last_count-sd.first_count)*1.0/sd.first_count,1.0)*0.2 ELSE 0 END
+                   ,4) AS emerging_score
+            FROM restaurants r JOIN snap_data sd ON sd.restaurant_id=r.id
+            WHERE COALESCE(r.business_status,'OPERATIONAL') \!= 'CLOSED_PERMANENTLY'
+              AND sd.latest_rating >= 4.0 AND sd.last_count < ? AND sd.last_count > 0
+            ORDER BY emerging_score DESC LIMIT ?
+        """, (max_reviews, limit)).fetchall()
+    return [dict(r) for r in rows]
+
+
+def get_all_restaurants(days: int = 30) -> list:
+    """ดึงร้านทั้งหมดพร้อม velocity data สำหรับ export"""
+    since = (date.today() - timedelta(days=days)).isoformat()
+    with get_conn() as conn:
+        rows = conn.execute("""
+            WITH ranked AS (
+                SELECT s.restaurant_id, s.review_count, s.rating, s.snapshot_date,
+                       ROW_NUMBER() OVER (PARTITION BY s.restaurant_id ORDER BY s.snapshot_date ASC)  AS rn_asc,
+                       ROW_NUMBER() OVER (PARTITION BY s.restaurant_id ORDER BY s.snapshot_date DESC) AS rn_desc
+                FROM review_snapshots s WHERE s.snapshot_date >= ?
+            ),
+            first_last AS (
+                SELECT restaurant_id,
+                       MAX(CASE WHEN rn_asc=1  THEN review_count END) AS first_count,
+                       MAX(CASE WHEN rn_desc=1 THEN review_count END) AS last_count,
+                       MAX(CASE WHEN rn_desc=1 THEN rating END)       AS latest_rating,
+                       COUNT(*)/2 AS snapshot_count
+                FROM ranked GROUP BY restaurant_id
+            )
+            SELECT r.id, r.name, r.name_en, r.cuisine, r.area, r.price_range, r.url, r.source,
+                   r.city, r.province, r.country, r.gmaps_types,
+                   r.venue_type, r.scope_market, r.is_bangkok_focus, r.is_restaurant_focus, r.exclude_reason,
+                   fl.first_count, fl.last_count, fl.latest_rating, fl.snapshot_count,
+                   MAX(0, COALESCE(fl.last_count,0)-COALESCE(fl.first_count,0)) AS new_reviews,
+                   CASE WHEN fl.first_count>0 AND fl.last_count>fl.first_count
+                        THEN ROUND((fl.last_count-fl.first_count)*100.0/fl.first_count,1) ELSE 0 END AS velocity_pct,
+                   CASE WHEN fl.first_count>0 AND fl.last_count>fl.first_count
+                        THEN ROUND(((fl.last_count-fl.first_count)*1.0/fl.first_count)
+                             *(LOG(fl.last_count+1)/LOG(fl.last_count+10))
+                             *COALESCE(fl.latest_rating,4.0)/4.0, 4) ELSE 0 END AS trend_score
+            FROM restaurants r
+            LEFT JOIN first_last fl ON fl.restaurant_id=r.id
+            WHERE COALESCE(r.business_status,'OPERATIONAL') \!= 'CLOSED_PERMANENTLY'
+            ORDER BY trend_score DESC, velocity_pct DESC
+        """, (since,)).fetchall()
+    return [dict(r) for r in rows]
+
+
+def get_stats() -> dict:
+    """สถิติรวมของ DB"""
+    with get_conn() as conn:
+        total = conn.execute("SELECT COUNT(*) FROM restaurants").fetchone()[0]
+        snaps = conn.execute("SELECT COUNT(*) FROM review_snapshots").fetchone()[0]
+        latest = conn.execute("SELECT MAX(snapshot_date) FROM review_snapshots").fetchone()[0]
+        by_source_rows = conn.execute(
+            "SELECT source, COUNT(*) as c FROM restaurants GROUP BY source"
+        ).fetchall()
+    return {
+        "total_restaurants": total,
+        "total_snapshots":   snaps,
+        "latest_snapshot":   latest,
+        "by_source":         {r["source"]: r["c"] for r in by_source_rows},
+    }
