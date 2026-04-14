@@ -592,10 +592,13 @@
   // ── Hero card — Highest Velocity from scraper if available, else real signal data ──
   const heroCard = document.getElementById("heroOverlapCard");
   if (heroCard) {
-    const extSorted = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined" && CM_EXTERNAL_RESTAURANTS.length > 0)
-      ? [...CM_EXTERNAL_RESTAURANTS].filter(r => (r.velocityPct||0) > 0 && ChefMinistryData.scopeFilter(r))
-          .sort((a,b) => (b.velocityPct||0) - (a.velocityPct||0))
-      : [];
+    const _extAll = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined") ? CM_EXTERNAL_RESTAURANTS : [];
+    const _extVel = _extAll.filter(r => (r.velocityPct||0) > 0 && ChefMinistryData.scopeFilter(r));
+    const extSorted = _extVel.length > 0
+      ? [..._extVel].sort((a,b) => (b.velocityPct||0) - (a.velocityPct||0))
+      : _extAll.filter(r => r._isEmerging && ChefMinistryData.scopeFilter(r))
+          .sort((a,b) => (b.totalReviews||0) - (a.totalReviews||0));
+
     const heroExt = extSorted[0];
 
     // Spotlight from ChefMinistryData — matched to real restaurant data
@@ -888,12 +891,12 @@
   // Rank list — velocity จาก DB ถ้ามี, fallback = overlap signal
   const rankList  = document.getElementById("overlapRankList");
   const rankLabel = document.getElementById("rankListLabel");
-  const extRising = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined" && CM_EXTERNAL_RESTAURANTS.length > 0)
-    ? [...CM_EXTERNAL_RESTAURANTS]
-        .filter(r => (r.velocityPct || 0) > 0 && ChefMinistryData.scopeFilter(r))
-        .sort((a,b) => (b.velocityPct||0) - (a.velocityPct||0))
-        .slice(0, 5)
-    : [];
+  const _rankAll = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined") ? CM_EXTERNAL_RESTAURANTS : [];
+  const _rankVel = _rankAll.filter(r => (r.velocityPct||0) > 0 && ChefMinistryData.scopeFilter(r));
+  const extRising = _rankVel.length > 0
+    ? [..._rankVel].sort((a,b) => (b.velocityPct||0) - (a.velocityPct||0)).slice(0, 5)
+    : ChefMinistryData.getEmergingRestaurants(5);
+
 
   if (rankLabel) {
     rankLabel.textContent = extRising.length > 0
