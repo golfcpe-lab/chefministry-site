@@ -26,6 +26,7 @@ import json, time, sys, pathlib, re, argparse
 import urllib.request, urllib.parse
 from db import init_db, get_conn, record_snapshot, upsert_restaurant
 from config import GOOGLE_MAPS_API_KEY
+from classify import classify_record  # v2: venue/scope classification
 
 BASE_URL   = "https://places.googleapis.com/v1"
 OLD_BASE   = "https://maps.googleapis.com/maps/api/place"
@@ -182,6 +183,16 @@ def process_restaurant(row: dict, api_key: str) -> dict:
             address         = details.get("formattedAddress", address)
             business_status = details.get("businessStatus", business_status)
 
+    # ── Collect gmaps types for classification ───────────────────────────────
+    gmaps_types = []
+    primary_type = place.get("primaryType") or ""
+    if primary_type:
+        gmaps_types.append(primary_type)
+    # Also pull from Place Details if fetched
+    if "details" in dir() and details:
+        gmaps_types.extend(details.get("types") or [])
+    gmaps_types = list(dict.fromkeys(t for t in gmaps_types if t))  # deduplicate
+
     return {
         "status":               "ok",
         "gmaps_place_id":       place_id,
@@ -190,6 +201,7 @@ def process_restaurant(row: dict, api_key: str) -> dict:
         "gmaps_review_count":   review_count,
         "gmaps_address":        address,
         "gmaps_business_status": business_status,
+        "gmaps_types":          gmaps_types,  # v2: for venue classification
     }
 
 
@@ -213,15 +225,53 @@ def save_gmaps_meta(restaurant_id: str, result: dict):
             if col not in existing_cols:
                 conn.execute(f"ALTER TABLE restaurants ADD COLUMN {col} {typedef}")
 
+        # ── Save classification fields derived from gmaps_types ────────────────
+        gmaps_types = result.get("gmaps_types") or []
+        import json as _json
+        gmaps_types_str = _json.dumps(gmaps_types) if gmaps_types else None
+
+        # Build a minimal record for the classifier (we need name+area from DB)
+        row_data = conn.execute(
+            "SELECT name, area, cuisine FROM restaurants WHERE id = ?", (restaurant_id,)
+        ).fetchone()
+        if row_data:
+            classification_input = {
+                "name":       row_data["name"],
+                "area":       row_data["area"] or "",
+                "cuisine":    row_data["cuisine"] or "",
+                "gmaps_types": gmaps_types,
+            }
+            classified = classify_record(classification_input)
+        else:
+            classified = {}
+
         conn.execute("""
             UPDATE restaurants
-            SET gmaps_place_id = ?, gmaps_address = ?, business_status = ?,
-                last_updated = datetime('now')
+            SET gmaps_place_id      = ?,
+                gmaps_address       = ?,
+                gmaps_types         = ?,
+                business_status     = ?,
+                city                = COALESCE(?, city),
+                province            = COALESCE(?, province),
+                venue_type          = COALESCE(?, venue_type),
+                scope_market        = COALESCE(?, scope_market),
+                is_bangkok_focus    = COALESCE(?, is_bangkok_focus),
+                is_restaurant_focus = COALESCE(?, is_restaurant_focus),
+                exclude_reason      = ?,
+                last_updated        = datetime('now')
             WHERE id = ?
         """, (
             result.get("gmaps_place_id"),
             result.get("gmaps_address"),
+            gmaps_types_str,
             result.get("gmaps_business_status", "OPERATIONAL"),
+            classified.get("city") or None,
+            classified.get("province") or None,
+            classified.get("venue_type") or None,
+            classified.get("scope_market") or None,
+            1 if classified.get("is_bangkok_focus") else None,
+            1 if classified.get("is_restaurant_focus") else None,
+            classified.get("exclude_reason"),
             restaurant_id,
         ))
 
