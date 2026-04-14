@@ -161,6 +161,41 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Migrate DB schema (classify-export)
+        run: |
+          cd scripts/scraper
+          python -c "
+          import sqlite3, pathlib
+          DB = pathlib.Path('chefministry_data.db')
+          if not DB.exists(): exit(0)
+          conn = sqlite3.connect(str(DB))
+          cols = [
+              ('city','TEXT'),('province','TEXT'),
+              ('country',\"TEXT DEFAULT 'Thailand'\"),
+              ('gmaps_types','TEXT'),('venue_type','TEXT'),('scope_market','TEXT'),
+              ('is_bangkok_focus','INTEGER DEFAULT 0'),
+              ('is_restaurant_focus','INTEGER DEFAULT 0'),
+              ('exclude_reason','TEXT'),('place_id','TEXT'),
+              ('creator_mentions_7d','INTEGER DEFAULT 0'),
+              ('creator_mentions_30d','INTEGER DEFAULT 0'),
+              ('creator_signal_score','REAL DEFAULT 0'),
+              ('is_viral_candidate','INTEGER DEFAULT 0'),
+              ('candidate_status',\"TEXT DEFAULT 'candidate'\"),
+              ('appeared_last_3_cycles','INTEGER DEFAULT 0'),
+          ]
+          added = []
+          for col, defn in cols:
+              try:
+                  conn.execute('ALTER TABLE restaurants ADD COLUMN ' + col + ' ' + defn)
+                  added.append(col)
+              except Exception:
+                  pass
+          conn.commit()
+          conn.close()
+          print('Migration: ' + str(len(added)) + ' columns added')
+          "
+        continue-on-error: true
+
       - name: Backfill classification for new/unclassified records
         run: |
           cd scripts/scraper
@@ -205,6 +240,7 @@ jobs:
           conn.close()
           print('Classified ' + str(updated) + ' new records')
           "
+        continue-on-error: true
 
       - name: Export classified dataset to export_restaurants.json
         env:
