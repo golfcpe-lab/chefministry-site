@@ -347,4 +347,3 @@ if __name__ == "__main__":
         restaurants = export_json(days=args.days, limit=args.limit)
         if args.inject and restaurants:
             inject_into_datajs(restaurants)
-                                                                                                                                
