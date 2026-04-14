@@ -93,12 +93,31 @@
 <main class="section-sm">
   <div class="container">
 
+
+    <\!-- Discover Tabs (Trend Intelligence mode selector) -->
+    <div id="discoverTabBar" style="display:flex;gap:8px;align-items:center;margin-bottom:20px;flex-wrap:wrap;border-bottom:2px solid var(--border);padding-bottom:14px">
+      <button id="tab-trending" onclick="setTab('trending')"
+        style="display:flex;align-items:center;gap:5px;padding:8px 16px;border-radius:99px;font-size:13px;font-weight:900;border:2px solid var(--navy);cursor:pointer;background:var(--navy);color:#fff">
+        🔥 Trending
+      </button>
+      <button id="tab-emerging" onclick="setTab('emerging')"
+        style="display:flex;align-items:center;gap:5px;padding:8px 16px;border-radius:99px;font-size:13px;font-weight:900;border:2px solid var(--border);cursor:pointer;background:transparent;color:var(--text-2)">
+        🆕 Emerging
+      </button>
+      <button id="tab-popular" onclick="setTab('popular')"
+        style="display:flex;align-items:center;gap:5px;padding:8px 16px;border-radius:99px;font-size:13px;font-weight:900;border:2px solid var(--border);cursor:pointer;background:transparent;color:var(--text-2)">
+        🏆 Popular
+      </button>
+      <span id="tabDesc" style="font-size:11px;color:var(--text-2);margin-left:6px;font-style:italic">จัดอันดับจากการเปลี่ยนแปลงของรีวิว ไม่ใช่จำนวนรีวิวรวม</span>
+      <span style="margin-left:auto;font-size:10px;color:var(--text-2);opacity:.6">อัปเดต: 2026-04-14 · ข้อมูล 30 วัน</span>
+    </div>
+
     <!-- Search + Sort -->
     <div style="display:flex;gap:12px;align-items:center;margin-bottom:16px;flex-wrap:wrap;min-width:0">
       <input class="search-input" id="searchInput" type="text" placeholder="🔍 ค้นหาร้าน, ย่าน, ประเภทอาหาร..." style="max-width:440px;min-width:0;flex:1"/>
       <select class="sort-select" id="sortSelect" style="min-width:0;max-width:100%">
-        <option value="overlap">เรียงตาม: Overlap Signal ↑</option>
-        <option value="signalCount">เรียงตาม: Total Signal Count</option>
+        <option value="overlap">เรียงตาม: Growth Score ↑</option>
+        <option value="score">เรียงตาม: Growth Rate %</option>
         <option value="reviews">เรียงตาม: Total Reviews</option>
         <option value="name">เรียงตาม: ชื่อ A–Z</option>
       </select>
@@ -123,9 +142,8 @@
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px;min-width:0;overflow:hidden">
       <div id="resultCount" style="font-size:14px;color:var(--text-2);font-weight:700"></div>
       <div style="display:flex;gap:14px;align-items:center;font-size:12px;flex-wrap:wrap">
-        <span style="font-weight:700;color:var(--text-2)">Overlap Signal =</span>
-        <span style="color:var(--green);font-weight:800">จำนวน Influencer unique ใน 30 วัน</span>
-        <a href="./listing.html?type=ramen" style="color:var(--navy);font-weight:700;text-decoration:underline">ดู Ramen →</a>
+        <span style="font-weight:700;color:var(--text-2)">Trend Score =</span>
+        <span style="color:var(--green);font-weight:800">growth_rate × log(total_reviews+1) · เน้นร้านที่กำลังเติบโต</span>
         <a href="./about.html#methodology" style="color:var(--navy);font-weight:700;text-decoration:underline">อ่านวิธีคิด →</a>
       </div>
     </div>
@@ -253,10 +271,10 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-<script src="./js/firebase-config.js?v=20260414b"></script>
-<script src="./js/auth.js?v=20260414b"></script>
-<script src="./js/data.js?v=20260414b"></script>
-<script src="./js/dataService.js?v=20260414b"></script>
+<script src="./js/firebase-config.js?v=20260415a"></script>
+<script src="./js/auth.js?v=20260415a"></script>
+<script src="./js/data.js?v=20260415a"></script>
+<script src="./js/dataService.js?v=20260415a"></script>
 <script>
   document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
     const n=document.getElementById("mobileNav");
@@ -273,6 +291,38 @@
   }
 
   const state={signal:"all",velocity:"all",budget:"all",type:"all",search:"",sort:"overlap"};
+
+  // ── Tab state (Trending / Emerging / Popular) ────────────────────────────
+  let currentTab = 'trending';
+
+  const TAB_DESC = {
+    trending: 'จัดอันดับจากการเปลี่ยนแปลงของรีวิว ไม่ใช่จำนวนรีวิวรวม · เน้นร้านที่กำลังเติบโต',
+    emerging: 'ร้านน่าจับตา — รีวิวรวมต่ำกว่า 300 แต่มีสัญญาณเติบโต ทั้ง review growth และ creator signal',
+    popular:  'ร้านที่มีรีวิวมากที่สุด — ไม่ใช่ trending แต่เป็นที่นิยมสูง'
+  };
+
+  function setTab(tab) {
+    currentTab = tab;
+    // Update button styles
+    ['trending','emerging','popular'].forEach(function(t) {
+      const btn = document.getElementById('tab-' + t);
+      if (\!btn) return;
+      if (t === tab) {
+        btn.style.background = 'var(--navy)';
+        btn.style.color = '#fff';
+        btn.style.borderColor = 'var(--navy)';
+      } else {
+        btn.style.background = 'transparent';
+        btn.style.color = 'var(--text-2)';
+        btn.style.borderColor = 'var(--border)';
+      }
+    });
+    // Update description
+    const descEl = document.getElementById('tabDesc');
+    if (descEl) descEl.textContent = TAB_DESC[tab] || '';
+    render();
+  }
+
 
   // Read URL params
   const params=new URLSearchParams(window.location.search);
@@ -345,45 +395,43 @@
   });
 
   function filterAndSort(){
-    // Base list from ChefMinistryData — single source of truth (reads from CM_RESTAURANTS)
-    const baseCurated = ChefMinistryData.getRestaurantList();
+    // Determine if any filter/search is active
+    const filtersActive = state.signal !== "all" || state.velocity !== "all" ||
+                          state.budget !== "all" || state.type !== "all" || state.search;
 
-    // Merge scraped data (CM_EXTERNAL_RESTAURANTS) if available, deduped by name
-    const curatedNames = new Set(baseCurated.map(r => r.name.trim().toLowerCase()));
-    const external = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined" ? CM_EXTERNAL_RESTAURANTS : [])
-      .filter(r => {
-        const n = (r.name || r.name_en || "").trim().toLowerCase();
-        return n && !curatedNames.has(n);
-      })
-      .map(r => ({
-        ...r,
-        name: r.name || r.name_en || "",
-        tags: r.tags || [],
-        occasions: r.occasions || [],
-        totalReviews: r.totalReviews || r.last_count || 0,
-      }));
+    // v5: always use canonical merged pool — Bangkok+restaurant scope is applied inside
+    // ChefMinistryData functions (scopeFilter).
+    if (\!filtersActive) {
+      const N = 60;
+      if (currentTab === 'emerging') return ChefMinistryData.getEmergingRestaurants(N);
+      if (currentTab === 'popular')  return ChefMinistryData.getPopularRestaurants(N);
+      return ChefMinistryData.getTrendingRestaurants(N);
+    }
 
-    let list = [...baseCurated, ...external];
+    // Filters active: use getRestaurantList() which already applies scope filter
+    let list = ChefMinistryData.getRestaurantList({
+      signal:   state.signal,
+      velocity: state.velocity,
+      budget:   state.budget,
+      type:     state.type !== "all" ? state.type : undefined,
+      search:   state.search || undefined,
+      sort:     state.sort === "score" ? "score" : state.sort === "reviews" ? "reviews" : "score",
+    });
 
-    if(state.signal!=="all")   list=list.filter(r=>r.signalStrength===state.signal);
-    if(state.velocity!=="all") list=list.filter(r=>r.trendVelocity===state.velocity);
-    if(state.budget!=="all")   list=list.filter(r=>String(r.budget)===state.budget);
-    if(state.type!=="all")     list=list.filter(r=>r.type===state.type);
-    if(state.search){
-      list=list.filter(r=>{
-        const hay=[r.name,r.cuisine,r.area,r.type,...(r.tags||[])].join(" ").toLowerCase();
-        return hay.includes(state.search);
+    // Additional sort options not in getRestaurantList
+    if (state.sort === "signalCount") {
+      list = list.slice().sort((a,b) => (b.signalCount||0) - (a.signalCount||0));
+    } else if (state.sort === "name") {
+      list = list.slice().sort((a,b) => a.name.localeCompare(b.name, "th"));
+    } else if (state.sort === "overlap") {
+      list = list.slice().sort((a,b) => {
+        const sd = (ChefMinistryData.computeScore(b).score||0) - (ChefMinistryData.computeScore(a).score||0);
+        return Math.abs(sd) > 0.001 ? sd : (b.overlapSignal||0) - (a.overlapSignal||0);
       });
     }
-    list.sort((a,b)=>{
-      if(state.sort==="signalCount") return (b.signalCount||0)-(a.signalCount||0);
-      if(state.sort==="reviews")     return (b.totalReviews||0)-(a.totalReviews||0);
-      if(state.sort==="name")        return a.name.localeCompare(b.name,"th");
-      return (b.overlapSignal||0)-(a.overlapSignal||0);
-    });
+
     return list;
   }
-
   const PREVIEW_COUNT = 6;
 
   function render(){
@@ -536,13 +584,18 @@
     render();
   } catch(e) {
     console.error("[CM] render() failed:", e);
-    // Fallback: populate directly from CM_RESTAURANTS if available
+    // v5 Fallback: use canonical external pool, scoped to Bangkok+restaurant
     var grid = document.getElementById("listingGrid");
-    if (grid && typeof CM_RESTAURANTS !== "undefined" && CM_RESTAURANTS.length) {
-      var preview = CM_RESTAURANTS.slice(0, 6);
+    var fallbackPool = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined" && CM_EXTERNAL_RESTAURANTS.length > 0)
+      ? CM_EXTERNAL_RESTAURANTS
+      : (typeof CM_RESTAURANTS !== "undefined" ? CM_RESTAURANTS : []);
+    var scopedPool = fallbackPool.filter(function(r) {
+      return r.scope_market !== "out_of_scope_location" && r.scope_market !== "out_of_scope_format"
+          && r.is_restaurant_focus !== false && r.is_bangkok_focus !== false;
+    });
+    if (grid && scopedPool.length) {
+      var preview = scopedPool.slice(0, 6);
       grid.innerHTML = preview.map(function(r){ return buildRestaurantCard(r, {showOverlap:true}); }).join("");
-      var wc = document.getElementById("wallCount");
-      if (wc) wc.textContent = "แสดง " + preview.length + " จาก " + CM_RESTAURANTS.length + " ร้านที่วิเคราะห์แล้ว";
     }
   }
 
