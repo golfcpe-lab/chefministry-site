@@ -21,6 +21,7 @@ SITE_FILES = [
     ("vercel.json",               "vercel.json"),
     ("css/style.css",              "css/style.css"),
     ("js/data.js",                 "js/data.js"),
+    ("js/dataService.js",        "js/dataService.js"),
     ("js/auth.js",                 "js/auth.js"),
     ("js/firebase-config.js",      "js/firebase-config.js"),
 ]
