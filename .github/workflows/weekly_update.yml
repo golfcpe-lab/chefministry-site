@@ -31,7 +31,7 @@ jobs:
         env:
           EXPORT_DIR: ${{ github.workspace }}/site/js
         run: |
-          cd scraper
+          cd scripts/scraper
           python -c "from db import init_db; init_db(); print('DB migration complete')"
         continue-on-error: true
 
@@ -40,7 +40,7 @@ jobs:
         env:
           EXPORT_DIR: ${{ github.workspace }}/site/js
         run: |
-          cd scraper
+          cd scripts/scraper
           python -c "
           from db import get_conn, init_db
           from classify import classify_record
@@ -85,7 +85,7 @@ jobs:
         env:
           EXPORT_DIR: ${{ github.workspace }}/site/js
         run: |
-          cd scraper
+          cd scripts/scraper
           python export_signals.py --inject
         continue-on-error: true
 
@@ -93,9 +93,9 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           DATA_FILE:      ${{ github.workspace }}/site/js/data.js
-          YOUTUBE_FILE:   ${{ github.workspace }}/scraper/youtube_reviews.json
+          YOUTUBE_FILE:   ${{ github.workspace }}/scripts/scraper/youtube_reviews.json
         run: |
-          cd scraper
+          cd scripts/scraper
           python inject_youtube.py
         continue-on-error: true
 
@@ -103,7 +103,7 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           DATA_FILE:      ${{ github.workspace }}/site/js/data.js
-          YOUTUBE_FILE:   ${{ github.workspace }}/scraper/youtube_reviews.json
+          YOUTUBE_FILE:   ${{ github.workspace }}/scripts/scraper/youtube_reviews.json
         run: python weekly_summary.py
         continue-on-error: false
 
@@ -112,7 +112,7 @@ jobs:
         run: |
           python -c "
           import json, sys, pathlib
-          p = pathlib.Path('scraper/export_restaurants.json')
+          p = pathlib.Path('scripts/scraper/export_restaurants.json')
           if not p.exists():
               print('export_restaurants.json not found'); sys.exit(0)
           records = json.load(open(p, encoding='utf-8'))
@@ -133,7 +133,7 @@ jobs:
         run: |
           git config user.name  "ChefMinistry Bot"
           git config user.email "bot@chefministry.com"
-          git add site/js/data.js scraper/export_restaurants.json
+          git add site/js/data.js scripts/scraper/export_restaurants.json
           git diff --staged --quiet || git commit -m "auto: weekly signal update $(date +'%Y-%m-%d') [schema-v2]"
 
       - name: Push to GitHub
