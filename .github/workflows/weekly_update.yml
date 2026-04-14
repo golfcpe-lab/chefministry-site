@@ -104,8 +104,8 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           DATA_FILE:      ${{ github.workspace }}/js/data.js
           YOUTUBE_FILE:   ${{ github.workspace }}/scripts/youtube_reviews.json
-        run: python weekly_summary.py
-        continue-on-error: false
+        run: python scripts/weekly_summary.py
+        continue-on-error: true
 
       # Validate schema v2 fields are present in export JSON
       - name: Validate classification schema in export
@@ -133,7 +133,7 @@ jobs:
         run: |
           git config user.name  "ChefMinistry Bot"
           git config user.email "bot@chefministry.com"
-          git add js/data.js scripts/scraper/export_restaurants.json
+          git add js/data.js scripts/scraper/export_restaurants.json || true
           git diff --staged --quiet || git commit -m "auto: weekly signal update $(date +'%Y-%m-%d') [schema-v2]"
 
       - name: Push to GitHub
