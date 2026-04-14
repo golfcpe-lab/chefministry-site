@@ -1,10 +1,10 @@
 name: ChefMinistry Weekly Update
 
-# รันทุกวันจันทร์ 08:00 น. เวลาไทย (01:00 UTC = +7)
+# Every Monday 08:00 ICT (01:00 UTC)
 on:
   schedule:
-    - cron: '0 1 * * 1'   # 08:00 ICT = 01:00 UTC
-  workflow_dispatch:        # รัน manual ได้ด้วย (ปุ่ม Run workflow ใน Actions tab)
+    - cron: '0 1 * * 1'
+  workflow_dispatch:
 
 jobs:
   weekly-update:
@@ -12,64 +12,129 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      # ── 1. Checkout code ──────────────────────────────────────────────────
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GH_PAT }}
           fetch-depth: 1
 
-      # ── 2. Setup Python ───────────────────────────────────────────────────
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      # ── 3. Install dependencies ───────────────────────────────────────────
       - name: Install Python packages
-        run: |
-          pip install openai --quiet
+        run: pip install openai --quiet
 
-      # ── 4. Export DB → inject CM_EXTERNAL_RESTAURANTS เข้า data.js ──────
+      # Step 4a: Migrate DB schema (idempotent — adds columns if missing)
+      - name: Migrate DB classification columns
+        env:
+          EXPORT_DIR: ${{ github.workspace }}/site/js
+        run: |
+          cd scraper
+          python -c "from db import init_db; init_db(); print('DB migration complete')"
+        continue-on-error: true
+
+      # Step 4b: Backfill classification for unclassified DB records
+      - name: Backfill venue/scope classification
+        env:
+          EXPORT_DIR: ${{ github.workspace }}/site/js
+        run: |
+          cd scraper
+          python -c "
+          from db import get_conn, init_db
+          from classify import classify_record
+          import json
+          init_db()
+          with get_conn() as conn:
+              rows = conn.execute('''
+                  SELECT id, name, area, cuisine,
+                         COALESCE(gmaps_types, '[]') AS gmaps_types_json
+                  FROM restaurants
+                  WHERE scope_market IS NULL OR scope_market = ''
+              ''').fetchall()
+              updated = 0
+              for row in rows:
+                  try:
+                      gmaps_types = json.loads(row['gmaps_types_json'] or '[]')
+                  except Exception:
+                      gmaps_types = []
+                  rec = classify_record({
+                      'name': row['name'], 'area': row['area'] or '',
+                      'cuisine': row['cuisine'] or '', 'gmaps_types': gmaps_types,
+                  })
+                  conn.execute('''UPDATE restaurants SET
+                      city=?, province=?, venue_type=?, scope_market=?,
+                      is_bangkok_focus=?, is_restaurant_focus=?, exclude_reason=?
+                      WHERE id=?''', (
+                      rec.get('city',''), rec.get('province',''),
+                      rec.get('venue_type','unknown'), rec.get('scope_market','needs_review'),
+                      1 if rec.get('is_bangkok_focus') else 0,
+                      1 if rec.get('is_restaurant_focus') else 0,
+                      rec.get('exclude_reason'), row['id'],
+                  ))
+                  updated += 1
+          print(f'Backfilled {updated} records')
+          "
+        continue-on-error: true
+
+      # Step 4c: Export DB signals → inject CM_EXTERNAL_RESTAURANTS into data.js
+      # export_signals.py calls classify_record() on every record so output
+      # includes all schema v2 classification fields.
       - name: Export DB signals into data.js
         env:
-          EXPORT_DIR: ${{ github.workspace }}/js
+          EXPORT_DIR: ${{ github.workspace }}/site/js
         run: |
-          cd scripts/scraper
+          cd scraper
           python export_signals.py --inject
-        continue-on-error: true   # ถ้า DB ไม่มีหรือ error ก็ข้ามไป ไม่หยุด workflow
+        continue-on-error: true
 
-      # ── 5. Inject YouTube reviews → อัปเดต restaurant signals ────────────
       - name: Inject YouTube signals into data.js
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          DATA_FILE:      ${{ github.workspace }}/js/data.js
-          YOUTUBE_FILE:   ${{ github.workspace }}/scripts/youtube_reviews.json
-          SCRIPTS_DIR:    ${{ github.workspace }}/scripts
+          DATA_FILE:      ${{ github.workspace }}/site/js/data.js
+          YOUTUBE_FILE:   ${{ github.workspace }}/scraper/youtube_reviews.json
         run: |
-          cd scripts/scraper
+          cd scraper
           python inject_youtube.py
-        continue-on-error: true   # ถ้าไม่มี youtube_reviews.json ก็ข้ามไป
+        continue-on-error: true
 
-      # ── 5. Generate weekly summary (อัปเดต weeklyHighlight) ─────────────
       - name: Run weekly_summary.py
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          DATA_FILE:      ${{ github.workspace }}/js/data.js
-          YOUTUBE_FILE:   ${{ github.workspace }}/scripts/youtube_reviews.json
-        run: |
-          cd scripts
-          python weekly_summary.py
+          DATA_FILE:      ${{ github.workspace }}/site/js/data.js
+          YOUTUBE_FILE:   ${{ github.workspace }}/scraper/youtube_reviews.json
+        run: python weekly_summary.py
         continue-on-error: false
 
-      # ── 5. Commit & Push ไฟล์ที่เปลี่ยนแปลง ──────────────────────────────
-      - name: Commit updated data.js
+      # Validate schema v2 fields are present in export JSON
+      - name: Validate classification schema in export
+        run: |
+          python -c "
+          import json, sys, pathlib
+          p = pathlib.Path('scraper/export_restaurants.json')
+          if not p.exists():
+              print('export_restaurants.json not found'); sys.exit(0)
+          records = json.load(open(p, encoding='utf-8'))
+          required = ['city','province','venue_type','scope_market','is_bangkok_focus','is_restaurant_focus']
+          ok = all(f in records[0] for f in required) if records else False
+          if ok:
+              in_scope = sum(1 for r in records if r.get('is_restaurant_focus'))
+              bkk = sum(1 for r in records if r.get('is_bangkok_focus'))
+              review = sum(1 for r in records if r.get('scope_market') == 'needs_review')
+              print(f'Schema v2 OK — {len(records)} records | in-scope: {in_scope} | bkk: {bkk} | review: {review}')
+          else:
+              missing = [f for f in required if f not in (records[0] if records else {})]
+              print(f'SCHEMA WARNING — missing: {missing}')
+          "
+        continue-on-error: true
+
+      - name: Commit updated data.js and export JSON
         run: |
           git config user.name  "ChefMinistry Bot"
           git config user.email "bot@chefministry.com"
-          git add js/data.js
-          # commit เฉพาะถ้ามีการเปลี่ยนแปลง
-          git diff --staged --quiet || git commit -m "auto: weekly signal update $(date +'%Y-%m-%d')"
+          git add site/js/data.js scraper/export_restaurants.json
+          git diff --staged --quiet || git commit -m "auto: weekly signal update $(date +'%Y-%m-%d') [schema-v2]"
 
       - name: Push to GitHub
         run: git push origin main
