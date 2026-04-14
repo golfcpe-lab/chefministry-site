@@ -126,8 +126,8 @@ jobs:
         run: |
           git config user.name  "ChefMinistry Bot"
           git config user.email "bot@chefministry.com"
+          git add scripts/scraper/chefministry_data.db || true
           git pull --rebase origin main
-          git add scripts/scraper/chefministry_data.db
           git diff --staged --quiet || git commit -m "auto: GMaps snapshot $(date +'%Y-%m-%d')"
 
       - name: Push to GitHub
@@ -239,8 +239,8 @@ jobs:
         run: |
           git config user.name  "ChefMinistry Bot"
           git config user.email "bot@chefministry.com"
+          git add scripts/scraper/export_restaurants.json scripts/scraper/chefministry_data.db || true
           git pull --rebase origin main
-          git add scripts/scraper/export_restaurants.json scripts/scraper/chefministry_data.db
           git diff --staged --quiet || git commit -m "auto: classify+export $(date +'%Y-%m-%d') [schema-v2]"
 
       - name: Push to GitHub
