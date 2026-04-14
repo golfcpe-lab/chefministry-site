@@ -15,6 +15,10 @@ SITE_FILES = [
     ("creator.html",            "creator.html"),
     ("restaurant.html",         "restaurant.html"),
     ("restaurant_partner.html", "restaurant_partner.html"),
+    ("contact.html",              "contact.html"),
+    ("faq.html",                  "faq.html"),
+    ("legal.html",                "legal.html"),
+    ("vercel.json",               "vercel.json"),
     ("css/style.css",              "css/style.css"),
     ("js/data.js",                 "js/data.js"),
     ("js/auth.js",                 "js/auth.js"),
@@ -39,6 +43,9 @@ ROOT_FILES = [
     ("scraper/scrape_gmaps.py",      "scripts/scraper/scrape_gmaps.py"),
     ("scraper/scrape_youtube.py",    "scripts/scraper/scrape_youtube.py"),
     ("scraper/inject_youtube.py",    "scripts/scraper/inject_youtube.py"),
+    ("scraper/canonical.py",         "scripts/scraper/canonical.py"),
+    ("scraper/classify.py",          "scripts/scraper/classify.py"),
+    ("scraper/dedup_restaurants.py", "scripts/scraper/dedup_restaurants.py"),
 ]
 
 FILES_TO_DELETE = []  # ไม่มีไฟล์ที่ต้องลบแล้ว
@@ -70,7 +77,7 @@ def gh_request(url, method="GET", body=None):
         raise Exception(f"HTTP {e.code} {e.reason}: {err_body[:300]}")
 
 today   = datetime.date.today().strftime("%Y-%m-%d")
-message = f"fix: data.js syntax, inject DB→data.js weekly, fix inject_youtube bugs ({today})"
+message = f"feat: positioning rewrite — decision-support messaging, CM_CONFIG, clean URLs, FAQ/Contact/Legal pages ({today})"
 
 print(f"\n{'='*55}")
 print(f"  ChefMinistry → Push to GitHub")
