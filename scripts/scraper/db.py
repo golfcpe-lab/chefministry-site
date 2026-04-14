@@ -54,6 +54,21 @@ def init_db():
             first_seen  TEXT DEFAULT (date('now')),
             last_updated TEXT DEFAULT (datetime('now')),
             business_status TEXT DEFAULT 'OPERATIONAL',  -- OPERATIONAL | CLOSED_TEMPORARILY | CLOSED_PERMANENTLY
+
+            -- ── Classification layer (schema v2) ──────────────────────────
+            -- Populated by classify.py at export time and by scrape_gmaps.py
+            -- at ingest time.  All columns are nullable so old records stay valid.
+            city                TEXT,  -- "Bangkok" | ""
+            province            TEXT,  -- "Bangkok" | "Chiang Mai" | ...
+            country             TEXT DEFAULT 'Thailand',
+            gmaps_types         TEXT,  -- JSON array from Places API (e.g. ["restaurant","thai_restaurant"])
+            venue_type          TEXT,  -- restaurant | cafe | kiosk | street_food | food_stand | takeaway_only | unknown
+            scope_market        TEXT,  -- bangkok_restaurant_focus | bangkok_cafe_focus | out_of_scope_location | out_of_scope_format | needs_review
+            is_bangkok_focus    INTEGER DEFAULT 0,   -- 0/1 boolean
+            is_restaurant_focus INTEGER DEFAULT 0,   -- 0/1 boolean
+            exclude_reason      TEXT,  -- null | province_not_bangkok | kiosk_format | street_food_format | food_stand_format | takeaway_only | missing_location | unclear_format
+            -- ──────────────────────────────────────────────────────────────
+
             UNIQUE(source, external_id)
         );
 
@@ -73,29 +88,86 @@ def init_db():
         CREATE INDEX IF NOT EXISTS idx_snap_date ON review_snapshots(snapshot_date);
         CREATE INDEX IF NOT EXISTS idx_rest_source ON restaurants(source);
         CREATE INDEX IF NOT EXISTS idx_rest_area ON restaurants(area);
+        CREATE INDEX IF NOT EXISTS idx_rest_scope ON restaurants(scope_market);
+        CREATE INDEX IF NOT EXISTS idx_rest_bkk ON restaurants(is_bangkok_focus);
         """)
+    # ── Safe migration: add classification columns if they don't exist yet ──
+    _migrate_classification_columns()
     print(f"✅ DB ready: {DB_PATH}")
+
+
+def _migrate_classification_columns():
+    """
+    ADD COLUMN migration — safe to run on existing DB.
+    SQLite does not support IF NOT EXISTS on ALTER TABLE, so we catch errors.
+    """
+    new_columns = [
+        ("city",                "TEXT"),
+        ("province",            "TEXT"),
+        ("country",             "TEXT DEFAULT 'Thailand'"),
+        ("gmaps_types",         "TEXT"),
+        ("venue_type",          "TEXT"),
+        ("scope_market",        "TEXT"),
+        ("is_bangkok_focus",    "INTEGER DEFAULT 0"),
+        ("is_restaurant_focus", "INTEGER DEFAULT 0"),
+        ("exclude_reason",      "TEXT"),
+    ]
+    with get_conn() as conn:
+        for col_name, col_def in new_columns:
+            try:
+                conn.execute(f"ALTER TABLE restaurants ADD COLUMN {col_name} {col_def}")
+            except Exception:
+                pass  # Column already exists — skip silently
 
 
 def upsert_restaurant(data: dict) -> str:
     """
     Insert หรือ update ร้าน
     data ต้องมี: source, external_id, name, cuisine, area
+
+    v2: also stores classification fields (city, province, gmaps_types,
+        venue_type, scope_market, is_bangkok_focus, is_restaurant_focus,
+        exclude_reason) when provided.
+
     Returns: restaurant_id
     """
+    import json as _json
     rid = f"{data['source']}_{data['external_id']}"
+
+    # gmaps_types may be a list — serialise to JSON string for SQLite TEXT column
+    gmaps_types_raw = data.get("gmaps_types")
+    if isinstance(gmaps_types_raw, list):
+        gmaps_types_val = _json.dumps(gmaps_types_raw, ensure_ascii=False)
+    else:
+        gmaps_types_val = gmaps_types_raw  # already a string or None
+
     with get_conn() as conn:
         conn.execute("""
             INSERT INTO restaurants
                 (id, source, external_id, name, name_en, cuisine, area,
-                 address, lat, lng, price_range, url, image_url, last_updated)
-            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,datetime('now'))
+                 address, lat, lng, price_range, url, image_url, last_updated,
+                 city, province, country, gmaps_types,
+                 venue_type, scope_market,
+                 is_bangkok_focus, is_restaurant_focus, exclude_reason)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,datetime('now'),
+                    ?,?,?,?,?,?,?,?,?)
             ON CONFLICT(source, external_id) DO UPDATE SET
-                name         = excluded.name,
-                cuisine      = excluded.cuisine,
-                area         = excluded.area,
-                price_range  = excluded.price_range,
-                last_updated = excluded.last_updated
+                name                = excluded.name,
+                cuisine             = excluded.cuisine,
+                area                = excluded.area,
+                price_range         = excluded.price_range,
+                last_updated        = excluded.last_updated,
+                -- Update classification fields only if the new value is non-NULL
+                -- (avoids overwriting a good classification with NULL on re-scrape)
+                city                = COALESCE(excluded.city,                city),
+                province            = COALESCE(excluded.province,            province),
+                country             = COALESCE(excluded.country,             country),
+                gmaps_types         = COALESCE(excluded.gmaps_types,         gmaps_types),
+                venue_type          = COALESCE(excluded.venue_type,          venue_type),
+                scope_market        = COALESCE(excluded.scope_market,        scope_market),
+                is_bangkok_focus    = COALESCE(excluded.is_bangkok_focus,    is_bangkok_focus),
+                is_restaurant_focus = COALESCE(excluded.is_restaurant_focus, is_restaurant_focus),
+                exclude_reason      = excluded.exclude_reason
         """, (
             rid,
             data.get("source"),
@@ -110,6 +182,16 @@ def upsert_restaurant(data: dict) -> str:
             data.get("price_range"),
             data.get("url"),
             data.get("image_url"),
+            # classification fields
+            data.get("city"),
+            data.get("province"),
+            data.get("country", "Thailand"),
+            gmaps_types_val,
+            data.get("venue_type"),
+            data.get("scope_market"),
+            1 if data.get("is_bangkok_focus") else 0,
+            1 if data.get("is_restaurant_focus") else 0,
+            data.get("exclude_reason"),
         ))
     return rid
 
@@ -177,12 +259,18 @@ def get_velocity(restaurant_id: str, days: int = 30) -> dict:
 
 def get_trending_restaurants(limit: int = 50, days: int = 30) -> list:
     """
-    ดึงร้านที่ review เพิ่มขึ้นเร็วที่สุดใน N วัน
+    ดึงร้านที่ trending โดยใช้ normalized score เพื่อป้องกัน large-restaurant dominance.
+
+    OLD: ORDER BY new_reviews DESC  → ร้านใหญ่ชนะเสมอ (absolute bias)
+    NEW: score = growth_rate * log(total+1) / log(total+10)  → balanced by size
+         growth_rate = (last - first) / max(first, 1)
+
+    หมายเหตุ data quality: snapshot Apr-05 (Wongnai cumulative) vs Apr-06 (recent only)
+    เป็น incompatible metrics → growth จะถูก clamp ที่ 0 ถ้า last < first
     """
     since = (date.today() - timedelta(days=days)).isoformat()
 
     with get_conn() as conn:
-        # หา earliest และ latest review_count ของแต่ละร้านใน window
         rows = conn.execute("""
             WITH ranked AS (
                 SELECT
@@ -207,19 +295,104 @@ def get_trending_restaurants(limit: int = 50, days: int = 30) -> list:
             SELECT
                 r.id, r.name, r.name_en, r.cuisine, r.area,
                 r.price_range, r.url, r.source,
+                r.city, r.province, r.country, r.gmaps_types,
+                r.venue_type, r.scope_market,
+                r.is_bangkok_focus, r.is_restaurant_focus, r.exclude_reason,
                 fl.first_count, fl.last_count, fl.latest_rating, fl.snapshot_count,
-                (fl.last_count - fl.first_count) AS new_reviews,
+                -- growth: clamp negative to 0 (data inconsistency guard)
+                MAX(0, fl.last_count - fl.first_count) AS new_reviews,
+                -- growth_rate: normalized by base (avoid divide-by-zero)
                 CASE
-                    WHEN fl.first_count > 0
+                    WHEN fl.first_count > 0 AND fl.last_count > fl.first_count
                     THEN ROUND((fl.last_count - fl.first_count) * 100.0 / fl.first_count, 1)
                     ELSE 0
-                END AS velocity_pct
+                END AS velocity_pct,
+                -- normalized score: reduces large-restaurant dominance
+                CASE
+                    WHEN fl.first_count > 0 AND fl.last_count > fl.first_count
+                    THEN ROUND(
+                        ((fl.last_count - fl.first_count) * 1.0 / fl.first_count)
+                        * (LOG(fl.last_count + 1) / LOG(fl.last_count + 10))
+                        * COALESCE(fl.latest_rating, 4.0) / 4.0
+                    , 4)
+                    ELSE 0
+                END AS trend_score
             FROM restaurants r
             JOIN first_last fl ON fl.restaurant_id = r.id
-            WHERE fl.last_count > fl.first_count
-            ORDER BY new_reviews DESC, velocity_pct DESC
+            WHERE COALESCE(r.business_status, 'OPERATIONAL') != 'CLOSED_PERMANENTLY'
+            ORDER BY trend_score DESC, velocity_pct DESC
             LIMIT ?
         """, (since, limit)).fetchall()
+
+    return [dict(r) for r in rows]
+
+
+def get_emerging_restaurants(limit: int = 20, max_reviews: int = 200) -> list:
+    """
+    ดึงร้านใหม่ที่กำลังเติบโตเร็ว (review count ต่ำ แต่ trend ดี).
+
+    เกณฑ์ Emerging:
+      - last_count < max_reviews (ยังไม่ใหญ่มาก)
+      - rating >= 4.0 (คุณภาพพอใช้)
+      - ไม่ CLOSED_PERMANENTLY
+
+    สำหรับร้านที่มี 1 snapshot: ใช้ rating เป็น signal หลัก
+    สำหรับร้านที่มี 2 snapshot: ใช้ growth_rate เพิ่มเติม
+    """
+    with get_conn() as conn:
+        rows = conn.execute("""
+            WITH latest AS (
+                SELECT
+                    restaurant_id,
+                    MAX(snapshot_date)  AS snap_date,
+                    COUNT(*)            AS snap_count
+                FROM review_snapshots
+                GROUP BY restaurant_id
+            ),
+            snap_data AS (
+                SELECT
+                    l.restaurant_id,
+                    l.snap_count,
+                    s.review_count  AS last_count,
+                    s.rating        AS latest_rating,
+                    first_s.review_count AS first_count
+                FROM latest l
+                JOIN review_snapshots s
+                    ON s.restaurant_id = l.restaurant_id
+                   AND s.snapshot_date = l.snap_date
+                LEFT JOIN review_snapshots first_s
+                    ON first_s.restaurant_id = l.restaurant_id
+                   AND first_s.snapshot_date = (
+                       SELECT MIN(snapshot_date) FROM review_snapshots
+                       WHERE restaurant_id = l.restaurant_id
+                   )
+            )
+            SELECT
+                r.id, r.name, r.name_en, r.cuisine, r.area,
+                r.price_range, r.url, r.source, r.first_seen,
+                sd.last_count, sd.latest_rating, sd.snap_count,
+                -- growth_rate: 0 if no comparison or if counts went down
+                CASE
+                    WHEN sd.snap_count > 1 AND sd.first_count > 0
+                         AND sd.last_count > sd.first_count
+                    THEN ROUND((sd.last_count - sd.first_count) * 100.0 / sd.first_count, 1)
+                    ELSE 0
+                END AS velocity_pct,
+                -- emerging score: quality * recency proxy
+                ROUND(
+                    COALESCE(sd.latest_rating, 4.0)
+                    * LOG(COALESCE(sd.last_count, 1) + 1)
+                    / LOG(COALESCE(sd.last_count, 1) + 10)
+                , 4) AS emerging_score
+            FROM restaurants r
+            JOIN snap_data sd ON sd.restaurant_id = r.id
+            WHERE sd.last_count < ?
+              AND COALESCE(sd.last_count, 0) > 0
+              AND COALESCE(sd.latest_rating, 0) >= 4.0
+              AND COALESCE(r.business_status, 'OPERATIONAL') != 'CLOSED_PERMANENTLY'
+            ORDER BY emerging_score DESC, sd.latest_rating DESC, sd.last_count ASC
+            LIMIT ?
+        """, (max_reviews, limit)).fetchall()
 
     return [dict(r) for r in rows]
 
@@ -252,20 +425,36 @@ def get_all_restaurants(days: int = 30) -> list:
             SELECT
                 r.id, r.name, r.name_en, r.cuisine, r.area,
                 r.price_range, r.url, r.source,
+                r.city, r.province, r.country, r.gmaps_types,
+                r.venue_type, r.scope_market,
+                r.is_bangkok_focus, r.is_restaurant_focus, r.exclude_reason,
                 COALESCE(fl.first_count, 0)    AS first_count,
                 COALESCE(fl.last_count, 0)     AS last_count,
                 COALESCE(fl.latest_rating, 0)  AS latest_rating,
                 COALESCE(fl.snapshot_count, 0) AS snapshot_count,
-                COALESCE(fl.last_count - fl.first_count, 0) AS new_reviews,
+                -- clamp negative growth to 0 (handles inconsistent snapshot metrics)
+                MAX(0, COALESCE(fl.last_count - fl.first_count, 0)) AS new_reviews,
                 CASE
                     WHEN COALESCE(fl.first_count, 0) > 0
+                         AND fl.last_count > fl.first_count
                     THEN ROUND((fl.last_count - fl.first_count) * 100.0 / fl.first_count, 1)
                     ELSE 0
-                END AS velocity_pct
+                END AS velocity_pct,
+                -- normalized trend score (size-dampened)
+                CASE
+                    WHEN COALESCE(fl.first_count, 0) > 0
+                         AND fl.last_count > fl.first_count
+                    THEN ROUND(
+                        ((fl.last_count - fl.first_count) * 1.0 / fl.first_count)
+                        * (LOG(fl.last_count + 1) / LOG(fl.last_count + 10))
+                        * COALESCE(fl.latest_rating, 4.0) / 4.0
+                    , 4)
+                    ELSE 0
+                END AS trend_score
             FROM restaurants r
             LEFT JOIN first_last fl ON fl.restaurant_id = r.id
             WHERE COALESCE(r.business_status, 'OPERATIONAL') != 'CLOSED_PERMANENTLY'
-            ORDER BY new_reviews DESC, velocity_pct DESC
+            ORDER BY trend_score DESC, velocity_pct DESC
         """, (since,)).fetchall()
     return [dict(r) for r in rows]
 
