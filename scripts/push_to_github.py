@@ -44,6 +44,8 @@ ROOT_FILES = [
     ("scraper/scrape_youtube.py",    "scripts/scraper/scrape_youtube.py"),
     ("scraper/inject_youtube.py",    "scripts/scraper/inject_youtube.py"),
     ("scraper/canonical.py",         "scripts/scraper/canonical.py"),
+    ("scraper/export_restaurants.json", "scripts/scraper/export_restaurants.json"),
+    ("scraper/chefministry_data.db",    "scripts/scraper/chefministry_data.db"),
     ("scraper/classify.py",          "scripts/scraper/classify.py"),
     ("scraper/dedup_restaurants.py", "scripts/scraper/dedup_restaurants.py"),
 ]
