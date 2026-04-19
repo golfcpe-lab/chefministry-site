@@ -428,7 +428,7 @@
             <div style="font-size:24px;width:40px;height:40px;display:grid;place-items:center;background:var(--cream);border-radius:8px;flex-shrink:0">🍣</div>
             <div style="flex:1;min-width:0">
               <div style="font-size:13px;font-weight:900">Sushi Zo Bangkok</div>
-              <div style="font-size:11px;color:var(--text-2)">Japanese Omakase · Sathorn</div>
+              <div style="font-size:11px;color:var(--text-2)">Japanese · Sathorn <span style="background:#f0f2f5;color:#56637a;font-size:9.5px;font-weight:700;padding:1px 6px;border-radius:3px;margin-left:4px">Omakase</span></div>
             </div>
             <div style="background:var(--green-bg);color:var(--green);font-size:10px;font-weight:900;padding:3px 8px;border-radius:99px;white-space:nowrap">↑ Rising Fast</div>
           </div>
@@ -697,7 +697,7 @@
 
     var CAT_FILTER = {
       'Thai Fine Dining': function(r){ return r.type==='fine-dining' && (r.cuisine.toLowerCase().indexOf('thai')>=0 || r.cuisine.toLowerCase().indexOf('samrub')>=0); },
-      'Japanese Omakase': function(r){ return r.type==='omakase'; },
+      'Japanese':         function(r){ return r.type==='omakase' || r.cuisine.toLowerCase().indexOf('japanese')>=0 || r.cuisine.toLowerCase().indexOf('ramen')>=0; },
       'Hidden Gems':      function(r){ return r.tags && r.tags.some(function(t){ return t==='Hidden Gem' || t==='ล้านลับ'; }); },
       'Farm-to-Table':    function(r){ return r.tags && r.tags.some(function(t){ return t.toLowerCase().indexOf('farm')>=0; }); },
       'Neapolitan Pizza': function(r){ return r.cuisine.toLowerCase().indexOf('pizza')>=0 || r.cuisine.toLowerCase().indexOf('neapolitan')>=0; },
@@ -745,8 +745,8 @@
     var DISC_CATS = [
       { label:"Thai Fine Dining", emoji:"🍽️", link:"./listing.html?type=fine-dining",
         filter: function(r){ return r.type==="fine-dining" && (r.cuisine.toLowerCase().indexOf("thai")>=0 || r.cuisine.toLowerCase().indexOf("royal")>=0 || r.cuisine.toLowerCase().indexOf("samrub")>=0 || r.cuisine.toLowerCase().indexOf("farm")>=0); } },
-      { label:"Japanese Omakase", emoji:"🍣", link:"./listing.html?type=omakase",
-        filter: function(r){ return r.type==="omakase"; } },
+      { label:"Japanese", emoji:"🍣", link:"./listing.html?type=omakase",
+        filter: function(r){ return r.type==="omakase" || r.cuisine.toLowerCase().indexOf("japanese")>=0 || r.cuisine.toLowerCase().indexOf("ramen")>=0; } },
       { label:"Pizza & Italian",  emoji:"🍕", link:"./listing.html",
         filter: function(r){ return r.cuisine.toLowerCase().indexOf("pizza")>=0 || r.cuisine.toLowerCase().indexOf("italian")>=0 || r.cuisine.toLowerCase().indexOf("neapolitan")>=0; } },
       { label:"Ramen",            emoji:"🍜", link:"./listing.html",
