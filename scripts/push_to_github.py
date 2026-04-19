@@ -20,6 +20,7 @@ SITE_FILES = [
     ("legal.html",                "legal.html"),
     ("vercel.json",               "vercel.json"),
     ("css/style.css",              "css/style.css"),
+    ("js/safeDataAdapter.js",       "js/safeDataAdapter.js"),
     ("js/data.js",                 "js/data.js"),
     ("js/dataService.js",        "js/dataService.js"),
     ("js/auth.js",                 "js/auth.js"),
@@ -80,7 +81,7 @@ def gh_request(url, method="GET", body=None):
         raise Exception(f"HTTP {e.code} {e.reason}: {err_body[:300]}")
 
 today   = datetime.date.today().strftime("%Y-%m-%d")
-message = f"feat: positioning rewrite — decision-support messaging, CM_CONFIG, clean URLs, FAQ/Contact/Legal pages ({today})"
+message = f"hotfix: card IA redesign — safeDataAdapter, Japanese Omakase→category+tag, SVG score rings with numeric values ({today})"
 
 print(f"\n{'='*55}")
 print(f"  ChefMinistry → Push to GitHub")
