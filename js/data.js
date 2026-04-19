@@ -623,104 +623,170 @@ function signalDots(overlapCount) {
   ).join("");
 }
 
-// ── Card Builder ──────────────────────────────────────────────────────────────
+// ── Card Builder v2 (3-layer IA: Category / Tag / Score) ────────────────────
 function buildRestaurantCard(r, opts = {}) {
-  const sc = signalClass(r.signalStrength);
-  const vc = velocityClass(r.trendVelocity);
 
-  // -- Growth metrics (prefer pre-computed _growth fields from dataService) --
+  // ── 1. GROWTH METRICS (unchanged — feeds Trend score) ──────────────────
   const totalRev = r.totalReviews || 0;
   let growth = 0, growthRate = 0;
-
   if (r._growth !== undefined) {
-    // Pre-computed by dataService getTrendingRestaurants / getEmergingRestaurants
-    growth     = r._growth     || 0;
-    growthRate = r._growthRate || 0;
+    growth = r._growth || 0; growthRate = r._growthRate || 0;
   } else if (r.newReviews30d !== undefined && r.newReviews30d > 0) {
-    growth     = r.newReviews30d;
-    const base = Math.max(totalRev - growth, 1);
-    growthRate = growth / base;
+    growth = r.newReviews30d;
+    growthRate = growth / Math.max(totalRev - growth, 1);
   } else if (r.velocityPct !== undefined && r.velocityPct > 0) {
     growthRate = r.velocityPct / 100;
-    growth     = Math.round(growthRate * Math.max(totalRev / (1 + growthRate), 1));
+    growth = Math.round(growthRate * Math.max(totalRev / (1 + growthRate), 1));
   } else {
-    // Curated: derive from qualitative signals
-    const velBase     = {rising:0.35, stable:0.08, declining:0.01}[r.trendVelocity] || 0.08;
-    const overlapBoost = ((r.overlapSignal||0)/10)*0.18;
-    growthRate = Math.max(velBase + overlapBoost, 0);
-    growth     = Math.round(growthRate * Math.max(totalRev, 1));
+    const velBase = {rising:0.35, stable:0.08, declining:0.01}[r.trendVelocity] || 0.08;
+    growthRate = Math.max(velBase + ((r.overlapSignal||0)/10)*0.18, 0);
+    growth = Math.round(growthRate * Math.max(totalRev, 1));
   }
 
-  // -- Trend label (multi-tier v5) --
+  // ── 2. TREND LABEL (kept for badge logic) ──────────────────────────────
   let trendLabel = r._trendLabel || r.trend_label;
-  let trendEmoji = r._trendEmoji || '→';
   if (!trendLabel) {
     const cScore = r.creator_signal_score || 0;
-    if (cScore > 0.5 && totalRev < 200)      { trendLabel='Social Buzz';        trendEmoji='📲'; }
-    else if (totalRev < 300 && totalRev > 0 && (growthRate > 0.03 || (r.rating_gmaps||0) >= 4.5))
-                                             { trendLabel='Emerging';           trendEmoji='🆕'; }
-    else if (growthRate > 0.5)               { trendLabel='Rising Fast';        trendEmoji='🔥'; }
-    else if (growthRate > 0.15)              { trendLabel='Gaining Momentum';   trendEmoji='📈'; }
-    else if (growthRate > 0.05)              { trendLabel='Steady Growth';      trendEmoji='↗️'; }
-    else if (growthRate > 0.01)              { trendLabel='Also Trending';      trendEmoji='↗️'; }
-    else if (cScore > 0.1 && totalRev < 500) { trendLabel='Under Watch';       trendEmoji='👀'; }
-    else                                     { trendLabel='Stable';             trendEmoji='→'; }
+    if (cScore > 0.5 && totalRev < 200)                                          trendLabel = 'Social Buzz';
+    else if (totalRev < 300 && totalRev > 0 && (growthRate > 0.03 || (r.rating_gmaps||0) >= 4.5)) trendLabel = 'Emerging';
+    else if (growthRate > 0.5)                                                   trendLabel = 'Rising Fast';
+    else if (growthRate > 0.15)                                                  trendLabel = 'Gaining Momentum';
+    else if (growthRate > 0.05)                                                  trendLabel = 'Steady Growth';
+    else if (growthRate > 0.01)                                                  trendLabel = 'Also Trending';
+    else if (cScore > 0.1 && totalRev < 500)                                     trendLabel = 'Under Watch';
+    else                                                                         trendLabel = 'Stable';
   }
 
-  // -- Growth metric string --
-  const growthPct = Math.round(growthRate * 100);
-  let growthMetric = '';
-  if (growth > 0) {
-    if (growthPct >= 10) {
-      growthMetric = `+${growthPct}% reviews in 30 days`;
-    } else {
-      growthMetric = `+${growth} reviews in last 30 days`;
-    }
+  // ── 3. CATEGORY (Layer 1) — cuisine only, never format ─────────────────
+  function normalizeCategory(cuisine, type) {
+    const c = (cuisine || '').toLowerCase();
+    const t = (type   || '').toLowerCase();
+    if (c.includes('omakase') || t === 'omakase')                           return {label:'Japanese', emoji:'🍣'};
+    if (c.includes('ramen')   || t === 'ramen')                             return {label:'Japanese', emoji:'🍜'};
+    if (c.includes('sushi') || c.includes('izakaya') || c.includes('japanese') || c.includes('ญี่ปุ่น')) return {label:'Japanese', emoji:'🍣'};
+    if (c.includes('thai') || c.includes('ไทย') || c.includes('street food') || t === 'street-food' || t === 'local') return {label:'Thai', emoji:'🌿'};
+    if (c.includes('italian'))                                               return {label:'Italian', emoji:'🍝'};
+    if (c.includes('french'))                                                return {label:'French',  emoji:'🥐'};
+    if (c.includes('steak') || c.includes('beef') || t === 'steakhouse')    return {label:'Steak',   emoji:'🥩'};
+    if (c.includes('chinese') || c.includes('dim sum') || c.includes('จีน')) return {label:'Chinese', emoji:'🥢'};
+    if (c.includes('cafe') || c.includes('coffee') || c.includes('คาเฟ่') || t === 'cafe') return {label:'Café', emoji:'☕'};
+    if (c.includes('indian'))                                                return {label:'Indian',  emoji:'🍛'};
+    if (c.includes('seafood') || c.includes('ซีฟู้ด'))                      return {label:'Seafood', emoji:'🦞'};
+    if (c.includes('korean') || c.includes('เกาหลี'))                       return {label:'Korean',  emoji:'🥘'};
+    if (c.includes('progressive') || t === 'fine-dining')                   return {label:'Fine Dining', emoji:'🍽'};
+    return {label:'Global', emoji:'🍽'};
+  }
+  const cat = normalizeCategory(r.cuisine_normalized || r.cuisine, r.type);
+
+  // ── 4. PRIMARY BADGE (Layer 2, image overlay) — one signal only ─────────
+  const tags = r.tags || [];
+  const isHiddenGem  = tags.some(t => t === 'Hidden Gem' || t === 'ล้านลับ' || t === 'Underrated');
+  const isNewOpening = tags.some(t => /new opening|grand open/i.test(t));
+  const isEdPick     = tags.some(t => /editor|must.try|best in/i.test(t));
+  let primaryBadge = '';
+  if      (isHiddenGem)                                                primaryBadge = '<div class="r-primary-badge r-badge-gem">💎 Hidden Gem</div>';
+  else if (trendLabel === 'Rising Fast' || growthRate > 0.45)          primaryBadge = '<div class="r-primary-badge r-badge-trend">🔥 Trending</div>';
+  else if (trendLabel === 'Gaining Momentum' || r.trendVelocity === 'rising') primaryBadge = '<div class="r-primary-badge r-badge-rising">↑ Rising</div>';
+  else if (trendLabel === 'Emerging')                                  primaryBadge = '<div class="r-primary-badge r-badge-new">🆕 Emerging</div>';
+  else if (isNewOpening)                                               primaryBadge = '<div class="r-primary-badge r-badge-new">✨ New Opening</div>';
+  else if (isEdPick)                                                   primaryBadge = '<div class="r-primary-badge r-badge-pick">⭐ Editor\'s Pick</div>';
+  else if (trendLabel === 'Social Buzz')                               primaryBadge = '<div class="r-primary-badge r-badge-buzz">📲 Social Buzz</div>';
+
+  // ── 5. INLINE TAGS (Layer 2, below name) — max 2, format + editorial ───
+  const FORMAT_MAP = {
+    'omakase':'Omakase', 'fine-dining':'Fine Dining', 'ramen':'Ramen',
+    'cafe':'Café', 'street-food':'Street Food', 'steakhouse':'Steakhouse',
+    'local':'Local Eats', 'seafood':'Seafood'
+  };
+  const EDITORIAL_TAGS = ['Michelin 1★','Michelin 2★','Michelin 3★',"Asia's 50 Best",'Reservation Required','Queue Required','Tasting Menu'];
+  let inlineTags = [];
+  if (FORMAT_MAP[r.type]) inlineTags.push({cls:'r-tag-format', text: FORMAT_MAP[r.type]});
+  for (const t of EDITORIAL_TAGS) {
+    if (tags.includes(t) && inlineTags.length < 2) inlineTags.push({cls:'r-tag-editorial', text: t});
+  }
+  const tagsHtml = inlineTags.slice(0,2).map(t => `<span class="${t.cls}">${escHtml(t.text)}</span>`).join('');
+
+  // ── 6. FOUR SCORES ──────────────────────────────────────────────────────
+  // Quality (0–10): mapped from signalStrength
+  const quality = ({
+    'very-strong': 8.8, 'strong': 7.8, 'moderate': 7.0, 'weak': 5.8
+  }[r.signalStrength] || 7.0);
+
+  // Value (0–10): inverse of budget tier
+  const value = ({1: 8.5, 2: 7.2, 3: 5.8}[r.budget] || 6.5);
+
+  // Trend (0–100%): from growthRate + trendVelocity fallback
+  let trend;
+  if      (growthRate > 0.5)  trend = Math.min(95, Math.round(growthRate * 60 + 62));
+  else if (growthRate > 0.15) trend = Math.round(growthRate * 90 + 55);
+  else if (growthRate > 0.03) trend = Math.round(growthRate * 160 + 42);
+  else                        trend = {rising:68, stable:50, declining:30}[r.trendVelocity] || 48;
+  trend = Math.max(22, Math.min(96, trend));
+
+  // Buzz (0–100%): from overlapSignal + signalCount
+  const buzz = Math.max(18, Math.min(96,
+    Math.round((r.overlapSignal||0) * 7 + Math.min((r.signalCount||0) * 2, 26) + 16)
+  ));
+
+  // ── 7. SCORE LABELS + FILL COLORS ──────────────────────────────────────
+  function scoreInfo10(v) {
+    if (v >= 9.0) return {label:'Exceptional', ic:'r-interp-green', fc:'r-score-fill-green'};
+    if (v >= 8.0) return {label:'High',        ic:'r-interp-green', fc:'r-score-fill-green'};
+    if (v >= 7.0) return {label:'Good',        ic:'r-interp-amber', fc:'r-score-fill-amber'};
+    if (v >= 6.0) return {label:'Decent',      ic:'r-interp-gray',  fc:'r-score-fill-gray'};
+    return              {label:'Weak',         ic:'r-interp-gray',  fc:'r-score-fill-gray'};
+  }
+  function scoreInfo100(v) {
+    if (v >= 90) return {label:'Peak',    ic:'r-interp-green', fc:'r-score-fill-green'};
+    if (v >= 75) return {label:'Strong',  ic:'r-interp-green', fc:'r-score-fill-green'};
+    if (v >= 55) return {label:'Growing', ic:'r-interp-amber', fc:'r-score-fill-amber'};
+    if (v >= 35) return {label:'Quiet',   ic:'r-interp-gray',  fc:'r-score-fill-gray'};
+    return             {label:'Fading',  ic:'r-interp-gray',  fc:'r-score-fill-gray'};
   }
 
-  // -- Trend badge HTML --
-  const badgeCls  = trendLabel==='Rising Fast'       ? 'color:#1a7a4a;background:rgba(26,122,74,.12)'
-                  : trendLabel==='Gaining Momentum'  ? 'color:#856404;background:rgba(255,193,7,.15)'
-                  : trendLabel==='Steady Growth'     ? 'color:#0a6b3a;background:rgba(10,107,58,.1)'
-                  : trendLabel==='Also Trending'     ? 'color:#0a6b3a;background:rgba(10,107,58,.08)'
-                  : trendLabel==='Emerging'          ? 'color:#0d6efd;background:rgba(13,110,253,.1)'
-                  : trendLabel==='Social Buzz'       ? 'color:#7c3aed;background:rgba(124,58,237,.1)'
-                  : trendLabel==='Under Watch'       ? 'color:#b45309;background:rgba(180,83,9,.1)'
-                  : 'color:var(--text-2);background:var(--border-light,#f0f0f0)';
-  const trendHtml = `<div class="card-trend ${vc==='green'?'trend-up':vc==='red'?'trend-down':''}" style="font-size:10px;font-weight:900;padding:3px 8px;border-radius:99px;${badgeCls}">${trendEmoji} ${escHtml(trendLabel)}</div>`;
-
-  return `
-    <div class="card restaurant-card">
-      <a class="card-link" href="./restaurant.html?id=${escHtml(r.id)}">
-        <div class="card-image">
-          <div class="card-emoji-bg">${escHtml(r.emoji||'🍽')}</div>
-          ${trendHtml}
-        </div>
-        <div class="card-body">
-          <div class="card-top">
-            <div>
-              <div class="card-name">${escHtml(r.name)}</div>
-              <div class="card-cuisine">${escHtml(r.cuisine_normalized||r.cuisine||'')}${(r.area_normalized||r.area) ? ' · ' + escHtml(r.area_normalized||r.area) : ''}</div>
-            </div>
-            <div class="signal-badge signal-${escHtml(r.signalStrength||'moderate')}">${totalRev}<span style="font-size:10px;font-weight:700;margin-left:2px">รีวิว</span></div>
-          </div>
-          ${growthMetric ? `<div style="font-size:12px;font-weight:800;color:var(--green,#1a7a4a);margin:4px 0 2px;letter-spacing:.01em">📊 ${escHtml(growthMetric)}</div>` : ''}
-          <div class="card-insight">${escHtml(r.trend_reason||r._growthMetric||r.cmNote||'')}</div>
-          ${(opts.showOverlap && r.overlapSignal) ? `<div class="overlap-bar" style="margin-top:4px">
-            <div style="font-size:10px;font-weight:800;color:var(--text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Creator Signal <span style="font-weight:400;opacity:.6">(ข้อมูลเสริม)</span></div>
-            ${signalDots(r.overlapSignal)}
-          </div>` : ''}
-          <div class="card-footer">
-            <div class="tag-list">
-              ${r.budgetLabel ? `<span class="tag budget-${r.budget}">${escHtml(r.budgetLabel)}</span>` : ''}
-              <span class="velocity ${escHtml(r.trendVelocity||'')}">${trendEmoji} ${escHtml(trendLabel)}</span>
-            </div>
-            ${(r.area_normalized||r.area) ? `<div class="card-area">📍 ${escHtml(r.area_normalized||r.area)}</div>` : ''}
-          </div>
-          <div style="font-size:9px;color:var(--text-2);opacity:.6;margin-top:4px">จัดอันดับจากการเปลี่ยนแปลงของรีวิว · อัปเดตล่าสุด 2026-04-14</div>
-        </div>
-      </a>
+  // ── 8. SVG RING BUILDER ─────────────────────────────────────────────────
+  // Circle r=18, circumference = 2π×18 = 113.1
+  const CIRC = 113.1;
+  function ring(pct, fillCls, numStr) {
+    const offset = Math.round(CIRC * (1 - Math.max(0, Math.min(100, pct)) / 100) * 10) / 10;
+    return `<div class="r-score-ring">
+      <svg viewBox="0 0 44 44">
+        <circle class="r-score-track" cx="22" cy="22" r="18"/>
+        <circle class="r-score-fill ${fillCls}" cx="22" cy="22" r="18"
+          stroke-dasharray="${CIRC}" stroke-dashoffset="${offset}"/>
+      </svg>
+      <div class="r-score-num">${escHtml(numStr)}</div>
     </div>`;
+  }
+
+  const qi = scoreInfo10(quality),  qRing = ring(quality * 10, qi.fc, quality.toFixed(1));
+  const vi = scoreInfo10(value),    vRing = ring(value  * 10, vi.fc, value.toFixed(1));
+  const ti = scoreInfo100(trend),   tRing = ring(trend,       ti.fc, trend + '%');
+  const bi = scoreInfo100(buzz),    bRing = ring(buzz,        bi.fc, buzz  + '%');
+
+  // ── 9. CARD HTML ────────────────────────────────────────────────────────
+  const areaStr = escHtml(r.area_normalized || r.area || '');
+  return `
+    <a class="r-card" href="./restaurant.html?id=${escHtml(r.id)}">
+      <div class="r-img">
+        <div class="r-img-bg">${escHtml(r.emoji||'🍽')}</div>
+        <div class="r-img-overlay"></div>
+        ${primaryBadge}
+        ${areaStr ? `<div class="r-location">📍 ${areaStr}</div>` : ''}
+      </div>
+      <div class="r-body">
+        <div class="r-category">${cat.emoji} ${cat.label}</div>
+        <div class="r-name">${escHtml(r.name)}</div>
+        <div class="r-tags">${tagsHtml}</div>
+        <div class="r-score-divider"></div>
+        <div class="r-scores">
+          <div class="r-score">${qRing}<div class="r-score-dim">Quality</div><div class="r-score-interp ${qi.ic}">${qi.label}</div></div>
+          <div class="r-score">${vRing}<div class="r-score-dim">Value</div><div class="r-score-interp ${vi.ic}">${vi.label}</div></div>
+          <div class="r-score">${tRing}<div class="r-score-dim">Trend</div><div class="r-score-interp ${ti.ic}">${ti.label}</div></div>
+          <div class="r-score">${bRing}<div class="r-score-dim">Buzz</div><div class="r-score-interp ${bi.ic}">${bi.label}</div></div>
+        </div>
+      </div>
+    </a>`;
 }
 
 // ── Central Config — single source of truth for all stats ────────────────────────
