@@ -400,7 +400,7 @@ const CM_RESTAURANTS = [
   },
   // ── Omakase ───────────────────────────────────────────────────────────────
   {
-    id:"r016", name:"Sushi Masato", cuisine:"Japanese Omakase",
+    id:"r016", name:"Sushi Masato", cuisine:"Japanese",
     type:"omakase", budget:3, budgetLabel:"฿฿฿",
     occasions:["special","date","business"], area:"สาทร",
     priceRange:"6,000–9,000", emoji:"🍣",
@@ -415,7 +415,7 @@ const CM_RESTAURANTS = [
     totalReviews: 27
   },
   {
-    id:"r017", name:"Sushi Ichizu", cuisine:"Japanese Omakase",
+    id:"r017", name:"Sushi Ichizu", cuisine:"Japanese",
     type:"omakase", budget:3, budgetLabel:"฿฿฿",
     occasions:["special","date"], area:"ทองหล่อ",
     priceRange:"4,500–7,000", emoji:"🍱",
@@ -430,7 +430,7 @@ const CM_RESTAURANTS = [
     totalReviews: 15
   },
   {
-    id:"r018", name:"Ginza Sushi Ichi", cuisine:"Japanese Omakase",
+    id:"r018", name:"Ginza Sushi Ichi", cuisine:"Japanese",
     type:"omakase", budget:3, budgetLabel:"฿฿฿",
     occasions:["special","business"], area:"เพลินจิต",
     priceRange:"5,500–8,500", emoji:"🔪",
@@ -547,7 +547,7 @@ const CM_SIGNALS = {
   },
   trendCategories: [
     { cat:"Thai Fine Dining", signal:"very-strong", change:"+52%", influencers:8 },
-    { cat:"Japanese Omakase", signal:"very-strong", change:"+34%", influencers:6 },
+    { cat:"Japanese",         signal:"very-strong", change:"+34%", influencers:6 },
     { cat:"Hidden Gems",      signal:"strong",      change:"+40%", influencers:5 },
     { cat:"Neapolitan Pizza", signal:"strong",      change:"+22%", influencers:7 },
     { cat:"Artisan Ramen",    signal:"strong",      change:"+15%", influencers:5 },
