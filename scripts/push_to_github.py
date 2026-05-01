@@ -50,6 +50,8 @@ ROOT_FILES = [
     ("scraper/chefministry_data.db",    "scripts/scraper/chefministry_data.db"),
     ("scraper/classify.py",          "scripts/scraper/classify.py"),
     ("scraper/dedup_restaurants.py", "scripts/scraper/dedup_restaurants.py"),
+    ("scraper/inject_fb_digest.py",  "scripts/scraper/inject_fb_digest.py"),
+    ("scraper/fb_digest.json",       "scripts/scraper/fb_digest.json"),
 ]
 
 FILES_TO_DELETE = []  # ไม่มีไฟล์ที่ต้องลบแล้ว
