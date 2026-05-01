@@ -204,6 +204,10 @@
       });
     });
 
+    // Option A: Trending = established restaurants only (reviews >= 300)
+    // Emerging owns the < 300 space — no overlap
+    all = all.filter(function (r) { return (r.totalReviews || 0) >= 300; });
+
     var scraped  = all.filter(function (r) { return  r._fromDB && r._score > 0; });
     var curated  = all.filter(function (r) { return !r._fromDB && r._score > 0; });
     scraped.sort(function (a, b) { return b._score - a._score; });
