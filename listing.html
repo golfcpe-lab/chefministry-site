@@ -108,6 +108,10 @@
         style="display:flex;align-items:center;gap:5px;padding:8px 16px;border-radius:99px;font-size:13px;font-weight:900;border:2px solid var(--border);cursor:pointer;background:transparent;color:var(--text-2)">
         🏛️ Classic
       </button>
+      <button id="tab-new" onclick="setTab('new')"
+        style="display:flex;align-items:center;gap:5px;padding:8px 16px;border-radius:99px;font-size:13px;font-weight:900;border:2px solid var(--border);cursor:pointer;background:transparent;color:var(--text-2)">
+        🆕 เปิดใหม่
+      </button>
       <span id="tabDesc" style="font-size:11px;color:var(--text-2);margin-left:6px;font-style:italic">จัดอันดับจากการเปลี่ยนแปลงของรีวิว ไม่ใช่จำนวนรีวิวรวม</span>
       <span style="margin-left:auto;font-size:10px;color:var(--text-2);opacity:.6">อัปเดต: 2026-04-14 · ข้อมูล 30 วัน</span>
     </div>
@@ -297,15 +301,16 @@
   let currentTab = 'trending';
 
   const TAB_DESC = {
-    trending: 'จัดอันดับจากการเปลี่ยนแปลงของรีวิว ไม่ใช่จำนวนรีวิวรวม · เน้นร้านที่กำลังเติบโต',
-    emerging: 'ร้านน่าจับตา — รีวิวรวมต่ำกว่า 300 แต่มีสัญญาณเติบโต ทั้ง review growth และ creator signal',
-    popular:  'ร้านที่พิสูจน์ตัวเองแล้ว — รีวิวสะสมมากที่สุด บ่งบอกว่าคนไปซ้ำ'
+    trending: 'ร้านที่ trendVelocity กำลัง rising — เรียงตาม signal สะสม',
+    emerging: 'ร้านที่สัญญาณแข็ง (strong/very-strong) แต่ยังไม่ mainstream — hidden gems',
+    popular:  'ร้านที่พิสูจน์ตัวเองแล้ว — รีวิวสะสมมากที่สุด บ่งบอกว่าคนไปซ้ำ',
+    new:      'ร้านที่เพิ่งเปิดสัปดาห์นี้ — scan จาก BK Magazine, Timeout Bangkok ฯลฯ ทุกวันจันทร์'
   };
 
   function setTab(tab) {
     currentTab = tab;
     // Update button styles
-    ['trending','emerging','popular'].forEach(function(t) {
+    ['trending','emerging','popular','new'].forEach(function(t) {
       const btn = document.getElementById('tab-' + t);
       if (!btn) return;
       if (t === tab) {
@@ -406,6 +411,13 @@
       const N = 60;
       if (currentTab === 'emerging') return ChefMinistryData.getEmergingRestaurants(N);
       if (currentTab === 'popular')  return ChefMinistryData.getPopularRestaurants(N);
+      if (currentTab === 'new') {
+        const digest = (typeof CM_FB_DIGEST !== 'undefined') ? CM_FB_DIGEST : [];
+        return digest.map(r => Object.assign({}, r, {
+          _isNew: true,
+          tags: (r.tags || []).concat(['New Opening'])
+        }));
+      }
       return ChefMinistryData.getTrendingRestaurants(N);
     }
 
