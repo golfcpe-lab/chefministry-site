@@ -6,7 +6,7 @@
   <link rel="icon" type="image/png" href="./assets/logo_circular.png"/>
   <title>ChefMinistry — Restaurant Rating Intelligence</title>
   <meta name="description" content="ChefMinistry วิเคราะห์ Rating Velocity และ Review Trend จากแหล่งข้อมูล public รายวัน — ให้ร้านอาหารรู้ position ตัวเองใน Category และให้ Food Creator เห็นโอกาสก่อนตลาด"/>
-  <link rel="stylesheet" href="./css/style.css?v=20260415a"/>
+  <link rel="stylesheet" href="./css/style.css?v=20260501a"/>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-BT2BCMZ9SH"></script>
   <script>
@@ -586,11 +586,11 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-<script src="./js/firebase-config.js?v=20260415a"></script>
-<script src="./js/auth.js?v=20260415a"></script>
-<script src="./js/safeDataAdapter.js?v=20260419a"></script>
-<script src="./js/data.js?v=20260415a"></script>
-<script src="./js/dataService.js?v=20260415a"></script>
+<script src="./js/firebase-config.js?v=20260501a"></script>
+<script src="./js/auth.js?v=20260501a"></script>
+<script src="./js/safeDataAdapter.js?v=20260501a"></script>
+<script src="./js/data.js?v=20260501a"></script>
+<script src="./js/dataService.js?v=20260501a"></script>
 <script>
   // Mobile nav
   document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
@@ -610,9 +610,50 @@
     if (whDesc  && spotlight.desc)  whDesc.textContent  = spotlight.desc;
   })();
 
-  // ── Hero card — Highest Velocity from scraper if available, else real signal data ──
+  // ── Hero card — New Opening (CM_FB_DIGEST) > Velocity > Weekly Spotlight ──
   const heroCard = document.getElementById("heroOverlapCard");
   if (heroCard) {
+
+    // 1. Prefer newest opening from FB digest
+    const _fbDigest = (typeof CM_FB_DIGEST !== "undefined") ? CM_FB_DIGEST : [];
+    const heroNew = _fbDigest.length > 0 ? _fbDigest[0] : null;
+
+    if (heroNew) {
+      const _emoji  = heroNew.emoji || "🍽️";
+      const _name   = escHtml(heroNew.name || "");
+      const _cuisine= escHtml(heroNew.cuisine || "");
+      const _area   = escHtml(heroNew.area || "");
+      const _desc   = escHtml(heroNew.description || "");
+      const _src    = escHtml(heroNew.sourceUrl || "#");
+      const _srcName= escHtml(heroNew.sourceName || "Source");
+      const _week   = escHtml((typeof CM_FB_DIGEST_META !== "undefined" ? CM_FB_DIGEST_META.weekLabel : "") || "");
+      const _trend  = escHtml((typeof CM_FB_DIGEST_META !== "undefined" ? CM_FB_DIGEST_META.trendNote : "") || "");
+      heroCard.innerHTML = `
+        <div class="hero-sample-head">
+          <span>🆕 New Opening — ${_week}</span>
+          <span class="verdict" style="background:rgba(59,130,246,.2);color:#60a5fa">เปิดใหม่สัปดาห์นี้</span>
+        </div>
+        <div class="hero-sample-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+            <div>
+              <div class="hero-sample-name">${_emoji} ${_name}</div>
+              <div class="hero-sample-type">${_cuisine} · ${_area}</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-size:10px;font-weight:900;color:var(--text-2);text-transform:uppercase;letter-spacing:.08em">New This Week</div>
+              <div style="font-size:22px;line-height:1.1">🆕</div>
+            </div>
+          </div>
+          <div class="hero-sample-insight" style="margin-bottom:10px">${_desc}</div>
+          ${_trend ? `<div style="font-size:11px;color:var(--gold);font-weight:700;margin-bottom:8px">💡 ${_trend}</div>` : ""}
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px">
+            <a href="${_src}" target="_blank" rel="noopener"
+               style="font-size:10px;color:var(--gold);font-weight:800;text-decoration:none;opacity:.85">${_srcName} ↗</a>
+            <span style="font-size:10px;color:var(--text-2);opacity:.6">${_fbDigest.length} ร้านเปิดใหม่สัปดาห์นี้</span>
+          </div>
+        </div>`;
+    } else {
+    // 2. Fallback: highest velocity from scraper
     const _extAll = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined") ? CM_EXTERNAL_RESTAURANTS : [];
     const _extVel = _extAll.filter(r => (r.velocityPct||0) > 0 && ChefMinistryData.scopeFilter(r));
     const extSorted = _extVel.length > 0
@@ -622,7 +663,7 @@
 
     const heroExt = extSorted[0];
 
-    // Spotlight from ChefMinistryData — matched to real restaurant data
+    // 3. Final fallback: weekly spotlight
     const _spotlight = ChefMinistryData.getWeeklySpotlight();
     const heroStatic = _spotlight.restaurant;
 
@@ -707,6 +748,7 @@
           </div>`;
       }
     }
+    } // end else (no CM_FB_DIGEST — fallback velocity/spotlight)
   }
 
 
@@ -951,8 +993,7 @@
         <div class="rank-meta">${escHtml(r.cuisine||"")} · ${escHtml(r.area||"")}</div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
-        <div style="font-size:${_rpct > 0 ? _rpct+"%" : _remoji}
-        </div>
+        <div style="font-size:16px;font-weight:900;color:var(--navy)">${_rpct > 0 ? "+"+_rpct+"%" : _remoji}</div>
         <div style="font-size:11px;color:var(--text-2);font-weight:700">${_remoji} ${escHtml(_rlabel)}</div>
       </div>
     </a>`;
@@ -1126,8 +1167,9 @@
       if (strip) strip.style.borderColor = tab === "new" ? "#3b82f6" : "var(--border)";
     };
 
-    // เปิด tab trending เป็น default
-    switchDiscoverTab("trending");
+    // เปิด tab ตาม CM_FB_DIGEST — ถ้ามีข้อมูลเปิดใหม่ ให้เปิด new tab
+    var _defaultTab = (typeof CM_FB_DIGEST !== "undefined" && CM_FB_DIGEST.length > 0) ? "new" : "trending";
+    switchDiscoverTab(_defaultTab);
 
   })();
 
