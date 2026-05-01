@@ -83,7 +83,7 @@ def gh_request(url, method="GET", body=None):
         raise Exception(f"HTTP {e.code} {e.reason}: {err_body[:300]}")
 
 today   = datetime.date.today().strftime("%Y-%m-%d")
-message = f"hotfix: card IA redesign — safeDataAdapter, Japanese Omakase→category+tag, SVG score rings with numeric values ({today})"
+message = f"feat: new-openings tab + version cache-bust v20260501 ({today})"
 
 print(f"\n{'='*55}")
 print(f"  ChefMinistry → Push to GitHub")
