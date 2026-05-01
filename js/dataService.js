@@ -188,70 +188,57 @@
 
   /* ─── Ranked lists ────────────────────────────────────────────────────────── */
   function getTrendingRestaurants(n) {
+    // Trending = กำลัง momentum ขึ้น — แยก logic ตาม data source
+    // Curated (CM_RESTAURANTS): trendVelocity === 'rising', sort by signalCount
+    // Scraped (CM_EXTERNAL): velocityPct > 5 or _growthRate > 0, sort by velocityPct
     var desired = n || 8;
     var all = _mergeAllRestaurants().filter(_scopeFilter).map(function (r) {
-      var s = _computeScore(r);
-      var label = r._trendLabel || r.trend_label || _trendLabel(s, r);
       return Object.assign({}, r, {
-        _score:       s.score,
-        _growthRate:  s.growthRate,
-        _growth:      s.growth,
-        _trendLabel:  label,
-        _trendEmoji:  r._trendEmoji || _trendEmoji(label),
-        _growthMetric: r._growthMetric || (s.growthRate > 0.1 ? ('+' + Math.round(s.growthRate * 100) + '% in 30d') : ''),
-        cuisine:      r.cuisine_normalized || r.cuisine || '',
-        area:         r.area_normalized    || r.area    || ''
+        cuisine: r.cuisine_normalized || r.cuisine || '',
+        area:    r.area_normalized    || r.area    || ''
       });
     });
-
-    // Option A: Trending = established restaurants only (reviews >= 300)
-    // Emerging owns the < 300 space — no overlap
-    all = all.filter(function (r) { return (r.totalReviews || 0) >= 300; });
-
-    var scraped  = all.filter(function (r) { return  r._fromDB && r._score > 0; });
-    var curated  = all.filter(function (r) { return !r._fromDB && r._score > 0; });
-    scraped.sort(function (a, b) { return b._score - a._score; });
-    curated.sort(function (a, b) { return b._score - a._score; });
-
-    var maxCurated = Math.floor(desired * 0.4);
-    var combined   = scraped.concat(curated.slice(0, maxCurated));
-    combined.sort(function (a, b) { return b._score - a._score; });
-
-    var rotated = _rotate(combined, desired, 2);
-
-    // Fill remainder with DB records sorted by reviews
-    if (rotated.length < desired) {
-      var seen = {};
-      rotated.forEach(function (r) { seen[r.id || r.name] = true; });
-      var extras = all.filter(function (r) { return !seen[r.id || r.name]; })
-        .sort(function (a, b) { return (b.totalReviews || 0) - (a.totalReviews || 0); })
-        .slice(0, desired - rotated.length);
-      rotated = rotated.concat(extras);
-    }
-    return rotated;
+    var curated  = all.filter(function (r) { return !r._fromDB && r.trendVelocity === 'rising'; });
+    var scraped  = all.filter(function (r) { return  r._fromDB && ((r.velocityPct || 0) > 5 || (r._growthRate || 0) > 0); });
+    curated.sort(function (a, b) { return (b.signalCount || 0) - (a.signalCount || 0); });
+    scraped.sort(function (a, b) { return (b.velocityPct || 0) - (a.velocityPct || 0); });
+    // Interleave: curated first, fill with scraped
+    var combined = curated.concat(scraped);
+    return _rotate(combined, desired, 2);
   }
 
   function getEmergingRestaurants(n) {
+    // Emerging = สัญญาณดีแต่ยังไม่ mainstream — แยก logic ตาม data source
+    // Curated: signalStrength strong/very-strong แต่ไม่ rising
+    // Scraped: _isEmerging flag + ไม่ใช่ trending (velocityPct <= 5)
     var desired = n || 8;
-    var THRESHOLD = 300;
-    var candidates = _mergeAllRestaurants().filter(_scopeFilter).map(function (r) {
-      var s = _computeScore(r);
+    var trendingIds = new (function() {
+      var ids = {};
+      getTrendingRestaurants(99).forEach(function (r) { ids[r.id || r.name] = true; });
+      return { has: function(k) { return !!ids[k]; } };
+    })();
+    var all = _mergeAllRestaurants().filter(_scopeFilter).map(function (r) {
       return Object.assign({}, r, {
-        _score: s.score, _growthRate: s.growthRate, _growth: s.growth,
-        _trendLabel: 'Emerging', _trendEmoji: '\uD83C\uDD95',
         cuisine: r.cuisine_normalized || r.cuisine || '',
         area:    r.area_normalized    || r.area    || ''
       });
     }).filter(function (r) {
-      var rev = r.totalReviews || 0;
-      return rev > 0 && rev < THRESHOLD &&
-        (r._isEmerging || r.trend_label === 'Emerging' || r._growthRate > 0.01 ||
-         (r.rating_gmaps || 0) >= 4.3 || (r.creator_signal_score || 0) > 0.1);
-    }).sort(function (a, b) {
-      if (Math.abs(b._growthRate - a._growthRate) > 0.005) return b._growthRate - a._growthRate;
-      return b._score - a._score;
+      return !trendingIds.has(r.id || r.name);
     });
-    return _rotate(candidates, desired, 2);
+    var curated = all.filter(function (r) {
+      var sig = r.signalStrength || '';
+      return !r._fromDB && (sig === 'strong' || sig === 'very-strong');
+    });
+    var scraped = all.filter(function (r) {
+      return r._fromDB && r._isEmerging;
+    });
+    curated.sort(function (a, b) { return (b.overlapSignal || 0) - (a.overlapSignal || 0); });
+    scraped.sort(function (a, b) {
+      var ra = r => (r.rating_gmaps || 0) * Math.log((r.totalReviews || 0) + 1);
+      return ra(b) - ra(a);
+    });
+    var combined = curated.concat(scraped);
+    return _rotate(combined, desired, 2);
   }
 
   function getPopularRestaurants(n) {
@@ -472,9 +459,6 @@
       getAllStats: getAllStats,
       injectStats: injectStats
     };
-    console.log('[CM] dataService v6 loaded — ' + _mergeAllRestaurants().filter(_scopeFilter).length + ' in-scope restaurants');
-  } catch (e) {
-    console.error('[CM] dataService export error:', e);
-  }
+  } catch (e) { if (typeof console !== 'undefined') console.error('[CM] export error', e); }
 
 }(typeof window !== 'undefined' ? window : this));
