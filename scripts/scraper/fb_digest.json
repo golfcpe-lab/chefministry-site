@@ -1,0 +1,84 @@
+{
+  "digest_date": "2026-05-01",
+  "week_label": "Week of Apr 28, 2026",
+  "trend_note": "Japanese curry and modern Thai concepts dominating Bangkok's new openings this month",
+  "entries": [
+    {
+      "name": "Curry Up Bangkok",
+      "type": "Restaurant",
+      "city": "Bangkok",
+      "area": "Ploenchit",
+      "cuisine": "Japanese",
+      "description": "First Southeast Asia outpost of NIGO's Japanese curry concept from Human Made — butter chicken curry and eggplant curry starting at 245 baht, inside Central Embassy next to Human Made store",
+      "source_url": "https://stupiddope.com/2026/04/human-made-bangkok-and-curry-up-bangkok-expand-nigos-cultural-retail-model/",
+      "source_name": "StupidDope",
+      "is_watchlist": false
+    },
+    {
+      "name": "Somsak",
+      "type": "Restaurant",
+      "city": "Bangkok",
+      "area": "Ekkamai",
+      "cuisine": "Thai",
+      "description": "Modern Isan from the team behind Fatboy Izakaya and Kim Jeong Grill — som tam, laab, grilled meats and sharing plates at Ekkamai Corner, punchy flavours done with personality",
+      "source_url": "https://www.bkmagazine.com/food/restaurants/top-tables-2026-bangkoks-20-best-restaurants-and-beyond/",
+      "source_name": "BK Magazine",
+      "is_watchlist": false
+    },
+    {
+      "name": "Wisetwiso",
+      "type": "Restaurant",
+      "city": "Bangkok",
+      "area": "Sathorn",
+      "cuisine": "Thai",
+      "description": "Fine-dining rooted in royal Thai culinary traditions, reinterpreted through a contemporary lens by Chef Chakkrapoom Boonyakom — inside a restored house on Chuea Phloeng Road",
+      "source_url": "https://www.bkmagazine.com/food/restaurants/top-tables-2026-bangkoks-20-best-restaurants-and-beyond/",
+      "source_name": "BK Magazine",
+      "is_watchlist": false
+    },
+    {
+      "name": "Jakawaan",
+      "type": "Restaurant",
+      "city": "Bangkok",
+      "area": "Thonglor",
+      "cuisine": "Thai",
+      "description": "Tapas-style Thai bites and structured samrub dining off Thonglor Soi 9, led by food stylist and designer Chef Nick — Thai dining reinvented as a sharing experience",
+      "source_url": "https://www.bkmagazine.com/food/restaurants/top-tables-2026-bangkoks-20-best-restaurants-and-beyond/",
+      "source_name": "BK Magazine",
+      "is_watchlist": false
+    },
+    {
+      "name": "Quilombo",
+      "type": "Restaurant",
+      "city": "Bangkok",
+      "area": "Thonglor",
+      "cuisine": "Steakhouse",
+      "description": "Argentine steakhouse inside a stone-clad castle on Thonglor Soi 5 — concise menu of Argentine ranching traditions, fire and meat, designed by Christopher Mark and Manuel Palacio",
+      "source_url": "https://fridaybangkok.com/v/quilombo",
+      "source_name": "Friday Bangkok",
+      "is_watchlist": false
+    },
+    {
+      "name": "Iris & Wild Iris",
+      "type": "Restaurant",
+      "city": "Bangkok",
+      "area": "Lumphini",
+      "cuisine": "European",
+      "description": "Dual-concept rooftop on the 29th floor of SO/ Bangkok — Iris restaurant with panoramic Lumphini Park views and French-Italian-Spanish menu, Wild Iris for cocktails and sunsets",
+      "source_url": "https://www.masalathai.com/trending/bangkoks-new-restaurants-caf%C3%A9s-cultural-openings-to-know-right-now",
+      "source_name": "Masala Thailand",
+      "is_watchlist": false
+    },
+    {
+      "name": "Sato San",
+      "type": "Restaurant",
+      "city": "Bangkok",
+      "area": "Ratchaprasong",
+      "cuisine": "Fusion",
+      "description": "Thai-Isaan meets Japanese precision on the 32nd floor of Moxy Bangkok Ratchaprasong — rooftop with DJ sets Wed-Sat and skyline views, open daily from 6PM",
+      "source_url": "https://sinehabangkok.com/food-drink/bar/sato-san-rooftop-bar/",
+      "source_name": "Sineba Bangkok",
+      "is_watchlist": false
+    }
+  ]
+}
