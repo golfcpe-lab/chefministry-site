@@ -277,8 +277,13 @@
           </button>
           <button id="tabEmerging"
             onclick="switchDiscoverTab('emerging')"
+            style="padding:8px 18px;font-size:13px;font-weight:800;border:none;cursor:pointer;background:transparent;color:var(--text-2);border-radius:0;transition:all .15s">
+            📈 Emerging
+          </button>
+          <button id="tabNew"
+            onclick="switchDiscoverTab('new')"
             style="padding:8px 18px;font-size:13px;font-weight:800;border:none;cursor:pointer;background:transparent;color:var(--text-2);border-radius:0 8px 8px 0;transition:all .15s">
-            🆕 Emerging
+            🆕 เปิดใหม่
           </button>
         </div>
         <a href="./listing.html?velocity=rising" class="btn btn-outline btn-sm">ดูทั้งหมด →</a>
@@ -289,6 +294,21 @@
     <div class="grid-3" id="risingGrid"></div>
     <!-- Emerging grid (hidden by default) -->
     <div class="grid-3" id="emergingGrid" style="display:none"></div>
+    <!-- New This Week grid (hidden by default) -->
+    <div id="newGrid" style="display:none">
+      <!-- Meta banner แสดง week label + trend note -->
+      <div id="newMetaBanner" style="margin-bottom:16px;padding:12px 16px;background:linear-gradient(135deg,#0d1f3c,#1a2f52);border-radius:12px;color:#fff;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <span style="font-size:18px">🆕</span>
+        <div>
+          <div style="font-size:12px;font-weight:700;letter-spacing:.06em;opacity:.7;text-transform:uppercase" id="newWeekLabel">New This Week</div>
+          <div style="font-size:13px;opacity:.9;margin-top:2px" id="newTrendNote"></div>
+        </div>
+      </div>
+      <div class="grid-3" id="newInnerGrid"></div>
+      <div style="margin-top:12px;font-size:11px;color:var(--text-2);text-align:center" id="newSourceNote">
+        ข้อมูลจากการ scan สื่อ F&B ทุกสัปดาห์ — BK Magazine, Timeout Bangkok, Masala Thailand และอื่นๆ
+      </div>
+    </div>
 
     <!-- Info strip below grid -->
     <div id="discoverInfoStrip" style="margin-top:16px;padding:10px 16px;background:var(--cream);border:1px solid var(--border);border-radius:10px;font-size:12px;color:var(--text-2);display:flex;gap:16px;flex-wrap:wrap;align-items:center">
@@ -948,6 +968,168 @@
       ChefMinistryData.injectStats();
     });
   }
+
+  // ── Discover Section: Trending / Emerging / New This Week ───────────────────
+  (function(){
+
+    // ── card renderer (shared across all tabs) ──────────────────────────────
+    function renderRestCard(r, opts) {
+      opts = opts || {};
+      var name    = escHtml(r.name || r.name_en || "");
+      var cuisine = escHtml(r.cuisine || "");
+      var area    = escHtml(r.area || "");
+      var emoji   = escHtml(r.emoji || "🍽️");
+      var badge   = escHtml(r.trendBadge || r.trend_label || "");
+      var note    = escHtml(r.cmNote || r.description || "");
+      var budget  = escHtml(r.budgetLabel || "");
+
+      // velocity badge color
+      var vel = (r.trendVelocity || r.trend_label || "").toLowerCase();
+      var badgeColor = vel.indexOf("rising") >= 0 || vel.indexOf("fast") >= 0 || vel === "rising"
+        ? "#4ade80" : vel.indexOf("new") >= 0 ? "#60a5fa" : "rgba(255,255,255,.45)";
+
+      // source link (for FB digest cards)
+      var srcLink = opts.sourceUrl
+        ? '<a href="'+escHtml(opts.sourceUrl)+'" target="_blank" rel="noopener" '
+          +'style="font-size:10px;color:var(--gold);opacity:.8;text-decoration:none;font-weight:700">'
+          +escHtml(opts.sourceName || "Source")+'↗</a>'
+        : "";
+
+      var extra = opts.isNew
+        ? '<div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center">'
+          +'<span style="font-size:10px;font-weight:800;letter-spacing:.06em;color:#60a5fa;text-transform:uppercase">🆕 เปิดใหม่</span>'
+          +srcLink+'</div>'
+        : "";
+
+      return '<div style="background:var(--white);border:1.5px solid var(--border);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:6px;transition:box-shadow .15s" '
+        +'onmouseover="this.style.boxShadow=\'0 4px 18px rgba(0,0,0,.10)\'" '
+        +'onmouseout="this.style.boxShadow=\'none\'">'
+        +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">'
+        +'<div>'
+        +'<div style="font-size:10px;font-weight:800;letter-spacing:.07em;color:var(--text-2);text-transform:uppercase;margin-bottom:3px">'
+        +cuisine+(area ? ' · '+area : '')+'</div>'
+        +'<div style="font-size:16px;font-weight:900;color:var(--navy);line-height:1.2">'+emoji+' '+name+'</div>'
+        +'</div>'
+        +(budget ? '<div style="font-size:11px;color:var(--text-2);font-weight:700;white-space:nowrap">'+budget+'</div>' : '')
+        +'</div>'
+        +'<div style="font-size:11px;font-weight:800;color:'+badgeColor+';letter-spacing:.04em">'+badge+'</div>'
+        +(note ? '<div style="font-size:12px;color:var(--text-2);line-height:1.5;margin-top:2px">'+note+'</div>' : '')
+        +extra
+        +'</div>';
+    }
+
+    // ── populate Trending grid ──────────────────────────────────────────────
+    var risingEl = document.getElementById("risingGrid");
+    if (risingEl) {
+      var pool = (typeof ChefMinistryData !== "undefined" && ChefMinistryData.mergeAll)
+        ? ChefMinistryData.mergeAll().filter(ChefMinistryData.scopeFilter)
+        : [];
+      var trending = pool.filter(function(r){
+        var sc = ChefMinistryData.computeScore(r);
+        return sc.growthRate > 0.01 || (r.velocityPct || 0) > 5;
+      }).sort(function(a,b){
+        var sa = ChefMinistryData.computeScore(a), sb = ChefMinistryData.computeScore(b);
+        return sb.score - sa.score;
+      }).slice(0, 6);
+      risingEl.innerHTML = trending.length
+        ? trending.map(function(r){ return renderRestCard(r); }).join("")
+        : '<div style="color:var(--text-2);padding:24px;text-align:center;grid-column:1/-1">ยังไม่มีข้อมูล trending</div>';
+    }
+
+    // ── populate Emerging grid ──────────────────────────────────────────────
+    var emergingEl = document.getElementById("emergingGrid");
+    if (emergingEl) {
+      var emerging = (typeof ChefMinistryData !== "undefined")
+        ? ChefMinistryData.getEmergingRestaurants(6)
+        : [];
+      emergingEl.innerHTML = emerging.length
+        ? emerging.map(function(r){ return renderRestCard(r); }).join("")
+        : '<div style="color:var(--text-2);padding:24px;text-align:center;grid-column:1/-1">ยังไม่มีข้อมูล emerging</div>';
+    }
+
+    // ── populate New This Week grid ─────────────────────────────────────────
+    var newInnerEl  = document.getElementById("newInnerGrid");
+    var newWeekEl   = document.getElementById("newWeekLabel");
+    var newTrendEl  = document.getElementById("newTrendNote");
+
+    if (newInnerEl) {
+      var fbDigest   = (typeof CM_FB_DIGEST !== "undefined") ? CM_FB_DIGEST : [];
+      var fbMeta     = (typeof CM_FB_DIGEST_META !== "undefined") ? CM_FB_DIGEST_META : {};
+
+      if (newWeekEl && fbMeta.weekLabel) newWeekEl.textContent = fbMeta.weekLabel;
+      if (newTrendEl && fbMeta.trendNote) newTrendEl.textContent = "💡 " + fbMeta.trendNote;
+
+      newInnerEl.innerHTML = fbDigest.length
+        ? fbDigest.slice(0, 9).map(function(r){
+            return renderRestCard(r, { isNew: true, sourceUrl: r.sourceUrl, sourceName: r.sourceName });
+          }).join("")
+        : '<div style="color:var(--text-2);padding:24px;text-align:center;grid-column:1/-1">'
+          +'ยังไม่มีข้อมูลเปิดใหม่สัปดาห์นี้ — จะอัปเดตทุกวันจันทร์</div>';
+    }
+
+    // ── tab switcher ────────────────────────────────────────────────────────
+    var TABS = {
+      trending: {
+        grid: "risingGrid",   btn: "tabTrending",
+        subtitle: "จัดอันดับจาก Normalized Growth Score — ไม่ใช่แค่ยอดรีวิวรวม",
+        formula: "📐 Score = growth_rate × log(reviews+1) / log(reviews+10) — ลด bias ร้านใหญ่",
+        rotate: "🔄 หมุนเวียนทุกวัน เพื่อความหลากหลาย",
+      },
+      emerging: {
+        grid: "emergingGrid", btn: "tabEmerging",
+        subtitle: "ร้านที่เพิ่งเริ่มมี signal — รีวิวน้อยแต่ rating สูง หรือ social buzz กำลังโต",
+        formula: "📐 Emerging = reviews < 300 + growth > 3% หรือ rating ≥ 4.5",
+        rotate: "🆕 อัปเดตทุก Sunday",
+      },
+      new: {
+        grid: "newGrid",      btn: "tabNew",
+        subtitle: "ร้านที่เพิ่งเปิดสัปดาห์นี้ — scan จากสื่อ F&B อัตโนมัติทุกวันจันทร์",
+        formula: "📰 ข้อมูลจาก BK Magazine, Timeout Bangkok, Masala Thailand และอื่นๆ",
+        rotate: "🔍 อัปเดตทุกวันจันทร์ 09:00 น.",
+      },
+    };
+
+    window.switchDiscoverTab = function(tab) {
+      var cfg = TABS[tab];
+      if (!cfg) return;
+
+      // ซ่อนทุก grid
+      Object.keys(TABS).forEach(function(t) {
+        var el = document.getElementById(TABS[t].grid);
+        if (el) el.style.display = "none";
+        var btn = document.getElementById(TABS[t].btn);
+        if (btn) {
+          btn.style.background = "transparent";
+          btn.style.color = "var(--text-2)";
+        }
+      });
+
+      // แสดง grid ที่เลือก
+      var activeEl = document.getElementById(cfg.grid);
+      if (activeEl) activeEl.style.display = cfg.grid === "newGrid" ? "block" : "grid";
+      var activeBtn = document.getElementById(cfg.btn);
+      if (activeBtn) {
+        activeBtn.style.background = "var(--navy)";
+        activeBtn.style.color = "#fff";
+      }
+
+      // อัปเดต subtitle + info strip
+      var subtitle = document.getElementById("discoverSubtitle");
+      var formula  = document.getElementById("discoverScoreFormula");
+      var rotate   = document.getElementById("discoverRotateNote");
+      if (subtitle) subtitle.textContent = cfg.subtitle;
+      if (formula)  formula.textContent  = cfg.formula;
+      if (rotate)   rotate.textContent   = cfg.rotate;
+
+      // strip border color สำหรับ "new" tab
+      var strip = document.getElementById("discoverInfoStrip");
+      if (strip) strip.style.borderColor = tab === "new" ? "#3b82f6" : "var(--border)";
+    };
+
+    // เปิด tab trending เป็น default
+    switchDiscoverTab("trending");
+
+  })();
 
 </script>
 </body>
