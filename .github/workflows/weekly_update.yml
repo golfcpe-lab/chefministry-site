@@ -1,9 +1,10 @@
 name: ChefMinistry Weekly Update
 
-# Every Monday 08:00 ICT (01:00 UTC)
+# Every Monday 09:00 ICT (02:00 UTC) — หลัง Cowork FB digest task (08:08 ICT) ทำงานเสร็จ
+# หรือ trigger ได้ manual / จาก scheduled task ผ่าน workflow_dispatch
 on:
   schedule:
-    - cron: '0 1 * * 1'
+    - cron: '0 2 * * 1'
   workflow_dispatch:
 
 jobs:
@@ -110,6 +111,27 @@ jobs:
           python inject_youtube.py
         continue-on-error: true
 
+      # ── NEW: FB Digest Injection ────────────────────────────────────────────
+      # อ่าน fb_digest.json (บันทึกโดย Cowork scheduled task ทุกวันจันทร์)
+      # แล้ว inject CM_FB_DIGEST + อัปเดต weeklyHighlight ใน data.js
+      - name: Inject FB weekly digest into data.js
+        env:
+          DATA_FILE: ${{ github.workspace }}/js/data.js
+        run: |
+          DIGEST="scripts/scraper/fb_digest.json"
+          if [ -f "$DIGEST" ]; then
+            python -c "
+          import json, pathlib
+          d = json.loads(pathlib.Path('$DIGEST').read_text(encoding='utf-8'))
+          entries = [e for e in d.get('entries', []) if not e.get('is_watchlist')]
+          print('FB digest: %s | %d entries | %s' % (d.get('week_label','?'), len(entries), d.get('digest_date','?')))
+          "
+            python scripts/scraper/inject_fb_digest.py --digest "$DIGEST"
+          else
+            echo "ℹ️  fb_digest.json not found — skipping FB digest injection"
+          fi
+        continue-on-error: true
+
       - name: Run weekly_summary.py
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -144,8 +166,8 @@ jobs:
         run: |
           git config user.name  "ChefMinistry Bot"
           git config user.email "bot@chefministry.com"
-          git add js/data.js scripts/scraper/export_restaurants.json || true
-          git diff --staged --quiet || git commit -m "auto: weekly signal update $(date +'%Y-%m-%d') [schema-v2]"
+          git add js/data.js scripts/scraper/export_restaurants.json scripts/scraper/fb_digest.json || true
+          git diff --staged --quiet || git commit -m "auto: weekly signal update $(date +'%Y-%m-%d') [schema-v2+fb-digest]"
 
       - name: Push to GitHub
         run: git push origin main
