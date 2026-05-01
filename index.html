@@ -146,8 +146,8 @@
   <div class="container">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px">
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-        <div style="font-size:11px;font-weight:900;color:var(--gold);letter-spacing:.1em;text-transform:uppercase">🔥 Trending by Category</div>
-        <span style="font-size:11px;color:rgba(255,255,255,.35)">Google Maps + YouTube · อัปเดตรายวัน</span>
+        <div style="font-size:11px;font-weight:900;color:var(--gold);letter-spacing:.1em;text-transform:uppercase">📊 Category Signal — เรียงตาม Growth %</div>
+        <span style="font-size:11px;color:rgba(255,255,255,.35)">อัปเดตรายวัน · จาก Google Maps + YouTube</span>
       </div>
       <a href="./listing.html" style="font-size:11px;font-weight:700;color:rgba(255,255,255,.5);text-decoration:none;white-space:nowrap">ดูร้านทั้งหมด →</a>
     </div>
@@ -221,7 +221,7 @@
           <h2 style="font-family:'Playfair Display',serif;font-size:clamp(20px,2.6vw,34px);line-height:1.12;letter-spacing:-.02em;margin-bottom:14px" id="weeklyTitle">🌿 Farm-to-Table คว้าสปอตไลต์ — Baan Tepa แรงเงียบสัปดาห์นี้</h2>
           <p class="lead" id="weeklyDesc">Baan Tepa ได้รับความสนใจจาก Creator เพิ่มขึ้นต่อเนื่อง ขณะที่กลุ่ม Farm-to-Table Thai Fine Dining กำลังโตแรง เป็นอันดับที่ 2 รองจาก Modern Thai ในสัปดาห์นี้</p>
           <div style="margin-top:20px">
-            <div style="font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);margin-bottom:10px">Trend by Category</div>
+            <div style="font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);margin-bottom:10px">Top Categories สัปดาห์นี้</div>
             <div id="trendCategoryList"></div>
           </div>
 
@@ -753,202 +753,108 @@
 
 
 
-  // Trend category bars (Spotlight section) — null-guarded
+  // Trend category pills (Spotlight section) — top 5 compact badges
   (function(){
     var tcList = document.getElementById('trendCategoryList');
     if (!tcList) return;
 
-    var CAT_FILTER = {
-      'Thai Fine Dining': function(r){ return r.type==='fine-dining' && (r.cuisine.toLowerCase().indexOf('thai')>=0 || r.cuisine.toLowerCase().indexOf('samrub')>=0); },
-      'Japanese':         function(r){ return r.type==='omakase' || r.cuisine.toLowerCase().indexOf('japanese')>=0 || r.cuisine.toLowerCase().indexOf('ramen')>=0; },
-      'Hidden Gems':      function(r){ return r.tags && r.tags.some(function(t){ return t==='Hidden Gem' || t==='ล้านลับ'; }); },
-      'Farm-to-Table':    function(r){ return r.tags && r.tags.some(function(t){ return t.toLowerCase().indexOf('farm')>=0; }); },
-      'Neapolitan Pizza': function(r){ return r.cuisine.toLowerCase().indexOf('pizza')>=0 || r.cuisine.toLowerCase().indexOf('neapolitan')>=0; },
-      'Artisan Ramen':    function(r){ return r.cuisine.toLowerCase().indexOf('ramen')>=0; },
-      'Thai Street Food': function(r){ return r.type==='street-food'; },
-      'Hot Pot / Suki':   function(r){ return r.cuisine.toLowerCase().indexOf('hot pot')>=0 || r.cuisine.toLowerCase().indexOf('suki')>=0; },
-      'Steakhouse':       function(r){ return r.type==='steakhouse'; },
+    var CAT_EMOJI = {
+      'Thai Fine Dining':'🍽️','Japanese':'🍣','Hidden Gems':'💎',
+      'Neapolitan Pizza':'🍕','Artisan Ramen':'🍜','Farm-to-Table':'🌿',
+      'Thai Street Food':'🍢','Hot Pot / Suki':'🫕','Steakhouse':'🥩','Dessert & Cafe':'🍰'
     };
 
-    var sortedTrends = [].concat(CM_SIGNALS.trendCategories).sort(function(a,b){
+    var sorted = [].concat(CM_SIGNALS.trendCategories).sort(function(a,b){
+      var va = parseInt(a.change), vb = parseInt(b.change);
+      if (isNaN(va)) va = 0; if (isNaN(vb)) vb = 0;
+      return vb - va;
+    }).slice(0, 5);
+
+    tcList.innerHTML = '<div style="display:flex;flex-wrap:wrap;gap:7px">'
+      + sorted.map(function(t){
+          var val = parseInt(t.change);
+          var dec = t.signal === 'declining';
+          var stable = t.signal === 'stable' || t.signal === 'moderate' || isNaN(val);
+          var color  = dec ? 'var(--red)' : stable ? 'var(--text-2)' : 'var(--green)';
+          var bg     = dec ? 'rgba(239,68,68,.08)' : stable ? 'rgba(0,0,0,.04)' : 'rgba(34,197,94,.09)';
+          var border = dec ? 'rgba(239,68,68,.2)' : stable ? 'var(--border)' : 'rgba(34,197,94,.25)';
+          var emoji  = CAT_EMOJI[t.cat] || '🍽️';
+          return '<div style="display:inline-flex;align-items:center;gap:5px;padding:6px 12px;background:'+bg+';border:1px solid '+border+';border-radius:99px">'
+            + '<span style="font-size:13px">'+emoji+'</span>'
+            + '<span style="font-size:11px;font-weight:800;color:var(--text-1)">'+escHtml(t.cat)+'</span>'
+            + '<span style="font-size:11px;font-weight:900;color:'+color+'">'+escHtml(t.change)+'</span>'
+            + '</div>';
+        }).join('')
+      + '</div>';
+  })();
+
+  // ── Category Signal Grid — infographic bar chart, sorted by growth % ────────
+  (function(){
+    var grid = document.getElementById("categoryDiscoveryGrid");
+    if (!grid) return;
+
+    var CAT_EMOJI = {
+      'Thai Fine Dining':'🍽️', 'Japanese':'🍣',      'Hidden Gems':'💎',
+      'Neapolitan Pizza':'🍕', 'Artisan Ramen':'🍜',  'Farm-to-Table':'🌿',
+      'Thai Street Food':'🍢', 'Hot Pot / Suki':'🫕', 'Steakhouse':'🥩',
+      'Dessert & Cafe':'🍰'
+    };
+
+    // Sort by % descending, NaN (Crowded/—) goes last
+    var sorted = [].concat(CM_SIGNALS.trendCategories).sort(function(a,b){
       var va = parseInt(a.change), vb = parseInt(b.change);
       if (isNaN(va) && isNaN(vb)) return 0;
       if (isNaN(va)) return 1;
       if (isNaN(vb)) return -1;
       return vb - va;
     });
+    // Add Dessert & Cafe as coming-soon entry
+    sorted.push({ cat:'Dessert & Cafe', signal:'stable', change:'—' });
 
-    var rows = sortedTrends.map(function(t){
-      var rawVal = parseInt(t.change);
-      var isPos  = t.change.indexOf('-') < 0;
-      var barPct = isNaN(rawVal) ? 8 : Math.min(Math.abs(rawVal) * 2.2, 100);
-      var barCls = t.signal==='declining' ? 'declining' : (t.signal==='stable'||t.signal==='moderate') ? 'stable' : '';
-      var chgCls = isNaN(rawVal) ? '' : (isPos ? 'positive' : 'negative');
-      var chgSty = isNaN(rawVal) ? 'color:var(--text-2);font-style:italic;font-weight:700' : '';
-      return '<div class="trend-row">'
-        + '<div class="trend-cat">' + escHtml(t.cat) + '</div>'
-        + '<div class="trend-bar-wrap"><div class="trend-bar-fill ' + barCls + '" style="width:' + barPct + '%"></div></div>'
-        + '<div class="trend-change ' + chgCls + '" style="' + chgSty + '">' + escHtml(t.change) + '</div>'
-        + '<div class="trend-inf-count">' + t.influencers + ' INF</div>'
-        + '</div>';
-    }).join('');
+    function renderGrid() {
+      var isMob = window.innerWidth < 640;
+      grid.style.gridTemplateColumns = isMob ? '1fr' : 'repeat(2,1fr)';
+      grid.style.gap = '8px';
 
-    // Append Dessert & Cafe as Coming Soon entry
-    var dessertRow = '<div class="trend-row">'
-      + '<div class="trend-cat">Dessert &amp; Cafe</div>'
-      + '<div class="trend-bar-wrap"><div class="trend-bar-fill stable" style="width:8%"></div></div>'
-      + '<div class="trend-change" style="color:var(--text-2);font-style:italic;font-weight:700">Coming Soon</div>'
-      + '<div class="trend-inf-count">— INF</div>'
-      + '</div>';
-    tcList.innerHTML = rows + dessertRow;
-  })();
+      grid.innerHTML = sorted.map(function(t, i){
+        var val     = parseInt(t.change);
+        var hasVal  = !isNaN(val);
+        var isDec   = hasVal && val < 0;
+        var isStable= t.signal === 'stable' || t.signal === 'moderate' || !hasVal;
+        var barW    = hasVal ? Math.min(Math.abs(val) * 1.5, 100) : 5;
+        var barColor= isDec ? '#f87171' : isStable ? 'rgba(255,255,255,.25)' : '#4ade80';
+        var numColor= isDec ? '#f87171' : !hasVal ? 'rgba(255,255,255,.3)' : '#4ade80';
+        var emoji   = CAT_EMOJI[t.cat] || '🍽️';
+        var rank    = i + 1;
+        var isComing= t.change === '—';
 
-  // ── Category Discovery Grid ──────────────────────────────────────────────────
-  (function(){
-    var DISC_CATS = [
-      { label:"Thai Fine Dining", emoji:"🍽️", link:"./listing.html?type=fine-dining",
-        filter: function(r){ return r.type==="fine-dining" && (r.cuisine.toLowerCase().indexOf("thai")>=0 || r.cuisine.toLowerCase().indexOf("royal")>=0 || r.cuisine.toLowerCase().indexOf("samrub")>=0 || r.cuisine.toLowerCase().indexOf("farm")>=0); } },
-      { label:"Japanese", emoji:"🍣", link:"./listing.html?type=omakase",
-        filter: function(r){ return r.type==="omakase" || r.cuisine.toLowerCase().indexOf("japanese")>=0 || r.cuisine.toLowerCase().indexOf("ramen")>=0; } },
-      { label:"Pizza & Italian",  emoji:"🍕", link:"./listing.html",
-        filter: function(r){ return r.cuisine.toLowerCase().indexOf("pizza")>=0 || r.cuisine.toLowerCase().indexOf("italian")>=0 || r.cuisine.toLowerCase().indexOf("neapolitan")>=0; } },
-      { label:"Ramen",            emoji:"🍜", link:"./listing.html",
-        filter: function(r){ return r.cuisine.toLowerCase().indexOf("ramen")>=0; } },
-      { label:"Steakhouse & BBQ", emoji:"🥩", link:"./listing.html",
-        filter: function(r){ return r.type==="steakhouse" || r.cuisine.toLowerCase().indexOf("steak")>=0 || r.cuisine.toLowerCase().indexOf("bbq")>=0; } },
-      { label:"Street Food",      emoji:"🍢", link:"./listing.html",
-        filter: function(r){ return r.type==="street-food" || r.type==="local" || r.cuisine.toLowerCase().indexOf("street")>=0; } },
-      { label:"Hotpot",           emoji:"🫕", link:"./listing.html",
-        filter: function(r){ return r.cuisine.toLowerCase().indexOf("hotpot")>=0 || r.cuisine.toLowerCase().indexOf("shabu")>=0 || r.cuisine.toLowerCase().indexOf("sukiyaki")>=0 || r.cuisine.toLowerCase().indexOf("hot pot")>=0; } },
-      { label:"Hidden Gems",      emoji:"💎", link:"./listing.html",
-        filter: function(r){ return r.tags && r.tags.some(function(t){ return t==="Hidden Gem" || t==="ล้านลับ"; }); } },
-      { label:"International",    emoji:"🌍", link:"./listing.html",
-        filter: function(r){ var c = r.cuisine.toLowerCase(); return r.type==="fine-dining" && c.indexOf("thai")<0 && c.indexOf("omakase")<0 && c.indexOf("japanese")<0; } },
-      { label:"Dessert & Cafe",   emoji:"🍰", link:"./listing.html",
-        filter: function(r){ return r.type==="cafe" || r.cuisine.toLowerCase().indexOf("dessert")>=0 || r.cuisine.toLowerCase().indexOf("cafe")>=0 || r.cuisine.toLowerCase().indexOf("bakery")>=0; } },
-    ];
-    var grid = document.getElementById("categoryDiscoveryGrid");
-    if (!grid) return;
-    // v5: canonical merged pool
-    var allPool = (typeof ChefMinistryData !== "undefined" && ChefMinistryData.mergeAll)
-      ? ChefMinistryData.mergeAll().filter(ChefMinistryData.scopeFilter)
-      : (typeof CM_EXTERNAL_RESTAURANTS !== "undefined" ? CM_EXTERNAL_RESTAURANTS : []).concat(typeof CM_RESTAURANTS !== "undefined" ? CM_RESTAURANTS : []);
-
-    var velStyle = function(v){
-      if(v==="rising")   return {bg:"rgba(34,197,94,.15)",  color:"#4ade80"};
-      if(v==="declining") return {bg:"rgba(239,68,68,.15)", color:"#f87171"};
-      return {bg:"rgba(255,255,255,.07)", color:"rgba(255,255,255,.5)"};
-    };
-
-    // Build circles + names separately, then output in 5x4 block order
-    var allCircles = [];
-    var allNames   = [];
-
-    DISC_CATS.forEach(function(cat){
-      var catLabel = cat.label.toLowerCase();
-      var matched = allPool.filter(function(r) {
-        var cuisine = (r.cuisine_normalized || r.cuisine || '').toLowerCase();
-        var vt = (r.venue_type || r.type || '').toLowerCase();
-        if (catLabel.indexOf('thai fine') >= 0) return cuisine.indexOf('thai') >= 0 || cuisine.indexOf('fine dining') >= 0;
-        if (catLabel.indexOf('omakase') >= 0 || catLabel.indexOf('japanese') >= 0) return cuisine.indexOf('omakase') >= 0 || cuisine.indexOf('japanese') >= 0;
-        if (catLabel.indexOf('pizza') >= 0 || catLabel.indexOf('italian') >= 0) return cuisine.indexOf('italian') >= 0 || cuisine.indexOf('pizza') >= 0;
-        if (catLabel.indexOf('ramen') >= 0) return cuisine.indexOf('ramen') >= 0;
-        if (catLabel.indexOf('steak') >= 0 || catLabel.indexOf('bbq') >= 0) return cuisine.indexOf('steak') >= 0 || cuisine.indexOf('bbq') >= 0;
-        if (catLabel.indexOf('hotpot') >= 0) return cuisine.indexOf('hotpot') >= 0 || cuisine.indexOf('shabu') >= 0;
-        if (catLabel.indexOf('dessert') >= 0 || catLabel.indexOf('cafe') >= 0) return vt === 'cafe' || cuisine.indexOf('cafe') >= 0 || cuisine.indexOf('dessert') >= 0;
-        if (catLabel.indexOf('international') >= 0) return cuisine.indexOf('thai') < 0 && (cuisine.indexOf('italian') >= 0 || cuisine.indexOf('french') >= 0 || cuisine.indexOf('western') >= 0 || cuisine.indexOf('korean') >= 0 || cuisine.indexOf('fusion') >= 0);
-        if (catLabel.indexOf('street') >= 0 || catLabel.indexOf('local') >= 0) return vt === 'street_food' || cuisine.indexOf('street') >= 0;
-        try { return cat.filter ? cat.filter(r) : false; } catch(e) { return false; }
-      }).map(function(r) {
-        var sc = (typeof ChefMinistryData !== 'undefined') ? ChefMinistryData.computeScore(r) : {score:0};
-        return Object.assign({}, r, { _sortScore: sc.score });
-      }).sort(function(a,b) {
-        if (Math.abs(b._sortScore - a._sortScore) > 0.001) return b._sortScore - a._sortScore;
-        return (b.totalReviews||0) - (a.totalReviews||0);
-      }).slice(0,3);
-
-      var riseCount=matched.filter(function(r){return r.trendVelocity==="rising";}).length;
-      var decCount =matched.filter(function(r){return r.trendVelocity==="declining";}).length;
-      var ringPct,ringColor;
-      if(matched.length===0){ringPct="15%";ringColor="rgba(255,255,255,.12)";}
-      else if(riseCount===matched.length){ringPct="85%";ringColor="#4ade80";}
-      else if(riseCount>0){ringPct=Math.round(50+riseCount/matched.length*30)+"%";ringColor="#86efac";}
-      else if(decCount===matched.length){ringPct="22%";ringColor="#f87171";}
-      else{ringPct="40%";ringColor="rgba(255,255,255,.38)";}
-
-      // Circle cell
-      allCircles.push(
-        '<a href="'+cat.link+'" style="display:flex;justify-content:center;padding:8px 4px 0;text-decoration:none" '
-        +'onmouseover="this.querySelector(\'.ri\').style.boxShadow=\'0 0 0 3px rgba(201,168,76,.5)\'" '
-        +'onmouseout="this.querySelector(\'.ri\').style.boxShadow=\'inset 0 2px 8px rgba(0,0,0,.4)\'">'
-        +'<div style="width:88px;height:88px;border-radius:50%;background:conic-gradient('+ringColor+' '+ringPct+',rgba(255,255,255,.07) 0);display:grid;place-items:center">'
-        +'<div class="ri" style="width:66px;height:66px;border-radius:50%;background:#0b1830;display:grid;place-items:center;font-size:30px;box-shadow:inset 0 2px 8px rgba(0,0,0,.4);transition:box-shadow .2s">'+cat.emoji+'</div>'
-        +'</div>'
-        +'</a>'
-      );
-
-      // Name + restaurant cell
-      var restHtml=matched.length>0
-        ? matched.map(function(r){
-            var tl = r._trendLabel || r.trend_label || '';
-            var clr = (tl==='Rising Fast'||tl==='Gaining Momentum'||tl==='Emerging'||tl==='Social Buzz'||r.trendVelocity==='rising') ? "#4ade80" : r.trendVelocity==="declining" ? "#f87171" : "rgba(255,255,255,.4)";
-            var arrow = (tl==='Rising Fast'||tl==='Gaining Momentum'||tl==='Emerging'||tl==='Social Buzz'||r.trendVelocity==='rising') ? "↑" : r.trendVelocity==="declining" ? "↓" : "→";
-            var nm=r.name.length>16?r.name.slice(0,15)+"…":r.name;
-            return '<div style="font-size:10.5px;color:rgba(255,255,255,.55);line-height:1.7">'+escHtml(nm)
-              +' <span style="color:'+clr+';font-weight:900;font-size:9px">'+arrow+'</span></div>';
-          }).join("")
-        : '<div style="color:rgba(255,255,255,.2);font-size:9.5px;margin-top:2px">Coming Soon</div>';
-
-      allNames.push(
-        '<div style="text-align:center;padding:6px 6px 14px">'
-        +'<div style="font-size:11px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px">'+escHtml(cat.label)+'</div>'
-        +restHtml
-        +'</div>'
-      );
-    });
-
-    // Responsive layout: 5 cols desktop, 2 cols mobile
-    var isMobile = window.innerWidth < 640;
-    var cols = isMobile ? 2 : 5;
-    grid.style.gridTemplateColumns = "repeat("+cols+",1fr)";
-
-    var out;
-    if (isMobile) {
-      // 2x10: pairs — circle[i], circle[i+1], name[i], name[i+1]
-      out = [];
-      for (var i = 0; i < allCircles.length; i += 2) {
-        if (allCircles[i])   out.push(allCircles[i]);
-        if (allCircles[i+1]) out.push(allCircles[i+1]);
-        if (allNames[i])     out.push(allNames[i]);
-        if (allNames[i+1])   out.push(allNames[i+1]);
-      }
-    } else {
-      // 5x4: circles[0-4], names[0-4], circles[5-9], names[5-9]
-      out = allCircles.slice(0,5).concat(allNames.slice(0,5))
-                      .concat(allCircles.slice(5,10)).concat(allNames.slice(5,10));
+        return '<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;'
+          +'background:rgba(255,255,255,.06);border-radius:12px;border:1px solid rgba(255,255,255,.07);'
+          +'transition:background .15s" '
+          +'onmouseover="this.style.background=\'rgba(255,255,255,.1)\'" '
+          +'onmouseout="this.style.background=\'rgba(255,255,255,.06)\'">'
+          // rank
+          +'<div style="font-size:10px;font-weight:900;color:rgba(255,255,255,.22);width:16px;'
+          +'flex-shrink:0;text-align:center">'+(isComing?'·':rank)+'</div>'
+          // emoji
+          +'<div style="font-size:22px;flex-shrink:0;line-height:1">'+emoji+'</div>'
+          // name + bar
+          +'<div style="flex:1;min-width:0">'
+          +'<div style="font-size:12px;font-weight:800;color:'+(isComing?'rgba(255,255,255,.35)':'#fff')+';'
+          +'white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.01em">'+escHtml(t.cat)+'</div>'
+          +'<div style="height:3px;background:rgba(255,255,255,.1);border-radius:99px;margin-top:6px;overflow:hidden">'
+          +'<div style="height:100%;width:'+barW+'%;background:'+barColor+';border-radius:99px"></div>'
+          +'</div>'
+          +'</div>'
+          // % badge
+          +'<div style="font-size:13px;font-weight:900;color:'+numColor+';flex-shrink:0;min-width:38px;text-align:right">'
+          +escHtml(t.change)+'</div>'
+          +'</div>';
+      }).join('');
     }
-    grid.innerHTML = out.join("");
 
-    // Re-layout on resize
-    window.addEventListener("resize", function(){
-      var mob = window.innerWidth < 640;
-      var c = mob ? 2 : 5;
-      grid.style.gridTemplateColumns = "repeat("+c+",1fr)";
-      var o;
-      if (mob) {
-        o = [];
-        for (var j = 0; j < allCircles.length; j += 2) {
-          if (allCircles[j])   o.push(allCircles[j]);
-          if (allCircles[j+1]) o.push(allCircles[j+1]);
-          if (allNames[j])     o.push(allNames[j]);
-          if (allNames[j+1])   o.push(allNames[j+1]);
-        }
-      } else {
-        o = allCircles.slice(0,5).concat(allNames.slice(0,5))
-                      .concat(allCircles.slice(5,10)).concat(allNames.slice(5,10));
-      }
-      grid.innerHTML = o.join("");
-    }, {passive:true});
+    renderGrid();
+    window.addEventListener('resize', renderGrid, {passive:true});
   })();
 
   // Rank list — velocity จาก DB ถ้ามี, fallback = overlap signal
