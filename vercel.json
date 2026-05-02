@@ -7,6 +7,10 @@
       "destination": "/api/$1"
     },
     {
+      "source": "/admin",
+      "destination": "/admin.html"
+    },
+    {
       "source": "/discover",
       "destination": "/listing.html"
     },
