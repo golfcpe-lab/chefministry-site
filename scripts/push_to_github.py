@@ -25,6 +25,9 @@ SITE_FILES = [
     ("js/dataService.js",        "js/dataService.js"),
     ("js/auth.js",                 "js/auth.js"),
     ("js/firebase-config.js",      "js/firebase-config.js"),
+    ("admin.html",                 "admin.html"),
+    ("api/add-restaurant.js",      "api/add-restaurant.js"),
+    ("api/manage-users.js",        "api/manage-users.js"),
 ]
 
 # ── scripts ที่อยู่ใน root (ไม่ใช่ใน site/) ────────────────────────────────────
