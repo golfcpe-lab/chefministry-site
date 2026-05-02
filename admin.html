@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>ChefMinistry Admin</title>
+<style>
+  :root {
+    --navy:#0f172a; --gold:#b8860b; --green:#16a34a; --red:#dc2626;
+    --bg:#f8f9fa; --white:#ffffff; --border:#e2e8f0;
+    --text:#0f172a; --text-2:#64748b;
+    --radius:12px; --shadow:0 2px 12px rgba(0,0,0,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Noto Sans Thai',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+  .topbar{background:var(--navy);color:#fff;padding:14px 24px;display:flex;align-items:center;gap:12px}
+  .topbar h1{font-size:17px;font-weight:900;letter-spacing:.04em}
+  .topbar .badge{background:var(--gold);color:#fff;font-size:10px;font-weight:800;padding:2px 8px;border-radius:99px;letter-spacing:.06em}
+  .topbar .user-info{margin-left:auto;font-size:12px;opacity:.8;display:flex;align-items:center;gap:8px}
+  .topbar .sign-out-btn{background:transparent;border:1px solid rgba(255,255,255,.3);color:#fff;padding:4px 12px;border-radius:99px;font-size:11px;cursor:pointer}
+  .topbar .sign-out-btn:hover{background:rgba(255,255,255,.1)}
+
+  .container{max-width:780px;margin:0 auto;padding:32px 20px}
+  .card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:24px;box-shadow:var(--shadow)}
+  .card h2{font-size:16px;font-weight:900;color:var(--navy);margin-bottom:18px;display:flex;align-items:center;gap:8px}
+
+  label{display:block;font-size:12px;font-weight:700;color:var(--text-2);margin-bottom:6px;letter-spacing:.04em;text-transform:uppercase}
+  input[type=text],input[type=email],select{
+    width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;
+    font-size:14px;color:var(--text);background:var(--white);outline:none;
+    transition:border-color .15s;
+  }
+  input:focus,select:focus{border-color:var(--navy)}
+  .btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:99px;font-size:13px;font-weight:800;cursor:pointer;border:none;transition:opacity .15s}
+  .btn:hover{opacity:.85}
+  .btn:disabled{opacity:.4;cursor:not-allowed}
+  .btn-primary{background:var(--navy);color:#fff}
+  .btn-green{background:var(--green);color:#fff}
+  .btn-red{background:var(--red);color:#fff}
+  .btn-ghost{background:transparent;color:var(--text-2);border:1.5px solid var(--border)}
+
+  /* Auth states */
+  #authGate,#unauthorized,#mainApp{display:none}
+
+  /* Preview card */
+  .preview-card{border:1.5px solid var(--border);border-radius:10px;padding:18px;margin-top:16px;background:var(--bg)}
+  .preview-card .rest-name{font-size:18px;font-weight:900;color:var(--navy)}
+  .preview-card .meta{font-size:12px;color:var(--text-2);margin-top:4px}
+  .preview-card .badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .preview-card .badge-item{background:var(--bg);border:1px solid var(--border);border-radius:99px;padding:3px 10px;font-size:11px;font-weight:700;color:var(--text-2)}
+
+  /* User table */
+  .user-table{width:100%;border-collapse:collapse;font-size:13px}
+  .user-table th{text-align:left;padding:8px 12px;font-size:11px;font-weight:800;color:var(--text-2);text-transform:uppercase;letter-spacing:.05em;border-bottom:2px solid var(--border)}
+  .user-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
+  .user-table tr:last-child td{border-bottom:none}
+  .role-admin{color:var(--gold);font-weight:800}
+  .role-editor{color:var(--green);font-weight:700}
+
+  /* Toast */
+  #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:12px 22px;border-radius:99px;font-size:13px;font-weight:700;box-shadow:0 4px 20px rgba(0,0,0,.2);opacity:0;transition:opacity .25s;pointer-events:none;z-index:999}
+  #toast.show{opacity:1}
+  #toast.error{background:var(--red)}
+  #toast.success{background:var(--green)}
+
+  /* Loading spinner */
+  .spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  .sign-in-center{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:80vh;gap:20px;text-align:center}
+  .sign-in-center h2{font-size:22px;font-weight:900;color:var(--navy)}
+  .sign-in-center p{font-size:14px;color:var(--text-2)}
+  .google-btn{display:flex;align-items:center;gap:10px;padding:12px 24px;border:1.5px solid var(--border);border-radius:99px;background:var(--white);font-size:14px;font-weight:700;color:var(--text);cursor:pointer;box-shadow:var(--shadow);transition:box-shadow .15s}
+  .google-btn:hover{box-shadow:0 4px 20px rgba(0,0,0,.12)}
+  .google-btn svg{width:20px;height:20px}
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="topbar">
+  <div style="font-size:20px">🍽️</div>
+  <h1>ChefMinistry</h1>
+  <span class="badge">ADMIN</span>
+  <div class="user-info" id="userInfo" style="display:none">
+    <span id="userEmail"></span>
+    <button class="sign-out-btn" onclick="signOut()">Sign out</button>
+  </div>
+</div>
+
+<!-- Loading -->
+<div id="authGate">
+  <div class="sign-in-center">
+    <div style="font-size:48px">🔐</div>
+    <h2>ChefMinistry Admin</h2>
+    <p>เข้าสู่ระบบด้วย Google Account ที่ได้รับสิทธิ์จาก Admin</p>
+    <button class="google-btn" onclick="signInWithGoogle()">
+      <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Sign in with Google
+    </button>
+  </div>
+</div>
+
+<!-- Unauthorized -->
+<div id="unauthorized">
+  <div class="sign-in-center">
+    <div style="font-size:48px">🚫</div>
+    <h2>ไม่มีสิทธิ์เข้าถึง</h2>
+    <p id="unauthorizedEmail" style="color:var(--text-2)"></p>
+    <p>ติดต่อ Admin เพื่อขอสิทธิ์</p>
+    <button class="btn btn-ghost" onclick="signOut()">Sign out</button>
+  </div>
+</div>
+
+<!-- Main App -->
+<div id="mainApp">
+  <div class="container">
+
+    <!-- Add Restaurant -->
+    <div class="card">
+      <h2>➕ เพิ่มร้านอาหาร</h2>
+      <div style="margin-bottom:16px">
+        <label>Google Maps URL</label>
+        <div style="display:flex;gap:8px">
+          <input type="text" id="placeUrlInput" placeholder="วาง link จาก Google Maps เช่น https://maps.app.goo.gl/..." style="flex:1"/>
+          <button class="btn btn-primary" id="previewBtn" onclick="previewRestaurant()">🔍 Preview</button>
+        </div>
+        <div style="font-size:11px;color:var(--text-2);margin-top:6px">รองรับทั้ง link สั้น (maps.app.goo.gl) และ link ยาว</div>
+      </div>
+
+      <!-- Preview result -->
+      <div id="previewResult" style="display:none"></div>
+    </div>
+
+    <!-- User Management (admin only) -->
+    <div class="card" id="userMgmtCard" style="display:none">
+      <h2>👥 จัดการสิทธิ์ผู้ใช้</h2>
+
+      <!-- Add user form -->
+      <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap">
+        <input type="email" id="newUserEmail" placeholder="email@gmail.com" style="flex:1;min-width:200px"/>
+        <select id="newUserRole" style="width:120px">
+          <option value="editor">Editor</option>
+          <option value="admin">Admin</option>
+        </select>
+        <button class="btn btn-green" onclick="addUser()">➕ เพิ่ม</button>
+      </div>
+
+      <!-- User table -->
+      <div id="userTableWrap">
+        <div style="color:var(--text-2);font-size:13px">กำลังโหลด...</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="/js/firebase-config.js"></script>
+
+<script>
+// ── Firebase init ────────────────────────────────────────────────────────────
+firebase.initializeApp(CM_FIREBASE_CONFIG);
+const auth = firebase.auth();
+const db   = firebase.firestore();
+
+let currentUser = null;
+let currentRole = null;
+let pendingRestaurant = null;
+
+// ── Auth state ───────────────────────────────────────────────────────────────
+auth.onAuthStateChanged(async (user) => {
+  if (!user) {
+    showSection('authGate');
+    document.getElementById('userInfo').style.display = 'none';
+    return;
+  }
+
+  currentUser = user;
+  document.getElementById('userEmail').textContent = user.email;
+  document.getElementById('userInfo').style.display = 'flex';
+
+  // Check allowlist in Firestore
+  try {
+    const doc = await db.collection('cm_allowlist').doc(user.email).get();
+    if (!doc.exists) {
+      document.getElementById('unauthorizedEmail').textContent = user.email;
+      showSection('unauthorized');
+      return;
+    }
+    currentRole = doc.data().role;
+    showSection('mainApp');
+
+    if (currentRole === 'admin') {
+      document.getElementById('userMgmtCard').style.display = 'block';
+      loadUsers();
+    }
+  } catch (e) {
+    // Firestore permission denied = not in allowlist
+    document.getElementById('unauthorizedEmail').textContent = user.email;
+    showSection('unauthorized');
+  }
+});
+
+function showSection(id) {
+  ['authGate','unauthorized','mainApp'].forEach(s => {
+    document.getElementById(s).style.display = s === id ? 'block' : 'none';
+  });
+}
+
+// ── Sign in / out ────────────────────────────────────────────────────────────
+function signInWithGoogle() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider).catch(e => toast('Sign-in ล้มเหลว: ' + e.message, 'error'));
+}
+
+function signOut() {
+  auth.signOut();
+}
+
+// ── Preview restaurant ───────────────────────────────────────────────────────
+async function previewRestaurant() {
+  const url = document.getElementById('placeUrlInput').value.trim();
+  if (!url) return toast('กรุณาใส่ Google Maps URL', 'error');
+
+  const btn = document.getElementById('previewBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> กำลังดึงข้อมูล...';
+
+  try {
+    const idToken = await currentUser.getIdToken();
+    const res = await fetch('/api/add-restaurant', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ idToken, placeUrl: url, action: 'preview' })
+    });
+    const data = await res.json();
+
+    if (!res.ok) {
+      toast(data.error || 'เกิดข้อผิดพลาด', 'error');
+      return;
+    }
+
+    pendingRestaurant = data.restaurant;
+    showPreview(data.restaurant);
+  } catch (e) {
+    toast('เกิดข้อผิดพลาด: ' + e.message, 'error');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '🔍 Preview';
+  }
+}
+
+function showPreview(r) {
+  const wrap = document.getElementById('previewResult');
+  wrap.style.display = 'block';
+  wrap.innerHTML = `
+    <div class="preview-card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+        <div>
+          <div class="rest-name">${esc(r.name)}</div>
+          <div class="meta">${esc(r.cuisine)} · ${esc(r.area)} · ${r.budgetLabel || ''}</div>
+          <div class="meta" style="margin-top:2px">⭐ ${r.rating_gmaps || '-'} · ${(r.totalReviews||0).toLocaleString()} reviews</div>
+          <div class="meta" style="margin-top:2px;font-size:11px;opacity:.7">${esc(r.address)}</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:11px;color:var(--text-2)">Place ID</div>
+          <div style="font-size:11px;font-family:monospace;color:var(--text-2)">${r.place_id || '-'}</div>
+        </div>
+      </div>
+      <div class="badges">
+        <span class="badge-item">📍 ${esc(r.area)}</span>
+        <span class="badge-item">🍽 ${esc(r.cuisine)}</span>
+        <span class="badge-item">${r.budgetLabel || '฿฿'}</span>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
+        <button class="btn btn-green" id="confirmAddBtn" onclick="confirmAdd()">✅ เพิ่มเข้า Database</button>
+        <button class="btn btn-ghost" onclick="cancelPreview()">ยกเลิก</button>
+      </div>
+    </div>
+  `;
+}
+
+function cancelPreview() {
+  pendingRestaurant = null;
+  document.getElementById('previewResult').style.display = 'none';
+  document.getElementById('placeUrlInput').value = '';
+}
+
+// ── Confirm add ──────────────────────────────────────────────────────────────
+async function confirmAdd() {
+  if (!pendingRestaurant) return;
+
+  const btn = document.getElementById('confirmAddBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> กำลังบันทึก...';
+
+  try {
+    const idToken = await currentUser.getIdToken();
+    const placeUrl = document.getElementById('placeUrlInput').value.trim();
+    const res = await fetch('/api/add-restaurant', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ idToken, placeUrl, action: 'add' })
+    });
+    const data = await res.json();
+
+    if (res.status === 409) {
+      toast(`ร้านนี้มีอยู่แล้ว: ${data.duplicate}`, 'error');
+      return;
+    }
+    if (!res.ok) {
+      toast(data.error || 'เกิดข้อผิดพลาด', 'error');
+      return;
+    }
+
+    toast(data.message || `เพิ่ม "${pendingRestaurant.name}" เรียบร้อย`, 'success');
+    cancelPreview();
+  } catch (e) {
+    toast('เกิดข้อผิดพลาด: ' + e.message, 'error');
+  } finally {
+    if (btn) { btn.disabled = false; btn.innerHTML = '✅ เพิ่มเข้า Database'; }
+  }
+}
+
+// ── User management ──────────────────────────────────────────────────────────
+async function loadUsers() {
+  const wrap = document.getElementById('userTableWrap');
+  try {
+    const idToken = await currentUser.getIdToken();
+    const res = await fetch('/api/manage-users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ idToken, action: 'list' })
+    });
+    const data = await res.json();
+    if (!res.ok) { wrap.innerHTML = `<div style="color:var(--red)">${data.error}</div>`; return; }
+
+    if (!data.users.length) {
+      wrap.innerHTML = '<div style="color:var(--text-2);font-size:13px">ยังไม่มีผู้ใช้</div>';
+      return;
+    }
+
+    wrap.innerHTML = `
+      <table class="user-table">
+        <thead><tr>
+          <th>Email</th><th>Role</th><th>Granted By</th><th>Date</th><th></th>
+        </tr></thead>
+        <tbody>
+          ${data.users.map(u => `
+            <tr>
+              <td><strong>${esc(u.email)}</strong></td>
+              <td><span class="role-${u.role}">${u.role}</span></td>
+              <td style="color:var(--text-2);font-size:12px">${esc(u.grantedBy||'-')}</td>
+              <td style="color:var(--text-2);font-size:12px">${u.grantedAt ? new Date(u.grantedAt).toLocaleDateString('th-TH') : '-'}</td>
+              <td>${u.email !== currentUser.email ?
+                `<button class="btn btn-red" style="padding:4px 12px;font-size:11px" onclick="removeUser('${esc(u.email)}')">ลบ</button>` : ''
+              }</td>
+            </tr>`).join('')}
+        </tbody>
+      </table>`;
+  } catch (e) {
+    wrap.innerHTML = `<div style="color:var(--red)">โหลดข้อมูลล้มเหลว</div>`;
+  }
+}
+
+async function addUser() {
+  const email = document.getElementById('newUserEmail').value.trim();
+  const role  = document.getElementById('newUserRole').value;
+  if (!email) return toast('กรุณาใส่ email', 'error');
+
+  const idToken = await currentUser.getIdToken();
+  const res = await fetch('/api/manage-users', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ idToken, action: 'add', email, role })
+  });
+  const data = await res.json();
+
+  if (!res.ok) { toast(data.error, 'error'); return; }
+  toast(data.message, 'success');
+  document.getElementById('newUserEmail').value = '';
+  loadUsers();
+}
+
+async function removeUser(email) {
+  if (!confirm(`ลบสิทธิ์ ${email} ใช่หรือไม่?`)) return;
+  const idToken = await currentUser.getIdToken();
+  const res = await fetch('/api/manage-users', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ idToken, action: 'remove', email })
+  });
+  const data = await res.json();
+  if (!res.ok) { toast(data.error, 'error'); return; }
+  toast(data.message, 'success');
+  loadUsers();
+}
+
+// ── Toast ────────────────────────────────────────────────────────────────────
+function toast(msg, type='') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'show' + (type ? ' ' + type : '');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => { el.className = ''; }, 3500);
+}
+
+// ── HTML escape ──────────────────────────────────────────────────────────────
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+</script>
+</body>
+</html>
