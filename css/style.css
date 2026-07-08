@@ -705,3 +705,34 @@ section.section[style*="background:var(--dark)"]{
 .disc-vel-mini.rising{color:#4ade80}
 .disc-vel-mini.declining{color:#f87171}
 @media(max-width:720px){.disc-circle-grid{grid-template-columns:repeat(2,1fr)!important}}
+/* ── Micro-interactions (v20260708) ────────────────────────────── */
+#categoryDiscoveryGrid > div,
+#risingGrid > *, #emergingGrid > *, #newInnerGrid > *,
+#thaiFineDineGrid > *, #creatorBuzzRoot > div > div,
+.grid-3 > * {
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+#categoryDiscoveryGrid > div:hover,
+#risingGrid > *:hover, #emergingGrid > *:hover, #newInnerGrid > *:hover,
+#thaiFineDineGrid > *:hover, .grid-3 > *:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(15,31,60,.13);
+}
+@keyframes cmPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: .55; transform: scale(.82); }
+}
+.cm-live-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #34d399; display: inline-block;
+  animation: cmPulse 1.6s ease-in-out infinite;
+}
+.cm-fresh-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 11.5px; font-weight: 800; letter-spacing: .04em;
+  background: rgba(52,211,153,.12); border: 1px solid rgba(52,211,153,.35);
+  color: #34d399; border-radius: 99px; padding: 5px 13px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cm-live-dot { animation: none; }
+}
