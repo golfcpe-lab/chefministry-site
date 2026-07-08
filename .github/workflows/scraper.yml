@@ -314,6 +314,17 @@ jobs:
           "
         continue-on-error: true
 
+      - name: Commit classified export + data.js
+        run: |
+          git config user.name  "ChefMinistry Bot"
+          git config user.email "bot@chefministry.com"
+          git add scripts/scraper/export_restaurants.json scripts/scraper/chefministry_data.db js/data.js || true
+          git diff --staged --quiet || git commit -m "auto: daily signal update $(date +'%Y-%m-%d')"
+          git pull --rebase origin main
+
+      - name: Push to GitHub
+        run: git push origin main
+
       # ── Freshness guard: snapshot ล่าสุดต้องไม่เก่าเกิน 2 วัน ──
       - name: Freshness guard (fail if data stale)
         run: |
@@ -329,14 +340,3 @@ jobs:
               sys.exit(1)
           print('Freshness OK')
           "
-
-      - name: Commit classified export + data.js
-        run: |
-          git config user.name  "ChefMinistry Bot"
-          git config user.email "bot@chefministry.com"
-          git add scripts/scraper/export_restaurants.json scripts/scraper/chefministry_data.db js/data.js || true
-          git diff --staged --quiet || git commit -m "auto: daily signal update $(date +'%Y-%m-%d')"
-          git pull --rebase origin main
-
-      - name: Push to GitHub
-        run: git push origin main

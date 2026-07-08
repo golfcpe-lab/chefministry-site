@@ -155,6 +155,17 @@
   </div>
 </section>
 
+<!-- ── QUICK PICK: กินอะไรดี? ── -->
+<section style="background:var(--gold-bg);padding:40px 0 44px" id="quickPickSection">
+  <div class="container" style="text-align:center">
+    <div class="eyebrow" style="color:var(--amber);margin-bottom:8px">🎲 Decision Helper</div>
+    <h2 class="display-2" style="margin-bottom:8px">คิดไม่ออกว่าจะกินอะไร?</h2>
+    <p style="font-size:14px;color:var(--text-2);margin:0 auto 22px;max-width:480px">เลือกอารมณ์กับงบ แล้วให้ข้อมูลจริงจาก 270+ ร้านช่วยตัดสินใจ — สุ่มจากร้านที่ signal ยังดีเท่านั้น</p>
+    <div id="quickPickRoot"></div>
+  </div>
+</section>
+
+
 <!-- ── WHY THIS MATTERS ── -->
 <section style="background:var(--cream);padding:32px 0">
   <div class="container" style="max-width:700px;text-align:center">
@@ -350,6 +361,22 @@
 </section>
 
 <hr class="divider"/>
+
+
+<!-- ── CREATOR BUZZ THIS WEEK ── -->
+<section style="background:var(--cream);padding:40px 0 46px" id="creatorBuzzSection">
+  <div class="container" style="max-width:720px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:10px;margin-bottom:18px">
+      <div>
+        <div class="eyebrow" style="color:var(--purple);margin-bottom:6px">🎥 Creator Buzz</div>
+        <h2 class="display-2">ร้านที่ Creator รีวิวสัปดาห์นี้</h2>
+        <p style="font-size:13px;color:var(--text-2);margin-top:6px">จัดอันดับจาก rating ของ creator + tier — อัปเดตอัตโนมัติทุกสัปดาห์จาก YouTube Creator Network</p>
+      </div>
+      <span id="creatorBuzzDate" style="font-size:10.5px;font-weight:800;background:#fff;border:1px solid var(--border);border-radius:99px;padding:4px 12px;color:var(--text-2)"></span>
+    </div>
+    <div id="creatorBuzzRoot"></div>
+  </div>
+</section>
 
 <!-- ── HOW IT WORKS ── -->
 <section style="padding:36px 0">
@@ -591,6 +618,8 @@
 <script src="./js/safeDataAdapter.js?v=20260501a"></script>
 <script src="./js/data.js?v=20260501a"></script>
 <script src="./js/dataService.js?v=20260501a"></script>
+<script src="./js/quickpick.js?v=20260708a"></script>
+<script src="./js/creatorbuzz.js?v=20260708a"></script>
 <script>
   // Mobile nav
   document.getElementById("mobileMenuBtn").addEventListener("click",()=>{

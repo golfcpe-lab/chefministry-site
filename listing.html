@@ -170,11 +170,16 @@
     <!-- Gradient fade overlay suggestion -->
     <div style="height:100px;background:linear-gradient(to bottom,transparent,var(--cream));margin-top:-100px;position:relative;z-index:1;pointer-events:none"></div>
     <!-- Wall card -->
-    <div style="background:var(--navy);border-radius:var(--radius-lg);padding:40px 36px;text-align:center;max-width:520px;margin:0 auto 40px;box-shadow:0 8px 40px rgba(29,58,95,.18)">
+    <div id="signup" style="background:var(--navy);border-radius:var(--radius-lg);padding:40px 36px;text-align:center;max-width:520px;margin:0 auto 40px;box-shadow:0 8px 40px rgba(29,58,95,.18)">
       <div style="display:inline-block;background:var(--gold);color:var(--navy);font-size:10px;font-weight:900;padding:4px 12px;border-radius:99px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px">Members Only</div>
       <div id="wallCount" style="font-size:13px;font-weight:700;color:rgba(255,255,255,.55);margin-bottom:10px">แสดง <span id="previewCount">6</span> จาก <span id="hiddenCount">270</span> ร้านในฐานข้อมูล</div>
       <h3 style="color:#fff;font-size:22px;font-weight:900;margin-bottom:8px;font-family:'Playfair Display',serif">เข้าถึง Signal ทั้งหมด</h3>
-      <p style="color:rgba(255,255,255,.65);font-size:14px;line-height:1.7;margin-bottom:24px">สมัครฟรีเพื่อดู Signal ร้านอาหาร รายชื่อ Creator<br/>และข้อมูล Trend ทั้งหมด · ไม่มีค่าใช้จ่าย</p>
+      <div style="text-align:left;max-width:340px;margin:0 auto 24px">
+        <div style="color:rgba(255,255,255,.75);font-size:13.5px;line-height:2">✅ Signal ครบทั้ง 270+ ร้าน อัปเดตรายวัน</div>
+        <div style="color:rgba(255,255,255,.75);font-size:13.5px;line-height:2">✅ ร้านที่ Creator รีวิวสัปดาห์นี้ — ครบทุกอันดับ</div>
+        <div style="color:rgba(255,255,255,.75);font-size:13.5px;line-height:2">✅ รายชื่อ 30+ Food Creators พร้อม tier</div>
+        <div style="color:rgba(255,255,255,.75);font-size:13.5px;line-height:2">✅ เห็นร้าน Rising ก่อนใคร — ฟรี ไม่มีเงื่อนไข</div>
+      </div>
       <button id="wallSignInBtn"
         onclick="if(typeof CM_AUTH!=='undefined') CM_AUTH.signIn()"
         style="width:100%;padding:14px;background:#fff;color:#0d1f3c;font-weight:900;font-size:15px;border:none;border-radius:var(--radius);cursor:pointer;letter-spacing:.04em;display:flex;align-items:center;justify-content:center;gap:10px">
