@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <link rel="icon" type="image/png" href="./assets/logo_circular.png"/>
   <title>ChefMinistry — Restaurant Rating Intelligence</title>
-  <meta name="description" content="ChefMinistry วิเคราะห์ Rating Velocity และ Review Trend จากแหล่งข้อมูล public รายวัน — ให้ร้านอาหารรู้ position ตัวเองใน Category และให้ Food Creator เห็นโอกาสก่อนตลาด"/>
+  <meta name="description" content="รู้ก่อนใครว่าร้านไหนกำลังมา — ChefMinistry จับสัญญาณจากรีวิว Google Maps รายวัน และ food creator กว่า 30 คน ครอบคลุม 270+ ร้านทั่วกรุงเทพฯ"/>
   <link rel="stylesheet" href="./css/style.css?v=20260708b"/>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-BT2BCMZ9SH"></script>
@@ -58,11 +58,11 @@
       <div>
         <div class="eyebrow hero-eyebrow">Restaurant Rating Intelligence Platform</div>
         <div style="margin-bottom:14px"><span class="cm-fresh-badge" id="cmFreshBadge"><span class="cm-live-dot"></span> อัปเดตรายวัน</span></div>
-        <h1 class="display-1 hero-title">ตัดสินใจได้แม่นขึ้น<br/>ด้วยข้อมูลร้านอาหารที่อัปเดตรายวัน</h1>
+        <h1 class="display-1 hero-title">รู้ก่อนใคร ว่าร้านไหนกำลังมา<br/>จากข้อมูลรีวิวจริงที่อัปเดตทุกวัน</h1>
         <p class="hero-subtitle">
-          ChefMinistry วิเคราะห์ review trend และ creator signal จากแหล่งข้อมูล public
-          เพื่อช่วยให้คุณเห็นว่าร้านไหนกำลังมา ร้านไหนเริ่มอิ่มตัว
-          และร้านของคุณอยู่ตรงไหนใน category ที่เกี่ยวข้อง
+          ChefMinistry จับสัญญาณจากรีวิว Google Maps และสายตา food creator กว่า 30 คน
+          กลั่นออกมาเป็นคำตอบง่ายๆ — ร้านไหนกำลังพีค ร้านไหนเริ่มแผ่ว
+          และร้านไหนคือดาวรุ่งที่คนยังไม่ทันรู้จัก
         </p>
         <div class="hero-actions" style="flex-wrap:wrap">
           <a href="./listing.html" class="btn btn-primary">🔍 ดูร้านทั้งหมด →</a>
@@ -71,7 +71,7 @@
         <div class="hero-stats">
           <div>
             <div class="hero-stat-num" id="statRestaurants">270+</div>
-            <div class="hero-stat-label">ร้านในฐานข้อมูล</div>
+            <div class="hero-stat-label">ร้านที่ติดตามอยู่</div>
           </div>
           <div>
             <div class="hero-stat-num">Daily</div>
@@ -83,7 +83,7 @@
           </div>
           <div>
             <div class="hero-stat-num" id="statCreators">30+</div>
-            <div class="hero-stat-label">creators monitored</div>
+            <div class="hero-stat-label">Food Creators ที่ติดตาม</div>
           </div>
         </div>
       </div>
@@ -123,21 +123,21 @@
     <div class="signal-concept-icon">📊</div>
     <div>
       <div class="signal-concept-title">Rising · Stable · Declining</div>
-      <div class="signal-concept-desc">รู้ movement ของร้านจาก snapshot รีวิว 30 วัน — ไม่ต้องเดา ดูข้อมูลจริงจาก Google Maps</div>
+      <div class="signal-concept-desc">ร้านกำลังขึ้นหรือเริ่มแผ่ว ดูจากรีวิวจริงย้อนหลัง 30 วัน — ไม่ต้องเดาจากกระแส</div>
     </div>
   </div>
   <div class="signal-concept-item">
     <div class="signal-concept-icon">🗂️</div>
     <div>
       <div class="signal-concept-title">แยกตาม Category</div>
-      <div class="signal-concept-desc">เปรียบเทียบเฉพาะร้านในหมวดเดียวกัน — Ramen vs Ramen, Fine Dining vs Fine Dining เสมอ</div>
+      <div class="signal-concept-desc">เทียบกันเฉพาะร้านสายเดียวกัน — ราเมนเทียบราเมน Fine Dining เทียบ Fine Dining แฟร์กว่ากันเยอะ</div>
     </div>
   </div>
   <div class="signal-concept-item">
     <div class="signal-concept-icon">🎥</div>
     <div>
       <div class="signal-concept-title">Google Maps + YouTube</div>
-      <div class="signal-concept-desc">รวม signal จาก Google Maps รายวัน และ YouTube Creator Network 30+ คน เห็นภาพรวมครบกว่า</div>
+      <div class="signal-concept-desc">สองมุมในที่เดียว — เสียงคนกินจริงรายวัน บวกสายตา food creator กว่า 30 คน</div>
     </div>
   </div>
 </div>
@@ -161,7 +161,7 @@
   <div class="container" style="text-align:center">
     <div class="eyebrow" style="color:var(--amber);margin-bottom:8px">🎲 Decision Helper</div>
     <h2 class="display-2" style="margin-bottom:8px">คิดไม่ออกว่าจะกินอะไร?</h2>
-    <p style="font-size:14px;color:var(--text-2);margin:0 auto 22px;max-width:480px">เลือกอารมณ์กับงบ แล้วให้ข้อมูลจริงจาก 270+ ร้านช่วยตัดสินใจ — สุ่มจากร้านที่ signal ยังดีเท่านั้น</p>
+    <p style="font-size:14px;color:var(--text-2);margin:0 auto 22px;max-width:480px">เลือกแนวที่อยากกิน บอกงบคร่าวๆ เดี๋ยวเราสุ่มให้จากร้านที่กระแสยังดี — มีให้เลือก 270+ ร้านทั่วกรุงเทพฯ</p>
     <div id="quickPickRoot"></div>
   </div>
 </section>
@@ -175,8 +175,8 @@
     <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:24px">
       <div>
         <div class="eyebrow" style="color:var(--green);margin-bottom:6px">📊 Growth Intelligence</div>
-        <h2 class="display-2">Discover ร้านอาหาร</h2>
-        <p class="lead" style="margin-top:8px" id="discoverSubtitle">จัดอันดับจาก Normalized Growth Score — ไม่ใช่แค่ยอดรีวิวรวม</p>
+        <h2 class="display-2">ร้านที่กำลังมาแรงตอนนี้</h2>
+        <p class="lead" style="margin-top:8px" id="discoverSubtitle">จัดอันดับจากความเร็วที่รีวิวโต ไม่ใช่แค่ยอดรวม — ร้านเล็กที่กำลังพุ่งก็มีที่ยืน</p>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
         <!-- Tab buttons -->
@@ -330,11 +330,11 @@
 <section style="background:var(--cream);padding:32px 0">
   <div class="container" style="max-width:700px;text-align:center">
     <div class="eyebrow" style="color:var(--navy);margin-bottom:10px">ทำไมข้อมูลถึงสำคัญ</div>
-    <h2 class="display-2" style="margin-bottom:14px">เมื่อสัญญาณของตลาดเปลี่ยนเร็วขึ้น<br/>ข้อมูลช่วยให้ตัดสินใจได้ชัดขึ้น</h2>
+    <h2 class="display-2" style="margin-bottom:14px">กระแสร้านอาหารเปลี่ยนเร็ว<br/>ใครเห็นข้อมูลก่อน ได้เปรียบก่อน</h2>
     <p style="font-size:15px;color:var(--text-2);line-height:1.75;max-width:600px;margin:0 auto">
-      ChefMinistry รวบรวมข้อมูลร้านอาหารจากแหล่งข้อมูล public และแปลงให้เป็น trend signal
-      ที่ช่วยให้ผู้ใช้งานมองเห็นโอกาส เปรียบเทียบตำแหน่งของร้าน
-      และติดตามความเปลี่ยนแปลงได้อย่างเป็นระบบ
+      ChefMinistry ย่อยรีวิวมหาศาลจากแหล่งข้อมูลสาธารณะให้เป็นสัญญาณที่อ่านง่าย
+      เห็นโอกาสก่อนใคร รู้ตำแหน่งของร้านตัวเอง
+      และตามทันทุกความเปลี่ยนแปลงโดยไม่ต้องนั่งไล่อ่านเอง
     </p>
   </div>
 </section>
@@ -384,8 +384,8 @@
   <div class="container">
     <div class="section-header" style="text-align:center;max-width:580px;margin:0 auto 28px">
       <div class="eyebrow" style="color:var(--navy);margin-bottom:8px">How It Works</div>
-      <h2 class="display-2">ข้อมูลจริง ตัดสินใจถูก</h2>
-      <p class="lead" style="margin-top:10px">รวบรวม review data จากแหล่งข้อมูล public ทุกวัน วิเคราะห์ผ่าน algorithm ที่ออกแบบมาเฉพาะสำหรับตลาดร้านอาหาร</p>
+      <h2 class="display-2">เบื้องหลังตัวเลขทุกตัว</h2>
+      <p class="lead" style="margin-top:10px">เราเก็บรีวิวจากแหล่งข้อมูลสาธารณะทุกวัน แล้ววิเคราะห์ด้วยสูตรที่ออกแบบมาเพื่อวงการร้านอาหารโดยเฉพาะ</p>
     </div>
     <div class="grid-3">
       <div class="step-card">
@@ -505,7 +505,7 @@
   <div class="container">
     <div class="section-header" style="text-align:center;max-width:680px;margin:0 auto 28px">
       <div class="eyebrow" style="color:var(--navy);margin-bottom:8px">เริ่มต้นได้ทันที</div>
-      <h2 class="display-2">ข้อมูลที่เปลี่ยนวิธีมองธุรกิจอาหาร</h2>
+      <h2 class="display-2">ให้ข้อมูลทำงาน แทนการเดา</h2>
       <p class="lead" style="margin-top:10px">
         ไม่ว่าคุณจะเป็นเจ้าของร้านที่อยากรู้ position ตัวเอง หรือ Creator ที่อยากเห็นโอกาสก่อนตลาด
         — ChefMinistry คือเครื่องมือที่คุณต้องการ
@@ -1058,7 +1058,7 @@
     var TABS = {
       trending: {
         grid: "risingGrid",   btn: "tabTrending",
-        subtitle: "จัดอันดับจาก Normalized Growth Score — ไม่ใช่แค่ยอดรีวิวรวม",
+        subtitle: "จัดอันดับจากความเร็วที่รีวิวโต ไม่ใช่แค่ยอดรวม — ร้านเล็กที่กำลังพุ่งก็มีที่ยืน",
         formula: "📐 Score = growth_rate × log(reviews+1) / log(reviews+10) — ลด bias ร้านใหญ่",
         rotate: "🔄 หมุนเวียนทุกวัน เพื่อความหลากหลาย",
       },
