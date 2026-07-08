@@ -38,7 +38,7 @@ AREA_NORM = {
     "phaya thai":"Phaya Thai",
 }
 PRICE_LABEL = {1:"\u0e3f", 2:"\u0e3f\u0e3f", 3:"\u0e3f\u0e3f\u0e3f", 4:"\u0e3f\u0e3f\u0e3f\u0e3f"}
-SOURCE_NORM = {"wongnai":"Wongnai","gmaps":"Google Maps","youtube":"YouTube","manual":"Manual"}
+SOURCE_NORM = {"wongnai":"Wongnai","gmaps":"Google Maps","youtube":"YouTube","manual":"Manual","community":"Community Pick"}
 EMOJI_MAP = {
     "Rising Fast":"\U0001f525","Emerging":"\U0001f195","Gaining Momentum":"\U0001f4c8",
     "Steady Growth":"\u2197\ufe0f","Social Buzz":"\U0001f4f2","Also Trending":"\u2197\ufe0f",
@@ -167,6 +167,12 @@ def build_canonical(db_path=None, out_path=None, days=30):
         cuisine_norm = norm_cuisine(cuisine_raw)
         area_raw     = d.get("area") or ""
         area_norm    = norm_area(area_raw)
+        # แก้ area ผิดจากข้อมูลเก่า — เทียบกับที่อยู่จริงจาก Google Maps
+        try:
+            from area_fix import resolve_area
+            area_norm = resolve_area(area_norm, d.get("gmaps_address") or "") or area_norm
+        except Exception:
+            pass
         price_raw    = d.get("price_range") or 2
         price_lbl    = PRICE_LABEL.get(price_raw, "\u0e3f\u0e3f")
 

@@ -247,6 +247,31 @@
   </div>
 </section>
 
+
+<!-- ── SUGGEST A RESTAURANT ── -->
+<section style="background:var(--white);padding:38px 0 42px" id="suggestSection">
+  <div class="container" style="max-width:640px;text-align:center">
+    <div class="eyebrow" style="color:var(--gold);margin-bottom:8px">🍜 Community Pick</div>
+    <h2 class="display-2" style="margin-bottom:8px">เจอร้านเด็ดที่เรายังไม่รู้จัก?</h2>
+    <p style="font-size:14px;color:var(--text-2);margin:0 auto 20px;max-width:480px">
+      แปะลิงก์ Google Maps มาได้เลย ระบบจะตรวจข้อมูลร้านอัตโนมัติ —
+      ถ้าผ่านเกณฑ์ ร้านจะขึ้นบนเว็บพร้อมป้าย Community Pick
+    </p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+      <input id="cmSuggestUrl" type="url" placeholder="https://maps.app.goo.gl/…"
+        style="flex:1;min-width:240px;max-width:380px;padding:13px 16px;border:1.5px solid var(--border);border-radius:12px;font-family:inherit;font-size:14px"/>
+      <button id="cmSuggestBtn"
+        style="cursor:pointer;font-family:inherit;font-size:14px;font-weight:900;padding:13px 26px;border-radius:12px;border:none;background:var(--navy);color:#fff;box-shadow:var(--shadow)">ส่งร้านนี้ →</button>
+    </div>
+    <input id="cmSuggestNote" type="text" placeholder="บอกหน่อยว่าเด็ดยังไง (ไม่บังคับ)"
+      style="margin-top:10px;width:100%;max-width:520px;padding:11px 16px;border:1.5px solid var(--border);border-radius:12px;font-family:inherit;font-size:13px"/>
+    <div id="cmSuggestMsg" style="margin-top:12px;font-size:13px;min-height:18px"></div>
+    <div style="margin-top:6px;font-size:11px;color:var(--text-2);opacity:.7">
+      เกณฑ์เบื้องต้น: ร้านอาหาร/คาเฟ่ใน กทม.-ปริมณฑล · rating 4.2+ · รีวิว 50+ — เกือบผ่านเราเก็บเข้า shortlist ไว้ตามต่อ
+    </div>
+  </div>
+</section>
+
 <!-- ── WEEKLY TREND HIGHLIGHT ── -->
 <section style="background:var(--cream);padding:36px 0">
   <div class="container">
@@ -622,6 +647,7 @@
 <script src="./js/quickpick.js?v=20260708b"></script>
 <script src="./js/creatorbuzz.js?v=20260708a"></script>
 <script src="./js/microfx.js?v=20260708b"></script>
+<script src="./js/suggest.js?v=20260708c"></script>
 <script>
   // Mobile nav
   document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
