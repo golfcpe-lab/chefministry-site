@@ -145,7 +145,11 @@
 
   /* ─── Core counts ────────────────────────────────────────────────────────── */
   function getDbTotalCount()  { return _config().restaurantCount || 270; }
-  function getLastUpdated()   { return _config().lastUpdated || ''; }
+  function getLastUpdated()   {
+    var db = (typeof CM_DB_STATS !== 'undefined' && CM_DB_STATS.lastUpdated) || '';
+    var cf = _config().lastUpdated || '';
+    return (db > cf) ? db : (cf || db);
+  }
   function getCreatorCount()  { var l = _influencers(); return l.length || _config().creatorCount || 0; }
   function getCategoryCount() { return Math.max(getCategoryList().length, _config().categoryCount || 0); }
   function getDetailedRestaurantCount() { return _mergeAllRestaurants().filter(_scopeFilter).length; }
