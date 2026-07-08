@@ -5052,8 +5052,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "ratchada",
-    "area_normalized": "Ratchada",
-    "area": "Ratchada",
+    "area_normalized": "Wang Thonglang",
+    "area": "Wang Thonglang",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 3,
@@ -5100,7 +5100,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Ratchada",
+      "Wang Thonglang",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -5412,8 +5412,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "sukhumvit",
-    "area_normalized": "Sukhumvit",
-    "area": "Sukhumvit",
+    "area_normalized": "Yan Nawa",
+    "area": "Yan Nawa",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 3,
@@ -5460,7 +5460,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Sukhumvit",
+      "Yan Nawa",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -5772,8 +5772,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "onnut",
-    "area_normalized": "On Nut",
-    "area": "On Nut",
+    "area_normalized": "Bang Khae",
+    "area": "Bang Khae",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -5820,7 +5820,7 @@
     "type": "unknown",
     "tags": [
       "Other",
-      "On Nut",
+      "Bang Khae",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -5844,8 +5844,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "onnut",
-    "area_normalized": "On Nut",
-    "area": "On Nut",
+    "area_normalized": "Bang Khae",
+    "area": "Bang Khae",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -5892,7 +5892,7 @@
     "type": "unknown",
     "tags": [
       "Other",
-      "On Nut",
+      "Bang Khae",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -5916,8 +5916,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "onnut",
-    "area_normalized": "On Nut",
-    "area": "On Nut",
+    "area_normalized": "Thawi Watthana",
+    "area": "Thawi Watthana",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -5964,7 +5964,7 @@
     "type": "unknown",
     "tags": [
       "Other",
-      "On Nut",
+      "Thawi Watthana",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -5988,8 +5988,8 @@
     "cuisine_normalized": "Cafe",
     "cuisine": "Cafe",
     "area_raw": "onnut",
-    "area_normalized": "On Nut",
-    "area": "On Nut",
+    "area_normalized": "Bang Khae",
+    "area": "Bang Khae",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -6036,7 +6036,7 @@
     "type": "cafe",
     "tags": [
       "Cafe",
-      "On Nut",
+      "Bang Khae",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -6060,8 +6060,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "onnut",
-    "area_normalized": "On Nut",
-    "area": "On Nut",
+    "area_normalized": "Bang Khae",
+    "area": "Bang Khae",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -6108,7 +6108,7 @@
     "type": "unknown",
     "tags": [
       "Other",
-      "On Nut",
+      "Bang Khae",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -6132,8 +6132,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "onnut",
-    "area_normalized": "On Nut",
-    "area": "On Nut",
+    "area_normalized": "Bang Khae",
+    "area": "Bang Khae",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -6180,7 +6180,7 @@
     "type": "unknown",
     "tags": [
       "Other",
-      "On Nut",
+      "Bang Khae",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -6204,8 +6204,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "onnut",
-    "area_normalized": "On Nut",
-    "area": "On Nut",
+    "area_normalized": "Prawet",
+    "area": "Prawet",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -6252,7 +6252,7 @@
     "type": "unknown",
     "tags": [
       "Other",
-      "On Nut",
+      "Prawet",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -6276,8 +6276,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "onnut",
-    "area_normalized": "On Nut",
-    "area": "On Nut",
+    "area_normalized": "Bang Khae",
+    "area": "Bang Khae",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -6324,7 +6324,7 @@
     "type": "unknown",
     "tags": [
       "Other",
-      "On Nut",
+      "Bang Khae",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -6348,8 +6348,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "onnut",
-    "area_normalized": "On Nut",
-    "area": "On Nut",
+    "area_normalized": "Watthana",
+    "area": "Watthana",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -6396,7 +6396,7 @@
     "type": "unknown",
     "tags": [
       "Other",
-      "On Nut",
+      "Watthana",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -6924,8 +6924,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "ladprao",
-    "area_normalized": "Lat Phrao",
-    "area": "Lat Phrao",
+    "area_normalized": "Bang Khen",
+    "area": "Bang Khen",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -6972,7 +6972,7 @@
     "type": "unknown",
     "tags": [
       "Other",
-      "Lat Phrao",
+      "Bang Khen",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -7140,8 +7140,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "ladprao",
-    "area_normalized": "Lat Phrao",
-    "area": "Lat Phrao",
+    "area_normalized": "Bueng Kum",
+    "area": "Bueng Kum",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -7188,7 +7188,7 @@
     "type": "unknown",
     "tags": [
       "Other",
-      "Lat Phrao",
+      "Bueng Kum",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -7284,8 +7284,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "rama9",
-    "area_normalized": "Rama 9",
-    "area": "Rama 9",
+    "area_normalized": "Bangkapi",
+    "area": "Bangkapi",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -7332,7 +7332,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Rama 9",
+      "Bangkapi",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -7356,8 +7356,8 @@
     "cuisine_normalized": "Japanese",
     "cuisine": "Japanese",
     "area_raw": "rama9",
-    "area_normalized": "Rama 9",
-    "area": "Rama 9",
+    "area_normalized": "Huai Khwang",
+    "area": "Huai Khwang",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 3,
@@ -7404,7 +7404,7 @@
     "type": "restaurant",
     "tags": [
       "Japanese",
-      "Rama 9",
+      "Huai Khwang",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -7428,8 +7428,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "rama9",
-    "area_normalized": "Rama 9",
-    "area": "Rama 9",
+    "area_normalized": "Huai Khwang",
+    "area": "Huai Khwang",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 3,
@@ -7476,7 +7476,7 @@
     "type": "unknown",
     "tags": [
       "Other",
-      "Rama 9",
+      "Huai Khwang",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -7500,8 +7500,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "rama9",
-    "area_normalized": "Rama 9",
-    "area": "Rama 9",
+    "area_normalized": "Huai Khwang",
+    "area": "Huai Khwang",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 3,
@@ -7548,7 +7548,7 @@
     "type": "unknown",
     "tags": [
       "Other",
-      "Rama 9",
+      "Huai Khwang",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -7572,8 +7572,8 @@
     "cuisine_normalized": "Italian",
     "cuisine": "Italian",
     "area_raw": "rama9",
-    "area_normalized": "Rama 9",
-    "area": "Rama 9",
+    "area_normalized": "Din Daeng",
+    "area": "Din Daeng",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 3,
@@ -7620,7 +7620,7 @@
     "type": "restaurant",
     "tags": [
       "Italian",
-      "Rama 9",
+      "Din Daeng",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -7644,8 +7644,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "rama9",
-    "area_normalized": "Rama 9",
-    "area": "Rama 9",
+    "area_normalized": "Huai Khwang",
+    "area": "Huai Khwang",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 3,
@@ -7692,7 +7692,7 @@
     "type": "unknown",
     "tags": [
       "Other",
-      "Rama 9",
+      "Huai Khwang",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -7716,8 +7716,8 @@
     "cuisine_normalized": "Japanese",
     "cuisine": "Japanese",
     "area_raw": "rama9",
-    "area_normalized": "Rama 9",
-    "area": "Rama 9",
+    "area_normalized": "Din Daeng",
+    "area": "Din Daeng",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -7764,7 +7764,7 @@
     "type": "restaurant",
     "tags": [
       "Japanese",
-      "Rama 9",
+      "Din Daeng",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -7788,8 +7788,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "rama9",
-    "area_normalized": "Rama 9",
-    "area": "Rama 9",
+    "area_normalized": "Din Daeng",
+    "area": "Din Daeng",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 3,
@@ -7836,7 +7836,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Rama 9",
+      "Din Daeng",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -7860,8 +7860,8 @@
     "cuisine_normalized": "Japanese",
     "cuisine": "Japanese",
     "area_raw": "rama9",
-    "area_normalized": "Rama 9",
-    "area": "Rama 9",
+    "area_normalized": "Huai Khwang",
+    "area": "Huai Khwang",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 3,
@@ -7908,7 +7908,7 @@
     "type": "restaurant",
     "tags": [
       "Japanese",
-      "Rama 9",
+      "Huai Khwang",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -7932,8 +7932,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "rama9",
-    "area_normalized": "Rama 9",
-    "area": "Rama 9",
+    "area_normalized": "Din Daeng",
+    "area": "Din Daeng",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -7980,7 +7980,7 @@
     "type": "unknown",
     "tags": [
       "Other",
-      "Rama 9",
+      "Din Daeng",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -8004,8 +8004,8 @@
     "cuisine_normalized": "Isaan Thai",
     "cuisine": "Isaan Thai",
     "area_raw": "rama9",
-    "area_normalized": "Rama 9",
-    "area": "Rama 9",
+    "area_normalized": "Huai Khwang",
+    "area": "Huai Khwang",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -8052,7 +8052,7 @@
     "type": "restaurant",
     "tags": [
       "Isaan Thai",
-      "Rama 9",
+      "Huai Khwang",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -8076,8 +8076,8 @@
     "cuisine_normalized": "Korean",
     "cuisine": "Korean",
     "area_raw": "rama9",
-    "area_normalized": "Rama 9",
-    "area": "Rama 9",
+    "area_normalized": "Huai Khwang",
+    "area": "Huai Khwang",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -8124,7 +8124,7 @@
     "type": "restaurant",
     "tags": [
       "Korean",
-      "Rama 9",
+      "Huai Khwang",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -8148,8 +8148,8 @@
     "cuisine_normalized": "Korean",
     "cuisine": "Korean",
     "area_raw": "rama9",
-    "area_normalized": "Rama 9",
-    "area": "Rama 9",
+    "area_normalized": "Huai Khwang",
+    "area": "Huai Khwang",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 4,
@@ -8196,7 +8196,7 @@
     "type": "restaurant",
     "tags": [
       "Korean",
-      "Rama 9",
+      "Huai Khwang",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -8220,8 +8220,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "rama9",
-    "area_normalized": "Rama 9",
-    "area": "Rama 9",
+    "area_normalized": "Suan Luang",
+    "area": "Suan Luang",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -8268,7 +8268,7 @@
     "type": "unknown",
     "tags": [
       "Other",
-      "Rama 9",
+      "Suan Luang",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -8292,8 +8292,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "rama9",
-    "area_normalized": "Rama 9",
-    "area": "Rama 9",
+    "area_normalized": "Huai Khwang",
+    "area": "Huai Khwang",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -8340,7 +8340,7 @@
     "type": "unknown",
     "tags": [
       "Other",
-      "Rama 9",
+      "Huai Khwang",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -8364,8 +8364,8 @@
     "cuisine_normalized": "Japanese",
     "cuisine": "Japanese",
     "area_raw": "rama9",
-    "area_normalized": "Rama 9",
-    "area": "Rama 9",
+    "area_normalized": "Huai Khwang",
+    "area": "Huai Khwang",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -8412,7 +8412,7 @@
     "type": "restaurant",
     "tags": [
       "Japanese",
-      "Rama 9",
+      "Huai Khwang",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -8436,8 +8436,8 @@
     "cuisine_normalized": "Japanese",
     "cuisine": "Japanese",
     "area_raw": "rama9",
-    "area_normalized": "Rama 9",
-    "area": "Rama 9",
+    "area_normalized": "Huai Khwang",
+    "area": "Huai Khwang",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 3,
@@ -8484,7 +8484,7 @@
     "type": "restaurant",
     "tags": [
       "Japanese",
-      "Rama 9",
+      "Huai Khwang",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -8508,8 +8508,8 @@
     "cuisine_normalized": "Japanese",
     "cuisine": "Japanese",
     "area_raw": "rama9",
-    "area_normalized": "Rama 9",
-    "area": "Rama 9",
+    "area_normalized": "Huai Khwang",
+    "area": "Huai Khwang",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 3,
@@ -8556,7 +8556,7 @@
     "type": "restaurant",
     "tags": [
       "Japanese",
-      "Rama 9",
+      "Huai Khwang",
       "Wongnai"
     ],
     "cmNote": "0 reviews · Wongnai",
@@ -8652,8 +8652,8 @@
     "cuisine_normalized": "Italian",
     "cuisine": "Italian",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Sathorn",
+    "area": "Sathorn",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -8702,7 +8702,7 @@
     "type": "restaurant",
     "tags": [
       "Italian",
-      "Bangkok",
+      "Sathorn",
       "Google Maps"
     ],
     "cmNote": "179 reviews, rating 4.9",
@@ -8726,8 +8726,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "sathorn",
-    "area_normalized": "Sathorn",
-    "area": "Sathorn",
+    "area_normalized": "Yaowarat",
+    "area": "Yaowarat",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -8776,7 +8776,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Sathorn",
+      "Yaowarat",
       "Google Maps"
     ],
     "cmNote": "687 reviews · Google Maps",
@@ -8800,8 +8800,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Minburi",
+    "area": "Minburi",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -8850,7 +8850,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Bangkok",
+      "Minburi",
       "Google Maps"
     ],
     "cmNote": "35 reviews, rating 5.0",
@@ -8874,8 +8874,8 @@
     "cuisine_normalized": "Bar & Grill",
     "cuisine": "Bar & Grill",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Bang Khen",
+    "area": "Bang Khen",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -8924,7 +8924,7 @@
     "type": "restaurant",
     "tags": [
       "Bar & Grill",
-      "Bangkok",
+      "Bang Khen",
       "Google Maps"
     ],
     "cmNote": "179 reviews, rating 4.8",
@@ -8948,8 +8948,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Saphan Sung",
+    "area": "Saphan Sung",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -8998,7 +8998,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Bangkok",
+      "Saphan Sung",
       "Google Maps"
     ],
     "cmNote": "278 reviews · Google Maps",
@@ -9022,8 +9022,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Huai Khwang",
+    "area": "Huai Khwang",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -9072,7 +9072,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Bangkok",
+      "Huai Khwang",
       "Google Maps"
     ],
     "cmNote": "208 reviews · Google Maps",
@@ -9096,8 +9096,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Sathorn",
+    "area": "Sathorn",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -9146,7 +9146,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Bangkok",
+      "Sathorn",
       "Google Maps"
     ],
     "cmNote": "641 reviews · Google Maps",
@@ -9170,8 +9170,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Khlong Sam Wa",
+    "area": "Khlong Sam Wa",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -9220,7 +9220,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Bangkok",
+      "Khlong Sam Wa",
       "Google Maps"
     ],
     "cmNote": "19 reviews, rating 5.0",
@@ -9244,8 +9244,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Bangkok Noi",
+    "area": "Bangkok Noi",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -9294,7 +9294,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Bangkok",
+      "Bangkok Noi",
       "Google Maps"
     ],
     "cmNote": "400 reviews · Google Maps",
@@ -9318,8 +9318,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Khan Na Yao",
+    "area": "Khan Na Yao",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -9368,7 +9368,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Bangkok",
+      "Khan Na Yao",
       "Google Maps"
     ],
     "cmNote": "38 reviews, rating 4.6",
@@ -9392,8 +9392,8 @@
     "cuisine_normalized": "Cafe",
     "cuisine": "Cafe",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Pathum Thani",
+    "area": "Pathum Thani",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -9442,7 +9442,7 @@
     "type": "cafe",
     "tags": [
       "Cafe",
-      "Bangkok",
+      "Pathum Thani",
       "Google Maps"
     ],
     "cmNote": "564 reviews · Google Maps",
@@ -9466,8 +9466,8 @@
     "cuisine_normalized": "Italian",
     "cuisine": "Italian",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Watthana",
+    "area": "Watthana",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -9516,7 +9516,7 @@
     "type": "restaurant",
     "tags": [
       "Italian",
-      "Bangkok",
+      "Watthana",
       "Google Maps"
     ],
     "cmNote": "402 reviews · Google Maps",
@@ -9614,8 +9614,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "sukhumvit",
-    "area_normalized": "Sukhumvit",
-    "area": "Sukhumvit",
+    "area_normalized": "Bang Khen",
+    "area": "Bang Khen",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -9664,7 +9664,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Sukhumvit",
+      "Bang Khen",
       "Google Maps"
     ],
     "cmNote": "174 reviews · Google Maps",
@@ -9688,8 +9688,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "sukhumvit",
-    "area_normalized": "Sukhumvit",
-    "area": "Sukhumvit",
+    "area_normalized": "Bueng Kum",
+    "area": "Bueng Kum",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -9738,7 +9738,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Sukhumvit",
+      "Bueng Kum",
       "Google Maps"
     ],
     "cmNote": "62 reviews · Google Maps",
@@ -9984,8 +9984,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "sukhumvit",
-    "area_normalized": "Sukhumvit",
-    "area": "Sukhumvit",
+    "area_normalized": "Taling Chan",
+    "area": "Taling Chan",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -10034,7 +10034,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Sukhumvit",
+      "Taling Chan",
       "Google Maps"
     ],
     "cmNote": "543 reviews · Google Maps",
@@ -10130,8 +10130,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "thonglor",
-    "area_normalized": "Thonglor",
-    "area": "Thonglor",
+    "area_normalized": "Khlong Sam Wa",
+    "area": "Khlong Sam Wa",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -10180,7 +10180,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Thonglor",
+      "Khlong Sam Wa",
       "Google Maps"
     ],
     "cmNote": "56 reviews · Google Maps",
@@ -10204,8 +10204,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "thonglor",
-    "area_normalized": "Thonglor",
-    "area": "Thonglor",
+    "area_normalized": "Suan Luang",
+    "area": "Suan Luang",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -10254,7 +10254,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Thonglor",
+      "Suan Luang",
       "Google Maps"
     ],
     "cmNote": "13 reviews · Google Maps",
@@ -10278,8 +10278,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "thonglor",
-    "area_normalized": "Thonglor",
-    "area": "Thonglor",
+    "area_normalized": "Lat Krabang",
+    "area": "Lat Krabang",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -10328,7 +10328,7 @@
     "type": "unknown",
     "tags": [
       "Other",
-      "Thonglor",
+      "Lat Krabang",
       "Google Maps"
     ],
     "cmNote": "44 reviews, rating 4.9",
@@ -10424,8 +10424,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Khan Na Yao",
+    "area": "Khan Na Yao",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -10474,7 +10474,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Bangkok",
+      "Khan Na Yao",
       "Google Maps"
     ],
     "cmNote": "22 reviews, rating 4.9",
@@ -10498,8 +10498,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Phra Nakhon",
+    "area": "Phra Nakhon",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -10548,7 +10548,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Bangkok",
+      "Phra Nakhon",
       "Google Maps"
     ],
     "cmNote": "59 reviews, rating 4.9",
@@ -10572,8 +10572,8 @@
     "cuisine_normalized": "Cafe",
     "cuisine": "Cafe",
     "area_raw": "ramintra",
-    "area_normalized": "Ram Intra",
-    "area": "Ram Intra",
+    "area_normalized": "Bang Khen",
+    "area": "Bang Khen",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -10622,7 +10622,7 @@
     "type": "cafe",
     "tags": [
       "Cafe",
-      "Ram Intra",
+      "Bang Khen",
       "Google Maps"
     ],
     "cmNote": "78 reviews, rating 4.6",
@@ -10718,8 +10718,8 @@
     "cuisine_normalized": "Japanese",
     "cuisine": "Japanese",
     "area_raw": "ramintra",
-    "area_normalized": "Ram Intra",
-    "area": "Ram Intra",
+    "area_normalized": "Watthana",
+    "area": "Watthana",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -10768,7 +10768,7 @@
     "type": "restaurant",
     "tags": [
       "Japanese",
-      "Ram Intra",
+      "Watthana",
       "Google Maps"
     ],
     "cmNote": "181 reviews, rating 4.8",
@@ -10866,8 +10866,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Lat Phrao",
+    "area": "Lat Phrao",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -10916,7 +10916,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Bangkok",
+      "Lat Phrao",
       "Google Maps"
     ],
     "cmNote": "187 reviews, rating 4.5",
@@ -10940,8 +10940,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Bangna",
+    "area": "Bangna",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -10990,7 +10990,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Bangkok",
+      "Bangna",
       "Google Maps"
     ],
     "cmNote": "146 reviews, rating 4.5",
@@ -11014,8 +11014,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "bangna",
-    "area_normalized": "Bangna",
-    "area": "Bangna",
+    "area_normalized": "Lat Phrao",
+    "area": "Lat Phrao",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -11064,7 +11064,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Bangna",
+      "Lat Phrao",
       "Google Maps"
     ],
     "cmNote": "75 reviews, rating 4.7",
@@ -11088,8 +11088,8 @@
     "cuisine_normalized": "Japanese",
     "cuisine": "Japanese",
     "area_raw": "bangna",
-    "area_normalized": "Bangna",
-    "area": "Bangna",
+    "area_normalized": "Lat Phrao",
+    "area": "Lat Phrao",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -11138,7 +11138,7 @@
     "type": "restaurant",
     "tags": [
       "Japanese",
-      "Bangna",
+      "Lat Phrao",
       "Google Maps"
     ],
     "cmNote": "1355 reviews · Google Maps",
@@ -11162,8 +11162,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "bangna",
-    "area_normalized": "Bangna",
-    "area": "Bangna",
+    "area_normalized": "Khlong Toei",
+    "area": "Khlong Toei",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -11212,7 +11212,7 @@
     "type": "unknown",
     "tags": [
       "Other",
-      "Bangna",
+      "Khlong Toei",
       "Google Maps"
     ],
     "cmNote": "303 reviews · Google Maps",
@@ -11532,8 +11532,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Bangkapi",
+    "area": "Bangkapi",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -11582,7 +11582,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Bangkok",
+      "Bangkapi",
       "Google Maps"
     ],
     "cmNote": "176 reviews, rating 4.5",
@@ -11606,8 +11606,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Minburi",
+    "area": "Minburi",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -11656,7 +11656,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Bangkok",
+      "Minburi",
       "Google Maps"
     ],
     "cmNote": "172 reviews · Google Maps",
@@ -11680,8 +11680,8 @@
     "cuisine_normalized": "Bakery",
     "cuisine": "Bakery",
     "area_raw": "sukhumvit",
-    "area_normalized": "Sukhumvit",
-    "area": "Sukhumvit",
+    "area_normalized": "Minburi",
+    "area": "Minburi",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -11730,7 +11730,7 @@
     "type": "cafe",
     "tags": [
       "Bakery",
-      "Sukhumvit",
+      "Minburi",
       "Google Maps"
     ],
     "cmNote": "7 reviews, rating 5.0",
@@ -11754,8 +11754,8 @@
     "cuisine_normalized": "Chinese",
     "cuisine": "Chinese",
     "area_raw": "sukhumvit",
-    "area_normalized": "Sukhumvit",
-    "area": "Sukhumvit",
+    "area_normalized": "Bang Rak",
+    "area": "Bang Rak",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -11804,7 +11804,7 @@
     "type": "restaurant",
     "tags": [
       "Chinese",
-      "Sukhumvit",
+      "Bang Rak",
       "Google Maps"
     ],
     "cmNote": "210 reviews · Google Maps",
@@ -11828,8 +11828,8 @@
     "cuisine_normalized": "Cafe",
     "cuisine": "Cafe",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Minburi",
+    "area": "Minburi",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -11878,7 +11878,7 @@
     "type": "cafe",
     "tags": [
       "Cafe",
-      "Bangkok",
+      "Minburi",
       "Google Maps"
     ],
     "cmNote": "34 reviews, rating 4.6",
@@ -11902,8 +11902,8 @@
     "cuisine_normalized": "Cafe",
     "cuisine": "Cafe",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Chatuchak",
+    "area": "Chatuchak",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -11952,7 +11952,7 @@
     "type": "cafe",
     "tags": [
       "Cafe",
-      "Bangkok",
+      "Chatuchak",
       "Google Maps"
     ],
     "cmNote": "63 reviews, rating 4.7",
@@ -11976,8 +11976,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "minburi",
-    "area_normalized": "Minburi",
-    "area": "Minburi",
+    "area_normalized": "Lat Phrao",
+    "area": "Lat Phrao",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -12026,7 +12026,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Minburi",
+      "Lat Phrao",
       "Google Maps"
     ],
     "cmNote": "788 reviews · Google Maps",
@@ -12050,8 +12050,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "minburi",
-    "area_normalized": "Minburi",
-    "area": "Minburi",
+    "area_normalized": "Prawet",
+    "area": "Prawet",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -12100,7 +12100,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Minburi",
+      "Prawet",
       "Google Maps"
     ],
     "cmNote": "161 reviews, rating 4.8",
@@ -12196,8 +12196,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "ratchada",
-    "area_normalized": "Ratchada",
-    "area": "Ratchada",
+    "area_normalized": "Watthana",
+    "area": "Watthana",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 3,
@@ -12246,7 +12246,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Ratchada",
+      "Watthana",
       "Google Maps"
     ],
     "cmNote": "63 reviews, rating 5.0",
@@ -12270,8 +12270,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "ratchada",
-    "area_normalized": "Ratchada",
-    "area": "Ratchada",
+    "area_normalized": "Pathum Thani",
+    "area": "Pathum Thani",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -12320,7 +12320,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Ratchada",
+      "Pathum Thani",
       "Google Maps"
     ],
     "cmNote": "244 reviews · Google Maps",
@@ -12344,8 +12344,8 @@
     "cuisine_normalized": "Chinese",
     "cuisine": "Chinese",
     "area_raw": "thonglor",
-    "area_normalized": "Thonglor",
-    "area": "Thonglor",
+    "area_normalized": "Ratchathewi",
+    "area": "Ratchathewi",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -12394,7 +12394,7 @@
     "type": "cafe",
     "tags": [
       "Chinese",
-      "Thonglor",
+      "Ratchathewi",
       "Google Maps"
     ],
     "cmNote": "348 reviews · Google Maps",
@@ -12418,8 +12418,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "thonglor",
-    "area_normalized": "Thonglor",
-    "area": "Thonglor",
+    "area_normalized": "Khan Na Yao",
+    "area": "Khan Na Yao",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -12468,7 +12468,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Thonglor",
+      "Khan Na Yao",
       "Google Maps"
     ],
     "cmNote": "195 reviews, rating 4.7",
@@ -12492,8 +12492,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "thonglor",
-    "area_normalized": "Thonglor",
-    "area": "Thonglor",
+    "area_normalized": "Nonthaburi",
+    "area": "Nonthaburi",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -12542,7 +12542,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Thonglor",
+      "Nonthaburi",
       "Google Maps"
     ],
     "cmNote": "245 reviews · Google Maps",
@@ -12566,8 +12566,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "thonglor",
-    "area_normalized": "Thonglor",
-    "area": "Thonglor",
+    "area_normalized": "Phasi Charoen",
+    "area": "Phasi Charoen",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -12616,7 +12616,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Thonglor",
+      "Phasi Charoen",
       "Google Maps"
     ],
     "cmNote": "915 reviews · Google Maps",
@@ -12788,8 +12788,8 @@
     "cuisine_normalized": "Japanese",
     "cuisine": "Japanese",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Khlong Toei",
+    "area": "Khlong Toei",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -12838,7 +12838,7 @@
     "type": "restaurant",
     "tags": [
       "Japanese",
-      "Bangkok",
+      "Khlong Toei",
       "Google Maps"
     ],
     "cmNote": "163 reviews, rating 4.5",
@@ -12862,8 +12862,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "ramintra",
-    "area_normalized": "Ram Intra",
-    "area": "Ram Intra",
+    "area_normalized": "Bang Khen",
+    "area": "Bang Khen",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -12912,7 +12912,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Ram Intra",
+      "Bang Khen",
       "Google Maps"
     ],
     "cmNote": "106 reviews, rating 4.5",
@@ -13008,8 +13008,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "ramintra",
-    "area_normalized": "Ram Intra",
-    "area": "Ram Intra",
+    "area_normalized": "Khlong Sam Wa",
+    "area": "Khlong Sam Wa",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -13058,7 +13058,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Ram Intra",
+      "Khlong Sam Wa",
       "Google Maps"
     ],
     "cmNote": "14 reviews · Google Maps",
@@ -13154,8 +13154,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Thonburi",
+    "area": "Thonburi",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -13204,7 +13204,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Bangkok",
+      "Thonburi",
       "Google Maps"
     ],
     "cmNote": "24 reviews · Google Maps",
@@ -13228,8 +13228,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Watthana",
+    "area": "Watthana",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -13278,7 +13278,7 @@
     "type": "unknown",
     "tags": [
       "Other",
-      "Bangkok",
+      "Watthana",
       "Google Maps"
     ],
     "cmNote": "3 reviews, rating 4.7",
@@ -13374,8 +13374,8 @@
     "cuisine_normalized": "Japanese",
     "cuisine": "Japanese",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Watthana",
+    "area": "Watthana",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -13424,7 +13424,7 @@
     "type": "restaurant",
     "tags": [
       "Japanese",
-      "Bangkok",
+      "Watthana",
       "Google Maps"
     ],
     "cmNote": "1167 reviews · Google Maps",
@@ -13592,8 +13592,8 @@
     "cuisine_normalized": "Cafe",
     "cuisine": "Cafe",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Khan Na Yao",
+    "area": "Khan Na Yao",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -13642,7 +13642,7 @@
     "type": "cafe",
     "tags": [
       "Cafe",
-      "Bangkok",
+      "Khan Na Yao",
       "Google Maps"
     ],
     "cmNote": "69 reviews, rating 4.5",
@@ -13666,8 +13666,8 @@
     "cuisine_normalized": "Bakery",
     "cuisine": "Bakery",
     "area_raw": "ramintra",
-    "area_normalized": "Ram Intra",
-    "area": "Ram Intra",
+    "area_normalized": "Watthana",
+    "area": "Watthana",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -13716,7 +13716,7 @@
     "type": "cafe",
     "tags": [
       "Bakery",
-      "Ram Intra",
+      "Watthana",
       "Google Maps"
     ],
     "cmNote": "106 reviews, rating 4.6",
@@ -13740,8 +13740,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "ramintra",
-    "area_normalized": "Ram Intra",
-    "area": "Ram Intra",
+    "area_normalized": "Sathorn",
+    "area": "Sathorn",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -13790,7 +13790,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Ram Intra",
+      "Sathorn",
       "Google Maps"
     ],
     "cmNote": "16657 reviews · Google Maps",
@@ -13886,8 +13886,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Bueng Kum",
+    "area": "Bueng Kum",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -13936,7 +13936,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Bangkok",
+      "Bueng Kum",
       "Google Maps"
     ],
     "cmNote": "390 reviews · Google Maps",
@@ -13960,8 +13960,8 @@
     "cuisine_normalized": "Japanese",
     "cuisine": "Japanese",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Prawet",
+    "area": "Prawet",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -14010,7 +14010,7 @@
     "type": "restaurant",
     "tags": [
       "Japanese",
-      "Bangkok",
+      "Prawet",
       "Google Maps"
     ],
     "cmNote": "80 reviews, rating 4.6",
@@ -14034,8 +14034,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Nonthaburi",
+    "area": "Nonthaburi",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -14084,7 +14084,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Bangkok",
+      "Nonthaburi",
       "Google Maps"
     ],
     "cmNote": "356 reviews · Google Maps",
@@ -14180,8 +14180,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Suan Luang",
+    "area": "Suan Luang",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -14230,7 +14230,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Bangkok",
+      "Suan Luang",
       "Google Maps"
     ],
     "cmNote": "171 reviews, rating 4.5",
@@ -14326,8 +14326,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "sukhumvit",
-    "area_normalized": "Sukhumvit",
-    "area": "Sukhumvit",
+    "area_normalized": "Huai Khwang",
+    "area": "Huai Khwang",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -14376,7 +14376,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Sukhumvit",
+      "Huai Khwang",
       "Google Maps"
     ],
     "cmNote": "597 reviews · Google Maps",
@@ -14400,8 +14400,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "sukhumvit",
-    "area_normalized": "Sukhumvit",
-    "area": "Sukhumvit",
+    "area_normalized": "Sai Mai",
+    "area": "Sai Mai",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -14450,7 +14450,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Sukhumvit",
+      "Sai Mai",
       "Google Maps"
     ],
     "cmNote": "34 reviews · Google Maps",
@@ -14474,8 +14474,8 @@
     "cuisine_normalized": "Chinese",
     "cuisine": "Chinese",
     "area_raw": "sukhumvit",
-    "area_normalized": "Sukhumvit",
-    "area": "Sukhumvit",
+    "area_normalized": "Lat Phrao",
+    "area": "Lat Phrao",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -14524,7 +14524,7 @@
     "type": "restaurant",
     "tags": [
       "Chinese",
-      "Sukhumvit",
+      "Lat Phrao",
       "Google Maps"
     ],
     "cmNote": "4781 reviews · Google Maps",
@@ -14548,8 +14548,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Lat Phrao",
+    "area": "Lat Phrao",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -14598,7 +14598,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Bangkok",
+      "Lat Phrao",
       "Google Maps"
     ],
     "cmNote": "219 reviews · Google Maps",
@@ -14622,8 +14622,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Lat Phrao",
+    "area": "Lat Phrao",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -14672,7 +14672,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Bangkok",
+      "Lat Phrao",
       "Google Maps"
     ],
     "cmNote": "66 reviews · Google Maps",
@@ -14696,8 +14696,8 @@
     "cuisine_normalized": "Bar & Grill",
     "cuisine": "Bar & Grill",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Watthana",
+    "area": "Watthana",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -14746,7 +14746,7 @@
     "type": "restaurant",
     "tags": [
       "Bar & Grill",
-      "Bangkok",
+      "Watthana",
       "Google Maps"
     ],
     "cmNote": "118 reviews, rating 4.5",
@@ -14770,8 +14770,8 @@
     "cuisine_normalized": "Japanese",
     "cuisine": "Japanese",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Lat Phrao",
+    "area": "Lat Phrao",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -14820,7 +14820,7 @@
     "type": "restaurant",
     "tags": [
       "Japanese",
-      "Bangkok",
+      "Lat Phrao",
       "Google Maps"
     ],
     "cmNote": "48 reviews, rating 4.6",
@@ -15064,8 +15064,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "ekkamai",
-    "area_normalized": "Ekkamai",
-    "area": "Ekkamai",
+    "area_normalized": "Sai Mai",
+    "area": "Sai Mai",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -15114,7 +15114,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Ekkamai",
+      "Sai Mai",
       "Google Maps"
     ],
     "cmNote": "61 reviews · Google Maps",
@@ -15284,8 +15284,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "ramintra",
-    "area_normalized": "Ram Intra",
-    "area": "Ram Intra",
+    "area_normalized": "Bueng Kum",
+    "area": "Bueng Kum",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -15334,7 +15334,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Ram Intra",
+      "Bueng Kum",
       "Google Maps"
     ],
     "cmNote": "350 reviews · Google Maps",
@@ -15358,8 +15358,8 @@
     "cuisine_normalized": "Cafe",
     "cuisine": "Cafe",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Khan Na Yao",
+    "area": "Khan Na Yao",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -15408,7 +15408,7 @@
     "type": "cafe",
     "tags": [
       "Cafe",
-      "Bangkok",
+      "Khan Na Yao",
       "Google Maps"
     ],
     "cmNote": "194 reviews · Google Maps",
@@ -15432,8 +15432,8 @@
     "cuisine_normalized": "Japanese",
     "cuisine": "Japanese",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Suan Luang",
+    "area": "Suan Luang",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -15482,7 +15482,7 @@
     "type": "restaurant",
     "tags": [
       "Japanese",
-      "Bangkok",
+      "Suan Luang",
       "Google Maps"
     ],
     "cmNote": "354 reviews · Google Maps",
@@ -15506,8 +15506,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Bueng Kum",
+    "area": "Bueng Kum",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -15556,7 +15556,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Bangkok",
+      "Bueng Kum",
       "Google Maps"
     ],
     "cmNote": "207 reviews · Google Maps",
@@ -15580,8 +15580,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Nonthaburi",
+    "area": "Nonthaburi",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -15630,7 +15630,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Bangkok",
+      "Nonthaburi",
       "Google Maps"
     ],
     "cmNote": "424 reviews · Google Maps",
@@ -15654,8 +15654,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Saphan Sung",
+    "area": "Saphan Sung",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -15704,7 +15704,7 @@
     "type": "takeaway_only",
     "tags": [
       "Other",
-      "Bangkok",
+      "Saphan Sung",
       "Google Maps"
     ],
     "cmNote": "202 reviews · Google Maps",
@@ -15728,8 +15728,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "ramkhamhaeng",
-    "area_normalized": "Ram Khamhaeng",
-    "area": "Ram Khamhaeng",
+    "area_normalized": "Bang Khen",
+    "area": "Bang Khen",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -15778,7 +15778,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Ram Khamhaeng",
+      "Bang Khen",
       "Google Maps"
     ],
     "cmNote": "413 reviews · Google Maps",
@@ -15802,8 +15802,8 @@
     "cuisine_normalized": "Italian",
     "cuisine": "Italian",
     "area_raw": "ramkhamhaeng",
-    "area_normalized": "Ram Khamhaeng",
-    "area": "Ram Khamhaeng",
+    "area_normalized": "Phra Khanong",
+    "area": "Phra Khanong",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -15852,7 +15852,7 @@
     "type": "restaurant",
     "tags": [
       "Italian",
-      "Ram Khamhaeng",
+      "Phra Khanong",
       "Google Maps"
     ],
     "cmNote": "1343 reviews · Google Maps",
@@ -15876,8 +15876,8 @@
     "cuisine_normalized": "Cafe",
     "cuisine": "Cafe",
     "area_raw": "ramintra",
-    "area_normalized": "Ram Intra",
-    "area": "Ram Intra",
+    "area_normalized": "Khan Na Yao",
+    "area": "Khan Na Yao",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -15926,7 +15926,7 @@
     "type": "cafe",
     "tags": [
       "Cafe",
-      "Ram Intra",
+      "Khan Na Yao",
       "Google Maps"
     ],
     "cmNote": "113 reviews, rating 4.9",
@@ -15950,8 +15950,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "ramintra",
-    "area_normalized": "Ram Intra",
-    "area": "Ram Intra",
+    "area_normalized": "Bang Khen",
+    "area": "Bang Khen",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -16000,7 +16000,7 @@
     "type": "takeaway_only",
     "tags": [
       "Other",
-      "Ram Intra",
+      "Bang Khen",
       "Google Maps"
     ],
     "cmNote": "40 reviews, rating 4.6",
@@ -16024,8 +16024,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "ratchada",
-    "area_normalized": "Ratchada",
-    "area": "Ratchada",
+    "area_normalized": "Bangkapi",
+    "area": "Bangkapi",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -16074,7 +16074,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Ratchada",
+      "Bangkapi",
       "Google Maps"
     ],
     "cmNote": "130 reviews, rating 4.8",
@@ -16098,8 +16098,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Bang Khen",
+    "area": "Bang Khen",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -16148,7 +16148,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Bangkok",
+      "Bang Khen",
       "Google Maps"
     ],
     "cmNote": "35 reviews, rating 4.7",
@@ -16172,8 +16172,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "ramintra",
-    "area_normalized": "Ram Intra",
-    "area": "Ram Intra",
+    "area_normalized": "Bang Khen",
+    "area": "Bang Khen",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -16222,7 +16222,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Ram Intra",
+      "Bang Khen",
       "Google Maps"
     ],
     "cmNote": "684 reviews · Google Maps",
@@ -16246,8 +16246,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "ramintra",
-    "area_normalized": "Ram Intra",
-    "area": "Ram Intra",
+    "area_normalized": "Pathum Thani",
+    "area": "Pathum Thani",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -16296,7 +16296,7 @@
     "type": "unknown",
     "tags": [
       "Other",
-      "Ram Intra",
+      "Pathum Thani",
       "Google Maps"
     ],
     "cmNote": "244 reviews · Google Maps",
@@ -16320,8 +16320,8 @@
     "cuisine_normalized": "Bar & Grill",
     "cuisine": "Bar & Grill",
     "area_raw": "ramintra",
-    "area_normalized": "Ram Intra",
-    "area": "Ram Intra",
+    "area_normalized": "Khlong Sam Wa",
+    "area": "Khlong Sam Wa",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -16370,7 +16370,7 @@
     "type": "cafe",
     "tags": [
       "Bar & Grill",
-      "Ram Intra",
+      "Khlong Sam Wa",
       "Google Maps"
     ],
     "cmNote": "124 reviews, rating 5.0",
@@ -17330,8 +17330,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "Minburi",
-    "area_normalized": "Minburi",
-    "area": "Minburi",
+    "area_normalized": "Pom Prap",
+    "area": "Pom Prap",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -17380,7 +17380,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Minburi",
+      "Pom Prap",
       "Google Maps"
     ],
     "cmNote": "160 reviews · Google Maps",
@@ -17404,8 +17404,8 @@
     "cuisine_normalized": "Chinese",
     "cuisine": "Chinese",
     "area_raw": "Minburi",
-    "area_normalized": "Minburi",
-    "area": "Minburi",
+    "area_normalized": "Watthana",
+    "area": "Watthana",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -17454,7 +17454,7 @@
     "type": "restaurant",
     "tags": [
       "Chinese",
-      "Minburi",
+      "Watthana",
       "Google Maps"
     ],
     "cmNote": "109 reviews, rating 4.8",
@@ -17478,8 +17478,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "Minburi",
-    "area_normalized": "Minburi",
-    "area": "Minburi",
+    "area_normalized": "Don Mueang",
+    "area": "Don Mueang",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -17528,7 +17528,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Minburi",
+      "Don Mueang",
       "Google Maps"
     ],
     "cmNote": "717 reviews · Google Maps",
@@ -17552,8 +17552,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "Minburi",
-    "area_normalized": "Minburi",
-    "area": "Minburi",
+    "area_normalized": "Don Mueang",
+    "area": "Don Mueang",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -17602,7 +17602,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Minburi",
+      "Don Mueang",
       "Google Maps"
     ],
     "cmNote": "199 reviews, rating 4.6",
@@ -17626,8 +17626,8 @@
     "cuisine_normalized": "Japanese",
     "cuisine": "Japanese",
     "area_raw": "Bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Watthana",
+    "area": "Watthana",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -17676,7 +17676,7 @@
     "type": "restaurant",
     "tags": [
       "Japanese",
-      "Bangkok",
+      "Watthana",
       "Google Maps"
     ],
     "cmNote": "67 reviews, rating 4.6",
@@ -17700,8 +17700,8 @@
     "cuisine_normalized": "Japanese",
     "cuisine": "Japanese",
     "area_raw": "Sukhumvit",
-    "area_normalized": "Sukhumvit",
-    "area": "Sukhumvit",
+    "area_normalized": "Khan Na Yao",
+    "area": "Khan Na Yao",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -17750,7 +17750,7 @@
     "type": "restaurant",
     "tags": [
       "Japanese",
-      "Sukhumvit",
+      "Khan Na Yao",
       "Google Maps"
     ],
     "cmNote": "23 reviews, rating 5.0",
@@ -17922,8 +17922,8 @@
     "cuisine_normalized": "Italian",
     "cuisine": "Italian",
     "area_raw": "Sukhumvit",
-    "area_normalized": "Sukhumvit",
-    "area": "Sukhumvit",
+    "area_normalized": "Sathorn",
+    "area": "Sathorn",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -17972,7 +17972,7 @@
     "type": "restaurant",
     "tags": [
       "Italian",
-      "Sukhumvit",
+      "Sathorn",
       "Google Maps"
     ],
     "cmNote": "296 reviews · Google Maps",
@@ -17996,8 +17996,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "Sukhumvit",
-    "area_normalized": "Sukhumvit",
-    "area": "Sukhumvit",
+    "area_normalized": "Suan Luang",
+    "area": "Suan Luang",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -18046,7 +18046,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Sukhumvit",
+      "Suan Luang",
       "Google Maps"
     ],
     "cmNote": "327 reviews · Google Maps",
@@ -18216,8 +18216,8 @@
     "cuisine_normalized": "Cafe",
     "cuisine": "Cafe",
     "area_raw": "Bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Bangkapi",
+    "area": "Bangkapi",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -18266,7 +18266,7 @@
     "type": "cafe",
     "tags": [
       "Cafe",
-      "Bangkok",
+      "Bangkapi",
       "Google Maps"
     ],
     "cmNote": "34 reviews, rating 5.0",
@@ -18290,8 +18290,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "Bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Khan Na Yao",
+    "area": "Khan Na Yao",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -18340,7 +18340,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Bangkok",
+      "Khan Na Yao",
       "Google Maps"
     ],
     "cmNote": "117 reviews, rating 4.9",
@@ -18364,8 +18364,8 @@
     "cuisine_normalized": "Cafe",
     "cuisine": "Cafe",
     "area_raw": "Bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Pathumwan",
+    "area": "Pathumwan",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -18414,7 +18414,7 @@
     "type": "cafe",
     "tags": [
       "Cafe",
-      "Bangkok",
+      "Pathumwan",
       "Google Maps"
     ],
     "cmNote": "217 reviews · Google Maps",
@@ -18438,8 +18438,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "Ram Intra",
-    "area_normalized": "Ram Intra",
-    "area": "Ram Intra",
+    "area_normalized": "Bueng Kum",
+    "area": "Bueng Kum",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -18488,7 +18488,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Ram Intra",
+      "Bueng Kum",
       "Google Maps"
     ],
     "cmNote": "13 reviews, rating 4.5",
@@ -18512,8 +18512,8 @@
     "cuisine_normalized": "Bakery",
     "cuisine": "Bakery",
     "area_raw": "Ram Intra",
-    "area_normalized": "Ram Intra",
-    "area": "Ram Intra",
+    "area_normalized": "Sathorn",
+    "area": "Sathorn",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -18562,7 +18562,7 @@
     "type": "cafe",
     "tags": [
       "Bakery",
-      "Ram Intra",
+      "Sathorn",
       "Google Maps"
     ],
     "cmNote": "61 reviews, rating 4.6",
@@ -18586,8 +18586,8 @@
     "cuisine_normalized": "Other",
     "cuisine": "Other",
     "area_raw": "Ram Intra",
-    "area_normalized": "Ram Intra",
-    "area": "Ram Intra",
+    "area_normalized": "Bangkapi",
+    "area": "Bangkapi",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -18636,7 +18636,7 @@
     "type": "restaurant",
     "tags": [
       "Other",
-      "Ram Intra",
+      "Bangkapi",
       "Google Maps"
     ],
     "cmNote": "839 reviews · Google Maps",
@@ -18660,8 +18660,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "Ratchada",
-    "area_normalized": "Ratchada",
-    "area": "Ratchada",
+    "area_normalized": "Phra Khanong",
+    "area": "Phra Khanong",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -18710,7 +18710,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Ratchada",
+      "Phra Khanong",
       "Google Maps"
     ],
     "cmNote": "61 reviews, rating 4.6",
@@ -18952,8 +18952,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "Bangkok",
-    "area_normalized": "Bangkok",
-    "area": "Bangkok",
+    "area_normalized": "Yaowarat",
+    "area": "Yaowarat",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -19002,7 +19002,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Bangkok",
+      "Yaowarat",
       "Google Maps"
     ],
     "cmNote": "42 reviews · Google Maps",
