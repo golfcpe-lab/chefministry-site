@@ -1,23 +1,36 @@
-name: ChefMinistry Sunday Scraper
+name: ChefMinistry Scraper
 
 # Pipeline order:
-#   1. youtube-scraper   — YouTube API -> youtube_reviews.json
-#   2. gmaps-scraper     — GMaps Places API -> review snapshots in DB
-#                          (scrape_gmaps.py calls classify_record() at ingest)
-#   3. classify-export   — classify unclassified records + export JSON
-#                          (this is what Monday weekly_update.yml reads)
+#   1. youtube-scraper   — YouTube API -> youtube_reviews.json  (Sunday + manual only)
+#   2. gmaps-scraper     — GMaps Places API -> review snapshots in DB  (daily)
+#   3. classify-export   — classify + export JSON + inject data.js  (daily)
+#
+# Schedules:
+#   - Sunday 16:00 UTC (23:00 ICT)  = full run รวม YouTube
+#   - Mon–Sat 16:30 UTC (23:30 ICT) = daily GMaps snapshot + export
+#
+# หมายเหตุความปลอดภัย:
+#   - มี "Verify DB integrity" ก่อน scrape — DB พังแล้ว "fail ดัง" ไม่เงียบ
+#   - GMaps scrape ไม่มี continue-on-error แล้ว (เดิม silent fail 3 เดือน)
+#   - มี freshness guard ท้าย pipeline — snapshot เก่าเกิน 2 วัน = job แดง
 on:
   schedule:
-    - cron: '0 16 * * 0'   # Sunday 16:00 UTC = Sunday 23:00 ICT
+    - cron: '0 16 * * 0'     # Sunday full run (with YouTube)
+    - cron: '30 16 * * 1-6'  # Mon–Sat daily snapshot
   workflow_dispatch:
+
+concurrency:
+  group: chefministry-scraper
+  cancel-in-progress: false
 
 jobs:
   # ============================================================
-  #  JOB 1 — YouTube Influencer Scraper (API only)
+  #  JOB 1 — YouTube Influencer Scraper (Sunday + manual only)
   # ============================================================
   youtube-scraper:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '0 16 * * 0'
 
     steps:
       - name: Checkout repository
@@ -53,15 +66,13 @@ jobs:
         run: git push origin main
 
   # ============================================================
-  #  JOB 2 — GMaps Snapshot
-  #  scrape_gmaps.py calls classify_record() at ingest so every
-  #  new restaurant row is immediately tagged with venue_type /
-  #  scope_market / is_bangkok_focus / is_restaurant_focus.
+  #  JOB 2 — GMaps Snapshot (daily)
   # ============================================================
   gmaps-scraper:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     needs: youtube-scraper
+    if: always()
 
     steps:
       - name: Checkout repository
@@ -77,6 +88,29 @@ jobs:
 
       - name: Install Python packages
         run: pip install requests --quiet
+
+      # ── DB ต้องไม่พัง — ถ้า malformed ให้ fail ทันทีพร้อมคำแนะนำ ──
+      - name: Verify DB integrity (fail loud)
+        run: |
+          cd scripts/scraper
+          python -c "
+          import sqlite3, sys, pathlib
+          DB = pathlib.Path('chefministry_data.db')
+          if not DB.exists():
+              print('No DB yet — first run'); sys.exit(0)
+          try:
+              conn = sqlite3.connect(str(DB))
+              result = conn.execute('PRAGMA integrity_check').fetchone()[0]
+          except Exception as e:
+              result = str(e)
+          if result != 'ok':
+              print('!! DATABASE CORRUPT: ' + result)
+              print('!! Restore a good copy of scripts/scraper/chefministry_data.db')
+              print('!! (see docs: recover via row-by-row salvage + export_restaurants.json)')
+              sys.exit(1)
+          n = conn.execute('SELECT COUNT(*) FROM restaurants').fetchone()[0]
+          print('DB integrity OK — ' + str(n) + ' restaurants')
+          "
 
       - name: Migrate DB schema (idempotent)
         run: |
@@ -114,13 +148,26 @@ jobs:
           "
         continue-on-error: true
 
+      # ไม่มี continue-on-error แล้ว — scrape พัง = job แดง = ได้ email แจ้งเตือน
       - name: Run GMaps scraper
         env:
           GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
         run: |
           cd scripts/scraper
           python scrape_gmaps.py --limit 200
-        continue-on-error: true
+
+      # VACUUM กัน DB บวม + กัน journal ค้าง ก่อน commit
+      - name: Compact DB (VACUUM)
+        run: |
+          cd scripts/scraper
+          python -c "
+          import sqlite3
+          conn = sqlite3.connect('chefministry_data.db')
+          assert conn.execute('PRAGMA integrity_check').fetchone()[0] == 'ok', 'DB corrupt after scrape!'
+          conn.execute('VACUUM')
+          conn.close()
+          print('VACUUM done')
+          "
 
       - name: Commit updated DB
         run: |
@@ -134,20 +181,13 @@ jobs:
         run: git push origin main
 
   # ============================================================
-  #  JOB 3 — Classify + Export (schema v2)
-  #  Runs after gmaps-scraper.  Classifies any unclassified DB
-  #  records and exports export_restaurants.json with full
-  #  classification fields.  This JSON is what weekly_update.yml
-  #  consumes on Monday.
-  #
-  #  Fields guaranteed in output:
-  #    city, province, country, venue_type, scope_market,
-  #    is_bangkok_focus, is_restaurant_focus, exclude_reason
+  #  JOB 3 — Classify + Export + Inject data.js (daily)
   # ============================================================
   classify-export:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     needs: gmaps-scraper
+    if: always() && needs.gmaps-scraper.result == 'success'
 
     steps:
       - name: Checkout repository
@@ -155,6 +195,9 @@ jobs:
         with:
           token: ${{ secrets.GH_PAT }}
           fetch-depth: 1
+
+      - name: Pull latest (DB just pushed by job 2)
+        run: git pull origin main
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
@@ -242,19 +285,19 @@ jobs:
           "
         continue-on-error: true
 
-      - name: Export classified dataset to export_restaurants.json
+      # --inject = อัปเดต js/data.js ทุกวัน (เดิมรอ Monday อย่างเดียว)
+      - name: Export + inject into data.js
         env:
           EXPORT_DIR: ${{ github.workspace }}/js
         run: |
           cd scripts/scraper
-          python export_signals.py
-        # No --inject here; weekly_update.yml handles data.js injection on Monday
+          python export_signals.py --inject
 
       - name: Validate schema v2 in exported JSON
         run: |
           python -c "
           import json, pathlib, sys
-          p = pathlib.Path('export_restaurants.json')
+          p = pathlib.Path('scripts/scraper/export_restaurants.json')
           if not p.exists():
               print('export_restaurants.json missing'); sys.exit(0)
           records = json.load(open(p, encoding='utf-8'))
@@ -271,12 +314,28 @@ jobs:
           "
         continue-on-error: true
 
-      - name: Commit classified export
+      # ── Freshness guard: snapshot ล่าสุดต้องไม่เก่าเกิน 2 วัน ──
+      - name: Freshness guard (fail if data stale)
+        run: |
+          cd scripts/scraper
+          python -c "
+          import sqlite3, sys
+          from datetime import date, timedelta
+          conn = sqlite3.connect('chefministry_data.db')
+          latest = conn.execute('SELECT MAX(snapshot_date) FROM review_snapshots').fetchone()[0]
+          print('Latest snapshot: ' + str(latest))
+          if latest is None or date.fromisoformat(latest) < date.today() - timedelta(days=2):
+              print('!! DATA IS STALE — pipeline is not collecting new snapshots')
+              sys.exit(1)
+          print('Freshness OK')
+          "
+
+      - name: Commit classified export + data.js
         run: |
           git config user.name  "ChefMinistry Bot"
           git config user.email "bot@chefministry.com"
-          git add scripts/scraper/export_restaurants.json scripts/scraper/chefministry_data.db || true
-          git diff --staged --quiet || git commit -m "auto: classify+export $(date +'%Y-%m-%d') [schema-v5]"
+          git add scripts/scraper/export_restaurants.json scripts/scraper/chefministry_data.db js/data.js || true
+          git diff --staged --quiet || git commit -m "auto: daily signal update $(date +'%Y-%m-%d')"
           git pull --rebase origin main
 
       - name: Push to GitHub

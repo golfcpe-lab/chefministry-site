@@ -86,7 +86,32 @@ def gh_request(url, method="GET", body=None):
         raise Exception(f"HTTP {e.code} {e.reason}: {err_body[:300]}")
 
 today   = datetime.date.today().strftime("%Y-%m-%d")
-message = f"feat: new-openings tab + version cache-bust v20260501 ({today})"
+message = f"chore: manual push ({today})"
+
+
+# ── SQLite safety guard ───────────────────────────────────────────────────────
+# ห้าม push ไฟล์ .db ที่ (1) มี journal ค้าง หรือ (2) integrity check ไม่ผ่าน
+# — นี่คือต้นเหตุที่ DB ใน repo เคย corrupt แล้ว pipeline ตายเงียบ 3 เดือน
+def sqlite_safe_to_push(local_file: pathlib.Path) -> bool:
+    if local_file.suffix != ".db":
+        return True
+    journal = local_file.with_name(local_file.name + "-journal")
+    if journal.exists() and journal.stat().st_size > 0:
+        print(f"❌  {local_file.name}: มี journal ค้าง ({journal.name}) — DB อยู่กลาง transaction")
+        print(f"    ปิดโปรแกรมที่เปิด DB อยู่ก่อน แล้วรันใหม่")
+        return False
+    import sqlite3
+    try:
+        conn = sqlite3.connect(str(local_file))
+        result = conn.execute("PRAGMA integrity_check").fetchone()[0]
+        conn.close()
+    except Exception as e:
+        result = str(e)
+    if result != "ok":
+        print(f"❌  {local_file.name}: integrity check ไม่ผ่าน — {result[:120]}")
+        print(f"    ห้าม push DB เสียขึ้น repo (จะทำให้ scraper ตายเงียบ)")
+        return False
+    return True
 
 print(f"\n{'='*55}")
 print(f"  ChefMinistry → Push to GitHub")
@@ -96,6 +121,9 @@ print(f"{'='*55}\n")
 def push_file(local_file, gh_path):
     if not local_file.exists():
         print(f"⚠️   ไม่พบไฟล์ {local_file.name} — ข้ามไป")
+        return
+    if not sqlite_safe_to_push(local_file):
+        print(f"⛔  ข้าม {gh_path} เพื่อความปลอดภัย\n")
         return
     file_bytes = local_file.read_bytes()
     encoded    = base64.b64encode(file_bytes).decode()
@@ -112,38 +140,4 @@ def push_file(local_file, gh_path):
         sha = None
     body = {"message": message, "content": encoded}
     if sha:
-        body["sha"] = sha
-    try:
-        result  = gh_request(url, method="PUT", body=body)
-        new_sha = result["commit"]["sha"]
-        print(f"    ✅  Push สำเร็จ — commit {new_sha[:7]}\n")
-    except Exception as e:
-        print(f"    ❌  Push ไม่สำเร็จ: {e}\n")
-
-def delete_file(gh_path):
-    """ลบไฟล์ออกจาก GitHub repo (ถ้ามีอยู่)"""
-    url = f"https://api.github.com/repos/{REPO}/contents/{gh_path}"
-    try:
-        info = gh_request(url)
-        sha  = info["sha"]
-        print(f"🗑️   ลบ {gh_path}  (SHA: {sha[:7]}…)")
-        gh_request(url, method="DELETE", body={"message": f"remove: ลบ scraper เก่า ({today})", "sha": sha})
-        print(f"    ✅  ลบสำเร็จ\n")
-    except Exception as e:
-        if "HTTP 404" in str(e):
-            print(f"⏭️   ข้าม {gh_path} (ไม่มีใน repo)\n")
-        else:
-            print(f"    ❌  ลบไม่สำเร็จ: {e}\n")
-
-print("── Site files ──────────────────────────────────────")
-for local_rel, gh_path in SITE_FILES:
-    push_file(HERE / "site" / local_rel, gh_path)
-
-print("── Scripts ─────────────────────────────────────────")
-for local_rel, gh_path in ROOT_FILES:
-    push_file(HERE / local_rel, gh_path)
-
-
-print(f"{'='*55}")
-print(f"  เสร็จสิ้น — รอ 1-2 นาทีแล้วเปิด chefministry.com")
-print(f"{'='*55}\n")
+      
