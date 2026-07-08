@@ -184,7 +184,12 @@ def main():
 
     suggestions = fetch_suggestions()
     if suggestions is None:
-        return  # Firestore ยังอ่านไม่ได้ — ไม่ถือว่า error
+        # Firestore ยังอ่านไม่ได้ — เขียนไฟล์ว่างไว้ให้ git add ทำงานได้ ไม่ถือว่า error
+        if not PROCESSED_F.exists():
+            PROCESSED_F.write_text("{}", encoding="utf-8")
+        if not SHORTLIST_F.exists():
+            SHORTLIST_F.write_text("[]", encoding="utf-8")
+        return
     pending = [s for s in suggestions if s["id"] not in processed]
     print(f"📨 suggestions ทั้งหมด {len(suggestions)} | ใหม่ {len(pending)}")
 
