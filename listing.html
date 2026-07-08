@@ -113,7 +113,8 @@
         🆕 เปิดใหม่
       </button>
       <span id="tabDesc" style="font-size:11px;color:var(--text-2);margin-left:6px;font-style:italic">จัดอันดับจากการเปลี่ยนแปลงของรีวิว ไม่ใช่จำนวนรีวิวรวม</span>
-      <span style="margin-left:auto;font-size:10px;color:var(--text-2);opacity:.6">อัปเดต: 2026-04-14 · ข้อมูล 30 วัน</span>
+      <span style="margin-left:auto;font-size:10px;color:var(--text-2);opacity:.6" id="dataUpdatedLabel">อัปเดตรายวัน · ข้อมูล 30 วัน</span>
+      <script>document.addEventListener('DOMContentLoaded',function(){try{var d=(typeof CM_DB_STATS!=='undefined'&&CM_DB_STATS.lastUpdated)||(typeof ChefMinistryData!=='undefined'&&ChefMinistryData.getLastUpdated());if(d)document.getElementById('dataUpdatedLabel').textContent='อัปเดต: '+d+' · ข้อมูล 30 วัน';}catch(e){}});</script>
     </div>
 
     <!-- Search + Sort -->
