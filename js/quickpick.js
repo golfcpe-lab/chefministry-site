@@ -10,7 +10,8 @@
     { key: 'all',        label: '🎲 อะไรก็ได้',   match: null },
     { key: 'thai',       label: '🍛 ไทยจัดจ้าน',  match: ['Thai', 'Street Food', 'Isaan', 'Southern'] },
     { key: 'japanese',   label: '🍣 ญี่ปุ่น',      match: ['Japanese', 'Ramen', 'Omakase', 'Sushi', 'Izakaya'] },
-    { key: 'noodle',     label: '🍜 เส้น/ซด',      match: ['Ramen', 'Noodle', 'Chinese'] },
+    { key: 'noodle',     label: '🍜 เส้น/ซด',      match: ['Ramen', 'Noodles', 'Noodle', 'Hot Pot'], nameRe: /ก๋วยเตี๋ยว|บะหมี่|เกี๊ยว|เย็นตาโฟ|ราเมน|สุกี้|ชาบู|หม้อไฟ|หม่าล่า|ramen|noodle|udon|soba/i },
+    { key: 'chinese',    label: '🥟 จีน/ติ่มซำ',    match: ['Chinese', 'Dim Sum'], nameRe: /ติ่มซำ|เสี่ยวหลงเปา|dim ?sum|กวางตุ้ง|ฮ่องกง/i },
     { key: 'western',    label: '🍝 ฝรั่ง/อิตาเลียน', match: ['Italian', 'French', 'Western', 'Pizza', 'Steak'] },
     { key: 'finedining', label: '🏆 Fine Dining',  match: ['Fine Dining', 'Chef’s Table', 'Tasting'] },
     { key: 'cafe',       label: '☕ คาเฟ่/หวาน',   match: ['Cafe', 'Dessert', 'Bakery', 'Brunch'] },
@@ -33,7 +34,9 @@
     if (mood && mood.match) {
       list = list.filter(function (r) {
         var c = ((r.cuisine || '') + ' ' + ((r.tags || []).join(' '))).toLowerCase();
-        return mood.match.some(function (m) { return c.indexOf(m.toLowerCase()) >= 0; });
+        var hit = mood.match.some(function (m) { return c.indexOf(m.toLowerCase()) >= 0; });
+        if (!hit && mood.nameRe) hit = mood.nameRe.test(r.name || '');
+        return hit;
       });
     }
     if (state.budget !== 'all') {

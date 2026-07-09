@@ -46,6 +46,31 @@ EMOJI_MAP = {
 }
 
 
+
+# ── จัดหมวดจากชื่อร้าน (สำหรับร้านที่ cuisine เป็น Other/ว่าง) ─────────────
+NAME_CUISINE_RULES = [
+    (("ราเมน", "ramen"), "Ramen"),
+    (("ก๋วยเตี๋ยว", "บะหมี่", "เกี๊ยว", "เย็นตาโฟ", "noodle", "หมี่"), "Noodles"),
+    (("สุกี้", "ชาบู", "หม้อไฟ", "หม่าล่า", "shabu", "suki", "hotpot", "hot pot"), "Hot Pot / Suki"),
+    (("ติ่มซำ", "dimsum", "dim sum", "เสี่ยวหลงเปา"), "Chinese"),
+    (("ซูชิ", "sushi", "โอมากาเสะ", "omakase", "izakaya", "อิซากายะ", "อุด้ง", "udon", "โซบะ", "soba", "ยากินิคุ", "yakiniku"), "Japanese"),
+    (("พิซซ่า", "pizza"), "Pizza"),
+    (("เบอร์เกอร์", "burger"), "Burger"),
+    (("ส้มตำ", "อีสาน", "ตำ", "ลาบ", "แจ่ว"), "Isaan Thai"),
+    (("หมูกระทะ", "ปิ้งย่าง", "bbq", "barbecue", "กระทะ"), "BBQ"),
+    (("ข้าวมันไก่", "ข้าวหมูแดง", "ข้าวขาหมู", "โจ๊ก", "ข้าวต้ม", "ตามสั่ง"), "Thai"),
+    (("คาเฟ่", "cafe", "coffee", "กาแฟ", "เบเกอรี่", "bakery", "ครัวซองต์", "croissant", "เค้ก", "โดนัท", "เจลาโต้", "gelato", "ไอศกรีม", "ice cream", "ทาร์ต"), "Cafe"),
+    (("ซีฟู้ด", "seafood", "ทะเล", "กุ้ง", "ปู", "หอย"), "Seafood"),
+    (("สเต๊ก", "steak"), "Steakhouse"),
+]
+
+def refine_cuisine_from_name(name):
+    low = (name or "").lower()
+    for keys, cui in NAME_CUISINE_RULES:
+        if any(k in low for k in keys):
+            return cui
+    return None
+
 def norm_cuisine(raw):
     if not raw: return "Other"
     return CUISINE_NORM.get(raw.strip().lower(), raw.strip().title())
@@ -165,6 +190,11 @@ def build_canonical(db_path=None, out_path=None, days=30):
         rid = d.get("id") or ("%s_%s" % (src, name[:20]))
         cuisine_raw  = d.get("cuisine") or "Other"
         cuisine_norm = norm_cuisine(cuisine_raw)
+        # ร้านที่หมวดกว้างเกิน — เดาใหม่จากชื่อร้าน (ก๋วยเตี๋ยว/สุกี้/ราเมน ฯลฯ)
+        if cuisine_norm in ("Other", "Casual Dining", "Street Food", ""):
+            _better = refine_cuisine_from_name(name)
+            if _better:
+                cuisine_norm = _better
         area_raw     = d.get("area") or ""
         area_norm    = norm_area(area_raw)
         # แก้ area ผิดจากข้อมูลเก่า — เทียบกับที่อยู่จริงจาก Google Maps
