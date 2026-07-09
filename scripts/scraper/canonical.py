@@ -197,6 +197,10 @@ def build_canonical(db_path=None, out_path=None, days=30):
             _better = refine_cuisine_from_name(name)
             if _better:
                 cuisine_norm = _better
+        # ร้านชา/tea bar = Cafe เสมอ ไม่ว่าหมวดเดิมเป็นอะไร (เช่น zhong.bkk 众 tea bar ถูกแท็ก Chinese)
+        import re as _re
+        if _re.search(r"tea ?(bar|house|room)|ชานม|โรงชา|ร้านชา", (name or "").lower()):
+            cuisine_norm = "Cafe"
         area_raw     = d.get("area") or ""
         area_norm    = norm_area(area_raw)
         # แก้ area ผิดจากข้อมูลเก่า — เทียบกับที่อยู่จริงจาก Google Maps

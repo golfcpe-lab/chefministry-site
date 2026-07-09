@@ -25,7 +25,7 @@
     { key: '4',   label: '฿฿฿฿ จัดเต็ม' }
   ];
 
-  var state = { mood: 'all', budget: 'all', lastPickName: null };
+  var state = { mood: 'all', budget: 'all', lastPickName: null, seen: {} };
 
   function pool() {
     if (typeof ChefMinistryData === 'undefined') return [];
@@ -65,9 +65,17 @@
     if (!list.length) {
       return '<div style="text-align:center;padding:22px;color:var(--text-2);font-size:13.5px">ยังไม่มีร้านในเงื่อนไขนี้ — ลองปรับหมวดหรืองบดู 🙏</div>';
     }
-    var candidates = list.filter(function (r) { return r.name !== state.lastPickName; });
-    if (!candidates.length) candidates = list;
+    // shuffle-bag: ไม่สุ่มซ้ำร้านเดิม จนกว่าจะออกครบทั้ง pool
+    var bagKey = state.mood + '|' + state.budget;
+    var seen = state.seen[bagKey] || (state.seen[bagKey] = {});
+    var candidates = list.filter(function (r) { return !seen[r.name]; });
+    if (!candidates.length) {
+      state.seen[bagKey] = seen = {};
+      candidates = list.filter(function (r) { return r.name !== state.lastPickName; });
+      if (!candidates.length) candidates = list;
+    }
     var r = candidates[Math.floor(Math.random() * candidates.length)];
+    seen[r.name] = true;
     state.lastPickName = r.name;
     var s = ChefMinistryData.computeScore(r);
     var label = ChefMinistryData.trendLabel(s, r);
