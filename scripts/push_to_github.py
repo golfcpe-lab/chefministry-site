@@ -21,8 +21,13 @@ SITE_FILES = [
     ("vercel.json",               "vercel.json"),
     ("css/style.css",              "css/style.css"),
     ("js/safeDataAdapter.js",       "js/safeDataAdapter.js"),
-    ("js/data.js",                 "js/data.js"),
+    # ⛔ js/data.js ห้าม push! — เป็นไฟล์ generated โดย pipeline บน GitHub ทุกคืน
+    #    push จากเครื่อง = ทับข้อมูลสดด้วยข้อมูลเก่า (เกิดเหตุแล้ว 2026-07-09)
     ("js/dataService.js",        "js/dataService.js"),
+    ("js/quickpick.js",          "js/quickpick.js"),
+    ("js/creatorbuzz.js",        "js/creatorbuzz.js"),
+    ("js/suggest.js",            "js/suggest.js"),
+    ("js/microfx.js",            "js/microfx.js"),
     ("js/auth.js",                 "js/auth.js"),
     ("js/firebase-config.js",      "js/firebase-config.js"),
     ("admin.html",                 "admin.html"),
@@ -49,12 +54,15 @@ ROOT_FILES = [
     ("scraper/scrape_youtube.py",    "scripts/scraper/scrape_youtube.py"),
     ("scraper/inject_youtube.py",    "scripts/scraper/inject_youtube.py"),
     ("scraper/canonical.py",         "scripts/scraper/canonical.py"),
-    ("scraper/export_restaurants.json", "scripts/scraper/export_restaurants.json"),
-    ("scraper/chefministry_data.db",    "scripts/scraper/chefministry_data.db"),
+    ("scraper/area_fix.py",          "scripts/scraper/area_fix.py"),
+    ("scraper/process_suggestions.py", "scripts/scraper/process_suggestions.py"),
+    # ⛔ ไฟล์ generated — pipeline บน GitHub เป็นเจ้าของ ห้าม push จากเครื่องเด็ดขาด:
+    #    - scraper/export_restaurants.json  (สร้างใหม่ทุกคืนจาก DB บน GitHub)
+    #    - scraper/chefministry_data.db     (DB บน GitHub มี snapshot ล่าสุด เครื่องนี้ไม่มี)
+    #    - scraper/fb_digest.json           (ส่งผ่าน Firestore แล้ว)
     ("scraper/classify.py",          "scripts/scraper/classify.py"),
     ("scraper/dedup_restaurants.py", "scripts/scraper/dedup_restaurants.py"),
     ("scraper/inject_fb_digest.py",  "scripts/scraper/inject_fb_digest.py"),
-    ("scraper/fb_digest.json",       "scripts/scraper/fb_digest.json"),
 ]
 
 FILES_TO_DELETE = []  # ไม่มีไฟล์ที่ต้องลบแล้ว
@@ -120,24 +128,4 @@ print(f"{'='*55}\n")
 
 def push_file(local_file, gh_path):
     if not local_file.exists():
-        print(f"⚠️   ไม่พบไฟล์ {local_file.name} — ข้ามไป")
-        return
-    if not sqlite_safe_to_push(local_file):
-        print(f"⛔  ข้าม {gh_path} เพื่อความปลอดภัย\n")
-        return
-    file_bytes = local_file.read_bytes()
-    encoded    = base64.b64encode(file_bytes).decode()
-    print(f"📄  {gh_path}  ({len(file_bytes):,} bytes)")
-    url = f"https://api.github.com/repos/{REPO}/contents/{gh_path}"
-    try:
-        sha = gh_request(url)["sha"]
-        print(f"    SHA ปัจจุบัน: {sha[:7]}…")
-    except Exception as e:
-        if "HTTP 404" in str(e):
-            print(f"    ไม่พบไฟล์ใน repo (จะสร้างใหม่)")
-        else:
-            print(f"    ⚠️  ดึง SHA ไม่ได้: {e}")
-        sha = None
-    body = {"message": message, "content": encoded}
-    if sha:
-      
+        print(f"⚠️   ไม่พบ�
