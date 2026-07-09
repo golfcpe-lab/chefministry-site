@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-07-09",
   "days_window": 7,
-  "total": 20,
+  "total": 22,
   "reviews": [
     {
       "influencer": "Peach Eat Laek",
@@ -62,7 +62,7 @@
       "restaurant": "เหลียงขาหมูประตูน้ำ",
       "cuisine": "Thai",
       "area": "ประตูน้ำ",
-      "rating": "high",
+      "rating": "exceed",
       "confidence": "high",
       "video_title": "เหลียงขาหมูประตูน้ำ ตำนานกว่า 30 ปี #ขาหมู #เหลียงขาหมูประตูน้ำ #ประตูน้ำ #พีช #พีชอีทแหลก",
       "video_url": "https://youtube.com/watch?v=kc56bb96QFo",
@@ -75,9 +75,9 @@
       "restaurant": "The Devonshire",
       "cuisine": "British",
       "area": "Soho",
-      "rating": "exceed",
+      "rating": "above_average",
       "confidence": "high",
-      "video_title": "10 Hours Inside London’s Busiest Pub! (I Ate Everything)",
+      "video_title": "London's Most Famous Sunday Roast (No One Has Ever Done This)",
       "video_url": "https://youtube.com/watch?v=K--fVQ73edk",
       "published": "2026-07-08"
     },
@@ -93,6 +93,32 @@
       "video_title": "Trying London’s Oldest Fish & Chips (Since 1871) 🇬🇧",
       "video_url": "https://youtube.com/watch?v=zKYo5mw_IvQ",
       "published": "2026-07-06"
+    },
+    {
+      "influencer": "ชีวิตติดรีวิว",
+      "handle": "@Tid_Review",
+      "tier": "Macro",
+      "restaurant": "อร่อยริมทาง ก๋วยเตี๋ยว คั่วไก่-เป็ด (น้ำซุปมะนาวดอง)",
+      "cuisine": "Thai",
+      "area": "Bangkok",
+      "rating": "above_average",
+      "confidence": "high",
+      "video_title": "เตี๋ยวคั่วเป็ด-คั่วไก่เตาถ่าน ริมทาง  ทีเด็ดน้ำซุปมะนาวดอง",
+      "video_url": "https://youtube.com/watch?v=cgqfArNizq4",
+      "published": "2026-07-09"
+    },
+    {
+      "influencer": "ชีวิตติดรีวิว",
+      "handle": "@Tid_Review",
+      "tier": "Macro",
+      "restaurant": "ข้าวหมูทอดพุงกาง",
+      "cuisine": "Thai",
+      "area": "Bangkok",
+      "rating": "above_average",
+      "confidence": "high",
+      "video_title": "ข้าวหมูทอดพุงกาง ข้าวฟรี! น้ำพริกผักสดฟรี!",
+      "video_url": "https://youtube.com/watch?v=58Beu7os-vU",
+      "published": "2026-07-09"
     },
     {
       "influencer": "ชีวิตติดรีวิว",
@@ -153,7 +179,7 @@
       "restaurant": "ร้านอาหารตามสั่ง",
       "cuisine": "Thai",
       "area": "Ratchada",
-      "rating": "above_average",
+      "rating": "exceed",
       "confidence": "high",
       "video_title": "ข้าวกะเพราหมูกรอบ จานละ 30.- ถูกที่สุดในเส้นรัชดา~",
       "video_url": "https://youtube.com/watch?v=f4g5TOtP5q4",
@@ -166,8 +192,8 @@
       "restaurant": "Khru Phueng Noodle",
       "cuisine": "Thai",
       "area": "Naan",
-      "rating": "average",
-      "confidence": "medium",
+      "rating": "above_average",
+      "confidence": "high",
       "video_title": "หมู่บ้านสะปัน น่าน ล่าสุด 2026 เปลี่ยนไปหรือเหมือนเดิม?",
       "video_url": "https://youtube.com/watch?v=1g34LuPerkg",
       "published": "2026-07-04"
@@ -179,8 +205,8 @@
       "restaurant": "Baan Yud Vela",
       "cuisine": "Thai",
       "area": "Naan",
-      "rating": "average",
-      "confidence": "medium",
+      "rating": "above_average",
+      "confidence": "high",
       "video_title": "หมู่บ้านสะปัน น่าน ล่าสุด 2026 เปลี่ยนไปหรือเหมือนเดิม?",
       "video_url": "https://youtube.com/watch?v=1g34LuPerkg",
       "published": "2026-07-04"
@@ -192,8 +218,8 @@
       "restaurant": "Yud Vela Cafe",
       "cuisine": "Cafe",
       "area": "Naan",
-      "rating": "average",
-      "confidence": "medium",
+      "rating": "above_average",
+      "confidence": "high",
       "video_title": "หมู่บ้านสะปัน น่าน ล่าสุด 2026 เปลี่ยนไปหรือเหมือนเดิม?",
       "video_url": "https://youtube.com/watch?v=1g34LuPerkg",
       "published": "2026-07-04"
@@ -231,7 +257,7 @@
       "restaurant": "หม่าม๊าปุกก๋วยเตี๋ยวคอหมูย่าง",
       "cuisine": "Thai",
       "area": "Silom",
-      "rating": "exceed",
+      "rating": "above_average",
       "confidence": "high",
       "video_title": "ร้านเด็ดชาวสีลม! บะหมี่เส้นแบนคอหมูย่างหมักซอสย่างฉ่ำๆ \r📍: หม่าม๊าปุกก๋วยเตี๋ยวคอหมูย่าง\r#eatguide",
       "video_url": "https://youtube.com/watch?v=gHHyA_M5R7Q",
