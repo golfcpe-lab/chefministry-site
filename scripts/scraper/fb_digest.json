@@ -1,84 +1,84 @@
 {
-  "digest_date": "2026-05-01",
-  "week_label": "Week of Apr 28, 2026",
-  "trend_note": "Japanese curry and modern Thai concepts dominating Bangkok's new openings this month",
-  "entries": [
-    {
-      "name": "Curry Up Bangkok",
-      "type": "Restaurant",
-      "city": "Bangkok",
-      "area": "Ploenchit",
-      "cuisine": "Japanese",
-      "description": "First Southeast Asia outpost of NIGO's Japanese curry concept from Human Made — butter chicken curry and eggplant curry starting at 245 baht, inside Central Embassy next to Human Made store",
-      "source_url": "https://stupiddope.com/2026/04/human-made-bangkok-and-curry-up-bangkok-expand-nigos-cultural-retail-model/",
-      "source_name": "StupidDope",
-      "is_watchlist": false
-    },
-    {
-      "name": "Somsak",
-      "type": "Restaurant",
-      "city": "Bangkok",
-      "area": "Ekkamai",
-      "cuisine": "Thai",
-      "description": "Modern Isan from the team behind Fatboy Izakaya and Kim Jeong Grill — som tam, laab, grilled meats and sharing plates at Ekkamai Corner, punchy flavours done with personality",
-      "source_url": "https://www.bkmagazine.com/food/restaurants/top-tables-2026-bangkoks-20-best-restaurants-and-beyond/",
-      "source_name": "BK Magazine",
-      "is_watchlist": false
-    },
-    {
-      "name": "Wisetwiso",
-      "type": "Restaurant",
-      "city": "Bangkok",
-      "area": "Sathorn",
-      "cuisine": "Thai",
-      "description": "Fine-dining rooted in royal Thai culinary traditions, reinterpreted through a contemporary lens by Chef Chakkrapoom Boonyakom — inside a restored house on Chuea Phloeng Road",
-      "source_url": "https://www.bkmagazine.com/food/restaurants/top-tables-2026-bangkoks-20-best-restaurants-and-beyond/",
-      "source_name": "BK Magazine",
-      "is_watchlist": false
-    },
-    {
-      "name": "Jakawaan",
-      "type": "Restaurant",
-      "city": "Bangkok",
-      "area": "Thonglor",
-      "cuisine": "Thai",
-      "description": "Tapas-style Thai bites and structured samrub dining off Thonglor Soi 9, led by food stylist and designer Chef Nick — Thai dining reinvented as a sharing experience",
-      "source_url": "https://www.bkmagazine.com/food/restaurants/top-tables-2026-bangkoks-20-best-restaurants-and-beyond/",
-      "source_name": "BK Magazine",
-      "is_watchlist": false
-    },
-    {
-      "name": "Quilombo",
-      "type": "Restaurant",
-      "city": "Bangkok",
-      "area": "Thonglor",
-      "cuisine": "Steakhouse",
-      "description": "Argentine steakhouse inside a stone-clad castle on Thonglor Soi 5 — concise menu of Argentine ranching traditions, fire and meat, designed by Christopher Mark and Manuel Palacio",
-      "source_url": "https://fridaybangkok.com/v/quilombo",
-      "source_name": "Friday Bangkok",
-      "is_watchlist": false
-    },
-    {
-      "name": "Iris & Wild Iris",
-      "type": "Restaurant",
-      "city": "Bangkok",
-      "area": "Lumphini",
-      "cuisine": "European",
-      "description": "Dual-concept rooftop on the 29th floor of SO/ Bangkok — Iris restaurant with panoramic Lumphini Park views and French-Italian-Spanish menu, Wild Iris for cocktails and sunsets",
-      "source_url": "https://www.masalathai.com/trending/bangkoks-new-restaurants-caf%C3%A9s-cultural-openings-to-know-right-now",
-      "source_name": "Masala Thailand",
-      "is_watchlist": false
-    },
-    {
-      "name": "Sato San",
-      "type": "Restaurant",
-      "city": "Bangkok",
-      "area": "Ratchaprasong",
-      "cuisine": "Fusion",
-      "description": "Thai-Isaan meets Japanese precision on the 32nd floor of Moxy Bangkok Ratchaprasong — rooftop with DJ sets Wed-Sat and skyline views, open daily from 6PM",
-      "source_url": "https://sinehabangkok.com/food-drink/bar/sato-san-rooftop-bar/",
-      "source_name": "Sineba Bangkok",
-      "is_watchlist": false
-    }
-  ]
+ "digest_date": "2026-07-09",
+ "week_label": "Week of Jul 6, 2026",
+ "entries": [
+  {
+   "name": "Two Men Bagel (Earth Ekkamai)",
+   "type": "Cafe",
+   "city": "Bangkok",
+   "area": "Ekkamai",
+   "cuisine": "Bagel",
+   "description": "Flagship ใหม่ที่ Earth Ekkamai — เบเกิล+ครีมชีสกว่า 20 รสใหม่ หลายรสมีเฉพาะสาขานี้",
+   "source_url": "https://www.timeout.com/bangkok/restaurants/two-men-bagel-ekkamai",
+   "source_name": "Time Out Bangkok",
+   "is_watchlist": false
+  },
+  {
+   "name": "Drop By Dough (Lumpini Park)",
+   "type": "Cafe",
+   "city": "Bangkok",
+   "area": "Sathorn",
+   "cuisine": "Doughnut",
+   "description": "สาขาใหม่ตรงข้ามสวนลุมฯ บนถนนสาทร — เพิ่มเมนูแซนด์วิช sourdough 4 ไส้",
+   "source_url": "https://www.timeout.com/bangkok/restaurants/drop-by-dough-at-lumpini-park",
+   "source_name": "Time Out Bangkok",
+   "is_watchlist": false
+  },
+  {
+   "name": "KIN Durian Tart",
+   "type": "Cafe",
+   "city": "Bangkok",
+   "area": "Banthat Thong",
+   "cuisine": "Dessert",
+   "description": "ทาร์ตไข่ทุเรียนพรีเมียมเจ้าแรกของไทย ใช้หมอนทองจากสวนครอบครัว — เปลือกทาร์ตสไตล์ครัวซองต์ 4 รส",
+   "source_url": "https://www.timeout.com/bangkok/things-to-do/table-talk-in-bangkok",
+   "source_name": "Time Out Bangkok",
+   "is_watchlist": false
+  },
+  {
+   "name": "Sydny Bagels (Charoen Krung)",
+   "type": "Cafe",
+   "city": "Bangkok",
+   "area": "Charoen Krung",
+   "cuisine": "Bagel",
+   "description": "สาขาเจริญกรุงกับ Sai Oua Bagel — เบเกิลหมักช้า + ครีมชีสน้ำพริกหนุ่ม + ไส้อั่ว เฉพาะสาขานี้",
+   "source_url": "https://www.timeout.com/bangkok/restaurants/sydny-bagels-charoen-krung-branch",
+   "source_name": "Time Out Bangkok",
+   "is_watchlist": false
+  },
+  {
+   "name": "ThaiCoon",
+   "type": "Restaurant",
+   "city": "Bangkok",
+   "area": "Silom",
+   "cuisine": "Thai",
+   "description": "'Real Thai, No Rules' — อาหารไทยไม่ยึดตำรา โดยเชฟ Buddy Hatayodom ร่วมกับเชฟ Wai จาก Rasik Local Kitchen",
+   "source_url": "https://www.timeout.com/bangkok/restaurants/new-restaurants",
+   "source_name": "Time Out Bangkok",
+   "is_watchlist": false
+  },
+  {
+   "name": "ข้าวจานโปรด (Khao Jaan-Prod)",
+   "type": "Restaurant",
+   "city": "Bangkok",
+   "area": "Pathumwan",
+   "cuisine": "Thai",
+   "description": "อาหารไทยต้นตำรับผสมฟิวชั่น เปิดกรกฎาคมนี้ ชั้น 2 โซน Groove เซ็นทรัลเวิลด์",
+   "source_url": "https://food.trueid.net/detail/kAOzZqd2G9n",
+   "source_name": "TrueID Food",
+   "is_watchlist": false
+  },
+  {
+   "name": "Le Du Kaan @ EA Rooftop The Empire",
+   "type": "Restaurant",
+   "city": "Bangkok",
+   "area": "Sathorn",
+   "cuisine": "Thai",
+   "description": "Thai rooftop restaurant แห่งแรกของกรุงเทพฯ บน EA Rooftop 6 ชั้นบนสุดของตึก The Empire",
+   "source_url": "https://www.timeout.com/bangkok/restaurants/le-du-kaan",
+   "source_name": "Time Out Bangkok",
+   "is_watchlist": true
+  }
+ ],
+ "trend_note": "กระแสแป้ง (bagel/doughnut/pastry) ยังแรงต่อเนื่อง — ครึ่งหนึ่งของร้านใหม่สัปดาห์นี้คือ dough concept ขยายสาขาเข้าย่านใหม่"
 }
