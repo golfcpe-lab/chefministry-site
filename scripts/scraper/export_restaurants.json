@@ -12341,8 +12341,8 @@
     "url": "https://www.google.com/maps/search/?q=zhong.bkk%20%E4%BC%97%20-%20tea%20bar",
     "place_id": "ChIJnezD0tif4jARrkIpuCdFM3E",
     "cuisine_raw": "Chinese",
-    "cuisine_normalized": "Chinese",
-    "cuisine": "Chinese",
+    "cuisine_normalized": "Cafe",
+    "cuisine": "Cafe",
     "area_raw": "thonglor",
     "area_normalized": "Ratchathewi",
     "area": "Ratchathewi",
@@ -12393,7 +12393,7 @@
     "trendBadge": "→ Stable",
     "type": "cafe",
     "tags": [
-      "Chinese",
+      "Cafe",
       "Ratchathewi",
       "Google Maps"
     ],
