@@ -16,6 +16,22 @@
   var TIER_W = { Mega: 3, Macro: 2, Mid: 1 };
   var FREE_COUNT = 3;
 
+  // กรองร้านต่างประเทศออก (creator ไปเที่ยวเมืองนอกแล้ววิดีโอหลุดเข้า feed)
+  var TH_AREAS = ['bangkok','thailand','nonthaburi','pak kret','samut prakan','pathum thani','rangsit',
+    'phra nakhon','dusit','nong chok','bang rak','bang khen','bangkapi','pathumwan','pom prap','phra khanong',
+    'minburi','lat krabang','yan nawa','yaowarat','phaya thai','thonburi','bangkok yai','huai khwang','khlong san',
+    'taling chan','bangkok noi','bang khun thian','phasi charoen','nong khaem','rat burana','bang phlat','din daeng',
+    'bueng kum','sathorn','bang sue','chatuchak','bang kho laem','prawet','khlong toei','suan luang','chom thong',
+    'don mueang','ratchathewi','lat phrao','watthana','bang khae','lak si','sai mai','khan na yao','saphan sung',
+    'wang thonglang','khlong sam wa','bangna','thawi watthana','thung khru','bang bon','silom','thonglor','ekkamai',
+    'sukhumvit','ari','asok','ratchada','rama9','ramintra','onnut','ladprao','banthat thong','pratunam','chinatown'];
+  function isThailand(rv) {
+    var s = (rv.restaurant || '') + ' ' + (rv.area || '') + ' ' + (rv.cuisine || '');
+    if (/[\u0E00-\u0E7F]/.test(s)) return true;  // มีอักษรไทย = ร้านไทย
+    var a = ((rv.area || '') + ' ' + (rv.city || '')).toLowerCase();
+    return TH_AREAS.some(function (t) { return a.indexOf(t) >= 0; });
+  }
+
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
@@ -47,7 +63,7 @@
   function render(data) {
     var root = document.getElementById('creatorBuzzRoot');
     if (!root) return;
-    var reviews = (data && data.reviews) || [];
+    var reviews = ((data && data.reviews) || []).filter(isThailand);
     if (!reviews.length) { root.closest('section') && (root.closest('section').style.display = 'none'); return; }
 
     // Rank: rating tier > influencer tier > recency
