@@ -24,7 +24,7 @@ CUISINE_NORM = {
     "isaan":"Isaan Thai","fine-dining":"Fine Dining","fine dining":"Fine Dining",
     "western":"Western","fusion":"Fusion","vegetarian":"Vegetarian","vegan":"Vegan",
     "other":"Other","casual-dining":"Casual Dining","casual":"Casual Dining",
-    "local":"Local Thai","bar":"Bar & Grill","pizza":"Italian",
+    "local":"Local Thai","bar":"Bar","pizza":"Italian",
 }
 AREA_NORM = {
     "thonglor":"Thonglor","ekkamai":"Ekkamai","silom":"Silom","sathorn":"Sathorn",
@@ -59,7 +59,7 @@ NAME_CUISINE_RULES = [
     (("ส้มตำ", "อีสาน", "ตำ", "ลาบ", "แจ่ว"), "Isaan Thai"),
     (("หมูกระทะ", "ปิ้งย่าง", "bbq", "barbecue", "กระทะ"), "BBQ"),
     (("ข้าวมันไก่", "ข้าวหมูแดง", "ข้าวขาหมู", "โจ๊ก", "ข้าวต้ม", "ตามสั่ง"), "Thai"),
-    (("คาเฟ่", "cafe", "coffee", "กาแฟ", "เบเกอรี่", "bakery", "ครัวซองต์", "croissant", "เค้ก", "โดนัท", "เจลาโต้", "gelato", "ไอศกรีม", "ice cream", "ทาร์ต"), "Cafe"),
+    (("คาเฟ่", "cafe", "coffee", "กาแฟ", "การคั่ว", "คั่ว", "โรสเตอร์", "โรสเตอรี่", "roaster", "roastery", "espresso", "เอสเพรสโซ", "เบเกอรี่", "bakery", "ครัวซองต์", "croissant", "เค้ก", "โดนัท", "เจลาโต้", "gelato", "ไอศกรีม", "ice cream", "ทาร์ต"), "Cafe"),
     (("ซีฟู้ด", "seafood", "ทะเล", "กุ้ง", "ปู", "หอย"), "Seafood"),
     (("สเต๊ก", "steak"), "Steakhouse"),
 ]
@@ -190,8 +190,10 @@ def build_canonical(db_path=None, out_path=None, days=30):
         rid = d.get("id") or ("%s_%s" % (src, name[:20]))
         cuisine_raw  = d.get("cuisine") or "Other"
         cuisine_norm = norm_cuisine(cuisine_raw)
-        # ร้านที่หมวดกว้างเกิน — เดาใหม่จากชื่อร้าน (ก๋วยเตี๋ยว/สุกี้/ราเมน ฯลฯ)
-        if cuisine_norm in ("Other", "Casual Dining", "Street Food", ""):
+        # ร้านที่หมวดกว้าง/ไม่ชัด — เดาใหม่จากชื่อร้าน (ก๋วยเตี๋ยว/สุกี้/ราเมน/คาเฟ่ ฯลฯ)
+        # รวม Bar / Bar & Grill ด้วย เพราะ GMaps มักแท็ก "Bar" ผิดให้ร้านกาแฟ/โรสเตอรี่
+        # (เช่น "อิสระการคั่ว") ทำให้ substring "grill" ไปโผล่หมวดปิ้งย่างบนหน้าเว็บ
+        if cuisine_norm in ("Other", "Casual Dining", "Street Food", "Bar", "Bar & Grill", ""):
             _better = refine_cuisine_from_name(name)
             if _better:
                 cuisine_norm = _better
@@ -309,6 +311,7 @@ def build_canonical(db_path=None, out_path=None, days=30):
 
 
 if __name__ == "__main__":
+    # cli entrypoint
     parser = argparse.ArgumentParser(description="ChefMinistry Canonical Dataset Builder")
     parser.add_argument("--db",     default=DB)
     parser.add_argument("--output", default=OUT)
