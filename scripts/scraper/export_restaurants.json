@@ -441,8 +441,8 @@
     "url": "https://www.wongnai.com/restaurants/34Iu-%E0%B8%9A%E0%B8%B8%E0%B8%8D%E0%B8%95%E0%B8%87%E0%B9%80%E0%B8%81%E0%B8%B5%E0%B8%A2%E0%B8%A3%E0%B8%95%E0%B8%B4-%E0%B8%82%E0%B9%89%E0%B8%B2%E0%B8%A7%E0%B8%A1%E0%B8%B1%E0%B8%99%E0%B9%84%E0%B8%81%E0%B9%88%E0%B8%AA%E0%B8%B4%E0%B8%87%E0%B8%84%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%8C-%E0%B8%97%E0%B8%AD%E0%B8%87%E0%B8%AB%E0%B8%A5%E0%B9%88%E0%B8%AD-thonglor",
     "place_id": "ChIJR7gcH1Oe4jARA4YYHTzJMx4",
     "cuisine_raw": "other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Thai",
+    "cuisine": "Thai",
     "area_raw": "thonglor",
     "area_normalized": "Thonglor",
     "area": "Thonglor",
@@ -491,7 +491,7 @@
     "trendBadge": "→ Stable",
     "type": "unknown",
     "tags": [
-      "Other",
+      "Thai",
       "Thonglor",
       "Wongnai"
     ],
@@ -585,8 +585,8 @@
     "url": "https://www.wongnai.com/restaurants/65255KC-%E0%B8%9A%E0%B8%B0%E0%B8%AB%E0%B8%A1%E0%B8%B5%E0%B9%88%E0%B8%84%E0%B8%99%E0%B9%81%E0%B8%8B%E0%B9%88%E0%B8%A5%E0%B8%B5-%E0%B8%97%E0%B8%AD%E0%B8%87%E0%B8%AB%E0%B8%A5%E0%B9%88%E0%B8%AD-thonglor",
     "place_id": "ChIJXUzQ0Kif4jARpupfUL8zxTQ",
     "cuisine_raw": "other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Noodles",
+    "cuisine": "Noodles",
     "area_raw": "thonglor",
     "area_normalized": "Thonglor",
     "area": "Thonglor",
@@ -635,7 +635,7 @@
     "trendBadge": "→ Stable",
     "type": "unknown",
     "tags": [
-      "Other",
+      "Noodles",
       "Thonglor",
       "Wongnai"
     ],
@@ -2529,8 +2529,8 @@
     "url": "https://www.wongnai.com/restaurants/153843SW-%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%97%E0%B8%B0%E0%B9%80%E0%B8%A5%E0%B8%97%E0%B8%AD%E0%B8%94-%E0%B8%A8%E0%B8%B2%E0%B8%A5%E0%B8%B2%E0%B9%81%E0%B8%94%E0%B8%87",
     "place_id": "ChIJ--mYUymf4jAReIcTN03NlA4",
     "cuisine_raw": "street-food",
-    "cuisine_normalized": "Street Food",
-    "cuisine": "Street Food",
+    "cuisine_normalized": "Seafood",
+    "cuisine": "Seafood",
     "area_raw": "silom",
     "area_normalized": "Silom",
     "area": "Silom",
@@ -2579,7 +2579,7 @@
     "trendBadge": "→ Stable",
     "type": "street_food",
     "tags": [
-      "Street Food",
+      "Seafood",
       "Silom",
       "Wongnai"
     ],
@@ -2817,8 +2817,8 @@
     "url": "https://www.wongnai.com/restaurants/22744sB-%E0%B8%81%E0%B9%8B%E0%B8%A7%E0%B8%A2%E0%B9%80%E0%B8%95%E0%B8%B5%E0%B9%8B%E0%B8%A2%E0%B8%A7%E0%B9%80%E0%B8%9B%E0%B9%87%E0%B8%94-%E0%B8%8B%E0%B8%AD%E0%B8%A2%E0%B8%84%E0%B8%AD%E0%B8%99%E0%B9%81%E0%B8%A7%E0%B8%99%E0%B8%95%E0%B9%8C",
     "place_id": "ChIJKYL0mC2f4jARxKM-NBEDXjg",
     "cuisine_raw": "street-food",
-    "cuisine_normalized": "Street Food",
-    "cuisine": "Street Food",
+    "cuisine_normalized": "Noodles",
+    "cuisine": "Noodles",
     "area_raw": "silom",
     "area_normalized": "Silom",
     "area": "Silom",
@@ -2867,7 +2867,7 @@
     "trendBadge": "→ Stable",
     "type": "street_food",
     "tags": [
-      "Street Food",
+      "Noodles",
       "Silom",
       "Wongnai"
     ],
@@ -2889,8 +2889,8 @@
     "url": "https://www.wongnai.com/listings/foods-around-silom-district#280005",
     "place_id": "ChIJ-0u_fgGZ4jARJw742_aiYJg",
     "cuisine_raw": "street-food",
-    "cuisine_normalized": "Street Food",
-    "cuisine": "Street Food",
+    "cuisine_normalized": "Noodles",
+    "cuisine": "Noodles",
     "area_raw": "silom",
     "area_normalized": "Silom",
     "area": "Silom",
@@ -2939,7 +2939,7 @@
     "trendBadge": "→ Stable",
     "type": "street_food",
     "tags": [
-      "Street Food",
+      "Noodles",
       "Silom",
       "Wongnai"
     ],
@@ -3033,8 +3033,8 @@
     "url": "https://www.wongnai.com/restaurants/189984sb-%E0%B8%82%E0%B9%89%E0%B8%B2%E0%B8%A7%E0%B8%A1%E0%B8%B1%E0%B8%99%E0%B9%84%E0%B8%81%E0%B9%88%E0%B8%95%E0%B8%AD%E0%B8%99-%E0%B8%99%E0%B8%B2%E0%B8%A2%E0%B8%99%E0%B9%89%E0%B8%AD%E0%B8%A2%E0%B9%80%E0%B8%88%E0%B9%89%E0%B8%B2%E0%B9%80%E0%B8%81%E0%B9%88%E0%B8%B2-%E0%B8%96%E0%B8%99%E0%B8%99%E0%B8%84%E0%B8%AD%E0%B8%99%E0%B9%81%E0%B8%A7%E0%B8%99",
     "place_id": "ChIJbYo1QSyf4jAR8a2OLnI1sAc",
     "cuisine_raw": "street-food",
-    "cuisine_normalized": "Street Food",
-    "cuisine": "Street Food",
+    "cuisine_normalized": "Thai",
+    "cuisine": "Thai",
     "area_raw": "silom",
     "area_normalized": "Silom",
     "area": "Silom",
@@ -3083,7 +3083,7 @@
     "trendBadge": "→ Stable",
     "type": "street_food",
     "tags": [
-      "Street Food",
+      "Thai",
       "Silom",
       "Wongnai"
     ],
@@ -3105,8 +3105,8 @@
     "url": "https://www.wongnai.com/restaurants/268864Mt-%E0%B8%AA%E0%B8%B8%E0%B8%81%E0%B8%B5%E0%B9%89%E0%B8%9A%E0%B8%B2%E0%B8%87%E0%B8%A3%E0%B8%B1%E0%B8%81",
     "place_id": "ChIJSa9-nyiZ4jARs1jU3BIEtBU",
     "cuisine_raw": "street-food",
-    "cuisine_normalized": "Street Food",
-    "cuisine": "Street Food",
+    "cuisine_normalized": "Hot Pot / Suki",
+    "cuisine": "Hot Pot / Suki",
     "area_raw": "silom",
     "area_normalized": "Silom",
     "area": "Silom",
@@ -3155,7 +3155,7 @@
     "trendBadge": "→ Stable",
     "type": "street_food",
     "tags": [
-      "Street Food",
+      "Hot Pot / Suki",
       "Silom",
       "Wongnai"
     ],
@@ -3321,8 +3321,8 @@
     "url": "https://www.wongnai.com/restaurants/60368zj-%E0%B8%81%E0%B9%8B%E0%B8%A7%E0%B8%A2%E0%B9%80%E0%B8%95%E0%B8%B5%E0%B9%8B%E0%B8%A2%E0%B8%A7%E0%B8%AB%E0%B8%A5%E0%B8%AD%E0%B8%94%E0%B9%80%E0%B8%88%E0%B9%8A%E0%B9%83%E0%B8%AB%E0%B8%8D%E0%B9%88-%E0%B8%9A%E0%B8%B2%E0%B8%87%E0%B8%A3%E0%B8%B1%E0%B8%81",
     "place_id": "ChIJEUhAtcWY4jARCK-SByWB-Xs",
     "cuisine_raw": "street-food",
-    "cuisine_normalized": "Street Food",
-    "cuisine": "Street Food",
+    "cuisine_normalized": "Noodles",
+    "cuisine": "Noodles",
     "area_raw": "silom",
     "area_normalized": "Silom",
     "area": "Silom",
@@ -3371,7 +3371,7 @@
     "trendBadge": "→ Stable",
     "type": "street_food",
     "tags": [
-      "Street Food",
+      "Noodles",
       "Silom",
       "Wongnai"
     ],
@@ -4113,8 +4113,8 @@
     "url": "https://www.wongnai.com/restaurants/2162472oL-bartels-sathorn-sourdough-sandwiches-coffee-juicery-%E0%B8%AA%E0%B8%B2%E0%B8%97%E0%B8%A3-sathorn?_st=cD0xMDtiPTIxNjI0NzI7YWQ9ZmFsc2U7dD0xNzc1Mzc5NTY0NzEyO3JpPTFYN2JWdEdhVWx2UjBIV2prMkxEOXJSRkVOTmZRcjtpPTFYNzB6RDJBek94ckZxMzZaVVlPandIaWhLTVhQbjt3cmVmPXNyOw%3D%3D",
     "place_id": "ChIJ8XTMPAKf4jARRYdW8leszPU",
     "cuisine_raw": "other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Cafe",
+    "cuisine": "Cafe",
     "area_raw": "sathorn",
     "area_normalized": "Sathorn",
     "area": "Sathorn",
@@ -4163,7 +4163,7 @@
     "trendBadge": "→ Stable",
     "type": "unknown",
     "tags": [
-      "Other",
+      "Cafe",
       "Sathorn",
       "Wongnai"
     ],
@@ -5841,8 +5841,8 @@
     "url": "https://www.wongnai.com/restaurants/196547Si-%E0%B9%81%E0%B8%AB%E0%B9%89%E0%B8%A7%E0%B8%8B%E0%B8%B5%E0%B8%9F%E0%B8%B9%E0%B9%8A%E0%B8%94-%E0%B8%9B%E0%B8%B9%E0%B8%94%E0%B8%AD%E0%B8%87%E0%B8%AB%E0%B8%B1%E0%B8%A7%E0%B8%9B%E0%B8%A5%E0%B8%B2%E0%B8%AB%E0%B8%A1%E0%B9%89%E0%B8%AD%E0%B9%84%E0%B8%9F-%E0%B8%9E%E0%B8%B8%E0%B8%97%E0%B8%98%E0%B8%A1%E0%B8%93%E0%B8%91%E0%B8%A5%E0%B8%AA%E0%B8%B2%E0%B8%A2-2",
     "place_id": "ChIJv6tdnkOX4jARF4RUhhyAUzY",
     "cuisine_raw": "other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Hot Pot / Suki",
+    "cuisine": "Hot Pot / Suki",
     "area_raw": "onnut",
     "area_normalized": "Bang Khae",
     "area": "Bang Khae",
@@ -5891,7 +5891,7 @@
     "trendBadge": "→ Stable",
     "type": "unknown",
     "tags": [
-      "Other",
+      "Hot Pot / Suki",
       "Bang Khae",
       "Wongnai"
     ],
@@ -6705,8 +6705,8 @@
     "url": "https://www.wongnai.com/restaurants/24605Ci-%E0%B8%81%E0%B9%8B%E0%B8%A7%E0%B8%A2%E0%B9%80%E0%B8%95%E0%B8%B5%E0%B9%8B%E0%B8%A2%E0%B8%A7-%E0%B8%95%E0%B9%89%E0%B8%A1%E0%B9%80%E0%B8%A5%E0%B8%B7%E0%B8%AD%E0%B8%94%E0%B8%AB%E0%B8%A1%E0%B8%B9%E0%B8%99%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%8A%E0%B9%89-%E0%B8%A5%E0%B8%B2%E0%B8%94%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%A7-lat-phrao",
     "place_id": "ChIJK-MjOu2d4jARJXQXUhyrhhw",
     "cuisine_raw": "other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Noodles",
+    "cuisine": "Noodles",
     "area_raw": "ladprao",
     "area_normalized": "Lat Phrao",
     "area": "Lat Phrao",
@@ -6755,7 +6755,7 @@
     "trendBadge": "→ Stable",
     "type": "unknown",
     "tags": [
-      "Other",
+      "Noodles",
       "Lat Phrao",
       "Wongnai"
     ],
@@ -6921,8 +6921,8 @@
     "url": "https://www.wongnai.com/restaurants/priksodnoodle",
     "place_id": "ChIJeZgp14FiHTERKJ5qXZADweY",
     "cuisine_raw": "other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Noodles",
+    "cuisine": "Noodles",
     "area_raw": "ladprao",
     "area_normalized": "Bang Khen",
     "area": "Bang Khen",
@@ -6971,7 +6971,7 @@
     "trendBadge": "→ Stable",
     "type": "unknown",
     "tags": [
-      "Other",
+      "Noodles",
       "Bang Khen",
       "Wongnai"
     ],
@@ -7209,8 +7209,8 @@
     "url": "https://www.wongnai.com/restaurants/27363hx-%E0%B8%AA%E0%B8%A1%E0%B8%A2%E0%B8%A8-%E0%B8%82%E0%B9%89%E0%B8%B2%E0%B8%A7%E0%B8%95%E0%B9%89%E0%B8%A1%E0%B8%A3%E0%B8%AD%E0%B8%9A%E0%B8%94%E0%B8%B6%E0%B8%81-som-yot-khaotom-rop-duek-%E0%B9%82%E0%B8%8A%E0%B8%84%E0%B8%8A%E0%B8%B1%E0%B8%A2-4-%E0%B8%8B%E0%B8%AD%E0%B8%A2-72-%E0%B9%82%E0%B8%8A%E0%B8%84%E0%B8%8A%E0%B8%B1%E0%B8%A2-4-chok-chai-4",
     "place_id": "ChIJx0YahZ-d4jARuo4bO2b7AIg",
     "cuisine_raw": "other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Thai",
+    "cuisine": "Thai",
     "area_raw": "ladprao",
     "area_normalized": "Lat Phrao",
     "area": "Lat Phrao",
@@ -7259,7 +7259,7 @@
     "trendBadge": "→ Stable",
     "type": "unknown",
     "tags": [
-      "Other",
+      "Thai",
       "Lat Phrao",
       "Wongnai"
     ],
@@ -8217,8 +8217,8 @@
     "url": "https://www.wongnai.com/restaurants/989481gt-honaji-ramen-%E0%B9%80%E0%B8%8B%E0%B9%87%E0%B8%99%E0%B8%97%E0%B8%A3%E0%B8%B1%E0%B8%A5-%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%A1-9",
     "place_id": "ChIJLUSieuif4jAR0zJ2mg2vJDs",
     "cuisine_raw": "other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Ramen",
+    "cuisine": "Ramen",
     "area_raw": "rama9",
     "area_normalized": "Suan Luang",
     "area": "Suan Luang",
@@ -8267,7 +8267,7 @@
     "trendBadge": "→ Stable",
     "type": "unknown",
     "tags": [
-      "Other",
+      "Ramen",
       "Suan Luang",
       "Wongnai"
     ],
@@ -8577,8 +8577,8 @@
     "url": "https://www.google.com/maps/place/?q=place_id:0x311d61d1f73e1ce3:0x5c9f45c3f325f0e4",
     "place_id": "0x311d61d1f73e1ce3:0x5c9f45c3f325f0e4",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Isaan Thai",
+    "cuisine": "Isaan Thai",
     "area_raw": "bangkapi",
     "area_normalized": "Bangkapi",
     "area": "Bangkapi",
@@ -8627,7 +8627,7 @@
     "trendBadge": "→ Stable",
     "type": "unknown",
     "tags": [
-      "Other",
+      "Isaan Thai",
       "Bangkapi",
       "Google Maps"
     ],
@@ -8797,8 +8797,8 @@
     "url": "https://www.google.com/maps/place/?q=place_id:0x30e29900036cb613:0xaa4397f63c14e0e0",
     "place_id": "ChIJdRnJWABlHTEReGIe6ZixPYI",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Thai",
+    "cuisine": "Thai",
     "area_raw": "bangkok",
     "area_normalized": "Minburi",
     "area": "Minburi",
@@ -8849,7 +8849,7 @@
     "trendBadge": "→ Stable",
     "type": "restaurant",
     "tags": [
-      "Other",
+      "Thai",
       "Minburi",
       "Google Maps"
     ],
@@ -9241,8 +9241,8 @@
     "url": "https://www.google.com/maps/search/?q=%E0%B9%80%E0%B8%81%E0%B8%B5%E0%B9%8A%E0%B8%A2%E0%B8%A7%E0%B8%AB%E0%B8%99%E0%B8%AD%E0%B8%87%E0%B8%9A%E0%B8%B1%E0%B8%A7",
     "place_id": "ChIJl3kuzpSZ4jARqbw2E_mN0BM",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Noodles",
+    "cuisine": "Noodles",
     "area_raw": "bangkok",
     "area_normalized": "Bangkok Noi",
     "area": "Bangkok Noi",
@@ -9293,7 +9293,7 @@
     "trendBadge": "→ Stable",
     "type": "restaurant",
     "tags": [
-      "Other",
+      "Noodles",
       "Bangkok Noi",
       "Google Maps"
     ],
@@ -9611,8 +9611,8 @@
     "url": "https://www.google.com/maps/place/?q=place_id:0x30e29fa17d3fde69:0xddd4cf6dc9335d43",
     "place_id": "ChIJOfFoVUmD4jARudL_PFetLRE",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Noodles",
+    "cuisine": "Noodles",
     "area_raw": "sukhumvit",
     "area_normalized": "Bang Khen",
     "area": "Bang Khen",
@@ -9663,7 +9663,7 @@
     "trendBadge": "→ Stable",
     "type": "restaurant",
     "tags": [
-      "Other",
+      "Noodles",
       "Bang Khen",
       "Google Maps"
     ],
@@ -9833,8 +9833,8 @@
     "url": "https://www.google.com/maps/place/?q=place_id:0x30e29fa17d3fde69:0xddd4cf6dc9335d43",
     "place_id": "ChIJLfTFBOuf4jARXEj-phZmHGo",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Isaan Thai",
+    "cuisine": "Isaan Thai",
     "area_raw": "sukhumvit",
     "area_normalized": "Sukhumvit",
     "area": "Sukhumvit",
@@ -9885,7 +9885,7 @@
     "trendBadge": "→ Stable",
     "type": "restaurant",
     "tags": [
-      "Other",
+      "Isaan Thai",
       "Sukhumvit",
       "Google Maps"
     ],
@@ -10275,8 +10275,8 @@
     "url": "https://www.google.com/maps/place/?q=place_id:0x30e29fa17d3fde69:0xddd4cf6dc9335d43",
     "place_id": "ChIJe4cLdQVnHTERJK48UdtVGEk",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Seafood",
+    "cuisine": "Seafood",
     "area_raw": "thonglor",
     "area_normalized": "Lat Krabang",
     "area": "Lat Krabang",
@@ -10327,7 +10327,7 @@
     "trendBadge": "→ Stable",
     "type": "unknown",
     "tags": [
-      "Other",
+      "Seafood",
       "Lat Krabang",
       "Google Maps"
     ],
@@ -10421,8 +10421,8 @@
     "url": "https://www.google.com/maps/place/?q=place_id:0x30e29fa17d3fde69:0xddd4cf6dc9335d43",
     "place_id": "ChIJk8E_ZQBjHTERNi0FIBDY0EA",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Noodles",
+    "cuisine": "Noodles",
     "area_raw": "bangkok",
     "area_normalized": "Khan Na Yao",
     "area": "Khan Na Yao",
@@ -10473,7 +10473,7 @@
     "trendBadge": "→ Stable",
     "type": "restaurant",
     "tags": [
-      "Other",
+      "Noodles",
       "Khan Na Yao",
       "Google Maps"
     ],
@@ -10643,8 +10643,8 @@
     "url": "https://www.google.com/maps/place/?q=place_id:0x30e2838e5d497909:0x21a6300c6c9c074f",
     "place_id": "0x30e2838e5d497909:0x21a6300c6c9c074f",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Seafood",
+    "cuisine": "Seafood",
     "area_raw": "ramintra",
     "area_normalized": "Ram Intra",
     "area": "Ram Intra",
@@ -10693,7 +10693,7 @@
     "trendBadge": "→ Stable",
     "type": "unknown",
     "tags": [
-      "Other",
+      "Seafood",
       "Ram Intra",
       "Google Maps"
     ],
@@ -11603,8 +11603,8 @@
     "url": "https://www.google.com/maps/place/?q=place_id:0x30e29fa17d3fde69:0xddd4cf6dc9335d43",
     "place_id": "ChIJl9pA0_VkHTERlFVGHNwwpvY",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Noodles",
+    "cuisine": "Noodles",
     "area_raw": "bangkok",
     "area_normalized": "Minburi",
     "area": "Minburi",
@@ -11655,7 +11655,7 @@
     "trendBadge": "→ Stable",
     "type": "restaurant",
     "tags": [
-      "Other",
+      "Noodles",
       "Minburi",
       "Google Maps"
     ],
@@ -12267,8 +12267,8 @@
     "url": "https://www.google.com/maps/search/?q=Chef%20Kai%20De%20Caf%C3%A9%20Klong%205%20-%20%E0%B9%80%E0%B8%8A%E0%B8%9F%E0%B9%84%E0%B8%81%E0%B9%88%20%E0%B9%80%E0%B8%94%E0%B8%AD%20%E0%B8%84%E0%B8%B2%E0%B9%80%E0%B8%9F%E0%B9%88%20%E0%B8%84%E0%B8%A5%E0%B8%AD%E0%B8%87%205%20%E0%B8%A5%E0%B8%B3%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%81%E0%B8%B2%20by%20Jana",
     "place_id": "ChIJY_qCTmV_HTERlMwpeOkHEE4",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Cafe",
+    "cuisine": "Cafe",
     "area_raw": "ratchada",
     "area_normalized": "Pathum Thani",
     "area": "Pathum Thani",
@@ -12319,7 +12319,7 @@
     "trendBadge": "→ Stable",
     "type": "restaurant",
     "tags": [
-      "Other",
+      "Cafe",
       "Pathum Thani",
       "Google Maps"
     ],
@@ -12563,8 +12563,8 @@
     "url": "https://www.google.com/maps/place/?q=place_id:0x30e29900036cb613:0xaa4397f63c14e0e0",
     "place_id": "ChIJjcHAGWOX4jAR-G1PBJHfw0s",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Cafe",
+    "cuisine": "Cafe",
     "area_raw": "thonglor",
     "area_normalized": "Phasi Charoen",
     "area": "Phasi Charoen",
@@ -12615,7 +12615,7 @@
     "trendBadge": "→ Stable",
     "type": "restaurant",
     "tags": [
-      "Other",
+      "Cafe",
       "Phasi Charoen",
       "Google Maps"
     ],
@@ -12637,8 +12637,8 @@
     "url": "https://www.google.com/maps/place/?q=place_id:0x30e29900036cb613:0xaa4397f63c14e0e0",
     "place_id": "ChIJnd9WrEYx2jARewQT6RgL_Gc",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Noodles",
+    "cuisine": "Noodles",
     "area_raw": "thonglor",
     "area_normalized": "Thonglor",
     "area": "Thonglor",
@@ -12689,7 +12689,7 @@
     "trendBadge": "→ Stable",
     "type": "restaurant",
     "tags": [
-      "Other",
+      "Noodles",
       "Thonglor",
       "Google Maps"
     ],
@@ -12859,8 +12859,8 @@
     "url": "https://www.google.com/maps/search/?q=%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%A5%E0%B8%B2%E0%B8%9A%E0%B9%80%E0%B8%9B%E0%B9%87%E0%B8%94%E0%B8%AD%E0%B8%B8%E0%B8%94%E0%B8%A3",
     "place_id": "ChIJwSXuTrliHTERbMjQsrior1E",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Isaan Thai",
+    "cuisine": "Isaan Thai",
     "area_raw": "ramintra",
     "area_normalized": "Bang Khen",
     "area": "Bang Khen",
@@ -12911,7 +12911,7 @@
     "trendBadge": "→ Stable",
     "type": "restaurant",
     "tags": [
-      "Other",
+      "Isaan Thai",
       "Bang Khen",
       "Google Maps"
     ],
@@ -12933,8 +12933,8 @@
     "url": "https://www.google.com/maps/place/?q=place_id:0x311d62b94eee25c1:0x51afa8b8b2d0c86c",
     "place_id": "0x311d62b94eee25c1:0x51afa8b8b2d0c86c",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Noodles",
+    "cuisine": "Noodles",
     "area_raw": "ramintra",
     "area_normalized": "Ram Intra",
     "area": "Ram Intra",
@@ -12983,7 +12983,7 @@
     "trendBadge": "→ Stable",
     "type": "unknown",
     "tags": [
-      "Other",
+      "Noodles",
       "Ram Intra",
       "Google Maps"
     ],
@@ -13151,8 +13151,8 @@
     "url": "https://www.google.com/maps/search/?q=%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%99%20%E0%B8%82%E0%B9%89%E0%B8%B2%E0%B8%A7%E0%B8%AB%E0%B8%A1%E0%B8%B9%E0%B9%81%E0%B8%94%E0%B8%87%20%E0%B8%AA%E0%B8%B8%E0%B8%9E%E0%B8%A3%E0%B8%A3%E0%B8%93",
     "place_id": "ChIJ_1c8sfCY4jARji2vLmpMLgQ",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Thai",
+    "cuisine": "Thai",
     "area_raw": "bangkok",
     "area_normalized": "Thonburi",
     "area": "Thonburi",
@@ -13203,7 +13203,7 @@
     "trendBadge": "→ Stable",
     "type": "restaurant",
     "tags": [
-      "Other",
+      "Thai",
       "Thonburi",
       "Google Maps"
     ],
@@ -13445,8 +13445,8 @@
     "url": "https://www.google.com/maps/place/?q=place_id:0x311d65004abc0f77:0x8f622983d4f6d349",
     "place_id": "0x311d65004abc0f77:0x8f622983d4f6d349",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Seafood",
+    "cuisine": "Seafood",
     "area_raw": "minburi",
     "area_normalized": "Minburi",
     "area": "Minburi",
@@ -13495,7 +13495,7 @@
     "trendBadge": "→ Stable",
     "type": "unknown",
     "tags": [
-      "Other",
+      "Seafood",
       "Minburi",
       "Google Maps"
     ],
@@ -14105,8 +14105,8 @@
     "url": "https://www.google.com/maps/place/?q=place_id:0x311d61003c1d47d7:0x3e1e2dcf9f4c91c3",
     "place_id": "0x311d61003c1d47d7:0x3e1e2dcf9f4c91c3",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Cafe",
+    "cuisine": "Cafe",
     "area_raw": "bangkok",
     "area_normalized": "Bangkok",
     "area": "Bangkok",
@@ -14155,7 +14155,7 @@
     "trendBadge": "→ Stable",
     "type": "unknown",
     "tags": [
-      "Other",
+      "Cafe",
       "Bangkok",
       "Google Maps"
     ],
@@ -15503,8 +15503,8 @@
     "url": "https://www.google.com/maps/place/?q=place_id:0x311d63ca0bc6d28d:0x57fd83f1d3661601",
     "place_id": "ChIJjdLGC8pjHTERARZm0_GD_Vc",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Noodles",
+    "cuisine": "Noodles",
     "area_raw": "bangkok",
     "area_normalized": "Bueng Kum",
     "area": "Bueng Kum",
@@ -15555,7 +15555,7 @@
     "trendBadge": "→ Stable",
     "type": "restaurant",
     "tags": [
-      "Other",
+      "Noodles",
       "Bueng Kum",
       "Google Maps"
     ],
@@ -15725,8 +15725,8 @@
     "url": "https://www.google.com/maps/place/?q=place_id:0x311d61889c7e15b9:0x32f22f0774baa00c",
     "place_id": "ChIJr7QlzimD4jARDOr8wNFfIPs",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Seafood",
+    "cuisine": "Seafood",
     "area_raw": "ramkhamhaeng",
     "area_normalized": "Bang Khen",
     "area": "Bang Khen",
@@ -15777,7 +15777,7 @@
     "trendBadge": "→ Stable",
     "type": "restaurant",
     "tags": [
-      "Other",
+      "Seafood",
       "Bang Khen",
       "Google Maps"
     ],
@@ -15947,8 +15947,8 @@
     "url": "https://www.google.com/maps/place/?q=place_id:0x311d638c45309c41:0x292ca5c878f4a25a",
     "place_id": "ChIJW_STFDpjHTERqnNWJ7D10Yw",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Isaan Thai",
+    "cuisine": "Isaan Thai",
     "area_raw": "ramintra",
     "area_normalized": "Bang Khen",
     "area": "Bang Khen",
@@ -15999,7 +15999,7 @@
     "trendBadge": "→ Stable",
     "type": "takeaway_only",
     "tags": [
-      "Other",
+      "Isaan Thai",
       "Bang Khen",
       "Google Maps"
     ],
@@ -16095,8 +16095,8 @@
     "url": "https://www.google.com/maps/place/?q=place_id:0x30e29d63bc31a293:0xb29d8250790d8f21",
     "place_id": "ChIJk6IxvGOd4jARIY8NeVCCnbI",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Thai",
+    "cuisine": "Thai",
     "area_raw": "bangkok",
     "area_normalized": "Bang Khen",
     "area": "Bang Khen",
@@ -16147,7 +16147,7 @@
     "trendBadge": "→ Stable",
     "type": "restaurant",
     "tags": [
-      "Other",
+      "Thai",
       "Bang Khen",
       "Google Maps"
     ],
@@ -16607,8 +16607,8 @@
     "url": "https://www.wongnai.com/restaurants/306933ce-%E0%B9%82%E0%B8%AD%E0%B8%8A%E0%B8%B2%E0%B8%A1-%E0%B8%82%E0%B9%89%E0%B8%B2%E0%B8%A7%E0%B8%95%E0%B9%89%E0%B8%A1%E0%B9%81%E0%B8%AB%E0%B9%89%E0%B8%87-%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%A1%E0%B8%B1%E0%B8%A2-ekkamai",
     "place_id": "ChIJt99M3r6f4jAR11iPdFJIEwo",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Thai",
+    "cuisine": "Thai",
     "area_raw": "Ekkamai",
     "area_normalized": "Ekkamai",
     "area": "Ekkamai",
@@ -16657,7 +16657,7 @@
     "trendBadge": "→ Stable",
     "type": "unknown",
     "tags": [
-      "Other",
+      "Thai",
       "Ekkamai",
       "Wongnai"
     ],
@@ -17183,8 +17183,8 @@
     "url": "https://www.wongnai.com/restaurants/269651JF-%E0%B9%80%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%A3%E0%B8%B8%E0%B8%87-%E0%B8%81%E0%B9%8B%E0%B8%A7%E0%B8%A2%E0%B9%80%E0%B8%95%E0%B8%B5%E0%B9%8B%E0%B8%A2%E0%B8%A7%E0%B9%84%E0%B8%81%E0%B9%88%E0%B8%A1%E0%B8%B0%E0%B8%A3%E0%B8%B0-%E0%B8%A7%E0%B8%B1%E0%B8%87%E0%B8%AB%E0%B8%B4%E0%B8%99",
     "place_id": "ChIJMf5-Gwyd4jAR-hzQUNK4qw8",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Noodles",
+    "cuisine": "Noodles",
     "area_raw": "Lat Phrao",
     "area_normalized": "Lat Phrao",
     "area": "Lat Phrao",
@@ -17233,7 +17233,7 @@
     "trendBadge": "→ Stable",
     "type": "unknown",
     "tags": [
-      "Other",
+      "Noodles",
       "Lat Phrao",
       "Wongnai"
     ],
@@ -17549,8 +17549,8 @@
     "url": "https://www.google.com/maps/place/?q=place_id:0x311d64f5d340da97:0xf6a630dc1c465594",
     "place_id": "ChIJxXXE2DWD4jAR0P1XCg6ffK0",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Noodles",
+    "cuisine": "Noodles",
     "area_raw": "Minburi",
     "area_normalized": "Don Mueang",
     "area": "Don Mueang",
@@ -17601,7 +17601,7 @@
     "trendBadge": "→ Stable",
     "type": "restaurant",
     "tags": [
-      "Other",
+      "Noodles",
       "Don Mueang",
       "Google Maps"
     ],
@@ -18067,8 +18067,8 @@
     "url": "https://www.google.com/maps/place/?q=place_id:0x30e29f685b46d2db:0x37cc755fe854350a",
     "place_id": "0x30e29f685b46d2db:0x37cc755fe854350a",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Thai",
+    "cuisine": "Thai",
     "area_raw": "Sathorn",
     "area_normalized": "Sathorn",
     "area": "Sathorn",
@@ -18117,7 +18117,7 @@
     "trendBadge": "→ Stable",
     "type": "unknown",
     "tags": [
-      "Other",
+      "Thai",
       "Sathorn",
       "Google Maps"
     ],
@@ -18287,8 +18287,8 @@
     "url": "https://www.google.com/maps/search/?q=SUMIKOYA%20YATAI%20izakaya",
     "place_id": "ChIJ3cvz9Y9jHTERiXzHpA1JK2I",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Japanese",
+    "cuisine": "Japanese",
     "area_raw": "Bangkok",
     "area_normalized": "Khan Na Yao",
     "area": "Khan Na Yao",
@@ -18339,7 +18339,7 @@
     "trendBadge": "→ Stable",
     "type": "restaurant",
     "tags": [
-      "Other",
+      "Japanese",
       "Khan Na Yao",
       "Google Maps"
     ],
@@ -18435,8 +18435,8 @@
     "url": "https://www.google.com/maps/place/?q=place_id:0x311d638ff5f3cbdd:0x622b490da4c77c89",
     "place_id": "ChIJWUStXwBjHTERb9_wQVMNvqI",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Cafe",
+    "cuisine": "Cafe",
     "area_raw": "Ram Intra",
     "area_normalized": "Bueng Kum",
     "area": "Bueng Kum",
@@ -18487,7 +18487,7 @@
     "trendBadge": "→ Stable",
     "type": "restaurant",
     "tags": [
-      "Other",
+      "Cafe",
       "Bueng Kum",
       "Google Maps"
     ],
@@ -18583,8 +18583,8 @@
     "url": "https://www.google.com/maps/place/?q=place_id:0x311d63005fad4459:0xa2be0d5341f0df6f",
     "place_id": "ChIJP4M-Qt9jHTERYZ6SJ3WWuYk",
     "cuisine_raw": "Other",
-    "cuisine_normalized": "Other",
-    "cuisine": "Other",
+    "cuisine_normalized": "Thai",
+    "cuisine": "Thai",
     "area_raw": "Ram Intra",
     "area_normalized": "Bangkapi",
     "area": "Bangkapi",
@@ -18635,7 +18635,7 @@
     "trendBadge": "→ Stable",
     "type": "restaurant",
     "tags": [
-      "Other",
+      "Thai",
       "Bangkapi",
       "Google Maps"
     ],
