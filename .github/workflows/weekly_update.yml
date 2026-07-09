@@ -112,6 +112,34 @@ jobs:
         continue-on-error: true
 
       # ── NEW: FB Digest Injection ────────────────────────────────────────────
+      # ── ดึง FB digest จาก Firestore (Cowork task เขียนไว้ — ไม่ต้องพึ่งไฟล์ในเครื่อง) ──
+      - name: Fetch FB digest from Firestore
+        run: |
+          python -c "
+          import json, urllib.request, pathlib
+          URL = ('https://firestore.googleapis.com/v1/projects/chefministry-d50e9'
+                 '/databases/(default)/documents/cm_fb_digest/latest'
+                 '?key=AIzaSyA6-SU_06S9zjCzXBKDtAl1lBuLl9JU9nY')
+          local = pathlib.Path('scripts/scraper/fb_digest.json')
+          try:
+              doc = json.loads(urllib.request.urlopen(URL, timeout=30).read())
+              payload = doc.get('fields', {}).get('payload', {}).get('stringValue', '')
+              digest = json.loads(payload)
+              assert isinstance(digest.get('entries'), list) and digest.get('digest_date'), 'bad schema'
+              old_date = ''
+              if local.exists():
+                  try: old_date = json.loads(local.read_text(encoding='utf-8')).get('digest_date','')
+                  except Exception: pass
+              if digest['digest_date'] > old_date:
+                  local.write_text(json.dumps(digest, ensure_ascii=False, indent=1), encoding='utf-8')
+                  print('Digest updated from Firestore:', digest['digest_date'], '(', len(digest['entries']), 'entries )')
+              else:
+                  print('Firestore digest not newer (', digest['digest_date'], '<=', old_date, ') — keep existing')
+          except Exception as e:
+              print('No Firestore digest available (', e, ') — keep existing file')
+          "
+        continue-on-error: true
+
       # อ่าน fb_digest.json (บันทึกโดย Cowork scheduled task ทุกวันจันทร์)
       # แล้ว inject CM_FB_DIGEST + อัปเดต weeklyHighlight ใน data.js
       - name: Inject FB weekly digest into data.js
