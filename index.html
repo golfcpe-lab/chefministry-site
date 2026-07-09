@@ -643,7 +643,7 @@
 <script src="./js/auth.js?v=20260501a"></script>
 <script src="./js/safeDataAdapter.js?v=20260501a"></script>
 <script src="./js/data.js?v=20260501a"></script>
-<script src="./js/dataService.js?v=20260708c"></script>
+<script src="./js/dataService.js?v=20260710a"></script>
 <script src="./js/quickpick.js?v=20260709a"></script>
 <script src="./js/creatorbuzz.js?v=20260709a"></script>
 <script src="./js/microfx.js?v=20260708b"></script>
@@ -928,18 +928,20 @@
   const rankLabel = document.getElementById("rankListLabel");
   const _rankAll = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined") ? CM_EXTERNAL_RESTAURANTS : [];
   const _rankVel = _rankAll.filter(r => (r.velocityPct||0) > 0 && ChefMinistryData.scopeFilter(r));
-  const extRising = _rankVel.length > 0
+  // ใช้ Velocity Rank เฉพาะเมื่อมีข้อมูล velocity จริงจาก snapshot เท่านั้น
+  // ไม่มี = แสดง Trending (Growth Score) พร้อมป้ายที่ตรงความจริง — ห้ามติดป้าย velocity บนข้อมูล curated
+  const _hasRealVelocity = _rankVel.length >= 3;
+  const extRising = _hasRealVelocity
     ? [..._rankVel].sort((a,b) => (b.velocityPct||0) - (a.velocityPct||0)).slice(0, 5)
-    : ChefMinistryData.getEmergingRestaurants(5);
-
+    : [];
 
   if (rankLabel) {
-    rankLabel.textContent = extRising.length > 0
+    rankLabel.textContent = _hasRealVelocity
       ? "📈 Velocity Rank — รีวิวเพิ่มเร็วที่สุด 30 วัน"
       : "🔥 Trending Now — จัดอันดับจาก Growth Score";
   }
 
-  const velocityItems = extRising.length > 0 ? extRising.map((r,i) => {
+  const velocityItems = _hasRealVelocity ? extRising.map((r,i) => {
     const pct = r.velocityPct ? `+${Math.round(r.velocityPct)}%` : "";
     const newRev = r.newReviews30d ? `+${r.newReviews30d} reviews` : "";
     return `<div class="rank-item" style="cursor:default">
