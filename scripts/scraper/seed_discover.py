@@ -141,6 +141,7 @@ def main():
                 "source": "gmaps", "external_id": pid,
                 "name": name, "cuisine": cuisine,
                 "area": extract_area(addr), "address": addr,
+                "city": "Bangkok", "province": "Bangkok",
                 "lat": loc.get("latitude"), "lng": loc.get("longitude"),
                 "price_range": PRICE_MAP.get(price, "2"),
                 "url": f"https://www.google.com/maps/place/?q=place_id:{pid}",
