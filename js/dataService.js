@@ -210,8 +210,8 @@
     var scraped  = all.filter(function (r) { return  r._fromDB && ((r.velocityPct || 0) > 5 || (r._growthRate || 0) > 0); });
     curated.sort(function (a, b) { return (b.signalCount || 0) - (a.signalCount || 0); });
     scraped.sort(function (a, b) { return (b.velocityPct || 0) - (a.velocityPct || 0); });
-    // Interleave: curated first, fill with scraped
-    var combined = curated.concat(scraped);
+    // ร้านจริงจาก scraper ขึ้นก่อน — curated (ชุด demo) เป็นตัวเติมเมื่อข้อมูลจริงไม่พอ
+    var combined = scraped.length >= desired ? scraped : scraped.concat(curated);
     return _rotate(combined, desired, 2);
   }
 
@@ -245,7 +245,7 @@
       var ra = r => (r.rating_gmaps || 0) * Math.log((r.totalReviews || 0) + 1);
       return ra(b) - ra(a);
     });
-    var combined = curated.concat(scraped);
+    var combined = scraped.length >= desired ? scraped : scraped.concat(curated);
     return _rotate(combined, desired, 2);
   }
 
