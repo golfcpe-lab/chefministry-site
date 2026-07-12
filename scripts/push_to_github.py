@@ -54,6 +54,7 @@ ROOT_FILES = [
     ("scraper/requirements.txt",  "scripts/scraper/requirements.txt"),
     ("scraper/scrape_wongnai_v5.py", "scripts/scraper/scrape_wongnai_v5.py"),
     ("scraper/scrape_gmaps.py",      "scripts/scraper/scrape_gmaps.py"),
+    ("scraper/seed_discover.py",     "scripts/scraper/seed_discover.py"),
     ("scraper/scrape_youtube.py",    "scripts/scraper/scrape_youtube.py"),
     ("scraper/inject_youtube.py",    "scripts/scraper/inject_youtube.py"),
     ("scraper/canonical.py",         "scripts/scraper/canonical.py"),
