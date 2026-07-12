@@ -124,6 +124,7 @@ EXTRACT_PROMPT = """\
     "restaurant": "ชื่อร้าน",
     "cuisine": "ประเภทอาหาร เช่น Thai, Japanese, Street Food, Fine Dining",
     "area": "ย่านหรือจังหวัด เช่น Thonglor, Silom, Bangkok (ถ้าไม่รู้ใส่ Bangkok)",
+    "country": "ประเทศที่ร้านตั้งอยู่ เช่น Thailand, UK, Japan (ดูจาก context ถ้าไม่แน่ใจใส่ Thailand)",
     "rating": "exceed | above_average | average | need_improve (ประเมินจาก tone ของ video)",
     "confidence": "high | medium | low"
   }}
@@ -191,6 +192,12 @@ def run(days=7, dry_run=False):
             # 4. สกัดร้านจาก OpenAI
             restaurants = extract_restaurants_from_video(video["title"], video["description"])
             high_conf   = [r for r in restaurants if r.get("confidence") != "low"]
+            # กรองร้านนอกไทย (เช่น creator ไปเที่ยวต่างประเทศ — เคยมีร้านลอนดอนหลุดเข้า feed)
+            _before = len(high_conf)
+            high_conf = [r for r in high_conf
+                         if r.get("country", "Thailand").strip().lower() in ("thailand", "th", "ไทย", "ประเทศไทย")]
+            if _before > len(high_conf):
+                print(f"       🌏 ตัดร้านนอกไทยออก {_before - len(high_conf)} ร้าน")
 
             if not high_conf:
                 print(f"       → ไม่พบร้านที่ชัดเจน\n")
