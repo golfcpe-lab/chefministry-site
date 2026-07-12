@@ -169,6 +169,9 @@ def process_restaurant(row: dict, api_key: str) -> dict:
     review_count = int(place.get("userRatingCount") or 0)
     address      = place.get("formattedAddress", "")
     gmaps_name   = (place.get("displayName") or {}).get("text", "")
+    _loc         = place.get("location") or {}
+    lat          = _loc.get("latitude")
+    lng          = _loc.get("longitude")
 
     time.sleep(DELAY)
 
@@ -182,6 +185,9 @@ def process_restaurant(row: dict, api_key: str) -> dict:
             review_count    = int(details.get("userRatingCount") or review_count)
             address         = details.get("formattedAddress", address)
             business_status = details.get("businessStatus", business_status)
+            _dloc           = details.get("location") or {}
+            lat             = _dloc.get("latitude")  or lat
+            lng             = _dloc.get("longitude") or lng
 
     # ── Collect gmaps types for classification ───────────────────────────────
     gmaps_types = []
@@ -202,6 +208,8 @@ def process_restaurant(row: dict, api_key: str) -> dict:
         "gmaps_address":        address,
         "gmaps_business_status": business_status,
         "gmaps_types":          gmaps_types,  # v2: for venue classification
+        "gmaps_lat":            lat,          # v3: พิกัดร้าน (near-me feature)
+        "gmaps_lng":            lng,
     }
 
 
@@ -258,6 +266,8 @@ def save_gmaps_meta(restaurant_id: str, result: dict):
                 is_bangkok_focus    = COALESCE(?, is_bangkok_focus),
                 is_restaurant_focus = COALESCE(?, is_restaurant_focus),
                 exclude_reason      = ?,
+                lat                 = COALESCE(?, lat),
+                lng                 = COALESCE(?, lng),
                 last_updated        = datetime('now')
             WHERE id = ?
         """, (
@@ -272,6 +282,8 @@ def save_gmaps_meta(restaurant_id: str, result: dict):
             1 if classified.get("is_bangkok_focus") else None,
             1 if classified.get("is_restaurant_focus") else None,
             classified.get("exclude_reason"),
+            result.get("gmaps_lat"),
+            result.get("gmaps_lng"),
             restaurant_id,
         ))
 
