@@ -144,7 +144,11 @@
   }
 
   /* ─── Core counts ────────────────────────────────────────────────────────── */
-  function getDbTotalCount()  { return _config().restaurantCount || 270; }
+  function getDbTotalCount()  {
+    // CM_DB_STATS ถูก inject สดทุกคืนจาก pipeline — ใช้ก่อน CM_CONFIG ที่เป็นค่าตาย
+    if (typeof CM_DB_STATS !== 'undefined' && CM_DB_STATS.total) return CM_DB_STATS.total;
+    return _config().restaurantCount || 270;
+  }
   function getLastUpdated()   {
     var db = (typeof CM_DB_STATS !== 'undefined' && CM_DB_STATS.lastUpdated) || '';
     var cf = _config().lastUpdated || '';
