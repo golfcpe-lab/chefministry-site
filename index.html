@@ -538,16 +538,16 @@
           <div style="background:#fff;border-radius:12px;padding:12px 14px;color:var(--text);display:flex;gap:12px;align-items:center">
             <div style="font-size:24px;width:40px;height:40px;display:grid;place-items:center;background:var(--cream);border-radius:8px;flex-shrink:0">🍣</div>
             <div style="flex:1;min-width:0">
-              <div style="font-size:13px;font-weight:900">Sushi Zo Bangkok</div>
-              <div style="font-size:11px;color:var(--text-2)">Japanese · Sathorn <span style="background:#f0f2f5;color:#56637a;font-size:9.5px;font-weight:700;padding:1px 6px;border-radius:3px;margin-left:4px">Omakase</span></div>
+              <div style="font-size:13px;font-weight:900" id="dashMock1Name">Sushi Zo Bangkok</div>
+              <div style="font-size:11px;color:var(--text-2)" id="dashMock1Meta">Japanese · Sathorn</div>
             </div>
             <div style="background:var(--green-bg);color:var(--green);font-size:10px;font-weight:900;padding:3px 8px;border-radius:99px;white-space:nowrap">↑ Rising Fast</div>
           </div>
           <div style="background:#fff;border-radius:12px;padding:12px 14px;color:var(--text);display:flex;gap:12px;align-items:center">
             <div style="font-size:24px;width:40px;height:40px;display:grid;place-items:center;background:var(--cream);border-radius:8px;flex-shrink:0">🍜</div>
             <div style="flex:1;min-width:0">
-              <div style="font-size:13px;font-weight:900">Sendo Ramen</div>
-              <div style="font-size:11px;color:var(--text-2)">Modern Japanese Ramen · Silom</div>
+              <div style="font-size:13px;font-weight:900" id="dashMock2Name">Sendo Ramen</div>
+              <div style="font-size:11px;color:var(--text-2)" id="dashMock2Meta">Modern Japanese Ramen · Silom</div>
             </div>
             <div style="background:var(--red-bg);color:var(--red);font-size:10px;font-weight:900;padding:3px 8px;border-radius:99px;white-space:nowrap">🔥 Trending</div>
           </div>
@@ -681,7 +681,7 @@
 <script src="./js/auth.js?v=20260501a"></script>
 <script src="./js/safeDataAdapter.js?v=20260501a"></script>
 <script src="./js/data.js?v=20260712b"></script>
-<script src="./js/dataService.js?v=20260712d"></script>
+<script src="./js/dataService.js?v=20260712e"></script>
 <script src="./js/quickpick.js?v=20260712a"></script>
 <script src="./js/creatorbuzz.js?v=20260709a"></script>
 <script src="./js/microfx.js?v=20260708b"></script>
@@ -694,6 +694,18 @@
   });
 
   // ── Stats: all values live from ChefMinistryData (derived from actual arrays) ──
+  // Creator dashboard mockup — ใช้ร้านจริงจาก trending แทนชื่อ hardcode
+  (function () {
+    try {
+      var t = ChefMinistryData.getTrendingRestaurants(2);
+      [["dashMock1Name","dashMock1Meta"],["dashMock2Name","dashMock2Meta"]].forEach(function (ids, i) {
+        if (!t[i]) return;
+        var nEl = document.getElementById(ids[0]), mEl = document.getElementById(ids[1]);
+        if (nEl) nEl.textContent = t[i].name || "";
+        if (mEl) mEl.textContent = [t[i].cuisine, t[i].area].filter(Boolean).join(" · ");
+      });
+    } catch (e) {}
+  })();
   ChefMinistryData.injectStats();
 
   // Weekly highlight — matched to real restaurant via CM_SIGNALS + actual data
