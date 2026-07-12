@@ -199,4 +199,25 @@ jobs:
           git config user.name  "ChefMinistry Bot"
           git config user.email "bot@chefministry.com"
           git add js/data.js scripts/scraper/export_restaurants.json scripts/scraper/fb_digest.json || true
-          git diff --staged --quiet || git commit -m "auto: weekly signal update $(da
+          git diff --staged --quiet || git commit -m "auto: weekly signal update $(date +'%Y-%m-%d') [schema-v2+fb-digest]"
+
+      - name: Push to GitHub
+        run: git push origin main
+
+      # ── Surface silent failures ──────────────────────────────────────────────
+      # continue-on-error ทำให้ step พังแล้ว workflow ยังเขียว — เคยซ่อนปัญหา
+      # DB พัง 3 เดือน + weeklyHighlight ค้างตั้งแต่เมษา step นี้รันหลัง push
+      # (data ที่ดีถูก commit ไปแล้ว) แล้วทำให้ workflow แดงถ้ามี step สำคัญพัง
+      - name: Fail workflow if critical steps failed silently
+        if: always()
+        run: |
+          failed=""
+          [ "${{ steps.export_signals.outcome }}" = "failure" ]  && failed="$failed export_signals"
+          [ "${{ steps.inject_youtube.outcome }}" = "failure" ]  && failed="$failed inject_youtube"
+          [ "${{ steps.inject_fb.outcome }}" = "failure" ]       && failed="$failed inject_fb"
+          [ "${{ steps.weekly_summary.outcome }}" = "failure" ]  && failed="$failed weekly_summary"
+          if [ -n "$failed" ]; then
+            echo "::error::Critical steps failed silently:$failed — ดู log ของ step ด้านบน"
+            exit 1
+          fi
+          echo "✅ All critical steps succeeded"
