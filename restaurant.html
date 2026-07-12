@@ -4,6 +4,12 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <link rel="icon" type="image/png" href="./assets/logo_circular.png"/>
+  <link rel="manifest" href="/manifest.json"/>
+  <meta name="theme-color" content="#0f1f3c"/>
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+  <meta name="apple-mobile-web-app-title" content="ChefMinistry"/>
   <title id="pageTitle">ข้อมูลเทรนด์ร้านอาหาร | ChefMinistry</title>
   <meta name="description" content="ดูสัญญาณเทรนด์ของร้าน — Rating Velocity, กระแสรีวิว 30 วัน และ creator ที่พูดถึง"/>
   <link rel="canonical" href="https://chefministry.com/restaurant.html"/>
@@ -465,5 +471,6 @@
     document.getElementById("otherRestaurants").innerHTML=others.map(o=>buildRestaurantCard(o)).join("");
   }
 </script>
+<script src="./js/pwa.js?v=20260712a"></script>
 </body>
 </html>
