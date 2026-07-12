@@ -301,6 +301,8 @@
     if (!o.trendBadge) o.trendBadge = (o.velocityPct || 0) > 5 ? '↑ Rising'
       : (rating ? '⭐ ' + rating.toFixed(1) + ' Google' : '— Stable');
     const _rawReason = (o.trend_reason && !/^\d[\d,]* reviews/.test(o.trend_reason)) ? o.trend_reason : '';
+    // cmNote ดิบจาก export เช่น "24421 reviews · Google Maps" → แทนด้วยข้อความอ่านรู้เรื่อง
+    if (o.cmNote && /^\d[\d,]* reviews/.test(o.cmNote)) o.cmNote = '';
     if (!o.cmNote) o.cmNote = _rawReason ||
       ('ร้านจริงจากฐานข้อมูล — rating ' + (rating ? '⭐ ' + rating.toFixed(1) : '-') +
        ' จาก ' + o.totalReviews.toLocaleString() + ' รีวิวบน Google Maps' +
