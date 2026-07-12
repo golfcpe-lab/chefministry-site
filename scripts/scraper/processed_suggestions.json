@@ -28,5 +28,29 @@
   "reason": "rating 4.1 · 178 reviews (เกือบผ่าน)",
   "by": "golf.cpe@gmail.com",
   "date": "2026-07-09"
+ },
+ "4WnDfUVDPO4vLbGH4BVv": {
+  "status": "pass",
+  "name": "DDC PIZZA ( Délices de Capoue )",
+  "reason": "rating 4.7 · 486 reviews",
+  "by": "golf.cpe@gmail.com",
+  "date": "2026-07-12",
+  "restaurant_id": "community_4721d2a3aa"
+ },
+ "Z4iRR2U1IabVkyTmMXC6": {
+  "status": "pass",
+  "name": "Baan Lamyai - บ้านลำไย",
+  "reason": "rating 4.7 · 56 reviews",
+  "by": "golf.cpe@gmail.com",
+  "date": "2026-07-12",
+  "restaurant_id": "community_2a336c6902"
+ },
+ "pgsye8q6Ks6oUZD6S5sj": {
+  "status": "pass",
+  "name": "The Kitchen by Monika",
+  "reason": "rating 4.8 · 57 reviews",
+  "by": "golf.cpe@gmail.com",
+  "date": "2026-07-12",
+  "restaurant_id": "community_c2898c777a"
  }
 }
