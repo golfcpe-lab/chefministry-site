@@ -4,8 +4,22 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <link rel="icon" type="image/png" href="./assets/logo_circular.png"/>
-  <title id="pageTitle">Restaurant — ChefMinistry</title>
-  <meta name="description" content="Signal Intelligence รายละเอียดร้านอาหาร — Overlap Signal, Trend Velocity และ Influencer ที่รีวิว"/>
+  <title id="pageTitle">ข้อมูลเทรนด์ร้านอาหาร | ChefMinistry</title>
+  <meta name="description" content="ดูสัญญาณเทรนด์ของร้าน — Rating Velocity, กระแสรีวิว 30 วัน และ creator ที่พูดถึง"/>
+  <link rel="canonical" href="https://chefministry.com/restaurant.html"/>
+  <meta property="og:site_name" content="ChefMinistry"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="ข้อมูลเทรนด์ร้านอาหาร | ChefMinistry"/>
+  <meta property="og:description" content="ดูสัญญาณเทรนด์ของร้าน — Rating Velocity, กระแสรีวิว 30 วัน และ creator ที่พูดถึง"/>
+  <meta property="og:url" content="https://chefministry.com/restaurant.html"/>
+  <meta property="og:image" content="https://chefministry.com/assets/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:locale" content="th_TH"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="ข้อมูลเทรนด์ร้านอาหาร | ChefMinistry"/>
+  <meta name="twitter:description" content="ดูสัญญาณเทรนด์ของร้าน — Rating Velocity, กระแสรีวิว 30 วัน และ creator ที่พูดถึง"/>
+  <meta name="twitter:image" content="https://chefministry.com/assets/og-image.png"/>
   <meta name="robots" content="noindex"/>
   <link rel="stylesheet" href="./css/style.css"/>
   <!-- Google tag (gtag.js) -->
@@ -284,6 +298,23 @@
       <span class="signal-tag signal-${r.signalStrength}" style="font-size:13px;padding:7px 14px">${signalLabel(r.signalStrength)}</span>
       <span class="velocity ${r.trendVelocity}" style="font-size:13px;padding:7px 14px">${escHtml(r.trendBadge)}</span>
       <span style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:99px;padding:7px 14px;font-size:13px;font-weight:700;color:#fff">${r.totalReviews} total reviews</span>`;
+
+    // Share bar (LINE-first สำหรับตลาดไทย)
+    (function(){
+      const shareUrl  = location.origin + location.pathname + '?id=' + encodeURIComponent(r.id || '');
+      const shareText = 'ร้านนี้กำลังมา: ' + r.name + ' — ดูเทรนด์จาก ChefMinistry';
+      const el = document.createElement('div');
+      el.style.cssText = 'display:flex;gap:8px;margin-top:14px;align-items:center;flex-wrap:wrap';
+      el.innerHTML =
+        '<span style="font-size:12px;color:rgba(255,255,255,.6);font-weight:700">แชร์:</span>' +
+        '<a href="https://social-plugins.line.me/lineit/share?url=' + encodeURIComponent(shareUrl) + '&text=' + encodeURIComponent(shareText) + '" target="_blank" rel="noopener" style="text-decoration:none;font-size:12px;font-weight:800;padding:6px 14px;border-radius:99px;background:#06C755;color:#fff">LINE</a>' +
+        '<a href="https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl) + '" target="_blank" rel="noopener" style="text-decoration:none;font-size:12px;font-weight:800;padding:6px 14px;border-radius:99px;background:#1877F2;color:#fff">Facebook</a>' +
+        '<button style="cursor:pointer;font-family:inherit;font-size:12px;font-weight:800;padding:6px 14px;border-radius:99px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff">คัดลอกลิงก์</button>';
+      el.querySelector('button').addEventListener('click', function(){
+        navigator.clipboard.writeText(shareUrl).then(() => { this.textContent = 'คัดลอกแล้ว ✓'; }.bind(this));
+      });
+      document.getElementById('heroBadges').parentNode.appendChild(el);
+    })();
 
     // CM Note box
     document.getElementById("cmNoteBox").innerHTML=`
