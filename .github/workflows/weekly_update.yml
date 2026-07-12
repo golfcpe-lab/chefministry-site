@@ -83,6 +83,7 @@ jobs:
       # export_signals.py calls classify_record() on every record so output
       # includes all schema v2 classification fields.
       - name: Export DB signals into data.js
+        id: export_signals
         env:
           EXPORT_DIR: ${{ github.workspace }}/js
         run: |
@@ -102,6 +103,7 @@ jobs:
         continue-on-error: true
 
       - name: Inject YouTube signals into data.js
+        id: inject_youtube
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           DATA_FILE:      ${{ github.workspace }}/js/data.js
@@ -143,6 +145,7 @@ jobs:
       # อ่าน fb_digest.json (บันทึกโดย Cowork scheduled task ทุกวันจันทร์)
       # แล้ว inject CM_FB_DIGEST + อัปเดต weeklyHighlight ใน data.js
       - name: Inject FB weekly digest into data.js
+        id: inject_fb
         env:
           DATA_FILE: ${{ github.workspace }}/js/data.js
         run: |
@@ -161,6 +164,7 @@ jobs:
         continue-on-error: true
 
       - name: Run weekly_summary.py
+        id: weekly_summary
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           DATA_FILE:      ${{ github.workspace }}/js/data.js
@@ -195,7 +199,4 @@ jobs:
           git config user.name  "ChefMinistry Bot"
           git config user.email "bot@chefministry.com"
           git add js/data.js scripts/scraper/export_restaurants.json scripts/scraper/fb_digest.json || true
-          git diff --staged --quiet || git commit -m "auto: weekly signal update $(date +'%Y-%m-%d') [schema-v2+fb-digest]"
-
-      - name: Push to GitHub
-        run: git push origin main
+          git diff --staged --quiet || git commit -m "auto: weekly signal update $(da
