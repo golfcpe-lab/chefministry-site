@@ -270,10 +270,11 @@ jobs:
           conn.row_factory = sqlite3.Row
           with conn:
               rows = conn.execute('''
-                  SELECT id, name, area, cuisine,
+                  SELECT id, name, area, cuisine, city,
                          COALESCE(gmaps_types, '[]') AS gmaps_types_json
                   FROM restaurants
                   WHERE scope_market IS NULL OR scope_market = ''
+                     OR scope_market = 'needs_review'
               ''').fetchall()
               updated = 0
               for row in rows:
@@ -284,6 +285,7 @@ jobs:
                   rec = classify_record({
                       'name': row['name'], 'area': row['area'] or '',
                       'cuisine': row['cuisine'] or '', 'gmaps_types': gmaps_types,
+                      'city': row['city'] or '',
                   })
                   conn.execute('''UPDATE restaurants SET
                       city=?, province=?, venue_type=?, scope_market=?,
