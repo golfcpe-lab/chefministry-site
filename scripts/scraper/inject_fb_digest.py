@@ -148,8 +148,14 @@ def update_weekly_highlight(js_text: str, top: dict, digest: dict) -> str:
     emoji = emoji_for(top.get("cuisine", ""))
     area  = area_norm(top.get("area", ""))
     new_title = f"{emoji} {name} — ร้านเปิดใหม่ที่น่าจับตา"[:60]
-    new_desc  = f"{desc_raw} ({week})"
-    if trend_note:
+    # ตัด desc_raw ก่อนประกอบ เพื่อไม่ให้ suffix "(week)" ถูกตัดกลางคำ
+    # (เคยเกิด: desc[:200] ตัดเหลือ "(Week of A" ค้างบนหน้าเว็บ)
+    suffix = f" ({week})" if week else ""
+    max_raw = 200 - len(suffix)
+    if len(desc_raw) > max_raw:
+        desc_raw = desc_raw[:max_raw - 1].rsplit(" ", 1)[0] + "…"
+    new_desc = f"{desc_raw}{suffix}"
+    if trend_note and len(new_desc) + len(trend_note) + 3 <= 200:
         new_desc += f" | {trend_note}"
 
     # Replace title
