@@ -60,6 +60,23 @@
 
   function budgetStr(b) { var n = parseInt(b, 10); return n > 0 ? '฿'.repeat(Math.min(n, 4)) : ''; }
 
+
+  // ── Share (LINE เป็นหลักสำหรับตลาดไทย) ─────────────────────────────────────
+  function shareRow(r) {
+    var shareUrl  = r.id ? ('https://chefministry.com/restaurant.html?id=' + encodeURIComponent(r.id))
+                         : 'https://chefministry.com/';
+    var shareText = 'ลองร้านนี้: ' + (r.name || '') + (r.area ? ' (' + r.area + ')' : '') + ' — เจอจาก ChefMinistry';
+    var lineHref = 'https://social-plugins.line.me/lineit/share?url=' + encodeURIComponent(shareUrl) + '&text=' + encodeURIComponent(shareText);
+    var fbHref   = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl);
+    return (
+      '<div style="display:flex;gap:8px;margin-top:14px;align-items:center;flex-wrap:wrap">' +
+        '<span style="font-size:11px;color:var(--text-2);font-weight:700">แชร์ร้านนี้:</span>' +
+        '<a href="' + lineHref + '" target="_blank" rel="noopener" style="text-decoration:none;font-size:11.5px;font-weight:800;padding:5px 13px;border-radius:99px;background:#06C755;color:#fff">LINE</a>' +
+        '<a href="' + fbHref + '" target="_blank" rel="noopener" style="text-decoration:none;font-size:11.5px;font-weight:800;padding:5px 13px;border-radius:99px;background:#1877F2;color:#fff">Facebook</a>' +
+        '<button onclick="navigator.clipboard.writeText(this.getAttribute(\'data-url\')).then(()=>{this.textContent=\'คัดลอกแล้ว ✓\'})" data-url="' + esc(shareUrl) + '" style="cursor:pointer;font-family:inherit;font-size:11.5px;font-weight:800;padding:5px 13px;border-radius:99px;border:1.5px solid var(--border);background:#fff;color:var(--text-2)">คัดลอกลิงก์</button>' +
+      '</div>');
+  }
+
   function pickCard() {
     var list = pool();
     if (!list.length) {
@@ -96,6 +113,7 @@
           (s.totalReviews ? '<span>💬 ' + s.totalReviews.toLocaleString() + ' รีวิว</span>' : '') +
           (r.overlapSignal ? '<span>🎥 ' + r.overlapSignal + ' creators พูดถึง</span>' : '') +
         '</div>' +
+        shareRow(r) +
       '</div>');
   }
 
