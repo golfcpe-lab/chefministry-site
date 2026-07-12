@@ -718,7 +718,16 @@
       : _extAll.filter(r => r._isEmerging && ChefMinistryData.scopeFilter(r))
           .sort((a,b) => (b.totalReviews||0) - (a.totalReviews||0));
 
-    const heroExt = extSorted[0];
+    // เมื่อไม่มี velocity data (เช่นช่วง snapshot ยังสะสมไม่พอ) การเรียงตาม
+    // totalReviews จะ deterministic — ร้านเดิมขึ้น hero ทุกวัน
+    // จึงหมุนเวียนรายวันจาก top 10 ด้วย day-of-year แทน
+    let heroExt = extSorted[0];
+    if (_extVel.length === 0 && extSorted.length > 1) {
+      const pool = extSorted.slice(0, Math.min(10, extSorted.length));
+      const now = new Date();
+      const dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
+      heroExt = pool[dayOfYear % pool.length];
+    }
 
     // 3. Final fallback: weekly spotlight
     const _spotlight = ChefMinistryData.getWeeklySpotlight();
