@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-07-12",
   "days_window": 7,
-  "total": 19,
+  "total": 18,
   "reviews": [
     {
       "influencer": "Peach Eat Laek",
@@ -10,7 +10,7 @@
       "restaurant": "หรอยแรง บางกอก",
       "cuisine": "Thai",
       "area": "ลาดพร้าว",
-      "rating": "exceed",
+      "rating": "above_average",
       "confidence": "high",
       "video_title": "อาหารใต้สูตร 100 ปี ของดีเกาะยอ",
       "video_url": "https://youtube.com/watch?v=-N3cXdGRwjM",
@@ -35,24 +35,11 @@
       "tier": "Mega",
       "restaurant": "โอว ก๋วยเตี๋ยวพริกสด",
       "cuisine": "Thai",
-      "area": "Nuan Chan, Bueng Kum",
+      "area": "นวลจันทร์, บึงกุ่ม",
       "rating": "above_average",
       "confidence": "high",
       "video_title": "ก๋วยเตี๋ยวต้มยำตำนาน 30 ปี",
       "video_url": "https://youtube.com/watch?v=AWycZLESVIU",
-      "published": "2026-07-07"
-    },
-    {
-      "influencer": "Peach Eat Laek",
-      "handle": "@PeachEatLaek",
-      "tier": "Mega",
-      "restaurant": "โอวก๋วยเตี๋ยวพริกสด",
-      "cuisine": "Thai",
-      "area": "Bangkok",
-      "rating": "above_average",
-      "confidence": "high",
-      "video_title": "โอวก๋วยเตี๋ยวพริกสด แค่ชื่อก็บอกแล้ว แซ่บสะใจ #ก๋วยเตี๋ยว #โอวก๋วยเตี๋ยวพริกสด #พีช #พีชอีทแหลก",
-      "video_url": "https://youtube.com/watch?v=ZRl0J3XUhSA",
       "published": "2026-07-07"
     },
     {
@@ -167,7 +154,7 @@
       "cuisine": "Thai",
       "area": "Bangkok",
       "rating": "above_average",
-      "confidence": "medium",
+      "confidence": "high",
       "video_title": "โก๊ะตี๋ข้าวมันไก่ ปี 2026.. ยังเปิดอยู่มั้ยหน้อออ??",
       "video_url": "https://youtube.com/watch?v=F6-U7H2pwMo",
       "published": "2026-07-11"
@@ -203,7 +190,7 @@
       "handle": "@KiaZaab",
       "tier": "Mid",
       "restaurant": "โจ๊กหมูนายทอง",
-      "cuisine": "Street Food",
+      "cuisine": "Thai",
       "area": "วัชรพล",
       "rating": "above_average",
       "confidence": "high",
@@ -216,7 +203,7 @@
       "handle": "@KiaZaab",
       "tier": "Mid",
       "restaurant": "เลนส์ ข้าวต้มโต้รุ่ง วัชรพล",
-      "cuisine": "Street Food",
+      "cuisine": "Thai",
       "area": "วัชรพล",
       "rating": "above_average",
       "confidence": "high",
