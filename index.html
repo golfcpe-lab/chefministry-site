@@ -681,7 +681,7 @@
 <script src="./js/auth.js?v=20260501a"></script>
 <script src="./js/safeDataAdapter.js?v=20260501a"></script>
 <script src="./js/data.js?v=20260712b"></script>
-<script src="./js/dataService.js?v=20260712f"></script>
+<script src="./js/dataService.js?v=20260712g"></script>
 <script src="./js/quickpick.js?v=20260712a"></script>
 <script src="./js/creatorbuzz.js?v=20260709a"></script>
 <script src="./js/microfx.js?v=20260708b"></script>
@@ -700,8 +700,11 @@
       var cats = (typeof CM_SIGNALS !== "undefined" && CM_SIGNALS.trendCategories) || [];
       var pick = null, top3 = [];
       for (var i = 0; i < cats.length; i++) {
-        var rows = ChefMinistryData.getCategoryTopN(cats[i].cat, 3);
-        if (rows.length >= 3) { pick = cats[i]; top3 = rows; break; }
+        var rows = ChefMinistryData.getCategoryTopN(cats[i].cat, 8);
+        // ร้านจริงจาก scraper ก่อน — curated demo เป็นตัวเติม
+        var real = rows.filter(function (r) { return r._fromDB; });
+        var merged = real.concat(rows.filter(function (r) { return !r._fromDB; })).slice(0, 3);
+        if (merged.length >= 3) { pick = cats[i]; top3 = merged; break; }
       }
       if (!pick) return; // คง fallback static
       document.getElementById("hotCatTitle").textContent =
