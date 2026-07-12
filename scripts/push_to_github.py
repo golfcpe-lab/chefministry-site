@@ -19,6 +19,9 @@ SITE_FILES = [
     ("faq.html",                  "faq.html"),
     ("legal.html",                "legal.html"),
     ("vercel.json",               "vercel.json"),
+    ("sitemap.xml",               "sitemap.xml"),
+    ("robots.txt",                "robots.txt"),
+    ("assets/og-image.png",       "assets/og-image.png"),
     ("css/style.css",              "css/style.css"),
     ("js/safeDataAdapter.js",       "js/safeDataAdapter.js"),
     # ⛔ js/data.js ห้าม push! — เป็นไฟล์ generated โดย pipeline บน GitHub ทุกคืน
@@ -128,4 +131,58 @@ print(f"{'='*55}\n")
 
 def push_file(local_file, gh_path):
     if not local_file.exists():
-        print(f"⚠️   ไม่พบ�
+        print(f"⚠️   ไม่พบไฟล์ {local_file.name} — ข้ามไป")
+        return
+    if not sqlite_safe_to_push(local_file):
+        print(f"⛔  ข้าม {gh_path} เพื่อความปลอดภัย\n")
+        return
+    file_bytes = local_file.read_bytes()
+    encoded    = base64.b64encode(file_bytes).decode()
+    print(f"📄  {gh_path}  ({len(file_bytes):,} bytes)")
+    url = f"https://api.github.com/repos/{REPO}/contents/{gh_path}"
+    try:
+        sha = gh_request(url)["sha"]
+        print(f"    SHA ปัจจุบัน: {sha[:7]}…")
+    except Exception as e:
+        if "HTTP 404" in str(e):
+            print(f"    ไม่พบไฟล์ใน repo (จะสร้างใหม่)")
+        else:
+            print(f"    ⚠️  ดึง SHA ไม่ได้: {e}")
+        sha = None
+    body = {"message": message, "content": encoded}
+    if sha:
+        body["sha"] = sha
+    try:
+        result  = gh_request(url, method="PUT", body=body)
+        new_sha = result["commit"]["sha"]
+        print(f"    ✅  Push สำเร็จ — commit {new_sha[:7]}\n")
+    except Exception as e:
+        print(f"    ❌  Push ไม่สำเร็จ: {e}\n")
+
+def delete_file(gh_path):
+    """ลบไฟล์ออกจาก GitHub repo (ถ้ามีอยู่)"""
+    url = f"https://api.github.com/repos/{REPO}/contents/{gh_path}"
+    try:
+        info = gh_request(url)
+        sha  = info["sha"]
+        print(f"🗑️   ลบ {gh_path}  (SHA: {sha[:7]}…)")
+        gh_request(url, method="DELETE", body={"message": f"remove: ลบ scraper เก่า ({today})", "sha": sha})
+        print(f"    ✅  ลบสำเร็จ\n")
+    except Exception as e:
+        if "HTTP 404" in str(e):
+            print(f"⏭️   ข้าม {gh_path} (ไม่มีใน repo)\n")
+        else:
+            print(f"    ❌  ลบไม่สำเร็จ: {e}\n")
+
+print("── Site files ──────────────────────────────────────")
+for local_rel, gh_path in SITE_FILES:
+    push_file(HERE / "site" / local_rel, gh_path)
+
+print("── Scripts ─────────────────────────────────────────")
+for local_rel, gh_path in ROOT_FILES:
+    push_file(HERE / local_rel, gh_path)
+
+
+print(f"{'='*55}")
+print(f"  เสร็จสิ้น — รอ 1-2 นาทีแล้วเปิด chefministry.com")
+print(f"{'='*55}\n")
