@@ -146,7 +146,7 @@ def build_canonical(db_path=None, out_path=None, days=30):
         "   r.is_restaurant_focus, r.exclude_reason, r.price_range,"
         "   r.first_seen, r.last_updated, r.business_status, r.candidate_status,"
         "   r.creator_mentions_7d, r.creator_mentions_30d, r.creator_signal_score,"
-        "   r.appeared_last_3_cycles,"
+        "   r.appeared_last_3_cycles, r.lat, r.lng,"
         "   fl.first_count, fl.last_count, fl.latest_rating, fl.snap_count,"
         "   MAX(0, COALESCE(fl.last_count,0)-COALESCE(fl.first_count,0)) AS new_reviews"
         " FROM restaurants r LEFT JOIN fl ON fl.restaurant_id=r.id"
@@ -166,7 +166,7 @@ def build_canonical(db_path=None, out_path=None, days=30):
             "  r.is_restaurant_focus, r.exclude_reason, r.price_range,"
             "  r.first_seen, r.last_updated, r.business_status, r.candidate_status,"
             "  r.creator_mentions_7d, r.creator_mentions_30d, r.creator_signal_score,"
-            "  r.appeared_last_3_cycles,"
+            "  r.appeared_last_3_cycles, r.lat, r.lng,"
             "  NULL AS first_count, NULL AS last_count, NULL AS latest_rating,"
             "  0 AS snap_count, 0 AS new_reviews"
             " FROM restaurants r WHERE r.id NOT IN (" + placeholders + ")"
@@ -265,6 +265,7 @@ def build_canonical(db_path=None, out_path=None, days=30):
             "source": norm_source(src), "source_raw": src,
             "address": d.get("gmaps_address") or d.get("address") or "",
             "url": d.get("url") or "", "place_id": d.get("gmaps_place_id") or "",
+            "lat": d.get("lat"), "lng": d.get("lng"),
             "cuisine_raw": cuisine_raw, "cuisine_normalized": cuisine_norm, "cuisine": cuisine_norm,
             "area_raw": area_raw, "area_normalized": area_norm, "area": area_norm,
             "city": d.get("city") or "Bangkok", "province": d.get("province") or "Bangkok",
@@ -320,5 +321,4 @@ if __name__ == "__main__":
     parser.add_argument("--db",     default=DB)
     parser.add_argument("--output", default=OUT)
     parser.add_argument("--days",   type=int, default=30)
-    args = parser.parse_args()
-    build_canonical(args.db, args.output, args.days)
+  
