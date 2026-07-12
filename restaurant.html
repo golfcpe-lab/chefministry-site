@@ -262,7 +262,7 @@
 <script src="./js/auth.js?v=20260414b"></script>
 <script src="./js/safeDataAdapter.js?v=20260501a"></script>
 <script src="./js/data.js?v=20260712b"></script>
-<script src="./js/dataService.js?v=20260712e"></script>
+<script src="./js/dataService.js?v=20260712f"></script>
 <script>
   document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
     const n=document.getElementById("mobileNav");
@@ -271,7 +271,44 @@
 
   const params=new URLSearchParams(window.location.search);
   const id=params.get("id");
-  const r=id ? getById(id) : CM_RESTAURANTS[0];
+
+  // ร้านจาก scraper ไม่มี field ครบแบบ curated — เติม default ให้ render ได้สมบูรณ์
+  function normalizeDetail(x){
+    const o = Object.assign({}, x);
+    o.name    = o.name || o.name_en || '';
+    o.cuisine = o.cuisine_normalized || o.cuisine || '';
+    o.area    = o.area_normalized    || o.area    || '';
+    const rating = o.rating_gmaps || o.rating_score || 0;
+    o.totalReviews = o.totalReviews || 0;
+    const men30 = o.creator_mentions_30d || 0;
+    o.emoji = o.emoji || ({'Cafe':'☕','Noodles':'🍜','Japanese':'🍣','Korean':'🥢','Chinese':'🥟',
+      'BBQ':'🔥','Hot Pot / Suki':'🍲','Hotpot':'🍲','Yakiniku':'🥩','Thai':'🌶️','Isaan Thai':'🌶️',
+      'Seafood':'🦞','Italian':'🍕','Street Food':'🥡','Bakery':'🥐','Omakase':'🍱'})[o.cuisine] || '🍽️';
+    o.budget = parseInt(o.budget || o.price_range_normalized || o.price_range, 10) || 2;
+    o.budgetLabel = o.budgetLabel || '฿'.repeat(Math.min(o.budget, 4));
+    o.priceRange = o.priceRange || ({1:'50–150', 2:'150–400', 3:'400–1,000', 4:'1,000+'})[o.budget] || '150–400';
+    o.occasions = (o.occasions && o.occasions.length) ? o.occasions : ['casual'];
+    o.tags = (o.tags && o.tags.length) ? o.tags : [o.cuisine, o.area].filter(Boolean);
+    o.menuHighlights = o.menuHighlights || [];
+    o.reviewerTiers = o.reviewerTiers || {mega:0, macro:0, mid:0};
+    o.recentReviewers = o.recentReviewers || [];
+    o.overlapSignal = o.overlapSignal || men30 || 0;
+    o.signalCount = o.signalCount || men30 || 0;
+    if (!o.signalStrength) o.signalStrength =
+      men30 >= 3 ? 'strong' : men30 >= 1 ? 'moderate' :
+      (rating >= 4.5 && o.totalReviews >= 1000 ? 'moderate' : 'emerging');
+    if (!o.trendVelocity) o.trendVelocity = (o.velocityPct || 0) > 5 ? 'rising' : 'stable';
+    if (!o.trendBadge) o.trendBadge = (o.velocityPct || 0) > 5 ? '↑ Rising'
+      : (rating ? '⭐ ' + rating.toFixed(1) + ' Google' : '— Stable');
+    if (!o.cmNote) o.cmNote = o.trend_reason ||
+      ('ร้านจริงจากฐานข้อมูล — rating ' + (rating ? '⭐ ' + rating.toFixed(1) : '-') +
+       ' จาก ' + o.totalReviews.toLocaleString() + ' รีวิวบน Google Maps' +
+       (men30 ? ' และถูก creator พูดถึง ' + men30 + ' ครั้งใน 30 วัน' : ''));
+    return o;
+  }
+
+  const _raw = id ? (ChefMinistryData.getRestaurantById(id) || getById(id)) : CM_RESTAURANTS[0];
+  const r = _raw ? normalizeDetail(_raw) : null;
 
   if(!r){
     document.getElementById("heroName").textContent="ไม่พบร้านนี้";
@@ -408,11 +445,16 @@
     ).join("");
 
     // Menu highlights
-    document.getElementById("menuList").innerHTML=r.menuHighlights.map(m=>`
+    document.getElementById("menuList").innerHTML=r.menuHighlights.length ? r.menuHighlights.map(m=>`
       <div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)">
         <span style="font-size:18px">🍴</span>
         <span style="font-weight:700;font-size:14px">${escHtml(m)}</span>
-      </div>`).join("");
+      </div>`).join("") : `
+      <div style="padding:10px 0;font-size:13px;color:var(--text-2)">
+        ดูเมนูและรูปจริงได้ที่
+        <a href="${escHtml(r.url || 'https://www.google.com/maps/search/' + encodeURIComponent(r.name))}"
+           target="_blank" rel="noopener" style="color:var(--gold);font-weight:800">Google Maps ↗</a>
+      </div>`;
 
     // Other restaurants (top 4 by overlap, excluding this)
     const others=topByOverlap(8).filter(x=>x.id!==r.id).slice(0,4);
