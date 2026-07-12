@@ -211,6 +211,19 @@
     curated.sort(function (a, b) { return (b.signalCount || 0) - (a.signalCount || 0); });
     scraped.sort(function (a, b) { return (b.velocityPct || 0) - (a.velocityPct || 0); });
     // ร้านจริงจาก scraper ขึ้นก่อน — curated (ชุด demo) เป็นตัวเติมเมื่อข้อมูลจริงไม่พอ
+    // ถ้ายังไม่มีร้านที่มี growth signal (ช่วง snapshot สะสมไม่พอ)
+    // ใช้ "ร้านจริงยอดนิยม" (rating × log(reviews)) แทนการตกไป curated
+    if (scraped.length < desired) {
+      var popular = all.filter(function (r) {
+        return r._fromDB && (r.rating_gmaps || 0) >= 4.4 && (r.totalReviews || 0) >= 300;
+      }).sort(function (a, b) {
+        var sa = (a.rating_gmaps || 0) * Math.log((a.totalReviews || 0) + 1);
+        var sb = (b.rating_gmaps || 0) * Math.log((b.totalReviews || 0) + 1);
+        return sb - sa;
+      });
+      var seenT = {}; scraped.forEach(function (r) { seenT[r.name] = 1; });
+      popular.forEach(function (r) { if (!seenT[r.name]) { scraped.push(r); seenT[r.name] = 1; } });
+    }
     var combined = scraped.length >= desired ? scraped : scraped.concat(curated);
     return _rotate(combined, desired, 2);
   }
