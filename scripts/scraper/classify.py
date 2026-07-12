@@ -30,6 +30,23 @@ import re
 
 # -- Bangkok neighbourhoods / areas -------------------------------------------
 # Any record whose `area` matches one of these is assumed to be in Bangkok.
+
+# 50 เขตของกรุงเทพ (ภาษาไทย) + แขวงที่เจอบ่อยจาก GMaps address
+# ใช้โดย _infer_province_from_area เพื่อรองรับ area ภาษาไทยจาก seed_discover/community
+THAI_BANGKOK_DISTRICTS = {
+    "พระนคร", "ดุสิต", "หนองจอก", "บางรัก", "บางเขน", "บางกะปิ", "ปทุมวัน",
+    "ป้อมปราบศัตรูพ่าย", "พระโขนง", "มีนบุรี", "ลาดกระบัง", "ยานนาวา",
+    "สัมพันธวงศ์", "พญาไท", "ธนบุรี", "บางกอกใหญ่", "ห้วยขวาง", "คลองสาน",
+    "ตลิ่งชัน", "บางกอกน้อย", "บางขุนเทียน", "ภาษีเจริญ", "หนองแขม",
+    "ราษฎร์บูรณะ", "บางพลัด", "ดินแดง", "บึงกุ่ม", "สาทร", "บางซื่อ",
+    "จตุจักร", "บางคอแหลม", "ประเวศ", "คลองเตย", "สวนหลวง", "จอมทอง",
+    "ดอนเมือง", "ราชเทวี", "ลาดพร้าว", "วัฒนา", "บางแค", "หลักสี่",
+    "สายไหม", "คันนายาว", "สะพานสูง", "วังทองหลาง", "คลองสามวา", "บางนา",
+    "ทวีวัฒนา", "ทุ่งครุ", "บางบอน",
+    # แขวงที่โผล่จาก address จริง (extract_area fallback เป็นแขวงเมื่อไม่มีเขต)
+    "สีกัน", "พลับพลา", "บางลำภูล่าง", "ทับช้าง", "เยาวราช", "อนุสาวรีย์",
+}
+
 BANGKOK_AREAS = {
     "thonglor", "ekkamai", "silom", "sathorn", "ari", "ratchada",
     "sukhumvit", "onnut", "on nut", "ladprao", "lat phrao", "rama9", "rama 9",
@@ -183,6 +200,10 @@ def _infer_province_from_area(area):
     """
     a = _normalise(area)
     if a in BANGKOK_AREAS:
+        return ("Bangkok", "Bangkok")
+    # area ภาษาไทย: เทียบกับรายชื่อเขต/แขวงของกรุงเทพ
+    area_th = (area or "").strip()
+    if area_th in THAI_BANGKOK_DISTRICTS or area_th.replace("เขต", "").strip() in THAI_BANGKOK_DISTRICTS:
         return ("Bangkok", "Bangkok")
     for prov in OUT_OF_SCOPE_PROVINCES:
         if prov in a or a in prov:
