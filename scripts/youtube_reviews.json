@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-07-12",
   "days_window": 7,
-  "total": 18,
+  "total": 19,
   "reviews": [
     {
       "influencer": "Peach Eat Laek",
@@ -35,11 +35,24 @@
       "tier": "Mega",
       "restaurant": "โอว ก๋วยเตี๋ยวพริกสด",
       "cuisine": "Thai",
-      "area": "นวลจันทร์, บึงกุ่ม",
+      "area": "Nuan Chan, Bueng Kum, Bangkok",
       "rating": "above_average",
       "confidence": "high",
       "video_title": "ก๋วยเตี๋ยวต้มยำตำนาน 30 ปี",
       "video_url": "https://youtube.com/watch?v=AWycZLESVIU",
+      "published": "2026-07-07"
+    },
+    {
+      "influencer": "Peach Eat Laek",
+      "handle": "@PeachEatLaek",
+      "tier": "Mega",
+      "restaurant": "โอวก๋วยเตี๋ยวพริกสด",
+      "cuisine": "Thai",
+      "area": "Bangkok",
+      "rating": "above_average",
+      "confidence": "high",
+      "video_title": "โอวก๋วยเตี๋ยวพริกสด แค่ชื่อก็บอกแล้ว แซ่บสะใจ #ก๋วยเตี๋ยว #โอวก๋วยเตี๋ยวพริกสด #พีช #พีชอีทแหลก",
+      "video_url": "https://youtube.com/watch?v=ZRl0J3XUhSA",
       "published": "2026-07-07"
     },
     {
@@ -154,7 +167,7 @@
       "cuisine": "Thai",
       "area": "Bangkok",
       "rating": "above_average",
-      "confidence": "high",
+      "confidence": "medium",
       "video_title": "โก๊ะตี๋ข้าวมันไก่ ปี 2026.. ยังเปิดอยู่มั้ยหน้อออ??",
       "video_url": "https://youtube.com/watch?v=F6-U7H2pwMo",
       "published": "2026-07-11"
@@ -165,9 +178,9 @@
       "tier": "Macro",
       "restaurant": "ร้านลาบบ้านเหนือ",
       "cuisine": "Thai",
-      "area": "Golden Triangle",
+      "area": "Chiang Rai",
       "rating": "above_average",
-      "confidence": "medium",
+      "confidence": "high",
       "video_title": "สามเหลี่ยมทองคำ จุดที่เห็นทั้งไทย ลาว เมียนมา ได้ในครั้งเดียว",
       "video_url": "https://youtube.com/watch?v=IcW26T2R4Jw",
       "published": "2026-07-11"
@@ -178,7 +191,7 @@
       "tier": "Macro",
       "restaurant": "Anantara Golden Triangle Elephant Camp & Resort",
       "cuisine": "Fine Dining",
-      "area": "Golden Triangle",
+      "area": "Chiang Rai",
       "rating": "exceed",
       "confidence": "high",
       "video_title": "สามเหลี่ยมทองคำ จุดที่เห็นทั้งไทย ลาว เมียนมา ได้ในครั้งเดียว",
