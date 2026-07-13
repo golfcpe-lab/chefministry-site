@@ -3915,8 +3915,8 @@
       "yakiniku_restaurant",
       "japanese_restaurant",
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -4155,8 +4155,8 @@
     "gmaps_types": [
       "korean_restaurant",
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -4555,8 +4555,8 @@
       "cafe",
       "food_store",
       "store",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -4876,8 +4876,8 @@
     "exclude_reason": null,
     "gmaps_types": [
       "cafe",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -5203,8 +5203,8 @@
       "yakiniku_restaurant",
       "japanese_restaurant",
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -6503,8 +6503,8 @@
       "yakiniku_restaurant",
       "japanese_restaurant",
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -7391,8 +7391,8 @@
     "exclude_reason": null,
     "gmaps_types": [
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -9900,8 +9900,8 @@
     "exclude_reason": null,
     "gmaps_types": [
       "korean_barbecue_restaurant",
-      "buffet_restaurant",
       "korean_restaurant",
+      "buffet_restaurant",
       "restaurant",
       "point_of_interest",
       "food",
@@ -9984,8 +9984,8 @@
       "yakiniku_restaurant",
       "japanese_restaurant",
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -10066,8 +10066,8 @@
       "vegan_restaurant",
       "vegetarian_restaurant",
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -10146,8 +10146,8 @@
     "gmaps_types": [
       "chinese_noodle_restaurant",
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -10226,8 +10226,8 @@
     "gmaps_types": [
       "thai_restaurant",
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -10305,8 +10305,8 @@
     "exclude_reason": null,
     "gmaps_types": [
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -10385,8 +10385,8 @@
     "gmaps_types": [
       "thai_restaurant",
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -10466,8 +10466,8 @@
       "noodle_shop",
       "chinese_restaurant",
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -10712,8 +10712,8 @@
     "exclude_reason": null,
     "gmaps_types": [
       "asian_fusion_restaurant",
-      "fusion_restaurant",
       "asian_restaurant",
+      "fusion_restaurant",
       "restaurant",
       "point_of_interest",
       "food",
@@ -10961,8 +10961,8 @@
     "gmaps_types": [
       "japanese_restaurant",
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -11027,8 +11027,8 @@
     "rating_gmaps": 4.3,
     "rating_wongnai": null,
     "reviews_gmaps": null,
-    "reviews_wongnai": 1048,
-    "totalReviews": 1048,
+    "reviews_wongnai": 1049,
+    "totalReviews": 1049,
     "newReviews30d": 0,
     "velocityPct": 0.0,
     "first_seen": "2026-04-05",
@@ -11073,7 +11073,7 @@
       "Thonglor",
       "Wongnai"
     ],
-    "cmNote": "1048 reviews · Wongnai",
+    "cmNote": "1049 reviews · Wongnai",
     "reviewerTiers": {
       "mega": 0,
       "macro": 0,
@@ -11531,8 +11531,8 @@
     "gmaps_types": [
       "thai_restaurant",
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -11692,8 +11692,8 @@
     "gmaps_types": [
       "noodle_shop",
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -11773,8 +11773,8 @@
       "japanese_izakaya_restaurant",
       "japanese_restaurant",
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -12014,8 +12014,8 @@
     "gmaps_types": [
       "thai_restaurant",
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -12176,8 +12176,8 @@
       "food_store",
       "store",
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -12340,8 +12340,8 @@
       "japanese_restaurant",
       "japanese_izakaya_restaurant",
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -12501,8 +12501,8 @@
     "gmaps_types": [
       "pizza_restaurant",
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -12663,8 +12663,8 @@
     "gmaps_types": [
       "seafood_restaurant",
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -12901,8 +12901,8 @@
     "exclude_reason": null,
     "gmaps_types": [
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -13061,8 +13061,8 @@
     "gmaps_types": [
       "noodle_shop",
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -13141,8 +13141,8 @@
     "gmaps_types": [
       "noodle_shop",
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -13300,8 +13300,8 @@
     "exclude_reason": null,
     "gmaps_types": [
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -14261,8 +14261,8 @@
       "italian_restaurant",
       "pizza_restaurant",
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -14342,8 +14342,8 @@
       "breakfast_restaurant",
       "coffee_shop",
       "cafe",
-      "american_restaurant",
       "food_store",
+      "american_restaurant",
       "store",
       "restaurant",
       "point_of_interest",
@@ -32435,8 +32435,8 @@
     "gmaps_types": [
       "chinese_restaurant",
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -32676,8 +32676,8 @@
     "gmaps_types": [
       "chinese_restaurant",
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -32758,8 +32758,8 @@
       "cantonese_restaurant",
       "chinese_restaurant",
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -32837,8 +32837,8 @@
     "exclude_reason": null,
     "gmaps_types": [
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -32916,8 +32916,8 @@
     "exclude_reason": null,
     "gmaps_types": [
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -32996,8 +32996,8 @@
     "gmaps_types": [
       "tea_house",
       "cafe",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -33315,8 +33315,8 @@
     "exclude_reason": null,
     "gmaps_types": [
       "cafe",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -33474,11 +33474,11 @@
     "exclude_reason": null,
     "gmaps_types": [
       "brunch_restaurant",
-      "pizza_restaurant",
       "cafe",
+      "pizza_restaurant",
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -33559,9 +33559,9 @@
       "coffee_roastery",
       "coffee_shop",
       "food_store",
-      "food",
       "store",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -33962,8 +33962,8 @@
       "cafe",
       "food_store",
       "store",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -34208,8 +34208,8 @@
       "cafe",
       "food_store",
       "store",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -34697,8 +34697,8 @@
     "gmaps_types": [
       "japanese_restaurant",
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -34776,8 +34776,8 @@
     "exclude_reason": null,
     "gmaps_types": [
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -35174,8 +35174,8 @@
     "gmaps_types": [
       "barbecue_restaurant",
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -36073,8 +36073,8 @@
       "yakiniku_restaurant",
       "japanese_restaurant",
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -36232,8 +36232,8 @@
     "exclude_reason": null,
     "gmaps_types": [
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -36311,8 +36311,8 @@
     "exclude_reason": null,
     "gmaps_types": [
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -36709,8 +36709,8 @@
     "gmaps_types": [
       "buffet_restaurant",
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -36789,8 +36789,8 @@
     "gmaps_types": [
       "barbecue_restaurant",
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -37114,8 +37114,8 @@
       "barbecue_restaurant",
       "japanese_restaurant",
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -37356,8 +37356,8 @@
     "gmaps_types": [
       "noodle_shop",
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -37515,8 +37515,8 @@
     "exclude_reason": null,
     "gmaps_types": [
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -37594,13 +37594,13 @@
     "exclude_reason": null,
     "gmaps_types": [
       "dim_sum_restaurant",
-      "cantonese_restaurant",
-      "chinese_restaurant",
       "meal_delivery",
       "food_delivery",
+      "cantonese_restaurant",
+      "chinese_restaurant",
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -37823,9 +37823,9 @@
     "budgetLabel": "฿฿",
     "rating_gmaps": 4.9,
     "rating_wongnai": null,
-    "reviews_gmaps": 3060,
+    "reviews_gmaps": 3059,
     "reviews_wongnai": null,
-    "totalReviews": 3060,
+    "totalReviews": 3059,
     "newReviews30d": 0,
     "velocityPct": 0.0,
     "first_seen": "2026-07-13",
@@ -37837,8 +37837,8 @@
     "exclude_reason": null,
     "gmaps_types": [
       "cafe",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -37869,7 +37869,7 @@
       "วัฒนา",
       "Google Maps"
     ],
-    "cmNote": "3060 reviews · Google Maps",
+    "cmNote": "3059 reviews · Google Maps",
     "reviewerTiers": {
       "mega": 0,
       "macro": 0,
@@ -37995,14 +37995,14 @@
     "exclude_reason": null,
     "gmaps_types": [
       "cafe",
-      "dessert_restaurant",
       "coffee_shop",
+      "dessert_restaurant",
       "bakery",
       "food_store",
-      "restaurant",
-      "food",
       "store",
+      "restaurant",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -38081,8 +38081,8 @@
     "gmaps_types": [
       "japanese_restaurant",
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -38160,8 +38160,8 @@
     "exclude_reason": null,
     "gmaps_types": [
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -38239,8 +38239,8 @@
     "exclude_reason": null,
     "gmaps_types": [
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -38320,8 +38320,8 @@
       "korean_barbecue_restaurant",
       "korean_restaurant",
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -38562,8 +38562,8 @@
       "yakiniku_restaurant",
       "japanese_restaurant",
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -38723,8 +38723,8 @@
     "gmaps_types": [
       "noodle_shop",
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -39041,8 +39041,8 @@
     "gmaps_types": [
       "thai_restaurant",
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -39444,8 +39444,8 @@
       "ramen_restaurant",
       "japanese_restaurant",
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -39524,8 +39524,8 @@
     "gmaps_types": [
       "steak_house",
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -39605,8 +39605,8 @@
       "sushi_restaurant",
       "japanese_restaurant",
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -39765,8 +39765,8 @@
     "gmaps_types": [
       "thai_restaurant",
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -39924,8 +39924,8 @@
     "exclude_reason": null,
     "gmaps_types": [
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -44486,7 +44486,7 @@
     "name_en": "ก๋วยเตี๋ยวเรืออยุธยา รสดั้งเดิม สูตรโบราณ",
     "source": "Google Maps",
     "source_raw": "gmaps",
-    "address": "VHWP+WXM แขวงดอนเมือง ดอนเมือง กรุงเทพมหานคร 10210",
+    "address": "VHWP+WXM, Don Mueang, Bangkok 10210, Thailand",
     "url": "https://www.google.com/maps/place/?q=place_id:ChIJr2BoyOiC4jARETmijn0oZHo",
     "place_id": "ChIJr2BoyOiC4jARETmijn0oZHo",
     "lat": 13.897330700000001,
@@ -44495,8 +44495,8 @@
     "cuisine_normalized": "Noodles",
     "cuisine": "Noodles",
     "area_raw": "ดอนเมือง",
-    "area_normalized": "Don Mueang",
-    "area": "Don Mueang",
+    "area_normalized": "ดอนเมือง",
+    "area": "ดอนเมือง",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 1,
@@ -44549,7 +44549,7 @@
     "type": "restaurant",
     "tags": [
       "Noodles",
-      "Don Mueang",
+      "ดอนเมือง",
       "Google Maps"
     ],
     "cmNote": "536 reviews · Google Maps",
@@ -44566,7 +44566,7 @@
     "name_en": "ศรีเหลืองโภชนา",
     "source": "Google Maps",
     "source_raw": "gmaps",
-    "address": "45/7 ถนน สาลีรัฐวิภาค แขวงสามเสนใน เขตพญาไท กรุงเทพมหานคร 10400",
+    "address": "45/7 Thanon Saliratthawiphak, Khwaeng Samsen Nai, Khet Phaya Thai, Krung Thep Maha Nakhon 10400, Thailand",
     "url": "https://www.google.com/maps/place/?q=place_id:ChIJp2Zacxec4jAR9i2toRndyaE",
     "place_id": "ChIJp2Zacxec4jAR9i2toRndyaE",
     "lat": 13.789304699999999,
@@ -44575,8 +44575,8 @@
     "cuisine_normalized": "Thai",
     "cuisine": "Thai",
     "area_raw": "พญาไท",
-    "area_normalized": "Phaya Thai",
-    "area": "Phaya Thai",
+    "area_normalized": "พญาไท",
+    "area": "พญาไท",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -44601,8 +44601,8 @@
       "thai_restaurant",
       "chicken_restaurant",
       "restaurant",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -44630,7 +44630,7 @@
     "type": "restaurant",
     "tags": [
       "Thai",
-      "Phaya Thai",
+      "พญาไท",
       "Google Maps"
     ],
     "cmNote": "928 reviews · Google Maps",
@@ -44647,7 +44647,7 @@
     "name_en": "กงฟูติ่มซำ",
     "source": "Google Maps",
     "source_raw": "gmaps",
-    "address": "2040 ถ. เพชรบุรีตัดใหม่ แขวงบางกะปิ เขตห้วยขวาง กรุงเทพมหานคร 10310",
+    "address": "2040 New Petchaburi Rd, Khwaeng Bang Kapi, Khet Huai Khwang, Krung Thep Maha Nakhon 10310, Thailand",
     "url": "https://www.google.com/maps/place/?q=place_id:ChIJMffmMACf4jARuL6oF923Pgs",
     "place_id": "ChIJMffmMACf4jARuL6oF923Pgs",
     "lat": 13.7468911,
@@ -44656,8 +44656,8 @@
     "cuisine_normalized": "Chinese",
     "cuisine": "Chinese",
     "area_raw": "ห้วยขวาง",
-    "area_normalized": "Huai Khwang",
-    "area": "Huai Khwang",
+    "area_normalized": "ห้วยขวาง",
+    "area": "ห้วยขวาง",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -44683,8 +44683,8 @@
       "cantonese_restaurant",
       "chinese_restaurant",
       "restaurant",
-      "point_of_interest",
       "food",
+      "point_of_interest",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -44712,7 +44712,7 @@
     "type": "restaurant",
     "tags": [
       "Chinese",
-      "Huai Khwang",
+      "ห้วยขวาง",
       "Google Maps"
     ],
     "cmNote": "1170 reviews · Google Maps",
@@ -44729,7 +44729,7 @@
     "name_en": "Laoteng 楼顶 - Banthat Thong ติ่มซำ เป็ดปักกิ่ง",
     "source": "Google Maps",
     "source_raw": "gmaps",
-    "address": "1525 แขวงวังใหม่ เขตปทุมวัน กรุงเทพมหานคร 10330",
+    "address": "1525 Khwaeng Wang Mai, Pathum Wan, Krung Thep Maha Nakhon 10330, Thailand",
     "url": "https://www.google.com/maps/place/?q=place_id:ChIJhydlPe2Z4jARyJL9inrBSaE",
     "place_id": "ChIJhydlPe2Z4jARyJL9inrBSaE",
     "lat": 13.741039599999999,
@@ -44738,8 +44738,8 @@
     "cuisine_normalized": "Chinese",
     "cuisine": "Chinese",
     "area_raw": "ปทุมวัน",
-    "area_normalized": "Pathumwan",
-    "area": "Pathumwan",
+    "area_normalized": "ปทุมวัน",
+    "area": "ปทุมวัน",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -44794,7 +44794,7 @@
     "type": "restaurant",
     "tags": [
       "Chinese",
-      "Pathumwan",
+      "ปทุมวัน",
       "Google Maps"
     ],
     "cmNote": "539 reviews · Google Maps",
@@ -44811,7 +44811,7 @@
     "name_en": "MoR​ Ministry of Roasters : Sukhumvit​ 101/1​ กระทรวงการ​คั่ว​ ​สุขุมวิท​ 101/1",
     "source": "Google Maps",
     "source_raw": "gmaps",
-    "address": "1 ถนน สุขุมวิท 101/1 แขวงบางจาก เขตพระโขนง กรุงเทพมหานคร 10260",
+    "address": "1 ถนน สุขุมวิท 101/1 Khwaeng Bang Chak, Khet Phra Khanong, Krung Thep Maha Nakhon 10260, Thailand",
     "url": "https://www.google.com/maps/place/?q=place_id:ChIJ8R-cwqSh4jAR9ErHwpybONA",
     "place_id": "ChIJ8R-cwqSh4jAR9ErHwpybONA",
     "lat": 13.6845211,
@@ -44820,8 +44820,8 @@
     "cuisine_normalized": "Cafe",
     "cuisine": "Cafe",
     "area_raw": "พระโขนง",
-    "area_normalized": "Phra Khanong",
-    "area": "Phra Khanong",
+    "area_normalized": "พระโขนง",
+    "area": "พระโขนง",
     "city": "Bangkok",
     "province": "Bangkok",
     "price_range_raw": 2,
@@ -44844,8 +44844,8 @@
     "exclude_reason": null,
     "gmaps_types": [
       "coffee_roastery",
-      "food",
       "point_of_interest",
+      "food",
       "establishment"
     ],
     "candidate_status": "candidate",
@@ -44873,7 +44873,7 @@
     "type": "cafe",
     "tags": [
       "Cafe",
-      "Phra Khanong",
+      "พระโขนง",
       "Google Maps"
     ],
     "cmNote": "1069 reviews · Google Maps",
