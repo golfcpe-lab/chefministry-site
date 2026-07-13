@@ -370,6 +370,79 @@ def update_trend_categories(js_text, cuisine_counts):
     return js_text
 
 # ── Main ───────────────────────────────────────────────────────────────────────
+def ingest_new_restaurant_to_db(name, cuisine, area):
+    """เพิ่มร้านใหม่จาก YouTube เข้า DB ด้วยข้อมูลจริงจาก Google Places
+    (แทนการ generate demo entry ด้วย OpenAI — เลิกใช้ 2026-07-13 เพราะได้
+    คะแนน/รายละเอียดสังเคราะห์). ร้านจะโผล่บนเว็บผ่าน export รอบถัดไป
+    และ Step 2 ของสคริปต์นี้จะติด influencer signal ให้ในสัปดาห์ถัดไป"""
+    api_key = os.environ.get("GOOGLE_MAPS_API_KEY", "")
+    if not api_key:
+        try:
+            from config import GOOGLE_MAPS_API_KEY as _k
+            api_key = _k or ""
+        except Exception:
+            pass
+    if not api_key:
+        print("      ⚠️ ไม่มี GOOGLE_MAPS_API_KEY — ข้าม (รอเข้า DB ทาง seed/suggestion)")
+        return False
+
+    from db import init_db, upsert_restaurant, record_snapshot, get_conn
+    from scrape_gmaps import find_place, get_place_details, save_gmaps_meta, load_blocklist
+    from seed_discover import norm_name, extract_area
+
+    init_db()
+    with get_conn() as conn:
+        rows = conn.execute(
+            "SELECT external_id, gmaps_place_id, name FROM restaurants").fetchall()
+    known_ids   = {r["external_id"] for r in rows} | {r["gmaps_place_id"] for r in rows if r["gmaps_place_id"]}
+    known_names = {norm_name(r["name"]) for r in rows}
+    if norm_name(name) in known_names:
+        print("      ⏭ มีใน DB แล้ว — export รอบหน้าจะพาขึ้นเว็บเอง")
+        return False
+
+    place = find_place(name, area, api_key)
+    if not place:
+        print("      ❓ GMaps ไม่เจอ — ข้าม")
+        return False
+    pid   = place.get("id", "")
+    found = (place.get("displayName") or {}).get("text", "")
+    bl_ids, bl_names = load_blocklist()
+    if not pid or pid in known_ids or pid in bl_ids or found.strip() in bl_names:
+        print(f"      ⏭ ซ้ำ/blocklisted: {found}")
+        return False
+
+    details = get_place_details(pid, api_key) or {}
+    urc    = int(details.get("userRatingCount") or place.get("userRatingCount") or 0)
+    rating = float(details.get("rating") or place.get("rating") or 0)
+    addr   = details.get("formattedAddress") or place.get("formattedAddress", "")
+    status = details.get("businessStatus", "OPERATIONAL")
+    loc    = details.get("location") or place.get("location") or {}
+    pt     = details.get("primaryType") or place.get("primaryType") or ""
+    gmaps_types = list(dict.fromkeys(([pt] if pt else []) + (details.get("types") or [])))
+    if urc == 0 or status == "CLOSED_PERMANENTLY":
+        print(f"      ❓ ไม่มีรีวิว/ปิดถาวร — ข้าม ({found})")
+        return False
+
+    rid = upsert_restaurant({
+        "source": "gmaps", "external_id": pid,
+        "name": found or name, "cuisine": cuisine or "Other",
+        "area": extract_area(addr), "address": addr,
+        "city": "Bangkok", "province": "Bangkok",
+        "lat": loc.get("latitude"), "lng": loc.get("longitude"),
+        "price_range": "2",
+        "url": f"https://www.google.com/maps/place/?q=place_id:{pid}",
+    })
+    record_snapshot(rid, review_count=urc, rating=rating, rating_count=urc)
+    save_gmaps_meta(rid, {
+        "gmaps_place_id": pid, "gmaps_address": addr,
+        "gmaps_types": gmaps_types,
+        "gmaps_business_status": status or "OPERATIONAL",
+        "gmaps_lat": loc.get("latitude"), "gmaps_lng": loc.get("longitude"),
+    })
+    print(f"      ✅ เข้า DB แล้ว: {found} ⭐{rating} ({urc:,} รีวิว)")
+    return True
+
+
 def main(dry_run=False):
     print(f"\n{'='*55}")
     print(f"  ChefMinistry — Inject YouTube → data.js")
@@ -453,41 +526,17 @@ def main(dry_run=False):
         # ── Step 3: ร้านใหม่ — เพิ่มเข้า CM_RESTAURANTS ─────────────────
         cuisine = data["cuisines"][0] if data["cuisines"] else "Thai"
         area    = data["areas"][0]    if data["areas"]    else "Bangkok"
-        new_id  = f"r{next_num:03d}"
-        print(f"  ➕  [NEW]     ร้านใหม่: {rest_name} ({cuisine}, {area}) — id: {new_id}")
-
+        print(f"  ➕  [NEW]     ร้านใหม่: {rest_name} ({cuisine}, {area}) — ingest เข้า DB จาก GMaps")
+        # เดิม: OpenAI generate demo entry เข้า CM_RESTAURANTS (คะแนนสังเคราะห์)
+        # ตอนนี้: เพิ่มเข้า DB ด้วยข้อมูลจริง → export คืนถัดไปพาขึ้นเว็บเอง
         if not dry_run:
-            entry = generate_new_restaurant_entry(rest_name, cuisine, area, influencers, new_id)
-            if entry:
-                js_entry = f"  {dict_to_js(entry)},"
-                # หาจุดปิด ] ของ CM_RESTAURANTS โดยนับ bracket
-                mo = re.search(r'const CM_RESTAURANTS\s*=\s*\[', js_text, re.DOTALL)
-                if mo:
-                    start = mo.end() - 1
-                    depth2, i2, in_s, esc2 = 0, start, False, False
-                    while i2 < len(js_text):
-                        c = js_text[i2]
-                        if esc2:   esc2 = False
-                        elif c == '\\' and in_s: esc2 = True
-                        elif c == '"' and not esc2: in_s = not in_s
-                        elif not in_s:
-                            if c == '[':  depth2 += 1
-                            elif c == ']':
-                                depth2 -= 1
-                                if depth2 == 0: break
-                        i2 += 1
-                    # แทรก entry ก่อน ] — ต้องมี comma หลัง entry สุดท้าย
-                    before = js_text[:i2].rstrip()
-                    if before and before[-1] not in (',', '['):
-                        before += ','
-                    js_text = before + "\n" + js_entry + "\n" + js_text[i2:]
-                next_num += 1
-                added_count += 1
-                # CM_EXTERNAL_RESTAURANTS เลื่อน offset หลัง insert — re-extract
-                if ext_list and ext_start != -1:
-                    _, ext_start, ext_end = extract_external_restaurants(js_text)
+            try:
+                if ingest_new_restaurant_to_db(rest_name, cuisine, area):
+                    added_count += 1
+            except Exception as e:
+                print(f"      ⚠️ ingest ล้มเหลว: {e}")
         else:
-            print(f"      [dry-run] จะ generate entry ด้วย OpenAI")
+            print(f"      [dry-run] จะ ingest เข้า DB ผ่าน GMaps")
 
     # ── เขียน CM_EXTERNAL_RESTAURANTS กลับ ──────────────────────────────────
     if not dry_run and ext_updated and ext_start != -1:
