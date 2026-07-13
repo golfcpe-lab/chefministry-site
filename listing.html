@@ -4,12 +4,6 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <link rel="icon" type="image/png" href="./assets/logo_circular.png"/>
-  <link rel="manifest" href="/manifest.json"/>
-  <meta name="theme-color" content="#0f1f3c"/>
-  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png"/>
-  <meta name="apple-mobile-web-app-capable" content="yes"/>
-  <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
-  <meta name="apple-mobile-web-app-title" content="ChefMinistry"/>
   <title>ค้นหาร้านอาหารน่าไป 400+ ร้านทั่วกรุงเทพ เรียงตามเทรนด์ | ChefMinistry</title>
   <meta name="description" content="รวมร้านอาหารกรุงเทพที่กำลังมาแรง — กรองตามประเภทอาหาร ย่าน งบประมาณ เรียงตามกระแสรีวิวจริง ไม่ใช่โฆษณา อัปเดตทุกวัน"/>
   <link rel="canonical" href="https://chefministry.com/listing.html"/>
@@ -145,9 +139,7 @@
         <option value="score">เรียงตาม: Growth Rate %</option>
         <option value="reviews">เรียงตาม: Total Reviews</option>
         <option value="name">เรียงตาม: ชื่อ A–Z</option>
-        <option value="nearme">📍 ใกล้ฉัน</option>
       </select>
-      <button id="nearMeBtn" class="btn btn-outline btn-sm" style="white-space:nowrap" title="เรียงร้านตามระยะทางจากตำแหน่งของคุณ">📍 ร้านใกล้ฉัน</button>
     </div>
 
     <!-- Filters -->
@@ -306,10 +298,8 @@
 <script src="./js/firebase-config.js?v=20260501a"></script>
 <script src="./js/auth.js?v=20260501a"></script>
 <script src="./js/safeDataAdapter.js?v=20260501a"></script>
-<script src="./js/data.js?v=20260712b"></script>
-<script src="./js/geo.js?v=20260712a"></script>
-<script src="./js/nearme.js?v=20260712a"></script>
-<script src="./js/dataService.js?v=20260712f"></script>
+<script src="./js/data.js?v=202607130742"></script>
+<script src="./js/dataService.js?v=202607130742"></script>
 <script>
   document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
     const n=document.getElementById("mobileNav");
@@ -413,16 +403,6 @@
   sortSel.value=state.sort;
   sortSel.addEventListener("change",()=>{state.sort=sortSel.value;render();});
 
-  // ── ปุ่ม "ร้านใกล้ฉัน" ────────────────────────────────────────────────
-  const nearBtn=document.getElementById("nearMeBtn");
-  if(nearBtn){
-    nearBtn.addEventListener("click",()=>{
-      state.sort="nearme";
-      sortSel.value="nearme";
-      render();
-    });
-  }
-
   // Filter chips
   document.querySelectorAll(".filter-chip").forEach(btn=>{
     btn.addEventListener("click",()=>{
@@ -488,28 +468,7 @@
   const PREVIEW_COUNT = 6;
 
   function render(){
-    let list = filterAndSort();
-
-    // ── "ใกล้ฉัน" — เรียงตามระยะทาง (ทำงานทุก tab ไม่ต้องมี filter) ──────
-    if (state.sort === "nearme" && typeof CM_NEARME !== "undefined") {
-      if (CM_NEARME.hasPosition()) {
-        list = CM_NEARME.sortByDistance(list);
-      } else {
-        CM_NEARME.locate(
-          () => render(),
-          (msg) => {
-            alert(msg);
-            state.sort = "overlap";
-            const s = document.getElementById("sortSelect");
-            if (s) s.value = "overlap";
-            render();
-          }
-        );
-        const rc = document.getElementById("resultCount");
-        if (rc) rc.textContent = "📍 กำลังหาตำแหน่งของคุณ...";
-        return;
-      }
-    }
+    const list = filterAndSort();
     const grid = document.getElementById("listingGrid");
     const empty = document.getElementById("emptyState");
     const wall = document.getElementById("discoverWall");
@@ -645,4 +604,47 @@
           <span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:99px;background:var(--cream);color:var(--text-2)">${platformIcon[c.platform] || "•"} ${escHtml(c.platform)}</span>
         </div>
         <div style="font-size:11px;color:var(--text-2);line-height:1.4">${escHtml(c.focusArea)}</div>
-        <div style="font-size:12px;font-weight:800;color:var(--navy);margin-top:8px">${escHt
+        <div style="font-size:12px;font-weight:800;color:var(--navy);margin-top:8px">${escHtml(c.followers)} followers</div>
+      </div>
+    `).join("");
+
+    section.style.display = "block";
+  }
+
+  // แสดง creator list อัตโนมัติถ้า unlock แล้ว
+  // Safe render — catches errors if dataService failed to load
+  try {
+    render();
+  } catch(e) {
+    console.error("[CM] render() failed:", e);
+    // v5 Fallback: use canonical external pool, scoped to Bangkok+restaurant
+    var grid = document.getElementById("listingGrid");
+    var fallbackPool = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined" && CM_EXTERNAL_RESTAURANTS.length > 0)
+      ? CM_EXTERNAL_RESTAURANTS
+      : (typeof CM_RESTAURANTS !== "undefined" ? CM_RESTAURANTS : []);
+    var scopedPool = fallbackPool.filter(function(r) {
+      return r.scope_market !== "out_of_scope_location" && r.scope_market !== "out_of_scope_format"
+          && r.is_restaurant_focus !== false && r.is_bangkok_focus !== false;
+    });
+    if (grid && scopedPool.length) {
+      var preview = scopedPool.slice(0, 6);
+      grid.innerHTML = preview.map(function(r){ return buildRestaurantCard(r, {showOverlap:true}); }).join("");
+    }
+  }
+
+  // Auth state listener — re-render เมื่อ login/logout
+  if (typeof CM_AUTH !== "undefined") {
+    CM_AUTH.onTierChange((tier) => {
+      render();
+      if (tier === "free" || tier === "paid") {
+        document.getElementById("discoverWall").style.display = "none";
+        renderCreatorList("all");
+      } else {
+        const section = document.getElementById("creatorListSection");
+        if (section) section.style.display = "none";
+      }
+    });
+  }
+</script>
+</body>
+</html>
