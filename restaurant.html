@@ -158,7 +158,7 @@
 
         <!-- Other restaurants -->
         <div>
-          <h2 class="h2" style="margin-bottom:16px">ร้านอื่นที่มี Signal แข็ง</h2>
+          <h2 class="h2" style="margin-bottom:16px">ร้านอื่นที่น่าสนใจ</h2>
           <div class="grid-2" id="otherRestaurants"></div>
         </div>
       </div>
@@ -466,8 +466,14 @@
            target="_blank" rel="noopener" style="color:var(--gold);font-weight:800">Google Maps ↗</a>
       </div>`;
 
-    // Other restaurants (top 4 by overlap, excluding this)
-    const others=topByOverlap(8).filter(x=>x.id!==r.id).slice(0,4);
+    // Other restaurants: ร้านจริงจาก DB (cuisine/พื้นที่เดียวกันขึ้นก่อน เรียงตามความนิยม)
+    // เดิมใช้ topByOverlap() ซึ่งมีแต่ curated demo (overlapSignal สังเคราะห์) ผ่านตลอด
+    const pool=(typeof CM_EXTERNAL_RESTAURANTS!=="undefined"?CM_EXTERNAL_RESTAURANTS:[])
+      .filter(x=>x.id!==r.id&&(x.totalReviews||0)>=100&&(x.rating_gmaps||x.rating||0)>=4.3);
+    const popScore=x=>((x.rating_gmaps||x.rating||4)*Math.log10((x.totalReviews||0)+1))
+      +(x.cuisine===r.cuisine?2:0)+(x.area===r.area?1:0);
+    let others=pool.sort((a,b)=>popScore(b)-popScore(a)).slice(0,4);
+    if(!others.length) others=topByOverlap(8).filter(x=>x.id!==r.id).slice(0,4);
     document.getElementById("otherRestaurants").innerHTML=others.map(o=>buildRestaurantCard(o)).join("");
   }
 </script>
