@@ -306,10 +306,10 @@
 <script src="./js/firebase-config.js?v=20260501a"></script>
 <script src="./js/auth.js?v=20260501a"></script>
 <script src="./js/safeDataAdapter.js?v=20260501a"></script>
-<script src="./js/data.js?v=202607131414"></script>
+<script src="./js/data.js?v=202607130742"></script>
 <script src="./js/geo.js?v=20260712a"></script>
 <script src="./js/nearme.js?v=20260712a"></script>
-<script src="./js/dataService.js?v=202607131414"></script>
+<script src="./js/dataService.js?v=202607130742"></script>
 <script>
   document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
     const n=document.getElementById("mobileNav");
@@ -623,6 +623,9 @@
 
     const list = (typeof CM_INFLUENCERS !== "undefined" ? CM_INFLUENCERS : [])
       .filter(c => tier === "all" || c.tier === tier);
+
+    // ไม่มีข้อมูล influencer (mockup ถูกลบ 2026-07-13) → ซ่อน section ทั้งก้อน
+    if (!list.length && tier === "all") { section.style.display = "none"; return; }
 
     const tierColor = { Mega:"#e8a020", Macro:"#3a7bd5", Mid:"#56c282" };
     const platformIcon = { YouTube:"▶", TikTok:"♪", Instagram:"◉", Facebook:"f" };
