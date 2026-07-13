@@ -28,7 +28,11 @@ PREMIUM_HINTS = ("fine dining", "omakase", "steakhouse", "progressive", "samrub"
 
 
 def _latin(s: str) -> str:
-    return re.sub(r"[^a-z0-9]", "", (s or "").lower())
+    t = re.sub(r"[^a-z0-9]", "", (s or "").lower())
+    # ตัดคำ generic ที่ทำให้ similarity เฟ้อ (เคส Aulis Bangkok ↔ Alien Bangkok)
+    for w in ("bangkok", "thailand", "restaurant", "bkk"):
+        t = t.replace(w, "")
+    return t
 
 
 def name_matches(query_name: str, found_name: str) -> bool:
@@ -40,8 +44,13 @@ def name_matches(query_name: str, found_name: str) -> bool:
     if a in b or b in a:
         return True
     la, lb = _latin(query_name), _latin(found_name)
-    if len(la) >= 4 and len(lb) >= 4 and (la in lb or lb in la):
-        return True
+    if len(la) >= 4 and len(lb) >= 4:
+        if la in lb or lb in la:
+            return True
+        # ชื่อละตินทั้งคู่แต่ไม่ containment — ต้องคล้ายกันจริงๆ
+        if difflib.SequenceMatcher(None, la, lb).ratio() >= 0.8:
+            return True
+        return False
     # เทียบเฉพาะส่วนอังกฤษ/ไทยแยกกันด้วย เพราะชื่อมักผสมสองภาษา
     for part in re.split(r"\s+", query_name):
         p = norm_name(part)
