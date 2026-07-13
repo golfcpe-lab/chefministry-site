@@ -176,27 +176,30 @@ function buildRestaurantCard(r, opts = {}) {
   }
   const tagsHtml = inlineTags.slice(0,2).map(t => `<span class="${t.cls}">${escHtml(t.text)}</span>`).join('');
 
-  // ── 6. FOUR SCORES ──────────────────────────────────────────────────────
-  // Quality (0–10): mapped from signalStrength
-  const quality = ({
-    'very-strong': 8.8, 'strong': 7.8, 'moderate': 7.0, 'weak': 5.8
-  }[r.signalStrength] || 7.0);
+  // ── 6. FOUR SCORES — จากข้อมูลจริงเท่านั้น (2026-07-13) ─────────────────
+  // Quality (0–10): rating จริงจาก Google Maps × 2
+  const _rating = r.rating_gmaps || r.rating_score || r.rating || 0;
+  const quality = _rating ? Math.round(_rating * 2 * 10) / 10
+    : ({'very-strong': 8.8, 'strong': 7.8, 'moderate': 7.0}[r.signalStrength] || 6.5);
 
-  // Value (0–10): inverse of budget tier
-  const value = ({1: 8.5, 2: 7.2, 3: 5.8}[r.budget] || 6.5);
+  // Value (0–10): rating เทียบระดับราคา (แพงขึ้น ต้องอร่อยขึ้นถึงคุ้ม)
+  const value = Math.max(3, Math.min(9.5,
+    Math.round((quality - ((r.budget || 2) - 1) * 0.9) * 10) / 10));
 
-  // Trend (0–100%): from growthRate + trendVelocity fallback
-  let trend;
-  if      (growthRate > 0.5)  trend = Math.min(95, Math.round(growthRate * 60 + 62));
-  else if (growthRate > 0.15) trend = Math.round(growthRate * 90 + 55);
-  else if (growthRate > 0.03) trend = Math.round(growthRate * 160 + 42);
-  else                        trend = {rising:68, stable:50, declining:30}[r.trendVelocity] || 48;
-  trend = Math.max(22, Math.min(96, trend));
+  // Trend (0–100%): จาก review growth จริง — ยังไม่มีข้อมูล = ไม่แต่งตัวเลข
+  const _hasGrowth = growthRate > 0.001 || (r.newReviews30d || 0) > 0 || (r.velocityPct || 0) > 0;
+  let trend = null;
+  if (_hasGrowth) {
+    if      (growthRate > 0.5)  trend = Math.min(95, Math.round(growthRate * 60 + 62));
+    else if (growthRate > 0.15) trend = Math.round(growthRate * 90 + 55);
+    else if (growthRate > 0.03) trend = Math.round(growthRate * 160 + 42);
+    else                        trend = 45;
+    trend = Math.max(22, Math.min(96, trend));
+  }
 
-  // Buzz (0–100%): from overlapSignal + signalCount
-  const buzz = Math.max(18, Math.min(96,
-    Math.round((r.overlapSignal||0) * 7 + Math.min((r.signalCount||0) * 2, 26) + 16)
-  ));
+  // Buzz (0–100%): จาก creator mentions จริง (30 วัน) — ไม่มี = ไม่มี
+  const _m30 = r.creator_mentions_30d || 0;
+  const buzz = _m30 > 0 ? Math.min(96, 30 + _m30 * 14) : null;
 
   // ── 7. SCORE LABELS + FILL COLORS ──────────────────────────────────────
   function scoreInfo10(v) {
@@ -229,10 +232,13 @@ function buildRestaurantCard(r, opts = {}) {
     </div>`;
   }
 
+  const NO_DATA = {label:'รอข้อมูล', ic:'r-interp-gray', fc:'r-score-fill-gray'};
   const qi = scoreInfo10(quality),  qRing = ring(quality * 10, qi.fc, quality.toFixed(1));
   const vi = scoreInfo10(value),    vRing = ring(value  * 10, vi.fc, value.toFixed(1));
-  const ti = scoreInfo100(trend),   tRing = ring(trend,       ti.fc, trend + '%');
-  const bi = scoreInfo100(buzz),    bRing = ring(buzz,        bi.fc, buzz  + '%');
+  const ti = trend === null ? NO_DATA : scoreInfo100(trend);
+  const tRing = trend === null ? ring(4, NO_DATA.fc, '–') : ring(trend, ti.fc, trend + '%');
+  const bi = buzz === null ? NO_DATA : scoreInfo100(buzz);
+  const bRing = buzz === null ? ring(4, NO_DATA.fc, '–') : ring(buzz, bi.fc, buzz + '%');
 
   // ── 9. CARD HTML ────────────────────────────────────────────────────────
   const areaStr = escHtml(r.area_normalized || r.area || '');
