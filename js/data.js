@@ -268,10 +268,11 @@ function buildRestaurantCard(r, opts = {}) {
 // ── Central Config — single source of truth for all stats ────────────────────────
 // To connect to live DB: update these values from your API endpoint.
 const CM_CONFIG = {
-  restaurantCount:  270,
-  creatorCount:     31,
+  // fallback เท่านั้น — ค่าจริงใช้ CM_DB_STATS (inject รายวัน)
+  restaurantCount:  400,
+  creatorCount:     9,
   categoryCount:    20,
-  lastUpdated:      "2026-04-13",
+  lastUpdated:      "",
   updateFrequency:  "daily",
   coverage:         "Bangkok"
 };
