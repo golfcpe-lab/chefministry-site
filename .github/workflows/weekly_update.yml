@@ -106,6 +106,7 @@ jobs:
         id: inject_youtube
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
           DATA_FILE:      ${{ github.workspace }}/js/data.js
           YOUTUBE_FILE:   ${{ github.workspace }}/scripts/youtube_reviews.json
         run: |
@@ -167,6 +168,7 @@ jobs:
         id: weekly_summary
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
           DATA_FILE:      ${{ github.workspace }}/js/data.js
           YOUTUBE_FILE:   ${{ github.workspace }}/scripts/youtube_reviews.json
         run: python scripts/weekly_summary.py
@@ -198,7 +200,7 @@ jobs:
         run: |
           git config user.name  "ChefMinistry Bot"
           git config user.email "bot@chefministry.com"
-          git add js/data.js scripts/scraper/export_restaurants.json scripts/scraper/fb_digest.json || true
+          git add js/data.js scripts/scraper/export_restaurants.json scripts/scraper/fb_digest.json scripts/scraper/chefministry_data.db || true
           git diff --staged --quiet || git commit -m "auto: weekly signal update $(date +'%Y-%m-%d') [schema-v2+fb-digest]"
 
       - name: Push to GitHub
