@@ -119,6 +119,18 @@ def build_canonical(db_path=None, out_path=None, days=30):
     db_path  = db_path  or DB
     out_path = out_path or OUT
 
+    # ── Blocklist: listing ปลอม/ขยะบน GMaps (เชนก๊อปชื่อ, โรงแรม ฯลฯ) ──
+    # แก้ไขรายการได้ที่ scraper/blocklist.json — กรองออกจาก export ทุกช่องทาง
+    bl_ids, bl_names = set(), set()
+    try:
+        _bl = pathlib.Path(__file__).parent / "blocklist.json"
+        if _bl.exists():
+            for e in json.loads(_bl.read_text(encoding="utf-8")):
+                if e.get("place_id"): bl_ids.add(e["place_id"].strip())
+                if e.get("name"):     bl_names.add(e["name"].strip())
+    except Exception as _e:
+        print("blocklist load error: %s" % _e)
+
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
     since = (date.today() - timedelta(days=days)).isoformat()
@@ -184,6 +196,9 @@ def build_canonical(db_path=None, out_path=None, days=30):
         d = dict(row)
         name = d.get("name") or d.get("name_en") or ""
         if not name:
+            continue
+        # blocklisted spam/ghost listing
+        if (d.get("gmaps_place_id") or "").strip() in bl_ids or name.strip() in bl_names:
             continue
 
         src = d.get("source") or "unknown"
@@ -321,4 +336,5 @@ if __name__ == "__main__":
     parser.add_argument("--db",     default=DB)
     parser.add_argument("--output", default=OUT)
     parser.add_argument("--days",   type=int, default=30)
-  
+    args = parser.parse_args()
+    build_canonical(args.db, args.output, args.days)
