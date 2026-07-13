@@ -14,7 +14,7 @@
   /* ─── Accessors ──────────────────────────────────────────────────────────── */
   function _restaurants()  { return (typeof CM_RESTAURANTS !== 'undefined'          ? CM_RESTAURANTS          : []); }
   function _external()     { return (typeof CM_EXTERNAL_RESTAURANTS !== 'undefined' ? CM_EXTERNAL_RESTAURANTS : []); }
-  function _config()       { return (typeof CM_CONFIG !== 'undefined'               ? CM_CONFIG               : { restaurantCount: 270, creatorCount: 31, categoryCount: 20, lastUpdated: '2026-04-15', coverage: 'Bangkok' }); }
+  function _config()       { return (typeof CM_CONFIG !== 'undefined'               ? CM_CONFIG               : { restaurantCount: 400, creatorCount: 9, categoryCount: 20, lastUpdated: '', coverage: 'Bangkok' }); }
   function _signals()      { return (typeof CM_SIGNALS !== 'undefined'              ? CM_SIGNALS              : {}); }
   function _influencers()  { return (typeof CM_INFLUENCERS !== 'undefined'          ? CM_INFLUENCERS          : []); }
 
