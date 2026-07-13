@@ -54,7 +54,7 @@ def _post(url: str, body: dict, headers: dict = None) -> dict:
 
 # ── Places API (New) ──────────────────────────────────────────────────────────
 
-def find_place(name: str, area: str, api_key: str) -> dict | None:
+def find_place(name: str, area: str, api_key: str, lang: str = "th") -> dict | None:
     """
     ใช้ Places API (New) Text Search หาร้านด้วยชื่อ + ย่าน
     คืน dict ที่มี place_id, displayName, rating, userRatingCount, ...
@@ -72,7 +72,7 @@ def find_place(name: str, area: str, api_key: str) -> dict | None:
     }
     body = {
         "textQuery":         query,
-        "languageCode":      "th",
+        "languageCode":      lang,
         "regionCode":        "TH",
         "maxResultCount":    1,
         "locationBias": {
