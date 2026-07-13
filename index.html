@@ -1144,16 +1144,11 @@
     // ── populate Trending grid ──────────────────────────────────────────────
     var risingEl = document.getElementById("risingGrid");
     if (risingEl) {
-      var pool = (typeof ChefMinistryData !== "undefined" && ChefMinistryData.mergeAll)
-        ? ChefMinistryData.mergeAll().filter(ChefMinistryData.scopeFilter)
+      // ใช้ logic กลางจาก dataService (ร้านจริง growth ก่อน → ร้านจริงยอดนิยม → curated เป็นตัวเติมสุดท้าย)
+      // เดิม filter inline เอาเฉพาะ growthRate>0 ซึ่งเหลือแต่ร้าน demo (ค่า growth สังเคราะห์) — ร้านจริงโดนตัดหมด
+      var trending = (typeof ChefMinistryData !== "undefined")
+        ? ChefMinistryData.getTrendingRestaurants(6)
         : [];
-      var trending = pool.filter(function(r){
-        var sc = ChefMinistryData.computeScore(r);
-        return sc.growthRate > 0.01 || (r.velocityPct || 0) > 5;
-      }).sort(function(a,b){
-        var sa = ChefMinistryData.computeScore(a), sb = ChefMinistryData.computeScore(b);
-        return sb.score - sa.score;
-      }).slice(0, 6);
       risingEl.innerHTML = trending.length
         ? trending.map(function(r){ return renderRestCard(r); }).join("")
         : '<div style="color:var(--text-2);padding:24px;text-align:center;grid-column:1/-1">ยังไม่มีข้อมูล trending</div>';
