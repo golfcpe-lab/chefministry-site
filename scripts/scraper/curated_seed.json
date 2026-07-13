@@ -195,11 +195,6 @@
   "cuisine": "Traditional Thai Fine Dining"
  },
  {
-  "name": "Aulis Bangkok by Simon Rogan",
-  "area": "สุขุมวิท",
-  "cuisine": "Chef's Table Fine Dining"
- },
- {
   "name": "Avant Bangkok",
   "area": "สาทร",
   "cuisine": "Contemporary Fine Dining"
@@ -303,5 +298,10 @@
   "name": "Wana Yook วรรณยุค",
   "area": "กรุงเทพ",
   "cuisine": "Thai Fine Dining"
+ },
+ {
+  "name": "Restaurant Resonance",
+  "area": "สุขุมวิท 65",
+  "cuisine": "Contemporary Fine Dining"
  }
 ]
