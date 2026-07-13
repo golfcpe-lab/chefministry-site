@@ -327,47 +327,67 @@ def dict_to_js(d, indent=4):
     return "\n  ".join(lines)
 
 # ── Update trendCategories ─────────────────────────────────────────────────────
-def update_trend_categories(js_text, cuisine_counts):
-    """อัปเดต trendCategories ใน CM_SIGNALS จาก YouTube cuisine data"""
+def update_trend_categories(js_text, cuisine_counts, cuisine_mentions=None):
+    """Regenerate trendCategories ทั้ง array จากรีวิว YouTube จริงของสัปดาห์นี้
+    (เดิม: อัปเดตเฉพาะหมวดที่ match — หมวดอื่นค้างค่า mockup เมษา และ
+    change% เป็นสูตร count×8 ที่แต่งขึ้น. เลิกใช้ 2026-07-13)
+    - influencers = จำนวนช่องจริงที่รีวิวหมวดนั้น
+    - mentions    = จำนวนรีวิวจริง
+    - change      = % เทียบสัปดาห์ก่อนจาก yt_category_history.json (null ถ้ายังไม่มี history)"""
     if not cuisine_counts:
         return js_text
+    cuisine_mentions = cuisine_mentions or {}
 
-    # map cuisine → category
-    cat_influencers = defaultdict(set)
+    cat_inf = defaultdict(set)
+    cat_men = defaultdict(int)
     for cuisine, influencers in cuisine_counts.items():
         norm = cuisine.lower()
-        cat = next((v for k, v in CUISINE_TO_CAT.items() if k in norm), None)
-        if cat:
-            cat_influencers[cat].update(influencers)
-
-    if not cat_influencers:
+        cat = next((v for k, v in CUISINE_TO_CAT.items() if k in norm), None) or cuisine.strip().title()
+        cat_inf[cat].update(i for i in influencers if i)
+        cat_men[cat] += cuisine_mentions.get(cuisine, 0) or len(influencers)
+    if not cat_inf:
         return js_text
 
-    def update_cat_block(match):
-        block = match.group(0)
-        cat_m = re.search(r'cat\s*:\s*["\']([^"\']+)["\']', block)
-        if not cat_m:
-            return block
-        cat_name = cat_m.group(1)
-        if cat_name not in cat_influencers:
-            return block
-        count = len(cat_influencers[cat_name])
-        # signal level
-        sig = "very-strong" if count >= 6 else "strong" if count >= 4 else "rising" if count >= 2 else "stable"
-        change = f"+{count * 8}%"
-        block = re.sub(r'(signal\s*:\s*)["\'][^"\']*["\']', rf'\1"{sig}"',     block)
-        block = re.sub(r'(change\s*:\s*)["\'][^"\']*["\']', rf'\1"{change}"', block)
-        block = re.sub(r'(influencers\s*:\s*)\d+',          rf'\g<1>{count}',  block)
-        return block
+    # ── history: เก็บ mentions รายสัปดาห์ไว้คำนวณ change จริง ──
+    hist_path = SCRIPTS_DIR / "yt_category_history.json"
+    try:
+        hist = json.loads(hist_path.read_text(encoding="utf-8")) if hist_path.exists() else {}
+    except Exception:
+        hist = {}
+    today = datetime.date.today().isoformat()
+    prev_key = max((d for d in hist if d < today), default=None)
+    prev = hist.get(prev_key, {}) if prev_key else {}
 
-    # update each { cat:"...", signal:"...", ... } block
-    js_text = re.sub(
-        r'\{\s*cat\s*:\s*["\'][^"\']+["\'][^{}]*\}',
-        update_cat_block,
-        js_text,
-        flags=re.DOTALL
-    )
+    items = []
+    for cat in sorted(cat_inf, key=lambda c: (-cat_men[c], -len(cat_inf[c]))):
+        n_inf, n_men = len(cat_inf[cat]), cat_men[cat]
+        sig = ("very-strong" if n_inf >= 5 else "strong" if n_inf >= 3
+               else "rising" if n_inf >= 2 else "stable")
+        change = None
+        p = (prev.get(cat) or {}).get("mentions")
+        if p:
+            pct = round((n_men - p) * 100.0 / p)
+            change = ("+%d%%" % pct) if pct >= 0 else ("%d%%" % pct)
+        items.append((cat, sig, change, n_inf, n_men))
+
+    hist[today] = {cat: {"mentions": cat_men[cat], "influencers": len(cat_inf[cat])} for cat in cat_inf}
+    hist = {k: hist[k] for k in sorted(hist)[-26:]}  # เก็บ ~ครึ่งปี
+    try:
+        hist_path.write_text(json.dumps(hist, ensure_ascii=False, indent=1), encoding="utf-8")
+    except Exception as e:
+        print(f"  ⚠️ เขียน history ไม่ได้: {e}")
+
+    lines = ",\n".join(
+        "    { cat:%s, signal:%s, change:%s, influencers:%d, mentions:%d }" % (
+            json.dumps(c, ensure_ascii=False), json.dumps(sg),
+            json.dumps(ch, ensure_ascii=False), ni, nm)
+        for c, sg, ch, ni, nm in items)
+    new_block = "trendCategories: [\n" + lines + "\n  ]"
+    js_text, n = re.subn(r'trendCategories\s*:\s*\[.*?\]', new_block, js_text, count=1, flags=re.DOTALL)
+    if n == 0:
+        print("  ⚠️ ไม่พบ trendCategories block ใน data.js")
     return js_text
+
 
 # ── Main ───────────────────────────────────────────────────────────────────────
 def ingest_new_restaurant_to_db(name, cuisine, area):
@@ -471,6 +491,7 @@ def main(dry_run=False):
     # ── รวม reviews ต่อร้าน ──────────────────────────────────────────────────
     rest_map = defaultdict(lambda: {"influencers": [], "cuisines": [], "areas": []})
     cuisine_counts = defaultdict(set)
+    cuisine_mentions = defaultdict(int)
 
     for rv in reviews:
         name = rv.get("restaurant", "").strip()
@@ -483,6 +504,7 @@ def main(dry_run=False):
         if rv.get("cuisine"):
             entry["cuisines"].append(rv["cuisine"])
             cuisine_counts[rv["cuisine"]].add(rv.get("influencer",""))
+            cuisine_mentions[rv["cuisine"]] += 1
         if rv.get("area"):
             entry["areas"].append(rv["area"])
 
@@ -545,7 +567,7 @@ def main(dry_run=False):
 
     # ── อัปเดต trendCategories ───────────────────────────────────────────────
     if not dry_run and cuisine_counts:
-        js_text = update_trend_categories(js_text, cuisine_counts)
+        js_text = update_trend_categories(js_text, cuisine_counts, cuisine_mentions)
         print(f"  📊  อัปเดต trendCategories จาก {len(cuisine_counts)} cuisine types")
 
     # ── บันทึก ───────────────────────────────────────────────────────────────
