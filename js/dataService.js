@@ -176,7 +176,8 @@
         var c = (r.cuisine_normalized || r.cuisine || '').toLowerCase();
         var v = (r.venue_type || r.type || '').toLowerCase();
         var q = opts.type.toLowerCase();
-        return v === q || c === q || c.indexOf(q) >= 0;
+        var qs = q.replace(/-/g, ' ');  // chip id "fine-dining" ↔ cuisine "Fine Dining"
+        return v === q || c === q || c.indexOf(q) >= 0 || c.indexOf(qs) >= 0;
       });
     }
     if (opts.search) {
