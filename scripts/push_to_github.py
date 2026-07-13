@@ -141,12 +141,35 @@ print(f"  ChefMinistry → Push to GitHub")
 print(f"  Repo: {REPO}")
 print(f"{'='*55}\n")
 
+def file_safe_to_push(local_file: pathlib.Path) -> bool:
+    """กันไฟล์เสีย/ขาด (torn write) ขึ้น repo — เคยเกิด 2026-07-12:
+    listing.html ท้ายไฟล์หายถูก push ทับของดี ทำหน้า Discover พังทั้งหน้า"""
+    suffix = local_file.suffix.lower()
+    try:
+        if suffix in (".html", ".htm"):
+            txt = local_file.read_bytes().decode("utf-8")
+            if not txt.rstrip().endswith("</html>"):
+                print(f"⛔  {local_file.name} ท้ายไฟล์ไม่ใช่ </html> — ไฟล์อาจขาด")
+                return False
+        elif suffix == ".py":
+            compile(local_file.read_bytes().decode("utf-8"), str(local_file), "exec")
+        elif suffix in (".yml", ".yaml", ".json", ".js", ".css", ".txt", ".xml"):
+            local_file.read_bytes().decode("utf-8")  # อย่างน้อยต้อง decode ได้
+    except Exception as e:
+        print(f"⛔  {local_file.name} เสีย ({str(e)[:60]}) — ข้าม")
+        return False
+    return True
+
+
 def push_file(local_file, gh_path):
     if not local_file.exists():
         print(f"⚠️   ไม่พบไฟล์ {local_file.name} — ข้ามไป")
         return
     if not sqlite_safe_to_push(local_file):
         print(f"⛔  ข้าม {gh_path} เพื่อความปลอดภัย\n")
+        return
+    if not file_safe_to_push(local_file):
+        print(f"⛔  ข้าม {gh_path} — ไฟล์ local ไม่สมบูรณ์ (แก้ไฟล์ก่อนแล้วค่อย push)\n")
         return
     file_bytes = local_file.read_bytes()
     encoded    = base64.b64encode(file_bytes).decode()
