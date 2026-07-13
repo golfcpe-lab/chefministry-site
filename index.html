@@ -686,8 +686,8 @@
 <script src="./js/firebase-config.js?v=20260501a"></script>
 <script src="./js/auth.js?v=20260501a"></script>
 <script src="./js/safeDataAdapter.js?v=20260501a"></script>
-<script src="./js/data.js?v=202607131447"></script>
-<script src="./js/dataService.js?v=202607131447"></script>
+<script src="./js/data.js?v=202607130742"></script>
+<script src="./js/dataService.js?v=202607130742"></script>
 <script src="./js/quickpick.js?v=20260712a"></script>
 <script src="./js/creatorbuzz.js?v=20260709a"></script>
 <script src="./js/microfx.js?v=20260708b"></script>
@@ -956,7 +956,7 @@
           return '<div style="display:inline-flex;align-items:center;gap:5px;padding:6px 12px;background:'+bg+';border:1px solid '+border+';border-radius:99px">'
             + '<span style="font-size:13px">'+emoji+'</span>'
             + '<span style="font-size:11px;font-weight:800;color:var(--text-1)">'+escHtml(t.cat)+'</span>'
-            + '<span style="font-size:11px;font-weight:900;color:'+color+'">'+escHtml(t.change)+'</span>'
+            + '<span style="font-size:11px;font-weight:900;color:'+color+'">'+escHtml(t.change || ((t.influencers||0)+' ช่อง reviews'))+'</span>'
             + '</div>';
         }).join('')
       + '</div>';
@@ -977,7 +977,7 @@
     // Sort by % descending, NaN (Crowded/—) goes last
     var sorted = [].concat(CM_SIGNALS.trendCategories).sort(function(a,b){
       var va = parseInt(a.change), vb = parseInt(b.change);
-      if (isNaN(va) && isNaN(vb)) return 0;
+      if (isNaN(va) && isNaN(vb)) return (b.mentions||0) - (a.mentions||0);
       if (isNaN(va)) return 1;
       if (isNaN(vb)) return -1;
       return vb - va;
@@ -995,7 +995,8 @@
         var hasVal  = !isNaN(val);
         var isDec   = hasVal && val < 0;
         var isStable= t.signal === 'stable' || t.signal === 'moderate' || !hasVal;
-        var barW    = hasVal ? Math.min(Math.abs(val) * 1.5, 100) : 5;
+        // ยังไม่มี history เทียบ % → ใช้จำนวนรีวิวจริงเป็นความยาวแท่งแทน
+        var barW    = hasVal ? Math.min(Math.abs(val) * 1.5, 100) : Math.min((t.mentions||0) * 12, 100) || 5;
         var barColor= isDec ? '#f87171' : isStable ? 'rgba(255,255,255,.25)' : '#4ade80';
         var numColor= isDec ? '#f87171' : !hasVal ? 'rgba(255,255,255,.3)' : '#4ade80';
         var emoji   = CAT_EMOJI[t.cat] || '🍽️';
@@ -1022,7 +1023,7 @@
           +'</div>'
           // % badge
           +'<div style="font-size:13px;font-weight:900;color:'+numColor+';flex-shrink:0;min-width:38px;text-align:right">'
-          +escHtml(t.change)+'</div>'
+          +escHtml(t.change || (t.mentions ? t.mentions + ' รีวิว' : '—'))+'</div>'
           +'</div>';
       }).join('');
     }
