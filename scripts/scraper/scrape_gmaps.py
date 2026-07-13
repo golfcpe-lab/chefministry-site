@@ -288,6 +288,55 @@ def save_gmaps_meta(restaurant_id: str, result: dict):
         ))
 
 
+# ── Blocklist ─────────────────────────────────────────────────────────────────
+
+def load_blocklist():
+    """place_id + ชื่อร้านที่แบน (listing ปลอม/โรงแรม ฯลฯ) — ดู blocklist.json
+    ร้านใน blocklist จะไม่ถูก scrape/refresh เลย (ประหยัด API + กันข้อมูลขยะ)"""
+    ids, names = set(), set()
+    try:
+        p = pathlib.Path(__file__).parent / "blocklist.json"
+        if p.exists():
+            for e in json.loads(p.read_text(encoding="utf-8")):
+                if e.get("place_id"): ids.add(e["place_id"].strip())
+                if e.get("name"):     names.add(e["name"].strip())
+    except Exception as e:
+        print(f"  ⚠️ blocklist load error: {e}")
+    return ids, names
+
+
+# ── Refresh existing restaurant (มี place_id แล้ว) ────────────────────────────
+
+def refresh_restaurant(row: dict, api_key: str) -> dict:
+    """ร้านที่มี gmaps_place_id แล้ว — เรียก Place Details ตรงๆ (ไม่ต้อง find_place,
+    ถูกกว่าครึ่งนึง) เพื่อเก็บ snapshot รายวัน → velocity คำนวณได้จริง"""
+    place_id = (row.get("gmaps_place_id") or "").strip()
+    if not place_id:
+        return {"status": "not_found"}
+    details = get_place_details(place_id, api_key)
+    if not details:
+        return {"status": "not_found"}
+    _loc = details.get("location") or {}
+    gmaps_types = []
+    pt = details.get("primaryType") or ""
+    if pt:
+        gmaps_types.append(pt)
+    gmaps_types.extend(details.get("types") or [])
+    gmaps_types = list(dict.fromkeys(t for t in gmaps_types if t))
+    return {
+        "status":                "ok",
+        "gmaps_place_id":        place_id,
+        "gmaps_name":            (details.get("displayName") or {}).get("text", ""),
+        "gmaps_rating":          float(details.get("rating") or 0),
+        "gmaps_review_count":    int(details.get("userRatingCount") or 0),
+        "gmaps_address":         details.get("formattedAddress", ""),
+        "gmaps_business_status": details.get("businessStatus", "OPERATIONAL"),
+        "gmaps_types":           gmaps_types,
+        "gmaps_lat":             _loc.get("latitude"),
+        "gmaps_lng":             _loc.get("longitude"),
+    }
+
+
 # ── Main ───────────────────────────────────────────────────────────────────────
 
 def run(
@@ -337,6 +386,36 @@ def run(
             query += f" LIMIT {limit}"
         rows = [dict(r) for r in conn.execute(query, params).fetchall()]
 
+        # ── ร้านเดิมที่มี place_id: refresh หมุนเวียน (เก่าสุดก่อน) ──────────
+        # เดิม query ข้างบนกรอง place_id IS NULL อย่างเดียว → ร้านเดิมไม่เคยได้
+        # snapshot ใหม่เลย = velocity เป็น 0 ตลอดกาล. เติม refresh ให้เต็ม limit
+        refresh_rows = []
+        if "gmaps_place_id" in existing_cols:
+            q2 = ("SELECT id, name, area, source, gmaps_place_id FROM restaurants"
+                  " WHERE gmaps_place_id IS NOT NULL AND gmaps_place_id != ''"
+                  " AND (business_status IS NULL OR business_status != 'CLOSED_PERMANENTLY')"
+                  " ORDER BY last_updated ASC")
+            refresh_rows = [dict(r) for r in conn.execute(q2).fetchall()]
+
+    # ── Blocklist: ข้ามร้านที่แบนตั้งแต่ต้นทาง (ไม่เรียก API เลย) ────────────
+    bl_ids, bl_names = load_blocklist()
+    def _blocked(r):
+        return ((r.get("gmaps_place_id") or "").strip() in bl_ids
+                or (r.get("name") or "").strip() in bl_names)
+    n_before = len(rows) + len(refresh_rows)
+    rows         = [r for r in rows if not _blocked(r)]
+    refresh_rows = [r for r in refresh_rows if not _blocked(r)]
+    n_blocked = n_before - len(rows) - len(refresh_rows)
+    if n_blocked:
+        print(f"  🚫 ข้าม {n_blocked} ร้านใน blocklist")
+
+    # ร้านใหม่ก่อน แล้วเติม refresh จนเต็ม limit (คุมงบ API/วัน)
+    if limit:
+        rows = rows[:limit]
+        rows = rows + refresh_rows[: max(0, limit - len(rows))]
+    else:
+        rows = rows + refresh_rows
+
     if not rows:
         print("  ℹ️  ไม่มีร้านใน DB — รัน scrape_wongnai_v5.py ก่อน")
         return
@@ -362,7 +441,10 @@ def run(
         if i % 10 == 0 or i == 1 or i == n:
             print(f"  [{i}/{n}] {name[:35]:<35} ({area_r})")
 
-        result = process_restaurant(row, api_key)
+        if row.get("gmaps_place_id"):
+            result = refresh_restaurant(row, api_key)   # มี place_id แล้ว — details อย่างเดียว
+        else:
+            result = process_restaurant(row, api_key)
 
         if result["status"] == "ok" and result["gmaps_review_count"] > 0:
             # บันทึก snapshot
