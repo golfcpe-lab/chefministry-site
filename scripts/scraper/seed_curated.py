@@ -27,12 +27,20 @@ SEED_FILE = pathlib.Path(__file__).parent / "curated_seed.json"
 PREMIUM_HINTS = ("fine dining", "omakase", "steakhouse", "progressive", "samrub")
 
 
+def _latin(s: str) -> str:
+    return re.sub(r"[^a-z0-9]", "", (s or "").lower())
+
+
 def name_matches(query_name: str, found_name: str) -> bool:
-    """กันจับร้านผิด: ชื่อที่เจอต้องคล้ายชื่อที่ค้นพอสมควร"""
+    """กันจับร้านผิด: ชื่อที่เจอต้องคล้ายชื่อที่ค้นพอสมควร
+    (เทียบส่วนละตินแยกด้วย — GMaps มักคืนชื่อไทย/ทับศัพท์)"""
     a, b = norm_name(query_name), norm_name(found_name)
     if not a or not b:
         return False
     if a in b or b in a:
+        return True
+    la, lb = _latin(query_name), _latin(found_name)
+    if len(la) >= 4 and len(lb) >= 4 and (la in lb or lb in la):
         return True
     # เทียบเฉพาะส่วนอังกฤษ/ไทยแยกกันด้วย เพราะชื่อมักผสมสองภาษา
     for part in re.split(r"\s+", query_name):
@@ -73,7 +81,8 @@ def main():
             skipped += 1
             continue
 
-        place = find_place(name, area, GOOGLE_MAPS_API_KEY)
+        # lang="en" — ให้ชื่อกลับมาเป็นละติน จะได้เทียบกับชื่อค้นได้
+        place = find_place(name, area, GOOGLE_MAPS_API_KEY, lang="en")
         time.sleep(DELAY)
         if not place:
             missed.append(name + " (search ไม่เจอ)")
