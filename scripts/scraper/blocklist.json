@@ -1,0 +1,14 @@
+[
+  {
+    "place_id": "ChIJFYf_MI1hHTERmV2U89HVyko",
+    "name": "Wall Street華爾街冰滴咖啡（十六浦店）",
+    "added": "2026-07-13",
+    "reason": "Spam listing cloning Macau chain (十六浦 = Ponte 16, Macau). 24k reviews implausible for a Lat Phrao cafe; not findable via GMaps search."
+  },
+  {
+    "place_id": "ChIJP5u9pGCZ4jARukuKPYb6FeY",
+    "name": "BANYAN",
+    "added": "2026-07-13",
+    "reason": "Banyan Tree Bangkok hotel listing (gmaps_types=[hotel], Thai Wah Plaza Sathorn). 16k hotel reviews, not a restaurant."
+  }
+]
