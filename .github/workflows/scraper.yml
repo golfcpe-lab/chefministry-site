@@ -312,6 +312,14 @@ jobs:
           cd scripts/scraper
           python export_signals.py --inject
 
+      # ── Auto cache-bust: data.js เปลี่ยนทุกคืนแต่ ?v= ไม่เคยขยับ ──
+      # browser จึง cache ของเก่าได้ → ประทับ stamp ใหม่ทุกรอบที่ inject
+      - name: Stamp cache-bust versions in HTML
+        run: |
+          STAMP=$(date +%Y%m%d%H%M)
+          sed -i -E "s/(data\.js\?v=)[0-9a-zA-Z]+/\1$STAMP/g; s/(dataService\.js\?v=)[0-9a-zA-Z]+/\1$STAMP/g" *.html
+          echo "stamped v=$STAMP"
+
       - name: Validate schema v2 in exported JSON
         run: |
           python -c "
@@ -337,7 +345,7 @@ jobs:
         run: |
           git config user.name  "ChefMinistry Bot"
           git config user.email "bot@chefministry.com"
-          git add scripts/scraper/export_restaurants.json scripts/scraper/chefministry_data.db js/data.js || true
+          git add scripts/scraper/export_restaurants.json scripts/scraper/chefministry_data.db js/data.js *.html || true
           git diff --staged --quiet || git commit -m "auto: daily signal update $(date +'%Y-%m-%d')"
           git pull --rebase origin main
 
