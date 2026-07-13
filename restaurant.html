@@ -267,8 +267,8 @@
 <script src="./js/firebase-config.js?v=20260414b"></script>
 <script src="./js/auth.js?v=20260414b"></script>
 <script src="./js/safeDataAdapter.js?v=20260501a"></script>
-<script src="./js/data.js?v=202607131414"></script>
-<script src="./js/dataService.js?v=202607131414"></script>
+<script src="./js/data.js?v=20260712b"></script>
+<script src="./js/dataService.js?v=20260712f"></script>
 <script>
   document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
     const n=document.getElementById("mobileNav");
@@ -321,6 +321,9 @@
 
   if(!r){
     document.getElementById("heroName").textContent="ไม่พบร้านนี้";
+    document.getElementById("breadcrumbName").textContent="ไม่พบร้าน";
+    // ลิงก์เก่า (เช่นร้าน demo r001–r035 ที่ถูกลบ) → พากลับหน้า Discover
+    setTimeout(()=>{ location.href="listing.html"; }, 2500);
   } else {
     document.title=`${r.name} — ChefMinistry`;
     document.getElementById("pageTitle").textContent=`${r.name} — ChefMinistry`;
@@ -412,7 +415,10 @@
     // Reviewer list (first 5, rest blurred for Pro)
     const reviewerListEl=document.getElementById("reviewerList");
     const freeCount=3;
-    reviewerListEl.innerHTML=r.recentReviewers.slice(0,freeCount).map(rid=>{
+    reviewerListEl.innerHTML=(!r.recentReviewers.length)?`
+      <div style="padding:10px 0;font-size:13px;color:var(--text-2);line-height:1.6">
+        ยังไม่มีข้อมูล creator รีวิวร้านนี้ — ดูรีวิวจากช่องดังได้ที่ Creator Buzz บนหน้าแรก
+      </div>`:r.recentReviewers.slice(0,freeCount).map(rid=>{
       const inf=getInfluencerById(rid);
       if(!inf) return "";
       return `<div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--border)">
