@@ -101,6 +101,14 @@ GMAPS_CAFE_TYPES = {
 GMAPS_KIOSK_TYPES = {"kiosk"}
 GMAPS_STREET_FOOD_TYPES = {"street_food_gathering", "food_stand", "meal_takeaway"}
 GMAPS_TAKEAWAY_TYPES = {"meal_takeaway", "fast_food_restaurant"}
+# Venue types ที่ไม่ใช่ร้านอาหารแน่ๆ (โรงแรม/ห้าง ฯลฯ) — ถ้าเจอ type กลุ่มนี้
+# โดยไม่มี food type ร่วมเลย ให้ตัดออกจาก scope (เคส BANYAN = Banyan Tree hotel
+# 16k รีวิวโรงแรม หลุดเข้า trending เพราะ cuisine="Thai")
+GMAPS_NON_FOOD_TYPES = {
+    "hotel", "lodging", "motel", "resort_hotel", "extended_stay_hotel",
+    "guest_house", "hostel", "bed_and_breakfast", "campground",
+    "shopping_mall", "spa", "travel_agency", "tourist_information_center",
+}
 
 # -- Cuisine / type keyword heuristics ----------------------------------------
 CAFE_CUISINE_KEYWORDS = {
@@ -145,6 +153,10 @@ def _gmaps_venue_type(gmaps_types):
     if not gmaps_types:
         return None
     types_set = {t.lower() for t in gmaps_types}
+    _food_types = (GMAPS_RESTAURANT_TYPES | GMAPS_CAFE_TYPES | GMAPS_KIOSK_TYPES
+                   | GMAPS_STREET_FOOD_TYPES | GMAPS_TAKEAWAY_TYPES)
+    if (types_set & GMAPS_NON_FOOD_TYPES) and not (types_set & _food_types):
+        return "non_food_venue"
     if types_set & GMAPS_KIOSK_TYPES:
         return "kiosk"
     if types_set & GMAPS_STREET_FOOD_TYPES:
@@ -308,6 +320,12 @@ def classify_record(record):
     elif vt == "takeaway_only":
         scope_market        = "out_of_scope_format"
         exclude_reason      = "takeaway_only"
+        is_restaurant_focus = False
+
+    elif vt == "non_food_venue":
+        # โรงแรม/ห้าง ฯลฯ ที่ GMaps ไม่แท็ก food type ใดๆ เลย
+        scope_market        = "out_of_scope_format"
+        exclude_reason      = "non_food_venue"
         is_restaurant_focus = False
 
     elif vt == "unknown":
