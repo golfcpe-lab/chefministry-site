@@ -704,13 +704,26 @@
   (function () {
     try {
       var cats = (typeof CM_SIGNALS !== "undefined" && CM_SIGNALS.trendCategories) || [];
+      // token-based match: "Thai Fine Dining" ต้องเจอทุกคำใน cuisine (เช่น "Modern Thai Fine Dining")
+      function catRestaurants(cat) {
+        var toks = String(cat).toLowerCase().split(/[^a-z0-9ก-๙]+/).filter(Boolean);
+        var pool = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined" ? CM_EXTERNAL_RESTAURANTS : []);
+        return pool.filter(function (r) {
+          var c = ((r.cuisine_normalized || r.cuisine || "") + " " + (r.cuisine_raw || "")).toLowerCase();
+          return toks.every(function (t) { return c.indexOf(t) >= 0; });
+        }).sort(function (a, b) {
+          var sa = (a.rating_gmaps || 4) * Math.log10((a.totalReviews || 0) + 1);
+          var sb = (b.rating_gmaps || 4) * Math.log10((b.totalReviews || 0) + 1);
+          return sb - sa;
+        });
+      }
       var pick = null, top3 = [];
       for (var i = 0; i < cats.length; i++) {
-        var rows = ChefMinistryData.getCategoryTopN(cats[i].cat, 8);
-        // ร้านจริงจาก scraper ก่อน — curated demo เป็นตัวเติม
-        var real = rows.filter(function (r) { return r._fromDB; });
-        var merged = real.concat(rows.filter(function (r) { return !r._fromDB; })).slice(0, 3);
-        if (merged.length >= 3) { pick = cats[i]; top3 = merged; break; }
+        // ต้องมี signal จริงพอ (รีวิว ≥2 หรือ ≥2 ช่อง) ถึงเรียกว่า "กำลังมาแรง"
+        if ((cats[i].mentions || 0) < 2 && (cats[i].influencers || 0) < 2) continue;
+        var rows = ChefMinistryData.getCategoryTopN(cats[i].cat, 8).filter(function (r) { return r._fromDB; });
+        if (rows.length < 3) rows = catRestaurants(cats[i].cat);
+        if (rows.length >= 2) { pick = cats[i]; top3 = rows.slice(0, 3); break; }
       }
       if (!pick) return; // คง fallback static
       document.getElementById("hotCatTitle").textContent =
