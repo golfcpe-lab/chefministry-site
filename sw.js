@@ -7,7 +7,7 @@
 // อัปเดตเวอร์ชันทุกครั้งที่ deploy เพื่อล้าง cache เก่า
 // ─────────────────────────────────────────────────────────────────────────────
 
-const CACHE_VERSION = "cm-v20260712a";
+const CACHE_VERSION = "cm-v20260713a";
 const PRECACHE = [
   "/",
   "/index.html",
@@ -19,7 +19,9 @@ const PRECACHE = [
 
 self.addEventListener("install", (e) => {
   e.waitUntil(
-    caches.open(CACHE_VERSION).then((c) => c.addAll(PRECACHE)).then(() => self.skipWaiting())
+    caches.open(CACHE_VERSION)
+      .then((c) => c.addAll(PRECACHE.map((u) => new Request(u, { cache: "reload" }))))
+      .then(() => self.skipWaiting())
   );
 });
 
@@ -36,6 +38,7 @@ function isNetworkFirst(url) {
     url.pathname.endsWith(".html") ||
     url.pathname === "/" ||
     url.pathname.endsWith("/data.js") ||
+    url.pathname.endsWith("/dataService.js") ||
     url.pathname.endsWith("/geo.js")
   );
 }
