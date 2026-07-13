@@ -70,6 +70,8 @@ ROOT_FILES = [
     ("scraper/inject_youtube.py",    "scripts/scraper/inject_youtube.py"),
     ("scraper/canonical.py",         "scripts/scraper/canonical.py"),
     ("scraper/blocklist.json",       "scripts/scraper/blocklist.json"),
+    ("scraper/seed_curated.py",      "scripts/scraper/seed_curated.py"),
+    ("scraper/curated_seed.json",    "scripts/scraper/curated_seed.json"),
     ("scraper/area_fix.py",          "scripts/scraper/area_fix.py"),
     ("scraper/process_suggestions.py", "scripts/scraper/process_suggestions.py"),
     # ⛔ ไฟล์ generated — pipeline บน GitHub เป็นเจ้าของ ห้าม push จากเครื่องเด็ดขาด:
