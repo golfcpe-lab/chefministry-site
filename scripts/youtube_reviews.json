@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-12",
+  "generated_at": "2026-07-13",
   "days_window": 7,
-  "total": 19,
+  "total": 20,
   "reviews": [
     {
       "influencer": "Peach Eat Laek",
@@ -10,7 +10,7 @@
       "restaurant": "หรอยแรง บางกอก",
       "cuisine": "Thai",
       "area": "ลาดพร้าว",
-      "rating": "above_average",
+      "rating": "exceed",
       "confidence": "high",
       "video_title": "อาหารใต้สูตร 100 ปี ของดีเกาะยอ",
       "video_url": "https://youtube.com/watch?v=-N3cXdGRwjM",
@@ -43,17 +43,30 @@
       "published": "2026-07-07"
     },
     {
-      "influencer": "Peach Eat Laek",
-      "handle": "@PeachEatLaek",
-      "tier": "Mega",
-      "restaurant": "โอวก๋วยเตี๋ยวพริกสด",
+      "influencer": "ชีวิตติดรีวิว",
+      "handle": "@Tid_Review",
+      "tier": "Macro",
+      "restaurant": "หมูทอดแม่ตุ่ม",
       "cuisine": "Thai",
-      "area": "Bangkok",
+      "area": "Pattaya",
       "rating": "above_average",
       "confidence": "high",
-      "video_title": "โอวก๋วยเตี๋ยวพริกสด แค่ชื่อก็บอกแล้ว แซ่บสะใจ #ก๋วยเตี๋ยว #โอวก๋วยเตี๋ยวพริกสด #พีช #พีชอีทแหลก",
-      "video_url": "https://youtube.com/watch?v=ZRl0J3XUhSA",
-      "published": "2026-07-07"
+      "video_title": "หมูทอดแม่ตุ่มพัทยา พริกทอดกระเทียมเจียวจุกๆ เอาใจคนรักกระเทียมแบบสุดๆ",
+      "video_url": "https://youtube.com/watch?v=jicu6qpVY78",
+      "published": "2026-07-13"
+    },
+    {
+      "influencer": "ชีวิตติดรีวิว",
+      "handle": "@Tid_Review",
+      "tier": "Macro",
+      "restaurant": "หมูอย่าลังเลเหลียวหลัง",
+      "cuisine": "Thai",
+      "area": "Pattaya",
+      "rating": "above_average",
+      "confidence": "high",
+      "video_title": "หมูทอดแม่ตุ่มพัทยา พริกทอดกระเทียมเจียวจุกๆ เอาใจคนรักกระเทียมแบบสุดๆ",
+      "video_url": "https://youtube.com/watch?v=jicu6qpVY78",
+      "published": "2026-07-13"
     },
     {
       "influencer": "ชีวิตติดรีวิว",
@@ -101,7 +114,7 @@
       "restaurant": "ร้านเด็ดย่านจอมทอง",
       "cuisine": "Thai",
       "area": "จอมทอง",
-      "rating": "exceed",
+      "rating": "above_average",
       "confidence": "high",
       "video_title": "#ไก่ทอดหม้อเตาถ่าน ตำนานไก่ทอดเตาถ่านกว่า 20 ปี ไก่ทอดกรอบนอกฉ่ำใน ร้านเด็ดย่านจอมทอง",
       "video_url": "https://youtube.com/watch?v=jfvXIkTBaWI",
@@ -147,19 +160,6 @@
       "published": "2026-07-11"
     },
     {
-      "influencer": "ชีวิตติดรีวิว",
-      "handle": "@Tid_Review",
-      "tier": "Macro",
-      "restaurant": "ส้มตำหน้ายูเนียนมอลล์",
-      "cuisine": "Thai",
-      "area": "หน้ายูเนียนมอลล์",
-      "rating": "above_average",
-      "confidence": "high",
-      "video_title": "ส้มตำคิวแน่นร้าน ร้านเด็ดหน้ายูเนียนมอลล์คนรุมหนัก จนต้องรอคิว 2 ชั่วโมง !!",
-      "video_url": "https://youtube.com/watch?v=F4IUk1DPKfo",
-      "published": "2026-07-10"
-    },
-    {
       "influencer": "EaterOat",
       "handle": "@EaterOat",
       "tier": "Macro",
@@ -167,7 +167,7 @@
       "cuisine": "Thai",
       "area": "Bangkok",
       "rating": "above_average",
-      "confidence": "medium",
+      "confidence": "high",
       "video_title": "โก๊ะตี๋ข้าวมันไก่ ปี 2026.. ยังเปิดอยู่มั้ยหน้อออ??",
       "video_url": "https://youtube.com/watch?v=F6-U7H2pwMo",
       "published": "2026-07-11"
@@ -178,9 +178,9 @@
       "tier": "Macro",
       "restaurant": "ร้านลาบบ้านเหนือ",
       "cuisine": "Thai",
-      "area": "Chiang Rai",
+      "area": "Golden Triangle",
       "rating": "above_average",
-      "confidence": "high",
+      "confidence": "medium",
       "video_title": "สามเหลี่ยมทองคำ จุดที่เห็นทั้งไทย ลาว เมียนมา ได้ในครั้งเดียว",
       "video_url": "https://youtube.com/watch?v=IcW26T2R4Jw",
       "published": "2026-07-11"
@@ -191,7 +191,7 @@
       "tier": "Macro",
       "restaurant": "Anantara Golden Triangle Elephant Camp & Resort",
       "cuisine": "Fine Dining",
-      "area": "Chiang Rai",
+      "area": "Golden Triangle",
       "rating": "exceed",
       "confidence": "high",
       "video_title": "สามเหลี่ยมทองคำ จุดที่เห็นทั้งไทย ลาว เมียนมา ได้ในครั้งเดียว",
@@ -223,6 +223,19 @@
       "video_title": "วัชรพล..คนกินดึก • 4 ร้านเด็ด ร้านประจำ..หิวเมื่อไหร่ต้องแวะกิน l เกี้ยแซ่บบ 2026:40",
       "video_url": "https://youtube.com/watch?v=uzmNEeMAMnI",
       "published": "2026-07-07"
+    },
+    {
+      "influencer": "EatGuide",
+      "handle": "@EatGuide",
+      "tier": "Mid",
+      "restaurant": "Dozenut",
+      "cuisine": "Japanese",
+      "area": "Ekkamai",
+      "rating": "above_average",
+      "confidence": "high",
+      "video_title": "โดนัทญี่ปุ่นคิวยาวว! ร้านดังย่านเอกมัย ทีแป้งนุ่มหนึบนึกว่าสกุชชี่ 📍: Dozenut เอกมัย #eatguide",
+      "video_url": "https://youtube.com/watch?v=7eRj-jbMMKE",
+      "published": "2026-07-13"
     },
     {
       "influencer": "EatGuide",
