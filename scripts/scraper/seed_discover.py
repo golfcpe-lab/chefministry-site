@@ -14,7 +14,7 @@ Usage:
 import argparse, json, re, sys, urllib.request
 
 from db import init_db, upsert_restaurant, record_snapshot, get_conn
-from scrape_gmaps import save_gmaps_meta
+from scrape_gmaps import save_gmaps_meta, load_blocklist
 from config import GOOGLE_MAPS_API_KEY
 
 SEARCH_URL = "https://places.googleapis.com/v1/places:searchText"
@@ -105,6 +105,9 @@ def main():
     known_names = {norm_name(r["name"]) for r in rows}
     seen_brands = set()
 
+    # blocklist: listing ปลอม/โรงแรม — ห้าม seed กลับเข้ามาอีก
+    bl_ids, bl_names = load_blocklist()
+
     added = 0
     print(f"\n{'='*55}\n  ChefMinistry — Seed Discovery (premium mass)\n{'='*55}")
     for query, cuisine in QUERIES:
@@ -126,6 +129,7 @@ def main():
             loc    = p.get("location") or {}
 
             if not pid or not name: continue
+            if pid in bl_ids or name.strip() in bl_names: continue  # blocklisted
             if pid in known_ids or norm_name(name) in known_names: continue
             if brand_key(name) in seen_brands: continue
             if rating < MIN_RATING or urc < MIN_REVIEWS: continue
