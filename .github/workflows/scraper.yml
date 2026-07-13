@@ -157,6 +157,15 @@ jobs:
           cd scripts/scraper
           python seed_discover.py --max-new 100
 
+      # ── Seed curated classics: ร้านดังที่เคยเป็น mockup — ingest ข้อมูลจริง ──
+      - name: Seed curated classics (manual runs only)
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+        run: |
+          cd scripts/scraper
+          python seed_curated.py
+
       # ไม่มี continue-on-error แล้ว — scrape พัง = job แดง = ได้ email แจ้งเตือน
       - name: Run GMaps scraper
         env:
