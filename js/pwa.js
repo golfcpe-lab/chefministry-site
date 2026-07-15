@@ -16,6 +16,7 @@ const CM_PWA = (() => {
     window.matchMedia("(display-mode: standalone)").matches ||
     window.navigator.standalone === true;
   const IS_IOS = /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
+  const IS_SAMSUNG = /SamsungBrowser/i.test(navigator.userAgent);
 
   // ── 1. Service worker ─────────────────────────────────────────────────────
   if ("serviceWorker" in navigator) {
@@ -78,6 +79,12 @@ const CM_PWA = (() => {
         return;
       }
       if (_deferredPrompt) {
+        // Samsung Internet ห่อ PWA เป็น APK ที่ target SDK เก่า → Play Protect
+        // จะเตือน "Unsafe app blocked" กับทุก PWA — แจ้งผู้ใช้ล่วงหน้าว่าปกติ
+        if (IS_SAMSUNG && !document.getElementById("cmPwaSamsungNote")) {
+          _showSamsungNote();
+          return;
+        }
         _deferredPrompt.prompt();
         const choice = await _deferredPrompt.userChoice;
         if (choice && choice.outcome === "accepted") _removeBtn();
@@ -88,6 +95,37 @@ const CM_PWA = (() => {
     });
 
     document.body.appendChild(wrap);
+  }
+
+  function _showSamsungNote() {
+    const m = document.createElement("div");
+    m.id = "cmPwaSamsungNote";
+    m.style.cssText =
+      "position:fixed;inset:0;z-index:10000;background:rgba(15,31,60,.55);" +
+      "display:flex;align-items:flex-end;justify-content:center";
+    m.innerHTML =
+      '<div style="background:#fff;border-radius:18px 18px 0 0;padding:24px 22px 34px;max-width:420px;width:100%;font-size:14.5px;line-height:1.7;color:#0f1f3c">' +
+      '<div style="font-weight:800;font-size:17px;margin-bottom:10px">📲 ก่อนติดตั้งบน Samsung Internet</div>' +
+      '<div>เบราว์เซอร์ Samsung อาจขึ้นเตือน <b>"Unsafe app blocked"</b> จาก Play Protect — ' +
+      'เป็นพฤติกรรมของ Samsung Internet กับเว็บแอปทุกตัว ไม่ใช่ปัญหาของ ChefMinistry</div>' +
+      '<div style="margin-top:8px">เลือกได้ 2 ทาง: กด <b>Install anyway</b> (ปลอดภัย — เป็นแค่ shortcut ของเว็บนี้) ' +
+      'หรือติดตั้งผ่าน <b>Chrome</b> จะไม่มีคำเตือน</div>' +
+      '<button id="cmPwaSamsungGo" style="margin-top:16px;width:100%;padding:12px;border:0;border-radius:10px;background:#0f1f3c;color:#fff;font-weight:700;font-size:15px">ติดตั้งต่อ</button>' +
+      '<button id="cmPwaSamsungCancel" style="margin-top:8px;width:100%;padding:11px;border:1px solid #d8d5cc;border-radius:10px;background:#fff;color:#0f1f3c;font-weight:700;font-size:14px">ไว้ก่อน</button>' +
+      "</div>";
+    m.addEventListener("click", async (ev) => {
+      if (ev.target === m || ev.target.id === "cmPwaSamsungCancel") { m.remove(); return; }
+      if (ev.target.id === "cmPwaSamsungGo") {
+        m.remove();
+        if (_deferredPrompt) {
+          _deferredPrompt.prompt();
+          const choice = await _deferredPrompt.userChoice;
+          if (choice && choice.outcome === "accepted") _removeBtn();
+          _deferredPrompt = null;
+        }
+      }
+    });
+    document.body.appendChild(m);
   }
 
   function _showIosGuide() {
