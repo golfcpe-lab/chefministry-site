@@ -1,0 +1,786 @@
+[
+ {
+  "name": "THAO MATCHA",
+  "area": "คลองเตย",
+  "lat": 13.71523,
+  "lng": 100.55415,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Gatcha Matcha",
+  "area": "วัฒนา",
+  "lat": 13.74549,
+  "lng": 100.55202,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Matcha Hachine โชคชัย4",
+  "area": "ลาดพร้าว",
+  "lat": 13.80587,
+  "lng": 100.6075,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Hon to Shiki",
+  "area": "บางแคเหนือ",
+  "lat": 13.7142,
+  "lng": 100.40909,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "NEKO MATCHA",
+  "area": "ธนบุรี",
+  "lat": 13.7216,
+  "lng": 100.4768,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "ORI matcha",
+  "area": "ราชเทวี",
+  "lat": 13.7518,
+  "lng": 100.53692,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Koyo Tearoom - SongWat Road (Japanese Matcha & Cafe)",
+  "area": "สัมพันธวงศ์",
+  "lat": 13.73824,
+  "lng": 100.50795,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Brown Matcha House",
+  "area": "ดุสิต",
+  "lat": 13.75879,
+  "lng": 100.51503,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "sof.matcha&creamybakery",
+  "area": "สวนหลวง",
+  "lat": 13.74083,
+  "lng": 100.63315,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Palmmetto studio",
+  "area": "สายไหม",
+  "lat": 13.90404,
+  "lng": 100.63467,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Wazuka Cha Premium Kyoto Tea by AAN Foods",
+  "area": "ราชเทวี",
+  "lat": 13.75062,
+  "lng": 100.53726,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "3Cha matcha cafe",
+  "area": "ทวีวัฒนา",
+  "lat": 13.77227,
+  "lng": 100.3374,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Matcha Vibes Co. (ร้านมัทฉะ ไวบส์)",
+  "area": "ราชเทวี",
+  "lat": 13.76521,
+  "lng": 100.52571,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Sanji Matcha Bar",
+  "area": "บางนา",
+  "lat": 13.66512,
+  "lng": 100.60263,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "SETSU Matcha & Gelato (Wabi-sabi)",
+  "area": "ทุ่งครุ",
+  "lat": 13.61407,
+  "lng": 100.51021,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Umi matchabar",
+  "area": "สวนหลวง",
+  "lat": 13.74638,
+  "lng": 100.63154,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Komori Tea House",
+  "area": "ตลิ่งชัน",
+  "lat": 13.75769,
+  "lng": 100.44385,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Yugen Cha",
+  "area": "กรุงเทพ",
+  "lat": 13.72855,
+  "lng": 100.53377,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Matcha commonly",
+  "area": "บางรัก",
+  "lat": 13.72111,
+  "lng": 100.51638,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "The Matcha Club (เดอะมัทฉะคลับ) - Specialty Matcha",
+  "area": "บึงกุ่ม",
+  "lat": 13.82813,
+  "lng": 100.64156,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Sandori Teahouse | Matcha Café มัทฉะพรีเมียม",
+  "area": "จอมพล",
+  "lat": 13.80241,
+  "lng": 100.55966,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Matcha Madness Club",
+  "area": "จตุจักร",
+  "lat": 13.83308,
+  "lng": 100.57103,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "House of Matcha",
+  "area": "ปทุมวัน",
+  "lat": 13.74851,
+  "lng": 100.5281,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "คัทซึเตะ มัทฉะ สาขาบรรทัดทอง",
+  "area": "ปทุมวัน",
+  "lat": 13.74787,
+  "lng": 100.52376,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "calmandcoff cafe",
+  "area": "สวนหลวง",
+  "lat": 13.74346,
+  "lng": 100.6369,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "MATCHAMARU - Songwat : มัทฉะมารุ สาขาทรงวาด",
+  "area": "สัมพันธวงศ์",
+  "lat": 13.73821,
+  "lng": 100.50695,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Hidden leaf matcha (ทรงวาด)",
+  "area": "สัมพันธวงศ์",
+  "lat": 13.73677,
+  "lng": 100.50988,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "safe-fu house",
+  "area": "บางแคเหนือ",
+  "lat": 13.71467,
+  "lng": 100.38906,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Vintage 41 Matcha Bar",
+  "area": "จตุจักร",
+  "lat": 13.80434,
+  "lng": 100.58503,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Craft fé Khlong San",
+  "area": "คลองสาน",
+  "lat": 13.73115,
+  "lng": 100.50577,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Ritmo.Kof Cafe",
+  "area": "มีนบุรี",
+  "lat": 13.79518,
+  "lng": 100.71217,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Matcha O'Clock | ทุกเวลาคือช่วงเวลาของมัทฉะ",
+  "area": "บึงกุ่ม",
+  "lat": 13.82108,
+  "lng": 100.63863,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "SHINJI Matcha Dojo",
+  "area": "กรุงเทพ",
+  "lat": 13.78883,
+  "lng": 100.59115,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "ตามใจคาเฟ่",
+  "area": "ห้วยขวาง",
+  "lat": 13.77341,
+  "lng": 100.58975,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Ksana Matcha (Central World)",
+  "area": "ปทุมวัน",
+  "lat": 13.74507,
+  "lng": 100.53904,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "HOMU",
+  "area": "สาทร",
+  "lat": 13.72669,
+  "lng": 100.54158,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Chamony slow tea bar",
+  "area": "บางนา",
+  "lat": 13.66328,
+  "lng": 100.6182,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Double Dogs Tea Room",
+  "area": "สัมพันธวงศ์",
+  "lat": 13.74063,
+  "lng": 100.50918,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "GOOD CHĀ MATCHA - Verde Sukhumvit 26",
+  "area": "คลองเตย",
+  "lat": 13.72502,
+  "lng": 100.56941,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "GOOD CHĀ MATCHA - Slowcombo",
+  "area": "ปทุมวัน",
+  "lat": 13.73443,
+  "lng": 100.52704,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "โรงคั่ว พิเศษ กาแฟ",
+  "area": "กรุงเทพ",
+  "lat": 13.09774,
+  "lng": 99.93766,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Daythem Tea Studio",
+  "area": "สัมพันธวงศ์",
+  "lat": 13.73168,
+  "lng": 100.51425,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Feng Huang Tea Bar | Ceremonial Matcha & Cold Brew Tea (เฟิ่งหวงบาร์ชา)",
+  "area": "สัมพันธวงศ์",
+  "lat": 13.73339,
+  "lng": 100.51437,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Peace 和 Oriental Teahouse (Gaysorn Amarin)",
+  "area": "ปทุมวัน",
+  "lat": 13.744,
+  "lng": 100.54139,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "B YAH >matcha",
+  "area": "ลาดพร้าว",
+  "lat": 13.83801,
+  "lng": 100.60252,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Davin Cafe",
+  "area": "บึงกุ่ม",
+  "lat": 13.82186,
+  "lng": 100.62727,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Milli TeaSpace Silom",
+  "area": "บางรัก",
+  "lat": 13.72503,
+  "lng": 100.52946,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Chong Matcha",
+  "area": "สะพานสูง",
+  "lat": 13.75729,
+  "lng": 100.66978,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Katsute Matcha (คัทซึเตะ มัทฉะ)",
+  "area": "สาทร",
+  "lat": 13.7091,
+  "lng": 100.51455,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Botanist activity space",
+  "area": "บางชัน",
+  "lat": 13.84798,
+  "lng": 100.72468,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "YAMA MATCHA",
+  "area": "ปทุมวัน",
+  "lat": 13.7368,
+  "lng": 100.52322,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Curious M Cafe (Coffee Shop)",
+  "area": "ปทุมวัน",
+  "lat": 13.73368,
+  "lng": 100.52751,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "APA Matcha",
+  "area": "พระโขนง",
+  "lat": 13.69602,
+  "lng": 100.60626,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "โรเซทต้า คอฟฟี่ โรสท์เตอร์",
+  "area": "บางคอแหลม",
+  "lat": 13.69649,
+  "lng": 100.49611,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Seven Rabbit Coffee and Tea",
+  "area": "สวนหลวง",
+  "lat": 13.73561,
+  "lng": 100.65064,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Nichi Matcha Bar @River City",
+  "area": "สัมพันธวงศ์",
+  "lat": 13.73039,
+  "lng": 100.5133,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "RYUU.BKK",
+  "area": "จตุจักร",
+  "lat": 13.83815,
+  "lng": 100.58213,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Koyo Tearoom - 紅葉 (Japanese tea & Matcha cafe)",
+  "area": "ทวีวัฒนา",
+  "lat": 13.77926,
+  "lng": 100.36349,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Baan orpor บ้านออพอ (Matcha House)",
+  "area": "ตลิ่งชัน",
+  "lat": 13.74465,
+  "lng": 100.44667,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "JOLIIJCOFFEE",
+  "area": "บางขุนเทียน",
+  "lat": 13.64375,
+  "lng": 100.44599,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Milli TeaSpace",
+  "area": "สายไหม",
+  "lat": 13.92137,
+  "lng": 100.67392,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "YAMATO Slow Bar Coffee",
+  "area": "บางคอแหลม",
+  "lat": 13.6956,
+  "lng": 100.51815,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Takeitslowcoffee",
+  "area": "ตลิ่งชัน",
+  "lat": 13.78127,
+  "lng": 100.43118,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Pisces Coffee Bangkok",
+  "area": "หลักสี่",
+  "lat": 13.85829,
+  "lng": 100.5484,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Sha Teahouse",
+  "area": "ปทุมวัน",
+  "lat": 13.74391,
+  "lng": 100.54595,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Cérémoniale Matcha Atelier",
+  "area": "สัมพันธวงศ์",
+  "lat": 13.73838,
+  "lng": 100.50714,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "โคโคปัง",
+  "area": "วังใหม่",
+  "lat": 13.73585,
+  "lng": 100.52351,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "CLEAR. Matcha bar",
+  "area": "ดอกไม้",
+  "lat": 13.65706,
+  "lng": 100.67786,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "INOME Japanese TEA",
+  "area": "พระนคร",
+  "lat": 13.76204,
+  "lng": 100.49364,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Hidden leaf matcha",
+  "area": "คันนายาว",
+  "lat": 13.84281,
+  "lng": 100.6736,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Espressoman x SCG HOME Experience",
+  "area": "บางกะปิ",
+  "lat": 13.8033,
+  "lng": 100.61767,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "KiRA KiRA Tea&Co. キラキラティー ชา และ เพื่อนๆ",
+  "area": "หลักสี่",
+  "lat": 13.89948,
+  "lng": 100.58082,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Fillter's happy castle",
+  "area": "วังทองหลาง",
+  "lat": 13.77851,
+  "lng": 100.60784,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Horm Tea Experience ( matcha coffee & tea )",
+  "area": "สวนหลวง",
+  "lat": 13.71873,
+  "lng": 100.60967,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "TEALILY CAFE EKKAMAI",
+  "area": "วัฒนา",
+  "lat": 13.73117,
+  "lng": 100.58921,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Grow Tea.studio, Sutthisan",
+  "area": "ห้วยขวาง",
+  "lat": 13.78836,
+  "lng": 100.57499,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "CHAEN TEA Experience",
+  "area": "วัฒนา",
+  "lat": 13.72542,
+  "lng": 100.58033,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Peace 和 Oriental Teahouse (Sukhumvit 49)",
+  "area": "วัฒนา",
+  "lat": 13.7318,
+  "lng": 100.57604,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "mini ミニ oriental speedbar (G Tower, G floor)",
+  "area": "ห้วยขวาง",
+  "lat": 13.75697,
+  "lng": 100.5657,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "The Matcha Tokyo Emporium",
+  "area": "คลองเตย",
+  "lat": 13.73043,
+  "lng": 100.56907,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "MTCH - Sukhumvit",
+  "area": "วัฒนา",
+  "lat": 13.74093,
+  "lng": 100.56583,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "MATCHA & MORE (EMQUARTIER)",
+  "area": "กรุงเทพ",
+  "lat": 13.7469,
+  "lng": 100.53912,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "MXTCHX & CO.",
+  "area": "บางซื่อ",
+  "lat": 13.83474,
+  "lng": 100.53795,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Grow Tea.studio, PhromPhong",
+  "area": "คลองเตย",
+  "lat": 13.72981,
+  "lng": 100.56816,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Rin Matcha",
+  "area": "พญาไท",
+  "lat": 13.80622,
+  "lng": 100.57449,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Sweet Boxes Ari",
+  "area": "พญาไท",
+  "lat": 13.78745,
+  "lng": 100.54815,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Chaya Teahouse",
+  "area": "พญาไท",
+  "lat": 13.78946,
+  "lng": 100.54397,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "mini ミニ oriental speedbar (The PARQ, 1st floor, Rama4)",
+  "area": "คลองเตย",
+  "lat": 13.72113,
+  "lng": 100.55835,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "mini ミニ oriental speedbar (Ari soi 1)",
+  "area": "พญาไท",
+  "lat": 13.78077,
+  "lng": 100.54447,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "qraft. (Ari soi1)",
+  "area": "พญาไท",
+  "lat": 13.78067,
+  "lng": 100.54438,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "MTCH - Ari",
+  "area": "พญาไท",
+  "lat": 13.77697,
+  "lng": 100.54257,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Ksana Matcha (Concept Store)",
+  "area": "ปทุมวัน",
+  "lat": 13.74283,
+  "lng": 100.54653,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Peace 和 Oriental Teahouse (King power)",
+  "area": "ราชเทวี",
+  "lat": 13.76018,
+  "lng": 100.53844,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Peace 和 Oriental Teahouse (Velaa,G floor/ Langsuan)",
+  "area": "ปทุมวัน",
+  "lat": 13.73708,
+  "lng": 100.54292,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "TOKU DESSERT(卜一𠂊) At Central World",
+  "area": "ปทุมวัน",
+  "lat": 13.74628,
+  "lng": 100.53955,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "ChaEn Matcha",
+  "area": "ปทุมวัน",
+  "lat": 13.74511,
+  "lng": 100.53395,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "MATCHAMOOD (Riri Teahouse BKK)",
+  "area": "บางรัก",
+  "lat": 13.72062,
+  "lng": 100.5187,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "REN - Cafe & Goods",
+  "area": "บางรัก",
+  "lat": 13.72816,
+  "lng": 100.5161,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Koto Tea Space - 琴 (Japanese tea & matcha shop, green tea cafe, tea pairing)",
+  "area": "บางรัก",
+  "lat": 13.73473,
+  "lng": 100.55119,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Ayatana Charoenkrung",
+  "area": "ป้อมปราบศัตรูพ่าย",
+  "lat": 13.74588,
+  "lng": 100.50549,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "TOKU DESSERT 卜一𠂊 At Siam Takashimaya",
+  "area": "คลองสาน",
+  "lat": 13.72717,
+  "lng": 100.5095,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Tanuki261cha ( Matcha , Japanese tea & Oriental Tea house, Tea cafe)",
+  "area": "บางคอแหลม",
+  "lat": 13.70744,
+  "lng": 100.50825,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Daily Theory",
+  "area": "คลองสาน",
+  "lat": 13.71474,
+  "lng": 100.49373,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Tokizen farm & cafe",
+  "area": "บางกอกน้อย",
+  "lat": 13.77458,
+  "lng": 100.4636,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "MTCH - The Circle Ratchapruk",
+  "area": "ตลิ่งชัน",
+  "lat": 13.76719,
+  "lng": 100.44301,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "TORI Cafe Rama 2 I โทริ คาเฟ่ พระราม 2",
+  "area": "บางขุนเทียน",
+  "lat": 13.66896,
+  "lng": 100.44854,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Motsukane - มัตสึคาเนะ",
+  "area": "ทวีวัฒนา",
+  "lat": 13.78734,
+  "lng": 100.39502,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "SO! Matcha",
+  "area": "คลองเตย",
+  "lat": 13.72237,
+  "lng": 100.58043,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Time's House Thailand",
+  "area": "สวนหลวง",
+  "lat": 13.7438,
+  "lng": 100.62448,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "HOME matcha",
+  "area": "สวนหลวง",
+  "lat": 13.74266,
+  "lng": 100.62956,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "spring matcha",
+  "area": "สะพานสูง",
+  "lat": 13.76803,
+  "lng": 100.6773,
+  "cuisine": "Matcha Cafe"
+ },
+ {
+  "name": "Nita.Bakeandbrew",
+  "area": "พระโขนง",
+  "lat": 13.6919,
+  "lng": 100.61159,
+  "cuisine": "Matcha Cafe"
+ }
+]
