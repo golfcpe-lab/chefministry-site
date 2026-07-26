@@ -125,6 +125,13 @@ _FINE_RE = _re_seg.compile(
     r"steakhouse|french|molecular", _re_seg.IGNORECASE)
 _CAFE_LIKE = {"Cafe", "Matcha Cafe", "Dessert", "Bakery", "Tea House", "Coffee"}
 _STREET_VENUES = {"street_food", "kiosk", "food_stand", "takeaway_only"}
+# ชื่อร้านที่บอกชัดว่าเป็นร้านจานเดียว/ข้างทาง — ใช้เมื่อ price_range ใน DB ค้างค่าเก่า
+# (เคส "อาเล็กโภชนา" GMaps ว่า ฿1-200 แต่ DB จาก Wongnai ค้างที่ ฿฿ → หลุดเป็น casual)
+_STREET_NAME_RE = _re_seg.compile(
+    r"โภชนา|ข้าวแกง|ก๋วยเตี๋ยว|ก๋วยจั๊บ|บะหมี่|เกาเหลา|ต้มเลือดหมู|ข้าวมันไก่|"
+    r"ข้าวหมูแดง|ข้าวขาหมู|ข้าวหมกไก่|ส้มตำ|ไก่ย่าง|ผัดไทย|ราดหน้า|ผัดซีอิ๊ว|"
+    r"ข้าวต้ม|โจ๊ก|หมูปิ้ง|ลูกชิ้น|ไก่ทอด|ข้าวเหนียว|โรตี|ปาท่องโก๋|น้ำเต้าหู้|"
+    r"หอยทอด|ผัดกะเพรา|ข้าวผัด|ยำ(?!ญี่ปุ่น)|ต้มยำ")
 
 
 def derive_segment(cuisine, venue_type, budget, name=""):
@@ -138,6 +145,8 @@ def derive_segment(cuisine, venue_type, budget, name=""):
     cafe_like = any(k.lower() in c.lower() for k in _CAFE_LIKE) or v == "cafe"
     if b <= 1 and not cafe_like:
         return "street"          # ฿1-200 + ไม่ใช่คาเฟ่ = ร้านจานเดียว/ข้างทาง
+    if not cafe_like and _STREET_NAME_RE.search(name or ""):
+        return "street"          # ชื่อบอกชัดว่าจานเดียว (กัน price_range ค้างค่าเก่า)
     return "casual"
 
 
