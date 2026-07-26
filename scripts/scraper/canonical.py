@@ -114,6 +114,33 @@ def creator_score(m7, m30, total):
     return round(min(base, 1.0), 3)
 
 
+# ── Segment: แยกกลุ่มร้านให้หน้าเว็บโชว์ทีละกลุ่ม (2026-07-25) ────────────────
+# ปัญหา: ร้านข้าวแกง/ก๋วยเตี๋ยวฐานรีวิวเล็กเด้งขึ้นหน้าแรกปนกับ fine dining
+#   street  = สตรีทฟู้ด/ร้านข้างทาง/ร้านถูกจานเดียว (คนกินบ่อย แต่ไม่ใช่ของโชว์หน้าแรก)
+#   casual  = ร้านนั่งกิน/คาเฟ่ระดับกลาง (฿฿)
+#   fine    = fine dining / omakase / ระดับ ฿฿฿ ขึ้นไป
+import re as _re_seg
+_FINE_RE = _re_seg.compile(
+    r"fine dining|omakase|chef'?s table|tasting|kaiseki|progressive|"
+    r"steakhouse|french|molecular", _re_seg.IGNORECASE)
+_CAFE_LIKE = {"Cafe", "Matcha Cafe", "Dessert", "Bakery", "Tea House", "Coffee"}
+_STREET_VENUES = {"street_food", "kiosk", "food_stand", "takeaway_only"}
+
+
+def derive_segment(cuisine, venue_type, budget, name=""):
+    c = (cuisine or "")
+    v = (venue_type or "").lower()
+    b = int(budget or 2)
+    if v in _STREET_VENUES:
+        return "street"
+    if b >= 3 or _FINE_RE.search(c) or _FINE_RE.search(name or ""):
+        return "fine"
+    cafe_like = any(k.lower() in c.lower() for k in _CAFE_LIKE) or v == "cafe"
+    if b <= 1 and not cafe_like:
+        return "street"          # ฿1-200 + ไม่ใช่คาเฟ่ = ร้านจานเดียว/ข้างทาง
+    return "casual"
+
+
 def build_canonical(db_path=None, out_path=None, days=30):
     """Build canonical restaurant dataset from SQLite DB."""
     db_path  = db_path  or DB
@@ -296,6 +323,7 @@ def build_canonical(db_path=None, out_path=None, days=30):
             "is_bangkok_focus": is_bkk, "is_restaurant_focus": is_rest,
             "exclude_reason": excl, "gmaps_types": gmaps_types,
             "candidate_status": d.get("candidate_status") or "candidate",
+            "segment": derive_segment(cuisine_norm, venue_type, price_raw, name),
             "_score": sc, "_growth": growth, "_growthRate": gr,
             "_growthMetric": growth_metric,
             "trend_score": sc, "trend_label": tl, "trend_reason": trend_rsn,
