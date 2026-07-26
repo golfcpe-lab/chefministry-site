@@ -7,7 +7,7 @@
 // อัปเดตเวอร์ชันทุกครั้งที่ deploy เพื่อล้าง cache เก่า
 // ─────────────────────────────────────────────────────────────────────────────
 
-const CACHE_VERSION = "cm-v20260713f";
+const CACHE_VERSION = "cm-v20260725a";
 const PRECACHE = [
   "/",
   "/index.html",
