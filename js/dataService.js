@@ -159,14 +159,53 @@
   function getDetailedRestaurantCount() { return _mergeAllRestaurants().filter(_scopeFilter).length; }
   function getRisingCount() {
     return _mergeAllRestaurants().filter(_scopeFilter).filter(function (r) {
+      // นับเฉพาะร้านที่ผ่านเกณฑ์จริง (ดู passesTrendFloor ด้านล่าง) กันตัวเลขเฟ้อ
+      var total = r.totalReviews || 0, fresh = r.newReviews30d || 0;
+      if (total < 150 || fresh < 15) return false;
       return r.trendVelocity === 'rising' || (_computeScore(r).growthRate || 0) > 0.05;
     }).length;
+  }
+
+  /* ─── Segment + trend floor (2026-07-25) ─────────────────────────────────────
+     ปัญหาเดิม: ร้านจานเดียวฐานรีวิวเล็ก (+3 รีวิวจาก 22 = +13%) เด้งขึ้นหน้าแรก
+     แซงร้านที่คนอยากเห็น. แก้ 2 ชั้น:
+       1) TREND_MIN_* — ร้านต้องมีมวลรีวิวจริงก่อนถึงเรียกว่า "กำลังมา"
+       2) segment — street food แยกกลุ่ม ไม่ปนกับ curated (ดู canonical.derive_segment)  */
+  var TREND_MIN_REVIEWS = 150;
+  var TREND_MIN_NEW     = 15;
+
+  function segmentOf(r) {
+    if (r.segment) return r.segment;
+    // fallback สำหรับ data.js เก่าที่ยังไม่มี field (จนกว่า pipeline จะ inject รอบใหม่)
+    var c = (r.cuisine_normalized || r.cuisine || '');
+    var v = (r.venue_type || r.type || '').toLowerCase();
+    var b = Number(r.budget || 2);
+    if (/street_food|kiosk|food_stand|takeaway/.test(v)) return 'street';
+    if (b >= 3 || /fine dining|omakase|chef'?s table|tasting|steakhouse|french/i.test(c)) return 'fine';
+    var cafeLike = v === 'cafe' || /cafe|café|matcha|dessert|bakery|tea/i.test(c);
+    if (b <= 1 && !cafeLike) return 'street';
+    return 'casual';
+  }
+  function isStreet(r)  { return segmentOf(r) === 'street'; }
+  function isCurated(r) { return segmentOf(r) !== 'street'; }
+
+  /** ผ่านเกณฑ์ "กำลังมาแรง" จริงไหม — ต้องมีทั้งฐานรีวิวและรีวิวใหม่พอ */
+  function passesTrendFloor(r) {
+    var total = r.totalReviews || 0;
+    var fresh = r.newReviews30d || 0;
+    return total >= TREND_MIN_REVIEWS && fresh >= TREND_MIN_NEW;
   }
 
   /* ─── Restaurant list ────────────────────────────────────────────────────── */
   function getRestaurantList(opts) {
     var list = _mergeAllRestaurants().filter(_scopeFilter);
     if (!opts) return _sortByScore(list);
+
+    if (opts.segment && opts.segment !== 'all') {
+      list = (opts.segment === 'curated') ? list.filter(isCurated)
+           : (opts.segment === 'street')  ? list.filter(isStreet)
+           : list.filter(function (r) { return segmentOf(r) === opts.segment; });
+    }
 
     if (opts.signal   && opts.signal   !== 'all') list = list.filter(function (r) { return r.signalStrength === opts.signal; });
     if (opts.velocity && opts.velocity !== 'all') list = list.filter(function (r) { return r.trendVelocity === opts.velocity; });
@@ -208,7 +247,11 @@
       });
     });
     var curated  = all.filter(function (r) { return !r._fromDB && r.trendVelocity === 'rising'; });
-    var scraped  = all.filter(function (r) { return  r._fromDB && ((r.velocityPct || 0) > 5 || (r._growthRate || 0) > 0); });
+    // ต้องผ่าน trend floor (มวลรีวิวจริง) + ไม่เอา street food ปนหน้าแรก
+    var scraped  = all.filter(function (r) {
+      return r._fromDB && isCurated(r) && passesTrendFloor(r) &&
+             ((r.velocityPct || 0) > 5 || (r._growthRate || 0) > 0);
+    });
     curated.sort(function (a, b) { return (b.signalCount || 0) - (a.signalCount || 0); });
     scraped.sort(function (a, b) { return (b.velocityPct || 0) - (a.velocityPct || 0); });
     // ร้านจริงจาก scraper ขึ้นก่อน — curated (ชุด demo) เป็นตัวเติมเมื่อข้อมูลจริงไม่พอ
@@ -216,7 +259,8 @@
     // ใช้ "ร้านจริงยอดนิยม" (rating × log(reviews)) แทนการตกไป curated
     if (scraped.length < desired) {
       var popular = all.filter(function (r) {
-        return r._fromDB && (r.rating_gmaps || 0) >= 4.4 && (r.totalReviews || 0) >= 300;
+        return r._fromDB && isCurated(r) &&
+               (r.rating_gmaps || 0) >= 4.4 && (r.totalReviews || 0) >= 300;
       }).sort(function (a, b) {
         var sa = (a.rating_gmaps || 0) * Math.log((a.totalReviews || 0) + 1);
         var sb = (b.rating_gmaps || 0) * Math.log((b.totalReviews || 0) + 1);
@@ -466,6 +510,13 @@
       getEmergingByCategory: getEmergingByCategory,
       getSocialBuzzRestaurants: getSocialBuzzRestaurants,
       getViralCandidates: getViralCandidates,
+      // Segment / trend gate
+      segmentOf: segmentOf,
+      isStreet: isStreet,
+      isCurated: isCurated,
+      passesTrendFloor: passesTrendFloor,
+      TREND_MIN_REVIEWS: TREND_MIN_REVIEWS,
+      TREND_MIN_NEW: TREND_MIN_NEW,
       // Lookup
       getCreatorStats: getCreatorStats,
       getRestaurantById: getRestaurantById,
