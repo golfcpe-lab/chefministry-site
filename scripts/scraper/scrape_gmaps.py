@@ -253,10 +253,34 @@ def save_gmaps_meta(restaurant_id: str, result: dict):
         else:
             classified = {}
 
+        # ── ชื่อ + ย่าน: เชื่อ Google เป็นหลัก ─────────────────────────────────
+        # ชื่อเก่าจาก Wongnai มักมีสาขาห้อยท้าย ("อาเล็กโภชนา พุทธมณฑลสาย3")
+        # ทำให้ค้นใน Google Maps ไม่เจอ + ย่านเก่าผิด (บางแค → On Nut)
+        gmaps_name = (result.get("gmaps_name") or "").strip()
+        new_name = None
+        if row_data and gmaps_name:
+            old_name = (row_data["name"] or "").strip()
+            if gmaps_name != old_name:
+                a, b = old_name.lower().replace(" ", ""), gmaps_name.lower().replace(" ", "")
+                # อัปเดตเมื่อชื่อ Google เป็น "ตัวย่อ/ตัวเต็ม" ของชื่อเดิม (ร้านเดียวกันแน่)
+                if a and (b in a or a in b):
+                    new_name = gmaps_name
+        new_area = None
+        try:
+            from area_fix import resolve_area
+            _resolved = resolve_area(row_data["area"] if row_data else "",
+                                     result.get("gmaps_address") or "")
+            if _resolved and _resolved != (row_data["area"] if row_data else ""):
+                new_area = _resolved
+        except Exception:
+            pass
+
         conn.execute("""
             UPDATE restaurants
             SET gmaps_place_id      = ?,
                 gmaps_address       = ?,
+                name                = COALESCE(?, name),
+                area                = COALESCE(?, area),
                 gmaps_types         = ?,
                 business_status     = ?,
                 city                = COALESCE(?, city),
@@ -273,6 +297,8 @@ def save_gmaps_meta(restaurant_id: str, result: dict):
         """, (
             result.get("gmaps_place_id"),
             result.get("gmaps_address"),
+            new_name,
+            new_area,
             gmaps_types_str,
             result.get("gmaps_business_status", "OPERATIONAL"),
             classified.get("city") or None,
