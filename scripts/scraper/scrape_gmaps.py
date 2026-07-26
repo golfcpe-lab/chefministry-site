@@ -102,7 +102,7 @@ def get_place_details(place_id: str, api_key: str) -> dict | None:
         "id", "displayName", "rating", "userRatingCount",
         "formattedAddress", "internationalPhoneNumber",
         "regularOpeningHours", "location", "websiteUri",
-        "primaryType", "types", "businessStatus",
+        "primaryType", "types", "businessStatus", "priceLevel",
     ])
     url  = f"{BASE_URL}/places/{place_id}"
     hdrs = {
@@ -265,6 +265,14 @@ def save_gmaps_meta(restaurant_id: str, result: dict):
                 # อัปเดตเมื่อชื่อ Google เป็น "ตัวย่อ/ตัวเต็ม" ของชื่อเดิม (ร้านเดียวกันแน่)
                 if a and (b in a or a in b):
                     new_name = gmaps_name
+        # ระดับราคาจาก Google — ของเดิมจาก Wongnai มักค้าง (฿1-200 จริงแต่ DB บอก ฿฿)
+        _PRICE_MAP = {
+            "PRICE_LEVEL_FREE": 1, "PRICE_LEVEL_INEXPENSIVE": 1,
+            "PRICE_LEVEL_MODERATE": 2, "PRICE_LEVEL_EXPENSIVE": 3,
+            "PRICE_LEVEL_VERY_EXPENSIVE": 3,
+        }
+        new_price = _PRICE_MAP.get(result.get("gmaps_price_level") or "")
+
         new_area = None
         try:
             from area_fix import resolve_area
@@ -281,6 +289,7 @@ def save_gmaps_meta(restaurant_id: str, result: dict):
                 gmaps_address       = ?,
                 name                = COALESCE(?, name),
                 area                = COALESCE(?, area),
+                price_range         = COALESCE(?, price_range),
                 gmaps_types         = ?,
                 business_status     = ?,
                 city                = COALESCE(?, city),
@@ -299,6 +308,7 @@ def save_gmaps_meta(restaurant_id: str, result: dict):
             result.get("gmaps_address"),
             new_name,
             new_area,
+            new_price,
             gmaps_types_str,
             result.get("gmaps_business_status", "OPERATIONAL"),
             classified.get("city") or None,
@@ -358,6 +368,7 @@ def refresh_restaurant(row: dict, api_key: str) -> dict:
         "gmaps_address":         details.get("formattedAddress", ""),
         "gmaps_business_status": details.get("businessStatus", "OPERATIONAL"),
         "gmaps_types":           gmaps_types,
+        "gmaps_price_level":     details.get("priceLevel"),
         "gmaps_lat":             _loc.get("latitude"),
         "gmaps_lng":             _loc.get("longitude"),
     }
