@@ -62,8 +62,18 @@ jobs:
           git add scripts/youtube_reviews.json || true
           git diff --staged --quiet || git commit -m "auto: YouTube reviews $(date +'%Y-%m-%d')"
 
+      # 3 job ใน workflow เดียวกัน push พร้อมกันได้ → เคย fail "fetch first"
+      # retry แบบ pull --rebase ก่อน push ใหม่ (ไม่ใช่ปัญหาข้อมูล แค่ชนกัน)
       - name: Push to GitHub
-        run: git push origin main
+        run: |
+          for i in 1 2 3 4 5; do
+            git push origin main && exit 0
+            echo "push ชนกัน — rebase แล้วลองใหม่ ($i/5)"
+            sleep $((RANDOM % 10 + 5))
+            git pull --rebase origin main || true
+          done
+          echo "::error::push ไม่สำเร็จหลัง retry 5 ครั้ง"
+          exit 1
 
   # ============================================================
   #  JOB 2 — GMaps Snapshot (daily)
@@ -212,8 +222,18 @@ jobs:
           git diff --staged --quiet || git commit -m "auto: GMaps snapshot $(date +'%Y-%m-%d')"
           git pull --rebase origin main
 
+      # 3 job ใน workflow เดียวกัน push พร้อมกันได้ → เคย fail "fetch first"
+      # retry แบบ pull --rebase ก่อน push ใหม่ (ไม่ใช่ปัญหาข้อมูล แค่ชนกัน)
       - name: Push to GitHub
-        run: git push origin main
+        run: |
+          for i in 1 2 3 4 5; do
+            git push origin main && exit 0
+            echo "push ชนกัน — rebase แล้วลองใหม่ ($i/5)"
+            sleep $((RANDOM % 10 + 5))
+            git pull --rebase origin main || true
+          done
+          echo "::error::push ไม่สำเร็จหลัง retry 5 ครั้ง"
+          exit 1
 
   # ============================================================
   #  JOB 3 — Classify + Export + Inject data.js (daily)
@@ -367,8 +387,18 @@ jobs:
           git diff --staged --quiet || git commit -m "auto: daily signal update $(date +'%Y-%m-%d')"
           git pull --rebase origin main
 
+      # 3 job ใน workflow เดียวกัน push พร้อมกันได้ → เคย fail "fetch first"
+      # retry แบบ pull --rebase ก่อน push ใหม่ (ไม่ใช่ปัญหาข้อมูล แค่ชนกัน)
       - name: Push to GitHub
-        run: git push origin main
+        run: |
+          for i in 1 2 3 4 5; do
+            git push origin main && exit 0
+            echo "push ชนกัน — rebase แล้วลองใหม่ ($i/5)"
+            sleep $((RANDOM % 10 + 5))
+            git pull --rebase origin main || true
+          done
+          echo "::error::push ไม่สำเร็จหลัง retry 5 ครั้ง"
+          exit 1
 
       # ── Freshness guard: snapshot ล่าสุดต้องไม่เก่าเกิน 2 วัน ──
       - name: Freshness guard (fail if data stale)
