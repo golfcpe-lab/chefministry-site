@@ -57,11 +57,64 @@ for _th, _en in list(DISTRICTS.items()):
     SUBAREA_PARENT.setdefault(_en.lower(), set()).add(_th)
 
 
+# ที่อยู่ภาษาอังกฤษจาก Google (เช่น "P9P7+FCW, Bang Phai, Bang Khae, Bangkok 10160")
+# เดิม regex จับแต่ภาษาไทย → district = None → area เก่าที่ผิดไม่เคยถูกแก้
+# (เคส "อาเล็กโภชนา" อยู่บางแค แต่ data เก่าจาก Wongnai บอก On Nut)
+_EN_DISTRICTS = {}
+for _th, _en in DISTRICTS.items():
+    _EN_DISTRICTS[_en.lower()] = _th
+    _EN_DISTRICTS[_en.lower().replace(" ", "")] = _th
+# ชื่ออังกฤษที่ Google สะกดต่างจาก display ของเรา
+_EN_ALIASES = {
+    "bang rak": "บางรัก", "bangrak": "บางรัก", "bang kho laem": "บางคอแหลม",
+    "khlong toei": "คลองเตย", "klongtoey": "คลองเตย", "watthana": "วัฒนา",
+    "vadhana": "วัฒนา", "huai khwang": "ห้วยขวาง", "huaykwang": "ห้วยขวาง",
+    "chatuchak": "จตุจักร", "phaya thai": "พญาไท", "ratchathewi": "ราชเทวี",
+    "pathum wan": "ปทุมวัน", "pathumwan": "ปทุมวัน", "sathon": "สาทร",
+    "bang khae": "บางแค", "bangkhae": "บางแค", "lat phrao": "ลาดพร้าว",
+    "lat krabang": "ลาดกระบัง", "din daeng": "ดินแดง", "bang sue": "บางซื่อ",
+    "bang su": "บางซื่อ", "suan luang": "สวนหลวง", "phra khanong": "พระโขนง",
+    "samphanthawong": "สัมพันธวงศ์", "pom prap sattru phai": "ป้อมปราบศัตรูพ่าย",
+    "thon buri": "ธนบุรี", "bangkok noi": "บางกอกน้อย", "bangkok yai": "บางกอกใหญ่",
+    "taling chan": "ตลิ่งชัน", "chom thong": "จอมทอง", "rat burana": "ราษฎร์บูรณะ",
+    "prawet": "ประเวศ", "bang na": "บางนา", "min buri": "มีนบุรี",
+    "nong chok": "หนองจอก", "nong khaem": "หนองแขม", "bang bon": "บางบอน",
+    "thung khru": "ทุ่งครุ", "khan na yao": "คันนายาว", "saphan sung": "สะพานสูง",
+    "wang thonglang": "วังทองหลาง", "khlong sam wa": "คลองสามวา",
+    "thawi watthana": "ทวีวัฒนา", "sai mai": "สายไหม", "lak si": "หลักสี่",
+    "don mueang": "ดอนเมือง", "bang khen": "บางเขน", "bueng kum": "บึงกุ่ม",
+    "bang phlat": "บางพลัด", "phasi charoen": "ภาษีเจริญ", "yan nawa": "ยานนาวา",
+    "khlong san": "คลองสาน", "phra nakhon": "พระนคร", "dusit": "ดุสิต",
+    "bang kapi": "บางกะปิ", "bangkapi": "บางกะปิ", "bang khun thian": "บางขุนเทียน",
+}
+_EN_DISTRICTS.update(_EN_ALIASES)
+
+
+def _district_from_english(addr):
+    """หาเขตจากที่อยู่ภาษาอังกฤษ — เทียบทีละ segment ที่คั่นด้วย comma"""
+    a = str(addr or "")
+    if not a:
+        return None
+    segs = [s.strip().lower() for s in re.split(r"[,\n]", a) if s.strip()]
+    for s in segs:
+        s_clean = re.sub(r"\s+\d{5}$", "", s).strip()
+        if s_clean in _EN_DISTRICTS:
+            return _EN_DISTRICTS[s_clean]
+    # fallback: substring (ยาวสุดก่อน กัน "bang" ไปชนคำสั้น)
+    low = a.lower()
+    for en in sorted(_EN_DISTRICTS, key=len, reverse=True):
+        if len(en) >= 6 and en in low:
+            return _EN_DISTRICTS[en]
+    return None
+
+
 def district_from_address(addr):
     """คืนชื่อเขต (ไทย) จากที่อยู่ Google Maps หรือ None"""
     if not addr:
         return None
     a = str(addr)
+    if not re.search(r"[ก-๙]", a):
+        return _district_from_english(a)
     # รูปแบบชัดเจน: "เขตดอนเมือง"
     m = re.search(r"เขต\s*([ก-๙]+)", a)
     if m:
