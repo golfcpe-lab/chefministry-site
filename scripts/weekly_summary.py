@@ -139,10 +139,21 @@ def build_prompt(restaurants, signals, youtube_reviews=None, external_restaurant
     ])
 
     # top velocity จาก DB scraper (ข้อมูลสดจาก Wongnai/GMaps)
+    # ⚠️ ต้องกรองเหมือนหน้าเว็บ (2026-07-26): ร้านจานเดียวฐานรีวิวเล็กเคยหลุดมาเป็น
+    # spotlight ("ก๋วยเตี๋ยวป๊อกป๊อก มาแรงด้วยรีวิวเพิ่ม 2 ครั้ง") เพราะที่นี่ไม่มีเกณฑ์
+    TREND_MIN_REVIEWS, TREND_MIN_NEW = 150, 15
     velocity_section = ""
     if external_restaurants:
+        def _ok(r):
+            if not r.get('isRestaurant', True):
+                return False
+            if r.get('segment') == 'street':       # street food แยกกลุ่ม ไม่ใช้เป็น spotlight
+                return False
+            return (r.get('velocityPct', 0) > 0
+                    and (r.get('totalReviews') or 0) >= TREND_MIN_REVIEWS
+                    and (r.get('newReviews30d') or 0) >= TREND_MIN_NEW)
         top_vel = sorted(
-            [r for r in external_restaurants if r.get('velocityPct', 0) > 0 and r.get('isRestaurant', True)],
+            [r for r in external_restaurants if _ok(r)],
             key=lambda r: r.get('velocityPct', 0), reverse=True
         )[:5]
         if top_vel:
@@ -186,6 +197,10 @@ Trend Categories:
 - ให้ priority กับร้านที่มี yt_reviews_this_week > 0 หรือ velocity สูงสุด
 - ถ้าไม่มี YouTube/velocity data ให้เลือกร้านจาก TOP 5 ที่มี overlapSignal สูงรองลงมา (ไม่ใช่อันดับ 1 เสมอ)
 - ห้ามเลือกร้านที่ถูกระบุใน "ห้ามเลือก" ด้านบนโดยเด็ดขาด
+- ⚠️ ห้ามพาดหัวว่า "มาแรง/ฮิต" จากรีวิวจำนวนน้อย (เช่น "รีวิวเพิ่ม 2 ครั้ง") — ถ้าตัวเลข
+  ที่มีคือรีวิวใหม่ไม่ถึง 15 หรือไม่มีรายชื่อใน Top Velocity ให้เขียนสรุปแนวโน้มหมวดอาหาร
+  แทนการเชียร์ร้านเดี่ยว และตอบ "restaurant": "" ไปเลย
+- ห้ามแต่งตัวเลขที่ไม่มีในข้อมูลด้านบน
 
 ต้องการ JSON output แบบนี้เท่านั้น (ห้ามเพิ่มข้อความนอก JSON):
 {{
