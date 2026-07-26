@@ -58,5 +58,27 @@
    "mentions": 1,
    "influencers": 1
   }
+ },
+ "2026-07-26": {
+  "Thai Fine Dining": {
+   "mentions": 13,
+   "influencers": 5
+  },
+  "Japanese Omakase": {
+   "mentions": 1,
+   "influencers": 1
+  },
+  "Thai Street Food": {
+   "mentions": 2,
+   "influencers": 2
+  },
+  "Cafe": {
+   "mentions": 3,
+   "influencers": 1
+  },
+  "Dessert": {
+   "mentions": 1,
+   "influencers": 1
+  }
  }
 }
