@@ -686,8 +686,8 @@
 <script src="./js/firebase-config.js?v=20260501a"></script>
 <script src="./js/auth.js?v=20260501a"></script>
 <script src="./js/safeDataAdapter.js?v=20260501a"></script>
-<script src="./js/data.js?v=202607251732"></script>
-<script src="./js/dataService.js?v=202607251732"></script>
+<script src="./js/data.js?v=202607252030"></script>
+<script src="./js/dataService.js?v=202607252030"></script>
 <script src="./js/quickpick.js?v=20260712a"></script>
 <script src="./js/creatorbuzz.js?v=20260709a"></script>
 <script src="./js/microfx.js?v=20260708b"></script>
@@ -717,20 +717,33 @@
           return sb - sa;
         });
       }
-      var pick = null, top3 = [];
+      // เดิม: เอา cats[0] ตลอด → "Thai Fine Dining" ค้างหัวข้อทุกวันแม้ change เป็น 0/null
+      // ตอนนี้: เก็บทุกหมวดที่มี signal จริง แล้วหมุนรายวัน + พาดหัวตามข้อมูลที่มีจริง
+      var eligible = [];
       for (var i = 0; i < cats.length; i++) {
-        // ต้องมี signal จริงพอ (รีวิว ≥2 หรือ ≥2 ช่อง) ถึงเรียกว่า "กำลังมาแรง"
         if ((cats[i].mentions || 0) < 2 && (cats[i].influencers || 0) < 2) continue;
         var rows = ChefMinistryData.getCategoryTopN(cats[i].cat, 8).filter(function (r) { return r._fromDB; });
         if (rows.length < 3) rows = catRestaurants(cats[i].cat);
-        if (rows.length >= 2) { pick = cats[i]; top3 = rows.slice(0, 3); break; }
+        if (rows.length >= 2) eligible.push({ cat: cats[i], rows: rows });
       }
-      if (!pick) return; // คง fallback static
-      document.getElementById("hotCatTitle").textContent =
-        "หมวด " + pick.cat + " กำลังมาแรง" + (pick.change && pick.change.indexOf("%") > -1 ? " " + pick.change : "");
+      if (!eligible.length) return; // คง fallback static
+      // หมวดที่มี % เติบโตจริงมาก่อน — ถ้าไม่มีเลย หมุนเวียนตามวันกันหัวข้อค้าง
+      var withPct = eligible.filter(function (e) { return /^\+\d/.test(String(e.cat.change || "")); });
+      var poolCat = withPct.length ? withPct : eligible;
+      var _now = new Date();
+      var _doy = Math.floor((_now - new Date(_now.getFullYear(), 0, 0)) / 86400000);
+      var chosen = poolCat[_doy % poolCat.length];
+      var pick = chosen.cat, top3 = chosen.rows.slice(0, 3);
+      var _pct = /^\+\d/.test(String(pick.change || "")) ? pick.change : "";
+      var _men = pick.mentions || 0, _inf = pick.influencers || 0;
+      document.getElementById("hotCatTitle").textContent = _pct
+        ? "หมวด " + pick.cat + " กำลังมาแรง " + _pct
+        : "หมวด " + pick.cat + " — ถูกพูดถึงมากสุดสัปดาห์นี้";
       document.getElementById("hotCatDesc").textContent =
         top3.map(function (r) { return r.name; }).join(" · ") +
-        " — จัดอันดับจากความเร็วรีวิวโตในหมวดเดียวกัน อัปเดตจากข้อมูลจริงสัปดาห์นี้";
+        (_pct
+          ? " — รีวิวในหมวดนี้โตเร็วสุดสัปดาห์นี้"
+          : " — จาก " + _men + " รีวิวของ creator " + _inf + " ช่องในสัปดาห์นี้ (ยังไม่มีข้อมูลเทียบสัปดาห์ก่อน)");
       var esc2 = function (x) { return String(x || "").replace(/[&<>"]/g, function (c) { return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c]; }); };
       document.getElementById("hotCatGrid").innerHTML = top3.map(function (r) {
         var rating = r.rating_gmaps || r.rating_score || 0;
@@ -812,8 +825,13 @@
         </div>`;
     } else {
     // 2. Fallback: highest velocity from scraper
-    const _extAll = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined") ? CM_EXTERNAL_RESTAURANTS : [];
-    const _extVel = _extAll.filter(r => (r.velocityPct||0) > 0 && ChefMinistryData.scopeFilter(r));
+    const _extAllRaw = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined") ? CM_EXTERNAL_RESTAURANTS : [];
+    // หน้าแรกโชว์เฉพาะกลุ่ม curated (ไม่เอาร้านจานเดียว/ข้างทางมาเป็นหน้าตาเว็บ)
+    const _extAll = _extAllRaw.filter(r => { try { return ChefMinistryData.isCurated(r); } catch(e) { return true; } });
+    // velocity ต้องผ่านเกณฑ์มวลรีวิวจริง (≥150 รีวิว + ≥15 รีวิวใหม่) กันร้านฐานเล็กเด้ง
+    const _extVel = _extAll.filter(r =>
+      (r.velocityPct||0) > 0 && ChefMinistryData.scopeFilter(r) &&
+      (ChefMinistryData.passesTrendFloor ? ChefMinistryData.passesTrendFloor(r) : true));
     const extSorted = _extVel.length > 0
       ? [..._extVel].sort((a,b) => (b.velocityPct||0) - (a.velocityPct||0))
       : _extAll.filter(r => r._isEmerging && ChefMinistryData.scopeFilter(r))
@@ -1048,8 +1066,11 @@
   // Rank list — velocity จาก DB ถ้ามี, fallback = overlap signal
   const rankList  = document.getElementById("overlapRankList");
   const rankLabel = document.getElementById("rankListLabel");
-  const _rankAll = (typeof CM_EXTERNAL_RESTAURANTS !== "undefined") ? CM_EXTERNAL_RESTAURANTS : [];
-  const _rankVel = _rankAll.filter(r => (r.velocityPct||0) > 0 && ChefMinistryData.scopeFilter(r));
+  const _rankAll = ((typeof CM_EXTERNAL_RESTAURANTS !== "undefined") ? CM_EXTERNAL_RESTAURANTS : [])
+    .filter(r => { try { return ChefMinistryData.isCurated(r); } catch(e) { return true; } });
+  const _rankVel = _rankAll.filter(r =>
+    (r.velocityPct||0) > 0 && ChefMinistryData.scopeFilter(r) &&
+    (ChefMinistryData.passesTrendFloor ? ChefMinistryData.passesTrendFloor(r) : true));
   // ใช้ Velocity Rank เฉพาะเมื่อมีข้อมูล velocity จริงจาก snapshot เท่านั้น
   // ไม่มี = แสดง Trending (Growth Score) พร้อมป้ายที่ตรงความจริง — ห้ามติดป้าย velocity บนข้อมูล curated
   const _hasRealVelocity = _rankVel.length >= 3;
