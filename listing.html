@@ -114,6 +114,23 @@
   <div class="container">
 
 
+    <!-- Segment tabs: คัดมาแล้ว (ค่าเริ่มต้น) vs Street food -->
+    <div id="segmentTabBar" style="display:flex;gap:8px;align-items:center;margin-bottom:14px;flex-wrap:wrap">
+      <button id="seg-curated" onclick="setSegment('curated')"
+        style="padding:9px 18px;border-radius:12px;font-size:13.5px;font-weight:900;border:2px solid var(--navy);cursor:pointer;background:var(--navy);color:#fff">
+        ✨ ร้านคัดมาแล้ว
+      </button>
+      <button id="seg-street" onclick="setSegment('street')"
+        style="padding:9px 18px;border-radius:12px;font-size:13.5px;font-weight:900;border:2px solid var(--border);cursor:pointer;background:transparent;color:var(--text-2)">
+        🍜 Street food & ร้านกินประจำ
+      </button>
+      <button id="seg-all" onclick="setSegment('all')"
+        style="padding:9px 14px;border-radius:12px;font-size:12.5px;font-weight:800;border:2px solid var(--border);cursor:pointer;background:transparent;color:var(--text-2)">
+        ทั้งหมด
+      </button>
+      <span id="segDesc" style="font-size:11.5px;color:var(--text-2);font-style:italic;margin-left:4px">ร้านนั่งกิน คาเฟ่ และ fine dining — ร้านข้างทางอยู่แท็บถัดไป</span>
+    </div>
+
     <!-- Discover Tabs (Trend Intelligence mode selector) -->
     <div id="discoverTabBar" style="display:flex;gap:8px;align-items:center;margin-bottom:20px;flex-wrap:wrap;border-bottom:2px solid var(--border);padding-bottom:14px">
       <button id="tab-trending" onclick="setTab('trending')"
@@ -306,10 +323,10 @@
 <script src="./js/firebase-config.js?v=20260501a"></script>
 <script src="./js/auth.js?v=20260501a"></script>
 <script src="./js/safeDataAdapter.js?v=20260501a"></script>
-<script src="./js/data.js?v=202607251732"></script>
+<script src="./js/data.js?v=202607252030"></script>
 <script src="./js/geo.js?v=20260712a"></script>
 <script src="./js/nearme.js?v=20260712a"></script>
-<script src="./js/dataService.js?v=202607251732"></script>
+<script src="./js/dataService.js?v=202607252030"></script>
 <script>
   document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
     const n=document.getElementById("mobileNav");
@@ -329,6 +346,36 @@
 
   // ── Tab state (Trending / Emerging / Popular) ────────────────────────────
   let currentTab = 'trending';
+
+  // ── Segment state (คัดมาแล้ว / street food / ทั้งหมด) ────────────────────
+  // ค่าเริ่มต้น = curated เพราะคนอยากเห็นร้านน่าสนใจก่อน แล้วค่อยกดดู street food
+  let currentSegment = 'curated';
+  const SEG_DESC = {
+    curated: 'ร้านนั่งกิน คาเฟ่ และ fine dining — ร้านข้างทางอยู่แท็บถัดไป',
+    street:  'ร้านจานเดียว ก๋วยเตี๋ยว ข้าวแกง ของกินประจำวัน — เรียงตามความนิยมจริง',
+    all:     'ทุกกลุ่มรวมกัน'
+  };
+  function setSegment(seg) {
+    currentSegment = seg;
+    ['curated','street','all'].forEach(function (s) {
+      const b = document.getElementById('seg-' + s);
+      if (!b) return;
+      const on = (s === seg);
+      b.style.background   = on ? 'var(--navy)' : 'transparent';
+      b.style.color        = on ? '#fff' : 'var(--text-2)';
+      b.style.borderColor  = on ? 'var(--navy)' : 'var(--border)';
+    });
+    const d = document.getElementById('segDesc');
+    if (d) d.textContent = SEG_DESC[seg] || '';
+    render();
+  }
+  function segMatch(r) {
+    if (currentSegment === 'all') return true;
+    try {
+      const s = ChefMinistryData.segmentOf(r);
+      return currentSegment === 'street' ? s === 'street' : s !== 'street';
+    } catch (e) { return true; }
+  }
 
   const TAB_DESC = {
     trending: 'ร้านที่ trendVelocity กำลัง rising — เรียงตาม signal สะสม',
@@ -366,6 +413,7 @@
   if(params.get("velocity")) state.velocity = params.get("velocity");
   if(params.get("type"))     state.type     = params.get("type");
   if(params.get("sort"))     state.sort     = params.get("sort");
+  if(params.get("segment"))  currentSegment = params.get("segment");
 
   // Signal filters
   const signals=[
@@ -449,6 +497,10 @@
     // ChefMinistryData functions (scopeFilter).
     if (!filtersActive) {
       const N = 60;
+      // Street food: velocity ไม่มีความหมายกับร้านฐานรีวิวเล็ก → เรียงความนิยมจริง
+      if (currentSegment === 'street' && currentTab === 'trending') {
+        return ChefMinistryData.getRestaurantList({ segment: 'street', sort: 'reviews' });
+      }
       if (currentTab === 'emerging') return ChefMinistryData.getEmergingRestaurants(N);
       if (currentTab === 'popular')  return ChefMinistryData.getPopularRestaurants(N);
       if (currentTab === 'new') {
@@ -488,7 +540,7 @@
   const PREVIEW_COUNT = 6;
 
   function render(){
-    let list = filterAndSort();
+    let list = filterAndSort().filter(segMatch);
 
     // ── "ใกล้ฉัน" — เรียงตามระยะทาง (ทำงานทุก tab ไม่ต้องมี filter) ──────
     if (state.sort === "nearme" && typeof CM_NEARME !== "undefined") {
@@ -658,7 +710,7 @@
   // แสดง creator list อัตโนมัติถ้า unlock แล้ว
   // Safe render — catches errors if dataService failed to load
   try {
-    render();
+    setSegment(currentSegment);   // ตั้งปุ่ม segment ให้ตรง state + render หนึ่งครั้ง
   } catch(e) {
     console.error("[CM] render() failed:", e);
     // v5 Fallback: use canonical external pool, scoped to Bangkok+restaurant
