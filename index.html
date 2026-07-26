@@ -686,8 +686,8 @@
 <script src="./js/firebase-config.js?v=20260501a"></script>
 <script src="./js/auth.js?v=20260501a"></script>
 <script src="./js/safeDataAdapter.js?v=20260501a"></script>
-<script src="./js/data.js?v=202607262100"></script>
-<script src="./js/dataService.js?v=202607262100"></script>
+<script src="./js/data.js?v=202607262200"></script>
+<script src="./js/dataService.js?v=202607262200"></script>
 <script src="./js/quickpick.js?v=20260712a"></script>
 <script src="./js/creatorbuzz.js?v=20260709a"></script>
 <script src="./js/microfx.js?v=20260708b"></script>
@@ -1031,9 +1031,10 @@
 
       grid.innerHTML = sorted.map(function(t, i){
         var val     = parseInt(t.change);
-        var hasVal  = !isNaN(val);
+        // "+0%" = ไม่ขยับ ไม่ใช่ตัวเลขที่ควรโชว์ — แสดงจำนวนรีวิวจริงแทน
+        var hasVal  = !isNaN(val) && val !== 0;
         var isDec   = hasVal && val < 0;
-        var isStable= t.signal === 'stable' || t.signal === 'moderate' || !hasVal;
+        var isStable= !hasVal || t.signal === 'stable' || t.signal === 'moderate';
         // ยังไม่มี history เทียบ % → ใช้จำนวนรีวิวจริงเป็นความยาวแท่งแทน
         var barW    = hasVal ? Math.min(Math.abs(val) * 1.5, 100) : Math.min((t.mentions||0) * 12, 100) || 5;
         var barColor= isDec ? '#f87171' : isStable ? 'rgba(255,255,255,.25)' : '#4ade80';
@@ -1062,7 +1063,7 @@
           +'</div>'
           // % badge
           +'<div style="font-size:13px;font-weight:900;color:'+numColor+';flex-shrink:0;min-width:38px;text-align:right">'
-          +escHtml(t.change || (t.mentions ? t.mentions + ' รีวิว' : '—'))+'</div>'
+          +escHtml(hasVal ? t.change : (t.mentions ? t.mentions + ' รีวิว' : '—'))+'</div>'
           +'</div>';
       }).join('');
     }
