@@ -686,8 +686,8 @@
 <script src="./js/firebase-config.js?v=20260501a"></script>
 <script src="./js/auth.js?v=20260501a"></script>
 <script src="./js/safeDataAdapter.js?v=20260501a"></script>
-<script src="./js/data.js?v=202607261226"></script>
-<script src="./js/dataService.js?v=202607261226"></script>
+<script src="./js/data.js?v=202607262100"></script>
+<script src="./js/dataService.js?v=202607262100"></script>
 <script src="./js/quickpick.js?v=20260712a"></script>
 <script src="./js/creatorbuzz.js?v=20260709a"></script>
 <script src="./js/microfx.js?v=20260708b"></script>
@@ -969,17 +969,22 @@
       'Thai Street Food':'🍢','Hot Pot / Suki':'🫕','Steakhouse':'🥩','Dessert & Cafe':'🍰'
     };
 
-    var sorted = [].concat(CM_SIGNALS.trendCategories).sort(function(a,b){
+    // เอาเฉพาะหมวดที่มี signal พอ (≥2 รีวิว หรือ ≥2 ช่อง) — กัน chip "1 ช่อง" รกหน้า
+    var sorted = [].concat(CM_SIGNALS.trendCategories).filter(function(t){
+      return (t.mentions || 0) >= 2 || (t.influencers || 0) >= 2;
+    }).sort(function(a,b){
       var va = parseInt(a.change), vb = parseInt(b.change);
-      if (isNaN(va)) va = 0; if (isNaN(vb)) vb = 0;
+      if (isNaN(va)) va = (a.mentions || 0); if (isNaN(vb)) vb = (b.mentions || 0);
       return vb - va;
     }).slice(0, 5);
+    if (!sorted.length) { tcList.style.display = 'none'; return; }
 
     tcList.innerHTML = '<div style="display:flex;flex-wrap:wrap;gap:7px">'
       + sorted.map(function(t){
           var val = parseInt(t.change);
-          var dec = t.signal === 'declining';
-          var stable = t.signal === 'stable' || t.signal === 'moderate' || isNaN(val);
+          var hasGrowth = !isNaN(val) && val > 0;      // "+0%" ไม่ใช่การเติบโต
+          var dec = t.signal === 'declining' || (!isNaN(val) && val < 0);
+          var stable = !hasGrowth && !dec;
           var color  = dec ? 'var(--red)' : stable ? 'var(--text-2)' : 'var(--green)';
           var bg     = dec ? 'rgba(239,68,68,.08)' : stable ? 'rgba(0,0,0,.04)' : 'rgba(34,197,94,.09)';
           var border = dec ? 'rgba(239,68,68,.2)' : stable ? 'var(--border)' : 'rgba(34,197,94,.25)';
@@ -987,7 +992,10 @@
           return '<div style="display:inline-flex;align-items:center;gap:5px;padding:6px 12px;background:'+bg+';border:1px solid '+border+';border-radius:99px">'
             + '<span style="font-size:13px">'+emoji+'</span>'
             + '<span style="font-size:11px;font-weight:800;color:var(--text-1)">'+escHtml(t.cat)+'</span>'
-            + '<span style="font-size:11px;font-weight:900;color:'+color+'">'+escHtml(t.change || ((t.influencers||0)+' ช่อง reviews'))+'</span>'
+            + '<span style="font-size:11px;font-weight:900;color:'+color+'">'
+              + escHtml(hasGrowth ? t.change
+                  : (dec ? t.change : ((t.mentions || t.influencers || 0) + ' รีวิว')))
+              + '</span>'
             + '</div>';
         }).join('')
       + '</div>';
