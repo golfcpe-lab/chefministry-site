@@ -323,10 +323,10 @@
 <script src="./js/firebase-config.js?v=20260501a"></script>
 <script src="./js/auth.js?v=20260501a"></script>
 <script src="./js/safeDataAdapter.js?v=20260501a"></script>
-<script src="./js/data.js?v=202607261651"></script>
-<script src="./js/geo.js?v=20260712a"></script>
-<script src="./js/nearme.js?v=20260712a"></script>
-<script src="./js/dataService.js?v=202607261651"></script>
+<script src="./js/data.js?v=202607252030"></script>
+<script src="./js/geo.js?v=20260726b"></script>
+<script src="./js/nearme.js?v=20260726b"></script>
+<script src="./js/dataService.js?v=202607252030"></script>
 <script>
   document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
     const n=document.getElementById("mobileNav");
@@ -369,6 +369,44 @@
     if (d) d.textContent = SEG_DESC[seg] || '';
     render();
   }
+  // ── แจ้งสถานะ "ร้านใกล้ฉัน" แบบไม่ใช้ alert ─────────────────────────────
+  function _nearMeBox() {
+    let el = document.getElementById("nearMeNotice");
+    if (!el) {
+      el = document.createElement("div");
+      el.id = "nearMeNotice";
+      el.style.cssText =
+        "margin:10px 0 4px;padding:11px 14px;border-radius:10px;font-size:13px;" +
+        "line-height:1.6;display:flex;gap:10px;align-items:center;flex-wrap:wrap";
+      const anchor = document.getElementById("nearMeBtn");
+      if (anchor && anchor.parentElement) anchor.parentElement.insertAdjacentElement("afterend", el);
+      else document.querySelector("main .container").prepend(el);
+    }
+    return el;
+  }
+  function _showNearMeNotice(msg, pending) {
+    const el = _nearMeBox();
+    el.style.background = pending ? "rgba(0,0,0,.04)" : "rgba(239,68,68,.08)";
+    el.style.border = pending ? "1px solid var(--border)" : "1px solid rgba(239,68,68,.25)";
+    el.style.color = pending ? "var(--text-2)" : "var(--navy)";
+    el.innerHTML = "<span style='flex:1;min-width:180px'>" +
+      String(msg).replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c])) + "</span>" +
+      (pending ? "" :
+        "<button id='nearMeRetry' class='btn btn-sm btn-outline' style='white-space:nowrap'>ลองอีกครั้ง</button>");
+    const rt = document.getElementById("nearMeRetry");
+    if (rt) rt.addEventListener("click", () => {
+      state.sort = "nearme";
+      const s = document.getElementById("sortSelect");
+      if (s) s.value = "nearme";
+      render();
+    });
+    el.style.display = "flex";
+  }
+  function _clearNearMeNotice() {
+    const el = document.getElementById("nearMeNotice");
+    if (el) el.style.display = "none";
+  }
+
   function segMatch(r) {
     if (currentSegment === 'all') return true;
     try {
@@ -548,9 +586,10 @@
         list = CM_NEARME.sortByDistance(list);
       } else {
         CM_NEARME.locate(
-          () => render(),
+          () => { _clearNearMeNotice(); render(); },
           (msg) => {
-            alert(msg);
+            // เดิมใช้ alert() — บนมือถือขึ้นกล่องทึบแล้วผู้ใช้ทำอะไรต่อไม่ได้
+            _showNearMeNotice(msg);
             state.sort = "overlap";
             const s = document.getElementById("sortSelect");
             if (s) s.value = "overlap";
@@ -559,6 +598,7 @@
         );
         const rc = document.getElementById("resultCount");
         if (rc) rc.textContent = "📍 กำลังหาตำแหน่งของคุณ...";
+        _showNearMeNotice("📍 กำลังหาตำแหน่ง… (มือถืออาจใช้เวลา 10–20 วินาที)", true);
         return;
       }
     }
