@@ -105,28 +105,57 @@ const CM_NEARME = (() => {
   // ── ตำแหน่งผู้ใช้ ─────────────────────────────────────────────────────────
   function hasPosition() { return !!_pos && (Date.now() - _pos.ts) < CACHE_MS; }
 
+  // มือถือมัก timeout ถ้าไม่มีพิกัด cache — ลอง 2 ชั้น:
+  //   รอบ 1 low-accuracy (เร็ว ใช้ cell/wifi, ยอมรับค่าเก่าได้ 10 นาที)
+  //   รอบ 2 high-accuracy (เปิด GPS จริง, ให้เวลานานขึ้น) เมื่อรอบแรก timeout/หาไม่เจอ
+  const _waiters = [];
+
+  function _finish(err, pos) {
+    _locating = false;
+    const list = _waiters.splice(0, _waiters.length);
+    list.forEach(w => { if (err) { w.err && w.err(err); } else { w.ok && w.ok(pos); } });
+  }
+
+  function _errMessage(e) {
+    if (!e) return "หาตำแหน่งไม่สำเร็จ ลองใหม่อีกครั้ง";
+    if (e.code === 1) return "กรุณาอนุญาตให้เข้าถึงตำแหน่ง แล้วกดอีกครั้ง (ไอคอน 🔒 ข้าง URL → Location → Allow)";
+    if (e.code === 2) return "อุปกรณ์หาตำแหน่งไม่ได้ — เปิด Location/GPS ในเครื่องแล้วลองอีกครั้ง";
+    return "หาตำแหน่งไม่สำเร็จ (สัญญาณ GPS อ่อน) — ลองใหม่ใกล้หน้าต่างหรือกลางแจ้ง";
+  }
+
   function locate(cb, errCb) {
     if (hasPosition()) { cb && cb(_pos); return; }
     if (!navigator.geolocation) {
       errCb && errCb("เบราว์เซอร์นี้ไม่รองรับการหาตำแหน่ง");
       return;
     }
-    if (_locating) return;
+    if (!window.isSecureContext) {
+      errCb && errCb("ต้องเปิดผ่าน https:// เท่านั้นถึงจะหาตำแหน่งได้");
+      return;
+    }
+
+    _waiters.push({ ok: cb, err: errCb });
+    if (_locating) return;       // มีคำขอค้างอยู่ — รอ callback รอบเดียวกัน
     _locating = true;
+
+    const onOk = p => {
+      _pos = { lat: p.coords.latitude, lng: p.coords.longitude, ts: Date.now() };
+      _finish(null, _pos);
+    };
+
+    const tryHighAccuracy = e1 => {
+      if (e1 && e1.code === 1) { _finish(_errMessage(e1)); return; }  // ถูกปฏิเสธ ไม่ต้องลองซ้ำ
+      navigator.geolocation.getCurrentPosition(
+        onOk,
+        e2 => _finish(_errMessage(e2)),
+        { enableHighAccuracy: true, timeout: 25000, maximumAge: 0 }
+      );
+    };
+
     navigator.geolocation.getCurrentPosition(
-      p => {
-        _locating = false;
-        _pos = { lat: p.coords.latitude, lng: p.coords.longitude, ts: Date.now() };
-        cb && cb(_pos);
-      },
-      e => {
-        _locating = false;
-        const msg = e.code === 1
-          ? "กรุณาอนุญาตให้เข้าถึงตำแหน่ง (กดไอคอน 🔒 ข้าง URL)"
-          : "หาตำแหน่งไม่สำเร็จ ลองใหม่อีกครั้ง";
-        errCb && errCb(msg);
-      },
-      { enableHighAccuracy: false, timeout: 10000, maximumAge: CACHE_MS }
+      onOk,
+      tryHighAccuracy,
+      { enableHighAccuracy: false, timeout: 8000, maximumAge: CACHE_MS }
     );
   }
 
