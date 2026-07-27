@@ -1,16 +1,126 @@
 {
- "digest_date": "2026-07-20",
+ "digest_date": "2026-07-27",
  "week_label": "Week of Jul 20, 2026",
  "entries": [
   {
-   "name": "Khao Jaan-Prod (ข้าวจานโปรด)",
+   "name": "EZ Smash",
    "type": "Restaurant",
    "city": "Bangkok",
-   "area": "CentralWorld (Pathumwan)",
+   "area": "Cloud 11, Sukhumvit",
+   "cuisine": "Burgers",
+   "description": "First Thailand outpost of the Dutch smash-burger brand, burgers from B259.",
+   "source_url": "https://www.bkmagazine.com/city-living/the-commons-cloud-11-is-finally-open-heres-what-you-can-try-right-now/",
+   "source_name": "BK Magazine",
+   "is_watchlist": false
+  },
+  {
+   "name": "Taqueria La Nena",
+   "type": "Restaurant",
+   "city": "Bangkok",
+   "area": "Cloud 11, Sukhumvit",
+   "cuisine": "Mexican",
+   "description": "Taco counter with signature sets, build-your-own options and pulled-pork fillings.",
+   "source_url": "https://www.bkmagazine.com/city-living/the-commons-cloud-11-is-finally-open-heres-what-you-can-try-right-now/",
+   "source_name": "BK Magazine",
+   "is_watchlist": false
+  },
+  {
+   "name": "Don Gang",
+   "type": "Restaurant",
+   "city": "Bangkok",
+   "area": "Cloud 11, Sukhumvit",
    "cuisine": "Thai",
-   "description": "New casual Thai brand from the team behind Michelin-starred Khao, opened July 2026 on CentralWorld's 7th floor with a glass-house dining room.",
-   "source_url": "https://www.bkkmenu.com/eat/we-recommend/khao-jaan-prod.html",
-   "source_name": "BKKMENU",
+   "description": "Fiery Southern Thai cooking from a Krabi 'outlaw' cook.",
+   "source_url": "https://www.bkmagazine.com/city-living/the-commons-cloud-11-is-finally-open-heres-what-you-can-try-right-now/",
+   "source_name": "BK Magazine",
+   "is_watchlist": false
+  },
+  {
+   "name": "Butter & Co.",
+   "type": "Cafe",
+   "city": "Bangkok",
+   "area": "Cloud 11, Sukhumvit",
+   "cuisine": "Bakery",
+   "description": "Artisanal herb, citrus and spiced butters served on warm sourdough.",
+   "source_url": "https://www.bkmagazine.com/city-living/the-commons-cloud-11-is-finally-open-heres-what-you-can-try-right-now/",
+   "source_name": "BK Magazine",
+   "is_watchlist": false
+  },
+  {
+   "name": "Kad Kreamery",
+   "type": "Cafe",
+   "city": "Bangkok",
+   "area": "Cloud 11, Sukhumvit",
+   "cuisine": "Dessert",
+   "description": "Pastry, ice cream and chocolate counter from the Kad Kokoa bean-to-bar team.",
+   "source_url": "https://www.bkmagazine.com/city-living/the-commons-cloud-11-is-finally-open-heres-what-you-can-try-right-now/",
+   "source_name": "BK Magazine",
+   "is_watchlist": false
+  },
+  {
+   "name": "Goodyguts",
+   "type": "Cafe",
+   "city": "Bangkok",
+   "area": "Cloud 11, Sukhumvit",
+   "cuisine": "Healthy",
+   "description": "Soy-protein smoothie and no-added-sugar soft-serve bar.",
+   "source_url": "https://www.bkmagazine.com/city-living/the-commons-cloud-11-is-finally-open-heres-what-you-can-try-right-now/",
+   "source_name": "BK Magazine",
+   "is_watchlist": false
+  },
+  {
+   "name": "7SUNS",
+   "type": "Cafe",
+   "city": "Bangkok",
+   "area": "Cloud 11, Sukhumvit",
+   "cuisine": "Matcha",
+   "description": "Sixth Bangkok branch for the award-winning matcha specialist.",
+   "source_url": "https://www.bkmagazine.com/city-living/the-commons-cloud-11-is-finally-open-heres-what-you-can-try-right-now/",
+   "source_name": "BK Magazine",
+   "is_watchlist": false
+  },
+  {
+   "name": "Bubblism (by 1923)",
+   "type": "Bar",
+   "city": "Bangkok",
+   "area": "Cloud 11, Sukhumvit",
+   "cuisine": "Japanese",
+   "description": "Tokyo-style highball bar with a striking build-out and non-alcoholic options.",
+   "source_url": "https://www.bkmagazine.com/city-living/the-commons-cloud-11-is-finally-open-heres-what-you-can-try-right-now/",
+   "source_name": "BK Magazine",
+   "is_watchlist": false
+  },
+  {
+   "name": "Taproom",
+   "type": "Bar",
+   "city": "Bangkok",
+   "area": "Cloud 11, Sukhumvit",
+   "cuisine": "Beer",
+   "description": "Craft beer with a wide IPA list, served by the tower.",
+   "source_url": "https://www.bkmagazine.com/city-living/the-commons-cloud-11-is-finally-open-heres-what-you-can-try-right-now/",
+   "source_name": "BK Magazine",
+   "is_watchlist": false
+  },
+  {
+   "name": "12 Plato",
+   "type": "Bar",
+   "city": "Bangkok",
+   "area": "Cloud 11, Sukhumvit",
+   "cuisine": "Beer",
+   "description": "Bang Na microbrewery's new city-side taproom, plus cocktails and rice wine.",
+   "source_url": "https://www.bkmagazine.com/city-living/the-commons-cloud-11-is-finally-open-heres-what-you-can-try-right-now/",
+   "source_name": "BK Magazine",
+   "is_watchlist": false
+  },
+  {
+   "name": "The Clucker",
+   "type": "Restaurant",
+   "city": "Bangkok",
+   "area": "On Nut, Sukhumvit 77",
+   "cuisine": "American",
+   "description": "Soft-opened Jul 23; cult Clucking Donut reborn as a 20-seat Nashville hot chicken sando shop.",
+   "source_url": "https://www.bkmagazine.com/food/restaurants/nashville-spice-and-a-disco-toilet-bangkoks-best-chicken-sando-is-back-and-bigger-than-ever-in-onnut/",
+   "source_name": "BK Magazine",
    "is_watchlist": false
   },
   {
@@ -19,110 +129,55 @@
    "city": "Bangkok",
    "area": "Silom",
    "cuisine": "Thai",
-   "description": "\"Real Thai. No Rules\" — new venture from Buddy Hatayadom with Chef Wai of Chiang Mai's Rasik, now in soft opening beside Pullman Hotel G.",
-   "source_url": "https://www.timeout.com/bangkok/things-to-do/table-talk-in-bangkok",
-   "source_name": "Time Out Bangkok",
-   "is_watchlist": false
+   "description": "'Real Thai. No Rules.' from chef Buddy Hatayadom and Chef Wai of Rasik; still in soft opening.",
+   "source_url": "https://www.masalathai.com/lifestyle/bangkok-new-restaurants-hotels-shops-lifestyle-openings-july-2026",
+   "source_name": "Masala Thailand",
+   "is_watchlist": true
   },
   {
-   "name": "Jakawaan",
+   "name": "Cuisine BKK",
+   "type": "Restaurant",
+   "city": "Bangkok",
+   "area": "Sala Daeng",
+   "cuisine": "French",
+   "description": "Open-kitchen French from Franck Le Bayon and Morgan Daniels.",
+   "source_url": "https://today.line.me/th/v3/article/DR6lRoX",
+   "source_name": "Lifestyle Asia Thailand",
+   "is_watchlist": true
+  },
+  {
+   "name": "TAANG",
+   "type": "Restaurant",
+   "city": "Bangkok",
+   "area": "Ratchaprasong",
+   "cuisine": "Northern",
+   "description": "12-seat Northern Thai chef's table by Kongwuth Chaiwongkajorn at Grand Hyatt Erawan; B3,880++.",
+   "source_url": "https://today.line.me/th/v3/article/DR6lRoX",
+   "source_name": "Lifestyle Asia Thailand",
+   "is_watchlist": true
+  },
+  {
+   "name": "Yamu",
+   "type": "Restaurant",
+   "city": "Bangkok",
+   "area": "Sathorn",
+   "cuisine": "Japanese",
+   "description": "Chef Mirco Keller's casual homestyle Japanese follow-up to Keller.",
+   "source_url": "https://today.line.me/th/v3/article/DR6lRoX",
+   "source_name": "Lifestyle Asia Thailand",
+   "is_watchlist": true
+  },
+  {
+   "name": "Elder Burger",
    "type": "Restaurant",
    "city": "Bangkok",
    "area": "Thonglor",
-   "cuisine": "Thai",
-   "description": "Traditional Thai dining by food designer Nick Pitthayanot, reviving hard-to-find heritage dishes; set menu or a la carte, booking advised.",
-   "source_url": "https://www.masalathai.com/lifestyle/bangkok-new-restaurants-hotels-shops-lifestyle-openings-july-2026",
-   "source_name": "Masala Thailand",
-   "is_watchlist": false
-  },
-  {
-   "name": "TAANG — Caravan, Table & Wine",
-   "type": "Restaurant",
-   "city": "Bangkok",
-   "area": "Erawan Bangkok (Ratchaprasong)",
-   "cuisine": "Northern-Thai",
-   "description": "12-seat Northern Thai chef's table from Chef Kong Chaiwongkajorn with a wine-led beverage program, Mon-Wed seatings.",
-   "source_url": "https://www.masalathai.com/lifestyle/bangkok-new-restaurants-hotels-shops-lifestyle-openings-july-2026",
-   "source_name": "Masala Thailand",
-   "is_watchlist": false
-  },
-  {
-   "name": "Luke Bangkok",
-   "type": "Restaurant",
-   "city": "Bangkok",
-   "area": "Hua Lamphong",
-   "cuisine": "Italian",
-   "description": "Two-floor Italian all-day diner in a revamped colonial-style shophouse — homemade pizza, hot sandwiches, retro red interiors.",
-   "source_url": "https://www.masalathai.com/lifestyle/bangkok-new-restaurants-hotels-shops-lifestyle-openings-july-2026",
-   "source_name": "Masala Thailand",
-   "is_watchlist": false
-  },
-  {
-   "name": "Curry Up",
-   "type": "Restaurant",
-   "city": "Bangkok",
-   "area": "Central Embassy",
-   "cuisine": "Indian-Japanese",
-   "description": "First Thai outpost of NIGO's Japanese curry brand, opened alongside the HUMAN MADE store on Central Embassy's second level.",
-   "source_url": "https://www.masalathai.com/lifestyle/bangkok-new-restaurants-hotels-shops-lifestyle-openings-july-2026",
-   "source_name": "Masala Thailand",
-   "is_watchlist": false
-  },
-  {
-   "name": "Folk Lane",
-   "type": "Cafe",
-   "city": "Bangkok",
-   "area": "Sukhumvit 38",
-   "cuisine": "Brunch",
-   "description": "Community brunch cafe in the former Toby's space — coffee, sandwiches, breakfast plates plus salmon miso ochazuke.",
-   "source_url": "https://www.masalathai.com/lifestyle/new-bangkok-openings-cult-everyday-folk-lane",
-   "source_name": "Masala Thailand",
-   "is_watchlist": false
-  },
-  {
-   "name": "CULT EVERYDAY",
-   "type": "Cafe",
-   "city": "Bangkok",
-   "area": "Asok (STECON Tower)",
-   "cuisine": "Wellness",
-   "description": "Wellness cafe built on no-sugar no-ice smoothies, wraps and daily-nutrition bowls with playful branding.",
-   "source_url": "https://www.masalathai.com/lifestyle/new-bangkok-openings-cult-everyday-folk-lane",
-   "source_name": "Masala Thailand",
-   "is_watchlist": false
-  },
-  {
-   "name": "OBi Record Bar",
-   "type": "Bar",
-   "city": "Bangkok",
-   "area": "Silom",
-   "cuisine": "Bar",
-   "description": "Vinyl listening bar near BTS Sala Daeng where records shape the room's mood.",
-   "source_url": "https://www.masalathai.com/lifestyle/new-bangkok-openings-cult-everyday-folk-lane",
-   "source_name": "Masala Thailand",
-   "is_watchlist": false
-  },
-  {
-   "name": "House of Savoy",
-   "type": "Bar",
-   "city": "Bangkok",
-   "area": "SILQ Hotel, Sukhumvit",
-   "cuisine": "Nightlife",
-   "description": "Cafe dansant from the BACCARAT / UPPER HOUSE / 24 BLVD team on the second floor of SILQ Hotel & Residence.",
-   "source_url": "https://www.masalathai.com/lifestyle/new-bangkok-openings-cult-everyday-folk-lane",
-   "source_name": "Masala Thailand",
-   "is_watchlist": false
-  },
-  {
-   "name": "Baan Phraya (reopening)",
-   "type": "Restaurant",
-   "city": "Bangkok",
-   "area": "Mandarin Oriental, Riverside",
-   "cuisine": "Thai",
-   "description": "Mandarin Oriental's landmark Thai restaurant reopened with a refreshed royal/regional Thai concept under Chef Pom Phatchara.",
-   "source_url": "https://www.masalathai.com/lifestyle/bangkok-new-restaurants-hotels-shops-lifestyle-openings-july-2026",
-   "source_name": "Masala Thailand",
-   "is_watchlist": false
+   "cuisine": "Burgers",
+   "description": "Seoul Seongsu-dong craft burger brand's first Thai store, with an in-store hydroponic garden.",
+   "source_url": "https://today.line.me/th/v3/article/DR6lRoX",
+   "source_name": "Lifestyle Asia Thailand",
+   "is_watchlist": true
   }
  ],
- "trend_note": "Thai heritage is the theme of the month: new brands from Michelin-starred Thai teams (Khao Jaan-Prod, Baan Phraya, TAANG, Jakawaan) doubling down on royal/regional Thai, while cafe growth skews wellness and brunch."
+ "trend_note": "Mall-scale food halls are now the main vehicle for new-brand entry - The Commons Cloud 11's Jul 20 opening delivered more new F&B doors than the rest of Bangkok combined, and is how foreign brands (EZ Smash, Bubblism) are landing."
 }
