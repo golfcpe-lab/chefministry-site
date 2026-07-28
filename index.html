@@ -347,6 +347,26 @@
 
 <hr class="divider"/>
 
+<!-- ── NEW OPENINGS (จาก weekly digest — เก็บไว้ 30 วัน) ── -->
+<section id="newOpeningsSection" style="background:var(--white);padding:38px 0;display:none">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:22px">
+      <div>
+        <div class="eyebrow" style="color:var(--gold);margin-bottom:8px">🆕 New Openings — สแกนสื่อ F&amp;B ทุกวันจันทร์</div>
+        <h2 class="display-2" style="margin-bottom:8px">ร้านเปิดใหม่ที่ควรรู้</h2>
+        <p style="color:var(--text-2);font-size:15px;max-width:560px;line-height:1.65" id="newOpenDesc">
+          ร้านที่เพิ่งเปิดในกรุงเทพฯ ภายใน 30 วัน — คนละชั้นกับ trending ที่วัดจากรีวิวสะสม
+        </p>
+      </div>
+      <a href="./listing.html?tab=new" class="btn btn-outline" style="white-space:nowrap">ดูร้านเปิดใหม่ทั้งหมด →</a>
+    </div>
+    <div class="grid-3" id="newOpeningsGrid"></div>
+    <div style="margin-top:14px;font-size:11.5px;color:var(--text-2)" id="newOpeningsSource"></div>
+  </div>
+</section>
+
+<hr class="divider" id="newOpeningsDivider" style="display:none"/>
+
 <!-- ── CATEGORY HEAT (dynamic — หมวดที่แรงสุดจาก signal สัปดาห์นี้) ── -->
 <section style="background:linear-gradient(135deg,#0d1f3c,#1a2f52);color:#fff;padding-top:36px;padding-bottom:36px">
   <div class="container">
@@ -686,8 +706,8 @@
 <script src="./js/firebase-config.js?v=20260501a"></script>
 <script src="./js/auth.js?v=20260501a"></script>
 <script src="./js/safeDataAdapter.js?v=20260501a"></script>
-<script src="./js/data.js?v=202607271806"></script>
-<script src="./js/dataService.js?v=202607271806"></script>
+<script src="./js/data.js?v=202607262330"></script>
+<script src="./js/dataService.js?v=202607262330"></script>
 <script src="./js/quickpick.js?v=20260712a"></script>
 <script src="./js/creatorbuzz.js?v=20260709a"></script>
 <script src="./js/microfx.js?v=20260708b"></script>
@@ -728,13 +748,15 @@
       }
       if (!eligible.length) return; // คง fallback static
       // หมวดที่มี % เติบโตจริงมาก่อน — ถ้าไม่มีเลย หมุนเวียนตามวันกันหัวข้อค้าง
-      var withPct = eligible.filter(function (e) { return /^\+\d/.test(String(e.cat.change || "")); });
+      // ต้องโตจริง — "+0%" ไม่ใช่การเติบโต (regex \+\d เดิมจับ "+0%" ด้วย)
+      var _growth = function (c) { var v = parseInt(c && c.change); return isNaN(v) ? 0 : v; };
+      var withPct = eligible.filter(function (e) { return _growth(e.cat) > 0; });
       var poolCat = withPct.length ? withPct : eligible;
       var _now = new Date();
       var _doy = Math.floor((_now - new Date(_now.getFullYear(), 0, 0)) / 86400000);
       var chosen = poolCat[_doy % poolCat.length];
       var pick = chosen.cat, top3 = chosen.rows.slice(0, 3);
-      var _pct = /^\+\d/.test(String(pick.change || "")) ? pick.change : "";
+      var _pct = _growth(pick) > 0 ? pick.change : "";
       var _men = pick.mentions || 0, _inf = pick.influencers || 0;
       document.getElementById("hotCatTitle").textContent = _pct
         ? "หมวด " + pick.cat + " กำลังมาแรง " + _pct
@@ -957,6 +979,61 @@
   }
 
 
+
+  // ── New Openings section — ร้านเปิดใหม่ 30 วัน จาก weekly digest ──────────
+  (function () {
+    try {
+      var sec  = document.getElementById("newOpeningsSection");
+      var grid = document.getElementById("newOpeningsGrid");
+      if (!sec || !grid) return;
+      var digest = (typeof CM_FB_DIGEST !== "undefined") ? CM_FB_DIGEST : [];
+      var meta   = (typeof CM_FB_DIGEST_META !== "undefined") ? CM_FB_DIGEST_META : {};
+      var cutoff = new Date(Date.now() - 30 * 86400000).toISOString().slice(0, 10);
+      var items  = digest
+        .filter(function (r) { return !r.digestDate || r.digestDate >= cutoff; })
+        .sort(function (a, b) { return String(b.digestDate || "").localeCompare(String(a.digestDate || "")); })
+        .slice(0, 6);
+      if (!items.length) return;   // ไม่มีข้อมูล = ซ่อน section (ไม่โชว์กล่องว่าง)
+
+      var esc = function (x) { return String(x || "").replace(/[&<>"]/g, function (c) {
+        return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]; }); };
+      var daysAgo = function (d) {
+        if (!d) return "";
+        var n = Math.round((Date.now() - new Date(d).getTime()) / 86400000);
+        return n <= 0 ? "วันนี้" : n <= 7 ? "สัปดาห์นี้" : n <= 14 ? "2 สัปดาห์ก่อน" : n + " วันก่อน";
+      };
+
+      grid.innerHTML = items.map(function (r) {
+        var link = r.sourceUrl || ("https://www.google.com/maps/search/" + encodeURIComponent(r.name || ""));
+        return '<a href="' + esc(link) + '" target="_blank" rel="noopener" ' +
+          'style="display:block;text-decoration:none;color:inherit;background:var(--cream);' +
+          'border:1px solid var(--border);border-radius:14px;padding:18px 20px">' +
+          '<div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:8px">' +
+            '<span style="font-size:22px">' + esc(r.emoji || "🍽️") + '</span>' +
+            '<span style="font-size:10px;font-weight:900;color:var(--gold);background:rgba(201,168,76,.12);' +
+            'padding:3px 9px;border-radius:99px;white-space:nowrap">' + esc(daysAgo(r.digestDate)) + '</span>' +
+          '</div>' +
+          '<div style="font-size:15.5px;font-weight:900;color:var(--navy);margin-bottom:3px">' + esc(r.name) + '</div>' +
+          '<div style="font-size:12px;color:var(--text-2);margin-bottom:8px">' +
+            esc([r.cuisine, r.area].filter(Boolean).join(" · ")) + '</div>' +
+          (r.description ? '<div style="font-size:12.5px;color:var(--text-2);line-height:1.6">' +
+            esc(String(r.description).slice(0, 110)) + (String(r.description).length > 110 ? "…" : "") + '</div>' : "") +
+          (r.sourceName ? '<div style="margin-top:10px;font-size:11px;font-weight:800;color:var(--navy);opacity:.75">' +
+            esc(r.sourceName) + ' ↗</div>' : "") +
+          '</a>';
+      }).join("");
+
+      var noteEl = document.getElementById("newOpeningsSource");
+      if (noteEl) {
+        noteEl.textContent = (meta.weekLabel ? "อัปเดตล่าสุด: " + meta.weekLabel + " · " : "") +
+          "สแกนจาก BK Magazine, Time Out Bangkok และสื่อ F&B อื่น ๆ ทุกวันจันทร์ · แสดง " +
+          items.length + " จาก " + digest.length + " ร้านที่เก็บไว้";
+      }
+      sec.style.display = "block";
+      var div = document.getElementById("newOpeningsDivider");
+      if (div) div.style.display = "block";
+    } catch (e) {}
+  })();
 
   // Trend category pills (Spotlight section) — top 5 compact badges
   (function(){
