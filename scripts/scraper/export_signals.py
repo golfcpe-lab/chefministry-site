@@ -95,6 +95,25 @@ def inject_into_datajs(cm_restaurants):
 
     base = content[:marker_idx]
 
+    # ── เก็บ block ที่ step อื่น inject ไว้ท้ายไฟล์ (2026-07-26) ──────────────
+    # bug เดิม: เขียนทับทุกอย่างหลัง marker → CM_FB_DIGEST (ร้านเปิดใหม่ประจำ
+    # สัปดาห์ จาก weekly_update วันจันทร์) ถูกลบทิ้งตอน scraper รันคืนถัดมา
+    # ทำให้แท็บ "เปิดใหม่" ว่างเปล่าเกือบทั้งสัปดาห์
+    import re as _re
+    preserved = ""
+    for _name in ("CM_FB_DIGEST_META", "CM_FB_DIGEST"):
+        _m = _re.search(r"^const %s\s*=\s*" % _name, content[marker_idx:], _re.M)
+        if not _m:
+            continue
+        _start = marker_idx + _m.start()
+        _rest = content[_start:]
+        # จบที่ const ตัวถัดไป (ถ้ามี) ไม่งั้นถึงท้ายไฟล์
+        _nxt = _re.search(r"^const (?!%s)" % _name, _rest[1:], _re.M)
+        _block = _rest[: _nxt.start() + 1] if _nxt else _rest
+        preserved += _block.rstrip() + "\n"
+    if preserved:
+        print("Preserving injected blocks (FB digest) — %d chars" % len(preserved))
+
     # Only inject in-scope records
     in_scope = [r for r in cm_restaurants if r.get("is_restaurant_focus") and r.get("is_bangkok_focus")]
 
@@ -111,7 +130,7 @@ def inject_into_datajs(cm_restaurants):
     ) % (max(total_in_db, len(in_scope)), today, json_str)
 
     with open(data_js_path, "w", encoding="utf-8") as f:
-        f.write(base + tail)
+        f.write(base + tail + (("\n" + preserved) if preserved else ""))
 
     print("Injected %d in-scope records into data.js" % len(in_scope))
 
