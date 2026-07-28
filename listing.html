@@ -323,10 +323,10 @@
 <script src="./js/firebase-config.js?v=20260501a"></script>
 <script src="./js/auth.js?v=20260501a"></script>
 <script src="./js/safeDataAdapter.js?v=20260501a"></script>
-<script src="./js/data.js?v=202607271806"></script>
+<script src="./js/data.js?v=202607252030"></script>
 <script src="./js/geo.js?v=20260726b"></script>
 <script src="./js/nearme.js?v=20260726b"></script>
-<script src="./js/dataService.js?v=202607271806"></script>
+<script src="./js/dataService.js?v=202607252030"></script>
 <script>
   document.getElementById("mobileMenuBtn").addEventListener("click",()=>{
     const n=document.getElementById("mobileNav");
@@ -452,6 +452,12 @@
   if(params.get("type"))     state.type     = params.get("type");
   if(params.get("sort"))     state.sort     = params.get("sort");
   if(params.get("segment"))  currentSegment = params.get("segment");
+  // ?tab=new — มาจากปุ่ม "ดูร้านเปิดใหม่ทั้งหมด" บนหน้าแรก
+  if(params.get("tab") && ["trending","emerging","popular","new"].includes(params.get("tab"))) {
+    currentTab = params.get("tab");
+    // ร้านเปิดใหม่ยังไม่มีรีวิวสะสม — ต้องดูข้าม segment ไม่งั้นแท็บว่าง
+    if (currentTab === "new") currentSegment = "all";
+  }
 
   // Signal filters
   const signals=[
@@ -751,6 +757,7 @@
   // Safe render — catches errors if dataService failed to load
   try {
     setSegment(currentSegment);   // ตั้งปุ่ม segment ให้ตรง state + render หนึ่งครั้ง
+    if (currentTab !== "trending") setTab(currentTab);   // ?tab=new ให้ปุ่มแท็บตรงด้วย
   } catch(e) {
     console.error("[CM] render() failed:", e);
     // v5 Fallback: use canonical external pool, scoped to Bangkok+restaurant
