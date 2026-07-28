@@ -106,6 +106,39 @@ def build_cm_records(digest: dict) -> list:
     return records
 
 
+KEEP_DAYS = 30   # ร้านเปิดใหม่อยู่บนเว็บ 30 วัน (≈4 สัปดาห์) แล้วค่อยหลุดออก
+
+
+def merge_with_existing(js_text: str, records: list) -> list:
+    """รวม digest สัปดาห์นี้กับของเดิมที่ยังไม่เกิน KEEP_DAYS
+    (เดิม replace ทั้งก้อนทุกจันทร์ → สัปดาห์ไหน digest ว่าง หน้าเว็บก็ว่างทันที)"""
+    old = []
+    m = re.search(r"const CM_FB_DIGEST\s*=\s*(\[.*?\]);", js_text, re.DOTALL)
+    if m:
+        try:
+            old = json.loads(m.group(1))
+        except Exception as e:
+            print(f"  ⚠️ อ่าน CM_FB_DIGEST เดิมไม่ได้ ({e}) — ใช้ของใหม่อย่างเดียว")
+            old = []
+
+    cutoff = (datetime.date.today() - datetime.timedelta(days=KEEP_DAYS)).isoformat()
+    seen = {(r.get("name") or "").strip().lower() for r in records}
+    merged = list(records)
+    kept = 0
+    for r in old:
+        nm = (r.get("name") or "").strip().lower()
+        if not nm or nm in seen:
+            continue
+        if (r.get("digestDate") or "") < cutoff:
+            continue                      # เกิน 30 วัน — ปล่อยหลุด
+        merged.append(r)
+        seen.add(nm)
+        kept += 1
+    if kept:
+        print(f"  ♻️  เก็บร้านเปิดใหม่จากสัปดาห์ก่อนอีก {kept} ร้าน (ภายใน {KEEP_DAYS} วัน)")
+    return merged
+
+
 def inject_cm_fb_digest(js_text: str, records: list, digest: dict) -> str:
     """Inject CM_FB_DIGEST constant เข้า data.js"""
     today     = digest.get("digest_date", datetime.date.today().isoformat())
@@ -223,8 +256,10 @@ def main():
     print(f"\n[3] อ่าน data.js ({DATA_JS})...")
     js_text = DATA_JS.read_text(encoding="utf-8")
 
-    # 4. Inject CM_FB_DIGEST
+    # 4. Inject CM_FB_DIGEST (รวมกับร้านเปิดใหม่ 30 วันย้อนหลัง)
     print(f"\n[4] Inject CM_FB_DIGEST...")
+    records = merge_with_existing(js_text, records)
+    print(f"    รวมทั้งหมด {len(records)} ร้านเปิดใหม่ (ภายใน {KEEP_DAYS} วัน)")
     js_text = inject_cm_fb_digest(js_text, records, digest)
 
     # 5. Update weeklyHighlight
