@@ -2,20 +2,20 @@
 <kml xmlns="http://www.opengis.net/kml/2.2">
 <Document>
   <name>ChefMinistry — 🇰🇷 เกาหลี</name>
-  <description>อัปเดต 2026-07-31 — chefministry.com</description>
+  <description>อัปเดต 2026-07-30 — chefministry.com</description>
   <Style id="cm0"><IconStyle><color>ff7cc0ff</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/dining.png</href></Icon></IconStyle></Style>
   <Folder>
     <name>🇰🇷 เกาหลี</name>
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ซัม กยอบ ซัล</name>
-      <description>⭐ 4.9 (11,469 รีวิว) · Korean · Huai Khwang · ฿฿
+      <description>⭐ 4.9 (11,538 รีวิว) · Korean · Huai Khwang · ฿฿
 410, 115-116 Soi Ratchadaphisek 22, Khwaeng Samsen Nok, Khet Huai Khwang, Krung Thep Maha Nakhon 10310, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJB9aS3l2d4jARZXTLifLjZrQ
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.9</value></Data>
-        <Data name="reviews"><value>11469</value></Data>
+        <Data name="reviews"><value>11538</value></Data>
         <Data name="cuisine"><value>Korean</value></Data>
         <Data name="area"><value>Huai Khwang</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJB9aS3l2d4jARZXTLifLjZrQ</value></Data>
@@ -25,13 +25,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJB9aS3l2d4jARZXTLifLjZrQ
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>Hongdae Buffet Siam Square One</name>
-      <description>⭐ 4.8 (5,949 รีวิว) · Korean · Pathumwan · ฿฿
+      <description>⭐ 4.8 (5,953 รีวิว) · Korean · Pathumwan · ฿฿
 Unit SS 5018 - 19, 388 Rama I Rd, Khwaeng Pathum Wan, Pathum Wan, Krung Thep Maha Nakhon 10330, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJkSRYFdKe4jARHuKV60eqRT4
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.8</value></Data>
-        <Data name="reviews"><value>5949</value></Data>
+        <Data name="reviews"><value>5953</value></Data>
         <Data name="cuisine"><value>Korean</value></Data>
         <Data name="area"><value>Pathumwan</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJkSRYFdKe4jARHuKV60eqRT4</value></Data>
@@ -41,13 +41,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJkSRYFdKe4jARHuKV60eqRT4
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>มันจอมเอ ปิ้งย่างเกาหลี</name>
-      <description>⭐ 4.9 (5,470 รีวิว) · Korean · Phaya Thai · ฿฿
+      <description>⭐ 4.9 (5,469 รีวิว) · Korean · Phaya Thai · ฿฿
 89/70 Room A6 CocoWalk Ratchathewi, ถ. พญาไท แขวงถนนเพชรบุรี Rajthawei, กรุงเทพมหานคร 10400, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJRf8ELbOf4jARF2dtNc45Xyg
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.9</value></Data>
-        <Data name="reviews"><value>5470</value></Data>
+        <Data name="reviews"><value>5469</value></Data>
         <Data name="cuisine"><value>Korean</value></Data>
         <Data name="area"><value>Phaya Thai</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJRf8ELbOf4jARF2dtNc45Xyg</value></Data>
@@ -57,13 +57,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJRf8ELbOf4jARF2dtNc45Xyg
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>กังนัมบาร์บีคิว ลาดกระบัง</name>
-      <description>⭐ 4.8 (5,524 รีวิว) · Korean · Lat Krabang · ฿฿
+      <description>⭐ 4.8 (5,530 รีวิว) · Korean · Lat Krabang · ฿฿
 1529 Soi Khum Lamphai, Khwaeng Lat Krabang, Khet Lat Krabang, Krung Thep Maha Nakhon 10520, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJ-y1HTrRnHTERJ2y9ZPgPXwg
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.8</value></Data>
-        <Data name="reviews"><value>5524</value></Data>
+        <Data name="reviews"><value>5530</value></Data>
         <Data name="cuisine"><value>Korean</value></Data>
         <Data name="area"><value>Lat Krabang</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ-y1HTrRnHTERJ2y9ZPgPXwg</value></Data>
@@ -73,13 +73,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJ-y1HTrRnHTERJ2y9ZPgPXwg
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>โกกิเนมเซ สามย่าน</name>
-      <description>⭐ 4.9 (4,127 รีวิว) · Korean · Pathumwan · ฿฿
+      <description>⭐ 4.9 (4,223 รีวิว) · Korean · Pathumwan · ฿฿
 280 Soi Chulalongkorn 11, Khwaeng Wang Mai, Pathum Wan, Krung Thep Maha Nakhon 10330, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJNWyyyluZ4jAR8xE_xu7adaw
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.9</value></Data>
-        <Data name="reviews"><value>4127</value></Data>
+        <Data name="reviews"><value>4223</value></Data>
         <Data name="cuisine"><value>Korean</value></Data>
         <Data name="area"><value>Pathumwan</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJNWyyyluZ4jAR8xE_xu7adaw</value></Data>
@@ -89,13 +89,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJNWyyyluZ4jAR8xE_xu7adaw
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>Bornga Thailand</name>
-      <description>⭐ 4.8 (4,148 รีวิว) · Korean · วัฒนา · ฿฿
+      <description>⭐ 4.8 (4,149 รีวิว) · Korean · วัฒนา · ฿฿
 ชั้น 2, บูเลอวาร์ด ทาวเวอร์, Soi Sukhumvit 39, Khwaeng Khlong Tan Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJbY7gF8Of4jARFyzLUFoqsuQ
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.8</value></Data>
-        <Data name="reviews"><value>4148</value></Data>
+        <Data name="reviews"><value>4149</value></Data>
         <Data name="cuisine"><value>Korean</value></Data>
         <Data name="area"><value>วัฒนา</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJbY7gF8Of4jARFyzLUFoqsuQ</value></Data>
@@ -105,13 +105,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJbY7gF8Of4jARFyzLUFoqsuQ
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>โดง อี</name>
-      <description>⭐ 4.9 (2,772 รีวิว) · Korean · Khlong Toei · ฿฿
+      <description>⭐ 4.9 (2,786 รีวิว) · Korean · Khlong Toei · ฿฿
 212/20, 1st Floor, Sukhumvit Plaza Soi 12 (Korean Town, ถ. สุขุมวิท แขวงคลองเตย เขตคลองเตย กรุงเทพมหานคร 10110, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJox7O4eOe4jARMNBT7vmIDzY
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.9</value></Data>
-        <Data name="reviews"><value>2772</value></Data>
+        <Data name="reviews"><value>2786</value></Data>
         <Data name="cuisine"><value>Korean</value></Data>
         <Data name="area"><value>Khlong Toei</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJox7O4eOe4jARMNBT7vmIDzY</value></Data>
@@ -169,13 +169,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJccECRmmj4jARmu7aJDkX-qs
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>โกกิเนมเซ บางนา</name>
-      <description>⭐ 4.8 (2,128 รีวิว) · Korean · Bangna · ฿฿
+      <description>⭐ 4.8 (2,151 รีวิว) · Korean · Bangna · ฿฿
 เลขที่ 58 อาคาร BIZZO, ชั้น 1 ห้อง B 101 - B 102, ซอยบางนา-ตราด 23 ถนนบางนา-ตราด, บางนา, เขตบางนา กรุงเทพมหานคร 10260, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJQV_wLu9fHTERrMTl0acoo1s
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.8</value></Data>
-        <Data name="reviews"><value>2128</value></Data>
+        <Data name="reviews"><value>2151</value></Data>
         <Data name="cuisine"><value>Korean</value></Data>
         <Data name="area"><value>Bangna</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJQV_wLu9fHTERrMTl0acoo1s</value></Data>

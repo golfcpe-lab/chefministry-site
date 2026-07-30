@@ -2,7 +2,7 @@
 <kml xmlns="http://www.opengis.net/kml/2.2">
 <Document>
   <name>ChefMinistry — ☕ คาเฟ่ &amp; มัทฉะ</name>
-  <description>อัปเดต 2026-07-31 — chefministry.com</description>
+  <description>อัปเดต 2026-07-30 — chefministry.com</description>
   <Style id="cm0"><IconStyle><color>ff3b8cd6</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/dining.png</href></Icon></IconStyle></Style>
   <Folder>
     <name>☕ คาเฟ่ &amp; มัทฉะ</name>
@@ -41,13 +41,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJkTJmvEef4jAR4nvfCeeQzds
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ฮงเซียงกง</name>
-      <description>⭐ 4.4 (4,097 รีวิว) · Cafe · Yaowarat · ฿฿
+      <description>⭐ 4.4 (4,102 รีวิว) · Cafe · Yaowarat · ฿฿
 734, 736 Soi Wanit 2, Khwaeng Talat Noi, Khet Samphanthawong, Krung Thep Maha Nakhon 10100, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJ580MFqCZ4jARh5fpv9GvfSs
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.4</value></Data>
-        <Data name="reviews"><value>4097</value></Data>
+        <Data name="reviews"><value>4102</value></Data>
         <Data name="cuisine"><value>Cafe</value></Data>
         <Data name="area"><value>Yaowarat</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ580MFqCZ4jARh5fpv9GvfSs</value></Data>
@@ -57,13 +57,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJ580MFqCZ4jARh5fpv9GvfSs
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>Sarnies Bangkok</name>
-      <description>⭐ 4.5 (3,718 รีวิว) · Cafe · Bang Rak · ฿฿
+      <description>⭐ 4.5 (3,716 รีวิว) · Cafe · Bang Rak · ฿฿
 101, 103 Soi Charoen Krung 44, Khwaeng Bang Rak, Khet Bang Rak, Krung Thep Maha Nakhon 10500, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJUXT3NL6Z4jARwh3cJq_bkog
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.5</value></Data>
-        <Data name="reviews"><value>3718</value></Data>
+        <Data name="reviews"><value>3716</value></Data>
         <Data name="cuisine"><value>Cafe</value></Data>
         <Data name="area"><value>Bang Rak</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJUXT3NL6Z4jARwh3cJq_bkog</value></Data>
@@ -73,13 +73,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJUXT3NL6Z4jARwh3cJq_bkog
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>Factory Coffee - Bangkok</name>
-      <description>⭐ 4.4 (3,945 รีวิว) · Cafe · Ratchathewi · ฿฿
+      <description>⭐ 4.4 (3,948 รีวิว) · Cafe · Ratchathewi · ฿฿
 49 Phaya Thai Rd, Khwaeng Thanon Phaya Thai, Khet Ratchathewi, Krung Thep Maha Nakhon 10400, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJA-r3h7ae4jARcgEibgLyJyc
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.4</value></Data>
-        <Data name="reviews"><value>3945</value></Data>
+        <Data name="reviews"><value>3948</value></Data>
         <Data name="cuisine"><value>Cafe</value></Data>
         <Data name="area"><value>Ratchathewi</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJA-r3h7ae4jARcgEibgLyJyc</value></Data>
@@ -121,13 +121,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJicwRRFOe4jARAcJ7qJDLIe8
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>นานา คอฟฟี่ โรสเตอร์ อารีย์</name>
-      <description>⭐ 4.4 (2,929 รีวิว) · Cafe · Phaya Thai · ฿฿
+      <description>⭐ 4.4 (2,943 รีวิว) · Cafe · Phaya Thai · ฿฿
 24, 2 Soi Ari 4, Khwaeng Samsen Nai, Khet Phaya Thai, Krung Thep Maha Nakhon 10400, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJl0zcc1ud4jAR6LEHnouPOEo
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.4</value></Data>
-        <Data name="reviews"><value>2929</value></Data>
+        <Data name="reviews"><value>2943</value></Data>
         <Data name="cuisine"><value>Cafe</value></Data>
         <Data name="area"><value>Phaya Thai</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJl0zcc1ud4jAR6LEHnouPOEo</value></Data>
@@ -185,13 +185,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJv4MdhRif4jARfuebyhUAYjM
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>Lazebkk</name>
-      <description>⭐ 4.9 (1,327 รีวิว) · Cafe · Phaya Thai · ฿฿
+      <description>⭐ 4.9 (1,330 รีวิว) · Cafe · Phaya Thai · ฿฿
 59 61 Thanon Sutthisan Winitchai, Khwaeng Samsen Nai, Khet Phaya Thai, Krung Thep Maha Nakhon 10400, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJMSqHmMGd4jAR-hACgiuiQ0A
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.9</value></Data>
-        <Data name="reviews"><value>1327</value></Data>
+        <Data name="reviews"><value>1330</value></Data>
         <Data name="cuisine"><value>Cafe</value></Data>
         <Data name="area"><value>Phaya Thai</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJMSqHmMGd4jAR-hACgiuiQ0A</value></Data>
@@ -217,13 +217,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJ8XTMPAKf4jARRYdW8leszPU
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>Sunset Coffee Roaster - Charoenkrung Sunset เจริญกรุง</name>
-      <description>⭐ 4.8 (1,370 รีวิว) · Cafe · สัมพันธวงศ์ · ฿
+      <description>⭐ 4.8 (1,407 รีวิว) · Cafe · สัมพันธวงศ์ · ฿
 741 ถ. เจริญกรุง Khwaeng Talat Noi, Khet Samphanthawong, Krung Thep Maha Nakhon 10100, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJe9Lg_cSZ4jARXoPQLhnKMO4
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.8</value></Data>
-        <Data name="reviews"><value>1370</value></Data>
+        <Data name="reviews"><value>1407</value></Data>
         <Data name="cuisine"><value>Cafe</value></Data>
         <Data name="area"><value>สัมพันธวงศ์</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJe9Lg_cSZ4jARXoPQLhnKMO4</value></Data>
@@ -265,13 +265,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJMflhdJmf4jAR2AaBJgzYTxs
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>มาเธอร์ โรสเตอร์</name>
-      <description>⭐ 4.4 (1,738 รีวิว) · Cafe · Yaowarat · ฿
+      <description>⭐ 4.4 (1,742 รีวิว) · Cafe · Yaowarat · ฿
 1172 Soi Chareonkrung 22, Khwaeng Talat Noi, Khet Samphanthawong, Krung Thep Maha Nakhon 10100, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJ1bQYQayZ4jARpphLAIGHblQ
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.4</value></Data>
-        <Data name="reviews"><value>1738</value></Data>
+        <Data name="reviews"><value>1742</value></Data>
         <Data name="cuisine"><value>Cafe</value></Data>
         <Data name="area"><value>Yaowarat</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ1bQYQayZ4jARpphLAIGHblQ</value></Data>
@@ -329,13 +329,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJ-z9QfeeZ4jARBEeOqpyZc94
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>GATTA CAfe (Park Silom) - Specialty Coffee</name>
-      <description>⭐ 4.9 (953 รีวิว) · Cafe · บางรัก · ฿
+      <description>⭐ 4.9 (954 รีวิว) · Cafe · บางรัก · ฿
 ชั้น L ปาร์ค, Si Lom Rd, Si Lom, Khet Bang Rak, Krung Thep Maha Nakhon 10500, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJ54yK4R2f4jARqeeHInvT16Y
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.9</value></Data>
-        <Data name="reviews"><value>953</value></Data>
+        <Data name="reviews"><value>954</value></Data>
         <Data name="cuisine"><value>Cafe</value></Data>
         <Data name="area"><value>บางรัก</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ54yK4R2f4jARqeeHInvT16Y</value></Data>
@@ -393,13 +393,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJ8R-cwqSh4jAR9ErHwpybONA
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>CHATA</name>
-      <description>⭐ 4.5 (1,110 รีวิว) · Cafe · Yaowarat · ฿฿
+      <description>⭐ 4.5 (1,111 รีวิว) · Cafe · Yaowarat · ฿฿
 98 Yaowarat Rd, Khwaeng Samphanthawong, Khet Samphanthawong, Krung Thep Maha Nakhon 10100, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJfSGaGiGZ4jARl6xb0Ghk7pQ
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.5</value></Data>
-        <Data name="reviews"><value>1110</value></Data>
+        <Data name="reviews"><value>1111</value></Data>
         <Data name="cuisine"><value>Cafe</value></Data>
         <Data name="area"><value>Yaowarat</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJfSGaGiGZ4jARl6xb0Ghk7pQ</value></Data>
@@ -409,13 +409,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJfSGaGiGZ4jARl6xb0Ghk7pQ
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>โอ๊คแลนด์ คาเฟ่ เอ็กซ์ เรสเทอรองค์</name>
-      <description>⭐ 4.7 (931 รีวิว) · Cafe · Thonglor · ฿฿
+      <description>⭐ 4.7 (936 รีวิว) · Cafe · Thonglor · ฿฿
 132 ถ. ราชมนตรี Khwaeng Khlong Khwang, Khet Phasi Charoen, Krung Thep Maha Nakhon 10160, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJjcHAGWOX4jAR-G1PBJHfw0s
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.7</value></Data>
-        <Data name="reviews"><value>931</value></Data>
+        <Data name="reviews"><value>936</value></Data>
         <Data name="cuisine"><value>Cafe</value></Data>
         <Data name="area"><value>Thonglor</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJjcHAGWOX4jAR-G1PBJHfw0s</value></Data>
@@ -441,13 +441,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJ65zcQTWd4jARWThHFKlMnW8
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>RISE COFFEE - One Bangkok</name>
-      <description>⭐ 4.9 (771 รีวิว) · Cafe · ปทุมวัน · ฿
+      <description>⭐ 4.9 (772 รีวิว) · Cafe · ปทุมวัน · ฿
 ชั้น บี1, The Storeys One Bangkok, Thanon Witthayu, Khwaeng Lumphini, Pathum Wan, Krung Thep Maha Nakhon 10330, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJ931sDQCf4jARTtgGPfel9-8
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.9</value></Data>
-        <Data name="reviews"><value>771</value></Data>
+        <Data name="reviews"><value>772</value></Data>
         <Data name="cuisine"><value>Cafe</value></Data>
         <Data name="area"><value>ปทุมวัน</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ931sDQCf4jARTtgGPfel9-8</value></Data>
@@ -489,13 +489,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJtag7oziX4jARYz-p-sz8uIM
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>MONOCHROME</name>
-      <description>⭐ 4.9 (757 รีวิว) · Cafe · Bang Rak · ฿
+      <description>⭐ 4.9 (760 รีวิว) · Cafe · Bang Rak · ฿
 8 Decho Rd, Khwaeng Suriya Wong, Khet Bang Rak, Krung Thep Maha Nakhon 10500, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJCSnbI6aZ4jARAt7M0fKhhJA
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.9</value></Data>
-        <Data name="reviews"><value>757</value></Data>
+        <Data name="reviews"><value>760</value></Data>
         <Data name="cuisine"><value>Cafe</value></Data>
         <Data name="area"><value>Bang Rak</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJCSnbI6aZ4jARAt7M0fKhhJA</value></Data>
@@ -521,13 +521,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJaabuSnuf4jAR4Xkt2Zc4byE
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>Kaizen Coffee Ekamai</name>
-      <description>⭐ 4.5 (965 รีวิว) · Cafe · Watthana · ฿฿
+      <description>⭐ 4.5 (966 รีวิว) · Cafe · Watthana · ฿฿
 888 6-7 Thanon Ekkamai, Khwaeng Khlong Tan Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJgQ0MLEye4jARHJXN1f_K5a0
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.5</value></Data>
-        <Data name="reviews"><value>965</value></Data>
+        <Data name="reviews"><value>966</value></Data>
         <Data name="cuisine"><value>Cafe</value></Data>
         <Data name="area"><value>Watthana</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJgQ0MLEye4jARHJXN1f_K5a0</value></Data>
@@ -569,13 +569,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJw3m1NVyd4jAR8N2Ol4lmT-4
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>GATTA CAfe (Siam Square One) - Specialty Coffee</name>
-      <description>⭐ 4.8 (716 รีวิว) · Cafe · Pathumwan · ฿
+      <description>⭐ 4.8 (719 รีวิว) · Cafe · Pathumwan · ฿
 2nd Floor Siam Square One 388 Rama I Rd, Khwaeng Pathum Wan, Pathum Wan, Krung Thep Maha Nakhon 10330, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJ7_4lHf-f4jAR_kytouoZBuA
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.8</value></Data>
-        <Data name="reviews"><value>716</value></Data>
+        <Data name="reviews"><value>719</value></Data>
         <Data name="cuisine"><value>Cafe</value></Data>
         <Data name="area"><value>Pathumwan</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ7_4lHf-f4jAR_kytouoZBuA</value></Data>
@@ -649,13 +649,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJF3DIeyeZ4jARmgQTEcHVphA
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>Ekkamai Macchiato</name>
-      <description>⭐ 4.4 (842 รีวิว) · Cafe · สวนหลวง · ฿฿
+      <description>⭐ 4.4 (846 รีวิว) · Cafe · สวนหลวง · ฿฿
 296 On Nut 35, แขวง อ่อนนุช, Khet Suan Luang, Krung Thep Maha Nakhon 10250, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJ_eZNlLKf4jARum7JpDAQ4Vo
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.4</value></Data>
-        <Data name="reviews"><value>842</value></Data>
+        <Data name="reviews"><value>846</value></Data>
         <Data name="cuisine"><value>Cafe</value></Data>
         <Data name="area"><value>สวนหลวง</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ_eZNlLKf4jARum7JpDAQ4Vo</value></Data>
@@ -697,13 +697,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJlZ5aoPqf4jARbySH2PvelsU
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>Eggtisan by commonroom x ari</name>
-      <description>⭐ 4.6 (719 รีวิว) · Cafe · Phaya Thai · ฿฿
+      <description>⭐ 4.6 (720 รีวิว) · Cafe · Phaya Thai · ฿฿
 33 Rajchakru Ave, room 106, ซ. พหลโยธิน 5 แขวงพญาไท เขตพญาไท กรุงเทพมหานคร 10400, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJ_____xuc4jAR9BcrMbnpRag
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.6</value></Data>
-        <Data name="reviews"><value>719</value></Data>
+        <Data name="reviews"><value>720</value></Data>
         <Data name="cuisine"><value>Cafe</value></Data>
         <Data name="area"><value>Phaya Thai</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ_____xuc4jAR9BcrMbnpRag</value></Data>
@@ -793,13 +793,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJa1F1Pl6Z4jARor9ZWzqy-ig
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>Blackwood Cafe &amp; Studio</name>
-      <description>⭐ 4.8 (547 รีวิว) · Cafe · สาทร · ฿฿
+      <description>⭐ 4.8 (546 รีวิว) · Cafe · สาทร · ฿฿
 1839, 1841 ถ. เจริญกรุง Khwaeng Yan Nawa, Khet Sathon, Krung Thep Maha Nakhon 10120, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJv7TtebqZ4jARY4KnT5z7dCY
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.8</value></Data>
-        <Data name="reviews"><value>547</value></Data>
+        <Data name="reviews"><value>546</value></Data>
         <Data name="cuisine"><value>Cafe</value></Data>
         <Data name="area"><value>สาทร</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJv7TtebqZ4jARY4KnT5z7dCY</value></Data>
@@ -1288,6 +1288,22 @@ https://www.google.com/maps/place/?q=place_id:ChIJR1ZVW8af4jARpvHtD4-ehDE
     </Placemark>
     <Placemark>
       <styleUrl>#cm0</styleUrl>
+      <name>NICO NICO - Café &amp; Brunch Place</name>
+      <description>⭐ 4.5 (432 รีวิว) · Cafe · วัฒนา · ฿฿
+555, ตึก DM Home Soi Thong Lo, แขวง คลองเตยเหนือ Watthana, Krung Thep Maha Nakhon 10110, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJK0oh-fqf4jAR-70cq-12UNY
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.5</value></Data>
+        <Data name="reviews"><value>432</value></Data>
+        <Data name="cuisine"><value>Cafe</value></Data>
+        <Data name="area"><value>วัฒนา</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJK0oh-fqf4jAR-70cq-12UNY</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.5828951,13.736536599999999,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
       <name>House of Matcha</name>
       <description>⭐ 5.0 (304 รีวิว) · Matcha Cafe · Pathumwan · ฿
 Soi Kasem San 2, Khwaeng Wang Mai, Pathum Wan, Krung Thep Maha Nakhon 10330, Thailand
@@ -1301,22 +1317,6 @@ https://www.google.com/maps/place/?q=place_id:ChIJOyoWD3OZ4jARUNI34bkMdDk
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJOyoWD3OZ4jARUNI34bkMdDk</value></Data>
       </ExtendedData>
       <Point><coordinates>100.5281016,13.7485073,0</coordinates></Point>
-    </Placemark>
-    <Placemark>
-      <styleUrl>#cm0</styleUrl>
-      <name>NICO NICO - Café &amp; Brunch Place</name>
-      <description>⭐ 4.5 (431 รีวิว) · Cafe · วัฒนา · ฿฿
-555, ตึก DM Home Soi Thong Lo, แขวง คลองเตยเหนือ Watthana, Krung Thep Maha Nakhon 10110, Thailand
-https://www.google.com/maps/place/?q=place_id:ChIJK0oh-fqf4jAR-70cq-12UNY
-ข้อมูลจาก ChefMinistry — chefministry.com</description>
-      <ExtendedData>
-        <Data name="rating"><value>4.5</value></Data>
-        <Data name="reviews"><value>431</value></Data>
-        <Data name="cuisine"><value>Cafe</value></Data>
-        <Data name="area"><value>วัฒนา</value></Data>
-        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJK0oh-fqf4jAR-70cq-12UNY</value></Data>
-      </ExtendedData>
-      <Point><coordinates>100.5828951,13.736536599999999,0</coordinates></Point>
     </Placemark>
     <Placemark>
       <styleUrl>#cm0</styleUrl>
@@ -1720,6 +1720,22 @@ https://www.google.com/maps/place/?q=place_id:ChIJLW9CDWuZ4jAR4WDwln-j2cA
     </Placemark>
     <Placemark>
       <styleUrl>#cm0</styleUrl>
+      <name>Sauvage</name>
+      <description>⭐ 4.7 (283 รีวิว) · Dessert · Watthana · ฿฿
+99, 395 Soi Chaeng Watthana 10, Lane 3, Khwaeng Thung Song Hong, Khet Lak Si, Krung Thep Maha Nakhon 10210, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJn_KItAOD4jARyxg2mZlw5GU
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.7</value></Data>
+        <Data name="reviews"><value>283</value></Data>
+        <Data name="cuisine"><value>Dessert</value></Data>
+        <Data name="area"><value>Watthana</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJn_KItAOD4jARyxg2mZlw5GU</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.5775584,13.8890187,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
       <name>The Coffee Store Charoenkrung</name>
       <description>⭐ 4.9 (244 รีวิว) · Cafe · สัมพันธวงศ์ · ฿
 775/1 ถ. เจริญกรุง Khwaeng Talat Noi, Khet Samphanthawong, Krung Thep Maha Nakhon 10120, Thailand
@@ -1733,22 +1749,6 @@ https://www.google.com/maps/place/?q=place_id:ChIJtQExQOOZ4jARrLr2JyfPddU
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJtQExQOOZ4jARrLr2JyfPddU</value></Data>
       </ExtendedData>
       <Point><coordinates>100.5138276,13.735633799999999,0</coordinates></Point>
-    </Placemark>
-    <Placemark>
-      <styleUrl>#cm0</styleUrl>
-      <name>Sauvage</name>
-      <description>⭐ 4.7 (280 รีวิว) · Dessert · Watthana · ฿฿
-99, 395 Soi Chaeng Watthana 10, Lane 3, Khwaeng Thung Song Hong, Khet Lak Si, Krung Thep Maha Nakhon 10210, Thailand
-https://www.google.com/maps/place/?q=place_id:ChIJn_KItAOD4jARyxg2mZlw5GU
-ข้อมูลจาก ChefMinistry — chefministry.com</description>
-      <ExtendedData>
-        <Data name="rating"><value>4.7</value></Data>
-        <Data name="reviews"><value>280</value></Data>
-        <Data name="cuisine"><value>Dessert</value></Data>
-        <Data name="area"><value>Watthana</value></Data>
-        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJn_KItAOD4jARyxg2mZlw5GU</value></Data>
-      </ExtendedData>
-      <Point><coordinates>100.5775584,13.8890187,0</coordinates></Point>
     </Placemark>
     <Placemark>
       <styleUrl>#cm0</styleUrl>
@@ -2120,6 +2120,22 @@ https://www.google.com/maps/place/?q=place_id:ChIJk5JyCfSZ4jARTJMXqqT4Kzw
     </Placemark>
     <Placemark>
       <styleUrl>#cm0</styleUrl>
+      <name>MTCH - The Circle Ratchapruk</name>
+      <description>⭐ 4.5 (222 รีวิว) · Matcha Cafe · Taling Chan · ฿
+39 Ratchapruk Road Unit C18, แขวงบางระมาด เขตตลิ่งชัน กรุงเทพมหานคร 10170, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJ8YcUsF-Z4jAR2gWvZQC8oRw
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.5</value></Data>
+        <Data name="reviews"><value>222</value></Data>
+        <Data name="cuisine"><value>Matcha Cafe</value></Data>
+        <Data name="area"><value>Taling Chan</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ8YcUsF-Z4jAR2gWvZQC8oRw</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.44301379999999,13.7671859,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
       <name>Ritmo.Kof Cafe (Ritmo Coffee and Matcha)</name>
       <description>⭐ 5.0 (156 รีวิว) · Matcha Cafe · มีนบุรี · ฿
 บ้านเลขที่2 Soi Ramkhamhaeng 166, Khwaeng Min Buri, Khet Min Buri, Krung Thep Maha Nakhon 10510, Thailand
@@ -2133,22 +2149,6 @@ https://www.google.com/maps/place/?q=place_id:ChIJ7x_VVaplHTERnQSQzPZvq1Q
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ7x_VVaplHTERnQSQzPZvq1Q</value></Data>
       </ExtendedData>
       <Point><coordinates>100.71216940000001,13.7951757,0</coordinates></Point>
-    </Placemark>
-    <Placemark>
-      <styleUrl>#cm0</styleUrl>
-      <name>MTCH - The Circle Ratchapruk</name>
-      <description>⭐ 4.5 (221 รีวิว) · Matcha Cafe · Taling Chan · ฿
-39 Ratchapruk Road Unit C18, แขวงบางระมาด เขตตลิ่งชัน กรุงเทพมหานคร 10170, Thailand
-https://www.google.com/maps/place/?q=place_id:ChIJ8YcUsF-Z4jAR2gWvZQC8oRw
-ข้อมูลจาก ChefMinistry — chefministry.com</description>
-      <ExtendedData>
-        <Data name="rating"><value>4.5</value></Data>
-        <Data name="reviews"><value>221</value></Data>
-        <Data name="cuisine"><value>Matcha Cafe</value></Data>
-        <Data name="area"><value>Taling Chan</value></Data>
-        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ8YcUsF-Z4jAR2gWvZQC8oRw</value></Data>
-      </ExtendedData>
-      <Point><coordinates>100.44301379999999,13.7671859,0</coordinates></Point>
     </Placemark>
     <Placemark>
       <styleUrl>#cm0</styleUrl>
@@ -2777,13 +2777,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJbTcAefCZ4jARGH4yKeZB9yg
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>SO! Matcha</name>
-      <description>⭐ 4.3 (104 รีวิว) · Matcha Cafe · Phra Khanong · ฿
+      <description>⭐ 4.3 (105 รีวิว) · Matcha Cafe · Phra Khanong · ฿
 ชั้น 1 อาคาร ทีวัน 8 Soi Sukhumvit 40, พระโขนง Khet Khlong Toei, Krung Thep Maha Nakhon 10110, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJSyQqCeCf4jAR2qPMVpNTsFI
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.3</value></Data>
-        <Data name="reviews"><value>104</value></Data>
+        <Data name="reviews"><value>105</value></Data>
         <Data name="cuisine"><value>Matcha Cafe</value></Data>
         <Data name="area"><value>Phra Khanong</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJSyQqCeCf4jAR2qPMVpNTsFI</value></Data>
@@ -2937,13 +2937,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJH6KDm7Kf4jARg7tLufpAvJA
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>หวานละมุน Bake Studio</name>
-      <description>⭐ 4.6 (63 รีวิว) · Bakery · Sathorn · ฿฿
+      <description>⭐ 4.6 (64 รีวิว) · Bakery · Sathorn · ฿฿
 95 Thanon Chan, Khwaeng Thung Wat Don, Khet Sathon, Krung Thep Maha Nakhon 10120, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJH8Sz5S2f4jARbLlJiWjbFU8
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.6</value></Data>
-        <Data name="reviews"><value>63</value></Data>
+        <Data name="reviews"><value>64</value></Data>
         <Data name="cuisine"><value>Bakery</value></Data>
         <Data name="area"><value>Sathorn</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJH8Sz5S2f4jARbLlJiWjbFU8</value></Data>

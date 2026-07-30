@@ -2,20 +2,20 @@
 <kml xmlns="http://www.opengis.net/kml/2.2">
 <Document>
   <name>ChefMinistry — 🍜 ก๋วยเตี๋ยว &amp; เส้น</name>
-  <description>อัปเดต 2026-07-31 — chefministry.com</description>
+  <description>อัปเดต 2026-07-30 — chefministry.com</description>
   <Style id="cm0"><IconStyle><color>ff64d19a</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/dining.png</href></Icon></IconStyle></Style>
   <Folder>
     <name>🍜 ก๋วยเตี๋ยว &amp; เส้น</name>
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>รุ่งเรือง (ตั๋ง) ก๋วยเตี๋ยวหมูต้มยำ</name>
-      <description>⭐ 4.4 (9,193 รีวิว) · Noodles · Khlong Toei · ฿
+      <description>⭐ 4.4 (9,206 รีวิว) · Noodles · Khlong Toei · ฿
 10/3 Sukhumvit 26, Khwaeng Khlong Tan, Khet Khlong Toei, Krung Thep Maha Nakhon 10110, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJMwKZPwGf4jARkgykQtmIoM8
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.4</value></Data>
-        <Data name="reviews"><value>9193</value></Data>
+        <Data name="reviews"><value>9206</value></Data>
         <Data name="cuisine"><value>Noodles</value></Data>
         <Data name="area"><value>Khlong Toei</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJMwKZPwGf4jARkgykQtmIoM8</value></Data>
@@ -25,13 +25,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJMwKZPwGf4jARkgykQtmIoM8
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>เล็กใหญ่ ก๋วยเตี๋ยวต้มยำโบราณ • สามย่าน</name>
-      <description>⭐ 4.7 (5,436 รีวิว) · Noodles · Pathumwan · ฿
+      <description>⭐ 4.7 (5,437 รีวิว) · Noodles · Pathumwan · ฿
 1440 Banthat Thong Rd, Khwaeng Wang Mai, Pathum Wan, Krung Thep Maha Nakhon 10110, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJB_B7YUyZ4jARuPyeBAQ4EnI
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.7</value></Data>
-        <Data name="reviews"><value>5436</value></Data>
+        <Data name="reviews"><value>5437</value></Data>
         <Data name="cuisine"><value>Noodles</value></Data>
         <Data name="area"><value>Pathumwan</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJB_B7YUyZ4jARuPyeBAQ4EnI</value></Data>
@@ -41,13 +41,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJB_B7YUyZ4jARuPyeBAQ4EnI
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>บ้านก๋วยเตี๋ยวเรือทอง อนุสาวรีย์ชัยสมรภูมิ</name>
-      <description>⭐ 4.4 (3,200 รีวิว) · Noodles · Phaya Thai · ฿
+      <description>⭐ 4.4 (3,205 รีวิว) · Noodles · Phaya Thai · ฿
 1/7 Thanon Ratchawithi, Khwaeng Samsen Nai, Khet Phaya Thai, Krung Thep Maha Nakhon 10400, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJ46MaYLCe4jARYgKxjbDAMYw
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.4</value></Data>
-        <Data name="reviews"><value>3200</value></Data>
+        <Data name="reviews"><value>3205</value></Data>
         <Data name="cuisine"><value>Noodles</value></Data>
         <Data name="area"><value>Phaya Thai</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ46MaYLCe4jARYgKxjbDAMYw</value></Data>
@@ -57,13 +57,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJ46MaYLCe4jARYgKxjbDAMYw
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ร้านพี่อ้อก๋วยเตี๋ยวต้มยำกุ้ง</name>
-      <description>⭐ 4.3 (3,380 รีวิว) · Noodles · Ratchathewi · ฿
+      <description>⭐ 4.3 (3,381 รีวิว) · Noodles · Ratchathewi · ฿
 68, 51 Thanon Phetchaburi, Khwaeng Thung Phaya Thai, Khet Ratchathewi, Krung Thep Maha Nakhon 10400, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJsW06FTWZ4jARLILZg-S3ODU
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.3</value></Data>
-        <Data name="reviews"><value>3380</value></Data>
+        <Data name="reviews"><value>3381</value></Data>
         <Data name="cuisine"><value>Noodles</value></Data>
         <Data name="area"><value>Ratchathewi</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJsW06FTWZ4jARLILZg-S3ODU</value></Data>
@@ -73,13 +73,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJsW06FTWZ4jARLILZg-S3ODU
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>เล็กใหญ่ ก๋วยเตี๋ยวต้มยำโบราณ</name>
-      <description>⭐ 4.8 (1,949 รีวิว) · Noodles · ดินแดง · ฿
+      <description>⭐ 4.8 (1,954 รีวิว) · Noodles · ดินแดง · ฿
 126/13 ซ. วิภาวดิรังสิต2 แยก 6 Ratchadaphisek, Khet Din Daeng, Krung Thep Maha Nakhon 10400, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJT9y3aMqf4jARRTx90LqDdU4
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.8</value></Data>
-        <Data name="reviews"><value>1949</value></Data>
+        <Data name="reviews"><value>1954</value></Data>
         <Data name="cuisine"><value>Noodles</value></Data>
         <Data name="area"><value>ดินแดง</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJT9y3aMqf4jARRTx90LqDdU4</value></Data>
@@ -105,13 +105,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJXUzQ0Kif4jARpupfUL8zxTQ
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ก๋วยเตี๋ยวเรือสามแซ่บ โชคชัย4</name>
-      <description>⭐ 4.8 (1,402 รีวิว) · Noodles · Lat Phrao · ฿
+      <description>⭐ 4.8 (1,403 รีวิว) · Noodles · Lat Phrao · ฿
 417 Chok Chai 4 Soi 49, ลาดพร้าว Khet Lat Phrao, Krung Thep Maha Nakhon 10230, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJ42nFAfSd4jARAL_fOxX8ZIw
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.8</value></Data>
-        <Data name="reviews"><value>1402</value></Data>
+        <Data name="reviews"><value>1403</value></Data>
         <Data name="cuisine"><value>Noodles</value></Data>
         <Data name="area"><value>Lat Phrao</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ42nFAfSd4jARAL_fOxX8ZIw</value></Data>
@@ -137,13 +137,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJSYzhdLSd4jARuqQajLQt6iU
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ก๋วยเตี๋ยวเรือ คุณชาย</name>
-      <description>⭐ 4.3 (1,886 รีวิว) · Noodles · ตลิ่งชัน · ฿
+      <description>⭐ 4.3 (1,888 รีวิว) · Noodles · ตลิ่งชัน · ฿
 18/3 หมู่ที่ 3 Khwaeng Chim Phli, Khet Taling Chan, Krung Thep Maha Nakhon 10170, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJObsQvAGa4jAR6JIOd6FSNLU
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.3</value></Data>
-        <Data name="reviews"><value>1886</value></Data>
+        <Data name="reviews"><value>1888</value></Data>
         <Data name="cuisine"><value>Noodles</value></Data>
         <Data name="area"><value>ตลิ่งชัน</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJObsQvAGa4jAR6JIOd6FSNLU</value></Data>
@@ -201,13 +201,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJyQDfPF2d4jARWG27SCyTEk0
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>เปลว ก๋วยเตี๋ยวต้มยำโบราณนครปฐม</name>
-      <description>⭐ 4.5 (1,309 รีวิว) · Noodles · Huai Khwang · ฿
+      <description>⭐ 4.5 (1,311 รีวิว) · Noodles · Huai Khwang · ฿
 633 Soi Pracha Rat Bamphen 21, Khwaeng Huai Khwang, Khet Huai Khwang, Krung Thep Maha Nakhon 10310, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJfxhlxded4jAR0RkFWksUr9g
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.5</value></Data>
-        <Data name="reviews"><value>1309</value></Data>
+        <Data name="reviews"><value>1311</value></Data>
         <Data name="cuisine"><value>Noodles</value></Data>
         <Data name="area"><value>Huai Khwang</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJfxhlxded4jAR0RkFWksUr9g</value></Data>
@@ -265,13 +265,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJA8USHgCZ4jARO_rv3Kch4Yw
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ก๋วยเตี๋ยวตรอกโรงหมู</name>
-      <description>⭐ 4.4 (1,160 รีวิว) · Noodles · Yaowarat · ฿
+      <description>⭐ 4.4 (1,162 รีวิว) · Noodles · Yaowarat · ฿
 23 10 Soi Sukon 1, Khwaeng Talat Noi, Khet Samphanthawong, Krung Thep Maha Nakhon 10100, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJczXlESeZ4jAR7-MrzumXvKM
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.4</value></Data>
-        <Data name="reviews"><value>1160</value></Data>
+        <Data name="reviews"><value>1162</value></Data>
         <Data name="cuisine"><value>Noodles</value></Data>
         <Data name="area"><value>Yaowarat</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJczXlESeZ4jAR7-MrzumXvKM</value></Data>
@@ -281,13 +281,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJczXlESeZ4jAR7-MrzumXvKM
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>เล้งเตี๋ยวหมูต้มยำ บรรทัดทอง (ร้านดั้งเดิม รสแซ่บ อร่อยคุ้มค่า)</name>
-      <description>⭐ 4.9 (774 รีวิว) · Noodles · Pathumwan · ฿฿
+      <description>⭐ 4.9 (779 รีวิว) · Noodles · Pathumwan · ฿฿
 1402 Banthat Thong Rd, Khwaeng Wang Mai, Pathum Wan, Krung Thep Maha Nakhon 10330, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJcdV01cqZ4jARqO_-PU5X7kU
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.9</value></Data>
-        <Data name="reviews"><value>774</value></Data>
+        <Data name="reviews"><value>779</value></Data>
         <Data name="cuisine"><value>Noodles</value></Data>
         <Data name="area"><value>Pathumwan</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJcdV01cqZ4jARqO_-PU5X7kU</value></Data>
@@ -297,13 +297,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJcdV01cqZ4jARqO_-PU5X7kU
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ก๋วยเตี๋ยวต้มยำกากหมูสูตรโบราณ รามคำแหง</name>
-      <description>⭐ 4.8 (776 รีวิว) · Noodles · Saphan Sung · ฿
+      <description>⭐ 4.8 (777 รีวิว) · Noodles · Saphan Sung · ฿
 91 Soi 2, Khwaeng Saphan Sung, Khet Saphan Sung, Krung Thep Maha Nakhon 10240, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJgb8_7_ZhHTERjBV_yKW8PZk
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.8</value></Data>
-        <Data name="reviews"><value>776</value></Data>
+        <Data name="reviews"><value>777</value></Data>
         <Data name="cuisine"><value>Noodles</value></Data>
         <Data name="area"><value>Saphan Sung</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJgb8_7_ZhHTERjBV_yKW8PZk</value></Data>
@@ -313,13 +313,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJgb8_7_ZhHTERjBV_yKW8PZk
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ก๋วยเตี๋ยว &quot;แซว&quot; 49</name>
-      <description>⭐ 4.4 (1,029 รีวิว) · Noodles · Watthana · ฿
+      <description>⭐ 4.4 (1,030 รีวิว) · Noodles · Watthana · ฿
 1 Sukhumvit 49, Khwaeng Khlong Tan Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJ3fcy96mf4jAR4Op5i05ZuzQ
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.4</value></Data>
-        <Data name="reviews"><value>1029</value></Data>
+        <Data name="reviews"><value>1030</value></Data>
         <Data name="cuisine"><value>Noodles</value></Data>
         <Data name="area"><value>Watthana</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ3fcy96mf4jAR4Op5i05ZuzQ</value></Data>
@@ -425,34 +425,18 @@ https://www.google.com/maps/place/?q=place_id:ChIJgaSL3JCZ4jARtfMy1U2ubU8
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ก๋วยเตี๋ยวเรือ น้าเสริม รสเด็ด</name>
-      <description>⭐ 4.9 (442 รีวิว) · Noodles · Lat Krabang · ฿
+      <description>⭐ 4.9 (443 รีวิว) · Noodles · Lat Krabang · ฿
 2 Soi Thai Samut, Khwaeng Lat Krabang, Khet Lat Krabang, Krung Thep Maha Nakhon 10520, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJH19e4rJnHTERJQNw-MPrFXU
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.9</value></Data>
-        <Data name="reviews"><value>442</value></Data>
+        <Data name="reviews"><value>443</value></Data>
         <Data name="cuisine"><value>Noodles</value></Data>
         <Data name="area"><value>Lat Krabang</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJH19e4rJnHTERJQNw-MPrFXU</value></Data>
       </ExtendedData>
       <Point><coordinates>100.7175795,13.721649,0</coordinates></Point>
-    </Placemark>
-    <Placemark>
-      <styleUrl>#cm0</styleUrl>
-      <name>ก๋วยเตี๋ยวเรือศรีอยุธยา (เทเวศร์) Sri Ayutthaya Noodle</name>
-      <description>⭐ 4.4 (599 รีวิว) · Noodles · ดุสิต · ฿
-224 Thanon Si Ayutthaya, Khwaeng Dusit, Khet Dusit, Krung Thep Maha Nakhon 10300, Thailand
-https://www.google.com/maps/place/?q=place_id:ChIJJ1RCj6YxEBERZfi0fOQhxpk
-ข้อมูลจาก ChefMinistry — chefministry.com</description>
-      <ExtendedData>
-        <Data name="rating"><value>4.4</value></Data>
-        <Data name="reviews"><value>599</value></Data>
-        <Data name="cuisine"><value>Noodles</value></Data>
-        <Data name="area"><value>ดุสิต</value></Data>
-        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJJ1RCj6YxEBERZfi0fOQhxpk</value></Data>
-      </ExtendedData>
-      <Point><coordinates>100.5061087,13.7704244,0</coordinates></Point>
     </Placemark>
     <Placemark>
       <styleUrl>#cm0</styleUrl>
@@ -504,6 +488,22 @@ https://www.google.com/maps/place/?q=place_id:ChIJdVWoztef4jARZLV_wRkB6aE
     </Placemark>
     <Placemark>
       <styleUrl>#cm0</styleUrl>
+      <name>ก๋วยเตี๋ยวเรือศรีอยุธยา (เทเวศร์) Sri Ayutthaya Noodle</name>
+      <description>⭐ 4.3 (600 รีวิว) · Noodles · ดุสิต · ฿
+224 Thanon Si Ayutthaya, Khwaeng Dusit, Khet Dusit, Krung Thep Maha Nakhon 10300, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJJ1RCj6YxEBERZfi0fOQhxpk
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.3</value></Data>
+        <Data name="reviews"><value>600</value></Data>
+        <Data name="cuisine"><value>Noodles</value></Data>
+        <Data name="area"><value>ดุสิต</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJJ1RCj6YxEBERZfi0fOQhxpk</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.5061087,13.7704244,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
       <name>ก๋วยเตี๋ยวเรืออยุธยา รสดั้งเดิม สูตรโบราณ</name>
       <description>⭐ 4.4 (537 รีวิว) · Noodles · Don Mueang · ฿
 VHWP+WXM, Don Mueang, Bangkok 10210, Thailand
@@ -552,22 +552,6 @@ https://www.google.com/maps/place/?q=place_id:ChIJV91sGwCh4jARQLMKL4feOLI
     </Placemark>
     <Placemark>
       <styleUrl>#cm0</styleUrl>
-      <name>เกี๊ยวหนองบัว วังหลัง Kiew Nong Bua Wang Lang, Trat Original Egg Noodle &amp; Wonton/ Cafe &amp; Bar</name>
-      <description>⭐ 4.5 (404 รีวิว) · Noodles · Bangkok Noi · ฿฿
-264 Trok Wat Rakhang Khwaeng Siriraj, Khet Bangkok Noi, Krung Thep Maha Nakhon 10700, Thailand
-https://www.google.com/maps/place/?q=place_id:ChIJl3kuzpSZ4jARqbw2E_mN0BM
-ข้อมูลจาก ChefMinistry — chefministry.com</description>
-      <ExtendedData>
-        <Data name="rating"><value>4.5</value></Data>
-        <Data name="reviews"><value>404</value></Data>
-        <Data name="cuisine"><value>Noodles</value></Data>
-        <Data name="area"><value>Bangkok Noi</value></Data>
-        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJl3kuzpSZ4jARqbw2E_mN0BM</value></Data>
-      </ExtendedData>
-      <Point><coordinates>100.4863508,13.7532581,0</coordinates></Point>
-    </Placemark>
-    <Placemark>
-      <styleUrl>#cm0</styleUrl>
       <name>ก๋วยเตี๋ยวเรือร้านลุงประตูน้ำ</name>
       <description>⭐ 4.5 (387 รีวิว) · Noodles · Ratchathewi · ฿
 1024, 2 Soi Petchburi 32, Khwaeng Makkasan, Khet Ratchathewi, Krung Thep Maha Nakhon 10400, Thailand
@@ -584,14 +568,30 @@ https://www.google.com/maps/place/?q=place_id:ChIJc1AsjsWe4jAR6lloU6c-JfA
     </Placemark>
     <Placemark>
       <styleUrl>#cm0</styleUrl>
+      <name>เกี๊ยวหนองบัว วังหลัง Kiew Nong Bua Wang Lang, Trat Original Egg Noodle &amp; Wonton/ Cafe &amp; Bar</name>
+      <description>⭐ 4.4 (406 รีวิว) · Noodles · Bangkok Noi · ฿฿
+264 Trok Wat Rakhang Khwaeng Siriraj, Khet Bangkok Noi, Krung Thep Maha Nakhon 10700, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJl3kuzpSZ4jARqbw2E_mN0BM
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.4</value></Data>
+        <Data name="reviews"><value>406</value></Data>
+        <Data name="cuisine"><value>Noodles</value></Data>
+        <Data name="area"><value>Bangkok Noi</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJl3kuzpSZ4jARqbw2E_mN0BM</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.4863508,13.7532581,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
       <name>สาวเส้น ก๋วยเตี๋ยวต้มยำ บางรัก Zaozen Tomyum Noodle</name>
-      <description>⭐ 4.8 (297 รีวิว) · Noodles · บางรัก · ฿
+      <description>⭐ 4.8 (299 รีวิว) · Noodles · บางรัก · ฿
 1483 ถ. เจริญกรุง Si Lom, Khet Bang Rak, Krung Thep Maha Nakhon 10500, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJsYOnguCZ4jARzml-t57gEdA
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.8</value></Data>
-        <Data name="reviews"><value>297</value></Data>
+        <Data name="reviews"><value>299</value></Data>
         <Data name="cuisine"><value>Noodles</value></Data>
         <Data name="area"><value>บางรัก</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJsYOnguCZ4jARzml-t57gEdA</value></Data>
@@ -649,13 +649,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJjar8vKKd4jARPLWCHXsT9qs
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>นัวโภชนา (ก๋วยเตี๋ยวหมูต้มยำนัว)</name>
-      <description>⭐ 4.3 (340 รีวิว) · Noodles · Phaya Thai · ฿
+      <description>⭐ 4.3 (342 รีวิว) · Noodles · Phaya Thai · ฿
 1511/9 Phahon Yothin Road, Khwaeng Samsen Nai, Khet Phaya Thai, Krung Thep Maha Nakhon 10400, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJpSSVcxec4jARFV7ry810u3U
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.3</value></Data>
-        <Data name="reviews"><value>340</value></Data>
+        <Data name="reviews"><value>342</value></Data>
         <Data name="cuisine"><value>Noodles</value></Data>
         <Data name="area"><value>Phaya Thai</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJpSSVcxec4jARFV7ry810u3U</value></Data>
@@ -681,13 +681,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJMf5-Gwyd4jAR-hzQUNK4qw8
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ร้านตะ-หลอด ก๋วยเตี๋ยวหลอดทรงเครื่อง สูตรโบราณ</name>
-      <description>⭐ 4.7 (204 รีวิว) · Noodles · Don Mueang · ฿
+      <description>⭐ 4.7 (206 รีวิว) · Noodles · Don Mueang · ฿
 22, 169 Soi Vibhavadirangsit 35, Khwaeng Sanambin, Khet Don Mueang, Krung Thep Maha Nakhon 10210, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJxXXE2DWD4jAR0P1XCg6ffK0
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.7</value></Data>
-        <Data name="reviews"><value>204</value></Data>
+        <Data name="reviews"><value>206</value></Data>
         <Data name="cuisine"><value>Noodles</value></Data>
         <Data name="area"><value>Don Mueang</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJxXXE2DWD4jAR0P1XCg6ffK0</value></Data>

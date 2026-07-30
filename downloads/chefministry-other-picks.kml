@@ -2,7 +2,7 @@
 <kml xmlns="http://www.opengis.net/kml/2.2">
 <Document>
   <name>ChefMinistry — ✨ ร้านน่าสนใจอื่นๆ</name>
-  <description>อัปเดต 2026-07-31 — chefministry.com</description>
+  <description>อัปเดต 2026-07-30 — chefministry.com</description>
   <Style id="cm0"><IconStyle><color>ff9e9e9e</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/dining.png</href></Icon></IconStyle></Style>
   <Folder>
     <name>✨ ร้านน่าสนใจอื่นๆ</name>
@@ -265,13 +265,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJ5Yx9yqCd4jARN6YtUbqT5Kg
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ร้าน สมศักดิ์</name>
-      <description>⭐ 4.8 (720 รีวิว) · Other · Sukhumvit · ฿฿
+      <description>⭐ 4.8 (719 รีวิว) · Other · Sukhumvit · ฿฿
 1319 Sukhumvit Rd, Khwaeng Phra Khanong Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJz5JqTwCf4jARL41kMcrveK4
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.8</value></Data>
-        <Data name="reviews"><value>720</value></Data>
+        <Data name="reviews"><value>719</value></Data>
         <Data name="cuisine"><value>Other</value></Data>
         <Data name="area"><value>Sukhumvit</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJz5JqTwCf4jARL41kMcrveK4</value></Data>
@@ -473,13 +473,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJwyABvaGf4jARdjq6QDFRUYI
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ร้านผลา PHALA (Thai Esan Gathering) Rama9 พระรามเก้า</name>
-      <description>⭐ 4.9 (333 รีวิว) · Other · Sukhumvit · ฿฿
+      <description>⭐ 4.9 (335 รีวิว) · Other · Sukhumvit · ฿฿
 43 ซอย Rama IX Soi 45, Phatthanakan, Khet Suan Luang, Krung Thep Maha Nakhon 10250, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJDTHIsVJhHTERwQe7nEMd0n8
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.9</value></Data>
-        <Data name="reviews"><value>333</value></Data>
+        <Data name="reviews"><value>335</value></Data>
         <Data name="cuisine"><value>Other</value></Data>
         <Data name="area"><value>Sukhumvit</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJDTHIsVJhHTERwQe7nEMd0n8</value></Data>
@@ -809,13 +809,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJu6T5b3Kf4jARoDjdwa19BPA
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>อังกี่</name>
-      <description>⭐ 4.7 (109 รีวิว) · Other · Sathorn · ฿฿
+      <description>⭐ 4.7 (110 รีวิว) · Other · Sathorn · ฿฿
 457 Thanon Somdet Chao Phraya, Klongsan, Krung Thep Maha Nakhon 10600, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJXVRDDqqZ4jARdqaGRBUACvo
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.7</value></Data>
-        <Data name="reviews"><value>109</value></Data>
+        <Data name="reviews"><value>110</value></Data>
         <Data name="cuisine"><value>Other</value></Data>
         <Data name="area"><value>Sathorn</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJXVRDDqqZ4jARdqaGRBUACvo</value></Data>
@@ -872,6 +872,22 @@ https://www.google.com/maps/place/?q=place_id:ChIJ1TnoBwCf4jARlFPWMY0f_cY
     </Placemark>
     <Placemark>
       <styleUrl>#cm0</styleUrl>
+      <name>อมร Home Cooking</name>
+      <description>⭐ 4.7 (77 รีวิว) · Other · Lat Phrao · ฿฿
+RHGX+H29, Chok Chai 4 Soi 84 Yaek 2-1, Khwaeng Lat Phrao, Khet Lat Phrao, Krung Thep Maha Nakhon 10230, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJgTr5FgCd4jARPwxJPick4z4
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.7</value></Data>
+        <Data name="reviews"><value>77</value></Data>
+        <Data name="cuisine"><value>Other</value></Data>
+        <Data name="area"><value>Lat Phrao</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJgTr5FgCd4jARPwxJPick4z4</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.59764,13.82653,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
       <name>uncle yod pork leg</name>
       <description>⭐ 4.6 (82 รีวิว) · Other · On Nut · ฿
 ตึกแถวริมถนน ปาก On Nut Rd, Khwaeng Phra Khanong Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand
@@ -885,22 +901,6 @@ https://www.google.com/maps/place/?q=place_id:ChIJB6r7irWf4jARcGHAW97l_TI
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJB6r7irWf4jARcGHAW97l_TI</value></Data>
       </ExtendedData>
       <Point><coordinates>100.600264,13.7091963,0</coordinates></Point>
-    </Placemark>
-    <Placemark>
-      <styleUrl>#cm0</styleUrl>
-      <name>อมร Home Cooking</name>
-      <description>⭐ 4.7 (76 รีวิว) · Other · Lat Phrao · ฿฿
-RHGX+H29, Chok Chai 4 Soi 84 Yaek 2-1, Khwaeng Lat Phrao, Khet Lat Phrao, Krung Thep Maha Nakhon 10230, Thailand
-https://www.google.com/maps/place/?q=place_id:ChIJgTr5FgCd4jARPwxJPick4z4
-ข้อมูลจาก ChefMinistry — chefministry.com</description>
-      <ExtendedData>
-        <Data name="rating"><value>4.7</value></Data>
-        <Data name="reviews"><value>76</value></Data>
-        <Data name="cuisine"><value>Other</value></Data>
-        <Data name="area"><value>Lat Phrao</value></Data>
-        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJgTr5FgCd4jARPwxJPick4z4</value></Data>
-      </ExtendedData>
-      <Point><coordinates>100.59764,13.82653,0</coordinates></Point>
     </Placemark>
     <Placemark>
       <styleUrl>#cm0</styleUrl>

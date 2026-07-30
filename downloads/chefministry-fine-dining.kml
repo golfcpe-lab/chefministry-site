@@ -2,7 +2,7 @@
 <kml xmlns="http://www.opengis.net/kml/2.2">
 <Document>
   <name>ChefMinistry — 🍽️ Fine Dining &amp; Omakase</name>
-  <description>อัปเดต 2026-07-31 — chefministry.com</description>
+  <description>อัปเดต 2026-07-30 — chefministry.com</description>
   <Style id="cm0"><IconStyle><color>ff2b52c9</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/dining.png</href></Icon></IconStyle></Style>
   <Folder>
     <name>🍽️ Fine Dining &amp; Omakase</name>
@@ -89,13 +89,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJJ9awVP6Z4jARG63KgxNla-Y
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>YAKINIKU MASTER SHOUTAIAN (MATSUSAKA WAGYU)</name>
-      <description>⭐ 4.9 (992 รีวิว) · Yakiniku · Watthana · ฿฿฿
+      <description>⭐ 4.9 (993 รีวิว) · Yakiniku · Watthana · ฿฿฿
 27 Hotel Nikko Bangkok,3rdFloor,315 Room, ถ. ทองหล่อ klongton-nua, เขตวัฒนา กรุงเทพมหานคร 10110, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJFb6qt_ef4jAR3BgU450v7D4
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.9</value></Data>
-        <Data name="reviews"><value>992</value></Data>
+        <Data name="reviews"><value>993</value></Data>
         <Data name="cuisine"><value>Yakiniku</value></Data>
         <Data name="area"><value>Watthana</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJFb6qt_ef4jAR3BgU450v7D4</value></Data>
@@ -297,13 +297,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJ9Rn3Stqe4jARvC9rgWzu31Q
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>Côte by Mauro Colagreco</name>
-      <description>⭐ 4.8 (628 รีวิว) · Mediterranean Fine Dining · Bangkok · ฿฿฿
+      <description>⭐ 4.8 (629 รีวิว) · Mediterranean Fine Dining · Bangkok · ฿฿฿
 300/2 ถ. เจริญกรุง Khwaeng Yan Nawa, Khet Sathon, Krung Thep Maha Nakhon 10120, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJf8OOlnmZ4jAR1XxCVTOPfPY
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.8</value></Data>
-        <Data name="reviews"><value>628</value></Data>
+        <Data name="reviews"><value>629</value></Data>
         <Data name="cuisine"><value>Mediterranean Fine Dining</value></Data>
         <Data name="area"><value>Bangkok</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJf8OOlnmZ4jAR1XxCVTOPfPY</value></Data>
@@ -793,13 +793,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJbXUt8DOf4jARorr_XaFh6NU
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>Mezzaluna</name>
-      <description>⭐ 4.5 (367 รีวิว) · Innovative Fine Dining · Bang Rak · ฿฿฿
+      <description>⭐ 4.5 (368 รีวิว) · Innovative Fine Dining · Bang Rak · ฿฿฿
 65th Floor State Tower Bangkok 1055 Si Lom Rd, Si Lom, Khet Bang Rak, Krung Thep Maha Nakhon 10500, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJmXuobsWY4jARc3EtJwWV21s
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.5</value></Data>
-        <Data name="reviews"><value>367</value></Data>
+        <Data name="reviews"><value>368</value></Data>
         <Data name="cuisine"><value>Innovative Fine Dining</value></Data>
         <Data name="area"><value>Bang Rak</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJmXuobsWY4jARc3EtJwWV21s</value></Data>
@@ -937,13 +937,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJF1TAJACf4jARrGzuq0r3hQc
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>Chef's Table by Lebua เชฟส์เทเบิล บาย เลอบัว</name>
-      <description>⭐ 4.6 (215 รีวิว) · French Fine Dining · Bang Rak · ฿฿฿
+      <description>⭐ 4.6 (216 รีวิว) · French Fine Dining · Bang Rak · ฿฿฿
 61st Floor, State Tower, 1055 Si Lom Rd, Si Lom, Khet Bang Rak, Krung Thep Maha Nakhon 10500, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJkbyJIMeZ4jARgc1-140HJkU
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.6</value></Data>
-        <Data name="reviews"><value>215</value></Data>
+        <Data name="reviews"><value>216</value></Data>
         <Data name="cuisine"><value>French Fine Dining</value></Data>
         <Data name="area"><value>Bang Rak</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJkbyJIMeZ4jARgc1-140HJkU</value></Data>

@@ -2,20 +2,20 @@
 <kml xmlns="http://www.opengis.net/kml/2.2">
 <Document>
   <name>ChefMinistry — 🥩 ปิ้งย่าง &amp; ชาบู</name>
-  <description>อัปเดต 2026-07-31 — chefministry.com</description>
+  <description>อัปเดต 2026-07-30 — chefministry.com</description>
   <Style id="cm0"><IconStyle><color>ff4b4bd6</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/dining.png</href></Icon></IconStyle></Style>
   <Folder>
     <name>🥩 ปิ้งย่าง &amp; ชาบู</name>
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>Shu Daxia Mala Hotpot ร้านหม่าล่า กรุงเทพ @MBK</name>
-      <description>⭐ 4.9 (9,786 รีวิว) · Hot Pot / Suki · Pathumwan · ฿฿
+      <description>⭐ 4.9 (9,846 รีวิว) · Hot Pot / Suki · Pathumwan · ฿฿
 Floor 6 MBK Center 444 Phaya Thai Rd, Khwaeng Wang Mai, Pathum Wan, Krung Thep Maha Nakhon 10330, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJdwrpAQCf4jARLueOBrlPfQI
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.9</value></Data>
-        <Data name="reviews"><value>9786</value></Data>
+        <Data name="reviews"><value>9846</value></Data>
         <Data name="cuisine"><value>Hot Pot / Suki</value></Data>
         <Data name="area"><value>Pathumwan</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJdwrpAQCf4jARLueOBrlPfQI</value></Data>
@@ -25,13 +25,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJdwrpAQCf4jARLueOBrlPfQI
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>Niku Sho Sukhumvit 31</name>
-      <description>⭐ 4.8 (8,710 รีวิว) · Yakiniku · Watthana · ฿฿
+      <description>⭐ 4.8 (8,730 รีวิว) · Yakiniku · Watthana · ฿฿
 12 Sukhumvit 31, Khwaeng Khlong Toei Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJ46fu9HKf4jARupTR_jaL8cc
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.8</value></Data>
-        <Data name="reviews"><value>8710</value></Data>
+        <Data name="reviews"><value>8730</value></Data>
         <Data name="cuisine"><value>Yakiniku</value></Data>
         <Data name="area"><value>Watthana</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ46fu9HKf4jARupTR_jaL8cc</value></Data>
@@ -41,13 +41,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJ46fu9HKf4jARupTR_jaL8cc
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>TenTen ชาบู 4 สี หมีออนเซน</name>
-      <description>⭐ 4.8 (5,660 รีวิว) · Hot Pot / Suki · Pathumwan · ฿฿
+      <description>⭐ 4.8 (5,662 รีวิว) · Hot Pot / Suki · Pathumwan · ฿฿
 388 5th Floor, Siam Square One, Rama I Rd, Khwaeng Pathum Wan, Pathum Wan, Krung Thep Maha Nakhon 10330, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJOS7Ez9-f4jARk2lpG0azP2k
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.8</value></Data>
-        <Data name="reviews"><value>5660</value></Data>
+        <Data name="reviews"><value>5662</value></Data>
         <Data name="cuisine"><value>Hot Pot / Suki</value></Data>
         <Data name="area"><value>Pathumwan</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJOS7Ez9-f4jARk2lpG0azP2k</value></Data>
@@ -73,13 +73,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJjYtkDAmZ4jARVKOVErxm5xU
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ทวีโชคหมูกะทะ สาขา13 ประชาชื่น</name>
-      <description>⭐ 4.9 (4,001 รีวิว) · BBQ · จตุจักร · ฿฿
+      <description>⭐ 4.9 (4,000 รีวิว) · BBQ · จตุจักร · ฿฿
 ลาดยาว, 50 ถนน เทศบาลรังรักษ์เหนือ Khwaeng Lat Yao, Khet Chatuchak, Krung Thep Maha Nakhon 10900, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJq7RFvOyd4jARFRTFmHV3Fb8
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.9</value></Data>
-        <Data name="reviews"><value>4001</value></Data>
+        <Data name="reviews"><value>4000</value></Data>
         <Data name="cuisine"><value>BBQ</value></Data>
         <Data name="area"><value>จตุจักร</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJq7RFvOyd4jARFRTFmHV3Fb8</value></Data>
@@ -105,13 +105,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJO3UE-uCf4jARpBGCSmdYoZc
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>หมูกระทะ ไทยเลอ บาร์กริล</name>
-      <description>⭐ 4.9 (3,070 รีวิว) · BBQ · Sathorn · ฿฿
+      <description>⭐ 4.9 (3,071 รีวิว) · BBQ · Sathorn · ฿฿
 Thanon Chan, Khwaeng Thung Wat Don, Khet Sathon, Krung Thep Maha Nakhon 10120, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJ3Rppr1GZ4jAR4Tp2G8r0QW0
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.9</value></Data>
-        <Data name="reviews"><value>3070</value></Data>
+        <Data name="reviews"><value>3071</value></Data>
         <Data name="cuisine"><value>BBQ</value></Data>
         <Data name="area"><value>Sathorn</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ3Rppr1GZ4jAR4Tp2G8r0QW0</value></Data>
@@ -137,13 +137,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJOdYqIjGZ4jARlWHdceourMA
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>HITORI SHABU</name>
-      <description>⭐ 4.7 (2,656 รีวิว) · Hot Pot / Suki · Pathumwan · ฿฿
+      <description>⭐ 4.7 (2,678 รีวิว) · Hot Pot / Suki · Pathumwan · ฿฿
 Siam Paragon, G Fl, 991 ถ. พระรามที่ 1 แขวงปทุมวัน เขตปทุมวัน กรุงเทพมหานคร 10330, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJh4qCVaif4jAR3B7egKQp3Wc
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.7</value></Data>
-        <Data name="reviews"><value>2656</value></Data>
+        <Data name="reviews"><value>2678</value></Data>
         <Data name="cuisine"><value>Hot Pot / Suki</value></Data>
         <Data name="area"><value>Pathumwan</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJh4qCVaif4jAR3B7egKQp3Wc</value></Data>
@@ -153,13 +153,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJh4qCVaif4jAR3B7egKQp3Wc
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>Renga Sukiyaki(เรนกะ)-ราชพฤกษ์</name>
-      <description>⭐ 4.9 (2,187 รีวิว) · Hot Pot / Suki · ตลิ่งชัน · ฿฿
+      <description>⭐ 4.9 (2,198 รีวิว) · Hot Pot / Suki · ตลิ่งชัน · ฿฿
 54 หมู่ที่ 13 Thanon Ratchaphruek, Khwaeng Bang Ramat, Khet Taling Chan, Krung Thep Maha Nakhon 10170, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJ-dqBmOWZ4jARiz_NJWw9hHI
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.9</value></Data>
-        <Data name="reviews"><value>2187</value></Data>
+        <Data name="reviews"><value>2198</value></Data>
         <Data name="cuisine"><value>Hot Pot / Suki</value></Data>
         <Data name="area"><value>ตลิ่งชัน</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ-dqBmOWZ4jARiz_NJWw9hHI</value></Data>
@@ -185,13 +185,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJv6tdnkOX4jARF4RUhhyAUzY
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ชูกริลล์ชาบู ถนนบรรทัดทอง</name>
-      <description>⭐ 4.9 (1,648 รีวิว) · Hot Pot / Suki · Pathumwan · ฿฿
+      <description>⭐ 4.9 (1,650 รีวิว) · Hot Pot / Suki · Pathumwan · ฿฿
 971, 973 Banthat Thong Rd, Khwaeng Wang Mai, Pathum Wan, Krung Thep Maha Nakhon 10330, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJn55SMlGZ4jARQ9aHIusSCpc
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.9</value></Data>
-        <Data name="reviews"><value>1648</value></Data>
+        <Data name="reviews"><value>1650</value></Data>
         <Data name="cuisine"><value>Hot Pot / Suki</value></Data>
         <Data name="area"><value>Pathumwan</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJn55SMlGZ4jARQ9aHIusSCpc</value></Data>
@@ -233,13 +233,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJK21OKolhHTERTPlDpOstk5o
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>KURA Premium Yakiniku and Sushi 蔵</name>
-      <description>⭐ 4.9 (1,206 รีวิว) · Yakiniku · Pathumwan · ฿฿
+      <description>⭐ 4.9 (1,207 รีวิว) · Yakiniku · Pathumwan · ฿฿
 B104, 87 Room no VELAA AT SINDHORN VILLAGE 105 Soi Langsuan, Khwaeng Lumphini, Pathum Wan, Krung Thep Maha Nakhon 10330, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJkwe2prCf4jARypVZbxGoV8c
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.9</value></Data>
-        <Data name="reviews"><value>1206</value></Data>
+        <Data name="reviews"><value>1207</value></Data>
         <Data name="cuisine"><value>Yakiniku</value></Data>
         <Data name="area"><value>Pathumwan</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJkwe2prCf4jARypVZbxGoV8c</value></Data>
@@ -249,13 +249,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJkwe2prCf4jARypVZbxGoV8c
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ร้าน คุณ ภัฐ หมูกะทะ</name>
-      <description>⭐ 4.9 (1,133 รีวิว) · BBQ · Huai Khwang · ฿฿
+      <description>⭐ 4.9 (1,134 รีวิว) · BBQ · Huai Khwang · ฿฿
 5 Soi 20 Mithuna, Lane 16, Khwaeng Huai Khwang, Khet Huai Khwang, Krung Thep Maha Nakhon 10310, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJt7SQBKyf4jAR_j9zUVbWG5M
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.9</value></Data>
-        <Data name="reviews"><value>1133</value></Data>
+        <Data name="reviews"><value>1134</value></Data>
         <Data name="cuisine"><value>BBQ</value></Data>
         <Data name="area"><value>Huai Khwang</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJt7SQBKyf4jAR_j9zUVbWG5M</value></Data>
@@ -281,18 +281,34 @@ https://www.google.com/maps/place/?q=place_id:ChIJg7yG-wmf4jARRify9AbXuyA
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ร้านหมูกระทะคุณภัฐ รามคำแหง 65 (สาขา8)</name>
-      <description>⭐ 4.9 (1,011 รีวิว) · BBQ · Wang Thonglang · ฿฿
+      <description>⭐ 4.9 (1,017 รีวิว) · BBQ · Wang Thonglang · ฿฿
 395/1 Khwaeng Phlabphla, Khet Wang Thonglang, Krung Thep Maha Nakhon 10310, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJpXc-R25hHTERhoSM1znX8s8
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.9</value></Data>
-        <Data name="reviews"><value>1011</value></Data>
+        <Data name="reviews"><value>1017</value></Data>
         <Data name="cuisine"><value>BBQ</value></Data>
         <Data name="area"><value>Wang Thonglang</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJpXc-R25hHTERhoSM1znX8s8</value></Data>
       </ExtendedData>
       <Point><coordinates>100.6236412,13.766085299999999,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>ชาบูคิง พระราม 9</name>
+      <description>⭐ 4.8 (1,045 รีวิว) · Hot Pot / Suki · Bangkapi · ฿฿
+29, Rama IX Soi 37, Khwaeng Hua Mak, Khet Bang Kapi, Krung Thep Maha Nakhon 10240, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJM-YvBQCf4jARjL0EH6X511w
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.8</value></Data>
+        <Data name="reviews"><value>1045</value></Data>
+        <Data name="cuisine"><value>Hot Pot / Suki</value></Data>
+        <Data name="area"><value>Bangkapi</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJM-YvBQCf4jARjL0EH6X511w</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.6097413,13.745496399999999,0</coordinates></Point>
     </Placemark>
     <Placemark>
       <styleUrl>#cm0</styleUrl>
@@ -325,22 +341,6 @@ https://www.google.com/maps/place/?q=place_id:ChIJv7orfj2d4jARaKVnKrSRtTs
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJv7orfj2d4jARaKVnKrSRtTs</value></Data>
       </ExtendedData>
       <Point><coordinates>100.59289109999999,13.803749999999999,0</coordinates></Point>
-    </Placemark>
-    <Placemark>
-      <styleUrl>#cm0</styleUrl>
-      <name>ชาบูคิง พระราม 9</name>
-      <description>⭐ 4.8 (1,043 รีวิว) · Hot Pot / Suki · Bangkapi · ฿฿
-29, Rama IX Soi 37, Khwaeng Hua Mak, Khet Bang Kapi, Krung Thep Maha Nakhon 10240, Thailand
-https://www.google.com/maps/place/?q=place_id:ChIJM-YvBQCf4jARjL0EH6X511w
-ข้อมูลจาก ChefMinistry — chefministry.com</description>
-      <ExtendedData>
-        <Data name="rating"><value>4.8</value></Data>
-        <Data name="reviews"><value>1043</value></Data>
-        <Data name="cuisine"><value>Hot Pot / Suki</value></Data>
-        <Data name="area"><value>Bangkapi</value></Data>
-        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJM-YvBQCf4jARjL0EH6X511w</value></Data>
-      </ExtendedData>
-      <Point><coordinates>100.6097413,13.745496399999999,0</coordinates></Point>
     </Placemark>
     <Placemark>
       <styleUrl>#cm0</styleUrl>
@@ -377,13 +377,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJmfnRrgxjHTERk5jD9Tez3OY
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>นักล่าหมูกระทะ เอ็ม บี เค เซ็นเตอร์</name>
-      <description>⭐ 4.5 (1,102 รีวิว) · BBQ · Phaya Thai · ฿฿
+      <description>⭐ 4.5 (1,104 รีวิว) · BBQ · Phaya Thai · ฿฿
 444 ถนน พญาไท อาคารมาบุญครองเซ็นเตอร์ ชั้น 2 Khwaeng Wang Mai, Pathum Wan, Krung Thep Maha Nakhon 10330, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJeeNC_kuf4jARhbLMNYU8vJE
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.5</value></Data>
-        <Data name="reviews"><value>1102</value></Data>
+        <Data name="reviews"><value>1104</value></Data>
         <Data name="cuisine"><value>BBQ</value></Data>
         <Data name="area"><value>Phaya Thai</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJeeNC_kuf4jARhbLMNYU8vJE</value></Data>
@@ -393,13 +393,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJeeNC_kuf4jARhbLMNYU8vJE
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>คุณเปิ้ล หมูกระทะ</name>
-      <description>⭐ 4.3 (1,273 รีวิว) · BBQ · Huai Khwang · ฿฿
+      <description>⭐ 4.3 (1,274 รีวิว) · BBQ · Huai Khwang · ฿฿
 Soi 20 Mithuna, Lane 22, Khwaeng Huai Khwang, Khet Huai Khwang, Krung Thep Maha Nakhon 10310, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJFeKmu9ad4jARwI77uT0Y5j8
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.3</value></Data>
-        <Data name="reviews"><value>1273</value></Data>
+        <Data name="reviews"><value>1274</value></Data>
         <Data name="cuisine"><value>BBQ</value></Data>
         <Data name="area"><value>Huai Khwang</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJFeKmu9ad4jARwI77uT0Y5j8</value></Data>
@@ -473,13 +473,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJG9G_GmOf4jAROP3hbTZtwWo
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>โอเค ชาบู ชาบู</name>
-      <description>⭐ 4.4 (1,004 รีวิว) · Hot Pot / Suki · Watthana · ฿฿
+      <description>⭐ 4.4 (1,005 รีวิว) · Hot Pot / Suki · Watthana · ฿฿
 9 3 Soi Sukhumvit 49/4, Khwaeng Khlong Tan Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJabDCHFWe4jAR8SCM2525qpg
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.4</value></Data>
-        <Data name="reviews"><value>1004</value></Data>
+        <Data name="reviews"><value>1005</value></Data>
         <Data name="cuisine"><value>Hot Pot / Suki</value></Data>
         <Data name="area"><value>Watthana</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJabDCHFWe4jAR8SCM2525qpg</value></Data>

@@ -2,20 +2,20 @@
 <kml xmlns="http://www.opengis.net/kml/2.2">
 <Document>
   <name>ChefMinistry — 🇨🇳 จีน &amp; ติ่มซำ</name>
-  <description>อัปเดต 2026-07-31 — chefministry.com</description>
+  <description>อัปเดต 2026-07-30 — chefministry.com</description>
   <Style id="cm0"><IconStyle><color>ff3ba7e8</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/dining.png</href></Icon></IconStyle></Style>
   <Folder>
     <name>🇨🇳 จีน &amp; ติ่มซำ</name>
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ฮัวหม่าล่า</name>
-      <description>⭐ 4.9 (4,976 รีวิว) · Chinese · Lat Phrao · ฿฿
+      <description>⭐ 4.9 (5,034 รีวิว) · Chinese · Lat Phrao · ฿฿
 79 Pradit Manutham Rd, Khwaeng Lat Phrao, Khet Lat Phrao, Krung Thep Maha Nakhon 10230, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJBVjCBACd4jARoVRvuegvF_Y
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.9</value></Data>
-        <Data name="reviews"><value>4976</value></Data>
+        <Data name="reviews"><value>5034</value></Data>
         <Data name="cuisine"><value>Chinese</value></Data>
         <Data name="area"><value>Lat Phrao</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJBVjCBACd4jARoVRvuegvF_Y</value></Data>
@@ -25,13 +25,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJBVjCBACd4jARoVRvuegvF_Y
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ฮะเก๋า เยาวราช</name>
-      <description>⭐ 4.7 (3,164 รีวิว) · Chinese · Yaowarat · ฿฿
+      <description>⭐ 4.7 (3,183 รีวิว) · Chinese · Yaowarat · ฿฿
 387 Yaowarat Rd, Khwaeng Samphanthawong, Khet Samphanthawong, Krung Thep Maha Nakhon 10100, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJg_OawsSZ4jARhar1F01_csQ
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.7</value></Data>
-        <Data name="reviews"><value>3164</value></Data>
+        <Data name="reviews"><value>3183</value></Data>
         <Data name="cuisine"><value>Chinese</value></Data>
         <Data name="area"><value>Yaowarat</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJg_OawsSZ4jARhar1F01_csQ</value></Data>
@@ -57,13 +57,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJVR1_rsWY4jAR0BqRhCK_sbM
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ตวง ติ่มซำ</name>
-      <description>⭐ 4.3 (3,819 รีวิว) · Chinese · Bang Kho Laem · ฿฿
+      <description>⭐ 4.3 (3,827 รีวิว) · Chinese · Bang Kho Laem · ฿฿
 2329 Soi Charoen Krung 89, Khwaeng Wat Phraya Krai, Khet Bang Kho Laem, Krung Thep Maha Nakhon 10120, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJHxU3Z76Y4jARFusSCmswJqc
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.3</value></Data>
-        <Data name="reviews"><value>3819</value></Data>
+        <Data name="reviews"><value>3827</value></Data>
         <Data name="cuisine"><value>Chinese</value></Data>
         <Data name="area"><value>Bang Kho Laem</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJHxU3Z76Y4jARFusSCmswJqc</value></Data>
@@ -73,13 +73,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJHxU3Z76Y4jARFusSCmswJqc
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>เหล่าเต๊ง</name>
-      <description>⭐ 4.6 (2,693 รีวิว) · Chinese · Yaowarat · ฿฿
+      <description>⭐ 4.6 (2,701 รีวิว) · Chinese · Yaowarat · ฿฿
 Floor, 2, 438 ถ. เยาวราช แขวงสัมพันธวงศ์ เขตสัมพันธวงศ์ กรุงเทพมหานคร 10100, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJJ03QjGOZ4jARdUW-bCQ2u2s
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.6</value></Data>
-        <Data name="reviews"><value>2693</value></Data>
+        <Data name="reviews"><value>2701</value></Data>
         <Data name="cuisine"><value>Chinese</value></Data>
         <Data name="area"><value>Yaowarat</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJJ03QjGOZ4jARdUW-bCQ2u2s</value></Data>
@@ -89,13 +89,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJJ03QjGOZ4jARdUW-bCQ2u2s
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>แกรนด์แสนยอด</name>
-      <description>⭐ 4.3 (2,313 รีวิว) · Chinese · Bang Rak · ฿฿
+      <description>⭐ 4.3 (2,316 รีวิว) · Chinese · Bang Rak · ฿฿
 89 Charat Wiang Rd, Si Lom, Khet Bang Rak, Krung Thep Maha Nakhon 10500, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJi8XyU9Oe4jARrOjDdixXim0
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.3</value></Data>
-        <Data name="reviews"><value>2313</value></Data>
+        <Data name="reviews"><value>2316</value></Data>
         <Data name="cuisine"><value>Chinese</value></Data>
         <Data name="area"><value>Bang Rak</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJi8XyU9Oe4jARrOjDdixXim0</value></Data>
@@ -137,13 +137,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJr6SgUABnHTERPpcbPGAlhdA
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>อาฟู​ เป็ดย่าง</name>
-      <description>⭐ 4.6 (1,083 รีวิว) · Chinese · พลับพลา · ฿฿
+      <description>⭐ 4.6 (1,094 รีวิว) · Chinese · พลับพลา · ฿฿
 1889 D2-D5, Thanon Siwara, Khwaeng Phlabphla, เขต งทองหลาง, Krung Thep Maha Nakhon 10312, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJT99KUA-e4jARfqZrvLcMn4c
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.6</value></Data>
-        <Data name="reviews"><value>1083</value></Data>
+        <Data name="reviews"><value>1094</value></Data>
         <Data name="cuisine"><value>Chinese</value></Data>
         <Data name="area"><value>พลับพลา</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJT99KUA-e4jARfqZrvLcMn4c</value></Data>
@@ -169,13 +169,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJSWhxfi6Z4jARhGQPscLf85g
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>จงติ่มซำ</name>
-      <description>⭐ 4.4 (1,105 รีวิว) · Chinese · Phaya Thai · ฿
+      <description>⭐ 4.4 (1,107 รีวิว) · Chinese · Phaya Thai · ฿
 524, 4 Phahon Yothin Road, Khwaeng Samsen Nai, Khet Phaya Thai, Krung Thep Maha Nakhon 10400, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJK8Yrohmc4jAR7FqVpG-wwrw
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.4</value></Data>
-        <Data name="reviews"><value>1105</value></Data>
+        <Data name="reviews"><value>1107</value></Data>
         <Data name="cuisine"><value>Chinese</value></Data>
         <Data name="area"><value>Phaya Thai</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJK8Yrohmc4jAR7FqVpG-wwrw</value></Data>
@@ -185,13 +185,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJK8Yrohmc4jAR7FqVpG-wwrw
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>Lhong Men</name>
-      <description>⭐ 4.8 (676 รีวิว) · Chinese · Yaowarat · ฿฿
+      <description>⭐ 4.8 (679 รีวิว) · Chinese · Yaowarat · ฿฿
 อยู่ก่อนถึงวัดไตรมิตร เลยแยกหมอมี 611 ถ. เจริญกรุง แขวงตลาดน้อย เขตสัมพันธวงศ์ Krung Thep Maha Nakhon 10100, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJ5XHnLY6Z4jARMrEZ7AScL9M
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.8</value></Data>
-        <Data name="reviews"><value>676</value></Data>
+        <Data name="reviews"><value>679</value></Data>
         <Data name="cuisine"><value>Chinese</value></Data>
         <Data name="area"><value>Yaowarat</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ5XHnLY6Z4jARMrEZ7AScL9M</value></Data>
@@ -201,13 +201,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJ5XHnLY6Z4jARMrEZ7AScL9M
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ข้าวต้มเป็ด เป็ดอ้วน เจ้าเก่า(ประตูผี)</name>
-      <description>⭐ 4.5 (714 รีวิว) · Chinese · พระนคร · ฿
+      <description>⭐ 4.5 (716 รีวิว) · Chinese · พระนคร · ฿
 เลขที่ 112 Soi Samran Rat, Khwaeng Samran Rat, Khet Phra Nakhon, Krung Thep Maha Nakhon 10200, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJ97RhgBaZ4jAR_ZOFaDAOZws
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.5</value></Data>
-        <Data name="reviews"><value>714</value></Data>
+        <Data name="reviews"><value>716</value></Data>
         <Data name="cuisine"><value>Chinese</value></Data>
         <Data name="area"><value>พระนคร</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ97RhgBaZ4jAR_ZOFaDAOZws</value></Data>
@@ -265,13 +265,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJ8wbkaxef4jAR-2ND2eIGgy4
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>เป็ดตุ๋น เจ้าท่า</name>
-      <description>⭐ 4.4 (622 รีวิว) · Chinese · Yaowarat · ฿
+      <description>⭐ 4.4 (621 รีวิว) · Chinese · Yaowarat · ฿
 945 Soi Wanit 2, Khwaeng Talat Noi, Khet Samphanthawong, Krung Thep Maha Nakhon 10100, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJRcDs0diY4jAR7JBCSsjopXE
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.4</value></Data>
-        <Data name="reviews"><value>622</value></Data>
+        <Data name="reviews"><value>621</value></Data>
         <Data name="cuisine"><value>Chinese</value></Data>
         <Data name="area"><value>Yaowarat</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJRcDs0diY4jAR7JBCSsjopXE</value></Data>
@@ -313,13 +313,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJjeh7g85hHTER2KzycSr1P7g
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>โตเป็ดย่าง</name>
-      <description>⭐ 4.5 (424 รีวิว) · Chinese · Bang Sue · ฿
+      <description>⭐ 4.5 (425 รีวิว) · Chinese · Bang Sue · ฿
 Pracha Rat Sai 1 Soi 20, Khwaeng Bang Sue, Khet Bang Sue, Krung Thep Maha Nakhon 10800, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJxya9RYyb4jARKrIqfI_hDes
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.5</value></Data>
-        <Data name="reviews"><value>424</value></Data>
+        <Data name="reviews"><value>425</value></Data>
         <Data name="cuisine"><value>Chinese</value></Data>
         <Data name="area"><value>Bang Sue</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJxya9RYyb4jARKrIqfI_hDes</value></Data>
@@ -345,13 +345,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJ4bKx4ymZ4jARDJgMkAYFKGw
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>เหอ เฉิน ฟง</name>
-      <description>⭐ 4.3 (445 รีวิว) · Chinese · สัมพันธวงศ์ · ฿฿
+      <description>⭐ 4.3 (446 รีวิว) · Chinese · สัมพันธวงศ์ · ฿฿
 464 ถ. เจริญกรุง Khwaeng Samphanthawong, Khet Samphanthawong, Krung Thep Maha Nakhon 10100, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJ0zW2RyKZ4jARGEFNs2z1XY0
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.3</value></Data>
-        <Data name="reviews"><value>445</value></Data>
+        <Data name="reviews"><value>446</value></Data>
         <Data name="cuisine"><value>Chinese</value></Data>
         <Data name="area"><value>สัมพันธวงศ์</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ0zW2RyKZ4jARGEFNs2z1XY0</value></Data>
@@ -393,13 +393,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJaf_D9yGZ4jARMX51rNIHrNE
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>แมนดารินเป็ดย่าง ภัตตาคาร</name>
-      <description>⭐ 4.4 (382 รีวิว) · Chinese · Watthana · ฿฿
+      <description>⭐ 4.4 (383 รีวิว) · Chinese · Watthana · ฿฿
 729 729/2 Soi Thong Lo, Khwaeng Phra Khanong Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJw-rVT1Ke4jAR8vyAhe_0c00
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.4</value></Data>
-        <Data name="reviews"><value>382</value></Data>
+        <Data name="reviews"><value>383</value></Data>
         <Data name="cuisine"><value>Chinese</value></Data>
         <Data name="area"><value>Watthana</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJw-rVT1Ke4jAR8vyAhe_0c00</value></Data>
@@ -473,13 +473,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJuXuaKmmZ4jARBjQskgg7sjU
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>เป็ดย่างคลังเชลล์</name>
-      <description>⭐ 4.4 (211 รีวิว) · Chinese · Khlong Toei · ฿
+      <description>⭐ 4.4 (212 รีวิว) · Chinese · Khlong Toei · ฿
 177 Na Ranong Rd, Khwaeng Khlong Toei, Khet Khlong Toei, Krung Thep Maha Nakhon 10110, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJh7kAOROf4jARIO-uCg69FLU
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.4</value></Data>
-        <Data name="reviews"><value>211</value></Data>
+        <Data name="reviews"><value>212</value></Data>
         <Data name="cuisine"><value>Chinese</value></Data>
         <Data name="area"><value>Khlong Toei</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJh7kAOROf4jARIO-uCg69FLU</value></Data>

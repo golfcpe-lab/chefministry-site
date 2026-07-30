@@ -2,20 +2,20 @@
 <kml xmlns="http://www.opengis.net/kml/2.2">
 <Document>
   <name>ChefMinistry — 🇹🇭 อาหารไทย</name>
-  <description>อัปเดต 2026-07-31 — chefministry.com</description>
+  <description>อัปเดต 2026-07-30 — chefministry.com</description>
   <Style id="cm0"><IconStyle><color>ff4fc3ff</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/dining.png</href></Icon></IconStyle></Style>
   <Folder>
     <name>🇹🇭 อาหารไทย</name>
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>Zhang Jia Yi — Ari (Baytong Chicken Rice)</name>
-      <description>⭐ 4.8 (5,272 รีวิว) · Thai · Phaya Thai · ฿฿
+      <description>⭐ 4.8 (5,274 รีวิว) · Thai · Phaya Thai · ฿฿
 104, 106 Soi Si Fa, Phaya Thai, Khet Phaya Thai, Krung Thep Maha Nakhon 10400, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJW0mrbfWe4jARhESOURP7fKw
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.8</value></Data>
-        <Data name="reviews"><value>5272</value></Data>
+        <Data name="reviews"><value>5274</value></Data>
         <Data name="cuisine"><value>Thai</value></Data>
         <Data name="area"><value>Phaya Thai</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJW0mrbfWe4jARhESOURP7fKw</value></Data>
@@ -153,13 +153,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJBZ4lFQCZ4jAR_kEKWPvgMWM
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>หมูแดงนายไซ</name>
-      <description>⭐ 4.3 (2,675 รีวิว) · Thai · Bang Sue · ฿
+      <description>⭐ 4.3 (2,676 รีวิว) · Thai · Bang Sue · ฿
 1059 Thanon Pracha Chuen, Khwaeng Wong Sawang, Khet Bang Sue, Krung Thep Maha Nakhon 10800, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJJWk-U4Wc4jARKi0t_tEqtdc
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.3</value></Data>
-        <Data name="reviews"><value>2675</value></Data>
+        <Data name="reviews"><value>2676</value></Data>
         <Data name="cuisine"><value>Thai</value></Data>
         <Data name="area"><value>Bang Sue</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJJWk-U4Wc4jARKi0t_tEqtdc</value></Data>
@@ -265,13 +265,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJ-bLUEyeZ4jARupp8yg3g8MA
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ร้านครัวคุณภา</name>
-      <description>⭐ 4.4 (2,147 รีวิว) · Thai · Taling Chan · ฿
+      <description>⭐ 4.4 (2,154 รีวิว) · Thai · Taling Chan · ฿
 65, 2 Thanon Ratchaphruek, Khwaeng Bang Phrom, Khet Taling Chan, Krung Thep Maha Nakhon 10170, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJf6Crb8GZ4jARBibTD1Jvz6g
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.4</value></Data>
-        <Data name="reviews"><value>2147</value></Data>
+        <Data name="reviews"><value>2154</value></Data>
         <Data name="cuisine"><value>Thai</value></Data>
         <Data name="area"><value>Taling Chan</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJf6Crb8GZ4jARBibTD1Jvz6g</value></Data>
@@ -281,13 +281,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJf6Crb8GZ4jARBibTD1Jvz6g
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>โกอ่าง ข้าวมันไก่ประตูน้ำ สาขาประตูน้ำ 2</name>
-      <description>⭐ 4.4 (2,058 รีวิว) · Thai · Pathumwan · ฿
+      <description>⭐ 4.4 (2,062 รีวิว) · Thai · Pathumwan · ฿
 17, Khwaeng Lumphini, Pathum Wan, Krung Thep Maha Nakhon 10330, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJj_WIE_Kf4jARywEFZ_PhZtE
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.4</value></Data>
-        <Data name="reviews"><value>2058</value></Data>
+        <Data name="reviews"><value>2062</value></Data>
         <Data name="cuisine"><value>Thai</value></Data>
         <Data name="area"><value>Pathumwan</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJj_WIE_Kf4jARywEFZ_PhZtE</value></Data>
@@ -297,13 +297,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJj_WIE_Kf4jARywEFZ_PhZtE
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ข้าวแกงเจ็กปุ๊ย (เจ๊เฉีย)</name>
-      <description>⭐ 4.5 (1,882 รีวิว) · Thai · Pom Prap · ฿
+      <description>⭐ 4.5 (1,887 รีวิว) · Thai · Pom Prap · ฿
 25 Mangkon Rd, Khwaeng Pom Prap, Khet Pom Prap Sattru Phai, Krung Thep Maha Nakhon 10100, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJhdkNRSKZ4jARo-VgQ65HGYU
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.5</value></Data>
-        <Data name="reviews"><value>1882</value></Data>
+        <Data name="reviews"><value>1887</value></Data>
         <Data name="cuisine"><value>Thai</value></Data>
         <Data name="area"><value>Pom Prap</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJhdkNRSKZ4jARo-VgQ65HGYU</value></Data>
@@ -361,13 +361,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJa_aFzXKf4jARvZFqO3bSkRs
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>888 Chicken Rice</name>
-      <description>⭐ 4.4 (1,527 รีวิว) · Thai · Suan Luang · ฿
+      <description>⭐ 4.4 (1,528 รีวิว) · Thai · Suan Luang · ฿
 1820 Phatthanakan Rd, Khwaeng Suan Luang, Khet Suan Luang, Krung Thep Maha Nakhon 10250, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJgZw-fM5hHTERiz1Hj-6Z2rg
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.4</value></Data>
-        <Data name="reviews"><value>1527</value></Data>
+        <Data name="reviews"><value>1528</value></Data>
         <Data name="cuisine"><value>Thai</value></Data>
         <Data name="area"><value>Suan Luang</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJgZw-fM5hHTERiz1Hj-6Z2rg</value></Data>
@@ -409,13 +409,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJ-zIqxjKC4jARxkG3tL4KzZg
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ตั๋นโบข้าวมันไก่ ลูกเฮียเทพ (สาขาสุทธิสาร)</name>
-      <description>⭐ 4.6 (1,093 รีวิว) · Thai · Phaya Thai · ฿
+      <description>⭐ 4.6 (1,095 รีวิว) · Thai · Phaya Thai · ฿
 351 Thanon Vibhavadi Rangsit, Khwaeng Samsen Nai, Khet Phaya Thai, Krung Thep Maha Nakhon 10400, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJFV8N_gqd4jARvLywfIikc1o
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.6</value></Data>
-        <Data name="reviews"><value>1093</value></Data>
+        <Data name="reviews"><value>1095</value></Data>
         <Data name="cuisine"><value>Thai</value></Data>
         <Data name="area"><value>Phaya Thai</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJFV8N_gqd4jARvLywfIikc1o</value></Data>
@@ -489,13 +489,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJHXBKmfih4jAR8TFcIeGuAY0
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ซุ่ยเฮง ข้าวมันไก่</name>
-      <description>⭐ 4.4 (1,007 รีวิว) · Thai · สาทร · ฿
+      <description>⭐ 4.4 (1,008 รีวิว) · Thai · สาทร · ฿
 1739 ถ. เจริญกรุง Khwaeng Yan Nawa, Khet Sathon, Krung Thep Maha Nakhon 10120, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJy0BpMMeY4jARWUGwjkDCYeM
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.4</value></Data>
-        <Data name="reviews"><value>1007</value></Data>
+        <Data name="reviews"><value>1008</value></Data>
         <Data name="cuisine"><value>Thai</value></Data>
         <Data name="area"><value>สาทร</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJy0BpMMeY4jARWUGwjkDCYeM</value></Data>
@@ -521,13 +521,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJcwK74S6Z4jARzqUhQsNBF1A
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ข้าวมันไก่เจ๊ยี</name>
-      <description>⭐ 4.4 (938 รีวิว) · Thai · Pom Prap · ฿
+      <description>⭐ 4.4 (940 รีวิว) · Thai · Pom Prap · ฿
 457/9 Thanon Chakkraphatdi Phong, Khwaeng Khlong Maha Nak, Khet Pom Prap Sattru Phai, Krung Thep Maha Nakhon 10100, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJTyVYej6Z4jAR_1fpix79NfM
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.4</value></Data>
-        <Data name="reviews"><value>938</value></Data>
+        <Data name="reviews"><value>940</value></Data>
         <Data name="cuisine"><value>Thai</value></Data>
         <Data name="area"><value>Pom Prap</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJTyVYej6Z4jAR_1fpix79NfM</value></Data>
@@ -553,13 +553,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJp2Zacxec4jAR9i2toRndyaE
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ร้านรสทิพย์ ข้าวขาหมู</name>
-      <description>⭐ 4.5 (843 รีวิว) · Thai · Ram Intra · ฿
+      <description>⭐ 4.5 (844 รีวิว) · Thai · Ram Intra · ฿
 106 ซอยโพธิ์แก้ว แยก 4-1-2-1 Khwaeng Khlong Chan, Khet Bang Kapi, Krung Thep Maha Nakhon 10240, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJP4M-Qt9jHTERYZ6SJ3WWuYk
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.5</value></Data>
-        <Data name="reviews"><value>843</value></Data>
+        <Data name="reviews"><value>844</value></Data>
         <Data name="cuisine"><value>Thai</value></Data>
         <Data name="area"><value>Ram Intra</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJP4M-Qt9jHTERYZ6SJ3WWuYk</value></Data>
@@ -585,13 +585,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJOV4PX72d4jARnM3B7eq7Y3M
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>หรรษาริเวอร์เฮ้าส์</name>
-      <description>⭐ 4.5 (760 รีวิว) · Thai · Yaowarat · ฿฿
+      <description>⭐ 4.5 (777 รีวิว) · Thai · Yaowarat · ฿฿
 1616 Soi Khang Wat Pathum Khongkha, Khwaeng Samphanthawong, Khet Samphanthawong, Krung Thep Maha Nakhon 10100, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJE7ZsAwCZ4jAR4OAUPPaXQ6o
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.5</value></Data>
-        <Data name="reviews"><value>760</value></Data>
+        <Data name="reviews"><value>777</value></Data>
         <Data name="cuisine"><value>Thai</value></Data>
         <Data name="area"><value>Yaowarat</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJE7ZsAwCZ4jAR4OAUPPaXQ6o</value></Data>
@@ -633,13 +633,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJR7gcH1Oe4jARA4YYHTzJMx4
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>โชคชัย ลูกชิ้นปลา</name>
-      <description>⭐ 4.5 (687 รีวิว) · Thai · Bang Khen · ฿
+      <description>⭐ 4.5 (689 รีวิว) · Thai · Bang Khen · ฿
 17/69 Ram Intra 45, Khwaeng Tha Raeng, Khet Bang Khen, Krung Thep Maha Nakhon 10230, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJwUYZW7piHTER1kNXPQDxXnY
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.5</value></Data>
-        <Data name="reviews"><value>687</value></Data>
+        <Data name="reviews"><value>689</value></Data>
         <Data name="cuisine"><value>Thai</value></Data>
         <Data name="area"><value>Bang Khen</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJwUYZW7piHTER1kNXPQDxXnY</value></Data>
@@ -697,13 +697,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJe6FJn4ue4jARW0LJkwrHjtc
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ร้านเจ๊แอ๊ด ก๋วยเตี๋ยวต้มยำสูตรมะนาว</name>
-      <description>⭐ 4.5 (546 รีวิว) · Thai · Sukhumvit · ฿
+      <description>⭐ 4.5 (547 รีวิว) · Thai · Sukhumvit · ฿
 30 หมู่ที่ 2 Soi Siri Watthana, Khwaeng Bang Chueak Nang, Khet Taling Chan, Krung Thep Maha Nakhon 10170, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJeZeEDXOX4jARgci9Bpq5gSQ
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.5</value></Data>
-        <Data name="reviews"><value>546</value></Data>
+        <Data name="reviews"><value>547</value></Data>
         <Data name="cuisine"><value>Thai</value></Data>
         <Data name="area"><value>Sukhumvit</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJeZeEDXOX4jARgci9Bpq5gSQ</value></Data>
@@ -713,13 +713,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJeZeEDXOX4jARgci9Bpq5gSQ
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>หมึกมันไก่ ข้าวมันไก่สไตล์สิงคโปร์</name>
-      <description>⭐ 4.5 (542 รีวิว) · Thai · Ratchathewi · ฿
+      <description>⭐ 4.5 (544 รีวิว) · Thai · Ratchathewi · ฿
 47/1 Soi Phetchaburi 5, Khwaeng Thung Phaya Thai, Khet Ratchathewi, Krung Thep Maha Nakhon 10400, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJSUv0DUCZ4jAR1i5h7plXW8w
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.5</value></Data>
-        <Data name="reviews"><value>542</value></Data>
+        <Data name="reviews"><value>544</value></Data>
         <Data name="cuisine"><value>Thai</value></Data>
         <Data name="area"><value>Ratchathewi</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJSUv0DUCZ4jAR1i5h7plXW8w</value></Data>
@@ -825,13 +825,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJ_bmYsK6d4jARtvlrLehWUqg
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ข้าวมันไก่นำโชค บางเขน</name>
-      <description>⭐ 4.9 (329 รีวิว) · Thai · บางเขน · ฿
+      <description>⭐ 4.9 (328 รีวิว) · Thai · บางเขน · ฿
 44/813 อนุสาวรีย์ Khet Bang Khen, Krung Thep Maha Nakhon 10220, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJQ2-XZuyD4jARy69czKJykUc
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.9</value></Data>
-        <Data name="reviews"><value>329</value></Data>
+        <Data name="reviews"><value>328</value></Data>
         <Data name="cuisine"><value>Thai</value></Data>
         <Data name="area"><value>บางเขน</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJQ2-XZuyD4jARy69czKJykUc</value></Data>
@@ -841,13 +841,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJQ2-XZuyD4jARy69czKJykUc
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>แม่ช้อย ดอยหลวง นนทบุรี</name>
-      <description>⭐ 4.5 (430 รีวิว) · Thai · Bangkok · ฿฿
+      <description>⭐ 4.5 (431 รีวิว) · Thai · Bangkok · ฿฿
 ตรงข้าม, 760 Rewadee Road, Tambon Talat Kwan, Amphoe Mueang Nonthaburi, Chang Wat Nonthaburi 11000, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJB6qgxrKE4jARJu4K5gDDP7Q
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.5</value></Data>
-        <Data name="reviews"><value>430</value></Data>
+        <Data name="reviews"><value>431</value></Data>
         <Data name="cuisine"><value>Thai</value></Data>
         <Data name="area"><value>Bangkok</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJB6qgxrKE4jARJu4K5gDDP7Q</value></Data>
@@ -1081,13 +1081,13 @@ https://www.google.com/maps/place/?q=place_id:ChIJCRzy4qCZ4jARpKj7GeHKrYo
     <Placemark>
       <styleUrl>#cm0</styleUrl>
       <name>ข้าวแกงแม่ประนอม1974&amp;น้ำผลไม้ปั่น</name>
-      <description>⭐ 4.6 (217 รีวิว) · Thai · Phra Nakhon · ฿
+      <description>⭐ 4.6 (218 รีวิว) · Thai · Phra Nakhon · ฿
 138 Dinso Rd, Khwaeng Wat Bowon Niwet, Khet Phra Nakhon, Krung Thep Maha Nakhon 10200, Thailand
 https://www.google.com/maps/place/?q=place_id:ChIJDxdbiBOZ4jAR1gIVpfph_LU
 ข้อมูลจาก ChefMinistry — chefministry.com</description>
       <ExtendedData>
         <Data name="rating"><value>4.6</value></Data>
-        <Data name="reviews"><value>217</value></Data>
+        <Data name="reviews"><value>218</value></Data>
         <Data name="cuisine"><value>Thai</value></Data>
         <Data name="area"><value>Phra Nakhon</value></Data>
         <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJDxdbiBOZ4jAR1gIVpfph_LU</value></Data>
