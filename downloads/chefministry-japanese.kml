@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>ChefMinistry — 🍣 ญี่ปุ่น</name>
+  <description>อัปเดต 2026-07-31 — chefministry.com</description>
+  <Style id="cm0"><IconStyle><color>ffb37cff</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/dining.png</href></Icon></IconStyle></Style>
+  <Folder>
+    <name>🍣 ญี่ปุ่น</name>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>ซูชินะ ฟอร์จูนทาวน์</name>
+      <description>⭐ 4.9 (3,276 รีวิว) · Japanese · Rama 9 · ฿฿
+ชั้น1, หน้าโรงแรม​ AVANI​ ตรงข้ามธนาคารกรุงศรี, ศูนย์การค้าฟอร์จูนทาวน์, 5 Thanon Ratchadaphisek, Khwaeng Din Daeng, Khet Din Daeng, Krung Thep Maha Nakhon 10400, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJb7Wy5Qmf4jAReLw9TOEaY7g
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.9</value></Data>
+        <Data name="reviews"><value>3276</value></Data>
+        <Data name="cuisine"><value>Japanese</value></Data>
+        <Data name="area"><value>Rama 9</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJb7Wy5Qmf4jAReLw9TOEaY7g</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.56486249999999,13.7570742,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>505 HOUSE (5 O 5 ハウス)</name>
+      <description>⭐ 5.0 (1,366 รีวิว) · Japanese · Lat Phrao · ฿฿
+75 Thanon Prasert-Manukitch 29, Khwaeng Chorakhe Bua, Khet Lat Phrao, Krung Thep Maha Nakhon 10230, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJ0TSZeQBjHTER3vTaELmQfHI
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>5.0</value></Data>
+        <Data name="reviews"><value>1366</value></Data>
+        <Data name="cuisine"><value>Japanese</value></Data>
+        <Data name="area"><value>Lat Phrao</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ0TSZeQBjHTER3vTaELmQfHI</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.6212161,13.844622699999999,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>SUSHIRO THAILAND Central Plaza Grand Rama 9</name>
+      <description>⭐ 4.4 (1,542 รีวิว) · Japanese · Rama 9 · ฿฿
+เลขที่ห้อง 630, 631/2 ชั้นที่ 6, 9/9 Rama IX Rd, Khwaeng Huai Khwang, Khet Huai Khwang, Krung Thep Maha Nakhon 10320, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJ1QSVleGf4jARvlb9zH6VzE4
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.4</value></Data>
+        <Data name="reviews"><value>1542</value></Data>
+        <Data name="cuisine"><value>Japanese</value></Data>
+        <Data name="area"><value>Rama 9</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ1QSVleGf4jARvlb9zH6VzE4</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.5664461,13.7594251,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>Umeshuthai Sukhumvit 45 梅酒タイ スクンビット 和食堂・梅酒バー | Japanese Restaurant and Umeshu Bar</name>
+      <description>⭐ 4.7 (1,194 รีวิว) · Japanese · Watthana · ฿
+835 Sukhumvit Rd, Khwaeng Khlong Tan Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJN6RJi8Wf4jARIJvN-HeTQCY
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.7</value></Data>
+        <Data name="reviews"><value>1194</value></Data>
+        <Data name="cuisine"><value>Japanese</value></Data>
+        <Data name="area"><value>Watthana</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJN6RJi8Wf4jARIJvN-HeTQCY</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.5736684,13.727841999999999,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>Washoku Aji</name>
+      <description>⭐ 4.5 (1,068 รีวิว) · Japanese · Sukhumvit · ฿฿
+78/2 Soi Sukhumvit 63, Khwaeng Phra Khanong Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJ76Xr-K2f4jAR6gpk84MxrNM
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.5</value></Data>
+        <Data name="reviews"><value>1068</value></Data>
+        <Data name="cuisine"><value>Japanese</value></Data>
+        <Data name="area"><value>Sukhumvit</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ76Xr-K2f4jAR6gpk84MxrNM</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.58584909999999,13.7268025,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>Washoku Aji</name>
+      <description>⭐ 4.5 (1,068 รีวิว) · Japanese · Ekkamai · ฿฿
+78/2 Soi Sukhumvit 63, Khwaeng Phra Khanong Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJ76Xr-K2f4jAR6gpk84MxrNM
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.5</value></Data>
+        <Data name="reviews"><value>1068</value></Data>
+        <Data name="cuisine"><value>Japanese</value></Data>
+        <Data name="area"><value>Ekkamai</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ76Xr-K2f4jAR6gpk84MxrNM</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.58584909999999,13.7268025,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>Taishoken Ramen</name>
+      <description>⭐ 4.5 (696 รีวิว) · Japanese · Thonglor · ฿฿
+ชั้น 1, Fifty Fifth, 90 Soi Thong Lo, Khwaeng Khlong Tan Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJM-ixT62f4jARkSl5E-sZnh0
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.5</value></Data>
+        <Data name="reviews"><value>696</value></Data>
+        <Data name="cuisine"><value>Japanese</value></Data>
+        <Data name="area"><value>Thonglor</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJM-ixT62f4jARkSl5E-sZnh0</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.5802216,13.7260943,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>ISHII KATSU อิชิอิ คัตสึ</name>
+      <description>⭐ 5.0 (433 รีวิว) · Japanese Katsu · Khan Na Yao · ฿฿
+121, 40 Soi Rarm Intra 103/2, Khwaeng Khan Na Yao, Khet Khan Na Yao, Krung Thep Maha Nakhon 10230, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJTcKzfcFjHTERFnoTefhRUKk
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>5.0</value></Data>
+        <Data name="reviews"><value>433</value></Data>
+        <Data name="cuisine"><value>Japanese Katsu</value></Data>
+        <Data name="area"><value>Khan Na Yao</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJTcKzfcFjHTERFnoTefhRUKk</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.68697619999999,13.815904699999999,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>Nen (念) Rama 9 - Modern Japanese Homecook</name>
+      <description>⭐ 4.9 (372 รีวิว) · Japanese · Suan Luang · ฿฿
+23 Rama 9 Soi 41 Suanluang Khet Suan Luang, Krung Thep Maha Nakhon 10250, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJNbOjbhdhHTERusIOByPajHg
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.9</value></Data>
+        <Data name="reviews"><value>372</value></Data>
+        <Data name="cuisine"><value>Japanese</value></Data>
+        <Data name="area"><value>Suan Luang</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJNbOjbhdhHTERusIOByPajHg</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.6245337,13.7441514,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>Osaka Ohsho</name>
+      <description>⭐ 4.4 (442 รีวิว) · Japanese · Thonglor · ฿฿
+The Fifty Fifth Plaza 90 ซอยทองหล่อ 2 Soi Thong Lo, Khwaeng Khlong Tan Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJm3Uks66f4jARTVpWzf_BQJI
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.4</value></Data>
+        <Data name="reviews"><value>442</value></Data>
+        <Data name="cuisine"><value>Japanese</value></Data>
+        <Data name="area"><value>Thonglor</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJm3Uks66f4jARTVpWzf_BQJI</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.58029259999999,13.7261138,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>Noomjad.bkk</name>
+      <description>⭐ 4.5 (332 รีวิว) · Japanese · Rama 9 · ฿฿
+ชั้น G, อาคาร จี ทาวเวอร์ 309 Rama IX Rd, Khwaeng Huai Khwang, Khet Huai Khwang, Krung Thep Maha Nakhon 10310, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJ9bfL-faf4jARgGCGo5x9CIs
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.5</value></Data>
+        <Data name="reviews"><value>332</value></Data>
+        <Data name="cuisine"><value>Japanese</value></Data>
+        <Data name="area"><value>Rama 9</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ9bfL-faf4jARgGCGo5x9CIs</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.5659539,13.757092,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>Ippudo</name>
+      <description>⭐ 4.3 (234 รีวิว) · Japanese · Rama 9 · ฿฿
+อาคารศูนย์การค้า เซ็นทรัล, Rama IX Rd, Khwaeng Huai Khwang, Khet Huai Khwang, Krung Thep Maha Nakhon 10310, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJK4TIpf6f4jARaZg1cUnursY
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.3</value></Data>
+        <Data name="reviews"><value>234</value></Data>
+        <Data name="cuisine"><value>Japanese</value></Data>
+        <Data name="area"><value>Rama 9</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJK4TIpf6f4jARaZg1cUnursY</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.5663313,13.7585863,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>SUMIKOYA YATAI izakaya</name>
+      <description>⭐ 4.9 (120 รีวิว) · Japanese · Khan Na Yao · ฿฿
+111 Ram Intra 62, Khwaeng Ram Inthra, Khet Khan Na Yao, Krung Thep Maha Nakhon 10230, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJ3cvz9Y9jHTERiXzHpA1JK2I
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.9</value></Data>
+        <Data name="reviews"><value>120</value></Data>
+        <Data name="cuisine"><value>Japanese</value></Data>
+        <Data name="area"><value>Khan Na Yao</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ3cvz9Y9jHTERiXzHpA1JK2I</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.6617912,13.8215661,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>Kinniku Gyudon พัฒนาการ</name>
+      <description>⭐ 4.6 (82 รีวิว) · Japanese · Bangkok · ฿฿
+207, 91 เมืองทองนิเวศน์, Khwaeng Prawet, Khet Prawet, Krung Thep Maha Nakhon 10250, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJ10cdPABhHTERw5FMn88tHj4
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.6</value></Data>
+        <Data name="reviews"><value>82</value></Data>
+        <Data name="cuisine"><value>Japanese</value></Data>
+        <Data name="area"><value>Bangkok</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ10cdPABhHTERw5FMn88tHj4</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.65672389999999,13.727844999999999,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>Shabubu Thonglor</name>
+      <description>⭐ 4.6 (68 รีวิว) · Japanese · Watthana · ฿฿
+125/1 Soi Sukhumvit 63, ถนน เอกมัย แขวงคลองตันเหนือ เขตวัฒนา กรุงเทพมหานคร 10110, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJ_YXXNNuf4jAR2GLwNOWdCHE
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.6</value></Data>
+        <Data name="reviews"><value>68</value></Data>
+        <Data name="cuisine"><value>Japanese</value></Data>
+        <Data name="area"><value>Watthana</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ_YXXNNuf4jAR2GLwNOWdCHE</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.5844393,13.7313003,0</coordinates></Point>
+    </Placemark>
+  </Folder>
+</Document></kml>
