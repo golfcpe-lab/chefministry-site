@@ -2,11 +2,17 @@ rules_version = '2';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // ChefMinistry — Firestore Security Rules
-// ⚠️ ต้อง publish ผ่าน Firebase Console → Firestore Database → Rules → Publish
-//    (ไฟล์นี้เก็บไว้ใน repo เพื่อ track ประวัติ ไม่ได้ deploy อัตโนมัติ)
+// deploy ผ่าน Firebase Rules API (service account) — ดู scripts/deploy_rules.py
 //
-// หลักการ: ทุกอย่างที่เกี่ยวกับ "จ่ายเงินแล้วหรือยัง" client ต้องเขียนไม่ได้
-// (ของเดิม users/{uid} client เขียนเองได้ → ห้ามใช้ตัดสินสิทธิ์เด็ดขาด)
+// เปลี่ยนสำคัญ 2026-07-31:
+//   เดิมมี catch-all `match /{document=**} { allow read, write: if auth != null }`
+//   = สมาชิกที่ล็อกอินเขียนอะไรก็ได้ รวมถึงตั้ง cm_subscriptions ให้ตัวเอง
+//   → ตัดทิ้ง แล้วประกาศทีละ collection แทน
+//
+// ที่ต้องคงไว้ (ของเดิมที่ระบบพึ่งพา):
+//   - cm_fb_digest: scheduled task เขียนด้วย key ไม่ได้ล็อกอิน
+//   - cm_suggestions: อ่านสาธารณะ (process_suggestions.py), เขียนได้เมื่อล็อกอิน
+//   - cm_allowlist: admin list ผู้ใช้ผ่าน API ด้วย token ตัวเอง
 // ─────────────────────────────────────────────────────────────────────────────
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -20,43 +26,55 @@ service cloud.firestore {
         && get(/databases/$(database)/documents/cm_allowlist/$(request.auth.token.email)).data.role == 'admin';
     }
 
-    // โปรไฟล์ผู้ใช้ — เจ้าของแก้ได้ (ชื่อ/รูป) แต่ห้ามใช้ตัดสินสิทธิ์จ่ายเงิน
-    match /users/{uid} {
-      allow read:   if signedIn() && (request.auth.uid == uid || isAdmin());
-      allow create: if signedIn() && request.auth.uid == uid;
-      allow update: if signedIn() && (request.auth.uid == uid || isAdmin());
-      allow delete: if isAdmin();
-    }
-
-    // สถานะสมาชิกจ่ายเงิน — client อ่านของตัวเองได้ แต่ "เขียนไม่ได้"
+    // ── สถานะสมาชิกจ่ายเงิน — หัวใจของ paywall ───────────────────────────────
+    // อ่านของตัวเองได้ (API ใช้ token ผู้ใช้อ่าน) แต่ "เขียนได้เฉพาะแอดมิน"
     match /cm_subscriptions/{uid} {
       allow read:  if signedIn() && (request.auth.uid == uid || isAdmin());
       allow write: if isAdmin();
     }
 
-    // คำขอ/แจ้งโอนเงิน — เจ้าของสร้าง/แก้ของตัวเองได้ แอดมินอ่าน+ลบ
+    // ── คำขอ/แจ้งโอนเงิน — เจ้าของสร้างได้ แอดมินอ่าน/ลบ ─────────────────────
     match /cm_subscription_requests/{uid} {
-      allow read:   if signedIn() && (request.auth.uid == uid || isAdmin());
+      allow read:           if signedIn() && (request.auth.uid == uid || isAdmin());
+      allow create, update: if signedIn() && request.auth.uid == uid
+                            && request.resource.data.keys().hasOnly(
+                                 ['email','name','plan','note','requestedAt','status'])
+                            && request.resource.data.status == 'pending';
+      allow delete:         if isAdmin();
+    }
+
+    // ── โปรไฟล์ผู้ใช้ — เจ้าของแก้ของตัวเองเท่านั้น ──────────────────────────
+    // (ห้ามใช้ field ในนี้ตัดสินสิทธิ์จ่ายเงิน — client เขียนเองได้)
+    match /users/{uid} {
+      allow read:           if signedIn() && (request.auth.uid == uid || isAdmin());
       allow create, update: if signedIn() && request.auth.uid == uid;
-      allow delete: if isAdmin();
+      allow delete:         if isAdmin();
     }
 
-    // สิทธิ์แอดมิน — แก้ได้เฉพาะแอดมิน
-    match /cm_allowlist/{email} {
-      allow read:  if signedIn();
-      allow write: if isAdmin();
-    }
-
-    // ร้านที่ community เสนอ — ผู้ใช้ที่ล็อกอินเสนอได้ ระบบ/แอดมินอ่าน
+    // ── ร้านที่ community เสนอ (ของเดิม — คงพฤติกรรมไว้) ─────────────────────
     match /cm_suggestions/{doc} {
-      allow create: if signedIn();
-      allow read, update, delete: if isAdmin();
+      allow create: if signedIn()
+                    && request.resource.data.url is string
+                    && request.resource.data.url.size() < 500;
+      allow read:   if true;
+      allow update, delete: if isAdmin();
     }
 
-    // FB digest relay (scheduled task เขียนด้วย key แยก — ดู memory)
+    // ── FB digest relay (scheduled task เขียนด้วย write key — ห้ามแตะ) ───────
     match /cm_fb_digest/{doc} {
-      allow read: if true;
+      allow read:  if true;
+      allow write: if request.resource.data.k == "9yj6Bszac2WD9Jpquq6rWYLjLeEW4CW7"
+                   && request.resource.data.payload is string
+                   && request.resource.data.payload.size() < 50000;
+    }
+
+    // ── สิทธิ์แอดมิน ─────────────────────────────────────────────────────────
+    // อ่าน: ของตัวเอง (เช็คสิทธิ์ตอนเข้า admin) หรือแอดมิน (list ผู้ใช้)
+    match /cm_allowlist/{email} {
+      allow read:  if signedIn() && (request.auth.token.email == email || isAdmin());
       allow write: if isAdmin();
     }
+
+    // ── ไม่มี catch-all อีกต่อไป — collection ที่ไม่ได้ประกาศ = ปฏิเสธทั้งหมด ──
   }
 }
