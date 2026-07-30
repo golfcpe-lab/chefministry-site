@@ -1,0 +1,62 @@
+rules_version = '2';
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ChefMinistry — Firestore Security Rules
+// ⚠️ ต้อง publish ผ่าน Firebase Console → Firestore Database → Rules → Publish
+//    (ไฟล์นี้เก็บไว้ใน repo เพื่อ track ประวัติ ไม่ได้ deploy อัตโนมัติ)
+//
+// หลักการ: ทุกอย่างที่เกี่ยวกับ "จ่ายเงินแล้วหรือยัง" client ต้องเขียนไม่ได้
+// (ของเดิม users/{uid} client เขียนเองได้ → ห้ามใช้ตัดสินสิทธิ์เด็ดขาด)
+// ─────────────────────────────────────────────────────────────────────────────
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+    function isAdmin() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/cm_allowlist/$(request.auth.token.email))
+        && get(/databases/$(database)/documents/cm_allowlist/$(request.auth.token.email)).data.role == 'admin';
+    }
+
+    // โปรไฟล์ผู้ใช้ — เจ้าของแก้ได้ (ชื่อ/รูป) แต่ห้ามใช้ตัดสินสิทธิ์จ่ายเงิน
+    match /users/{uid} {
+      allow read:   if signedIn() && (request.auth.uid == uid || isAdmin());
+      allow create: if signedIn() && request.auth.uid == uid;
+      allow update: if signedIn() && (request.auth.uid == uid || isAdmin());
+      allow delete: if isAdmin();
+    }
+
+    // สถานะสมาชิกจ่ายเงิน — client อ่านของตัวเองได้ แต่ "เขียนไม่ได้"
+    match /cm_subscriptions/{uid} {
+      allow read:  if signedIn() && (request.auth.uid == uid || isAdmin());
+      allow write: if isAdmin();
+    }
+
+    // คำขอ/แจ้งโอนเงิน — เจ้าของสร้าง/แก้ของตัวเองได้ แอดมินอ่าน+ลบ
+    match /cm_subscription_requests/{uid} {
+      allow read:   if signedIn() && (request.auth.uid == uid || isAdmin());
+      allow create, update: if signedIn() && request.auth.uid == uid;
+      allow delete: if isAdmin();
+    }
+
+    // สิทธิ์แอดมิน — แก้ได้เฉพาะแอดมิน
+    match /cm_allowlist/{email} {
+      allow read:  if signedIn();
+      allow write: if isAdmin();
+    }
+
+    // ร้านที่ community เสนอ — ผู้ใช้ที่ล็อกอินเสนอได้ ระบบ/แอดมินอ่าน
+    match /cm_suggestions/{doc} {
+      allow create: if signedIn();
+      allow read, update, delete: if isAdmin();
+    }
+
+    // FB digest relay (scheduled task เขียนด้วย key แยก — ดู memory)
+    match /cm_fb_digest/{doc} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+  }
+}
