@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <link rel="icon" type="image/png" href="./assets/logo_circular.png"/>
+  <link rel="manifest" href="/manifest.json"/>
+  <meta name="theme-color" content="#0f1f3c"/>
+  <title>สมัครสมาชิก Map Pack รายเดือน | ChefMinistry</title>
+  <meta name="description" content="สมาชิกรายเดือน ChefMinistry — ดาวน์โหลดไฟล์แผนที่ร้านอาหารกรุงเทพคัดสรร นำเข้า Google My Maps อัปเดตทุกวัน"/>
+  <link rel="canonical" href="https://chefministry.com/subscribe.html"/>
+  <meta name="robots" content="noindex"/>
+  <link rel="stylesheet" href="./css/style.css"/>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BT2BCMZ9SH"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BT2BCMZ9SH');</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="./index.html">
+      <img src="./assets/logo_circular.png" alt="Chef Ministry" class="logo-img" style="width:40px;height:40px;border-radius:50%;object-fit:cover"/>
+      <div>
+        <div class="logo-name">ChefMinistry</div>
+        <div class="logo-tagline">Restaurant Rating Intelligence Platform</div>
+      </div>
+    </a>
+    <nav class="site-nav">
+      <a class="nav-link" href="./index.html">Home</a>
+      <a class="nav-link" href="./listing.html">Discover</a>
+      <a class="nav-link" href="./maps.html">🗺️ แผนที่</a>
+      <div class="cm-auth-nav" style="display:flex;align-items:center"></div>
+    </nav>
+  </div>
+</header>
+
+<div class="hero" style="padding:44px 0 36px">
+  <div class="container">
+    <div style="max-width:620px">
+      <div class="eyebrow hero-eyebrow" style="margin-bottom:12px">💳 สมาชิกรายเดือน</div>
+      <h1 class="display-1" style="color:#fff;margin-bottom:12px">Map Pack — ร้านคัดสรรในมือถือคุณ</h1>
+      <p style="color:rgba(255,255,255,.72);font-size:15.5px;line-height:1.75">
+        โอนผ่าน PromptPay แล้วแจ้งในหน้านี้ — เปิดสิทธิ์ให้ภายใน 24 ชั่วโมง
+        ใช้ได้ 30 วัน ไม่มีการตัดบัตรอัตโนมัติ
+      </p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<section class="section-sm" style="background:var(--cream)">
+  <div class="container" style="max-width:900px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px" id="subGrid">
+
+      <!-- Plan -->
+      <div style="background:#fff;border:1px solid var(--border);border-radius:16px;padding:26px 24px">
+        <div style="font-size:12px;font-weight:900;color:var(--gold);text-transform:uppercase;letter-spacing:.1em" id="planLabel">Map Pack รายเดือน</div>
+        <div style="display:flex;align-items:baseline;gap:6px;margin:10px 0 16px">
+          <span style="font-size:40px;font-weight:900;color:var(--navy);font-family:'Playfair Display',serif" id="planPrice">99</span>
+          <span style="font-size:14px;color:var(--text-2);font-weight:700">บาท / เดือน</span>
+        </div>
+        <ul style="list-style:none;padding:0;margin:0;display:grid;gap:9px" id="benefitList"></ul>
+      </div>
+
+      <!-- Payment -->
+      <div style="background:#fff;border:1px solid var(--border);border-radius:16px;padding:26px 24px">
+        <div style="font-weight:900;color:var(--navy);margin-bottom:12px">วิธีชำระเงิน</div>
+        <div id="payBox"></div>
+
+        <div style="margin-top:18px;border-top:1px solid var(--border);padding-top:16px">
+          <div style="font-weight:900;color:var(--navy);margin-bottom:8px">แจ้งโอนเงิน</div>
+          <div id="notifyBox">
+            <div style="font-size:13px;color:var(--text-2);line-height:1.7;margin-bottom:10px">
+              เข้าสู่ระบบก่อน แล้วกดแจ้งโอน ระบบจะส่งให้แอดมินตรวจสอบ
+            </div>
+            <button class="btn btn-primary" onclick="if(typeof CM_AUTH!=='undefined')CM_AUTH.signIn()">Sign in with Google</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:22px;font-size:12.5px;color:var(--text-2);line-height:1.8">
+      • ข้อมูลร้านมาจากแหล่งสาธารณะ (Google Maps) — เราขายความสะดวกในการคัดกรองและจัดชุดข้อมูล ไม่ได้ขายสิทธิ์ในตัวข้อมูล<br/>
+      • ยกเลิกได้ทุกเมื่อ เพียงไม่ต่ออายุ — สิทธิ์จะหมดเองเมื่อครบกำหนด<br/>
+      • ต้องการใบเสร็จ/ใบกำกับ หรือแพ็กเกจทีม ติดต่อ <span id="contactInline"></span>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container"><div class="footer-bottom" style="border:0">
+    <div class="footer-legal">© 2026 ChefMinistry · <a href="./maps.html" style="color:inherit">Map Pack</a> · <a href="./legal.html" style="color:inherit">เงื่อนไข</a></div>
+  </div></div>
+</footer>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<script src="./js/firebase-config.js?v=20260501a"></script>
+<script src="./js/auth.js?v=20260501a"></script>
+<script src="./js/billing-config.js?v=20260731a"></script>
+<script>
+  const API_BASE = location.hostname.endsWith('.vercel.app') || location.hostname === 'localhost'
+    ? '' : 'https://chefministry-site.vercel.app';
+  const B = window.CM_BILLING || {};
+  const esc = s => String(s || '').replace(/[&<>"]/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]));
+
+  document.getElementById('planLabel').textContent = B.planLabel || 'Map Pack รายเดือน';
+  document.getElementById('planPrice').textContent = B.price ?? 99;
+  document.getElementById('benefitList').innerHTML = (B.benefits || [])
+    .map(t => '<li style="font-size:13.5px;color:var(--text-2);line-height:1.6">✅ ' + esc(t) + '</li>').join('');
+  document.getElementById('contactInline').innerHTML =
+    'LINE ' + esc(B.lineId || '-') + ' หรือ <a href="mailto:' + esc(B.contactEmail || '') + '">' + esc(B.contactEmail || '') + '</a>';
+
+  // ── PromptPay QR (EMVCo payload สร้างฝั่ง client ไม่ต้องมี backend) ─────────
+  function ppPayload(id, amount) {
+    const f = (tag, val) => tag + String(val.length).padStart(2, '0') + val;
+    let acc = id.replace(/\D/g, '');
+    let target;
+    if (acc.length === 13) target = f('02', acc);                       // Tax ID
+    else if (acc.length === 10) target = f('01', '0066' + acc.slice(1)); // เบอร์มือถือ
+    else if (acc.length === 15) target = f('03', acc);                  // e-Wallet
+    else return null;
+    let p = f('00', '01') + f('01', amount ? '12' : '11') +
+            f('29', f('00', 'A000000677010111') + target) + f('53', '764') + f('58', 'TH');
+    if (amount) p = p.slice(0, p.indexOf('5303764')) + f('54', Number(amount).toFixed(2)) + p.slice(p.indexOf('5303764'));
+    // ประกอบใหม่ตามลำดับ tag ที่ถูกต้อง
+    p = f('00', '01') + f('01', amount ? '12' : '11') +
+        f('29', f('00', 'A000000677010111') + target) + f('53', '764') +
+        (amount ? f('54', Number(amount).toFixed(2)) : '') + f('58', 'TH');
+    const data = p + '6304';
+    let crc = 0xFFFF;
+    for (let i = 0; i < data.length; i++) {
+      crc ^= data.charCodeAt(i) << 8;
+      for (let j = 0; j < 8; j++) crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) & 0xFFFF : (crc << 1) & 0xFFFF;
+    }
+    return data + crc.toString(16).toUpperCase().padStart(4, '0');
+  }
+
+  const payBox = document.getElementById('payBox');
+  const payload = B.promptpayId ? ppPayload(B.promptpayId, B.price) : null;
+  payBox.innerHTML = payload
+    ? '<div style="text-align:center">' +
+      '<img alt="PromptPay QR" style="width:212px;height:212px;border:1px solid var(--border);border-radius:12px;background:#fff" ' +
+      'src="https://api.qrserver.com/v1/create-qr-code/?size=420x420&data=' + encodeURIComponent(payload) + '"/>' +
+      '<div style="font-size:13px;font-weight:800;color:var(--navy);margin-top:10px">PromptPay · ' + esc(B.price) + ' บาท</div>' +
+      (B.accountName ? '<div style="font-size:12px;color:var(--text-2)">' + esc(B.accountName) + '</div>' : '') +
+      '<div style="font-size:11.5px;color:var(--text-2);margin-top:6px">สแกนด้วยแอปธนาคาร แล้วกดแจ้งโอนด้านล่าง</div></div>'
+    : '<div style="font-size:13.5px;color:var(--text-2);line-height:1.8">ยังไม่ได้ตั้งค่าช่องทางชำระเงินอัตโนมัติ — ' +
+      'ทักมาที่ LINE <b>' + esc(B.lineId || '-') + '</b> เพื่อรับเลขบัญชี/QR แล้วกลับมากดแจ้งโอน</div>';
+
+  // ── สถานะ + แจ้งโอน ────────────────────────────────────────────────────────
+  async function api(action, extra) {
+    const u = firebase.auth().currentUser;
+    if (!u) throw new Error('ยังไม่ได้เข้าสู่ระบบ');
+    const idToken = await u.getIdToken();
+    const r = await fetch(API_BASE + '/api/subscription', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ idToken, action, ...(extra || {}) })
+    });
+    const d = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(d.error || ('HTTP ' + r.status));
+    return d;
+  }
+
+  async function refresh() {
+    const box = document.getElementById('notifyBox');
+    const u = firebase.auth().currentUser;
+    if (!u) return;
+    box.innerHTML = '<div style="font-size:13px;color:var(--text-2)">กำลังตรวจสอบสถานะ…</div>';
+    try {
+      const s = await api('me');
+      if (s.active) {
+        box.innerHTML = '<div style="background:rgba(22,163,74,.09);border:1px solid rgba(22,163,74,.3);border-radius:10px;padding:14px">' +
+          '<div style="font-weight:900;color:#16a34a;margin-bottom:4px">✅ สมาชิกใช้งานอยู่</div>' +
+          '<div style="font-size:13px;color:var(--text-2)">ใช้ได้ถึง ' +
+          (s.expiresAt ? new Date(s.expiresAt).toLocaleDateString('th-TH') : '-') + '</div>' +
+          '<a class="btn btn-primary btn-sm" style="margin-top:12px" href="./maps.html">ไปหน้าโหลดแผนที่ →</a></div>';
+        return;
+      }
+      const stateMsg = { expired: 'สมาชิกหมดอายุแล้ว — โอนแล้วแจ้งอีกครั้งเพื่อต่ออายุ',
+                         revoked: 'สิทธิ์ถูกระงับ — ติดต่อแอดมิน',
+                         none: 'ยังไม่เป็นสมาชิก' }[s.state] || '';
+      box.innerHTML =
+        '<div style="font-size:13px;color:var(--text-2);margin-bottom:10px">' + esc(stateMsg) + '</div>' +
+        '<input id="slipNote" placeholder="เวลาที่โอน / 4 ตัวท้ายบัญชี (ไม่บังคับ)" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;margin-bottom:10px;font-size:13px"/>' +
+        '<button class="btn btn-primary" id="notifyBtn" style="width:100%">📩 แจ้งโอนเงินแล้ว</button>';
+      document.getElementById('notifyBtn').addEventListener('click', async (e) => {
+        const btn = e.currentTarget;
+        btn.disabled = true; btn.textContent = 'กำลังส่ง…';
+        try {
+          const note = document.getElementById('slipNote').value.trim();
+          const d = await api('request', { plan: 'monthly', slipNote: note });
+          if (typeof gtag !== 'undefined') gtag('event', 'subscribe_request');
+          box.innerHTML = '<div style="background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.4);border-radius:10px;padding:14px;font-size:13.5px;color:var(--navy);line-height:1.7">' +
+            '⏳ ' + esc(d.message) + '<br/>ถ้าต้องการเร่ง ทักได้ที่ LINE ' + esc(B.lineId || '') + '</div>';
+        } catch (err) {
+          btn.disabled = false; btn.textContent = '📩 แจ้งโอนเงินแล้ว';
+          alert('ส่งไม่สำเร็จ: ' + err.message);
+        }
+      });
+    } catch (e) {
+      box.innerHTML = '<div style="color:var(--red);font-size:13px">ตรวจสอบสถานะไม่สำเร็จ: ' + esc(e.message) + '</div>';
+    }
+  }
+
+  if (typeof CM_AUTH !== 'undefined' && CM_AUTH.onTierChange) {
+    CM_AUTH.onTierChange(() => { if (firebase.auth().currentUser) refresh(); });
+  }
+</script>
+<script src="./js/pwa.js?v=20260726a"></script>
+</body>
+</html>
