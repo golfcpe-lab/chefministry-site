@@ -19,6 +19,8 @@ SITE_FILES = [
     ("faq.html",                  "faq.html"),
     ("legal.html",                "legal.html"),
     ("maps.html",                 "maps.html"),
+    ("subscribe.html",            "subscribe.html"),
+    ("firestore.rules",           "firestore.rules"),
     ("vercel.json",               "vercel.json"),
     ("sitemap.xml",               "sitemap.xml"),
     ("robots.txt",                "robots.txt"),
@@ -34,6 +36,7 @@ SITE_FILES = [
     ("js/microfx.js",            "js/microfx.js"),
     ("js/auth.js",                 "js/auth.js"),
     ("js/firebase-config.js",      "js/firebase-config.js"),
+    ("js/billing-config.js",       "js/billing-config.js"),
     # PWA + Near Me (2026-07-12)
     ("manifest.json",              "manifest.json"),
     ("sw.js",                      "sw.js"),
@@ -48,12 +51,15 @@ SITE_FILES = [
     ("admin.html",                 "admin.html"),
     ("api/add-restaurant.js",      "api/add-restaurant.js"),
     ("api/manage-users.js",        "api/manage-users.js"),
+    ("api/map-download.js",        "api/map-download.js"),
+    ("api/subscription.js",        "api/subscription.js"),
 ]
 
 # ── scripts ที่อยู่ใน root (ไม่ใช่ใน site/) ────────────────────────────────────
 # หมายเหตุ: ไม่รวม .env และ .github_token.txt เพราะเป็นข้อมูลลับ
 ROOT_FILES = [
     ("push_to_github.py",         "scripts/push_to_github.py"),
+    ("deploy_rules.py",           "scripts/deploy_rules.py"),
     ("weekly_summary.py",         "scripts/weekly_summary.py"),
     # GitHub Actions workflows
     (".github/workflows/weekly_update.yml", ".github/workflows/weekly_update.yml"),
