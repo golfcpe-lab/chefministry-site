@@ -1,5 +1,5 @@
 {
- "generated": "2026-07-30",
+ "generated": "2026-07-31",
  "criteria": {
   "minRating": 4.3,
   "minReviews": 50
@@ -10,8 +10,6 @@
    "key": "cafe",
    "label": "☕ คาเฟ่ & มัทฉะ",
    "count": 185,
-   "kml": "downloads/chefministry-cafe-matcha.kml",
-   "csv": "downloads/chefministry-cafe-matcha.csv",
    "top": [
     "เดอะ คอฟฟี่ คลับ - ริเวอร์ ซิตี้",
     "ThaiWan-Thai灣 Coffee&tea socialspace",
@@ -22,8 +20,6 @@
    "key": "finedining",
    "label": "🍽️ Fine Dining & Omakase",
    "count": 72,
-   "kml": "downloads/chefministry-fine-dining.kml",
-   "csv": "downloads/chefministry-fine-dining.csv",
    "top": [
     "Octave Rooftop Lounge and Bar Bangkok Marriott Hotel Sukhumvit",
     "Sühring",
@@ -34,8 +30,6 @@
    "key": "thai",
    "label": "🇹🇭 อาหารไทย",
    "count": 86,
-   "kml": "downloads/chefministry-thai.kml",
-   "csv": "downloads/chefministry-thai.csv",
    "top": [
     "Zhang Jia Yi — Ari (Baytong Chicken Rice)",
     "แก้ว ไก่ กรอบ",
@@ -46,8 +40,6 @@
    "key": "noodles",
    "label": "🍜 ก๋วยเตี๋ยว & เส้น",
    "count": 48,
-   "kml": "downloads/chefministry-noodles.kml",
-   "csv": "downloads/chefministry-noodles.csv",
    "top": [
     "รุ่งเรือง (ตั๋ง) ก๋วยเตี๋ยวหมูต้มยำ",
     "เล็กใหญ่ ก๋วยเตี๋ยวต้มยำโบราณ • สามย่าน",
@@ -58,8 +50,6 @@
    "key": "grill",
    "label": "🥩 ปิ้งย่าง & ชาบู",
    "count": 58,
-   "kml": "downloads/chefministry-grill-hotpot.kml",
-   "csv": "downloads/chefministry-grill-hotpot.csv",
    "top": [
     "Shu Daxia Mala Hotpot ร้านหม่าล่า กรุงเทพ @MBK",
     "Niku Sho Sukhumvit 31",
@@ -70,8 +60,6 @@
    "key": "japanese",
    "label": "🍣 ญี่ปุ่น",
    "count": 15,
-   "kml": "downloads/chefministry-japanese.kml",
-   "csv": "downloads/chefministry-japanese.csv",
    "top": [
     "ซูชินะ ฟอร์จูนทาวน์",
     "505 HOUSE (5 O 5 ハウス)",
@@ -82,8 +70,6 @@
    "key": "korean",
    "label": "🇰🇷 เกาหลี",
    "count": 29,
-   "kml": "downloads/chefministry-korean.kml",
-   "csv": "downloads/chefministry-korean.csv",
    "top": [
     "ซัม กยอบ ซัล",
     "Hongdae Buffet Siam Square One",
@@ -94,8 +80,6 @@
    "key": "chinese",
    "label": "🇨🇳 จีน & ติ่มซำ",
    "count": 33,
-   "kml": "downloads/chefministry-chinese.kml",
-   "csv": "downloads/chefministry-chinese.csv",
    "top": [
     "ฮัวหม่าล่า",
     "ฮะเก๋า เยาวราช",
@@ -106,8 +90,6 @@
    "key": "western",
    "label": "🍕 ตะวันตก",
    "count": 9,
-   "kml": "downloads/chefministry-western.kml",
-   "csv": "downloads/chefministry-western.csv",
    "top": [
     "The Gardens of Dinsor Palace",
     "คาซ่า พาสต้า",
@@ -118,8 +100,6 @@
    "key": "other",
    "label": "✨ ร้านน่าสนใจอื่นๆ",
    "count": 57,
-   "kml": "downloads/chefministry-other-picks.kml",
-   "csv": "downloads/chefministry-other-picks.csv",
    "top": [
     "ซ้งเป็ดพะโล้ วังหิน",
     "ขาหมูเจริญแสงสีลม สีลม",
@@ -128,7 +108,6 @@
   }
  ],
  "all": {
-  "kml": "downloads/chefministry-bangkok-all.kml",
   "layers": 10,
   "count": 592
  }
