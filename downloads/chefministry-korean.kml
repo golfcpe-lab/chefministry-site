@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>ChefMinistry — 🇰🇷 เกาหลี</name>
+  <description>อัปเดต 2026-07-31 — chefministry.com</description>
+  <Style id="cm0"><IconStyle><color>ff7cc0ff</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/dining.png</href></Icon></IconStyle></Style>
+  <Folder>
+    <name>🇰🇷 เกาหลี</name>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>ซัม กยอบ ซัล</name>
+      <description>⭐ 4.9 (11,469 รีวิว) · Korean · Huai Khwang · ฿฿
+410, 115-116 Soi Ratchadaphisek 22, Khwaeng Samsen Nok, Khet Huai Khwang, Krung Thep Maha Nakhon 10310, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJB9aS3l2d4jARZXTLifLjZrQ
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.9</value></Data>
+        <Data name="reviews"><value>11469</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>Huai Khwang</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJB9aS3l2d4jARZXTLifLjZrQ</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.5752419,13.7971595,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>Hongdae Buffet Siam Square One</name>
+      <description>⭐ 4.8 (5,949 รีวิว) · Korean · Pathumwan · ฿฿
+Unit SS 5018 - 19, 388 Rama I Rd, Khwaeng Pathum Wan, Pathum Wan, Krung Thep Maha Nakhon 10330, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJkSRYFdKe4jARHuKV60eqRT4
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.8</value></Data>
+        <Data name="reviews"><value>5949</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>Pathumwan</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJkSRYFdKe4jARHuKV60eqRT4</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.53401079999999,13.7450867,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>มันจอมเอ ปิ้งย่างเกาหลี</name>
+      <description>⭐ 4.9 (5,470 รีวิว) · Korean · Phaya Thai · ฿฿
+89/70 Room A6 CocoWalk Ratchathewi, ถ. พญาไท แขวงถนนเพชรบุรี Rajthawei, กรุงเทพมหานคร 10400, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJRf8ELbOf4jARF2dtNc45Xyg
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.9</value></Data>
+        <Data name="reviews"><value>5470</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>Phaya Thai</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJRf8ELbOf4jARF2dtNc45Xyg</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.53232899999999,13.751441799999998,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>กังนัมบาร์บีคิว ลาดกระบัง</name>
+      <description>⭐ 4.8 (5,524 รีวิว) · Korean · Lat Krabang · ฿฿
+1529 Soi Khum Lamphai, Khwaeng Lat Krabang, Khet Lat Krabang, Krung Thep Maha Nakhon 10520, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJ-y1HTrRnHTERJ2y9ZPgPXwg
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.8</value></Data>
+        <Data name="reviews"><value>5524</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>Lat Krabang</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ-y1HTrRnHTERJ2y9ZPgPXwg</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.76427969999999,13.7227632,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>โกกิเนมเซ สามย่าน</name>
+      <description>⭐ 4.9 (4,127 รีวิว) · Korean · Pathumwan · ฿฿
+280 Soi Chulalongkorn 11, Khwaeng Wang Mai, Pathum Wan, Krung Thep Maha Nakhon 10330, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJNWyyyluZ4jAR8xE_xu7adaw
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.9</value></Data>
+        <Data name="reviews"><value>4127</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>Pathumwan</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJNWyyyluZ4jAR8xE_xu7adaw</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.52595679999999,13.7344808,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>Bornga Thailand</name>
+      <description>⭐ 4.8 (4,148 รีวิว) · Korean · วัฒนา · ฿฿
+ชั้น 2, บูเลอวาร์ด ทาวเวอร์, Soi Sukhumvit 39, Khwaeng Khlong Tan Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJbY7gF8Of4jARFyzLUFoqsuQ
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.8</value></Data>
+        <Data name="reviews"><value>4148</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>วัฒนา</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJbY7gF8Of4jARFyzLUFoqsuQ</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.5698488,13.7375583,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>โดง อี</name>
+      <description>⭐ 4.9 (2,772 รีวิว) · Korean · Khlong Toei · ฿฿
+212/20, 1st Floor, Sukhumvit Plaza Soi 12 (Korean Town, ถ. สุขุมวิท แขวงคลองเตย เขตคลองเตย กรุงเทพมหานคร 10110, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJox7O4eOe4jARMNBT7vmIDzY
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.9</value></Data>
+        <Data name="reviews"><value>2772</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>Khlong Toei</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJox7O4eOe4jARMNBT7vmIDzY</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.5578788,13.7381993,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>เมียงคา</name>
+      <description>⭐ 4.8 (2,805 รีวิว) · Korean · คลองเตย · ฿฿
+21216 สุขุมวิทพลาซ่า ซอย อาคารสุขุมวิทพลาซ่า ชั้น 3 Sukhumvit 12, Khwaeng Khlong Toei, Khet Khlong Toei, Krung Thep Maha Nakhon 10110, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJkTWS3eOe4jARauzDiBy263Y
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.8</value></Data>
+        <Data name="reviews"><value>2805</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>คลองเตย</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJkTWS3eOe4jARauzDiBy263Y</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.5578943,13.738279299999999,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>il mi jung</name>
+      <description>⭐ 4.8 (2,341 รีวิว) · Korean · Khlong Toei · ฿฿
+212 Sukhumvit 12, Khwaeng Khlong Toei, Khet Khlong Toei, Krung Thep Maha Nakhon 10110, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJyxdA4OOe4jARyObK8PFbn4Y
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.8</value></Data>
+        <Data name="reviews"><value>2341</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>Khlong Toei</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJyxdA4OOe4jARyObK8PFbn4Y</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.5579066,13.7377857,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>อาจุมม่าGrill บุฟเฟ่ต์ปิ้งย่างเกาหลี พระราม2</name>
+      <description>⭐ 4.7 (2,443 รีวิว) · Korean · Chom Thong · ฿฿
+57 14 Rama 2 Soi 43, Khwaeng Bang Mot, Khet Chom Thong, Krung Thep Maha Nakhon 10150, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJccECRmmj4jARmu7aJDkX-qs
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.7</value></Data>
+        <Data name="reviews"><value>2443</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>Chom Thong</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJccECRmmj4jARmu7aJDkX-qs</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.45708529999999,13.6722238,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>โกกิเนมเซ บางนา</name>
+      <description>⭐ 4.8 (2,128 รีวิว) · Korean · Bangna · ฿฿
+เลขที่ 58 อาคาร BIZZO, ชั้น 1 ห้อง B 101 - B 102, ซอยบางนา-ตราด 23 ถนนบางนา-ตราด, บางนา, เขตบางนา กรุงเทพมหานคร 10260, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJQV_wLu9fHTERrMTl0acoo1s
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.8</value></Data>
+        <Data name="reviews"><value>2128</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>Bangna</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJQV_wLu9fHTERrMTl0acoo1s</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.6360473,13.670771499999999,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>Kosirae</name>
+      <description>⭐ 4.4 (2,758 รีวิว) · Korean · Thonglor · ฿฿
+97 99 Soi Thong Lo, Khwaeng Khlong Tan Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJmVWZ2aif4jARgARENVJv07g
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.4</value></Data>
+        <Data name="reviews"><value>2758</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>Thonglor</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJmVWZ2aif4jARgARENVJv07g</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.57973439999999,13.7249409,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>SURA Korean BBQ_by Korean Chef</name>
+      <description>⭐ 4.7 (2,206 รีวิว) · Korean · Watthana · ฿฿
+32/1 Soi Sukhumvit 39, Khwaeng Khlong Tan Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJcQq1s_-e4jARN4ySRHpTidY
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.7</value></Data>
+        <Data name="reviews"><value>2206</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>Watthana</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJcQq1s_-e4jARN4ySRHpTidY</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.5720937,13.734647700000002,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>korean Kitchen ปิ้งย่างเกาหลี</name>
+      <description>⭐ 4.9 (1,887 รีวิว) · Korean · Prawet · ฿฿
+160, 3 Thanon Sukhaphiban 2, Khwaeng Dok Mai, Khet Prawet, Krung Thep Maha Nakhon 10250, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJlbG-pR5hHTERF6TEdzMmua8
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.9</value></Data>
+        <Data name="reviews"><value>1887</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>Prawet</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJlbG-pR5hHTERF6TEdzMmua8</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.7045205,13.6991182,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>ซุกดัล ปิ้งย่างเกาหลีพรีเมียม (บรรทัดทอง)</name>
+      <description>⭐ 4.8 (1,937 รีวิว) · Korean · Pathumwan · ฿฿
+92/1-3 94 Rama I Rd, Khwaeng Wang Mai, Pathum Wan, Krung Thep Maha Nakhon 10330, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJjcniOPWZ4jARcH3EvgCD-M8
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.8</value></Data>
+        <Data name="reviews"><value>1937</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>Pathumwan</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJjcniOPWZ4jARcH3EvgCD-M8</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.5240678,13.7472069,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>Yuk-Do ยุกโด สยามสเคป</name>
+      <description>⭐ 4.8 (1,652 รีวิว) · Korean · Pathumwan · ฿฿
+SIAMSCAPE, 215 ชั้น 3, Khwaeng Pathum Wan, Pathum Wan, Krung Thep Maha Nakhon 10330, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJwzNiPRef4jARMK6xrzcWA9Y
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.8</value></Data>
+        <Data name="reviews"><value>1652</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>Pathumwan</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJwzNiPRef4jARMK6xrzcWA9Y</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.5308531,13.744524,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>เคบีบีคิว สุขุมวิท</name>
+      <description>⭐ 4.7 (1,706 รีวิว) · Korean · Watthana · ฿฿
+เรสซิเดนเซส ชั้น 2 ถ. 12/497 อาคาร 15 สุขุมวิท Soi Sukhumvit 13, Khwaeng Khlong Toei Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJbykHRfSf4jARn2JYKm5ZdFM
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.7</value></Data>
+        <Data name="reviews"><value>1706</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>Watthana</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJbykHRfSf4jARn2JYKm5ZdFM</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.5581905,13.7420055,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>ดูเร</name>
+      <description>⭐ 4.6 (1,797 รีวิว) · Korean · Khlong Toei · ฿฿
+212 15 Sukhumvit Rd, Khwaeng Khlong Toei, Khet Khlong Toei, Krung Thep Maha Nakhon 10110, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJt-itk-Oe4jAR-7mgbaBJzlg
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.6</value></Data>
+        <Data name="reviews"><value>1797</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>Khlong Toei</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJt-itk-Oe4jAR-7mgbaBJzlg</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.55793589999999,13.738284,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>Kiani ทองหล่อ</name>
+      <description>⭐ 4.8 (1,286 รีวิว) · Korean · Thonglor · ฿฿
+90 Fifty fifth Thonglor Building Soi Thong Lo, Khwaeng Khlong Tan Nuea, Watthana, Krung Thep Maha Nakhon 10110, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJx6JXUqmf4jAR6tmg4xV65_A
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.8</value></Data>
+        <Data name="reviews"><value>1286</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>Thonglor</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJx6JXUqmf4jAR6tmg4xV65_A</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.580468,13.7260034,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>KABORAE</name>
+      <description>⭐ 4.9 (1,054 รีวิว) · Korean · คลองเตย · ฿฿
+Sukhumvit 12, แขวง คลองเตย Khet Khlong Toei, Krung Thep Maha Nakhon 10110, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJ5QN0YOGe4jARE-Y03sxqpmY
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.9</value></Data>
+        <Data name="reviews"><value>1054</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>คลองเตย</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ5QN0YOGe4jARE-Y03sxqpmY</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.5579448,13.738301199999999,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>แนแน บาร์บีคิว บุฟเฟต์อาหารเกาหลี (รัชดา)</name>
+      <description>⭐ 4.3 (1,291 รีวิว) · Korean · Din Daeng · ฿฿
+332, 85 Soi Ratchadaphisek 3, Intersection 4, Khwaeng Din Daeng, Khet Din Daeng, Krung Thep Maha Nakhon 10400, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJK4ukaY6e4jARlcxTABJW-qw
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.3</value></Data>
+        <Data name="reviews"><value>1291</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>Din Daeng</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJK4ukaY6e4jARlcxTABJW-qw</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.5653114,13.7630774,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>Apgujeong Grill Korean BBQ (APG grill)</name>
+      <description>⭐ 4.9 (801 รีวิว) · Korean · Phaya Thai · ฿฿
+Unit B01 (B floor, Vanit Village Aree, 304/1 Phahon Yothin Road, Khwaeng Samsen Nai, Khet Phaya Thai, Krung Thep Maha Nakhon 10400, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJXcGDoKOf4jAR7YTBguTrXcw
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.9</value></Data>
+        <Data name="reviews"><value>801</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>Phaya Thai</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJXcGDoKOf4jAR7YTBguTrXcw</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.5438803,13.7768488,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>Bangkok Banjom</name>
+      <description>⭐ 4.7 (895 รีวิว) · Korean · Ekkamai · ฿฿
+Thailand, Krung Thep Maha Nakhon, Watthana, Krung Thep Maha Nakhon, Soi Sukhumvit 63, Horizon Eakkamai
+https://www.google.com/maps/place/?q=place_id:ChIJtYKT3m-f4jAR1tc1CViUmZ8
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.7</value></Data>
+        <Data name="reviews"><value>895</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>Ekkamai</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJtYKT3m-f4jAR1tc1CViUmZ8</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.5848237,13.721420199999999,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>ไวกิ้ง บุฟเฟต์บาร์บีคิวเกาหลี</name>
+      <description>⭐ 4.3 (965 รีวิว) · Korean · Khlong Toei · ฿฿
+korean town 5 Sukhumvit Rd, Khwaeng Khlong Toei, Khet Khlong Toei, Krung Thep Maha Nakhon 10110, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJCdSqGbmf4jAR0Hemw9xhTlM
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.3</value></Data>
+        <Data name="reviews"><value>965</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>Khlong Toei</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJCdSqGbmf4jAR0Hemw9xhTlM</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.5576488,13.7378615,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>BANGABANGA Korean BBQ Buffet บุฟเฟต์ปิ้งย่างและอาหารเกาหลีเกรดพรีเมี่ยม</name>
+      <description>⭐ 4.7 (582 รีวิว) · Korean · Chatuchak · ฿฿
+126, 16 Thanon Sena Nikhom 1, Khwaeng Sena Nikhom, Khet Chatuchak, Krung Thep Maha Nakhon 10900, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJNybSaNed4jARnp2Ysmn4Ljc
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.7</value></Data>
+        <Data name="reviews"><value>582</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>Chatuchak</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJNybSaNed4jARnp2Ysmn4Ljc</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.58166659999999,13.8347714,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>Bookmagol</name>
+      <description>⭐ 4.4 (685 รีวิว) · Korean · Ekkamai · ฿฿
+994 996 Sukhumvit Rd, Khwaeng Phra Khanong, พระโขนง Krung Thep Maha Nakhon 10110, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJv5I3yqqf4jARgHnnwRPaUAE
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.4</value></Data>
+        <Data name="reviews"><value>685</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>Ekkamai</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJv5I3yqqf4jARgHnnwRPaUAE</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.58674549999999,13.7181017,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>Dal Dal Korean Restaurant</name>
+      <description>⭐ 4.7 (542 รีวิว) · Korean · Rama 9 · ฿฿
+เลขที่9​ อาคารจี​ ทาวเวอร์​ ชั้นจี​ ถนนพระราม9​ Khwaeng Huai Khwang, Khet Huai Khwang, Krung Thep Maha Nakhon 10310, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJw8_MJI2e4jARi0ILjyOKWxs
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.7</value></Data>
+        <Data name="reviews"><value>542</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>Rama 9</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJw8_MJI2e4jARi0ILjyOKWxs</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.5656834,13.756740899999999,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>Nanalee korean BBQ</name>
+      <description>⭐ 4.5 (509 รีวิว) · Korean · Lat Phrao · ฿฿
+55 Thanon Sena Nikhom 1, Khwaeng Lat Phrao, Khet Lat Phrao, Krung Thep Maha Nakhon 10230, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJ0-WHKwyd4jARJ-wPyWEHmh8
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.5</value></Data>
+        <Data name="reviews"><value>509</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>Lat Phrao</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJ0-WHKwyd4jARJ-wPyWEHmh8</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.5919735,13.8317237,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <styleUrl>#cm0</styleUrl>
+      <name>Saemaeul (แซมาอึล) เซ็นทรัลพระราม9</name>
+      <description>⭐ 4.5 (187 รีวิว) · Korean · Huai Khwang · ฿฿
+Floor, Room no Central 629 Rama IX 6, Khwaeng Huai Khwang, Khet Huai Khwang, Krung Thep Maha Nakhon 10310, Thailand
+https://www.google.com/maps/place/?q=place_id:ChIJQ_1sNWCf4jAR-s1Mk1Ra0nM
+ข้อมูลจาก ChefMinistry — chefministry.com</description>
+      <ExtendedData>
+        <Data name="rating"><value>4.5</value></Data>
+        <Data name="reviews"><value>187</value></Data>
+        <Data name="cuisine"><value>Korean</value></Data>
+        <Data name="area"><value>Huai Khwang</value></Data>
+        <Data name="google_maps"><value>https://www.google.com/maps/place/?q=place_id:ChIJQ_1sNWCf4jAR-s1Mk1Ra0nM</value></Data>
+      </ExtendedData>
+      <Point><coordinates>100.5661981,13.7592587,0</coordinates></Point>
+    </Placemark>
+  </Folder>
+</Document></kml>
