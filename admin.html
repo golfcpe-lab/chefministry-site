@@ -153,6 +153,25 @@
       </div>
     </div>
 
+    <!-- Subscriptions (admin only) -->
+    <div class="card" id="subsCard" style="display:none">
+      <h2>💳 สมาชิกรายเดือน (Map Pack)</h2>
+      <p style="color:var(--text-2);font-size:13px;margin-bottom:14px">
+        สมาชิกโอนเงินแล้วกด "แจ้งโอน" ในเว็บ → รายการจะขึ้นที่นี่ → กดอนุมัติเพื่อเปิดสิทธิ์ 30 วัน
+        · หมดอายุ = ระบบตัดเองอัตโนมัติ · กดตัดสิทธิ์ = ใช้ไม่ได้ทันที
+      </p>
+
+      <div style="margin-bottom:18px">
+        <div style="font-weight:800;margin-bottom:8px">⏳ รอตรวจสอบ</div>
+        <div id="subReqWrap"><div style="color:var(--text-2);font-size:13px">กำลังโหลด...</div></div>
+      </div>
+
+      <div>
+        <div style="font-weight:800;margin-bottom:8px">📋 สมาชิกทั้งหมด</div>
+        <div id="subListWrap"><div style="color:var(--text-2);font-size:13px">กำลังโหลด...</div></div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -206,7 +225,9 @@ auth.onAuthStateChanged(async (user) => {
 
     if (currentRole === 'admin') {
       document.getElementById('userMgmtCard').style.display = 'block';
+      document.getElementById('subsCard').style.display = 'block';
       loadUsers();
+      loadSubs();
     }
   } catch (e) {
     // Firestore permission denied = not in allowlist
@@ -334,6 +355,78 @@ async function confirmAdd() {
   } finally {
     if (btn) { btn.disabled = false; btn.innerHTML = '✅ เพิ่มเข้า Database'; }
   }
+}
+
+// ── Subscriptions (Map Pack รายเดือน) ────────────────────────────────────────
+async function subApi(payload) {
+  const idToken = await currentUser.getIdToken();
+  const res = await fetch(API_BASE + '/api/subscription', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ idToken, ...payload })
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+  return data;
+}
+
+function subBadge(s) {
+  const map = { active: ['#16a34a', 'ใช้งานอยู่'], expired: ['#b45309', 'หมดอายุ'],
+                revoked: ['#dc2626', 'ถูกตัดสิทธิ์'], none: ['#6b7280', 'ยังไม่สมัคร'] };
+  const [c, t] = map[s] || ['#6b7280', s];
+  return `<span style="color:${c};font-weight:800;font-size:12px">${t}</span>`;
+}
+
+async function loadSubs() {
+  const rw = document.getElementById('subReqWrap');
+  const lw = document.getElementById('subListWrap');
+  try {
+    const d = await subApi({ action: 'list' });
+
+    rw.innerHTML = d.requests.length ? `
+      <table class="user-table"><thead><tr>
+        <th>Email</th><th>แจ้งเมื่อ</th><th>หมายเหตุ</th><th></th></tr></thead><tbody>
+        ${d.requests.map(r => `<tr>
+          <td><strong>${esc(r.email || r.uid)}</strong></td>
+          <td style="font-size:12px;color:var(--text-2)">${r.requestedAt ? new Date(r.requestedAt).toLocaleString('th-TH') : '-'}</td>
+          <td style="font-size:12px">${esc(r.note || '-')}</td>
+          <td><button class="btn btn-green" style="padding:4px 12px;font-size:11px"
+              onclick="approveSub('${esc(r.uid)}')">✅ อนุมัติ 30 วัน</button></td>
+        </tr>`).join('')}
+      </tbody></table>` : '<div style="color:var(--text-2);font-size:13px">ไม่มีคำขอค้างอยู่</div>';
+
+    lw.innerHTML = d.subscriptions.length ? `
+      <table class="user-table"><thead><tr>
+        <th>Email</th><th>สถานะ</th><th>หมดอายุ</th><th>อนุมัติโดย</th><th></th></tr></thead><tbody>
+        ${d.subscriptions.map(s => `<tr>
+          <td><strong>${esc(s.email || s.uid)}</strong></td>
+          <td>${subBadge(s.state)}</td>
+          <td style="font-size:12px;color:var(--text-2)">${s.expiresAt ? new Date(s.expiresAt).toLocaleDateString('th-TH') : '-'}</td>
+          <td style="font-size:12px;color:var(--text-2)">${esc(s.approvedBy || '-')}</td>
+          <td style="white-space:nowrap">
+            <button class="btn btn-green" style="padding:4px 10px;font-size:11px" onclick="approveSub('${esc(s.uid)}')">+30 วัน</button>
+            <button class="btn btn-red" style="padding:4px 10px;font-size:11px" onclick="revokeSub('${esc(s.uid)}')">ตัดสิทธิ์</button>
+            <button class="btn" style="padding:4px 10px;font-size:11px;background:#374151;color:#fff" onclick="purgeSub('${esc(s.uid)}','${esc(s.email||s.uid)}')">ลบข้อมูล</button>
+          </td>
+        </tr>`).join('')}
+      </tbody></table>` : '<div style="color:var(--text-2);font-size:13px">ยังไม่มีสมาชิก</div>';
+  } catch (e) {
+    rw.innerHTML = lw.innerHTML = `<div style="color:var(--red)">โหลดไม่สำเร็จ: ${esc(e.message)}</div>`;
+  }
+}
+
+async function approveSub(uid) {
+  try { const d = await subApi({ action: 'approve', uid, months: 1 }); toast(d.message); loadSubs(); }
+  catch (e) { toast(e.message, 'error'); }
+}
+async function revokeSub(uid) {
+  if (!confirm('ตัดสิทธิ์สมาชิกรายนี้ทันที?')) return;
+  try { const d = await subApi({ action: 'revoke', uid }); toast(d.message); loadSubs(); }
+  catch (e) { toast(e.message, 'error'); }
+}
+async function purgeSub(uid, email) {
+  if (!confirm('ลบข้อมูลสมาชิก ' + email + ' ทั้งหมด? (ย้อนกลับไม่ได้)')) return;
+  try { const d = await subApi({ action: 'purge', uid }); toast(d.message); loadSubs(); }
+  catch (e) { toast(e.message, 'error'); }
 }
 
 // ── User management ──────────────────────────────────────────────────────────
