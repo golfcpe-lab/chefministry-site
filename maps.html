@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <link rel="icon" type="image/png" href="./assets/logo_circular.png"/>
+  <link rel="manifest" href="/manifest.json"/>
+  <meta name="theme-color" content="#0f1f3c"/>
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+  <meta name="apple-mobile-web-app-title" content="ChefMinistry"/>
+  <title>โหลดแผนที่ร้านอาหารกรุงเทพ เปิดใน Google Maps | ChefMinistry</title>
+  <meta name="description" content="ดาวน์โหลดไฟล์แผนที่ร้านอาหารกรุงเทพที่คัดแล้ว แบ่งตามหมวด (คาเฟ่ มัทฉะ ปิ้งย่าง ก๋วยเตี๋ยว fine dining) นำเข้า Google My Maps แล้วเปิดในแอป Google Maps ได้ทันที"/>
+  <link rel="canonical" href="https://chefministry.com/maps.html"/>
+  <meta property="og:site_name" content="ChefMinistry"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="โหลดแผนที่ร้านอาหารกรุงเทพ เปิดใน Google Maps | ChefMinistry"/>
+  <meta property="og:description" content="ไฟล์แผนที่ร้านคัดสรรกรุงเทพ แบ่งตามหมวด — นำเข้า Google My Maps ใช้ได้ทั้งบนมือถือและคอม"/>
+  <meta property="og:url" content="https://chefministry.com/maps.html"/>
+  <meta property="og:image" content="https://chefministry.com/assets/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:locale" content="th_TH"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="โหลดแผนที่ร้านอาหารกรุงเทพ เปิดใน Google Maps | ChefMinistry"/>
+  <meta name="twitter:description" content="ไฟล์แผนที่ร้านคัดสรรกรุงเทพ แบ่งตามหมวด — นำเข้า Google My Maps ใช้ได้ทั้งบนมือถือและคอม"/>
+  <meta name="twitter:image" content="https://chefministry.com/assets/og-image.png"/>
+  <link rel="stylesheet" href="./css/style.css"/>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BT2BCMZ9SH"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BT2BCMZ9SH');</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="./index.html">
+      <img src="./assets/logo_circular.png" alt="Chef Ministry" class="logo-img" style="width:40px;height:40px;border-radius:50%;object-fit:cover"/>
+      <div>
+        <div class="logo-name">ChefMinistry</div>
+        <div class="logo-tagline">Restaurant Rating Intelligence Platform</div>
+      </div>
+    </a>
+    <nav class="site-nav">
+      <a class="nav-link" href="./index.html">Home</a>
+      <a class="nav-link" href="./listing.html">Discover</a>
+      <a class="nav-link active" href="./maps.html">🗺️ แผนที่</a>
+      <a class="nav-link" href="./about.html">Methodology</a>
+      <a class="btn-pro" href="./restaurant_partner.html">🏪 For Restaurants</a>
+      <div class="cm-auth-nav" style="display:flex;align-items:center"></div>
+    </nav>
+    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+  </div>
+  <nav class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-links">
+      <a class="mobile-nav-link" href="./index.html">Home</a>
+      <a class="mobile-nav-link" href="./listing.html">Discover</a>
+      <a class="mobile-nav-link" href="./maps.html">🗺️ แผนที่</a>
+      <a class="mobile-nav-link" href="./about.html">Methodology</a>
+      <a class="mobile-nav-link" href="./creator.html">🎥 For Creators</a>
+      <a class="mobile-nav-link" href="./restaurant_partner.html">🏪 For Restaurants</a>
+    </div>
+  </nav>
+</header>
+
+<!-- PAGE HERO -->
+<div class="hero" style="padding:48px 0 40px">
+  <div class="container">
+    <div style="max-width:640px">
+      <div class="eyebrow hero-eyebrow" style="margin-bottom:12px">🗺️ Map Pack — สำหรับสมาชิก</div>
+      <h1 class="display-1" style="color:#fff;margin-bottom:14px">พกร้านคัดแล้วไว้ใน Google Maps</h1>
+      <p style="color:rgba(255,255,255,.72);font-size:16px;line-height:1.7;max-width:540px">
+        โหลดไฟล์แผนที่แยกตามหมวดอาหาร นำเข้า Google My Maps ครั้งเดียว แล้วเปิดดูในแอป Google Maps
+        ได้เลยตอนอยู่หน้าร้าน — ทุกหมุดคัดจากคะแนนและรีวิวจริง อัปเดตทุกสัปดาห์
+      </p>
+      <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:20px" id="mapStats"></div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- DOWNLOADS -->
+<section class="section-sm" style="background:var(--cream)">
+  <div class="container">
+
+    <!-- Member gate -->
+    <div id="mapWall" style="display:none;background:var(--navy);border-radius:var(--radius-lg);padding:34px 30px;text-align:center;max-width:520px;margin:0 auto 34px">
+      <div style="display:inline-block;background:var(--gold);color:var(--navy);font-size:10px;font-weight:900;padding:4px 12px;border-radius:99px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px">Members Only</div>
+      <h3 style="color:#fff;font-size:21px;font-weight:900;margin-bottom:10px;font-family:'Playfair Display',serif">เข้าสู่ระบบเพื่อดาวน์โหลดแผนที่</h3>
+      <p style="color:rgba(255,255,255,.7);font-size:13.5px;line-height:1.8;margin-bottom:20px">
+        ฟรี ไม่มีค่าใช้จ่าย — ใช้บัญชี Google เดียวกับที่ใช้เปิด My Maps ได้เลย
+      </p>
+      <button onclick="if(typeof CM_AUTH!=='undefined') CM_AUTH.signIn()"
+        style="width:100%;padding:13px;background:#fff;color:#0d1f3c;font-weight:900;font-size:15px;border:none;border-radius:var(--radius);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" style="width:20px;height:20px" alt=""/>
+        Sign in with Google — ฟรี
+      </button>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:22px">
+      <div>
+        <h2 class="h2" style="margin-bottom:6px">เลือกหมวดที่อยากได้</h2>
+        <p style="font-size:13.5px;color:var(--text-2)" id="mapCriteria">กำลังโหลดรายการ…</p>
+      </div>
+      <a id="allMapLink" class="btn btn-primary" href="#" style="white-space:nowrap;display:none">📦 โหลดรวมทุกหมวด (.kml)</a>
+    </div>
+
+    <div class="grid-3" id="mapGrid"></div>
+    <div id="mapEmpty" style="display:none;padding:28px;text-align:center;color:var(--text-2);font-size:14px">
+      ยังไม่มีไฟล์แผนที่ในรอบนี้ — ระบบสร้างใหม่ทุกคืนหลังอัปเดตข้อมูล
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- HOW TO -->
+<section class="section-sm" style="background:var(--white)">
+  <div class="container" style="max-width:820px">
+    <h2 class="h2" style="margin-bottom:8px">วิธีเปิดไฟล์ใน Google Maps</h2>
+    <p style="font-size:13.5px;color:var(--text-2);margin-bottom:22px">
+      แอป Google Maps นำเข้าไฟล์เองไม่ได้ ต้องผ่าน <b>Google My Maps</b> ก่อนครั้งเดียว
+      หลังจากนั้นแผนที่จะอยู่ในแอปถาวร (Saved → Maps)
+    </p>
+
+    <div style="display:grid;gap:14px">
+      <div style="background:var(--cream);border:1px solid var(--border);border-radius:12px;padding:16px 18px">
+        <div style="font-weight:900;color:var(--navy);margin-bottom:6px">1. โหลดไฟล์หมวดที่ต้องการ (.kml)</div>
+        <div style="font-size:13.5px;color:var(--text-2);line-height:1.7">บนมือถือให้กดโหลดแล้วจำที่เก็บไฟล์ไว้ (ปกติอยู่ใน Downloads)</div>
+      </div>
+      <div style="background:var(--cream);border:1px solid var(--border);border-radius:12px;padding:16px 18px">
+        <div style="font-weight:900;color:var(--navy);margin-bottom:6px">2. เปิด <a href="https://www.google.com/mymaps" target="_blank" rel="noopener" style="color:var(--navy);text-decoration:underline">google.com/mymaps</a> → สร้างแผนที่ใหม่</div>
+        <div style="font-size:13.5px;color:var(--text-2);line-height:1.7">กด <b>สร้างแผนที่ใหม่ (Create a new map)</b> → <b>นำเข้า (Import)</b> → เลือกไฟล์ที่โหลดมา</div>
+      </div>
+      <div style="background:var(--cream);border:1px solid var(--border);border-radius:12px;padding:16px 18px">
+        <div style="font-weight:900;color:var(--navy);margin-bottom:6px">3. ถ้าใช้ไฟล์ .csv ให้เลือกคอลัมน์</div>
+        <div style="font-size:13.5px;color:var(--text-2);line-height:1.7">ตำแหน่ง = <b>Latitude, Longitude</b> · ชื่อหมุด = <b>Name</b> (ไฟล์ .kml ไม่ต้องตั้งค่าอะไร)</div>
+      </div>
+      <div style="background:var(--cream);border:1px solid var(--border);border-radius:12px;padding:16px 18px">
+        <div style="font-weight:900;color:var(--navy);margin-bottom:6px">4. เปิดในแอป Google Maps</div>
+        <div style="font-size:13.5px;color:var(--text-2);line-height:1.7">แอป Google Maps → <b>บันทึกไว้ (Saved)</b> → เลื่อนลงหา <b>แผนที่ (Maps)</b> → เลือกแผนที่ที่เพิ่งสร้าง</div>
+      </div>
+      <div style="background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.35);border-radius:12px;padding:16px 18px">
+        <div style="font-weight:900;color:var(--navy);margin-bottom:6px">💡 เคล็ดลับ</div>
+        <div style="font-size:13.5px;color:var(--text-2);line-height:1.7">
+          ไฟล์ "รวมทุกหมวด" จะแยกเป็น layer ให้ในแผนที่เดียว เปิด/ปิดทีละหมวดได้ —
+          แต่ My Maps จำกัด 10 layer ต่อแผนที่ ถ้าอยากได้ครบกว่านั้นให้แยกโหลดเป็นหมวด
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom" style="border:0">
+      <div class="footer-legal">© 2026 ChefMinistry · ข้อมูลจากแหล่งสาธารณะ · <a href="./listing.html" style="color:inherit">Discover</a> · <a href="./about.html" style="color:inherit">Methodology</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<script src="./js/firebase-config.js?v=20260501a"></script>
+<script src="./js/auth.js?v=20260501a"></script>
+<script>
+  document.getElementById("mobileMenuBtn").addEventListener("click", () => {
+    const n = document.getElementById("mobileNav");
+    n.style.display = n.style.display === "block" ? "none" : "block";
+  });
+
+  const esc = s => String(s || "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  let MANIFEST = null;
+
+  function isMember() {
+    return typeof CM_AUTH !== "undefined" && CM_AUTH.isReady() &&
+           ["free", "paid"].includes(CM_AUTH.getTier());
+  }
+
+  function render() {
+    if (!MANIFEST) return;
+    const unlocked = isMember();
+    document.getElementById("mapWall").style.display = unlocked ? "none" : "block";
+
+    const g = MANIFEST.groups || [];
+    document.getElementById("mapCriteria").textContent =
+      "เกณฑ์คัดร้าน: ⭐ " + (MANIFEST.criteria?.minRating ?? 4.3) + " ขึ้นไป และรีวิว " +
+      (MANIFEST.criteria?.minReviews ?? 50) + "+ · รวม " + (MANIFEST.total || 0) +
+      " ร้าน · อัปเดต " + (MANIFEST.generated || "-");
+
+    const stats = document.getElementById("mapStats");
+    stats.innerHTML = [
+      [MANIFEST.total || 0, "ร้านในแผนที่"],
+      [g.length, "หมวดให้เลือก"],
+      [(MANIFEST.all?.layers) || 0, "layer ในไฟล์รวม"]
+    ].map(([n, l]) =>
+      '<div><div style="font-size:24px;font-weight:900;color:#fff;line-height:1">' + n + '</div>' +
+      '<div style="font-size:10.5px;font-weight:700;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.07em;margin-top:3px">' + l + '</div></div>'
+    ).join("");
+
+    const allLink = document.getElementById("allMapLink");
+    if (MANIFEST.all && unlocked) {
+      allLink.href = "./" + MANIFEST.all.kml;
+      allLink.setAttribute("download", "");
+      allLink.style.display = "inline-flex";
+      allLink.onclick = () => { if (typeof gtag !== "undefined") gtag("event", "map_download", { file: "all" }); };
+    } else {
+      allLink.style.display = "none";
+    }
+
+    const grid = document.getElementById("mapGrid");
+    document.getElementById("mapEmpty").style.display = g.length ? "none" : "block";
+    grid.innerHTML = g.map(x => {
+      const top = (x.top || []).filter(Boolean).slice(0, 3).join(" · ");
+      const btns = unlocked
+        ? '<div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">' +
+            '<a class="btn btn-primary btn-sm" download href="./' + esc(x.kml) + '" ' +
+              'onclick="if(typeof gtag!==\'undefined\')gtag(\'event\',\'map_download\',{file:\'' + esc(x.key) + '\'})">⬇ .kml</a>' +
+            '<a class="btn btn-outline btn-sm" download href="./' + esc(x.csv) + '">.csv</a>' +
+          '</div>'
+        : '<div style="margin-top:14px"><button class="btn btn-outline btn-sm" ' +
+          'onclick="if(typeof CM_AUTH!==\'undefined\')CM_AUTH.signIn()">🔒 เข้าสู่ระบบเพื่อโหลด</button></div>';
+      return '<div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px 20px">' +
+        '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">' +
+          '<div style="font-size:16px;font-weight:900;color:var(--navy)">' + esc(x.label) + '</div>' +
+          '<div style="font-size:11px;font-weight:900;color:var(--gold);white-space:nowrap">' + x.count + ' ร้าน</div>' +
+        '</div>' +
+        (top ? '<div style="font-size:12px;color:var(--text-2);margin-top:8px;line-height:1.6">' + esc(top) + '</div>' : "") +
+        btns + '</div>';
+    }).join("");
+  }
+
+  fetch("./downloads/manifest.json?v=" + Date.now())
+    .then(r => r.ok ? r.json() : Promise.reject(r.status))
+    .then(j => { MANIFEST = j; render(); })
+    .catch(() => {
+      document.getElementById("mapCriteria").textContent =
+        "ยังไม่มีไฟล์แผนที่ — ระบบจะสร้างในรอบอัปเดตถัดไป";
+      document.getElementById("mapEmpty").style.display = "block";
+    });
+
+  if (typeof CM_AUTH !== "undefined" && CM_AUTH.onTierChange) CM_AUTH.onTierChange(render);
+</script>
+<script src="./js/pwa.js?v=20260726a"></script>
+</body>
+</html>
