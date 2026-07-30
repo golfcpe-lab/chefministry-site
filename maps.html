@@ -86,15 +86,17 @@
     <!-- Member gate -->
     <div id="mapWall" style="display:none;background:var(--navy);border-radius:var(--radius-lg);padding:34px 30px;text-align:center;max-width:520px;margin:0 auto 34px">
       <div style="display:inline-block;background:var(--gold);color:var(--navy);font-size:10px;font-weight:900;padding:4px 12px;border-radius:99px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px">Members Only</div>
-      <h3 style="color:#fff;font-size:21px;font-weight:900;margin-bottom:10px;font-family:'Playfair Display',serif">เข้าสู่ระบบเพื่อดาวน์โหลดแผนที่</h3>
-      <p style="color:rgba(255,255,255,.7);font-size:13.5px;line-height:1.8;margin-bottom:20px">
-        ฟรี ไม่มีค่าใช้จ่าย — ใช้บัญชี Google เดียวกับที่ใช้เปิด My Maps ได้เลย
+      <h3 style="color:#fff;font-size:21px;font-weight:900;margin-bottom:10px;font-family:'Playfair Display',serif" id="wallTitle">เข้าสู่ระบบเพื่อดาวน์โหลดแผนที่</h3>
+      <p style="color:rgba(255,255,255,.7);font-size:13.5px;line-height:1.8;margin-bottom:20px" id="wallDesc">
+        ใช้บัญชี Google เดียวกับที่ใช้เปิด My Maps ได้เลย
       </p>
-      <button onclick="if(typeof CM_AUTH!=='undefined') CM_AUTH.signIn()"
-        style="width:100%;padding:13px;background:#fff;color:#0d1f3c;font-weight:900;font-size:15px;border:none;border-radius:var(--radius);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px">
-        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" style="width:20px;height:20px" alt=""/>
-        Sign in with Google — ฟรี
-      </button>
+      <div id="wallAction">
+        <button onclick="if(typeof CM_AUTH!=='undefined') CM_AUTH.signIn()"
+          style="width:100%;padding:13px;background:#fff;color:#0d1f3c;font-weight:900;font-size:15px;border:none;border-radius:var(--radius);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px">
+          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" style="width:20px;height:20px" alt=""/>
+          Sign in with Google
+        </button>
+      </div>
     </div>
 
     <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:22px">
@@ -172,17 +174,74 @@
   });
 
   const esc = s => String(s || "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const API_BASE = location.hostname.endsWith(".vercel.app") || location.hostname === "localhost"
+    ? "" : "https://chefministry-site.vercel.app";
   let MANIFEST = null;
+  let SUB = { active: false, state: "none", expiresAt: null };   // สถานะจาก server เท่านั้น
 
-  function isMember() {
-    return typeof CM_AUTH !== "undefined" && CM_AUTH.isReady() &&
-           ["free", "paid"].includes(CM_AUTH.getTier());
+  function isMember() { return SUB.active; }
+
+  async function refreshSub() {
+    const u = (window.firebase && firebase.auth) ? firebase.auth().currentUser : null;
+    if (!u) { SUB = { active: false, state: "guest" }; render(); return; }
+    try {
+      const idToken = await u.getIdToken();
+      const r = await fetch(API_BASE + "/api/subscription", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idToken, action: "me" })
+      });
+      SUB = await r.json();
+    } catch (e) { SUB = { active: false, state: "error" }; }
+    render();
+  }
+
+  // ดาวน์โหลดผ่าน API (แนบ ID token) — ไฟล์ไม่มี public URL อีกต่อไป
+  async function download(group, format, btn) {
+    const u = (window.firebase && firebase.auth) ? firebase.auth().currentUser : null;
+    if (!u) { if (typeof CM_AUTH !== "undefined") CM_AUTH.signIn(); return; }
+    const label = btn ? btn.textContent : "";
+    if (btn) { btn.disabled = true; btn.textContent = "กำลังสร้างไฟล์…"; }
+    try {
+      const idToken = await u.getIdToken();
+      const r = await fetch(API_BASE + "/api/map-download?group=" + encodeURIComponent(group) +
+                            "&format=" + encodeURIComponent(format),
+                            { headers: { Authorization: "Bearer " + idToken } });
+      if (r.status === 402) { location.href = "./subscribe.html"; return; }
+      if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error || ("HTTP " + r.status));
+      const blob = await r.blob();
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "chefministry-" + group + "." + format;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+      if (typeof gtag !== "undefined") gtag("event", "map_download", { file: group + "." + format });
+    } catch (e) {
+      alert("โหลดไม่สำเร็จ: " + e.message);
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = label; }
+    }
   }
 
   function render() {
     if (!MANIFEST) return;
     const unlocked = isMember();
     document.getElementById("mapWall").style.display = unlocked ? "none" : "block";
+
+    // ข้อความบนกำแพงเปลี่ยนตามสถานะจริงจาก server
+    if (!unlocked) {
+      const signedIn = SUB.state !== "guest" && SUB.state !== "error";
+      const T = {
+        expired: ["สมาชิกหมดอายุแล้ว", "ต่ออายุเพื่อโหลดไฟล์แผนที่ต่อ — ข้อมูลอัปเดตทุกวัน"],
+        revoked: ["สิทธิ์ถูกระงับ", "ติดต่อแอดมินเพื่อตรวจสอบสถานะการชำระเงิน"],
+        none:    ["สมัครสมาชิกเพื่อดาวน์โหลด", "รายเดือน ยกเลิกได้ทุกเมื่อ — โอนผ่าน PromptPay แล้วแจ้งในเว็บ"],
+      }[SUB.state] || ["เข้าสู่ระบบเพื่อดาวน์โหลดแผนที่", "ใช้บัญชี Google เดียวกับที่ใช้เปิด My Maps ได้เลย"];
+      document.getElementById("wallTitle").textContent = T[0];
+      document.getElementById("wallDesc").textContent = T[1];
+      if (signedIn) {
+        document.getElementById("wallAction").innerHTML =
+          '<a href="./subscribe.html" style="display:block;width:100%;padding:13px;background:var(--gold);color:#0d1f3c;font-weight:900;font-size:15px;border-radius:var(--radius);text-decoration:none">💳 ไปหน้าสมัครสมาชิก</a>';
+      }
+    }
 
     const g = MANIFEST.groups || [];
     document.getElementById("mapCriteria").textContent =
@@ -202,10 +261,9 @@
 
     const allLink = document.getElementById("allMapLink");
     if (MANIFEST.all && unlocked) {
-      allLink.href = "./" + MANIFEST.all.kml;
-      allLink.setAttribute("download", "");
+      allLink.href = "#";
       allLink.style.display = "inline-flex";
-      allLink.onclick = () => { if (typeof gtag !== "undefined") gtag("event", "map_download", { file: "all" }); };
+      allLink.onclick = (e) => { e.preventDefault(); download("all", "kml", allLink); };
     } else {
       allLink.style.display = "none";
     }
@@ -216,12 +274,12 @@
       const top = (x.top || []).filter(Boolean).slice(0, 3).join(" · ");
       const btns = unlocked
         ? '<div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">' +
-            '<a class="btn btn-primary btn-sm" download href="./' + esc(x.kml) + '" ' +
-              'onclick="if(typeof gtag!==\'undefined\')gtag(\'event\',\'map_download\',{file:\'' + esc(x.key) + '\'})">⬇ .kml</a>' +
-            '<a class="btn btn-outline btn-sm" download href="./' + esc(x.csv) + '">.csv</a>' +
+            '<button class="btn btn-primary btn-sm" onclick="download(\'' + esc(x.key) + '\',\'kml\',this)">⬇ .kml</button>' +
+            '<button class="btn btn-outline btn-sm" onclick="download(\'' + esc(x.key) + '\',\'csv\',this)">.csv</button>' +
           '</div>'
-        : '<div style="margin-top:14px"><button class="btn btn-outline btn-sm" ' +
-          'onclick="if(typeof CM_AUTH!==\'undefined\')CM_AUTH.signIn()">🔒 เข้าสู่ระบบเพื่อโหลด</button></div>';
+        : '<div style="margin-top:14px">' + (SUB.state === "guest" || SUB.state === "error"
+            ? '<button class="btn btn-outline btn-sm" onclick="if(typeof CM_AUTH!==\'undefined\')CM_AUTH.signIn()">🔒 เข้าสู่ระบบ</button>'
+            : '<a class="btn btn-outline btn-sm" href="./subscribe.html">💳 สมัครสมาชิกเพื่อโหลด</a>') + '</div>';
       return '<div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px 20px">' +
         '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">' +
           '<div style="font-size:16px;font-weight:900;color:var(--navy)">' + esc(x.label) + '</div>' +
@@ -241,7 +299,7 @@
       document.getElementById("mapEmpty").style.display = "block";
     });
 
-  if (typeof CM_AUTH !== "undefined" && CM_AUTH.onTierChange) CM_AUTH.onTierChange(render);
+  if (typeof CM_AUTH !== "undefined" && CM_AUTH.onTierChange) CM_AUTH.onTierChange(refreshSub);
 </script>
 <script src="./js/pwa.js?v=20260726a"></script>
 </body>
