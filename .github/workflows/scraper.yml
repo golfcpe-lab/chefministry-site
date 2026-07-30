@@ -358,6 +358,14 @@ jobs:
           sed -i -E "s/(data\.js\?v=)[0-9a-zA-Z]+/\1$STAMP/g; s/(dataService\.js\?v=)[0-9a-zA-Z]+/\1$STAMP/g" *.html
           echo "stamped v=$STAMP"
 
+      # ── สร้างไฟล์แผนที่ (.kml/.csv) ให้สมาชิกโหลดเข้า Google My Maps ──
+      - name: Export map files
+        env:
+          MAPS_DIR: ${{ github.workspace }}/downloads
+        run: |
+          cd scripts/scraper
+          python export_maps.py
+
       - name: Validate schema v2 in exported JSON
         run: |
           python -c "
@@ -383,7 +391,7 @@ jobs:
         run: |
           git config user.name  "ChefMinistry Bot"
           git config user.email "bot@chefministry.com"
-          git add scripts/scraper/export_restaurants.json scripts/scraper/chefministry_data.db js/data.js *.html || true
+          git add scripts/scraper/export_restaurants.json scripts/scraper/chefministry_data.db js/data.js downloads *.html || true
           git diff --staged --quiet || git commit -m "auto: daily signal update $(date +'%Y-%m-%d')"
           git pull --rebase origin main
 
