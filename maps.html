@@ -68,9 +68,10 @@
     <div style="max-width:640px">
       <div class="eyebrow hero-eyebrow" style="margin-bottom:12px">🗺️ Map Pack — สำหรับสมาชิก</div>
       <h1 class="display-1" style="color:#fff;margin-bottom:14px">พกร้านคัดแล้วไว้ใน Google Maps</h1>
-      <p style="color:rgba(255,255,255,.72);font-size:16px;line-height:1.7;max-width:540px">
-        โหลดไฟล์แผนที่แยกตามหมวดอาหาร นำเข้า Google My Maps ครั้งเดียว แล้วเปิดดูในแอป Google Maps
-        ได้เลยตอนอยู่หน้าร้าน — ทุกหมุดคัดจากคะแนนและรีวิวจริง อัปเดตทุกสัปดาห์
+      <p style="color:rgba(255,255,255,.72);font-size:16px;line-height:1.7;max-width:560px">
+        สมาชิกกดปุ่มเดียวเปิดแผนที่ใน Google Maps ได้เลย — สิทธิ์ผูกกับบัญชี Google ของคุณ
+        (ส่งลิงก์ต่อให้คนอื่นเปิดไม่ได้) หรือจะโหลดไฟล์ .kml/.csv ไปใช้เองก็ได้
+        ทุกหมุดคัดจากคะแนนและรีวิวจริง
       </p>
       <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:20px" id="mapStats"></div>
     </div>
@@ -104,7 +105,11 @@
         <h2 class="h2" style="margin-bottom:6px">เลือกหมวดที่อยากได้</h2>
         <p style="font-size:13.5px;color:var(--text-2)" id="mapCriteria">กำลังโหลดรายการ…</p>
       </div>
-      <a id="allMapLink" class="btn btn-primary" href="#" style="white-space:nowrap;display:none">📦 โหลดรวมทุกหมวด (.kml)</a>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a id="openMapLink" target="_blank" rel="noopener" class="btn btn-primary" href="#"
+           style="white-space:nowrap;display:none;background:var(--gold);color:#0d1f3c">🗺️ เปิดใน Google Maps</a>
+        <a id="allMapLink" class="btn btn-outline" href="#" style="white-space:nowrap;display:none">📦 โหลดรวมทุกหมวด (.kml)</a>
+      </div>
     </div>
 
     <div class="grid-3" id="mapGrid"></div>
@@ -258,6 +263,17 @@
       '<div><div style="font-size:24px;font-weight:900;color:#fff;line-height:1">' + n + '</div>' +
       '<div style="font-size:10.5px;font-weight:700;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.07em;margin-top:3px">' + l + '</div></div>'
     ).join("");
+
+    // แผนที่พร้อมใช้ใน Google Maps — สิทธิ์ผูกกับอีเมลสมาชิก (ส่งลิงก์ต่อแล้วเปิดไม่ได้)
+    const openLink = document.getElementById("openMapLink");
+    if (openLink) {
+      if (unlocked && SUB.mapUrl) {
+        openLink.href = SUB.mapUrl;
+        openLink.style.display = "inline-flex";
+      } else {
+        openLink.style.display = "none";
+      }
+    }
 
     const allLink = document.getElementById("allMapLink");
     if (MANIFEST.all && unlocked) {
