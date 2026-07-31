@@ -139,7 +139,20 @@
 
   const payBox = document.getElementById('payBox');
   const payload = B.promptpayId ? ppPayload(B.promptpayId, B.price) : null;
-  payBox.innerHTML = payload
+  if (B.qrImage) {
+    // QR ร้านค้าเป็นแบบไม่ระบุยอด — ผู้ใช้กรอกยอดเอง จึงย้ำจำนวนเงินให้ชัด
+    payBox.innerHTML =
+      '<div style="text-align:center">' +
+      '<img alt="PromptPay QR — ' + esc(B.accountName || '') + '" src="' + esc(B.qrImage) + '" ' +
+      'style="width:100%;max-width:290px;border:1px solid var(--border);border-radius:12px;background:#fff"/>' +
+      '<div style="font-size:15px;font-weight:900;color:var(--navy);margin-top:12px">โอน ' + esc(B.price) + ' บาท</div>' +
+      (B.accountName ? '<div style="font-size:12.5px;color:var(--text-2);margin-top:2px">' + esc(B.accountName) + '</div>' : '') +
+      '<div style="font-size:11.5px;color:var(--text-2);margin-top:8px;line-height:1.6">' +
+      'สแกนด้วยแอปธนาคาร → กรอกยอด ' + esc(B.price) + ' บาท → โอน แล้วกดแจ้งโอนด้านล่าง</div>' +
+      '<a href="' + esc(B.qrImage) + '" download="chefministry-promptpay.png" ' +
+      'style="display:inline-block;margin-top:10px;font-size:12px;font-weight:800;color:var(--navy);text-decoration:underline">' +
+      'บันทึกรูป QR ไว้สแกนจากอีกเครื่อง</a></div>';
+  } else payBox.innerHTML = payload
     ? '<div style="text-align:center">' +
       '<img alt="PromptPay QR" style="width:212px;height:212px;border:1px solid var(--border);border-radius:12px;background:#fff" ' +
       'src="https://api.qrserver.com/v1/create-qr-code/?size=420x420&data=' + encodeURIComponent(payload) + '"/>' +
