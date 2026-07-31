@@ -25,6 +25,7 @@ SITE_FILES = [
     ("sitemap.xml",               "sitemap.xml"),
     ("robots.txt",                "robots.txt"),
     ("assets/og-image.png",       "assets/og-image.png"),
+    ("assets/promptpay-qr.png",   "assets/promptpay-qr.png"),
     ("css/style.css",              "css/style.css"),
     ("js/safeDataAdapter.js",       "js/safeDataAdapter.js"),
     # ⛔ js/data.js ห้าม push! — เป็นไฟล์ generated โดย pipeline บน GitHub ทุกคืน
