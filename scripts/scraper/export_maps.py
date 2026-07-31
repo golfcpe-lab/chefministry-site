@@ -28,19 +28,21 @@ MIN_REVIEWS = 50
 
 # ── หมวด (สูงสุด 10 กลุ่ม = 10 layer ของ My Maps) ─────────────────────────────
 # (key, ชื่อไฟล์, ชื่อแสดงผล, สี KML (aabbggrr), เงื่อนไข)
+# (key, ชื่อไฟล์, ชื่อแสดงผล, สี KML aabbggrr, ไอคอน Google KML shapes)
 GROUPS = [
-    ("cafe",      "cafe-matcha",   "☕ คาเฟ่ & มัทฉะ",        "ff3b8cd6"),
-    ("finedining","fine-dining",   "🍽️ Fine Dining & Omakase", "ff2b52c9"),
-    ("thai",      "thai",          "🇹🇭 อาหารไทย",            "ff4fc3ff"),
-    ("noodles",   "noodles",       "🍜 ก๋วยเตี๋ยว & เส้น",     "ff64d19a"),
-    ("grill",     "grill-hotpot",  "🥩 ปิ้งย่าง & ชาบู",       "ff4b4bd6"),
-    ("japanese",  "japanese",      "🍣 ญี่ปุ่น",               "ffb37cff"),
-    ("korean",    "korean",        "🇰🇷 เกาหลี",              "ff7cc0ff"),
-    ("chinese",   "chinese",       "🇨🇳 จีน & ติ่มซำ",         "ff3ba7e8"),
-    ("western",   "western",       "🍕 ตะวันตก",              "ff8fd14f"),
-    ("other",     "other-picks",   "✨ ร้านน่าสนใจอื่นๆ",      "ff9e9e9e"),
+    ("cafe",      "cafe-matcha",   "☕ คาเฟ่ & มัทฉะ",        "ff3b8cd6", "coffee"),
+    ("finedining","fine-dining",   "🍽️ Fine Dining & Omakase", "ff2b52c9", "dining"),
+    ("thai",      "thai",          "🇹🇭 อาหารไทย",            "ff4fc3ff", "snack_bar"),
+    ("noodles",   "noodles",       "🍜 ก๋วยเตี๋ยว & เส้น",     "ff64d19a", "restaurant"),
+    ("grill",     "grill-hotpot",  "🥩 ปิ้งย่าง & ชาบู",       "ff4b4bd6", "campfire"),
+    ("japanese",  "japanese",      "🍣 ญี่ปุ่น",               "ffb37cff", "fishing"),
+    ("korean",    "korean",        "🇰🇷 เกาหลี",              "ff7cc0ff", "picnic"),
+    ("chinese",   "chinese",       "🇨🇳 จีน & ติ่มซำ",         "ff3ba7e8", "shopping"),
+    ("western",   "western",       "🍕 ตะวันตก",              "ff8fd14f", "bars"),
+    ("other",     "other-picks",   "✨ ร้านน่าสนใจอื่นๆ",      "ff9e9e9e", "star"),
 ]
 GROUP_NAMES = {g[0]: g[2] for g in GROUPS}
+GROUP_ICONS = {g[0]: g[4] for g in GROUPS}
 
 
 def group_of(r):
@@ -141,18 +143,20 @@ def kml_placemark(r):
 
 
 def kml_document(title, folders):
-    """folders = [(ชื่อ, สี, [records])]"""
+    """folders = [(ชื่อ, สี, [records], icon)]"""
     out = ['<?xml version="1.0" encoding="UTF-8"?>',
            '<kml xmlns="http://www.opengis.net/kml/2.2">',
            "<Document>",
            f"  <name>{esc(title)}</name>",
            f"  <description>{esc('อัปเดต ' + datetime.date.today().isoformat() + ' — chefministry.com')}</description>"]
-    for i, (name, color, rows) in enumerate(folders):
+    for i, folder in enumerate(folders):
+        name, color, rows = folder[0], folder[1], folder[2]
+        icon = folder[3] if len(folder) > 3 else "dining"
         if not rows:
             continue
         sid = f"cm{i}"
-        out.append(f'  <Style id="{sid}"><IconStyle><color>{color}</color>'
-                   '<Icon><href>http://maps.google.com/mapfiles/kml/shapes/dining.png</href></Icon>'
+        out.append(f'  <Style id="{sid}"><IconStyle><color>{color}</color><scale>1.1</scale>'
+                   f'<Icon><href>http://maps.google.com/mapfiles/kml/shapes/{icon}.png</href></Icon>'
                    "</IconStyle></Style>")
         out.append("  <Folder>")
         out.append(f"    <name>{esc(name)}</name>")
@@ -222,20 +226,20 @@ def main():
     }
 
     folders = []
-    for key, slug, label, color in GROUPS:
+    for key, slug, label, color, icon in GROUPS:
         rows = buckets[key]
         if not rows:
             print(f"  ⏭  {label}: 0 ร้าน — ข้าม")
             continue
         kml_path = out_dir / f"chefministry-{slug}.kml"
         csv_path = out_dir / f"chefministry-{slug}.csv"
-        kml_path.write_text(kml_document(f"ChefMinistry — {label}", [(label, color, rows)]),
+        kml_path.write_text(kml_document(f"ChefMinistry — {label}", [(label, color, rows, icon)]),
                             encoding="utf-8")
         write_csv(csv_path, rows)
-        folders.append((label, color, rows))
+        folders.append((label, color, rows, icon))
+        # manifest เก็บแค่ metadata — ไฟล์จริงเสิร์ฟผ่าน /api/map-download (ต้องเป็นสมาชิก)
         manifest["groups"].append({
             "key": key, "label": label, "count": len(rows),
-            "kml": f"downloads/{kml_path.name}", "csv": f"downloads/{csv_path.name}",
             "top": [r.get("name") for r in rows[:3]],
         })
         print(f"  ✅ {label}: {len(rows)} ร้าน → {kml_path.name} + {csv_path.name}")
@@ -244,7 +248,7 @@ def main():
     all_kml = out_dir / "chefministry-bangkok-all.kml"
     all_kml.write_text(kml_document("ChefMinistry — ร้านคัดสรรกรุงเทพฯ", folders[:10]),
                        encoding="utf-8")
-    manifest["all"] = {"kml": f"downloads/{all_kml.name}", "layers": len(folders[:10]),
+    manifest["all"] = {"layers": len(folders[:10]),
                        "count": sum(len(f[2]) for f in folders[:10])}
     print(f"  📦 รวมทุกหมวด → {all_kml.name} ({manifest['all']['count']} จุด / {manifest['all']['layers']} layer)")
 
