@@ -377,6 +377,17 @@ jobs:
           pip install pyjwt cryptography --quiet
           cd scripts/scraper
           python sync_drive_maps.py --dir "$MAPS_DIR"
+
+      # ── ส่ง CSV เข้า Google ชีต 10 ไฟล์ (ต้นทางของ My Maps reimport รายเดือน) ──
+      - name: Sync map sheets for My Maps reimport
+        if: env.GOOGLE_SA_JSON != ''
+        env:
+          GOOGLE_SA_JSON: ${{ secrets.GOOGLE_SA_JSON }}
+          MAPS_DIR: ${{ github.workspace }}/downloads
+        run: |
+          pip install pyjwt cryptography --quiet
+          cd scripts/scraper
+          python sync_sheet_maps.py --dir "$MAPS_DIR"
         continue-on-error: true
 
       - name: Validate schema v2 in exported JSON
