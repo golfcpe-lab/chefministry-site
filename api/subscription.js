@@ -14,6 +14,8 @@
 // (ดูไฟล์ firestore.rules ในโปรเจกต์ — ต้อง publish ผ่าน Firebase Console)
 // ─────────────────────────────────────────────────────────────────────────────
 
+const { grantMapAccess, revokeMapAccess, MAP_URL } = require('./_drive');
+
 const PROJECT = () => process.env.FIREBASE_PROJECT_ID;
 const SUBS = 'cm_subscriptions';
 const REQS = 'cm_subscription_requests';
@@ -106,11 +108,13 @@ module.exports = async (req, res) => {
   if (action === 'me') {
     const sub = parseDoc(await fsGet(`${SUBS}/${me.uid}`, idToken));
     const st = computeState(sub);
+    // สมาชิกที่ยัง active → คืนลิงก์แผนที่ (สิทธิ์ผูกกับอีเมล เปิดได้เฉพาะบัญชีตัวเอง)
     return res.status(200).json({
       ok: true, ...st,
       plan: sub?.plan || null,
       expiresAt: sub?.expiresAt || null,
       email: me.email,
+      mapUrl: st.active ? MAP_URL : null,
     });
   }
 
@@ -163,22 +167,38 @@ module.exports = async (req, res) => {
     }, idToken);
     if (!ok) return res.status(500).json({ error: 'อัปเดตไม่สำเร็จ' });
     await fsDelete(`${REQS}/${targetUid}`, idToken);   // เคลียร์คำขอที่อนุมัติแล้ว
-    return res.status(200).json({ ok: true, expiresAt: exp.toISOString(),
-      message: `เปิดสิทธิ์ถึง ${exp.toISOString().slice(0, 10)}` });
+
+    // เปิดสิทธิ์ดู Google My Maps ให้อีเมลสมาชิกด้วย (ไม่ล้มทั้ง request ถ้าพลาด)
+    const memberEmail = cur?.email || reqDoc?.email || '';
+    let mapResult = null;
+    if (memberEmail) {
+      try { mapResult = await grantMapAccess(memberEmail); } catch (e) { mapResult = { ok: false }; }
+    }
+    return res.status(200).json({ ok: true, expiresAt: exp.toISOString(), map: mapResult,
+      message: `เปิดสิทธิ์ถึง ${exp.toISOString().slice(0, 10)}` +
+               (mapResult?.ok ? ' · เปิดแผนที่ให้แล้ว' : (mapResult ? ' · (แผนที่: ' + (mapResult.skipped || 'ล้มเหลว') + ')' : '')) });
   }
 
   if (action === 'revoke') {
+    const cur = parseDoc(await fsGet(`${SUBS}/${targetUid}`, idToken));
     const ok = await fsSet(`${SUBS}/${targetUid}`, {
       status: 'revoked',
       revokedBy: me.email,
       revokedAt: new Date().toISOString(),
     }, idToken);
-    return ok ? res.status(200).json({ ok: true, message: 'ตัดสิทธิ์แล้ว — ดาวน์โหลดครั้งถัดไปจะถูกปฏิเสธทันที' })
+    let mapResult = null;
+    if (cur?.email) {
+      try { mapResult = await revokeMapAccess(cur.email); } catch (e) { mapResult = { ok: false }; }
+    }
+    return ok ? res.status(200).json({ ok: true, map: mapResult,
+                  message: 'ตัดสิทธิ์แล้ว — ดาวน์โหลดและแผนที่ถูกปิดทันที' })
               : res.status(500).json({ error: 'อัปเดตไม่สำเร็จ' });
   }
 
   if (action === 'purge') {
-    // ลบข้อมูลสมาชิก: subscription + request + user profile
+    // ลบข้อมูลสมาชิก: subscription + request + user profile (+ ถอนสิทธิ์แผนที่)
+    const curP = parseDoc(await fsGet(`${SUBS}/${targetUid}`, idToken));
+    if (curP?.email) { try { await revokeMapAccess(curP.email); } catch (e) {} }
     const results = await Promise.all([
       fsDelete(`${SUBS}/${targetUid}`, idToken),
       fsDelete(`${REQS}/${targetUid}`, idToken),
