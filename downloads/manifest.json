@@ -4,7 +4,7 @@
   "minRating": 4.3,
   "minReviews": 50
  },
- "total": 592,
+ "total": 591,
  "groups": [
   {
    "key": "cafe",
@@ -49,7 +49,7 @@
   {
    "key": "grill",
    "label": "🥩 ปิ้งย่าง & ชาบู",
-   "count": 58,
+   "count": 57,
    "top": [
     "Shu Daxia Mala Hotpot ร้านหม่าล่า กรุงเทพ @MBK",
     "Niku Sho Sukhumvit 31",
@@ -109,6 +109,6 @@
  ],
  "all": {
   "layers": 10,
-  "count": 592
+  "count": 591
  }
 }
