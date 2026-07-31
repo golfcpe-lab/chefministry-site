@@ -81,6 +81,7 @@ ROOT_FILES = [
     ("scraper/curated_seed.json",    "scripts/scraper/curated_seed.json"),
     ("scraper/seed_list.py",         "scripts/scraper/seed_list.py"),
     ("scraper/export_maps.py",       "scripts/scraper/export_maps.py"),
+    ("scraper/sync_drive_maps.py",   "scripts/scraper/sync_drive_maps.py"),
     ("scraper/matcha_bkk.json",      "scripts/scraper/matcha_bkk.json"),
     ("scraper/area_fix.py",          "scripts/scraper/area_fix.py"),
     ("scraper/process_suggestions.py", "scripts/scraper/process_suggestions.py"),
