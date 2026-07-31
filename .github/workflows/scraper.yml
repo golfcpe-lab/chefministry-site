@@ -366,6 +366,19 @@ jobs:
           cd scripts/scraper
           python export_maps.py
 
+      # ── ส่ง KML ล่าสุดขึ้น Google Drive (ต้นทางของ Google My Maps) ──
+      # ข้ามเงียบถ้ายังไม่ได้ตั้ง secret GOOGLE_SA_JSON
+      - name: Sync map files to Google Drive
+        if: env.GOOGLE_SA_JSON != ''
+        env:
+          GOOGLE_SA_JSON: ${{ secrets.GOOGLE_SA_JSON }}
+          MAPS_DIR: ${{ github.workspace }}/downloads
+        run: |
+          pip install pyjwt cryptography --quiet
+          cd scripts/scraper
+          python sync_drive_maps.py --dir "$MAPS_DIR"
+        continue-on-error: true
+
       - name: Validate schema v2 in exported JSON
         run: |
           python -c "
@@ -391,7 +404,7 @@ jobs:
         run: |
           git config user.name  "ChefMinistry Bot"
           git config user.email "bot@chefministry.com"
-          git add scripts/scraper/export_restaurants.json scripts/scraper/chefministry_data.db js/data.js downloads *.html || true
+          git add scripts/scraper/export_restaurants.json scripts/scraper/chefministry_data.db js/data.js downloads/manifest.json *.html || true
           git diff --staged --quiet || git commit -m "auto: daily signal update $(date +'%Y-%m-%d')"
           git pull --rebase origin main
 
