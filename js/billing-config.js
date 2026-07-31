@@ -7,10 +7,12 @@ window.CM_BILLING = {
   currency: "THB",
   planLabel: "Map Pack รายเดือน",
 
-  // PromptPay: ใส่เบอร์มือถือ (0812345678) หรือเลขประจำตัวผู้เสียภาษี 13 หลัก
-  // ว่างไว้ = หน้าเว็บจะซ่อน QR แล้วบอกให้ติดต่อทาง LINE แทน
+  // ── ช่องทางรับเงิน ────────────────────────────────────────────────────────
+  // ใช้รูป QR ร้านค้าจริง (Thai QR / PromptPay ของ Chef Ministry Shop)
+  // ถ้าอยากให้ระบบสร้าง QR เองพร้อมยอดเงิน ให้ใส่ promptpayId แทน แล้วลบ qrImage
+  qrImage: "./assets/promptpay-qr.png?v=20260731",
   promptpayId: "",
-  accountName: "",                 // ชื่อบัญชี/ชื่อร้านที่จะแสดงใต้ QR
+  accountName: "Chef Ministry Shop",
 
   lineId: "@chefministry",
   contactEmail: "contact@chefministry.com",
