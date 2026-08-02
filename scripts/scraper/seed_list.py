@@ -18,12 +18,21 @@ from db import init_db, upsert_restaurant, record_snapshot, get_conn
 from scrape_gmaps import save_gmaps_meta, load_blocklist, DELAY, _post, BASE_URL
 from seed_discover import norm_name, extract_area
 from config import GOOGLE_MAPS_API_KEY
+import api_budget
 
 MAX_DIST_M = 700.0
 
 
 def search_biased(name, lat, lng, api_key):
-    """Text Search ด้วย bias วงแคบรอบพิกัดที่รู้ — คืน list ผลลัพธ์ (มี types ครบ ไม่ต้องเรียก details ซ้ำ)"""
+    """Text Search ด้วย bias วงแคบรอบพิกัดที่รู้ — คืน list ผลลัพธ์ (มี types ครบ ไม่ต้องเรียก details ซ้ำ)
+
+    ⚠️ 1 ร้าน = 1 call ชั้น Text Search Enterprise (ฟรีแค่ 1,000/เดือน)
+    ไฟล์ list ใหญ่ ๆ (เช่น matcha_bkk.json 112 รายการ) กินโควตาไปเป็นสิบเปอร์เซ็นต์
+    ต่อการรัน 1 ครั้ง — รันเท่าที่จำเป็น และดู `python api_budget.py` ก่อนรัน
+    """
+    if not api_budget.allow("text_ent"):
+        print("      ⏸  โควตา Text Search Enterprise เดือนนี้หมดแล้ว — ข้าม")
+        return []
     url = f"{BASE_URL}/places:searchText"
     hdrs = {
         "X-Goog-Api-Key": api_key,
@@ -41,6 +50,7 @@ def search_biased(name, lat, lng, api_key):
         "locationBias": {"circle": {"center": {"latitude": lat, "longitude": lng}, "radius": 500.0}},
     }
     try:
+        api_budget.record("text_ent")
         return (_post(url, body, hdrs) or {}).get("places", [])
     except Exception as e:
         print(f"      ❌ search({name[:30]}): {e}")
