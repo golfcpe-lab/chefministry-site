@@ -12,6 +12,7 @@ process_suggestions.py — ตรวจร้านที่ community เสน
 import json, os, re, sys, hashlib, pathlib, sqlite3
 import urllib.request, urllib.parse
 from datetime import date
+import api_budget
 
 HERE = pathlib.Path(__file__).parent
 DB = HERE / "chefministry_data.db"
@@ -102,7 +103,12 @@ def resolve_place(url):
     body = {"textQuery": name, "languageCode": "th", "maxResultCount": 1}
     if lat and lng:
         body["locationBias"] = {"circle": {"center": {"latitude": lat, "longitude": lng}, "radius": 2000.0}}
+    # ต้องใช้ rating + userRatingCount ตัดสิน PASS/NEAR → ชั้น Text Search Enterprise
+    # (ฟรี 1,000/เดือน ใช้ร่วมกับ seed_discover / seed_list)
+    if not api_budget.allow("text_ent"):
+        return None, "โควตา Google Places เดือนนี้หมดแล้ว — จะลองใหม่รอบหน้า"
     try:
+        api_budget.record("text_ent")
         data = http_json("https://places.googleapis.com/v1/places:searchText", "POST", body, {
             "X-Goog-Api-Key": GMAPS_KEY,
             "X-Goog-FieldMask": ("places.id,places.displayName,places.rating,places.userRatingCount,"
