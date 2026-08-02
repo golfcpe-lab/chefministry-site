@@ -186,12 +186,29 @@ jobs:
           python seed_list.py --file matcha_bkk.json
 
       # ไม่มี continue-on-error แล้ว — scrape พัง = job แดง = ได้ email แจ้งเตือน
+      #
+      # ไม่ใช้ --limit แล้ว: จำนวน call ต่อวันคุมด้วย api_budget (โควตาฟรีต่อเดือน
+      # หารด้วยวันที่เหลือ) ซึ่งแม่นกว่าเพดานตายตัว และหยุดเองเมื่อโควตาหมด
+      #   CM_API_BUDGET_PCT=100  → อยู่ในโควตาฟรี = ไม่เสียเงิน (ตั้ง 150 ถ้ายอมจ่าย)
+      #   CM_HOT_MIN_REVIEWS     → ร้านที่รีวิวถึงเกณฑ์นี้ได้ refresh แบบเต็ม (velocity)
+      #   CM_HOT_INTERVAL_DAYS   → รอบ refresh ร้าน hot
+      #   CM_TAIL_INTERVAL_DAYS  → รอบเช็คร้านส่วนหาง (แค่ยังเปิดอยู่ไหม)
       - name: Run GMaps scraper
         env:
-          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+          GOOGLE_MAPS_API_KEY:   ${{ secrets.GOOGLE_MAPS_API_KEY }}
+          CM_API_BUDGET_PCT:     "100"
+          CM_HOT_MIN_REVIEWS:    "150"
+          CM_HOT_INTERVAL_DAYS:  "7"
+          CM_TAIL_INTERVAL_DAYS: "30"
         run: |
           cd scripts/scraper
-          python scrape_gmaps.py --limit 200
+          python scrape_gmaps.py
+
+      # สรุปโควตาที่ใช้ไปเดือนนี้ (ตัวนับอยู่ในตาราง api_usage ของ DB ที่ commit ทุกคืน)
+      - name: API budget report
+        run: |
+          cd scripts/scraper
+          python api_budget.py
 
       # ── ตรวจร้านที่ community เสนอ (ผ่าน=ขึ้นเว็บ, เกือบผ่าน=shortlist) ──
       - name: Process community suggestions
