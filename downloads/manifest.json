@@ -1,15 +1,15 @@
 {
- "generated": "2026-08-01",
+ "generated": "2026-08-02",
  "criteria": {
   "minRating": 4.3,
   "minReviews": 50
  },
- "total": 592,
+ "total": 597,
  "groups": [
   {
    "key": "cafe",
    "label": "☕ คาเฟ่ & มัทฉะ",
-   "count": 185,
+   "count": 186,
    "top": [
     "เดอะ คอฟฟี่ คลับ - ริเวอร์ ซิตี้",
     "ThaiWan-Thai灣 Coffee&tea socialspace",
@@ -29,7 +29,7 @@
   {
    "key": "thai",
    "label": "🇹🇭 อาหารไทย",
-   "count": 86,
+   "count": 87,
    "top": [
     "Zhang Jia Yi — Ari (Baytong Chicken Rice)",
     "แก้ว ไก่ กรอบ",
@@ -49,7 +49,7 @@
   {
    "key": "grill",
    "label": "🥩 ปิ้งย่าง & ชาบู",
-   "count": 57,
+   "count": 59,
    "top": [
     "Shu Daxia Mala Hotpot ร้านหม่าล่า กรุงเทพ @MBK",
     "Niku Sho Sukhumvit 31",
@@ -69,11 +69,11 @@
   {
    "key": "korean",
    "label": "🇰🇷 เกาหลี",
-   "count": 29,
+   "count": 30,
    "top": [
+    "เปียงยาง ปิ้งย่างเกาหลี 219 ที่สุดในมีนบุรี",
     "ซัม กยอบ ซัล",
-    "Hongdae Buffet Siam Square One",
-    "มันจอมเอ ปิ้งย่างเกาหลี"
+    "Hongdae Buffet Siam Square One"
    ]
   },
   {
@@ -109,6 +109,6 @@
  ],
  "all": {
   "layers": 10,
-  "count": 592
+  "count": 597
  }
 }
