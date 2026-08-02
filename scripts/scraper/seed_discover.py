@@ -16,6 +16,7 @@ import argparse, json, re, sys, urllib.request
 from db import init_db, upsert_restaurant, record_snapshot, get_conn
 from scrape_gmaps import save_gmaps_meta, load_blocklist
 from config import GOOGLE_MAPS_API_KEY
+import api_budget
 
 SEARCH_URL = "https://places.googleapis.com/v1/places:searchText"
 FIELD_MASK = ",".join([
@@ -55,6 +56,12 @@ PRICE_MAP   = {"PRICE_LEVEL_INEXPENSIVE": "1", "PRICE_LEVEL_MODERATE": "2"}
 
 
 def search(query: str, api_key: str) -> list:
+    # FIELD_MASK มี rating/userRatingCount/priceLevel (จำเป็นต่อการคัดกรอง)
+    # → ตกชั้น Text Search Enterprise $35/1,000 ฟรีแค่ 1,000/เดือน
+    # Text Search คิดเงินต่อ "request" ไม่ใช่ต่อผลลัพธ์ — 1 query = 1 call
+    if not api_budget.allow("text_ent"):
+        print("  ⏸  โควตา Text Search Enterprise เดือนนี้หมดแล้ว — หยุด seed")
+        return []
     body = json.dumps({
         "textQuery": query, "languageCode": "th",
         "regionCode": "TH", "maxResultCount": 20,
@@ -65,6 +72,7 @@ def search(query: str, api_key: str) -> list:
         "X-Goog-FieldMask": FIELD_MASK,
     })
     try:
+        api_budget.record("text_ent")
         return json.loads(urllib.request.urlopen(req, timeout=30).read()).get("places", [])
     except Exception as e:
         print(f"  ⚠️ search fail: {e}")
