@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-08-02",
   "days_window": 7,
-  "total": 12,
+  "total": 13,
   "reviews": [
     {
       "influencer": "Peach Eat Laek",
@@ -74,7 +74,7 @@
       "tier": "Macro",
       "restaurant": "ก๋วยเตี๋ยวคั่วไก่ แฮปปี้แลนด์ 1999",
       "cuisine": "Thai",
-      "area": "บางกะปิ",
+      "area": "Bangkok",
       "rating": "exceed",
       "confidence": "high",
       "video_title": "ก๋วยเตี๋ยวคั่วไก่ไขออนเซน เส้นทาโร่",
@@ -132,6 +132,19 @@
       "video_title": "อาหารไทยชาววัง สูตรโบราณ อร่อยเด็ด เหมือนกินข้าวฝีมือคุณแม่",
       "video_url": "https://youtube.com/watch?v=YTKBHBVmPUs",
       "published": "2026-07-26"
+    },
+    {
+      "influencer": "EatGuide",
+      "handle": "@EatGuide",
+      "tier": "Mid",
+      "restaurant": "กาลครั้งหนึ่ง",
+      "cuisine": "Thai",
+      "area": "Pak Kret",
+      "rating": "above_average",
+      "confidence": "high",
+      "video_title": "ในที่สุดก็ได้กิน กับข้าวในบ้านไม้เก่า!  บรรยากาศเหมือนยุค 90 \r📍กาลครั้งหนึ่ง ปากเกร็ด #eatguide",
+      "video_url": "https://youtube.com/watch?v=3nx0v6gEPxo",
+      "published": "2026-07-31"
     },
     {
       "influencer": "EatGuide",
