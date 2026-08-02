@@ -431,6 +431,27 @@ def load_blocklist():
 
 # ── Refresh existing restaurant (มี place_id แล้ว) ────────────────────────────
 
+def is_legacy_ftid(place_id: str) -> bool:
+    """place_id แบบเก่า (FTID) หน้าตาเป็น '0x30e2838e...:0x21a6300c...'
+    Places API (New) ไม่รับ → ตอบ HTTP 400 ทุกครั้ง เสียโควตาฟรี ๆ
+    ต้องหา place_id ใหม่ด้วย find_place แทน"""
+    pid = (place_id or "").strip()
+    return ":" in pid or pid.startswith("0x")
+
+
+def touch_last_updated(restaurant_id: str):
+    """ขยับ last_updated โดยไม่แตะข้อมูลอื่น
+
+    สำคัญ: คิว refresh เรียงตาม last_updated ASC — ถ้าร้านที่ดึงไม่สำเร็จไม่เคย
+    ถูกขยับ มันจะค้างหัวคิวและกินโควตาใหม่ "ทุกวัน" ตลอดไป (เจอจริง: 20 ร้าน
+    FTID เก่า กิน ~600 call/เดือน จากโควตาฟรี 1,000) — ให้ไปต่อท้ายคิวแทน
+    แล้วค่อยลองใหม่รอบหน้า"""
+    with get_conn() as conn:
+        conn.execute(
+            "UPDATE restaurants SET last_updated = datetime('now') WHERE id = ?",
+            (restaurant_id,))
+
+
 def refresh_restaurant(row: dict, api_key: str, lite: bool = False) -> dict:
     """ร้านที่มี gmaps_place_id แล้ว — เรียก Place Details ตรงๆ (ไม่ต้อง find_place)
 
@@ -635,10 +656,12 @@ def run(
         if i % 10 == 0 or i == 1 or i == n:
             print(f"  [{i}/{n}] {tier:<4} {name[:32]:<32} ({area_r})")
 
-        if row.get("gmaps_place_id"):
+        if row.get("gmaps_place_id") and not is_legacy_ftid(row["gmaps_place_id"]):
             # มี place_id แล้ว — details อย่างเดียว; tail ใช้ mask แบบ lite
             result = refresh_restaurant(row, api_key, lite=(tier == "tail"))
         else:
+            # ไม่มี place_id หรือเป็น FTID เก่าที่ API ใหม่ไม่รับ → ค้นหาใหม่
+            # (find_place จะได้ place_id รูปแบบใหม่มาเขียนทับให้เอง)
             result = process_restaurant(row, api_key)
 
         if result["status"] == "ok":
@@ -666,6 +689,8 @@ def run(
                           f"[{result.get('gmaps_business_status')}]")
         else:
             miss_count += 1
+            # ขยับไปท้ายคิว ไม่งั้นร้านที่ดึงไม่สำเร็จจะกินโควตาซ้ำทุกวัน
+            touch_last_updated(rid)
             if result["status"] == "not_found":
                 errors.append(f"    ❓ not found: {name[:40]}")
 
