@@ -4,11 +4,26 @@ ChefMinistry — Google Maps Places API Scraper
 ดึงข้อมูลจาก Google Maps สำหรับร้านที่มีอยู่ใน DB แล้ว (จาก Wongnai + influencer list)
 เพื่อเก็บ review_count snapshot รายวัน → ใช้ track velocity
 
-ค่าใช้จ่าย (ประมาณ) สำหรับ 500 ร้าน:
-  - Text Search:        500 × $0.032 = $16
-  ใช้ Find Place แทน:   500 × $0.017 = $8.50  (ถูกกว่า)
-  + Place Details:      500 × $0.017 = $8.50
-  รวม ≈ $17 พอดี
+ค่าใช้จ่าย — อ่าน api_budget.py ประกอบ (สำคัญ):
+  Places API (New) คิดเงินตาม "SKU สูงสุดใน field mask" และมีโควตาฟรีต่อเดือน
+  แยกตาม SKU (ไม่ใช่เครดิต $200 แบบเดิมแล้ว ตั้งแต่ มี.ค. 2025):
+
+    Place Details Enterprise  $20/1,000  ฟรีแค่ 1,000/เดือน  ← rating, userRatingCount,
+                                                               priceLevel, openingHours
+    Place Details Pro         $17/1,000  ฟรี  5,000/เดือน   ← displayName, businessStatus
+    Text Search Enterprise    $35/1,000  ฟรี  1,000/เดือน
+    Text Search Pro           $32/1,000  ฟรี  5,000/เดือน
+
+  ดังนั้น refresh ทุกร้านทุก 2-3 วันด้วย field mask เต็ม = ~6,000 call/เดือน
+  = เกินโควตา Enterprise 5,000 call ≈ $100 ≈ ฿3,500/เดือน
+
+  วิธีคุมค่าใช้จ่ายที่ใช้อยู่ตอนนี้ (ดู run() และ api_budget.py):
+    Tier A "hot"  — ร้านที่มีรีวิว ≥ CM_HOT_MIN_REVIEWS ใช้ field mask เต็ม
+                    (Enterprise) refresh ทุก CM_HOT_INTERVAL_DAYS วัน
+                    → velocity ยังคำนวณได้จริง
+    Tier B "tail" — ร้านส่วนหางใช้ mask แบบ lite (Pro, ฟรี 5,000/เดือน)
+                    refresh ทุก CM_TAIL_INTERVAL_DAYS วัน แค่เช็คว่าร้านยังเปิด
+    ทุก call ผ่าน api_budget → หยุดเองเมื่อถึงเพดานโควตาฟรี
 
 Setup:
   1. ไปที่ https://console.cloud.google.com/
@@ -22,11 +37,12 @@ Setup:
      python scrape_gmaps.py --area thonglor
      python scrape_gmaps.py --source wongnai
 """
-import json, time, sys, pathlib, re, argparse
+import json, time, sys, os, pathlib, re, argparse
 import urllib.request, urllib.parse
 from db import init_db, get_conn, record_snapshot, upsert_restaurant
 from config import GOOGLE_MAPS_API_KEY
 from classify import classify_record  # v2: venue/scope classification
+import api_budget                      # นับ/คุมโควตา API ต่อเดือน
 
 BASE_URL   = "https://places.googleapis.com/v1"
 OLD_BASE   = "https://maps.googleapis.com/maps/api/place"
@@ -34,6 +50,46 @@ DEBUG_DIR  = pathlib.Path(__file__).parent / "debug_output"
 DEBUG_DIR.mkdir(exist_ok=True)
 
 DELAY = 0.3   # วินาทีระหว่าง API calls (avoid rate limit)
+
+
+# ── Field masks ───────────────────────────────────────────────────────────────
+# ⚠️ ห้ามเติม rating / userRatingCount / priceLevel / regularOpeningHours /
+#    websiteUri ลงใน *_LITE เด็ดขาด — field พวกนี้ดัน call ขึ้นชั้น Enterprise
+#    ที่ฟรีแค่ 1,000/เดือน (LITE ต้องอยู่ชั้น Pro ที่ฟรี 5,000/เดือน)
+
+# ชั้น Enterprise — ใช้เฉพาะร้าน Tier A ที่ต้องใช้ตัวเลขรีวิวคำนวณ velocity
+FIELDS_FULL = ",".join([
+    "id", "displayName", "rating", "userRatingCount",
+    "formattedAddress", "regularOpeningHours", "location", "websiteUri",
+    "primaryType", "types", "businessStatus", "priceLevel",
+])
+
+# ชั้น Pro — พอสำหรับ "ร้านยังเปิดอยู่ไหม / ชื่อ-พิกัด-ประเภทเปลี่ยนไหม"
+FIELDS_LITE = ",".join([
+    "id", "displayName", "formattedAddress", "location",
+    "primaryType", "types", "businessStatus",
+])
+
+# ชั้น Pro สำหรับ Text Search — เดิมใส่ rating+userRatingCount ทำให้ทุกครั้ง
+# ที่ค้นร้านใหม่กินโควตา Text Search Enterprise (ฟรีแค่ 1,000/เดือน)
+SEARCH_FIELDS_PRO = ",".join([
+    "places.id", "places.displayName", "places.formattedAddress",
+    "places.location", "places.primaryType", "places.businessStatus",
+])
+
+
+# ── Tier config (ปรับผ่าน env ได้โดยไม่ต้องแก้โค้ด) ──────────────────────────
+def _env_int(name: str, default: int) -> int:
+    try:
+        return int(os.environ.get(name, default))
+    except (TypeError, ValueError):
+        return default
+
+# ร้านที่รีวิวถึงเกณฑ์นี้ถึงจะได้ refresh แบบเต็ม (ตรงกับ TREND_MIN_REVIEWS
+# ใน dataService.js — ร้านที่ต่ำกว่านี้ยังไงก็ไม่ผ่าน trend floor บนเว็บ)
+HOT_MIN_REVIEWS    = _env_int("CM_HOT_MIN_REVIEWS", 150)
+HOT_INTERVAL_DAYS  = _env_int("CM_HOT_INTERVAL_DAYS", 7)
+TAIL_INTERVAL_DAYS = _env_int("CM_TAIL_INTERVAL_DAYS", 30)
 
 
 # ── HTTP helper ───────────────────────────────────────────────────────────────
@@ -56,18 +112,22 @@ def _post(url: str, body: dict, headers: dict = None) -> dict:
 
 def find_place(name: str, area: str, api_key: str, lang: str = "th") -> dict | None:
     """
-    ใช้ Places API (New) Text Search หาร้านด้วยชื่อ + ย่าน
-    คืน dict ที่มี place_id, displayName, rating, userRatingCount, ...
+    ใช้ Places API (New) Text Search หาร้านด้วยชื่อ + ย่าน — คืน place_id + ข้อมูลพื้นฐาน
+
+    ไม่ขอ rating/userRatingCount ตรงนี้ (จะดันเป็น Text Search Enterprise ที่ฟรี
+    แค่ 1,000/เดือน) — ปล่อยให้ get_place_details ดึงตัวเลขรีวิวแทน
     """
+    if not api_budget.allow("text_pro"):
+        print("      ⏸  โควตา Text Search Pro เดือนนี้หมดแล้ว — ข้าม")
+        return None
+
     # สร้าง query ที่เฉพาะเจาะจง
     query = f"{name} {area} Bangkok Thailand"
 
     url  = f"{BASE_URL}/places:searchText"
     hdrs = {
         "X-Goog-Api-Key":    api_key,
-        "X-Goog-FieldMask":  "places.id,places.displayName,places.rating,"
-                              "places.userRatingCount,places.formattedAddress,"
-                              "places.location,places.primaryType",
+        "X-Goog-FieldMask":  SEARCH_FIELDS_PRO,
         "Content-Type":      "application/json",
     }
     body = {
@@ -84,6 +144,7 @@ def find_place(name: str, area: str, api_key: str, lang: str = "th") -> dict | N
     }
 
     try:
+        api_budget.record("text_pro")   # นับตอนยิง — Google คิดเงินตาม request
         data   = _post(url, body, hdrs)
         places = data.get("places", [])
         if not places:
@@ -94,22 +155,27 @@ def find_place(name: str, area: str, api_key: str, lang: str = "th") -> dict | N
         return None
 
 
-def get_place_details(place_id: str, api_key: str) -> dict | None:
+def get_place_details(place_id: str, api_key: str, lite: bool = False) -> dict | None:
     """
-    Place Details (New API) — ดึง review count, rating, hours, address
+    Place Details (New API)
+
+    lite=False → FIELDS_FULL (ชั้น Enterprise $20/1,000, ฟรี 1,000/เดือน)
+                 ได้ rating + userRatingCount → บันทึก snapshot คำนวณ velocity ได้
+    lite=True  → FIELDS_LITE (ชั้น Pro $17/1,000, ฟรี 5,000/เดือน)
+                 ได้แค่ชื่อ/พิกัด/ประเภท/สถานะเปิด-ปิด แต่ถูกกว่ามากในแง่โควตา
     """
-    fields = ",".join([
-        "id", "displayName", "rating", "userRatingCount",
-        "formattedAddress", "internationalPhoneNumber",
-        "regularOpeningHours", "location", "websiteUri",
-        "primaryType", "types", "businessStatus", "priceLevel",
-    ])
+    sku = "details_pro" if lite else "details_ent"
+    if not api_budget.allow(sku):
+        print(f"      ⏸  โควตา {sku} เดือนนี้หมดแล้ว — ข้าม {place_id}")
+        return None
+
     url  = f"{BASE_URL}/places/{place_id}"
     hdrs = {
         "X-Goog-Api-Key":   api_key,
-        "X-Goog-FieldMask": fields,
+        "X-Goog-FieldMask": FIELDS_LITE if lite else FIELDS_FULL,
     }
     try:
+        api_budget.record(sku)
         return _get(url, hdrs)
     except Exception as e:
         print(f"      ❌ get_place_details({place_id}): {e}")
@@ -138,15 +204,31 @@ def _area_to_latlng(area: str) -> dict:
 
 # ── Estimate cost ─────────────────────────────────────────────────────────────
 
-def estimate_cost(n_restaurants: int) -> str:
-    # Text Search (New): $0.032/request, Place Details (New Basic): $0.017/request
-    search_cost  = n_restaurants * 0.032
-    details_cost = n_restaurants * 0.017
-    total        = search_cost + details_cost
-    return (f"  📊 ประมาณการค่าใช้จ่าย: {n_restaurants} ร้าน\n"
-            f"     Text Search : {n_restaurants} × $0.032 = ${search_cost:.2f}\n"
-            f"     Place Details: {n_restaurants} × $0.017 = ${details_cost:.2f}\n"
-            f"     รวม ≈ ${total:.2f}")
+def estimate_cost(n_new: int, n_hot: int, n_tail: int) -> str:
+    """ประมาณค่าใช้จ่าย "ส่วนที่เกินโควตาฟรี" ของรอบนี้ (ไม่ใช่ราคาเต็ม)"""
+    def _billable(sku, n):
+        # โควตาฟรีที่เหลืออยู่ก่อนรอบนี้
+        free_left = max(0, api_budget.FREE_CAPS[sku] - api_budget.used(sku))
+        return max(0, n - free_left)
+
+    # ร้านใหม่กิน 2 call: Text Search Pro + Place Details Enterprise
+    rows = [
+        ("text_pro",    n_new),
+        ("details_ent", n_new + n_hot),
+        ("details_pro", n_tail),
+    ]
+    lines = [f"  📊 รอบนี้: ร้านใหม่ {n_new} · hot {n_hot} · tail {n_tail}"]
+    total_usd = 0.0
+    for sku, n in rows:
+        if not n:
+            continue
+        b   = _billable(sku, n)
+        usd = b / 1000.0 * api_budget.UNIT_USD[sku]
+        total_usd += usd
+        lines.append(f"     {sku:<12} {n:>4} call  (เกินโควตาฟรี {b:,})"
+                     + (f" ≈ ${usd:.2f}" if usd else " — ฟรี"))
+    lines.append(f"     รวมประมาณ ${total_usd:.2f} ≈ ฿{total_usd * api_budget.USD_TO_THB:,.0f}")
+    return "\n".join(lines)
 
 
 # ── Process one restaurant ────────────────────────────────────────────────────
@@ -165,42 +247,47 @@ def process_restaurant(row: dict, api_key: str) -> dict:
         return {"status": "not_found"}
 
     place_id     = place.get("id", "")
-    rating       = float(place.get("rating") or 0)
-    review_count = int(place.get("userRatingCount") or 0)
     address      = place.get("formattedAddress", "")
     gmaps_name   = (place.get("displayName") or {}).get("text", "")
     _loc         = place.get("location") or {}
     lat          = _loc.get("latitude")
     lng          = _loc.get("longitude")
+    rating       = 0.0
+    review_count = 0
+    price_level  = None
+    business_status = place.get("businessStatus", "OPERATIONAL")
+
+    if not place_id:
+        return {"status": "not_found"}
 
     time.sleep(DELAY)
 
-    business_status = place.get("businessStatus", "OPERATIONAL")
-
-    # Step 2: Place Details (ถ้า review_count ยังไม่มี หรือต้องการ businessStatus)
-    if (review_count == 0 or not business_status) and place_id:
-        details      = get_place_details(place_id, api_key)
-        if details:
-            rating          = float(details.get("rating") or rating)
-            review_count    = int(details.get("userRatingCount") or review_count)
-            address         = details.get("formattedAddress", address)
-            business_status = details.get("businessStatus", business_status)
-            _dloc           = details.get("location") or {}
-            lat             = _dloc.get("latitude")  or lat
-            lng             = _dloc.get("longitude") or lng
+    # Step 2: Place Details แบบเต็ม — Text Search (Pro) ไม่คืนตัวเลขรีวิวแล้ว
+    # ร้านใหม่ต้องมี rating/reviews ตั้งแต่แรกไม่งั้นไม่มี snapshot ตั้งต้น
+    details = get_place_details(place_id, api_key)
+    if details:
+        rating          = float(details.get("rating") or 0)
+        review_count    = int(details.get("userRatingCount") or 0)
+        address         = details.get("formattedAddress", address)
+        business_status = details.get("businessStatus", business_status)
+        price_level     = details.get("priceLevel")
+        gmaps_name      = (details.get("displayName") or {}).get("text", "") or gmaps_name
+        _dloc           = details.get("location") or {}
+        lat             = _dloc.get("latitude")  or lat
+        lng             = _dloc.get("longitude") or lng
 
     # ── Collect gmaps types for classification ───────────────────────────────
     gmaps_types = []
-    primary_type = place.get("primaryType") or ""
+    primary_type = (details or {}).get("primaryType") or place.get("primaryType") or ""
     if primary_type:
         gmaps_types.append(primary_type)
-    # Also pull from Place Details if fetched
-    if "details" in dir() and details:
+    if details:
         gmaps_types.extend(details.get("types") or [])
     gmaps_types = list(dict.fromkeys(t for t in gmaps_types if t))  # deduplicate
 
     return {
         "status":               "ok",
+        "tier":                 "new",
         "gmaps_place_id":       place_id,
         "gmaps_name":           gmaps_name,
         "gmaps_rating":         rating,
@@ -208,6 +295,7 @@ def process_restaurant(row: dict, api_key: str) -> dict:
         "gmaps_address":        address,
         "gmaps_business_status": business_status,
         "gmaps_types":          gmaps_types,  # v2: for venue classification
+        "gmaps_price_level":    price_level,
         "gmaps_lat":            lat,          # v3: พิกัดร้าน (near-me feature)
         "gmaps_lng":            lng,
     }
@@ -343,13 +431,17 @@ def load_blocklist():
 
 # ── Refresh existing restaurant (มี place_id แล้ว) ────────────────────────────
 
-def refresh_restaurant(row: dict, api_key: str) -> dict:
-    """ร้านที่มี gmaps_place_id แล้ว — เรียก Place Details ตรงๆ (ไม่ต้อง find_place,
-    ถูกกว่าครึ่งนึง) เพื่อเก็บ snapshot รายวัน → velocity คำนวณได้จริง"""
+def refresh_restaurant(row: dict, api_key: str, lite: bool = False) -> dict:
+    """ร้านที่มี gmaps_place_id แล้ว — เรียก Place Details ตรงๆ (ไม่ต้อง find_place)
+
+    lite=False (Tier A) → ได้ rating + reviews → บันทึก snapshot → velocity ใช้ได้
+    lite=True  (Tier B) → เช็คแค่ว่าร้านยังเปิด/ชื่อ-พิกัดเปลี่ยนไหม (ชั้น Pro,
+                          โควตาฟรีมากกว่า 5 เท่า) — ไม่มี snapshot
+    """
     place_id = (row.get("gmaps_place_id") or "").strip()
     if not place_id:
         return {"status": "not_found"}
-    details = get_place_details(place_id, api_key)
+    details = get_place_details(place_id, api_key, lite=lite)
     if not details:
         return {"status": "not_found"}
     _loc = details.get("location") or {}
@@ -361,6 +453,7 @@ def refresh_restaurant(row: dict, api_key: str) -> dict:
     gmaps_types = list(dict.fromkeys(t for t in gmaps_types if t))
     return {
         "status":                "ok",
+        "tier":                  "tail" if lite else "hot",
         "gmaps_place_id":        place_id,
         "gmaps_name":            (details.get("displayName") or {}).get("text", ""),
         "gmaps_rating":          float(details.get("rating") or 0),
@@ -425,13 +518,31 @@ def run(
 
         # ── ร้านเดิมที่มี place_id: refresh หมุนเวียน (เก่าสุดก่อน) ──────────
         # เดิม query ข้างบนกรอง place_id IS NULL อย่างเดียว → ร้านเดิมไม่เคยได้
-        # snapshot ใหม่เลย = velocity เป็น 0 ตลอดกาล. เติม refresh ให้เต็ม limit
+        # snapshot ใหม่เลย = velocity เป็น 0 ตลอดกาล
+        #
+        # ตอนนี้กรองเพิ่ม 2 ชั้นเพื่อประหยัด API:
+        #  1. ข้ามร้านที่ยังไงก็ไม่ขึ้นเว็บ (นอก scope / ไม่ใช่ร้านอาหาร / ปิดถาวร)
+        #     — เดิมโดน scrape ทุกคืนแล้วค่อยถูกกรองทิ้งตอน export = จ่ายฟรี
+        #  2. ดึงจำนวนรีวิวล่าสุดมาด้วย เพื่อแยก Tier A (hot) / Tier B (tail)
         refresh_rows = []
         if "gmaps_place_id" in existing_cols:
-            q2 = ("SELECT id, name, area, source, gmaps_place_id FROM restaurants"
-                  " WHERE gmaps_place_id IS NOT NULL AND gmaps_place_id != ''"
-                  " AND (business_status IS NULL OR business_status != 'CLOSED_PERMANENTLY')"
-                  " ORDER BY last_updated ASC")
+            q2 = """
+                SELECT r.id, r.name, r.area, r.source, r.gmaps_place_id,
+                       r.last_updated,
+                       COALESCE((SELECT s.review_count FROM review_snapshots s
+                                  WHERE s.restaurant_id = r.id
+                                  ORDER BY s.snapshot_date DESC LIMIT 1), 0) AS reviews,
+                       CAST(julianday('now') - julianday(COALESCE(r.last_updated, '2000-01-01'))
+                            AS INTEGER) AS stale_days
+                FROM restaurants r
+                WHERE r.gmaps_place_id IS NOT NULL AND r.gmaps_place_id != ''
+                  AND (r.business_status IS NULL
+                       OR r.business_status != 'CLOSED_PERMANENTLY')
+                  AND COALESCE(r.is_restaurant_focus, 1) = 1
+                  AND COALESCE(r.is_bangkok_focus, 1) = 1
+                  AND COALESCE(r.venue_type, '') != 'non_food_venue'
+                ORDER BY r.last_updated ASC
+            """
             refresh_rows = [dict(r) for r in conn.execute(q2).fetchall()]
 
     # ── Blocklist: ข้ามร้านที่แบนตั้งแต่ต้นทาง (ไม่เรียก API เลย) ────────────
@@ -446,19 +557,62 @@ def run(
     if n_blocked:
         print(f"  🚫 ข้าม {n_blocked} ร้านใน blocklist")
 
-    # ร้านใหม่ก่อน แล้วเติม refresh จนเต็ม limit (คุมงบ API/วัน)
+    # ── แบ่ง Tier + คุมโควตา ────────────────────────────────────────────────
+    # Tier A (hot):  รีวิวถึงเกณฑ์ trend floor → ต้องมีตัวเลขรีวิวสด ๆ เพื่อคำนวณ
+    #                velocity → ใช้ field mask เต็ม (Enterprise, ฟรี 1,000/เดือน)
+    # Tier B (tail): ที่เหลือ → แค่เช็คว่ายังเปิดอยู่ (Pro, ฟรี 5,000/เดือน)
+    # refresh_rows เรียง last_updated ASC อยู่แล้ว → เก่าสุดได้คิวก่อนเสมอ
+    hot_all   = [r for r in refresh_rows if (r.get("reviews") or 0) >= HOT_MIN_REVIEWS]
+    hot_rows  = [r for r in hot_all if (r.get("stale_days") or 999) >= HOT_INTERVAL_DAYS]
+    tail_rows = [r for r in refresh_rows
+                 if (r.get("reviews") or 0) < HOT_MIN_REVIEWS
+                 and (r.get("stale_days") or 999) >= TAIL_INTERVAL_DAYS]
+
+    # โควตาที่ควรใช้วันนี้ = ที่เหลือทั้งเดือน ÷ วันที่เหลือ (กันใช้หมดต้นเดือน)
+    ent_today = api_budget.daily_allowance("details_ent")
+    pro_today = api_budget.daily_allowance("details_pro")
+    txt_today = api_budget.daily_allowance("text_pro")
+
+    # ร้านใหม่กิน text_pro 1 + details_ent 1 ต่อร้าน → กันโควตา ent ไว้ให้ก่อน
+    new_rows  = rows[: max(0, min(txt_today, ent_today))]
+    hot_quota = max(0, ent_today - len(new_rows))
+
+    # ⚠️ กันคิว hot ว่างจนไม่มี snapshot ใหม่เลยทั้งวัน — freshness guard ใน
+    # scraper.yml จะ fail ถ้าไม่มี snapshot เกิน 2 วัน. ถ้าร้านที่ "ถึงรอบ" มี
+    # น้อยกว่าโควตาวันนี้ ให้เติมด้วยร้าน hot ที่เก่าสุดที่ยังไม่ได้ refresh วันนี้
+    # (โควตาที่ไม่ใช้ก็หายไปเปล่า ๆ อยู่ดี — ใช้ให้คุ้มดีกว่า)
+    if len(hot_rows) < hot_quota:
+        seen = {r["id"] for r in hot_rows}
+        hot_rows += [r for r in hot_all
+                     if r["id"] not in seen and (r.get("stale_days") or 999) >= 1]
+
+    hot_rows  = hot_rows[:hot_quota]
+    tail_rows = tail_rows[: max(0, pro_today)]
+
+    # --limit ยังใช้ได้ (เพดานแข็งอีกชั้น เผื่ออยากทดสอบ)
     if limit:
-        rows = rows[:limit]
-        rows = rows + refresh_rows[: max(0, limit - len(rows))]
-    else:
-        rows = rows + refresh_rows
+        new_rows  = new_rows[:limit]
+        hot_rows  = hot_rows[: max(0, limit - len(new_rows))]
+        tail_rows = tail_rows[: max(0, limit - len(new_rows) - len(hot_rows))]
+
+    for r in new_rows:
+        r["_tier"] = "new"
+    for r in hot_rows:
+        r["_tier"] = "hot"
+    for r in tail_rows:
+        r["_tier"] = "tail"
+    rows = new_rows + hot_rows + tail_rows
+
+    print(api_budget.report())
+    print()
+    print(estimate_cost(len(new_rows), len(hot_rows), len(tail_rows)))
+    print(f"     โควตาที่ใช้ได้วันนี้: ent {ent_today} · pro {pro_today} · text {txt_today}")
 
     if not rows:
-        print("  ℹ️  ไม่มีร้านใน DB — รัน scrape_wongnai_v5.py ก่อน")
+        print("\n  ℹ️  ไม่มีร้านที่ถึงรอบ refresh วันนี้ (หรือโควตาเดือนนี้หมดแล้ว) — จบ")
         return
 
     n = len(rows)
-    print(estimate_cost(n))
     print(f"\n  ▶  จะ scrape {n} ร้าน")
     if dry_run:
         print("  [dry-run] ไม่ได้เรียก API จริง — จบ")
@@ -469,36 +623,47 @@ def run(
     miss_count = 0
     errors     = []
 
+    tier_counts = {"new": 0, "hot": 0, "tail": 0}
+
     for i, row in enumerate(rows, 1):
         rid  = row["id"]
         name = row["name"]
         area_r = row["area"] or "bangkok"
+        tier = row.get("_tier", "hot")
 
         # progress
         if i % 10 == 0 or i == 1 or i == n:
-            print(f"  [{i}/{n}] {name[:35]:<35} ({area_r})")
+            print(f"  [{i}/{n}] {tier:<4} {name[:32]:<32} ({area_r})")
 
         if row.get("gmaps_place_id"):
-            result = refresh_restaurant(row, api_key)   # มี place_id แล้ว — details อย่างเดียว
+            # มี place_id แล้ว — details อย่างเดียว; tail ใช้ mask แบบ lite
+            result = refresh_restaurant(row, api_key, lite=(tier == "tail"))
         else:
             result = process_restaurant(row, api_key)
 
-        if result["status"] == "ok" and result["gmaps_review_count"] > 0:
-            # บันทึก snapshot
-            record_snapshot(
-                restaurant_id=rid,
-                review_count=result["gmaps_review_count"],
-                rating=result["gmaps_rating"],
-                rating_count=result["gmaps_review_count"],
-            )
-            # บันทึก metadata
+        if result["status"] == "ok":
+            # snapshot เก็บได้เฉพาะรอบที่ขอ rating/reviews มาจริง (new/hot)
+            # tail ใช้ mask ชั้น Pro ที่ไม่มีตัวเลขรีวิว — ข้าม snapshot ไม่ใช่ error
+            if result.get("gmaps_review_count", 0) > 0:
+                record_snapshot(
+                    restaurant_id=rid,
+                    review_count=result["gmaps_review_count"],
+                    rating=result["gmaps_rating"],
+                    rating_count=result["gmaps_review_count"],
+                )
+            # บันทึก metadata (อัปเดต last_updated → เข้าคิว refresh รอบถัดไป)
             save_gmaps_meta(rid, result)
             ok_count += 1
+            tier_counts[tier] = tier_counts.get(tier, 0) + 1
 
             if i <= 5:  # แสดงตัวอย่าง 5 ร้านแรก
-                print(f"    ✅ {result['gmaps_name'][:30]} "
-                      f"⭐{result['gmaps_rating']} "
-                      f"({result['gmaps_review_count']:,} reviews)")
+                if result.get("gmaps_review_count"):
+                    print(f"    ✅ {result['gmaps_name'][:30]} "
+                          f"⭐{result['gmaps_rating']} "
+                          f"({result['gmaps_review_count']:,} reviews)")
+                else:
+                    print(f"    ✅ {result['gmaps_name'][:30]} "
+                          f"[{result.get('gmaps_business_status')}]")
         else:
             miss_count += 1
             if result["status"] == "not_found":
@@ -506,8 +671,11 @@ def run(
 
         time.sleep(DELAY)
 
-    print(f"\n  ✅ สำเร็จ : {ok_count} ร้าน")
+    print(f"\n  ✅ สำเร็จ : {ok_count} ร้าน "
+          f"(ใหม่ {tier_counts['new']} · hot {tier_counts['hot']} · tail {tier_counts['tail']})")
     print(f"  ❓ ไม่พบ  : {miss_count} ร้าน")
+    print()
+    print(api_budget.report())
 
     if errors[:10]:
         print("\n  ตัวอย่างร้านที่ไม่พบ:")
@@ -560,7 +728,9 @@ def check_closed_restaurants(api_key: str = None, limit: int = None):
 
     for i, row in enumerate(rows, 1):
         rid, name, place_id = row["id"], row["name"], row["gmaps_place_id"]
-        details = get_place_details(place_id, api_key)
+        # ต้องการแค่ businessStatus → ใช้ mask ชั้น Pro (ฟรี 5,000/เดือน)
+        # เดิมใช้ mask เต็มซึ่งเป็นชั้น Enterprise (ฟรีแค่ 1,000/เดือน)
+        details = get_place_details(place_id, api_key, lite=True)
         status = "OPERATIONAL"
         if details:
             status = details.get("businessStatus", "OPERATIONAL") or "OPERATIONAL"
