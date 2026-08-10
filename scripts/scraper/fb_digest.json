@@ -1,15 +1,81 @@
 {
- "digest_date": "2026-08-03",
- "week_label": "Week of Aug 3, 2026",
+ "digest_date": "2026-08-10",
+ "week_label": "Week of Aug 10, 2026",
  "entries": [
   {
-   "name": "ThaiCoon",
+   "name": "KAYAKI (EmQuartier)",
    "type": "Restaurant",
    "city": "Bangkok",
-   "area": "Silom",
+   "area": "Phrom Phong",
+   "cuisine": "Japanese",
+   "description": "Third branch of the charcoal yakizakana specialist, opening with a six-course Toyosu-inspired seafood set.",
+   "source_url": "https://www.timeout.com/bangkok/things-to-do/table-talk-in-bangkok",
+   "source_name": "Time Out Bangkok",
+   "is_watchlist": false
+  },
+  {
+   "name": "Kaiten Sushi Ginza Onodera",
+   "type": "Restaurant",
+   "city": "Bangkok",
+   "area": "Ratchaprasong",
+   "cuisine": "Sushi",
+   "description": "First Thailand outpost of the Japanese premium conveyor-sushi brand at CentralWorld, plates from B40.",
+   "source_url": "https://www.timeout.com/bangkok/things-to-do/table-talk-in-bangkok",
+   "source_name": "Time Out Bangkok",
+   "is_watchlist": false
+  },
+  {
+   "name": "Sra Bua by Num Weerawat",
+   "type": "Restaurant",
+   "city": "Bangkok",
+   "area": "Siam",
    "cuisine": "Thai",
-   "description": "Chef Buddy Hatayodom and Chef Wai of Rasik Local Kitchen open a 'Real Thai, No Rules' casual diner built on curry pastes, seafood and hotpot-style rice dishes.",
-   "source_url": "https://www.timeout.com/bangkok/restaurants/thaicoon",
+   "description": "Siam Kempinski's Sra Bua relaunches under Chef Num with a biodiversity-driven Thai tasting menu; soft launch from July 31.",
+   "source_url": "https://www.timeout.com/bangkok/things-to-do/table-talk-in-bangkok",
+   "source_name": "Time Out Bangkok",
+   "is_watchlist": false
+  },
+  {
+   "name": "Cova Bangkok",
+   "type": "Cafe",
+   "city": "Bangkok",
+   "area": "One Bangkok / The Storeys",
+   "cuisine": "Italian",
+   "description": "The 200-year-old Milanese pasticceria opens a Maison Boutique doing coffee, all-day dining, afternoon tea and aperitivo.",
+   "source_url": "https://www.masalathai.com/lifestyle/whats-up-bangkok-cova-bella-napoli-house-of-om-subdued",
+   "source_name": "Masala Thailand",
+   "is_watchlist": false
+  },
+  {
+   "name": "Bella Napoli Yen Akat",
+   "type": "Restaurant",
+   "city": "Bangkok",
+   "area": "Yen Akat",
+   "cuisine": "Italian",
+   "description": "Bangkok's longest-running pizzeria opens a second home on Soi Yen Akat 3 after 25 years.",
+   "source_url": "https://www.masalathai.com/lifestyle/whats-up-bangkok-cova-bella-napoli-house-of-om-subdued",
+   "source_name": "Masala Thailand",
+   "is_watchlist": false
+  },
+  {
+   "name": "Cante, Glint, Luso & SoolHaus (Canopy by Hilton Bangkok Sukhumvit)",
+   "type": "Restaurant",
+   "city": "Bangkok",
+   "area": "Asok",
+   "cuisine": "International",
+   "description": "Four new F&B concepts launched with the hotel's August 1 opening, including a rooftop pool bar.",
+   "source_url": "https://www.masalathai.com/lifestyle/bangkok-new-restaurants-hotels-shops-lifestyle-openings-july-2026",
+   "source_name": "Masala Thailand",
+   "is_watchlist": false
+  },
+  {
+   "name": "Pinki's Deli (Earth Ekkamai)",
+   "type": "Cafe",
+   "city": "Bangkok",
+   "area": "Ekkamai",
+   "cuisine": "Sandwiches",
+   "description": "Recently opened sourdough sandwich deli, this week launching an eight-brand collaboration spread platter.",
+   "source_url": "https://www.timeout.com/bangkok/things-to-do/table-talk-in-bangkok",
    "source_name": "Time Out Bangkok",
    "is_watchlist": false
   },
@@ -19,88 +85,33 @@
    "city": "Bangkok",
    "area": "Thonglor",
    "cuisine": "American",
-   "description": "Y Work's new-wave diner at Marketplace Thonglor serving comfort classics, oxtail cannelloni and house-made sourdough bagels baked daily.",
-   "source_url": "https://www.butlerfood.com/",
-   "source_name": "Butler",
-   "is_watchlist": false
+   "description": "New wave diner from Y Work at Market Place Thonglor; dry-aged striploin alongside grilled cheese.",
+   "source_url": "https://www.bangkokpost.com/life/social-and-lifestyle/3238050/new-taste-tinglers-for-your-palate",
+   "source_name": "Bangkok Post",
+   "is_watchlist": true
   },
   {
-   "name": "Canopy by Hilton Bangkok Sukhumvit",
+   "name": "ThaiCoon",
    "type": "Restaurant",
    "city": "Bangkok",
-   "area": "Asok",
-   "cuisine": "International",
-   "description": "Opened Aug 1 with four new dining concepts at once - Cante, Glint, Luso and SoolHaus - plus a rooftop pool bar.",
-   "source_url": "https://www.masalathai.com/lifestyle/bangkok-new-restaurants-hotels-shops-lifestyle-openings-july-2026",
-   "source_name": "Masala Thailand",
-   "is_watchlist": false
-  },
-  {
-   "name": "The Clucker",
-   "type": "Restaurant",
-   "city": "Bangkok",
-   "area": "On Nut",
-   "cuisine": "American",
-   "description": "The cult Clucking Donut reborn under BTS On Nut, in soft opening with Nashville hot chicken sandos across seven heat levels.",
-   "source_url": "https://www.bkmagazine.com/food/restaurants/nashville-spice-and-a-disco-toilet-bangkoks-best-chicken-sando-is-back-and-bigger-than-ever-in-onnut/",
-   "source_name": "BK Magazine",
-   "is_watchlist": false
-  },
-  {
-   "name": "The Commons Cloud 11",
-   "type": "Restaurant",
-   "city": "Bangkok",
-   "area": "Sukhumvit 11",
-   "cuisine": "Various",
-   "description": "The Commons' long-delayed fourth branch is finally trading, bringing a fresh cluster of independent F&B tenants to Cloud 11.",
-   "source_url": "https://www.bkmagazine.com/city-living/the-commons-cloud-11-is-finally-open-heres-what-you-can-try-right-now/",
-   "source_name": "BK Magazine",
-   "is_watchlist": false
-  },
-  {
-   "name": "Piscari",
-   "type": "Restaurant",
-   "city": "Bangkok",
-   "area": "Lumphini",
-   "cuisine": "Mediterranean",
-   "description": "Mediterranean sharing plates from chef Marc Vasseur on the 23rd floor of Andaz One Bangkok, with an aperitivo bar and a hidden speakeasy.",
-   "source_url": "https://www.bkmagazine.com/food/restaurants/heres-why-piscari-stands-out-among-bangkoks-rooftop-restaurants/",
-   "source_name": "BK Magazine",
-   "is_watchlist": false
-  },
-  {
-   "name": "iberry Group noodle counter",
-   "type": "Restaurant",
-   "city": "Bangkok",
-   "area": "Ratchaprasong",
+   "area": "Silom",
    "cuisine": "Thai",
-   "description": "iberry's chicken-and-bitter-melon noodle concept has become one of CentralWorld's newest queues this week.",
-   "source_url": "https://www.timeout.com/bangkok/things-to-do/table-talk-in-bangkok",
-   "source_name": "Time Out Bangkok",
-   "is_watchlist": false
-  },
-  {
-   "name": "Chatrium Rawai Phuket",
-   "type": "Restaurant",
-   "city": "Phuket",
-   "area": "Rawai Beach",
-   "cuisine": "International",
-   "description": "Resort opening in August with two dining outlets near Promthep Cape.",
+   "description": "Real Thai, No Rules concept from Chef Buddy and Chef Wai of Rasik Local Kitchen, still in soft opening beside Pullman Hotel G.",
    "source_url": "https://www.masalathai.com/lifestyle/bangkok-new-restaurants-hotels-shops-lifestyle-openings-july-2026",
    "source_name": "Masala Thailand",
    "is_watchlist": true
   },
   {
-   "name": "Basin",
-   "type": "Cafe",
+   "name": "Jakawaan",
+   "type": "Restaurant",
    "city": "Bangkok",
-   "area": "Sukhumvit 71",
-   "cuisine": "Various",
-   "description": "Mixed-use hub opposite Soi Pridi Banomyong 21 whose cafe, bar and restaurant tenants land mid-2026.",
+   "area": "Thonglor",
+   "cuisine": "Thai",
+   "description": "Food designer Nick Pitthayanot's set-menu traditional Thai project on Sukhumvit 55.",
    "source_url": "https://www.masalathai.com/lifestyle/bangkok-new-restaurants-hotels-shops-lifestyle-openings-july-2026",
    "source_name": "Masala Thailand",
    "is_watchlist": true
   }
  ],
- "trend_note": "Hotels are doing the heavy lifting - Canopy launched four F&B concepts in a single day and Piscari anchors Andaz One Bangkok - while independents keep leaning on craft bread, with house-fermented sourdough bagels now a signature at Butler and across Bangkok's new cafes."
+ "trend_note": "Import-led week: three confirmed openings are foreign brands landing first or expanded Thai outposts (Ginza Onodera, Cova, Canopy's four concepts), while heritage Thai names (Sra Bua, Bella Napoli) reinvent or replicate rather than start fresh. Nothing notable surfaced outside Bangkok."
 }
