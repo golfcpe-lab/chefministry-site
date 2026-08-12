@@ -1,10 +1,10 @@
 {
- "generated": "2026-08-11",
+ "generated": "2026-08-12",
  "criteria": {
   "minRating": 4.3,
   "minReviews": 50
  },
- "total": 615,
+ "total": 614,
  "groups": [
   {
    "key": "cafe",
@@ -29,7 +29,7 @@
   {
    "key": "thai",
    "label": "🇹🇭 อาหารไทย",
-   "count": 94,
+   "count": 93,
    "top": [
     "Zhang Jia Yi — Ari (Baytong Chicken Rice)",
     "แก้ว ไก่ กรอบ",
@@ -109,6 +109,6 @@
  ],
  "all": {
   "layers": 10,
-  "count": 615
+  "count": 614
  }
 }
