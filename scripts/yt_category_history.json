@@ -186,5 +186,27 @@
    "mentions": 1,
    "influencers": 1
   }
+ },
+ "2026-08-24": {
+  "Yakiniku": {
+   "mentions": 1,
+   "influencers": 1
+  },
+  "Thai Fine Dining": {
+   "mentions": 10,
+   "influencers": 6
+  },
+  "Thai Street Food": {
+   "mentions": 2,
+   "influencers": 2
+  },
+  "Coffee": {
+   "mentions": 1,
+   "influencers": 1
+  },
+  "Cafe": {
+   "mentions": 1,
+   "influencers": 1
+  }
  }
 }
