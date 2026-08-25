@@ -1,15 +1,15 @@
 {
- "generated": "2026-08-24",
+ "generated": "2026-08-25",
  "criteria": {
   "minRating": 4.3,
   "minReviews": 50
  },
- "total": 614,
+ "total": 613,
  "groups": [
   {
    "key": "cafe",
    "label": "☕ คาเฟ่ & มัทฉะ",
-   "count": 189,
+   "count": 188,
    "top": [
     "เดอะ คอฟฟี่ คลับ - ริเวอร์ ซิตี้",
     "ThaiWan-Thai灣 Coffee&tea socialspace",
@@ -109,6 +109,6 @@
  ],
  "all": {
   "layers": 10,
-  "count": 614
+  "count": 613
  }
 }
