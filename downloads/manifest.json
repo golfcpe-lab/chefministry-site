@@ -1,15 +1,15 @@
 {
- "generated": "2026-08-28",
+ "generated": "2026-08-29",
  "criteria": {
   "minRating": 4.3,
   "minReviews": 50
  },
- "total": 613,
+ "total": 579,
  "groups": [
   {
    "key": "cafe",
    "label": "☕ คาเฟ่ & มัทฉะ",
-   "count": 188,
+   "count": 156,
    "top": [
     "เดอะ คอฟฟี่ คลับ - ริเวอร์ ซิตี้",
     "ThaiWan-Thai灣 Coffee&tea socialspace",
@@ -29,7 +29,7 @@
   {
    "key": "thai",
    "label": "🇹🇭 อาหารไทย",
-   "count": 93,
+   "count": 92,
    "top": [
     "Zhang Jia Yi — Ari (Baytong Chicken Rice)",
     "แก้ว ไก่ กรอบ",
@@ -99,7 +99,7 @@
   {
    "key": "other",
    "label": "✨ ร้านน่าสนใจอื่นๆ",
-   "count": 59,
+   "count": 58,
    "top": [
     "ซ้งเป็ดพะโล้ วังหิน",
     "ขาหมูเจริญแสงสีลม สีลม",
@@ -109,6 +109,6 @@
  ],
  "all": {
   "layers": 10,
-  "count": 613
+  "count": 579
  }
 }
