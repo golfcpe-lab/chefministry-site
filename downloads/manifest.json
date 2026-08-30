@@ -1,15 +1,15 @@
 {
- "generated": "2026-08-29",
+ "generated": "2026-08-30",
  "criteria": {
   "minRating": 4.3,
   "minReviews": 50
  },
- "total": 578,
+ "total": 567,
  "groups": [
   {
    "key": "cafe",
    "label": "☕ คาเฟ่ & มัทฉะ",
-   "count": 156,
+   "count": 151,
    "top": [
     "เดอะ คอฟฟี่ คลับ - ริเวอร์ ซิตี้",
     "ThaiWan-Thai灣 Coffee&tea socialspace",
@@ -19,7 +19,7 @@
   {
    "key": "finedining",
    "label": "🍽️ Fine Dining & Omakase",
-   "count": 75,
+   "count": 74,
    "top": [
     "แม่มังกร บุฟเฟต์ ซีฟู้ด @สาขาลาดพร้าว",
     "Octave Rooftop Lounge and Bar Bangkok Marriott Hotel Sukhumvit",
@@ -29,7 +29,7 @@
   {
    "key": "thai",
    "label": "🇹🇭 อาหารไทย",
-   "count": 92,
+   "count": 90,
    "top": [
     "Zhang Jia Yi — Ari (Baytong Chicken Rice)",
     "แก้ว ไก่ กรอบ",
@@ -99,7 +99,7 @@
   {
    "key": "other",
    "label": "✨ ร้านน่าสนใจอื่นๆ",
-   "count": 58,
+   "count": 55,
    "top": [
     "ซ้งเป็ดพะโล้ วังหิน",
     "ขาหมูเจริญแสงสีลม สีลม",
@@ -109,6 +109,6 @@
  ],
  "all": {
   "layers": 10,
-  "count": 578
+  "count": 567
  }
 }
