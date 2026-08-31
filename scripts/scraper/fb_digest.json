@@ -1,95 +1,117 @@
 {
- "digest_date": "2026-08-24",
- "week_label": "Week of Aug 24, 2026",
+ "digest_date": "2026-08-31",
+ "week_label": "Week of Aug 31, 2026",
  "entries": [
   {
-   "name": "Blue Bottle Coffee (Dusit Central Park)",
-   "type": "Cafe",
-   "city": "Bangkok",
-   "area": "Silom / Saladaeng",
-   "cuisine": "Coffee",
-   "description": "First Thailand store of the Oakland specialty-coffee brand, opened 21 Aug on Level 1 of Central Park with NOLA iced coffee, Thai-exclusive pastries and Southeast Asia's first full Kyoto-style espresso tap bar.",
-   "source_url": "https://thethaiger.com/guides/best-of/food/cafe/blue-bottle-coffee-central-park-bangkok",
-   "source_name": "Thaiger",
-   "is_watchlist": false
-  },
-  {
-   "name": "Harper's",
+   "name": "FRICKIN' Fried Chicken",
    "type": "Restaurant",
    "city": "Bangkok",
-   "area": "Sukhumvit (Fairmont Bangkok Sukhumvit)",
-   "cuisine": "Brasserie",
-   "description": "North American-French brasserie that opened with Fairmont's first Thailand hotel on 18 Aug.",
-   "source_url": "https://www.rustourismnews.com/2026/08/18/fairmont-bangkok-sukhumvit-opens-as-brands-thailand-debut/",
-   "source_name": "Rus Tourism News",
-   "is_watchlist": false
-  },
-  {
-   "name": "CAYA Pool Club",
-   "type": "Restaurant",
-   "city": "Bangkok",
-   "area": "Sukhumvit (Fairmont Bangkok Sukhumvit)",
-   "cuisine": "Thai",
-   "description": "Poolside night-market-inspired venue serving contemporary takes on Thai street food with cocktails; opened 18 Aug.",
-   "source_url": "https://www.rustourismnews.com/2026/08/18/fairmont-bangkok-sukhumvit-opens-as-brands-thailand-debut/",
-   "source_name": "Rus Tourism News",
-   "is_watchlist": false
-  },
-  {
-   "name": "AELA Social Bar",
-   "type": "Bar",
-   "city": "Bangkok",
-   "area": "Sukhumvit (Fairmont Bangkok Sukhumvit)",
-   "cuisine": "Cocktails",
-   "description": "Daytime lounge that shifts into a cocktail-led bar at night, part of the Fairmont's 18 Aug debut.",
-   "source_url": "https://www.rustourismnews.com/2026/08/18/fairmont-bangkok-sukhumvit-opens-as-brands-thailand-debut/",
-   "source_name": "Rus Tourism News",
-   "is_watchlist": false
-  },
-  {
-   "name": "ThaiCoon",
-   "type": "Restaurant",
-   "city": "Bangkok",
-   "area": "Silom",
-   "cuisine": "Thai",
-   "description": "Casual 'Real Thai, No Rules' newcomer beside Pullman Hotel G from chef Buddy Hatayodom and chef Wai of Rasik Local Kitchen; in soft opening, dinner Tue-Sun.",
-   "source_url": "https://www.timeout.com/bangkok/restaurants/thaicoon",
+   "area": "Thonglor",
+   "cuisine": "American",
+   "description": "Nashville-style hot chicken spin-off from the Birdies Bangkok team, now open at PRIME Thonglor with heat levels from Naked to Tingly; Phuket branch next.",
+   "source_url": "https://www.timeout.com/bangkok/things-to-do/table-talk-in-bangkok",
    "source_name": "Time Out Bangkok",
    "is_watchlist": false
   },
   {
-   "name": "Blue Bottle Coffee (EmQuartier)",
+   "name": "Jaan Ranjuan",
+   "type": "Bar",
+   "city": "Bangkok",
+   "area": "Phloen Chit",
+   "cuisine": "Thai",
+   "description": "New Thai-flavoured cocktail and tea lounge debuting as an extension of one-Michelin-star Saneh Jaan for its tenth anniversary.",
+   "source_url": "https://www.timeout.com/bangkok/restaurants/saneh-jaan",
+   "source_name": "Time Out Bangkok",
+   "is_watchlist": false
+  },
+  {
+   "name": "Blue Bottle Coffee EmQuartier",
    "type": "Cafe",
    "city": "Bangkok",
    "area": "Phrom Phong",
    "cuisine": "Coffee",
-   "description": "Second Thai outpost billed as the flagship, weighted toward hand-brewed pour-overs; slated to open later in August.",
-   "source_url": "https://www.timeout.com/bangkok/attractions/dusit-central-park",
-   "source_name": "Time Out Bangkok",
-   "is_watchlist": true
+   "description": "Blue Bottle's Thailand flagship opened Aug 28 with 200+ sqm, 80 seats, a full pour-over bar and branch-exclusive products.",
+   "source_url": "https://insideretail.asia/2026/08/20/blue-bottle-coffee-brews-up-thailand-expansion-with-bangkok-debut/",
+   "source_name": "Inside Retail Asia",
+   "is_watchlist": false
   },
   {
-   "name": "Wiggle Room",
-   "type": "Bar",
+   "name": "Blue Bottle Coffee Central Park",
+   "type": "Cafe",
    "city": "Bangkok",
-   "area": "Sukhumvit Soi 18",
-   "cuisine": "Supperclub",
-   "description": "Fairmont's below-ground supper club with live music and cabaret, opening mid-September.",
-   "source_url": "https://www.rustourismnews.com/2026/08/18/fairmont-bangkok-sukhumvit-opens-as-brands-thailand-debut/",
-   "source_name": "Rus Tourism News",
-   "is_watchlist": true
+   "area": "Saladaeng",
+   "cuisine": "Coffee",
+   "description": "Blue Bottle's first Thai store, opened Aug 21, and the first in Southeast Asia with a full Kyoto-Style Espresso Tap Bar.",
+   "source_url": "https://thethaiger.com/guides/best-of/food/blue-bottle-coffee-central-park-bangkok",
+   "source_name": "Thaiger",
+   "is_watchlist": false
   },
   {
-   "name": "Carito's x Local Canteen / Dibuk House",
+   "name": "VUUR by Jacob Jan Boerma",
    "type": "Restaurant",
    "city": "Bangkok",
-   "area": "Sukhumvit 22",
-   "cuisine": "Southern Thai",
-   "description": "Two-night Phuket Old Town takeover 28-29 Aug bringing Southern Thai cooking and Phuket bar culture to Sukhumvit 22 - a pop-up, not a permanent opening.",
-   "source_url": "https://www.timeout.com/bangkok/things-to-do/caritos-brings-phuket-old-town-to-sukhumvit-22",
+   "area": "Bang Na",
+   "cuisine": "European",
+   "description": "Fine-dining debut inside the new Happitat complex from the Dutch chef who led De Leest to three Michelin stars.",
+   "source_url": "https://www.businesstraveller.com/news/happitat-bangkok-bangna-opening-2026/",
+   "source_name": "Business Traveller",
+   "is_watchlist": false
+  },
+  {
+   "name": "SING LANG",
+   "type": "Restaurant",
+   "city": "Bangkok",
+   "area": "Bang Na",
+   "cuisine": "Thai",
+   "description": "New Thai concept at Happitat from chef Thaninthorn Chantrawan of one-Michelin-star Chim by Siam Wisdom.",
+   "source_url": "https://thethaiger.com/guides/best-of/food/happitat-bang-na-restaurants-food-guide",
+   "source_name": "Thaiger",
+   "is_watchlist": false
+  },
+  {
+   "name": "Happitat Bang Na",
+   "type": "Restaurant",
+   "city": "Samut Prakan",
+   "area": "Bang Na km7",
+   "cuisine": "Mixed",
+   "description": "CP Axtra's THB 15bn, 200,000 sqm lifestyle landmark opened Aug 21 with 100+ restaurants and cafes across three themed zones.",
+   "source_url": "https://thethaiger.com/guides/best-of/food/happitat-bang-na-restaurants-food-guide",
+   "source_name": "Thaiger",
+   "is_watchlist": false
+  },
+  {
+   "name": "EGGDAY x On Lok Yun",
+   "type": "Cafe",
+   "city": "Bangkok",
+   "area": "All branches",
+   "cuisine": "Breakfast",
+   "description": "New collaboration menu pairing EGGDAY's brioche French toast with On Lok Yun's 90-year-old custard recipe, from B89.",
+   "source_url": "https://www.timeout.com/bangkok/things-to-do/table-talk-in-bangkok",
    "source_name": "Time Out Bangkok",
+   "is_watchlist": false
+  },
+  {
+   "name": "Bo.bkk",
+   "type": "Cafe",
+   "city": "Bangkok",
+   "area": "Sathon",
+   "cuisine": "Bakery",
+   "description": "Bagel-and-coffee cafe under a Sathon apartment block, pet-friendly with Saturday morning run club; opening date not firmly confirmed.",
+   "source_url": "https://www.timeout.com/bangkok/th/restaurants/new-cafe-in-bangkok",
+   "source_name": "Time Out Bangkok TH",
+   "is_watchlist": true
+  },
+  {
+   "name": "Cova Bangkok",
+   "type": "Cafe",
+   "city": "Bangkok",
+   "area": "One Bangkok",
+   "cuisine": "Italian",
+   "description": "200-year-old Milanese pasticceria at One Bangkok's The Storeys, reported early August; coffee, all-day dining, afternoon tea and aperitivo.",
+   "source_url": "https://www.masalathai.com/lifestyle/whats-up-bangkok-cova-bella-napoli-house-of-om-subdued",
+   "source_name": "Masala Thailand",
    "is_watchlist": true
   }
  ],
- "trend_note": "This week's openings were driven almost entirely by big international brands and hotel F&B - Blue Bottle's Thailand debut and Fairmont's three-venue launch - rather than independent operators; verified independent openings from Thai-language outlets were thin."
+ "trend_note": "The week belonged to big-format arrivals - Blue Bottle's two-store Thailand entry and the 100-venue Happitat opening in Bang Na - rather than independent neighbourhood debuts, with international coffee brands and Michelin-pedigree chefs both anchoring into new mall developments."
 }
