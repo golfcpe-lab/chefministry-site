@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-02",
+ "generated": "2026-09-03",
  "criteria": {
   "minRating": 4.3,
   "minReviews": 50
@@ -19,7 +19,7 @@
   {
    "key": "finedining",
    "label": "🍽️ Fine Dining & Omakase",
-   "count": 68,
+   "count": 69,
    "top": [
     "แม่มังกร บุฟเฟต์ ซีฟู้ด @สาขาลาดพร้าว",
     "Octave Rooftop Lounge and Bar Bangkok Marriott Hotel Sukhumvit",
@@ -79,7 +79,7 @@
   {
    "key": "chinese",
    "label": "🇨🇳 จีน & ติ่มซำ",
-   "count": 34,
+   "count": 33,
    "top": [
     "ฮัวหม่าล่า",
     "ฮะเก๋า เยาวราช",
