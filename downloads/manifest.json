@@ -1,10 +1,10 @@
 {
- "generated": "2026-09-04",
+ "generated": "2026-09-05",
  "criteria": {
   "minRating": 4.3,
   "minReviews": 50
  },
- "total": 540,
+ "total": 539,
  "groups": [
   {
    "key": "cafe",
@@ -59,7 +59,7 @@
   {
    "key": "japanese",
    "label": "🍣 ญี่ปุ่น",
-   "count": 14,
+   "count": 13,
    "top": [
     "ซูชินะ ฟอร์จูนทาวน์",
     "505 HOUSE (5 O 5 ハウス)",
@@ -109,6 +109,6 @@
  ],
  "all": {
   "layers": 10,
-  "count": 540
+  "count": 539
  }
 }
