@@ -1,10 +1,10 @@
 {
- "generated": "2026-09-05",
+ "generated": "2026-09-06",
  "criteria": {
   "minRating": 4.3,
   "minReviews": 50
  },
- "total": 539,
+ "total": 538,
  "groups": [
   {
    "key": "cafe",
@@ -69,11 +69,11 @@
   {
    "key": "korean",
    "label": "🇰🇷 เกาหลี",
-   "count": 30,
+   "count": 29,
    "top": [
-    "เปียงยาง ปิ้งย่างเกาหลี 219 ที่สุดในมีนบุรี",
     "Hongdae Buffet Siam Square One",
-    "มันจอมเอ ปิ้งย่างเกาหลี"
+    "มันจอมเอ ปิ้งย่างเกาหลี",
+    "กังนัมบาร์บีคิว ลาดกระบัง"
    ]
   },
   {
@@ -109,6 +109,6 @@
  ],
  "all": {
   "layers": 10,
-  "count": 539
+  "count": 538
  }
 }
