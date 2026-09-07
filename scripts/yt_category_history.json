@@ -230,5 +230,27 @@
    "mentions": 1,
    "influencers": 1
   }
+ },
+ "2026-09-07": {
+  "Thai Fine Dining": {
+   "mentions": 10,
+   "influencers": 7
+  },
+  "Buffet": {
+   "mentions": 1,
+   "influencers": 1
+  },
+  "Burger": {
+   "mentions": 1,
+   "influencers": 1
+  },
+  "Korean": {
+   "mentions": 3,
+   "influencers": 1
+  },
+  "Japanese Omakase": {
+   "mentions": 1,
+   "influencers": 1
+  }
  }
 }
